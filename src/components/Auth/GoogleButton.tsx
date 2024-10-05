@@ -62,7 +62,7 @@ export default function GoogleAuthButton({
   return (
     <div className="google-button-container">
       <button
-        onClick={googleHandler}
+        onClick={() => googleHandler()}
         type="button"
         className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-zinc-800 font-cardo text-lg font-semibold px-4 py-3 border border-gray-300"
       >
