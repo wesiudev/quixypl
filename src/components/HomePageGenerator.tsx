@@ -253,12 +253,7 @@ export default function HomePageGenerator({
                   Wygeneruj pomysł na biznes, utwórz konto i odbierz 3💎
                 </div>
                 <div className="absolute left-1/2 -translate-x-1/2 w-5 h-5 rotate-45 bg-blue-500 -top-[57%] cursor-default -translate-y-[50px] group-hover:-translate-y-[0px] z-[-10] group-hover:z-[24] select-none opacity-0 group-hover:opacity-100 duration-150 ease-in-out" />
-                {!loading && !generatedIdea?.content && !isThinking && (
-                  <>{user ? "Przejdź do panelu" : "Wypróbuj za darmo"}</>
-                )}
-                {!isThinking && generatedIdea?.content && !generatorPopup && (
-                  <>{"Wróć do pomysłu"}</>
-                )}
+                Wypróbuj za darmo
                 {!isThinking && generatedIdea?.content && generatorPopup && (
                   <div className="flex items-center justify-center">
                     <FaCheck className="mr-2 text-green-500" />
