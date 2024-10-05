@@ -19,19 +19,19 @@ function StripeButton({ item }: { item: any }) {
   const [isLoading, setLoading] = useState(false);
   const [user, loading] = useAuthState(auth);
   const [success, setSuccess] = useState(false);
-  const sendCheckoutRequest = () => {
+  const sendCheckoutRequest = async () => {
     setLoading(true);
     if (!loading && !user) {
       router.push("/login");
       setLoading(false);
     }
-    getStripeCheckoutByQuixyPacket(user?.uid!, item.plainName).then(
+    await getStripeCheckoutByQuixyPacket(user?.uid!, item.plainName).then(
       (data: any) => {
         setLoading(false);
         setSuccess(true);
         if (data) {
           setLoading(false);
-          router.replace(`${data.url}`);
+          router.replace(`${data?.url}`);
         }
       }
     );
