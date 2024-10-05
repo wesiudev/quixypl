@@ -1,0 +1,44 @@
+{
+  "name": "Oryginalne obrazy artystów - Quixy",
+  "short_name": "Quixy",
+  "description": "Platforma online do wystawiania prac artystycznych i kupowania sztuki.",
+  "start_url": "https://quixy.pl/",
+  "display": "standalone",
+  "background_color": "#F87315",
+  "theme_color": "#F87315",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+
+    {
+      "src": "/favicons/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "Quixy",
+      "url": "https://www.quixy.pl/"
+    }
+  ]
+}

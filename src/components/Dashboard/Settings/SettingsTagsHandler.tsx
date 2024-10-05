@@ -1,0 +1,420 @@
+"use client";
+import jobs from "../../../../public/14.09.2024.json";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaMinus,
+  FaMinusCircle,
+} from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
+import { polishToEnglish } from "../../../../utils/polishToEnglish";
+import { useState } from "react";
+import { updateUser } from "@/firebase";
+import { toast } from "react-toastify";
+import { setUser } from "@/redux/slices/user";
+import { useDispatch, useSelector } from "react-redux";
+
+export default function TagsHandler() {
+  // Handle changes to the tag input field
+  const dispatch = useDispatch();
+  const [tagDeletion, setTagDeletion] = useState(false);
+  const [selectedTag, setSelectedTag] = useState<any>({});
+
+  const [configurationOpen, setConfigurationOpen] = useState(false);
+  const [slug, setSlug] = useState({ title: "", url: "" });
+  const [category, setCategory] = useState({ title: "", url: "" });
+  const [tagsOpenLevel, setTagsOpenLevel] = useState(0);
+  const { user } = useSelector((state: any) => state.user);
+  return (
+    <div className="flex flex-col w-full px-4 sm:px-6">
+      {user?.tags?.length > 0 && (
+        <>
+          {" "}
+          <h1 className="text-base font-bold text-black ">Stanowiska</h1>
+          <div className="mt-2 w-full grid grid-cols-2 sm:grid-cols-3 gap-2 text-white font-bold text-sm md:text-lg">
+            <button
+              onClick={() => setTagsOpenLevel(0)}
+              className={`bg-orange-500 ${
+                tagsOpenLevel === 0 ? "bg-orange-500" : "bg-orange-400"
+              } px-2 py-1.5 rounded-md`}
+            >
+              Prosty
+            </button>
+            <button
+              onClick={() => setTagsOpenLevel(1)}
+              className={`bg-orange-500 ${
+                tagsOpenLevel === 1 ? "bg-orange-500" : "bg-orange-400"
+              } px-2 py-1.5 rounded-md`}
+            >
+              Rozszerzony
+            </button>
+            <button
+              onClick={() => setTagsOpenLevel(2)}
+              className={`bg-orange-500 ${
+                tagsOpenLevel === 2 ? "bg-orange-500" : "bg-orange-400"
+              } px-2 py-1.5 rounded-md`}
+            >
+              Całość
+            </button>
+          </div>
+        </>
+      )}
+      <div className="mt-2 font-bold text-sm text-black ">
+        {user?.tags?.length === 0 && "Czym się zajmujesz?"}{" "}
+        {user?.tags?.length > 0 && tagsOpenLevel === 0 && "Widok Prosty"}
+        {user?.tags?.length > 0 && tagsOpenLevel === 1 && "Widok Rozszerzony"}
+        {user?.tags?.length > 0 &&
+          tagsOpenLevel === 2 &&
+          "Twoja obecność w strukturze strony"}
+        <div
+          className={`${
+            tagsOpenLevel === 0 ? "flex flex-row flex-wrap -ml-2" : ""
+          }`}
+        >
+          {user?.tags && tagsOpenLevel === 1
+            ? user?.tags?.map((item: any, i: any) => (
+                <div
+                  className="text-sm mt-4 bg-slate-300 rounded-xl p-2"
+                  key={i}
+                >
+                  <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
+                    <div className="bg-slate-700 rounded-lg p-1 text-white mt-2">
+                      {item.slugTitle}
+                    </div>
+                    <div className="flex items-center">
+                      <FaChevronRight className="mx-1 mt-2" />
+                      <div className="bg-slate-700 rounded-lg p-1 text-white mt-2">
+                        {item.title}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            : tagsOpenLevel === 2
+            ? user?.tags?.map((item: any, i: any) => (
+                <div
+                  className="text-sm mt-4 bg-slate-300 rounded-xl p-2"
+                  key={i}
+                >
+                  <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
+                    <div className="flex items-center">
+                      <div className="bg-slate-700 rounded-lg p-1 text-white mt-2">
+                        {item.slugTitle}
+                      </div>
+                    </div>
+                    <div className="flex items-center">
+                      <FaChevronRight className="mx-1 mt-2" />
+                      <div className="bg-slate-700 rounded-lg p-1 text-white mt-2">
+                        {item.categoryTitle}
+                      </div>
+                    </div>
+                    <div className="flex items-center font-bold">
+                      <FaChevronRight className="mx-1 mt-2" />
+                      <div className="bg-slate-700 rounded-lg p-1 text-white mt-2">
+                        {item.title}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            : user?.tags?.map((item: any, i: any) => (
+                <div
+                  key={i}
+                  className="w-max max-w-[100%] ml-2 mt-2 flex flex-wrap items-center font-gotham font-light text-white"
+                >
+                  <div
+                    className={`${
+                      selectedTag.title === item.title ? "flex-col" : ""
+                    } bg-slate-700 rounded-lg flex items-center p-1`}
+                  >
+                    <div className="flex flex-row items-center">
+                      {item.title}
+                      <button
+                        onClick={() => {
+                          setTagDeletion(true);
+                          setSelectedTag(item);
+                        }}
+                        className=""
+                      >
+                        <FaMinusCircle className="ml-2 text-white" />
+                      </button>
+                    </div>
+                    {tagDeletion && selectedTag.title === item.title && (
+                      <div className="flex flex-col w-[90%] my-2 sticky left-0 top-0 bg-black bg-opacity-60 p-3 rounded-md">
+                        <h2>Usunąć {selectedTag?.title}?</h2>
+                        <div className="grid grid-cols-2 gap-3 mt-3">
+                          <button
+                            onClick={() => {
+                              const newTags = user?.tags?.filter(
+                                (tag: any) => tag.title !== selectedTag.title
+                              );
+                              const history = user?.history;
+                              updateUser(user?.uid, {
+                                tags: newTags,
+                                history: [
+                                  ...history,
+                                  {
+                                    action: `Usunięto specjalizację "${selectedTag.title}"`,
+                                    creationTime: Date.now(),
+                                  },
+                                ],
+                              });
+                              dispatch(
+                                setUser({
+                                  ...user,
+                                  tags: newTags,
+                                  history: [
+                                    ...history,
+                                    {
+                                      action: `Usunięto specjalizację "${selectedTag.title}"`,
+                                      creationTime: Date.now(),
+                                    },
+                                  ],
+                                })
+                              );
+                            }}
+                            className="bg-red-500 text-white px-3 py-1 rounded-md"
+                          >
+                            Usuń
+                          </button>
+                          <button
+                            onClick={() => {
+                              setTagDeletion(false);
+                              setSelectedTag({});
+                            }}
+                            className="bg-green-500 text-white px-3 py-1 rounded-md"
+                          >
+                            Nie
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+        </div>
+      </div>
+      <p className="text-sm text-[green] mb-2"></p>
+      {!configurationOpen && (
+        <div className="font-gotham font-bold text-black">
+          Dodaj stanowisko(a)
+        </div>
+      )}
+      {configurationOpen && !slug?.title && (
+        <div className="font-gotham font-bold text-black">
+          Wybierz kategorię
+        </div>
+      )}
+      {slug?.title !== "" && category?.title === "" && (
+        <div className="text-black font-gotham flex flex-col">
+          <div className="font-bold mb-1 bg-slate-700 p-1 rounded-md px-2 text-white w-max max-w-[100%]">
+            {slug.title}
+          </div>
+          <div className="font-bold">Wybierz podkategorię</div>
+        </div>
+      )}
+      {slug?.title !== "" && category?.title !== "" && (
+        <div className="text-black font-gotham flex flex-col">
+          <div className="font-bold mb-1 bg-slate-700 p-1 rounded-md px-2 text-white w-max max-w-[100%]">
+            {category.title}
+          </div>
+          <div className="font-bold"></div>Wybierz stanowisko
+        </div>
+      )}
+      <div className="-ml-0.5 flex flex-row items-start w-full">
+        {!configurationOpen && slug.title === "" && (
+          <button
+            onClick={() => setConfigurationOpen(true)}
+            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-slate-700 rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+          >
+            <FaPlus />
+          </button>
+        )}
+        {configurationOpen && slug.title !== "" && category.title !== "" && (
+          <button
+            onClick={() => setCategory({ title: "", url: "" })}
+            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-slate-700 rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+          >
+            <FaChevronLeft />
+          </button>
+        )}
+        {configurationOpen && slug.title !== "" && category.title === "" && (
+          <button
+            onClick={() => {
+              setSlug({ title: "", url: "" }), setConfigurationOpen(false);
+            }}
+            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-slate-700 rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+          >
+            <FaChevronLeft />
+          </button>
+        )}
+        {configurationOpen && slug.title === "" && (
+          <div>
+            {jobs.map((item: any, i: any) => (
+              <button
+                onClick={() =>
+                  setSlug({
+                    title: item.title,
+                    url: polishToEnglish(item.title),
+                  })
+                }
+                className="m-0.5 bg-slate-700 rounded-lg text-white font-light p-2"
+                key={i}
+              >
+                {item.title}
+              </button>
+            ))}
+          </div>
+        )}
+        {configurationOpen && category.title === "" && (
+          <div>
+            {jobs.map((item: any, i: any) => (
+              <>
+                {item.title === slug.title && (
+                  <>
+                    {item.data.map((cat: any, i: any) => (
+                      <button
+                        onClick={() =>
+                          setCategory({
+                            title: cat.title,
+                            url: polishToEnglish(cat.title),
+                          })
+                        }
+                        className="m-0.5 bg-slate-700 rounded-lg text-white font-light p-2"
+                        key={i}
+                      >
+                        {cat.title}
+                      </button>
+                    ))}
+                  </>
+                )}
+              </>
+            ))}
+          </div>
+        )}
+        {configurationOpen && category.title !== "" && (
+          <div>
+            {jobs.map((item: any, i: any) => (
+              <>
+                {item.title === slug.title && (
+                  <>
+                    {item.data.map((cat: any, i: any) => (
+                      <>
+                        {cat.title === category.title && (
+                          <>
+                            {cat.data.map((job: any, i: any) => (
+                              <button
+                                onClick={() => {
+                                  if (
+                                    user?.tags?.find(
+                                      (tag: any) =>
+                                        tag.url === polishToEnglish(job.title)
+                                    )
+                                  ) {
+                                    return (
+                                      toast.error(
+                                        `Kategoria ${category.title} i stanowisko ${job.title} są już dodane.`,
+                                        {
+                                          position: "top-right",
+                                          autoClose: 5000,
+                                          hideProgressBar: false,
+                                          closeOnClick: true,
+                                          pauseOnHover: true,
+                                          draggable: true,
+                                          progress: undefined,
+                                        }
+                                      ),
+                                      setConfigurationOpen(false),
+                                      setCategory({ title: "", url: "" }),
+                                      setSlug({ title: "", url: "" })
+                                    );
+                                  } else {
+                                    const history = user?.history
+                                      ? [...user?.history]
+                                      : [];
+                                    toast.success(
+                                      `Pomyślnie dodano kategorię ${category.title} i stanowisko ${job.title}.`,
+                                      {
+                                        position: "top-right",
+                                        autoClose: 5000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                      }
+                                    );
+                                    updateUser(user?.uid, {
+                                      tags: [
+                                        ...(user?.tags || []),
+                                        {
+                                          url: polishToEnglish(job.title),
+                                          categoryUrl: polishToEnglish(
+                                            category.title
+                                          ),
+                                          categoryTitle: category.title,
+                                          slugUrl: polishToEnglish(slug.title),
+                                          slugTitle: slug.title,
+                                          title: job.title,
+                                        },
+                                      ],
+                                      history: [
+                                        ...history,
+                                        {
+                                          action: `Dodano nową specjalizację ${job.title} w podkategorii ${category.title}`,
+                                          creationTime: Date.now(),
+                                        },
+                                      ],
+                                    });
+                                    dispatch(
+                                      setUser({
+                                        ...user,
+                                        tags: [
+                                          ...(user?.tags || []),
+                                          {
+                                            url: polishToEnglish(job.title),
+                                            categoryUrl: polishToEnglish(
+                                              category.title
+                                            ),
+                                            categoryTitle: category.title,
+                                            slugUrl: polishToEnglish(
+                                              slug.title
+                                            ),
+                                            slugTitle: slug.title,
+                                            title: job.title,
+                                          },
+                                        ],
+                                        history: [
+                                          ...history,
+                                          {
+                                            action: `Dodano nową specjalizację ${job.title} w podkategorii ${category.title}`,
+                                            creationTime: Date.now(),
+                                          },
+                                        ],
+                                      })
+                                    );
+                                    setConfigurationOpen(false);
+                                    setCategory({ title: "", url: "" });
+                                    setSlug({ title: "", url: "" });
+                                  }
+                                }}
+                                className="m-0.5 bg-slate-700 rounded-lg text-white font-light p-2"
+                                key={i}
+                              >
+                                {job.title}
+                              </button>
+                            ))}
+                          </>
+                        )}
+                      </>
+                    ))}
+                  </>
+                )}
+              </>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

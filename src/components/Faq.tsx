@@ -1,0 +1,61 @@
+"use client";
+import React, { useState } from "react";
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface FAQProps {
+  faqItems: FAQItem[];
+}
+
+/**
+ * FAQ component
+ *
+ * This component renders a list of FAQs, with a limit of {@link visibleItems} items
+ * initially visible. Clicking the "Poka  wi cej" button will show 3 more items.
+ *
+ * @param {FAQProps} props
+ * @prop {FAQItem[]} faqItems - List of FAQs to render
+ * @returns {React.ReactElement} FAQ component
+ */
+const FAQ: React.FC<FAQProps> = ({ faqItems }) => {
+  const [visibleItems, setVisibleItems] = useState(3);
+
+  const handleShowMore = () => {
+    setVisibleItems((prev) => prev + 3); // Show 3 more items on each click
+  };
+
+  return (
+    <div className="!font-gotham">
+      <h2 className="text-3xl font-bold mb-6 text-black  text-center lg:text-left">
+        FAQ: Najczęściej Zadawane Pytania
+      </h2>
+      <ul className="space-y-4 text-lg text-black">
+        {faqItems.slice(0, visibleItems).map((faq, index) => (
+          <li
+            key={index}
+            className="border-x-[12px] rounded-xl border-orange-500 p-3 border-y-2"
+          >
+            <strong>{faq.question}</strong>
+            <p className="font-light">{faq.answer}</p>
+          </li>
+        ))}
+      </ul>
+
+      {visibleItems < faqItems.length && (
+        <div className="text-center mt-8">
+          <button
+            onClick={handleShowMore}
+            className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 transition"
+          >
+            Pokaż więcej
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default FAQ;
