@@ -1,6 +1,6 @@
 import React from "react";
 import { createUser, provider } from "@/firebase";
-import { getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import { signInWithPopup, getAuth, GoogleAuthProvider } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { errorCatcher } from "../../../utils/errorCatcher";
 async function sendVerificationEmail(email: string, verificationCode: string) {
@@ -21,7 +21,7 @@ export default function GoogleAuthButton({
   const router = useRouter();
   function googleHandler() {
     const auth = getAuth();
-    signInWithRedirect(auth, provider)
+    signInWithPopup(auth, provider)
       .then((result: any) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const user = result.user;
@@ -35,7 +35,7 @@ export default function GoogleAuthButton({
           tokens: 3,
           isPremium: false,
           emailVerified: false,
-          ideas: ideas ? ideas : [],
+          ideas: [],
           jobOffers: [],
           groups: [],
           profileComments: [],
