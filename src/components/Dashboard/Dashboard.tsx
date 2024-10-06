@@ -30,7 +30,7 @@ export default function Dashboard() {
                   <h1 className="text-3xl sm:text-5xl text-black  font-gotham mb-4">
                     Panel Użytkownika
                   </h1>
-                  {!user?.verified && !emailInfo && (
+                  {!user?.verified && (
                     <div className="bg-slate-700 text-white p-3 font-gotham font-light mb-4 rounded-xl w-max max-w-[100%]">
                       Witaj w Quixy!🔥 Wysłaliśmy wiadomość aktywującą konto na
                       podany adres e-mail - {user?.email}{" "}
