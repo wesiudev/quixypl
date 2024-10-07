@@ -217,14 +217,14 @@ export default function HomePageGenerator({
   return (
     <div className="w-full flex flex-col md:flex-row">
       <div
-        className="rounded-xl text-zinc-800 h-full bg-white w-full"
+        className="rounded-xl text-black h-full bg-white w-full"
         style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
       >
         <div className="flex flex-row w-full">
           <div className="flex flex-col md:flex-row w-full">
             <div className="flex flex-col w-full md:w-3/5 lg:w-4/5">
-              <h2 className="font-cardo text-3xl text-zinc-800 font-bold drop-shadow-xl shadow-black p-6 lg:p-12">
-                Twój nowy, <b className="text-orange-500">unikalny</b> pomysł na
+              <h2 className="font-gotham text-3xl text-black font-bold drop-shadow-xl shadow-black p-6 lg:p-12">
+                Twój nowy, <b className="text-primary">unikalny</b> pomysł na
                 biznes!
               </h2>
               <GenerateIdeaInputs setConfig={setConfig} config={config} />
@@ -235,7 +235,7 @@ export default function HomePageGenerator({
               className="rounded-3xl p-6 lg:p-12 2xl:p-16 bg-gray-200 w-full h-full flex flex-col justify-between md:w-2/5"
             >
               <div className="h-full flex flex-col">
-                <h2 className="font-cardo text-2xl text-black font-bold drop-shadow-xl shadow-black">
+                <h2 className="font-gotham text-2xl text-black font-bold drop-shadow-xl shadow-black">
                   Generuj nowy pomysł na biznes
                 </h2>
                 <p className="mt-3 font-gotham text-lg font-light text-black">
@@ -246,7 +246,7 @@ export default function HomePageGenerator({
               </div>
               <button
                 disabled={isThinking ? true : false}
-                className="disabled:cursor-not-allowed disabled:bg-orange-300 disabled:opacity-80 group rounded-xl p-3 w-full h-max bg-orange-500 hover:bg-orange-400 duration-150 text-white font-bold mt-3 relative"
+                className="disabled:cursor-not-allowed disabled:bg-orange-300 disabled:opacity-80 group rounded-xl p-3 w-full h-max bg-[#126b91] hover:bg-[#468CA9] duration-150 text-white font-bold mt-3 relative"
                 onClick={handleGenerateIdea}
               >
                 <div className="w-[250px] cursor-default absolute left-1/2 -translate-x-1/2 -top-[170%] p-2 rounded-2xl text-white bg-blue-500 font-bold -translate-y-[50px] group-hover:-translate-y-[0px] z-[-10] group-hover:z-[25] select-none opacity-0 group-hover:opacity-100 duration-150 ease-in-out">
@@ -260,7 +260,6 @@ export default function HomePageGenerator({
                     Pomysł gotowy
                   </div>
                 )}
-                {(loading || isThinking) && "Proszę czekać"}
               </button>
             </div>
           </div>
@@ -307,11 +306,11 @@ export default function HomePageGenerator({
           }}
           className="bg-white rounded-lg flex flex-col w-[90%] sm:max-w-[40rem] h-[50vh] relative bg-opacity-90"
         >
-          <h2 className="bg-orange-500 rounded-t-lg p-4 md:p-6 font-gotham text-2xl text-white font-bold drop-shadow-xl shadow-black sticky top-0">
+          <h2 className="bg-[#126b91] rounded-t-lg p-4 md:p-6 font-gotham text-2xl text-white font-bold drop-shadow-xl shadow-black sticky top-0">
             Twój nowy pomysł jest gotowy!
           </h2>
           <div className="w-full p-4 md:p-6 flex flex-col h-full overflow-y-scroll">
-            <div className="text-zinc-800 text-xl font-bold">
+            <div className="text-black text-xl font-bold">
               Wygenerowany pomysł:
             </div>
             <p className="text-gray-800 text-justify mt-3">
@@ -319,8 +318,8 @@ export default function HomePageGenerator({
             </p>
             <div className="mt-3 text-sm text-gray-500 ">
               Zaloguj się by odebrać{" "}
-              <b className="text-orange-500">nowy pomysł na biznes</b> oraz 3💎
-              na start
+              <b className="text-primary">nowy pomysł na biznes</b> oraz 3💎 na
+              start
             </div>
           </div>
           <button

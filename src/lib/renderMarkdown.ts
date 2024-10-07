@@ -25,24 +25,24 @@ export const parseMarkdown = (input: any) => {
     // Parse headings
     if (line.startsWith("h2 ")) {
       const text = line.substring(3);
-      return `<h2 class="!text-3xl leading-relaxed font-bold text-zinc-800 drop-shadow-lg shadow-black">${text}</h1>`;
+      return `<h2 class="!text-3xl leading-relaxed font-bold text-black drop-shadow-lg shadow-black">${text}</h1>`;
     } else if (line.startsWith("p ")) {
       const text = line.substring(2);
-      return `<p class="!text-xl leading-relaxed font-bold text-zinc-800 drop-shadow-lg shadow-black">${text}</p>`;
+      return `<p class="!text-xl leading-relaxed font-bold text-black drop-shadow-lg shadow-black">${text}</p>`;
     } else if (
       line.startsWith(
-        "h3 leading-relaxed font-bold text-zinc-800 drop-shadow-lg shadow-black"
+        "h3 leading-relaxed font-bold text-black drop-shadow-lg shadow-black"
       )
     ) {
       const text = line.substring(3);
-      return `<h3 class="!text-2xl leading-relaxed font-bold text-zinc-800 drop-shadow-lg shadow-black">${text}</h3>`;
+      return `<h3 class="!text-2xl leading-relaxed font-bold text-black drop-shadow-lg shadow-black">${text}</h3>`;
     } else if (
       line.startsWith(
-        "h4 leading-relaxed font-bold text-zinc-800 drop-shadow-lg shadow-black"
+        "h4 leading-relaxed font-bold text-black drop-shadow-lg shadow-black"
       )
     ) {
       const text = line.substring(3);
-      return `<h4 class="!text-lg leading-relaxed font-bold text-zinc-800 drop-shadow-lg shadow-black">${text}</h4>`;
+      return `<h4 class="!text-lg leading-relaxed font-bold text-black drop-shadow-lg shadow-black">${text}</h4>`;
     }
 
     // Parse ordered lists

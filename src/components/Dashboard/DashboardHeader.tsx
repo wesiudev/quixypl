@@ -48,7 +48,7 @@ export default function DashboardHeader() {
                   title="Burger menu"
                   className={`${
                     menuShow && "opened"
-                  } bg-orange-500 p-1 rounded-lg z-50 w-max text-sm sm:text-base drop-shadow-sm duration-100 cursor-default font-bold`}
+                  } bg-[#126b91] p-1 rounded-lg z-50 w-max text-sm sm:text-base drop-shadow-sm duration-100 cursor-default font-bold`}
                 >
                   <svg width="30" height="30" viewBox="0 0 100 100">
                     <path
@@ -103,72 +103,69 @@ export default function DashboardHeader() {
                 />
               </button>
               <div className="w-full flex lg:flex-col-reverse lg:items-end justify-between items-start">
-                <div className="text-black font-light text-base mt-6 lg:mt-0">
-                  Panel Użytkownika
-                </div>
-                <div className="mt-6 lg:mt-0 text-black font-gotham text-3xl">
-                  💎{user?.tokens?.toFixed(2)}
+                <div className="flex items-end justify-end">
+                  <Image
+                    src="/assets/quixy-logo.png"
+                    width={224}
+                    height={224}
+                    alt="Logo serwisu quixy.pl"
+                    className="w-24 h-auto"
+                  />
                 </div>
               </div>
             </div>
             <h2 className="text-3xl flex w-full justify-between items-end mt-3">
-              <div className="text-3xl text-orange-500 font-gotham">
-                Nawigacja
+              <div className="text-3xl text-primary font-gotham">Nawigacja</div>
+              <div className="text-black font-light text-base mt-6 lg:mt-0">
+                Panel Użytkownika
               </div>
-              <div className="flex items-end justify-end">
-                <Image
-                  src="/assets/quixy-logo.png"
-                  width={224}
-                  height={224}
-                  alt="Logo serwisu quixy.pl"
-                  className="w-24 h-auto"
-                />
+              <div className="mt-6 lg:mt-0 text-black font-gotham text-3xl">
+                💎{user?.tokens?.toFixed(2)}
               </div>
             </h2>
             <Link
               href="/dashboard"
               onClick={() => setMenuShow(false)}
-              className="flex items-center text-xl text-zinc-800 drop-shadow-xl mt-3"
+              className="flex items-center text-xl text-black drop-shadow-xl mt-3"
             >
-              <FaHome className="mr-2 text-orange-500" />
+              <FaHome className="mr-2 text-primary" />
               Panel użytkownika
             </Link>
             <Link
               href="/dashboard/image_generator"
               onClick={() => setMenuShow(false)}
-              className="flex items-center text-xl text-zinc-800 drop-shadow-xl mt-3"
+              className="flex items-center text-xl text-black drop-shadow-xl mt-3"
             >
-              <FaImage className="mr-2 text-orange-500" />
+              <FaImage className="mr-2 text-primary" />
               Obrazy Quixy&trade;
             </Link>
             <Link
               href="/dashboard/idea_generator"
               onClick={() => setMenuShow(false)}
-              className="flex items-center text-xl text-zinc-800 drop-shadow-xl mt-3"
+              className="flex items-center text-xl text-black drop-shadow-xl mt-3"
             >
-              <FaLightbulb className="mr-2 text-orange-500" />
+              <FaLightbulb className="mr-2 text-primary" />
               Pomysły Quixy&trade;
             </Link>
           </div>
         </div>
         <div className="font-coco px-6 mt-12">
-          <h2 className="text-3xl text-orange-500 font-gotham">Praca Zdalna</h2>
+          <h2 className="text-3xl text-primary font-gotham">Praca Zdalna</h2>
           {user?.seek && (
             <div>
               <Link
                 href="/dashboard/job_search"
                 onClick={() => setMenuShow(false)}
-                className="flex items-center text-xl text-zinc-800 drop-shadow-xl mt-3"
+                className="flex items-center text-xl text-black drop-shadow-xl mt-3"
               >
-                <FaMagnifyingGlass className="mr-2 text-orange-500" /> Szukaj
-                pracy
+                <FaMagnifyingGlass className="mr-2 text-primary" /> Szukaj pracy
               </Link>
               <Link
                 href="/dashboard/applications"
                 onClick={() => setMenuShow(false)}
-                className="flex items-center text-xl text-zinc-800 drop-shadow-xl mt-3"
+                className="flex items-center text-xl text-black drop-shadow-xl mt-3"
               >
-                <FaList className="mr-2 text-orange-500" /> Moje aplikacje
+                <FaList className="mr-2 text-primary" /> Moje aplikacje
               </Link>
             </div>
           )}
@@ -177,22 +174,22 @@ export default function DashboardHeader() {
               <Link
                 href="/dashboard/add_job_offer"
                 onClick={() => setMenuShow(false)}
-                className="flex items-center text-xl text-zinc-800 drop-shadow-xl mt-3"
+                className="flex items-center text-xl text-black drop-shadow-xl mt-3"
               >
-                <FaPlus className="mr-2 text-orange-500" /> Dodaj ofertę pracy
+                <FaPlus className="mr-2 text-primary" /> Dodaj ofertę pracy
               </Link>
               <Link
                 href="/dashboard/my_postings"
                 onClick={() => setMenuShow(false)}
-                className="flex items-center text-xl text-zinc-800 drop-shadow-xl mt-3"
+                className="flex items-center text-xl text-black drop-shadow-xl mt-3"
               >
-                <FaRocket className="mr-2 text-orange-500" /> Moje oferty pracy
+                <FaRocket className="mr-2 text-primary" /> Moje oferty pracy
               </Link>
             </>
           )}
         </div>
         <div className="font-coco px-6 mt-12 w-full">
-          <h2 className="text-3xl text-orange-500 font-gotham">Marketplace</h2>
+          <h2 className="text-3xl text-primary font-gotham">Marketplace</h2>
           <p className="font-coco text-lg text-left max-w-[30rem] mt-3 text-gray-600">
             Kup lub sprzedaj swoją aplikację, stronę internetową lub projekt.
             Już wkrótce!
@@ -201,23 +198,23 @@ export default function DashboardHeader() {
             <Link
               href="/marketplace"
               onClick={() => setMenuShow(false)}
-              className="flex items-center text-xl text-zinc-800 drop-shadow-xl mt-3"
+              className="flex items-center text-xl text-black drop-shadow-xl mt-3"
             >
-              <FaDollarSign className="mr-2 text-orange-500" /> Kup projekt
+              <FaDollarSign className="mr-2 text-primary" /> Kup projekt
             </Link>
           )}
           {user?.seek && (
             <Link
               href="/marketplace"
               onClick={() => setMenuShow(false)}
-              className="flex items-center text-xl text-zinc-800 drop-shadow-xl mt-3"
+              className="flex items-center text-xl text-black drop-shadow-xl mt-3"
             >
-              <FaDollarSign className="mr-2 text-orange-500" /> Sprzedaj projekt
+              <FaDollarSign className="mr-2 text-primary" /> Sprzedaj projekt
             </Link>
           )}
         </div>
         <div className={`pt-12 p-6 font-coco`}>
-          <h2 className="text-3xl text-orange-500 font-gotham">
+          <h2 className="text-3xl text-primary font-gotham">
             <div className="">Ustawienia</div>
           </h2>
 
@@ -247,18 +244,18 @@ export default function DashboardHeader() {
             onClick={() => dispatch(set_modals({ ...modals, quixies: true }))}
             className="flex items-center text-black font-coco mt-4 text-lg"
           >
-            <FaCoins className="mr-2 text-orange-500 text-2xl" />
+            <FaCoins className="mr-2 text-primary text-2xl" />
             Doładuj Quixies
           </button>
           <button
             onClick={() => dispatch(set_modals({ ...modals, config: true }))}
             className="flex items-center text-black font-coco mt-1 text-lg"
           >
-            <FaCog className="mr-2 text-orange-500 text-2xl" />
+            <FaCog className="mr-2 text-primary text-2xl" />
             Ustawienia konta
           </button>
           <button
-            className="mt-2 text-zinc-800 drop-shadow-xl"
+            className="mt-2 text-black drop-shadow-xl"
             onClick={() => {
               signOut(auth);
               dispatch(setUser(null));

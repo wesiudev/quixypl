@@ -2,6 +2,7 @@ import Link from "next/link";
 import Discord from "./Discord";
 import Image from "next/image";
 import { polishToEnglish } from "../../utils/polishToEnglish";
+import Hero from "./Hero";
 
 /**
  * @function SlugFooter
@@ -22,11 +23,11 @@ export default function SlugFooter({
   footerTitle: string;
 }) {
   return (
-    <div className="bg-zinc-800 flex flex-col px-6 lg:px-12 p-6 py-12 font-gotham">
-      <div className="flex flex-col">
+    <div className="bg-white flex flex-col px-6 lg:px-12 p-6 py-12 font-gotham overflow-hidden">
+      <div className="flex flex-col z-50 relative">
         <div className="mb-12">
           <h2
-            className="text-4xl font-bold text-white"
+            className="text-4xl font-bold text-black"
             style={{ lineHeight: 1.35 }}
           >
             Przeglądasz {footerTitle}
@@ -40,7 +41,7 @@ export default function SlugFooter({
                       title !== "praca-zdalna" && `/${polishToEnglish(title)}`
                     }/${polishToEnglish(item.title)}`}
                     title={item.h1}
-                    className="w-max flex items-center text-blue-400 text-2xl font-bold"
+                    className="w-max flex items-center text-cta text-2xl font-bold"
                   >
                     {item.title}
                   </Link>
@@ -56,7 +57,7 @@ export default function SlugFooter({
                       )}/${polishToEnglish(item.title)}/${polishToEnglish(
                         cat.title
                       )}`}
-                      className="flex items-center text-white font-light"
+                      className="flex items-center text-black font-light"
                     >
                       {cat.title}
                     </Link>

@@ -88,7 +88,7 @@ export default function ChatHeader({
           </div>
         </div>
       </div>
-      <div className="font-bold flex items-center bg-white text-zinc-800 p-6">
+      <div className="font-bold flex items-center bg-white text-black p-6">
         {clickedUserData?.photoURL && (
           <div className="rounded-full w-16 h-16 relative overflow-hidden mr-3">
             <Image

@@ -15,7 +15,7 @@ export default function Backpack({ user }: { user: any }) {
   });
   return (
     <>
-      <div className="w-[100%] font-gotham bg-zinc-800 p-6 sm:p-8 lg:p-16 xl:p-24">
+      <div className="w-[100%] font-gotham bg-black p-6 sm:p-8 lg:p-16 xl:p-24">
         <Hero />
         <ImageOpen imageOpen={imageOpen} setImageOpen={setImageOpen} />
         {!user?.generatedImages?.length && <BackpackEmpty user={user} />}

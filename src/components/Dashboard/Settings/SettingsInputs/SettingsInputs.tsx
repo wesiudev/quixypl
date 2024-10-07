@@ -138,7 +138,7 @@ export default function UserEditDashboard({
                         onClick={() => {
                           setIsNewProject(true);
                         }}
-                        className="bg-orange-500 text-white p-2 rounded-md"
+                        className="bg-[#126b91] text-white p-2 rounded-md"
                       >
                         Dodaj projekt
                       </button>
@@ -195,7 +195,7 @@ export default function UserEditDashboard({
                                 setProject({ ...project, name: e.target.value })
                               }
                               placeholder="Podaj nazwę projektu"
-                              className="border border-orange-500 rounded-md p-2 text-black  font-light w-full"
+                              className="border border-primary rounded-md p-2 text-black  font-light w-full"
                             />
                           </div>
                           <div>
@@ -207,7 +207,7 @@ export default function UserEditDashboard({
                               onChange={(e) =>
                                 setProject({ ...project, time: e.target.value })
                               }
-                              className="border border-orange-500 rounded-md p-2 text-black  font-light w-full"
+                              className="border border-primary rounded-md p-2 text-black  font-light w-full"
                             >
                               <option value="Nie podano">
                                 Ile trwał twój udział w projekcie?
@@ -236,7 +236,7 @@ export default function UserEditDashboard({
                               setProject({ ...project, desc: e.target.value })
                             }
                             placeholder="Jaka byla twoja rola w projekcie?"
-                            className="border border-orange-500 rounded-md p-2 text-black  font-light w-full"
+                            className="border border-primary rounded-md p-2 text-black  font-light w-full"
                           />
                         </div>
                         <h3 className="font-gotham font-light text-black drop-shadow-lg mt-1.5 mb-3">
@@ -251,7 +251,7 @@ export default function UserEditDashboard({
                                   width={1920}
                                   height={1920}
                                   alt="image"
-                                  className="rounded-t-lg w-full h-auto border-[2px] border-orange-500"
+                                  className="rounded-t-lg w-full h-auto border-[2px] border-primary"
                                 />
                                 {isImageDescriptionOpen === i && (
                                   <>
@@ -273,10 +273,10 @@ export default function UserEditDashboard({
                                           ),
                                         });
                                       }}
-                                      className="w-full border-x-[2px] border-orange-500 text-black"
+                                      className="w-full border-x-[2px] border-primary text-black"
                                     />
                                     <button
-                                      className="w-full py-2 rounded-b-xl bg-orange-500 text-white"
+                                      className="w-full py-2 rounded-b-xl bg-[#126b91] text-white"
                                       onClick={() => {
                                         setImageDescriptionOpen(-1);
                                         toast.success(
@@ -299,7 +299,7 @@ export default function UserEditDashboard({
                                 {isImageDescriptionOpen !== i && (
                                   <button
                                     onClick={() => setImageDescriptionOpen(i)}
-                                    className="w-full bg-orange-500 rounded-b-lg text-white"
+                                    className="w-full bg-[#126b91] rounded-b-lg text-white"
                                   >
                                     Opisz obraz
                                   </button>

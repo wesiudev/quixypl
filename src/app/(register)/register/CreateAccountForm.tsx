@@ -23,7 +23,7 @@ export default function CreateAccountForm({
     <div className="w-full h-full flex items-center justify-center font-gotham">
       <div className="w-full p-6 sm:px-12 bg-white ">
         <h2
-          className={`text-zinc-800 py-3 font-bold text-2xl lg:text-3xl drop-shadow-xl shadow-black mb-6 flex flex-row items-center font-gotham`}
+          className={`text-black py-3 font-bold text-2xl lg:text-3xl drop-shadow-xl shadow-black mb-6 flex flex-row items-center font-gotham`}
         >
           <div>Utwórz swoje konto</div>
         </h2>
@@ -104,7 +104,7 @@ export default function CreateAccountForm({
         </button>
         <div className="my-6 flex flex-row items-center justify-center">
           <div className="h-px w-full bg-[#126b91]"></div>
-          <div className="px-12 font-cardo">lub</div>
+          <div className="px-12 font-gotham">lub</div>
           <div className="h-px w-full bg-[#126b91]"></div>
         </div>
         <GoogleAuthButton seek={seek} />

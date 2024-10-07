@@ -44,7 +44,7 @@ function StripeButton({ item }: { item: any }) {
     >
       <div
         style={{ boxShadow: "0px 0px 16px cyan" }}
-        className={`w-full font-bold relative flex items-center justify-center text-center text-white bg-orange-500 px-6 py-1 rounded-b-xl mt-2 text-base rounded-xl`}
+        className={`w-full font-bold relative flex items-center justify-center text-center text-white bg-[#126b91] px-6 py-1 rounded-b-xl mt-2 text-base rounded-xl`}
       >
         {isLoading && (
           <div className="bg-white h-full aspect-square rounded-md flex flex-row items-center justify-center px-2 font-bold mx-auto">

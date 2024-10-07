@@ -2,6 +2,7 @@ import Link from "next/link";
 import Discord from "./Discord";
 import Image from "next/image";
 import { polishToEnglish } from "../../utils/polishToEnglish";
+import Hero from "./Hero";
 
 /**
  * @function MainFooter
@@ -22,20 +23,17 @@ export default function MainFooter({
   category?: any;
 }) {
   return (
-    <div className="flex flex-col px-6 lg:px-12 p-6 py-12 bg-zinc-800 relative z-50">
-      <div className="flex flex-col">
+    <div className="flex flex-col px-6 lg:px-12 p-6 py-12 bg-white relative z-50 overflow-hidden font-coco">
+      <div className="flex flex-col relative z-50">
         <div className="mb-12">
-          <h2
-            className="text-4xl font-bold text-white"
-            style={{ textShadow: "2px 2px 2px blue", lineHeight: 1.35 }}
-          >
-            {!heading && <>Zatrudnij z Quixy Talent&trade;</>}
+          <h2 className="text-4xl font-bold text-black">
+            {!heading && <div>Szukaj lub zatrudnij w pracy zdalnej</div>}
             {heading && <>{heading}</>}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
             {jobsList.map((item: any, i: any) => (
               <div key={i} className="flex flex-col mt-8">
-                <h2 className="flex items-center text-blue-400 text-2xl font-bold">
+                <h2 className="flex items-center text-cta text-2xl font-bold">
                   {item.title}
                 </h2>
                 {item.data.map((cat: any, i: any) => (
@@ -49,7 +47,7 @@ export default function MainFooter({
                       }${polishToEnglish(item.title)}/${polishToEnglish(
                         cat.title
                       )}`}
-                      className="flex items-center text-white"
+                      className="flex items-center text-black"
                     >
                       {cat.title}
                     </Link>
@@ -59,7 +57,7 @@ export default function MainFooter({
             ))}
           </div>
         </div>
-        <div className="">
+        <div className="p-3 lg:p-6 bg-zinc-600 rounded-xl">
           <div className="text-white text-lg drop-shadow-lg shadow-black italic mb-3">
             Powered by
           </div>

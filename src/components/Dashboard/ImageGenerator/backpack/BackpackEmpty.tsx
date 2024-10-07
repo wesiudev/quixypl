@@ -28,7 +28,7 @@ export default function BackpackEmpty({ user }: { user: any }) {
               <h2 className="text-3xl sm:text-5xl text-white mb-6">
                 Generator Obrazów
               </h2>
-              {/* <div className="text-xl sm:text-2xl text-white bg-orange-500 rounded-xl p-3 w-max max-w-[100%]">
+              {/* <div className="text-xl sm:text-2xl text-white bg-[#126b91] rounded-xl p-3 w-max max-w-[100%]">
                 Cześć, {user?.name || user?.email || user?.pseudo}!
               </div> */}
               <div className="mt-2 text-white text-xl sm:text-2xl">
@@ -43,7 +43,7 @@ export default function BackpackEmpty({ user }: { user: any }) {
           </div>
           <div className="flex flex-col relative z-[50]">
             <div className="text-white text-2xl font-gotham">
-              <div className="mr-2 text-orange-500">Krok 1.</div> Wygeneruj swój
+              <div className="mr-2 text-primary">Krok 1.</div> Wygeneruj swój
               pierwszy obraz
             </div>
             <div className="w-full mt-6">

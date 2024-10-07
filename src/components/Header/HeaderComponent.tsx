@@ -77,7 +77,7 @@ export default function HeaderComponent({
           <Link
             title="Idź do Centrum Biznesu w Internecie Quixy"
             href="/"
-            className="flex flex-col font-light lg:w-[100px] w-[60px]"
+            className="flex flex-col font-light w-[60px]"
           >
             <Image
               src="/assets/quixy-logo.png"
@@ -106,7 +106,7 @@ export default function HeaderComponent({
                 setMenuShow(false);
               }}
               title="Lista specjalistów "
-              className={`flex text-zinc-800 items-center rounded-md ml-3 sm:ml-12 w-max py-[10px] px-[10px] drop-shadow-sm duration-500 cursor-default relative text-base`}
+              className={`flex text-black items-center rounded-md ml-3 sm:ml-12 w-max py-[10px] px-[10px] drop-shadow-sm duration-500 cursor-default relative text-base`}
             >
               Praca zdalna
               <FaChevronDown
@@ -116,11 +116,18 @@ export default function HeaderComponent({
               />
             </Link>{" "}
           </div>
+
           <Link
-            href="/pomysly-na-biznes"
+            href="/business-ideas"
             className="ml-3 text-base drop-shadow-sm shadow-black text-black "
           >
-            Jak zarobić? AI&trade;
+            Pomysły AI&trade;
+          </Link>
+          <Link
+            href="/register"
+            className="ml-3 text-base drop-shadow-sm shadow-black text-black "
+          >
+            Obrazy AI&trade;
           </Link>
           <Link
             href="/marketplace"
@@ -144,7 +151,7 @@ export default function HeaderComponent({
         <div className="w-max flex">
           <Link
             href="/register"
-            className={`w-max ml-2 py-[2px] px-[10px] text-lg rounded-md bg-orange-500 hover:bg-orange-400 text-white drop-shadow-sm duration-100 cursor-default font-bold`}
+            className={`w-max ml-2 py-[2px] px-[10px] text-lg rounded-md bg-cta hover:bg-opacity-90 text-white drop-shadow-sm duration-100 cursor-default font-bold`}
           >
             Rejestracja
           </Link>{" "}

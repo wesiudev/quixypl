@@ -57,7 +57,7 @@ export default function ContactForm() {
           </div>
           <button
             type="submit"
-            className="bg-orange-500 text-white font-medium p-2 rounded-md"
+            className="bg-[#126b91] text-white font-medium p-2 rounded-md"
             onClick={() => {
               if (!email || !name || !message) {
                 toast.error("Proszę uzupełnić wszystkie pola", {

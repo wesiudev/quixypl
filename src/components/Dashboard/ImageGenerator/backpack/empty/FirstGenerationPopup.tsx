@@ -164,7 +164,7 @@ export default function FirstGenerationPopup(props: FirstGenerationPopupProps) {
             >
               {!isLoading && (
                 <>
-                  <div className="text-center z-[50] p-3 w-full bg-orange-500 text-white font-bold">
+                  <div className="text-center z-[50] p-3 w-full bg-[#126b91] text-white font-bold">
                     {userPrompt}
                   </div>
                   <Image

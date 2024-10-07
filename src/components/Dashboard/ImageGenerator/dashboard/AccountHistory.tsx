@@ -20,7 +20,7 @@ export default function AccountHistory() {
               .map((item: any, idx: number) => (
                 <div className="flex flex-col p-4" key={idx}>
                   <div className="flex flex-row sm:items-center">
-                    <FaClock className="w-6 h-6 mt-px mr-1 text-orange-500" />
+                    <FaClock className="w-6 h-6 mt-px mr-1 text-primary" />
                     <div className="flex flex-col sm:flex-row">
                       <span className="text-lg text-slate-800 font-light">
                         {moment(item.creationTime).format("DD-MM-yyyy hh:mm a")}{" "}

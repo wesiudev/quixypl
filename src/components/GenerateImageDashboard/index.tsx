@@ -35,7 +35,7 @@ export default function GenerateImageDashboard() {
             <div className="flex flex-row h-max mt-5">
               <textarea
                 placeholder="Shine Bright Like a Diamond"
-                className="placeholder:font-light z-20 w-full p-4 rounded-2xl text-xl lg:text-xl min-h-[25vh] bg-white text-black border-2 border-orange-500 outline-none"
+                className="placeholder:font-light z-20 w-full p-4 rounded-2xl text-xl lg:text-xl min-h-[25vh] bg-white text-black border-2 border-primary outline-none"
                 value={userPrompt}
                 onChange={(e) => setUserPrompt(e.target.value)}
               />
@@ -58,8 +58,8 @@ export default function GenerateImageDashboard() {
                   key={i}
                   className={`text-base font-light py-1.5 px-2 ml-2 mt-2 rounded-md text-white duration-200 ${
                     styles.includes(style.name)
-                      ? "scale-[1.06] hover:scale-[1.04] bg-orange-500"
-                      : "hover:scale-[0.95] bg-slate-700 hover:bg-slate-600"
+                      ? "scale-[1.06] hover:scale-[1.04] bg-[#126b91]"
+                      : "hover:scale-[0.95] bg-[#126b91] hover:bg-[#468CA9]"
                   }`}
                 >
                   {style.name}

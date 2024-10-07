@@ -22,16 +22,16 @@ export default function Dashboard() {
   return (
     <>
       {user ? (
-        <div className="relative p-4 bg-gray-200 sm:p-6 md:p-8 lg:p-6 xl:p-16 2xl:p-24">
+        <div className="relative p-4 bg-gradient-to-br from-slate-800 to-primary via-primaryHover sm:p-6 md:p-8 lg:p-6 xl:p-16 2xl:p-24">
           <div className="grid grid-cols-1 h-max font-coco relative w-full mx-auto">
             <div>
               <div className="">
                 <div className="flex flex-col">
-                  <h1 className="text-3xl sm:text-5xl text-black  font-gotham mb-4">
+                  <h1 className="text-3xl sm:text-5xl text-white font-gotham mb-4">
                     Panel Użytkownika
                   </h1>
                   {!user?.verified && (
-                    <div className="bg-slate-700 text-white p-3 font-gotham font-light mb-4 rounded-xl w-max max-w-[100%]">
+                    <div className="bg-[#126b91] text-white p-3 font-gotham font-light mb-4 rounded-xl w-max max-w-[100%]">
                       Witaj w Quixy!🔥 Wysłaliśmy wiadomość aktywującą konto na
                       podany adres e-mail - {user?.email}{" "}
                       <button
@@ -65,7 +65,7 @@ export default function Dashboard() {
                       {!user.photoURL && (
                         <div
                           style={{ boxShadow: "inset 0px 0px 8px black" }}
-                          className="bg-orange-500 rounded-full h-24 w-24 text-white flex items-center justify-center"
+                          className="bg-[#126b91] rounded-full h-24 w-24 text-white flex items-center justify-center"
                         >
                           <FaUser className="text-3xl lg:text-5xl group-hover:scale-110 duration-200" />
                         </div>
@@ -99,7 +99,7 @@ export default function Dashboard() {
                             Imię (lub imię i nazwisko)
                           </h2>
                         )}
-                        <h3 className="text-orange-500 text-xl font-gotham font-bold">
+                        <h3 className="text-primary text-xl font-gotham font-bold">
                           {user?.name ? user?.name : "Nie podano"}
                         </h3>
                         <h3 className="text-black text-lg">
@@ -109,7 +109,7 @@ export default function Dashboard() {
                           {user?.pseudo && user?.pseudo}
                         </h3>
 
-                        <h3 className="text-black text-lg">
+                        <h3 className="text-black text-xs sm:text-base">
                           {user?.email &&
                             !user?.pseudo &&
                             !user?.title &&
@@ -120,9 +120,9 @@ export default function Dashboard() {
                           onClick={() =>
                             dispatch(set_modals({ ...modals, config: true }))
                           }
-                          className="flex items-center text-black"
+                          className="flex items-center text-black mt-2"
                         >
-                          <FaCog className="text-xl mr-1" />
+                          <FaCog className="text-primary text-2xl mr-1" />
                           Konfiguruj konto
                         </button>
                       </div>
@@ -176,14 +176,26 @@ export default function Dashboard() {
                   <h3 className="text-black text-lg font-gotham font-light">
                     {user?.pseudo && (
                       <Link
-                        className="text-orange-500"
+                        className="text-primary"
                         href={`https://quixy.pl/talent/${user?.pseudo}`}
                       >
                         {user?.pseudo && `quixy.pl/talent/${user?.pseudo}`}
                       </Link>
                     )}
-                    {!user?.pseudo &&
-                      "Ustaw swój pseudonim, aby otrzymać unikalny link, dzięki któremu dotrzesz do pracodawców."}
+                    {!user?.pseudo && (
+                      <div>
+                        <button
+                          className="text-primary font-bold"
+                          onClick={() =>
+                            dispatch(set_modals({ ...modals, config: true }))
+                          }
+                        >
+                          Ustaw swój pseudonim,
+                        </button>{" "}
+                        aby otrzymać unikalny link, dzięki któremu dotrzesz do
+                        pracodawców.
+                      </div>
+                    )}
                   </h3>
                   <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
                     Specjalizacje
@@ -191,7 +203,7 @@ export default function Dashboard() {
                   <div className="w-full -ml-1 mt-1 flex flex-wrap items-center font-coco font-light text-white">
                     {user?.tags?.map((item: any, i: any) => (
                       <div className="text-sm" key={i}>
-                        <div className="ml-1 mt-1 rounded-xl bg-slate-700 flex items-center px-2 py-0.5">
+                        <div className="ml-1 mt-1 rounded-xl bg-[#126b91] flex items-center px-2 py-0.5">
                           {item.title}
                         </div>
                       </div>
@@ -210,7 +222,7 @@ export default function Dashboard() {
                       user?.preferences?.map((item: any, i: any) => (
                         <h3
                           key={i}
-                          className={`ml-1 mt-1 rounded-xl bg-slate-700 flex items-center px-2 py-0.5 text-sm font-coco font-light text-white`}
+                          className={`ml-1 mt-1 rounded-xl bg-[#126b91] flex items-center px-2 py-0.5 text-sm font-coco font-light text-white`}
                         >
                           {item}
                         </h3>
@@ -253,7 +265,7 @@ export default function Dashboard() {
                     onClick={() =>
                       dispatch(set_modals({ ...modals, config: true }))
                     }
-                    className="text-orange-500 hover:no-underline underline font-bold"
+                    className="text-primary hover:no-underline underline font-bold"
                   >
                     klikając tutaj
                   </button>{" "}
@@ -262,7 +274,7 @@ export default function Dashboard() {
               {user?.projects?.length > 0 && (
                 <div>
                   {user?.projects?.map((project: IProject, i: any) => (
-                    <ProjectCard place="dashboard" key={i} project={project} />
+                    <ProjectCard key={i} project={project} />
                   ))}
                 </div>
               )}
@@ -300,7 +312,7 @@ export default function Dashboard() {
               )} */}
               {/* <Link
                 href="/chat"
-                className="font-gotham underline text-orange-500 text-lg"
+                className="font-gotham underline text-primary text-lg"
               >
                 Przejdź do czatu
               </Link> */}
@@ -310,7 +322,7 @@ export default function Dashboard() {
                 }
                 className="flex items-center text-black font-coco mt-4 text-lg"
               >
-                <FaCoins className="mr-2 text-orange-500 text-2xl" />
+                <FaCoins className="mr-2 text-primary text-2xl" />
                 Doładuj Quixies
               </button>
               <button
@@ -319,7 +331,7 @@ export default function Dashboard() {
                 }
                 className="flex items-center text-black font-coco mt-1 text-lg"
               >
-                <FaCog className="mr-2 text-orange-500 text-2xl" />
+                <FaCog className="mr-2 text-primary text-2xl" />
                 Ustawienia konta
               </button>
             </div>

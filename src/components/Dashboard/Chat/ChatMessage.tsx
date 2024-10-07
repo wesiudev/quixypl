@@ -18,7 +18,7 @@ export default function ChatMessage({
   source: any;
 }) {
   return (
-    <div className={`w-full text-zinc-800 text-light text-base lg:text-xl`}>
+    <div className={`w-full text-black text-light text-base lg:text-xl`}>
       <div
         className={`${
           clickedUserData?.uid === message?.sender

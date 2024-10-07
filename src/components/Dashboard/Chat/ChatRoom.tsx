@@ -37,7 +37,7 @@ export default function ChatRoom({
             className="w-full flex flex-col mb-24 p-3 sm:p-6 lg:p-12 h-screen overflow-y-scroll"
           >
             {!chat?.messages?.length && (
-              <div className="text-center text-zinc-800 flex flex-col items-center justify-center">
+              <div className="text-center text-black flex flex-col items-center justify-center">
                 {clickedUserData?.photoURL && (
                   <div className="rounded-full overflow-hidden w-32 h-32 mb-3 relative">
                     <Image

@@ -146,7 +146,7 @@ export default function GenerateButton(props: any) {
           disabled={isGenerationPending || isError}
           className={`${
             isError ? "bg-red-500" : ""
-          } disabled:opacity-90 h-max z-[51] disabled:cursor-not-allowed flex flex-row bg-orange-500 hover:bg-orange-600 duration-75 ease-in  items-center justify-center  w-full p-2 text-center mx-auto lg:mx-0 text-gray-50 hover:transition-transform cursor-pointer py-4 px-8 rounded-md text-2xl mt-8`}
+          } disabled:opacity-90 h-max z-[51] disabled:cursor-not-allowed flex flex-row bg-primary hover:bg-primaryHover duration-75 ease-in  items-center justify-center w-full p-2 text-center mx-auto lg:mx-0 text-gray-50 hover:transition-transform cursor-pointer py-4 px-8 rounded-md text-2xl mt-8`}
           onClick={() => handleImageGeneration(prompt)}
         >
           {!isGenerationPending && (

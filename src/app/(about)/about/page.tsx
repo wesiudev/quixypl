@@ -3,6 +3,7 @@ import {
   FaLightbulb,
   FaCheckCircle,
   FaHeadset,
+  FaStar,
 } from "react-icons/fa";
 import React from "react";
 import Header from "@/components/Header";
@@ -11,6 +12,8 @@ import jobs from "../../../../public/14.09.2024.json";
 import Hero from "@/components/Hero";
 import Link from "next/link";
 import { Metadata } from "next";
+import Image from "next/image";
+import AboutQuixyTalent from "../AboutQuixyTalent";
 export default function Page() {
   return (
     <div className="min-h-screen flex flex-col font-gotham">
@@ -19,18 +22,16 @@ export default function Page() {
       {/* Hero Section */}
       <div className="flex-grow">
         <div
-          className="h-full w-full bg-zinc-800 overflow-hidden text-white py-12 relative z-50 px-10 text-center"
+          className="h-full w-full bg-black overflow-hidden text-white py-12 relative z-50 px-10 text-center"
           style={{ textShadow: "2px 2px 2px black" }}
         >
           <Hero />
-          <h1 className="text-5xl font-bold text-orange-500">
-            Czym jest Quixy.pl?
-          </h1>
+          <h1 className="text-5xl font-bold text-cta">Czym jest Quixy.pl?</h1>
           <p className="text-xl italic mt-4 max-w-xl mx-auto">
             Quixy to platforma z pracą zdalną i nie tylko - na bieżąco rozwijamy
             nasz serwis i dbamy o doświadczenie użytkownika.
           </p>
-          <button className="bg-white text-orange-500 font-bold relative z-50 py-3 px-8 rounded mt-6 hover:bg-gray-100 transition">
+          <button className="bg-white text-primary font-bold relative z-50 py-3 px-8 rounded mt-6 hover:bg-gray-100 transition">
             Dołącz teraz
           </button>
         </div>
@@ -43,12 +44,17 @@ export default function Page() {
               className="bg-white p-6 relative z-50 rounded-xl"
               style={{ boxShadow: "0px 0px 4px black" }}
             >
-              <h3 className="text-xl font-semibold text-orange-500">
-                <Link href="/praca-zdalna/rozwoj-oprogramowania">
+              <h3 className="text-xl text-black flex">
+                <FaStar className="mr-2 text-cta mt-1" />
+                <Link
+                  href="/praca-zdalna/rozwoj-oprogramowania"
+                  className="flex flex-col"
+                >
                   Rozwój Oprogramowania
+                  <span className="ml-1 text-sm font-light">Sprawdź</span>
                 </Link>
               </h3>
-              <p className="mt-2 text-zinc-800 font-coco">
+              <p className="mt-2 text-black font-coco">
                 Zatrudnij ekspertów od aplikacji mobilnych, web developmentu,
                 frameworków i nowych technologii.
               </p>
@@ -57,10 +63,14 @@ export default function Page() {
               className="bg-white p-6 relative z-50 rounded-xl"
               style={{ boxShadow: "0px 0px 4px black" }}
             >
-              <h3 className="text-xl font-semibold text-orange-500">
-                <Link href="/praca-zdalna/e-commerce">E-Commerce</Link>
+              <h3 className="text-xl text-black flex">
+                <FaStar className="mr-2 text-cta mt-1" />
+                <Link href="/praca-zdalna/e-commerce" className="flex flex-col">
+                  E-Commerce{" "}
+                  <span className="ml-1 text-sm font-light">Sprawdź</span>
+                </Link>
               </h3>
-              <p className="mt-2 text-zinc-800 font-coco">
+              <p className="mt-2 text-black font-coco">
                 Oferujemy pełne wsparcie w tworzeniu sklepów internetowych,
                 rozwiązań Magento, Shopify i innych.
               </p>
@@ -69,20 +79,24 @@ export default function Page() {
               className="bg-white p-6 relative z-50 rounded-xl"
               style={{ boxShadow: "0px 0px 4px black" }}
             >
-              <h3 className="text-xl font-semibold text-orange-500">
-                <Link href="/praca-zdalna/uslugi-it">Usługi IT</Link>
+              <h3 className="text-xl text-black flex">
+                <FaStar className="mr-2 text-cta mt-1" />
+                <Link href="/praca-zdalna/uslugi-it" className="flex flex-col">
+                  Usługi IT{" "}
+                  <span className="ml-1 text-sm font-light">Sprawdź</span>
+                </Link>
               </h3>
-              <p className="mt-2 text-zinc-800 font-coco">
+              <p className="mt-2 text-black font-coco">
                 Skorzystaj z doradztwa IT, wsparcia technicznego oraz rozwiązań
                 z zakresu bezpieczeństwa IT.
               </p>
             </div>
           </div>
         </div>
-        <div className="py-2 bg-orange-300 w-full relative">
+        <div className="py-2 bg-primary w-full relative">
           <Link
             style={{ boxShadow: "0px 0px 4px #000" }}
-            className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 bg-orange-500 text-white font-bold z-50 py-3 px-8 rounded-lg hover:bg-gray-100 "
+            className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 bg-cta text-white font-bold z-50 py-3 px-8 rounded-lg hover:bg-white hover:text-cta transition"
             href="/praca-zdalna"
           >
             Zobacz więcej
@@ -100,12 +114,12 @@ export default function Page() {
               className="p-6 bg-white rounded-xl"
               style={{ boxShadow: "0px 0px 5px black" }}
             >
-              <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <div className="bg-[#126b91] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <FaShieldAlt className="text-white text-3xl" />{" "}
                 {/* Ikona bezpieczeństwa */}
               </div>
               <h3 className="text-xl font-bold text-black">Bezpieczeństwo</h3>
-              <p className="mt-2 text-zinc-800 font-coco">
+              <p className="mt-2 text-black font-coco">
                 Nasze rozwiązania są w pełni bezpieczne i niezawodne.
               </p>
             </div>
@@ -114,12 +128,12 @@ export default function Page() {
               className="p-6 bg-white rounded-xl"
               style={{ boxShadow: "0px 0px 5px black" }}
             >
-              <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <div className="bg-[#126b91] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <FaLightbulb className="text-white text-3xl" />{" "}
                 {/* Ikona kreatywności */}
               </div>
               <h3 className="text-xl font-bold text-black">Kreatywność</h3>
-              <p className="mt-2 text-zinc-800 font-coco">
+              <p className="mt-2 text-black font-coco">
                 Twórz nowe pomysły na biznes za pomocą naszego generatora.
               </p>
             </div>
@@ -128,12 +142,12 @@ export default function Page() {
               className="p-6 bg-white rounded-xl"
               style={{ boxShadow: "0px 0px 5px black" }}
             >
-              <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <div className="bg-[#126b91] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <FaCheckCircle className="text-white text-3xl" />{" "}
                 {/* Ikona prostoty */}
               </div>
               <h3 className="text-xl font-bold text-black">Prostota</h3>
-              <p className="mt-2 text-zinc-800 font-coco">
+              <p className="mt-2 text-black font-coco">
                 Narzędzie stworzone z myślą o Twoich potrzebach.
               </p>
             </div>
@@ -142,27 +156,63 @@ export default function Page() {
               className="p-6 bg-white rounded-xl"
               style={{ boxShadow: "0px 0px 5px black" }}
             >
-              <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <div className="bg-[#126b91] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <FaHeadset className="text-white text-3xl" />{" "}
                 {/* Ikona wsparcia */}
               </div>
               <h3 className="text-xl font-bold text-black">Wsparcie 24/7</h3>
-              <p className="mt-2 text-zinc-800 font-coco">
+              <p className="mt-2 text-black font-coco">
                 Jesteśmy dostępni, aby pomóc Ci o każdej porze dnia i nocy.
               </p>
             </div>
           </div>
         </div>
+        <div className="bg-gray-200 p-4 lg:p-12 relative overflow-hidden container mx-auto my-24 rounded-xl">
+          <div className="absolute left-0 -top-36" id="ccrm" />
+          <div className="flex w-full justify-between items-center">
+            <h2 className="text-3xl font-bold text-black">
+              Czym jest Quixy Talent&trade;
+            </h2>
+            <div className="h-full max-w-lg flex items-center justify-center">
+              <Image
+                src="/assets/quixy-logo.png"
+                width={224}
+                height={224}
+                alt="Logo serwisu quixy.pl"
+                className="w-1/2 h-auto"
+              />
+            </div>
+          </div>
+          <p className="mt-4 text-lg text-black font-light max-w-3xl">
+            W Quixy Talent&trade; postawiliśmy na innowacyjne rozwiązanie CCRM
+            (Client-to-Client Relationship Management), aby zmaksymalizować
+            wartość płynącą z relacji pomiędzy naszymi klientami. Tradycyjne
+            systemy CRM skupiają się wyłącznie na relacji firmy z klientami, ale
+            nasza wizja jest szersza. Dzięki CCRM wspieramy współpracę i
+            interakcje pomiędzy naszymi klientami, tworząc sieci wartościowych
+            kontaktów i wzmacniając ich możliwości rozwoju.
+          </p>
 
+          <AboutQuixyTalent />
+        </div>
         {/* Call-to-Action Section */}
-        <div className="bg-orange-500 text-white py-16 relative z-50 px-10 text-center">
-          <h2 className="text-3xl font-bold">
+        <div className="bg-[#126b91] text-white py-16 relative z-50 px-10 text-center">
+          <h2
+            className="text-3xl font-bold"
+            style={{ textShadow: "2px 2px 2px black" }}
+          >
             Wypróbuj Quixy Talent™ za darmo!
           </h2>
-          <p className="text-lg mt-4">
+          <p
+            style={{ textShadow: "1px 1px 1px black" }}
+            className="text-lg mt-4 max-w-lg mx-auto"
+          >
             Zarejestruj się już teraz i zyskaj darmowe Quixies 💎 na start!
           </p>
-          <button className="bg-white text-orange-500 font-bold relative z-50 py-1.5 px-2 rounded mt-6 hover:bg-gray-200 transition">
+          <button
+            style={{ textShadow: "1px 1px 1px black" }}
+            className="bg-cta text-white font-bold relative z-50 py-1.5 px-2 rounded mt-6 hover:bg-opacity-90 transition"
+          >
             Rejestracja
           </button>
         </div>

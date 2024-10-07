@@ -29,14 +29,14 @@ const FAQ: React.FC<FAQProps> = ({ faqItems }) => {
 
   return (
     <div className="!font-gotham">
-      <h2 className="text-3xl font-bold mb-6 text-black  text-center lg:text-left">
+      <h2 className="text-3xl font-bold mb-6 text-black">
         FAQ: Najczęściej Zadawane Pytania
       </h2>
       <ul className="space-y-4 text-lg text-black">
         {faqItems.slice(0, visibleItems).map((faq, index) => (
           <li
             key={index}
-            className="border-x-[12px] rounded-xl border-orange-500 p-3 border-y-2"
+            className="border-x-[12px] rounded-xl border-primary p-3 border-y-2 bg-primary bg-opacity-80 text-white"
           >
             <strong>{faq.question}</strong>
             <p className="font-light">{faq.answer}</p>
@@ -48,7 +48,7 @@ const FAQ: React.FC<FAQProps> = ({ faqItems }) => {
         <div className="text-center mt-8">
           <button
             onClick={handleShowMore}
-            className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 transition"
+            className="bg-[#126b91] text-white py-2 px-4 rounded hover:bg-orange-600 transition"
           >
             Pokaż więcej
           </button>

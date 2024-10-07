@@ -231,8 +231,8 @@ html {
   margin-top: 24px;
   padding: 12px 10px 12px 20px;
   background: white;
-  border-left: 12px solid #f97316;
-  border-right: 12px solid #f97316;
+  border-left: 10px solid #14a800;
+  border-right: 10px solid #14a800;
   border-radius: 8px;
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
   max-width: 100%;

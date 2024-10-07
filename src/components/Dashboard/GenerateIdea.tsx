@@ -130,7 +130,7 @@ export default function GenerateIdea({
 
   return (
     <div className="bg-white rounded-lg w-full flex flex-col lg:flex-row p-3 sm:p-6 lg:p-12 2xl:p-24">
-      <div className="text-zinc-800 h-full w-full">
+      <div className="text-black h-full w-full">
         <div className="flex flex-row w-full">
           <div className="w-full">
             <div className="flex flex-col">
@@ -154,7 +154,7 @@ export default function GenerateIdea({
                   className={`p-3 w-full h-max text-white font-bold mb-6 ${
                     isLoading
                       ? "cursor-not-allowed bg-green-500"
-                      : "bg-orange-500 rounded-lg hover:bg-orange-400 duration-100"
+                      : "bg-[#126b91] rounded-lg hover:bg-[#468CA9] duration-100"
                   }`}
                 >
                   {isLoading ? (

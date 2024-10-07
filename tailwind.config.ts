@@ -10,11 +10,15 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        cardo: ["var(--font-cardo)"],
+        cardo: ["var(--font-gotham)"],
         coco: ["var(--font-cocosharp)"],
         gotham: ["var(--font-gotham)"],
       },
-
+      colors: {
+        cta: "#14A800",
+        primary: "#126b91",
+        primaryHover: "#468CA9",
+      },
       backgroundImage: {
         "woman-pc": "url('/assets/woman-pc.webp')",
         "lion-bg": "url('/assets/quixy/bg.webp')",

@@ -22,14 +22,14 @@ export default function Contact() {
 
       <div className="flex-grow">
         {/* Contact Section */}
-        <div className="flex flex-col relative overflow-hidden bg-zinc-800">
+        <div className="flex flex-col relative overflow-hidden bg-black">
           <Hero />
 
           <div
             className="relative overflow-hidden h-full w-full text-white pt-20 pb-12 px-10"
             style={{ textShadow: "2px 2px 2px black" }}
           >
-            <h1 className="text-4xl text-center relative z-50 text-orange-500">
+            <h1 className="text-4xl text-center relative z-50 text-primary">
               Kontakt z Quixy.pl
             </h1>
             <p className="text-lg text-center mt-4 relative z-50 max-w-lg mx-auto">
@@ -45,7 +45,7 @@ export default function Contact() {
               <div className="bg-white shadow-lg relative z-50 rounded-t-xl pb-3 lg:pb-6">
                 <h2
                   style={{ textShadow: "2px 2px 2px black" }}
-                  className="p-3 lg:p-6 rounded-t-xl text-3xl text-white bg-orange-500"
+                  className="p-3 lg:p-6 rounded-t-xl text-3xl text-white bg-[#126b91]"
                 >
                   Formularz kontaktowy
                 </h2>
@@ -163,7 +163,7 @@ export default function Contact() {
         </div>
 
         {/* Contact Info Section */}
-        <div className="bg-orange-500 text-white py-12 px-6 flex flex-col items-center justify-center">
+        <div className="bg-[#126b91] text-white py-12 px-6 flex flex-col items-center justify-center">
           <h2
             style={{ textShadow: "2px 2px 2px black" }}
             className="text-3xl lg:text-5xl text-white text-center"

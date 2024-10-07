@@ -22,21 +22,16 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <div>
       <Header jobsList={jobs} />
-      <div className="relative bg-zinc-800 sm:p-8 lg:p-16 xl:p-24">
+      <div className="relative bg-black sm:p-8 lg:p-16 xl:p-24">
         <Hero />
         <div className="bg-white text-black sm:rounded-xl breadcrumbs-container relative z-50 sm:mb-8 px-4">
           <ul className="breadcrumbs flex items-center flex-wrap">
             <h2 className="breadcrumb-title mr-2">
-              <Link href="/pomysly-na-biznes">
-                Pomysły na biznes Quixy&trade;
-              </Link>
+              <Link href="/business-ideas">Pomysły na biznes Quixy&trade;</Link>
             </h2>
             <FaChevronRight className="mr-2" />
             <li className="mr-2">
-              <Link
-                href={`/pomysly-na-biznes/${params.slug}`}
-                title={params.slug}
-              >
+              <Link href={`/business-ideas/${params.slug}`} title={params.slug}>
                 {slug.name}
               </Link>
             </li>
@@ -58,10 +53,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 <div className="italic font-light text-lg text-black">
                   Wygenerowano z AI Pomysły Quixy&trade;
                 </div>
-                <Link
-                  href="/pomysly-na-biznes"
-                  className="font-bold text-primary"
-                >
+                <Link href="/business-ideas" className="font-bold text-primary">
                   Wypróbuj za darmo
                 </Link>
               </div>
@@ -93,7 +85,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 <h2 className="text-3xl lg:text-5xl">
                   {slug?.name || "Nie podano"}
                 </h2>
-                <div className="w-48 text-sm font-light !text-white bg-orange-500 p-2 rounded-lg">
+                <div className="w-48 text-sm font-light !text-white bg-[#126b91] p-2 rounded-lg">
                   <div>Data Utworzenia</div>
                   <div>{moment(slug?.createdAt).format("DD-MM-yyyy")}</div>
                 </div>
@@ -165,7 +157,7 @@ export async function generateMetadata({ params }: { params: any }) {
     description,
     openGraph: {
       type: "website",
-      url: `https://quixy.pl/pomysly-na-biznes/${polishToEnglish(
+      url: `https://quixy.pl/business-ideas/${polishToEnglish(
         slug?.name
       )}${slug?.creationTime?.toString()}`,
       title,

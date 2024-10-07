@@ -135,7 +135,7 @@ export default function RegisterPopup({
               <button
                 disabled={isThinking}
                 onClick={() => createAccount()}
-                className="duration-150 disabled:cursor-not-allowed disabled:bg-gray-500 bg-orange-500 text-white font-bold h-[42px] w-full p-2"
+                className="duration-150 disabled:cursor-not-allowed disabled:bg-gray-500 bg-[#126b91] text-white font-bold h-[42px] w-full p-2"
               >
                 {isThinking ? "Tworzę konto..." : "Zarejestruj się"}
               </button>
@@ -146,7 +146,7 @@ export default function RegisterPopup({
               <button
                 disabled={isThinking}
                 onClick={() => signIn()}
-                className="duration-150 disabled:cursor-not-allowed disabled:bg-gray-500 bg-orange-500 text-white font-bold h-[42px] w-full p-2"
+                className="duration-150 disabled:cursor-not-allowed disabled:bg-gray-500 bg-[#126b91] text-white font-bold h-[42px] w-full p-2"
               >
                 {isThinking ? "Loguję konto" : "Zaloguj się"}
               </button>
@@ -176,7 +176,7 @@ export default function RegisterPopup({
             Akceptuję{" "}
             <Link
               href="/terms-of-use"
-              className="mx-1 text-orange-500"
+              className="mx-1 text-primary"
               target="_blank"
             >
               regulamin
@@ -209,7 +209,7 @@ export default function RegisterPopup({
               Posiadasz już konto?{" "}
               <button
                 onClick={() => setView("login")}
-                className="underline hover:no-underline ml-1 text-orange-500"
+                className="underline hover:no-underline ml-1 text-primary"
               >
                 Zaloguj się
               </button>
@@ -219,7 +219,7 @@ export default function RegisterPopup({
               Nie posiadasz konta?
               <button
                 onClick={() => setView("register")}
-                className="underline hover:no-underline ml-1 text-orange-500"
+                className="underline hover:no-underline ml-1 text-primary"
               >
                 Zarejestruj się
               </button>

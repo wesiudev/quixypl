@@ -34,7 +34,7 @@ export default function ContentItem({ data }: { data: any }) {
     }
   }, [lead]);
   return (
-    <li className="bg-slate-700 p-3 rounded-md !text-white font-gotham font-light">
+    <li className="bg-[#126b91] p-3 rounded-md !text-white font-gotham font-light">
       <h2 className="text-2xl font-semibold mb-2">{lead?.title}</h2>
       <p>
         <b>Mianownik:</b> {lead?.nominative}

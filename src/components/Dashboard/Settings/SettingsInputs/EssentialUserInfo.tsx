@@ -52,7 +52,7 @@ export default function EssentialUserInfo({
                   handleReduxUserState(e.target.value, "name");
                   setChangesWereMade(true);
                 }}
-                className="border border-slate-700 rounded-md p-2 text-black  font-light"
+                className="border border-primary rounded-md p-2 text-black  font-light"
                 placeholder="Imię lub imię i nazwisko"
               />
             </div>
@@ -65,7 +65,7 @@ export default function EssentialUserInfo({
                   handleReduxUserState(e.target.value, "title");
                   setChangesWereMade(true);
                 }}
-                className="border border-slate-700 rounded-md p-2 text-black  font-light"
+                className="border border-primary rounded-md p-2 text-black  font-light"
                 placeholder="np. Młodszy Księgowy"
               />
             </div>
@@ -81,7 +81,7 @@ export default function EssentialUserInfo({
                     <div className="">
                       To będzie Twój unikalny link w Quixy.pl, dzięki któremu
                       trafią do Ciebie pracodawcy!{" "}
-                      <strong className="text-orange-500">
+                      <strong className="text-primary">
                         quixy.pl/talent/{localPseudo}
                       </strong>
                     </div>
@@ -105,7 +105,7 @@ export default function EssentialUserInfo({
                     hasAnswer &&
                     !pseudoIsAvailable &&
                     "bg-red-500 text-white !font-bold"
-                  } border-slate-700 rounded-md p-2 text-black font-light`}
+                  } border-primary rounded-md p-2 text-black font-light`}
                   placeholder="np. jan345"
                 />
                 <div className="grid grid-cols-2 gap-3">
@@ -115,7 +115,7 @@ export default function EssentialUserInfo({
                       <button
                         onClick={check}
                         disabled={isLoading}
-                        className="disabled:cursor-not-allowed w-max rounded-md disabled:bg-slate-700 disabled:duration-500 duration-100 px-2 py-1.5 bg-orange-500 text-white font-gotham mt-2"
+                        className="disabled:cursor-not-allowed w-max rounded-md disabled:bg-[#126b91] disabled:duration-500 duration-100 px-2 py-1.5 bg-[#126b91] text-white font-gotham mt-2"
                       >
                         {!isLoading && "Sprawdź dostępność"}
                         {isLoading && "Sprawdzam..."}
@@ -141,7 +141,7 @@ export default function EssentialUserInfo({
                           setHasAnswer(false);
                           setPseudoWasChanged(false);
                         }}
-                        className="disabled:cursor-not-allowed disabled:bg-slate-700 disabled:duration-500 duration-100 px-2 py-1.5 bg-green-500 text-white font-gotham mt-2"
+                        className="disabled:cursor-not-allowed disabled:bg-[#126b91] disabled:duration-500 duration-100 px-2 py-1.5 bg-green-500 text-white font-gotham mt-2"
                       >
                         Zmien pseudonim
                       </button>
@@ -160,7 +160,7 @@ export default function EssentialUserInfo({
             }}
             rows={4}
             maxLength={2000}
-            className="border border-slate-700 rounded-lg p-2 mt-3 w-full text-black  font-light"
+            className="border border-primary rounded-lg p-2 mt-3 w-full text-black  font-light"
             placeholder={
               source?.seek
                 ? "Jakie usługi wykonujesz? Opisz szczegółowo to, co możesz zeoferować w zespole lub dla klienta."

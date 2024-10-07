@@ -58,7 +58,7 @@ export default function Login() {
       <div className="w-full mx-auto md:w-[67vw] lg:w-[50vw] sm:px-2 sm:p-4 lg:p-6 h-full flex items-center justify-center">
         <div className="w-full p-6 2xl:px-12 bg-white md:mx-6 2xl:mx-12">
           <h2
-            className={`text-zinc-800 py-3 pr-3 font-bold text-2xl lg:text-3xl drop-shadow-xl shadow-black mb-6 flex flex-row items-center font-gotham`}
+            className={`text-black py-3 pr-3 font-bold text-2xl lg:text-3xl drop-shadow-xl shadow-black mb-6 flex flex-row items-center font-gotham`}
           >
             Zaloguj się na swoje konto
           </h2>
@@ -117,7 +117,7 @@ export default function Login() {
               )}
               {isThinking && "Poczekaj..."}
             </button>
-            <div className="font-cardo my-6 flex flex-row items-center justify-center">
+            <div className="font-gotham my-6 flex flex-row items-center justify-center">
               <div className="h-px w-full bg-[#126b91]"></div>
               <div className="px-12">lub</div>
               <div className="h-px w-full bg-[#126b91]"></div>

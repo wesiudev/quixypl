@@ -82,11 +82,11 @@ export default function GeneratedIdeaHeroPopup({
           }}
           className="bg-white rounded-lg flex flex-col w-[90%] sm:max-w-[40rem] h-[50vh] relative bg-opacity-90 z-[999999999999]"
         >
-          <h2 className="bg-orange-500 rounded-t-lg p-6 font-gotham text-2xl text-white font-bold drop-shadow-xl shadow-black sticky top-0">
+          <h2 className="bg-[#126b91] rounded-t-lg p-6 font-gotham text-2xl text-white font-bold drop-shadow-xl shadow-black sticky top-0">
             Twój nowy pomysł jest gotowy!
           </h2>
           <div className="w-full p-4 md:p-6 flex flex-col h-full overflow-y-scroll">
-            <div className="text-zinc-800 text-xl font-bold">
+            <div className="text-black text-xl font-bold">
               Wygenerowany pomysł:
             </div>
             <p className="text-gray-800 text-justify mt-3">
@@ -94,8 +94,8 @@ export default function GeneratedIdeaHeroPopup({
             </p>
             <p className="mt-3 text-sm text-gray-500 ">
               Zaloguj się by odebrać{" "}
-              <b className="text-orange-500">nowy pomysł na biznes</b> oraz 3💎
-              na start
+              <b className="text-primary">nowy pomysł na biznes</b> oraz 3💎 na
+              start
             </p>
           </div>
           <button

@@ -25,7 +25,7 @@ export default function ImageOpen({ imageOpen, setImageOpen }: ImageOpenProps) {
     <div>
       {imageOpen?.src !== "" && (
         <>
-          <div className="w-full z-[500] bg-zinc-800">
+          <div className="w-full z-[500] bg-black">
             <Hero />
             <div className="bg-white z-[506] fixed top-0 lg:left-[30rem] h-screen lg:w-[calc(100vw-30rem)] flex flex-col p-4 sm:p-8 lg:p-16 xl:p-24 overflow-y-scroll">
               <div className="flex flex-col w-full z-[505] relative">
@@ -37,7 +37,7 @@ export default function ImageOpen({ imageOpen, setImageOpen }: ImageOpenProps) {
                   width={1920}
                   height={1080}
                   alt=""
-                  className={`rounded-t-xl relative z-[505] bg-orange-500 bg-opacity-70`}
+                  className={`rounded-t-xl relative z-[505] bg-[#126b91] bg-opacity-70`}
                   blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAA"
                   placeholder="blur"
                 />
@@ -50,7 +50,7 @@ export default function ImageOpen({ imageOpen, setImageOpen }: ImageOpenProps) {
                     <div className="text-2xl flex items-center text-black ">
                       Prompt
                       <FaChevronRight className="text-gray-500 mx-3" />
-                      <div className="text-left text-2xl text-orange-500">
+                      <div className="text-left text-2xl text-primary">
                         &quot;{imageOpen?.prompt}&quot;
                       </div>
                     </div>
@@ -61,13 +61,13 @@ export default function ImageOpen({ imageOpen, setImageOpen }: ImageOpenProps) {
                     <div className="mt-3 grid grid-cols-2 gap-3">
                       <button
                         onClick={() => downloadImage()}
-                        className="w-full bg-orange-500 hover:bg-opacity-90 duration-100 text-white font-bold text-lg p-3"
+                        className="w-full bg-[#126b91] hover:bg-opacity-90 duration-100 text-white font-bold text-lg p-3"
                       >
                         Idź do źródła
                       </button>
                       <button
                         onClick={() => setImageOpen({ src: "" })}
-                        className="w-full bg-slate-700 hover:bg-opacity-90 duration-100 text-white font-bold text-lg p-3"
+                        className="w-full bg-[#126b91] hover:bg-opacity-90 duration-100 text-white font-bold text-lg p-3"
                       >
                         Wyjdź
                       </button>

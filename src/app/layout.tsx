@@ -41,7 +41,7 @@ const cardo = Cardo({
   style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-cardo",
+  variable: "--font-gotham",
 });
 //font
 const gotham = localFont({

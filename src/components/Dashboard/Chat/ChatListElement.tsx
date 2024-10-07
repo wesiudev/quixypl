@@ -143,7 +143,7 @@ export default function ChatListElement({
                   {value?.login[0].toUpperCase()}
                 </div>
               )}
-              <div className="text-zinc-800 font-bold ml-3 flex items-center justify-between w-full overflow-hidden text-clip">
+              <div className="text-black font-bold ml-3 flex items-center justify-between w-full overflow-hidden text-clip">
                 <div className="pr-6 w-max">
                   {value?.login !== source?.login ? value?.login : "Ty"}
                 </div>

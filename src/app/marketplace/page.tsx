@@ -5,6 +5,7 @@ import MainFooter from "@/components/MainFooter";
 import Hero from "@/components/Hero";
 import {
   FaFileSignature,
+  FaImages,
   FaList,
   FaPlus,
   FaRobot,
@@ -21,7 +22,7 @@ export default function Page() {
 
       <main className="bg-gray-100 ">
         {/* Hero Section */}
-        <section className="hero-section h-full w-full bg-zinc-800 text-white py-20 px-10 relative overflow-hidden">
+        <section className="hero-section h-full w-full bg-black text-white py-20 px-10 relative overflow-hidden">
           <Hero />
           <h1 className="text-4xl font-bold text-center z-50 relative">
             Rynek gotowych aplikacji, stron internetowych i projektów.
@@ -30,7 +31,7 @@ export default function Page() {
             Tutaj będzie można wystawić swój projekt, do sprzedaży lub
             współpracy z ludźmi.
             <br />
-            <span className="font-bold text-orange-500">Stay tuned</span> 😎
+            <span className="font-bold text-primary">Stay tuned</span> 😎
           </p>
         </section>
         <div className="flex flex-col items-center justify-center mx-auto">
@@ -47,7 +48,7 @@ export default function Page() {
             </p>
             <Link
               href="/register"
-              className="text-white py-1.5 px-2 bg-orange-500 my-6 rounded-md w-max mx-auto"
+              className="text-white py-1.5 px-2 bg-[#126b91] my-6 rounded-md w-max mx-auto"
             >
               Rejestracja
             </Link>
@@ -75,7 +76,7 @@ export default function Page() {
                         boxShadow: "0px 0px 3px rgb(0, 0, 0)",
                       }}
                     >
-                      <div className="bg-zinc-800 bg-opacity-50 duration-500 absolute top-0 left-0 w-full h-full z-[200]"></div>
+                      <div className="bg-black bg-opacity-50 duration-500 absolute top-0 left-0 w-full h-full z-[200]"></div>
                       <div className="absolute w-full h-full left-0 top-0 z-[50] opacity-100 hover:opacity-0 duration-300" />
                       <div className="mx-auto my-auto h-full w-full flex items-center justify-center relative z-[201]">
                         <div
@@ -133,10 +134,10 @@ const secondMenuItems = [
     icon: FaRobot,
   },
   {
-    urlLabel: "Dodaj ogłoszenie",
+    urlLabel: "Wygeneruj obraz",
     url: "/register",
     color: "#F97316",
-    icon: FaPlus,
+    icon: FaImages,
   },
   {
     urlLabel: "Szukaj pracy",

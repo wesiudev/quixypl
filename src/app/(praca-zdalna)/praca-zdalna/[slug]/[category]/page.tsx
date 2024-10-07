@@ -6,6 +6,9 @@ import MainFooter from "@/components/MainFooter";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import { FaBriefcase } from "react-icons/fa";
+import AboutQuixyTalent from "@/app/(about)/AboutQuixyTalent";
+import { TfiFlagAlt } from "react-icons/tfi";
+import { getPageContent } from "@/lib/getPageContent";
 
 // Generowanie parametrów statycznych
 export async function generateStaticParams() {
@@ -22,21 +25,20 @@ export default async function Page({ params }: { params: any }) {
   const slug = cat?.data.find(
     (item: any) => polishToEnglish(item.title) === params.category
   );
-
+  const content = await getPageContent(polishToEnglish(slug?.title));
   return (
-    <div className="bg-gradient-to-b !font-gotham relative bg-zinc-800">
+    <div className="bg-gradient-to-b !font-gotham relative bg-black">
       <Header jobsList={jobs} />
 
       {/* Hero Section */}
-      <div className="relative text-center text-white py-16 overflow-hidden">
-        <Hero />
+      <div className="relative text-center py-16 overflow-hidden bg-gray-200">
         <div className="p-3 sm:p-6 lg:p-12 !py-0 relative z-50">
-          <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 text-white">
-            Praca zdalna <b className="text-orange-500">{slug?.title}</b>
+          <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 text-black">
+            Praca zdalna <b>{slug?.title}</b>
           </h1>
         </div>
         <div className=" breadcrumbs text-sm bg-transparent mx-auto flex items-center justify-center relative z-50">
-          <ul className="flex-wrap flex items-center justify-center px-3 font-light">
+          <ul className="flex-wrap flex items-center justify-center px-3 font-light text-black">
             <li>
               <Link title="praca zdalna" href={`/praca-zdalna`}>
                 praca-zdalna
@@ -57,44 +59,83 @@ export default async function Page({ params }: { params: any }) {
             </li>
           </ul>
         </div>
-        <p className="max-w-2xl mx-auto text-lg text-white px-3 mt-3">
-          Zatrudnij <b className="text-orange-500">najlepszych specjalistów</b>{" "}
-          na rynku. Zrealizuj swój projekt z ich wsparciem! Odkryj naszą
-          platformę pracy zdalnej.
+        <p className="max-w-2xl mx-auto text-lg text-black px-3 mt-3 font-light">
+          Zatrudnij najlepszych specjalistów od{" "}
+          <b className="text-cta">{content?.genitive}</b> na polskim rynku
+          pracy. Zrealizuj swój projekt z ich wsparciem! Odkryj naszą platformę
+          pracy zdalnej.
         </p>
+        <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 justify-center mt-4 w-full">
+          <Link
+            href="/register"
+            title="Rekrutuj do pracy zdalnej na panelu Quixy"
+            className="font-gotham rounded-md bg-primary hover:bg-opacity-90 duration-100 text-white font-bold text-sm lg:text-base p-2 py-1.5 text-center"
+          >
+            <h2 className="w-max mx-auto">Zatrudnij talent</h2>
+          </Link>
+          <Link
+            href="/register"
+            title="Szukaj pracy zdalnej na panelu Quixy"
+            className="font-gotham rounded-md bg-cta hover:bg-opacity-90 duration-100 text-white font-bold text-sm lg:text-base p-2 py-1.5 text-center"
+          >
+            <h2 className="w-max mx-auto">Pracuj zdalnie</h2>
+          </Link>
+        </div>
       </div>
 
       {/* Subcategories Section */}
-      {slug?.data?.length > 0 && (
-        <div className="!pt-0 p-12">
-          <h1
-            style={{ boxShadow: "inset 0 0 7px rgb(0, 0, 0)" }}
-            className="text-black  bg-white p-3 rounded-t-xl text-lg lg:text-2xl"
-          >
-            {slug.title}
-            <b className="text-orange-500"> oferty pracy zdalnej</b>
-          </h1>
-          <div
-            style={{ boxShadow: "inset 0 0 7px rgb(0, 0, 0)" }}
-            className="bg-white shadow-lg p-8 relative z-50 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4"
-          >
-            {slug.data.map((item: any, index: number) => (
-              <Link
-                href={`/praca-zdalna/${params.slug}/${
-                  params.category
-                }/${polishToEnglish(item.title)}`}
-                key={index}
-                className="flex flex-col md:flex-row items-start md:items-center justify-between bg-orange-500 px-4 py-2 rounded-t-md"
-              >
-                <h2 className="flex items-center text-white">
-                  <FaBriefcase className="w-10 h-10 mr-3" />{" "}
-                  <div className="font-light">{item.title}</div>
-                </h2>
-              </Link>
-            ))}
+      <div className="bg-white">
+        {slug?.data?.length > 0 && (
+          <div className=" container mx-auto">
+            <h1 className="text-black bg-white px-8 text-lg lg:text-2xl pt-12">
+              {slug.title}
+              <b className="text-primary ml-1">oferty pracy zdalnej</b>
+            </h1>
+            <div className="bg-white p-8 relative z-50 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+              {slug.data.map((item: any, index: number) => (
+                <Link
+                  href={`/praca-zdalna/${params.slug}/${
+                    params.category
+                  }/${polishToEnglish(item.title)}`}
+                  key={index}
+                  className="flex flex-col md:flex-row items-start md:items-center justify-between bg-[#126b91] px-4 py-2 rounded-xl font-coco italic"
+                >
+                  <h2 className="flex items-center text-white">
+                    <FaBriefcase className="w-10 h-10 mr-3" />{" "}
+                    <div className="font-light">{item.title}</div>
+                  </h2>
+                </Link>
+              ))}
+            </div>
           </div>
+        )}
+      </div>
+      <div className="bg-white p-3 py-6 sm:py-12 lg:py-24">
+        <div className="bg-cta rounded-full aspect-square mx-auto w-40 flex items-center justify-center">
+          <TfiFlagAlt className="text-white text-7xl" />
         </div>
-      )}
+
+        <p className="font-light text-black text-base font-gotham my-3 text-center max-w-xl mx-auto">
+          Brak aktywnych ofert pracy zdalnej dla specjalistów w branży{" "}
+          {content?.genitive}
+        </p>
+        <h3 className="flex flex-col text-white p-2 font-gotham font-light text-center mx-auto max-w-[332px] group">
+          <Link
+            href="/register"
+            className="rounded-2xl bg-[#14a800] p-2 duration-100 group-hover:bg-opacity-80"
+          >
+            Bądź szybszy/a i dodaj ogłoszenie
+          </Link>
+          <Link
+            href="/register"
+            className="rounded-b-2xl bg-[#14a800] w-max max-w-[100%] mx-auto p-2 px-4 duration-100 group-hover:bg-opacity-80"
+          >
+            o pracę już dziś!
+          </Link>
+        </h3>
+      </div>
+      <AboutQuixyTalent />
+      {/* Footer Section */}
       <MainFooter
         jobsList={cat.data}
         heading={`Praca zdalna ${cat.title}`}

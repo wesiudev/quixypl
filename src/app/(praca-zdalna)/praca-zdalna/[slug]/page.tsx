@@ -20,21 +20,36 @@ export default async function Page({ params }: { params: any }) {
   );
   const content = await getPageContent(polishToEnglish(slug.title));
   const talents = await getTalents();
+  const job_offers = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/getOffers?tubylytylkofigi=${
+      process.env.API_SECRET_KEY
+    }&cat=${polishToEnglish(slug.title)}`,
+    {
+      method: "POST",
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      next: { revalidate: 360 },
+    }
+  );
   return (
     <>
       <div className="bg-gray-200">
         <Header jobsList={jobs} />
         {/* Hero Section */}
-        <div className="relative overflow-hidden text-center text-white bg-zinc-800 py-12 !font-coco">
+        <div className="relative text-center text-white bg-black py-12 !font-coco">
           <Hero />
           <p className="text-4xl font-bold mb-4 relative z-50 font-coco">
-            Praca Zdalna Quixy - <b className="text-orange-500">{slug.title}</b>
+            Praca Zdalna Quixy - <b className="text-cta">{slug.title}</b>
           </p>
           {/* <h2 className="text-2xl font-semibold mb-6">{slug.h2}</h2> */}
           <h2 className="text-lg  relative z-50 w-[90%] mx-auto sm:max-w-[40rem] font-coco">
-            Poszukujesz specjalistów zajmujących się{" "}
-            <b className="text-orange-500">{content?.instrumental}</b>? Dodaj
-            ofertę pracy zdalnej i zatrudnij najlepszych ekspertów w Polsce.
+            Interesujesz się pracą w{" "}
+            <b className="text-cta">{content?.genitive}</b>? Szukaj pracy lub
+            dodaj ofertę pracy zdalnej i zatrudnij najlepszych ekspertów w
+            Polsce.
           </h2>
           <div className="px-6 sm:px-12 breadcrumbs text-sm bg-transparent mb-3 mx-auto relative z-50">
             <ul className="flex items-center justify-center flex-wrap font-light">
@@ -54,7 +69,7 @@ export default async function Page({ params }: { params: any }) {
             </ul>
           </div>
           <Link href="/register" className="relative z-50">
-            <button className="bg-orange-500 text-white font-semibold px-6 py-3 rounded-lg hover:bg-orange-600">
+            <button className="bg-cta text-white font-semibold px-6 py-3 rounded-lg hover:bg-opacity-90">
               Dodaj ofertę pracy
             </button>
           </Link>
@@ -84,15 +99,19 @@ export default async function Page({ params }: { params: any }) {
                 <h2 className="font-light italic p-2 bg-black rounded-tl-lg rounded-br-lg w-max text-sm">
                   Rekrutuj do pracy zdalnej
                 </h2>
-                <p className="text-base 2xl:text-xl font-light mb-4 p-3 text-zinc-800">
-                  Chcesz znaleźć idealnych kandydatów do swojego projektu? Dodaj
-                  ogłoszenie w kategorii {slug.title} i zatrudnij ekspertów z
-                  tej dziedziny.
+                <p className="text-base 2xl:text-xl font-light mb-4 p-3 text-black">
+                  Talent w {content?.genitive} to np.{" "}
+                  {content?.synonyms[1]
+                    ? content?.synonyms[1]
+                    : content?.synonyms[0]}{" "}
+                  - dodaj ogłoszenie w kategorii{" "}
+                  <b className="text-cta">{slug.title}</b> i zatrudnij ekspertów
+                  z tej dziedziny.
                 </p>
                 <div className="flex items-end justify-end w-full">
                   <Link
                     href="/register"
-                    className="text-white bg-orange-500 font-bold p-2 rounded-br-lg rounded-tl-lg flex items-center"
+                    className="text-white bg-[#126b91] font-bold p-2 rounded-br-lg rounded-tl-lg flex items-center"
                   >
                     Stwórz konto klienta
                     <FaArrowRightLong className="ml-2" />
@@ -106,15 +125,15 @@ export default async function Page({ params }: { params: any }) {
                 <h2 className="font-light italic p-2 bg-black rounded-tl-lg rounded-br-lg w-max text-sm">
                   Szukaj pracy zdalnej
                 </h2>
-                <p className="text-base 2xl:text-xl font-light mb-4 p-3 text-zinc-800">
+                <p className="text-base 2xl:text-xl font-light mb-4 p-3 text-black">
                   Chcesz realizować projekty lub rozwijać swoje portfolio?
-                  Przeglądaj ogłoszenia w kategorii {slug.title}, dołącz do
-                  zespołu i twórz innowacyjne rozwiązania.
+                  Przeglądaj ogłoszenia pracy zdalnej, dołącz do zespołu i twórz
+                  innowacyjne rozwiązania.
                 </p>
                 <div className="flex items-end justify-end w-full">
                   <Link
                     href="/register"
-                    className="text-white bg-cyan-500 font-bold p-2 rounded-br-lg rounded-tl-lg flex items-center"
+                    className="text-white bg-[#14A800] font-bold p-2 rounded-br-lg rounded-tl-lg flex items-center"
                   >
                     Stwórz konto talentu
                     <FaArrowRightLong className="ml-2" />
@@ -126,42 +145,42 @@ export default async function Page({ params }: { params: any }) {
 
           {/* Content */}
           <h2 className="text-black mt-12 text-3xl lg:text-5xl font-bold font-coco">
-            {slug?.title}{" "}
-            <strong className="text-orange-500">Praca Zdalna</strong>
+            {slug?.title} <strong className="text-primary">Praca Zdalna</strong>
           </h2>
-          <div className="bg-white rounded-xl p-3 mt-6 lg:mt-12 py-6 sm:py-12 lg:py-24">
-            <div className="bg-orange-500 rounded-full aspect-square mx-auto w-40 flex items-center justify-center">
-              <TfiFlagAlt className="text-white text-7xl" />
-            </div>
+          {!job_offers && (
+            <div className="bg-white rounded-xl p-3 mt-6 lg:mt-12 py-6 sm:py-12 lg:py-24">
+              <div className="bg-cta rounded-full aspect-square mx-auto w-40 flex items-center justify-center">
+                <TfiFlagAlt className="text-white text-7xl" />
+              </div>
 
-            <p className="font-light text-black text-base font-gotham my-3 text-center max-w-xl mx-auto">
-              Brak aktywnych ofert pracy zdalnej dla specjalistów w branży{" "}
-              {content?.genitive}
-            </p>
-            <h3 className="flex flex-col text-white p-2 font-gotham font-light text-center mx-auto max-w-[332px] group">
-              <Link
-                href="/register"
-                className="rounded-2xl bg-orange-500 p-2 duration-100 group-hover:bg-green-500"
-              >
-                Bądź szybszy/a i dodaj ogłoszenie
-              </Link>
-              <Link
-                href="/register"
-                className="rounded-b-2xl bg-orange-500 w-max max-w-[100%] mx-auto p-2 px-4 duration-100 group-hover:bg-green-500"
-              >
-                o pracę już dziś!
-              </Link>
-            </h3>
-          </div>
+              <p className="font-light text-black text-base font-gotham my-3 text-center max-w-xl mx-auto">
+                Brak aktywnych ofert pracy zdalnej dla specjalistów w branży{" "}
+                {content?.genitive}
+              </p>
+              <h3 className="flex flex-col text-white p-2 font-gotham font-light text-center mx-auto max-w-[332px] group">
+                <Link
+                  href="/register"
+                  className="rounded-2xl bg-[#14a800] p-2 duration-100 group-hover:bg-opacity-80"
+                >
+                  Bądź szybszy/a i dodaj ogłoszenie
+                </Link>
+                <Link
+                  href="/register"
+                  className="rounded-b-2xl bg-[#14a800] w-max max-w-[100%] mx-auto p-2 px-4 duration-100 group-hover:bg-opacity-80"
+                >
+                  o pracę już dziś!
+                </Link>
+              </h3>
+            </div>
+          )}
           <div className="flex flex-row gap-6 my-16">
             <section className="text-left w-full lg:pr-24">
-              <h2 className="text-3xl font-extrabold mb-6 text-black  font-gotham">
-                Jak wyglądają codzienne zadania w pracy zdalnej specjalistów od{" "}
-                {content?.genitive}?
+              <h2 className="text-3xl font-extrabold mb-6 text-black font-gotham">
+                Czym zajmują się specjaliści {content?.genitive}?
               </h2>
 
               <div
-                className="text-zinc-800 max-w-3xl markdownSlug font-light font-gotham"
+                className="text-black max-w-3xl markdownSlug font-light font-gotham"
                 dangerouslySetInnerHTML={{
                   __html: content?.description,
                 }}
@@ -194,35 +213,7 @@ export default async function Page({ params }: { params: any }) {
               </div>
             </section>
             <div className="flex flex-col max-w-[30rem]">
-              <h3
-                style={{ lineHeight: 1.4 }}
-                className="bg-white p-6 rounded-t-xl text-3xl font-gotham text-black "
-              >
-                <b className="text-white bg-orange-500 px-3 rounded-lg py-1">
-                  {content?.nominative?.charAt(0).toUpperCase() +
-                    content?.nominative?.slice(1)}
-                </b>
-                {" - "}
-                Jak rozpocząć swoją przygodę?
-              </h3>
-              <span className="font-coco text-black text-opacity-60 py-3 italic">
-                Koniec ze starymi nawykami i prokrastynacją - dzięki{" "}
-                {/* <Link href="/e-booki" className="text-orange-500 underline"> */}
-                e-bookom Quixy - już wkrótce!
-                {/* </Link> */}
-              </span>
-              <p className="bg-orange-500 text-white p-6 rounded-b-xl">
-                Tworzymy kursy oraz poradniki dotyczące pracy w{" "}
-                {content?.genitive} oraz innych zawodach pracy zdalnej. Jeśli
-                posiadasz jakiś problem, chcesz być na bieżąco z wszystkimi
-                tematami lub chcesz z nami współpracować, to zapraszamy do
-                kontaktu poprzez zakładkę{" "}
-                <Link href="/contact" className="underline">
-                  Kontakt
-                </Link>
-                .
-              </p>
-              <div className="mt-6">
+              <div>
                 <h2 className="text-black font-gotham mb-3">
                   Kategorie Pracy Zdalnej
                 </h2>
@@ -255,7 +246,7 @@ export default async function Page({ params }: { params: any }) {
                         key={talent?.uid}
                       >
                         {talent?.photoURL ? (
-                          <div className="w-12 aspect-square rounded-lg p-3 bg-orange-500">
+                          <div className="w-12 aspect-square rounded-lg p-3 bg-[#126b91]">
                             <div
                               className="rounded-lg"
                               style={{ boxShadow: "0px 0px 4px black" }}
@@ -272,7 +263,7 @@ export default async function Page({ params }: { params: any }) {
                             </div>
                           </div>
                         ) : (
-                          <span className="w-12 aspect-square mr-2 rounded-full bg-white flex items-center justify-center text-2xl text-orange-500">
+                          <span className="w-12 aspect-square mr-2 rounded-full bg-white flex items-center justify-center text-2xl text-primary">
                             {talent?.name?.[0].toUpperCase() ||
                               talent?.pseudo?.[0].toUpperCase()}
                           </span>
@@ -281,9 +272,37 @@ export default async function Page({ params }: { params: any }) {
                     ))}
                 </div>
               </div>
+              <h3
+                style={{ lineHeight: 1.4 }}
+                className="mt-6 bg-white p-6 rounded-t-xl text-3xl font-gotham text-black "
+              >
+                <b className="text-white bg-[#126b91] px-3 rounded-lg py-1">
+                  {content?.nominative?.charAt(0).toUpperCase() +
+                    content?.nominative?.slice(1)}
+                </b>
+                {" - "}
+                Jak rozpocząć swoją przygodę?
+              </h3>
+              <span className="font-coco text-black text-opacity-60 py-3 italic">
+                Koniec ze starymi nawykami i prokrastynacją - dzięki{" "}
+                {/* <Link href="/e-booki" className="text-primary underline"> */}
+                e-bookom Quixy - już wkrótce!
+                {/* </Link> */}
+              </span>
+              <p className="bg-[#126b91] text-white p-6 rounded-b-xl">
+                Tworzymy kursy oraz poradniki dotyczące pracy w{" "}
+                {content?.genitive} oraz innych zawodach pracy zdalnej. Jeśli
+                posiadasz jakiś problem, chcesz być na bieżąco z wszystkimi
+                tematami lub chcesz z nami współpracować, to zapraszamy do
+                kontaktu poprzez zakładkę{" "}
+                <Link href="/contact" className="underline">
+                  Kontakt
+                </Link>
+                .
+              </p>
             </div>
           </div>
-          {/* <h2 className="text-xl font-semibold text-orange-500 mb-4">
+          {/* <h2 className="text-xl font-semibold text-primary mb-4">
           Najlepsi specjaliści {slug.title}
         </h2> */}
           {/* display users with seek:true and user.categories includes slug.title, else display "no users, want to be first? man with black glasses italic" */}

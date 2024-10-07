@@ -62,7 +62,7 @@ export default function Leads() {
           className="z-[120] fixed left-0 top-0 w-full h-full bg-black bg-opacity-80 flex flex-col items-center justify-center"
         >
           <div
-            className="bg-slate-700 border-black border-2 p-6 sm:p-12"
+            className="bg-[#126b91] border-black border-2 p-6 sm:p-12"
             onClick={(e) => e.stopPropagation()}
           >
             <Editor

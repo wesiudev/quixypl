@@ -25,7 +25,7 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
       >
         <div
           onClick={(e: any) => e.stopPropagation()}
-          className="flex flex-wrap w-full my-auto mx-auto bg-orange-500 p-4 lg:p-12 relative"
+          className="flex flex-wrap w-full my-auto mx-auto bg-[#126b91] p-4 lg:p-12 relative"
         >
           <div className="flex flex-row items-center w-full justify-between mb-4 font-gotham text-3xl">
             <p className="text-white font-semibold">Sklep</p>
@@ -43,7 +43,7 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
             {shopProducts?.map((item: any, i: any) => (
               <div
                 key={i}
-                className="group relative w-full h-full flex justify-between items-center flex-col bg-zinc-700 hover:bg-slate-700 transition lg:duration-300 rounded-xl"
+                className="group relative w-full h-full flex justify-between items-center flex-col bg-zinc-700 hover:bg-[#126b91] transition lg:duration-300 rounded-xl"
               >
                 <div className="relative w-full h-auto">
                   <Image
@@ -65,12 +65,12 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
                     {item.name}
                   </h2>
                   {i === 2 && (
-                    <div className="sticky bottom-0 top-0 left-0 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-3xl">
+                    <div className="sticky bottom-0 top-0 left-0 bg-[#126b91] text-white text-xs font-bold px-2 py-1 rounded-3xl">
                       Najczęściej wybierany
                     </div>
                   )}
                   {item.discount > 0 && (
-                    <div className="italic w-max absolute top-0 right-0 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-tr-xl">
+                    <div className="italic w-max absolute top-0 right-0 bg-[#126b91] text-white text-xs font-bold px-2 py-1 rounded-tr-xl">
                       {item.discountSize}%
                     </div>
                   )}
@@ -81,7 +81,7 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
           </div>
           <button
             onClick={() => dispatch(set_modals({ ...modals, quixies: false }))}
-            className="mt-12 sticky left-1/2 -translate-x-1/2 bottom-3 w-max px-3 py-1.5 bg-slate-700 text-white z-50 rounded-lg"
+            className="mt-12 sticky left-1/2 -translate-x-1/2 bottom-3 w-max px-3 py-1.5 bg-[#126b91] text-white z-50 rounded-lg"
           >
             Zamknij okno
           </button>

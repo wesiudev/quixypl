@@ -15,7 +15,7 @@ export default function BackpackImageThumbnail(props: BackpackThumbnail) {
     <button onClick={() => setImageOpen(image)} className="relative">
       <Image
         className={`select-none rounded-md ${
-          isLoading ? "bg-orange-500 animate-pulse" : ""
+          isLoading ? "bg-[#126b91] animate-pulse" : ""
         }`}
         priority
         width={500}

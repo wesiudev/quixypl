@@ -64,7 +64,7 @@ export default function GoogleAuthButton({
       <button
         onClick={() => googleHandler()}
         type="button"
-        className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-zinc-800 font-cardo text-lg font-semibold px-4 py-3 border border-gray-300"
+        className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-black font-gotham text-lg font-semibold px-4 py-3 border border-gray-300"
       >
         <div className="flex items-center justify-center">
           <svg

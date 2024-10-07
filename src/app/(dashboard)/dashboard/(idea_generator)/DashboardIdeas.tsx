@@ -8,12 +8,17 @@ import { useSelector } from "react-redux";
 export default function DashboardIdeas() {
   const [ideaOpen, setIdeaOpen] = useState<any>({});
   const { user } = useSelector((state: any) => state.user);
+  const [isJobRequestOpen, setJobRequestOpen] = useState(false);
   return (
     <>
       <div className="flex flex-col bg-white w-full">
         <GenerateIdea userTokens={user?.tokens} setIdeaOpen={setIdeaOpen} />
       </div>
-
+      {isJobRequestOpen && (
+        <div className="fixed left-0 top-0 w-full h-screen lg:left-[30rem]">
+          <h2>Zatrudnij do wykonania pomysłu</h2>
+        </div>
+      )}
       {user?.ideas?.length > 0 && (
         <div className="p-8 md:p-12 lg:p-12 flex justify-center flex-col bg-gray-200">
           <div className="flex">
@@ -32,7 +37,7 @@ export default function DashboardIdeas() {
                 <div
                   key={i}
                   style={{ boxShadow: "inset 0px 0px 5px black" }}
-                  className="ml-3 mt-3 p-3 group bg-orange-500 lg:w-max lg:max-w-[100%] rounded-xl hover:bg-orange-400 duration-75"
+                  className="ml-3 mt-3 p-3 group bg-[#126b91] lg:w-max lg:max-w-[100%] rounded-xl hover:bg-[#468CA9] duration-75"
                 >
                   <div
                     className="rounded-lg duration-100 h-full relative"
@@ -51,13 +56,17 @@ export default function DashboardIdeas() {
                         </div>
                       </div>
 
-                      <div key={i}>{idea.tags}</div>
+                      <div key={i}>{idea.tags.join(", ")}</div>
                     </button>
                   </div>
                 </div>
               ))}
           </div>
-          <OpenedIdea ideaOpen={ideaOpen} setIdeaOpen={setIdeaOpen} />
+          <OpenedIdea
+            setJobRequestOpen={setJobRequestOpen}
+            ideaOpen={ideaOpen}
+            setIdeaOpen={setIdeaOpen}
+          />
         </div>
       )}
     </>

@@ -47,11 +47,11 @@ export default function Lead({
   return (
     <div
       key={lead.id}
-      className={`rounded relative bg-zinc-800 p-3 h-max border-[3px] overflow-hidden ${
+      className={`rounded relative bg-black p-3 h-max border-[3px] overflow-hidden ${
         lead.status === "trash" && "border-orange-700"
       } ${lead.status === "reseted" && "border-white"} ${
         lead.status === "accepted" && "border-green-500"
-      } ${lead.status === undefined && "border-zinc-800"} ${
+      } ${lead.status === undefined && "border-black"} ${
         lead.status === "rejected" && "border-red-500"
       } ${lead?.status === "accepted" && "border-yellow-400"}`}
     >
@@ -110,7 +110,7 @@ export default function Lead({
           <HiOutlineDotsHorizontal />
         </button>
         <div
-          className={`z-50 absolute top-14 right-14 w-max h-max py-6 bg-zinc-800 flex flex-col items-start space-y-1 duration-200 ease-in-out ${
+          className={`z-50 absolute top-14 right-14 w-max h-max py-6 bg-black flex flex-col items-start space-y-1 duration-200 ease-in-out ${
             !optionsOpen ? "-translate-y-[300px]" : "-translate-y-0"
           }`}
         >

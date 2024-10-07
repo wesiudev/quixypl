@@ -37,15 +37,15 @@ const IdeaListSlug: React.FC<IdeasProps> = ({ ideas }) => {
         Przejrzyj listę pomysłów i dołącz do grupy, lub utwórz swój pomysł i
         niech inni dołączą do Ciebie!
       </p>
-      <h3 className="text-orange-500">Zobacz listę pomysłów:</h3>
+      <h3 className="text-primary">Zobacz listę pomysłów:</h3>
       <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {currentIdeas.map((idea: Idea, i: number) => (
           <Link
             key={i}
-            href={`/pomysly-na-biznes/${polishToEnglish(
+            href={`/business-ideas/${polishToEnglish(
               idea?.name
             )}${idea?.creationTime?.toString()}`}
-            className="text-black flex flex-col justify-between p-6 border rounded-lg shadow-sm hover:shadow-lg hover:border-orange-500 hover:shadow-orange-500 hover:scale-105 duration-300"
+            className="text-black flex flex-col justify-between p-6 border rounded-lg shadow-sm hover:shadow-lg hover:border-primary hover:shadow-primary hover:scale-105 duration-300"
           >
             {idea?.name}
           </Link>

@@ -38,7 +38,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     }
   }, [loading, user, router]);
   return (
-    <div className="bg-orange-500">
+    <div className="bg-[#126b91]">
       <Providers>
         {!user && <Loading />}
         <div className="sticky top-0 left-0 z-[999999]">

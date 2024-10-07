@@ -13,15 +13,15 @@ import ContactForm from "@/components/ContactForm";
 
 function HeroSection() {
   return (
-    <header className="text-center py-16 bg-zinc-800 overflow-hidden text-white relative">
+    <header className="text-center py-16 bg-black overflow-hidden text-white relative">
       <Hero />
       <h1
         style={{ lineHeight: 1.5 }}
         className="text-4xl font-bold mb-4 leading-snug relative z-50 w-[90%] sm:max-w-[50rem] mx-auto"
       >
-        <b className="text-orange-500">Rozwijaj Projekty</b> z Najlepszymi
+        <b className="text-primary">Rozwijaj Projekty</b> z Najlepszymi
         Ekspertami IT, Marketingu i Designu
-        <b className="text-orange-500 px-3 py-1 rounded-md shadow-lg">
+        <b className="text-primary px-3 py-1 rounded-md shadow-lg">
           Praca Zdalna
         </b>
         z Quixy Talent™
@@ -56,7 +56,7 @@ function Breadcrumbs() {
 function JoinButton() {
   return (
     <Link
-      className="bg-orange-500 text-white hover:bg-orange-400 py-1.5 px-2 font-gotham rounded-lg w-max mx-auto relative z-50"
+      className="bg-[#126b91] text-white hover:bg-[#468CA9] py-1.5 px-2 font-gotham rounded-lg w-max mx-auto relative z-50"
       href="/register"
     >
       Rejestracja
@@ -69,7 +69,7 @@ function WhyChooseQuixySection() {
     <section className="text-left flex lg:items-center rounded-3xl flex-col-reverse lg:flex-row">
       <h3 className="text-left lg:text-center font-bold">
         <Link
-          className="p-3 flex lg:flex-col items-center justify-center bg-orange-500 text-white hover:bg-orange-400 rounded-lg lg:rounded-3xl lg:h-full lg:aspect-square relative z-50 mt-6 lg:mt-0 lg:mb-0"
+          className="p-3 flex lg:flex-col items-center justify-center bg-[#126b91] text-white hover:bg-[#468CA9] rounded-lg lg:rounded-3xl lg:h-full lg:aspect-square relative z-50 mt-6 lg:mt-0 lg:mb-0"
           href="/register"
         >
           <div className="mb-0 lg:mb-3 mr-3 lg:mr-0">
@@ -118,7 +118,7 @@ function SpecialistsCategoriesSection() {
               alt="Zatrudnij ekspertów od Rozwoju Oprogramowania"
               className="rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg h-full"
             />
-            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-orange-500 bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
+            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
               Najlepsi specjaliści od rozwoju oprogramowania
             </h2>
           </div>
@@ -133,7 +133,7 @@ function SpecialistsCategoriesSection() {
               naszej sieci talentów, by przyspieszyć rozwój swojego projektu IT.
             </p>
             <div
-              className="text-orange-500 mt-4 block hover:underline"
+              className="text-primary mt-4 block hover:underline"
               aria-label="Dowiedz się więcej o tworzeniu aplikacji"
             >
               Dowiedz się więcej
@@ -153,7 +153,7 @@ function SpecialistsCategoriesSection() {
               alt="Wdrożenie Sklepów Internetowych z naszymi ekspertami"
               className="rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg min-h-full w-auto"
             />
-            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-orange-500 bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
+            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
               Wdroż sklep internetowy z najlepszymi ekspertami
             </h2>
           </div>
@@ -169,7 +169,7 @@ function SpecialistsCategoriesSection() {
               cyfrowe przedsięwzięcia w sukces.
             </p>
             <div
-              className="text-orange-500 mt-4 block hover:underline"
+              className="text-primary mt-4 block hover:underline"
               aria-label="Dowiedz się więcej o tworzeniu aplikacji"
             >
               Dowiedz się więcej
@@ -189,7 +189,7 @@ function SpecialistsCategoriesSection() {
               alt="Zatrudnij specjalistów od Marketingu"
               className="rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg min-h-full w-auto"
             />
-            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-orange-500 bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
+            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
               Najlepsi specjaliści od marketingu
             </h2>
           </div>
@@ -205,7 +205,7 @@ function SpecialistsCategoriesSection() {
               marketerów online.
             </p>
             <div
-              className="text-orange-500 mt-4 block hover:underline"
+              className="text-primary mt-4 block hover:underline"
               aria-label="Dowiedz się więcej o tworzeniu aplikacji"
             >
               Dowiedz się więcej
@@ -225,7 +225,7 @@ function SpecialistsCategoriesSection() {
               alt="Zatrudnij ekspertów od Wsparcia IT"
               className="rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg min-h-full w-auto"
             />
-            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-orange-500 bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
+            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
               Najlepsi specjaliści od wsparcia IT
             </h2>
           </div>
@@ -241,7 +241,7 @@ function SpecialistsCategoriesSection() {
               technologicznej.
             </p>
             <div
-              className="text-orange-500 mt-4 block hover:underline"
+              className="text-primary mt-4 block hover:underline"
               aria-label="Dowiedz się więcej o tworzeniu aplikacji"
             >
               Dowiedz się więcej
@@ -261,7 +261,7 @@ function SpecialistsCategoriesSection() {
               alt="Zatrudnij doradców biznesowych"
               className="rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg min-h-full w-auto"
             />
-            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-orange-500 bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
+            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
               Najlepsi doradcy biznesowi
             </h2>
           </div>
@@ -277,7 +277,7 @@ function SpecialistsCategoriesSection() {
               swojego przedsięwzięcia biznesowego.
             </p>
             <div
-              className="text-orange-500 mt-4 block hover:underline"
+              className="text-primary mt-4 block hover:underline"
               aria-label="Dowiedz się więcej o tworzeniu aplikacji"
             >
               Dowiedz się więcej
@@ -297,7 +297,7 @@ function SpecialistsCategoriesSection() {
               alt="Zatrudnij Projektantów dla Twojego Biznesu"
               className="rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg min-h-full w-auto"
             />
-            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-orange-500 bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
+            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
               Najlepsi specjaliści dla Twojego Biznesu
             </h2>
           </div>
@@ -313,7 +313,7 @@ function SpecialistsCategoriesSection() {
               efektownym projektom.
             </p>
             <div
-              className="text-orange-500 mt-4 block hover:underline"
+              className="text-primary mt-4 block hover:underline"
               aria-label="Dowiedz się więcej o tworzeniu aplikacji"
             >
               Dowiedz się więcej
@@ -333,19 +333,19 @@ function WhatMakesUsUniqueSection() {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
         <HighlightCard
-          icon={<FaRocket className="text-orange-500 text-5xl" />}
+          icon={<FaRocket className="text-primary text-5xl" />}
           title="Szybka rekrutacja"
           description="Proces rekrutacji jest szybki i efektywny, pozwalając Ci skupić się na rozwoju projektu."
           linkTitle="Quixy Talent™"
         />
         <HighlightCard
-          icon={<FaUsers className="text-orange-500 text-5xl" />}
+          icon={<FaUsers className="text-primary text-5xl" />}
           title="Najlepsi eksperci"
           description="Współpracujemy z doświadczonymi ekspertami, aby zapewnić najwyższą jakość usług."
           linkTitle="Quixy Talent™"
         />
         <HighlightCard
-          icon={<FaRegLightbulb className="text-orange-500 text-5xl" />}
+          icon={<FaRegLightbulb className="text-primary text-5xl" />}
           title="Innowacyjne pomysły"
           description="Nasze narzędzia i porady pomogą Ci stworzyć unikalne i skuteczne strategie biznesowe."
           linkTitle="Pomysły Quixy™"
@@ -369,7 +369,7 @@ function HighlightCard({
 }) {
   return (
     <div
-      className="font-coco p-6 rounded-xl bg-orange-500 shadow-lg"
+      className="font-coco p-6 rounded-xl bg-[#126b91] shadow-lg"
       style={{ boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.25)" }}
     >
       <div className="bg-white rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
@@ -379,7 +379,7 @@ function HighlightCard({
       <p className="text-gray-200">{description}</p>
       <div className="mt-6" />
       <Link
-        className="font-bold bg-white hover:bg-opacity-90 duration-100 underline text-orange-500 p-3 rounded-lg"
+        className="font-bold bg-white hover:bg-opacity-90 duration-100 underline text-primary p-3 rounded-lg"
         href="/register"
         title={linkTitle}
       >
@@ -431,7 +431,7 @@ function CallToActionSection() {
         <Link
           href="/register"
           title="Dołącz do Quixy"
-          className="bg-orange-500 text-white py-1.5 px-2 rounded-lg hover:bg-orange-600 transition font-gotham font-light"
+          className="bg-[#126b91] text-white py-1.5 px-2 rounded-lg hover:bg-orange-600 transition font-gotham font-light"
         >
           Zarejestruj
         </Link>
@@ -469,7 +469,7 @@ export default function Page() {
 // Zabawny komponent
 function FunnyComponent() {
   return (
-    <div className="flex flex-col lg:flex-row lg:justify-between font-coco bg-orange-500 p-6 rounded-lg shadow-lg my-12">
+    <div className="flex flex-col lg:flex-row lg:justify-between font-coco bg-[#126b91] p-6 rounded-lg shadow-lg my-12">
       <div className="">
         <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
           Potrzebujesz chwili wytchnienia?
@@ -489,7 +489,7 @@ function FunnyComponent() {
         <Link
           href="/register"
           title="Zarejestruj się w platformie z pracą zdalną"
-          className="mb-3 bg-white text-orange-500 py-1.5 px-2 rounded-lg hover:bg-opacity-90 durtion-100 font-bold"
+          className="mb-3 bg-white text-primary py-1.5 px-2 rounded-lg hover:bg-opacity-90 durtion-100 font-bold"
         >
           Zarejestruj
         </Link>

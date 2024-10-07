@@ -33,7 +33,7 @@ export default function ScrollTo({ section }: { section: any }) {
       offset={50}
       duration={500}
     >
-      <FaLink className="text-zinc-800 mr-2 min-w-[25px]" /> {section.title}
+      <FaLink className="text-black mr-2 min-w-[25px]" /> {section.title}
     </ScrollTo>
   );
 }

@@ -17,7 +17,7 @@ export default function SettingsHeader({
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
   return (
-    <div className="bg-orange-500 text-base text-white font-bold p-3 sticky left-0 top-[-1px] z-[5000] flex items-center justify-between w-full">
+    <div className="bg-[#126b91] text-base text-white font-bold p-3 sticky left-0 top-[-1px] z-[5000] flex items-center justify-between w-full">
       <div className="ml-3">Skonfiguruj swoje konto</div>
       <div className="flex">
         <button

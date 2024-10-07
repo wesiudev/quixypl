@@ -8,6 +8,7 @@ export default function OpenedIdea({
 }: {
   ideaOpen: any;
   setIdeaOpen: Function;
+  setJobRequestOpen:Function
 }) {
   const [jobRequest, setJobRequest] = useState<any>({});
   return (
@@ -23,7 +24,7 @@ export default function OpenedIdea({
         onClick={(e) => e.stopPropagation()}
         className="p-6 2xl:p-24 md:p-12 lg:p-10 xl:p-12 h-full w-full bg-white font-gotham relative"
       >
-        <h1 className="text-3xl xl:text-5xl text-orange-500 text-left font-bold drop-shadow-xl shadow-black">
+        <h1 className="text-3xl xl:text-5xl text-primary text-left font-bold drop-shadow-xl shadow-black">
           {ideaOpen?.name}
         </h1>
         <div className="my-2 font-light text-black">

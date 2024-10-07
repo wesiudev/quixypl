@@ -37,7 +37,7 @@ export default function HomePageLead() {
         className={`${
           validateEmail(email) === false
             ? "border-red-500 text-red-500"
-            : "border-orange-500 text-green-500"
+            : "border-primary text-green-500"
         } placeholder:text-green-500 font-bold text-lg border-2 rounded-md p-3 my-3`}
         type="text"
         placeholder="Wpisz email"

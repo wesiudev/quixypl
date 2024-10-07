@@ -9,13 +9,16 @@ import Register from "@/app/(register)/register/Register";
 import Image from "next/image";
 import { Metadata } from "next";
 import IdeaList from "@/components/IdeaList";
-import { getDocuments } from "@/firebase";
 export default async function Page() {
-  const ideas: any = await getDocuments("ideas");
+  const ideas = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/getIdeas?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    { next: { revalidate: 300 } }
+  ).then((res) => res.json());
+
   return (
     <div>
       <Header jobsList={jobs} />
-      <div className="flex items-center justify-center h-max py-16 w-full relative overflow-hidden bg-zinc-800">
+      <div className="flex items-center justify-center h-max py-16 w-full relative overflow-hidden bg-black">
         <Hero />
         <div className="relative z-50 px-6 lg:px-0">
           <div
@@ -50,7 +53,7 @@ export default async function Page() {
             <Link
               title="Sprawdź Nasz Nowy Generator Pomysłów Na Biznes"
               href="#generator"
-              className="bg-orange-500 text-white p-1.5 px-2 rounded-lg font-gotham"
+              className="bg-[#126b91] text-white p-1.5 px-2 rounded-lg font-gotham"
             >
               Wypróbuj za darmo
             </Link>

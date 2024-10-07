@@ -61,7 +61,7 @@ export default async function Page({ params }: { params: any }) {
       {/* Description Section with Banner */}
       <div className="">
         <h3 className="text-2xl font-bold text-black  text-center">
-          Praca zdalna <b className="text-orange-500">{job?.title}</b>
+          Praca zdalna <b className="text-primary">{job?.title}</b>
         </h3>
       </div>
       <div className="lg:block hidden bg-white px-6 sm:px-12 text-black ">
@@ -73,7 +73,7 @@ export default async function Page({ params }: { params: any }) {
           className="w-full rounded-lg shadow"
         />
         <h3 className="text-2xl font-bold">
-          <b className="text-orange-500">Oferty Pracy</b> {job?.title}
+          <b className="text-primary">Oferty Pracy</b> {job?.title}
         </h3>
       </div>
       <div className="lg:hidden bg-white px-6 sm:px-12 text-gray-800">
@@ -88,7 +88,7 @@ export default async function Page({ params }: { params: any }) {
 
       {/* Job Opportunities Section with Images */}
       <div className="bg-white px-6 sm:px-12 text-gray-800">
-        <h2 className="bg-orange-500 text-white rounded-md p-3">
+        <h2 className="bg-[#126b91] text-white rounded-md p-3">
           Oferty Pracy - Quixy Talent&trade;
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -103,7 +103,7 @@ export default async function Page({ params }: { params: any }) {
 
               <Link
                 href={`/praca-zdalna/${polishToEnglish(job.title)}`}
-                className="mt-4 inline-block text-orange-500 font-semibold underline"
+                className="mt-4 inline-block text-primary font-semibold underline"
               >
                 Zobacz więcej
               </Link>
@@ -112,18 +112,18 @@ export default async function Page({ params }: { params: any }) {
         </div>
 
         <div className="text-left">
-          <h2 className="bg-orange-500 text-white rounded-md p-3">
+          <h2 className="bg-[#126b91] text-white rounded-md p-3">
             Oferty pracy od firm
           </h2>
         </div>
       </div>
 
       {/* Call to Action Section */}
-      <div className="flex flex-col space-y-3 bg-orange-500 py-12 text-white text-center">
+      <div className="flex flex-col space-y-3 bg-[#126b91] py-12 text-white text-center">
         <h2 className="text-3xl font-bold mb-4">Gotowy, aby rozpocząć?</h2>
         <Link
           href="/register"
-          className="w-max mx-auto mt-4 bg-white text-orange-500 py-3 px-8 rounded font-semibold hover:bg-gray-100 transition"
+          className="w-max mx-auto mt-4 bg-white text-primary py-3 px-8 rounded font-semibold hover:bg-gray-100 transition"
         >
           Wypróbuj Quixy Talent&trade; za darmo!
         </Link>

@@ -6,6 +6,7 @@ import ProductsMobile from "./ProductsMobile";
 import HeaderComponent from "./HeaderComponent";
 import {
   FaFileSignature,
+  FaImages,
   FaList,
   FaPlus,
   FaRobot,
@@ -105,10 +106,10 @@ const secondMenuItems = [
     icon: FaRobot,
   },
   {
-    urlLabel: "Dodaj ogłoszenie",
+    urlLabel: "Wygeneruj obraz",
     url: "/register",
     color: "#F97316",
-    icon: FaPlus,
+    icon: FaImages,
   },
   {
     urlLabel: "Szukaj pracy",

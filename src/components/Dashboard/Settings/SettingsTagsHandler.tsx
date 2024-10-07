@@ -34,24 +34,24 @@ export default function TagsHandler() {
           <div className="mt-2 w-full grid grid-cols-2 sm:grid-cols-3 gap-2 text-white font-bold text-sm md:text-lg">
             <button
               onClick={() => setTagsOpenLevel(0)}
-              className={`bg-orange-500 ${
-                tagsOpenLevel === 0 ? "bg-orange-500" : "bg-orange-400"
+              className={`bg-[#126b91] ${
+                tagsOpenLevel === 0 ? "bg-[#126b91]" : "bg-orange-400"
               } px-2 py-1.5 rounded-md`}
             >
               Prosty
             </button>
             <button
               onClick={() => setTagsOpenLevel(1)}
-              className={`bg-orange-500 ${
-                tagsOpenLevel === 1 ? "bg-orange-500" : "bg-orange-400"
+              className={`bg-[#126b91] ${
+                tagsOpenLevel === 1 ? "bg-[#126b91]" : "bg-orange-400"
               } px-2 py-1.5 rounded-md`}
             >
               Rozszerzony
             </button>
             <button
               onClick={() => setTagsOpenLevel(2)}
-              className={`bg-orange-500 ${
-                tagsOpenLevel === 2 ? "bg-orange-500" : "bg-orange-400"
+              className={`bg-[#126b91] ${
+                tagsOpenLevel === 2 ? "bg-[#126b91]" : "bg-orange-400"
               } px-2 py-1.5 rounded-md`}
             >
               Całość
@@ -78,12 +78,12 @@ export default function TagsHandler() {
                   key={i}
                 >
                   <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
-                    <div className="bg-slate-700 rounded-lg p-1 text-white mt-2">
+                    <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
                       {item.slugTitle}
                     </div>
                     <div className="flex items-center">
                       <FaChevronRight className="mx-1 mt-2" />
-                      <div className="bg-slate-700 rounded-lg p-1 text-white mt-2">
+                      <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
                         {item.title}
                       </div>
                     </div>
@@ -98,19 +98,19 @@ export default function TagsHandler() {
                 >
                   <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
                     <div className="flex items-center">
-                      <div className="bg-slate-700 rounded-lg p-1 text-white mt-2">
+                      <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
                         {item.slugTitle}
                       </div>
                     </div>
                     <div className="flex items-center">
                       <FaChevronRight className="mx-1 mt-2" />
-                      <div className="bg-slate-700 rounded-lg p-1 text-white mt-2">
+                      <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
                         {item.categoryTitle}
                       </div>
                     </div>
                     <div className="flex items-center font-bold">
                       <FaChevronRight className="mx-1 mt-2" />
-                      <div className="bg-slate-700 rounded-lg p-1 text-white mt-2">
+                      <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
                         {item.title}
                       </div>
                     </div>
@@ -125,7 +125,7 @@ export default function TagsHandler() {
                   <div
                     className={`${
                       selectedTag.title === item.title ? "flex-col" : ""
-                    } bg-slate-700 rounded-lg flex items-center p-1`}
+                    } bg-[#126b91] rounded-lg flex items-center p-1`}
                   >
                     <div className="flex flex-row items-center">
                       {item.title}
@@ -207,7 +207,7 @@ export default function TagsHandler() {
       )}
       {slug?.title !== "" && category?.title === "" && (
         <div className="text-black font-gotham flex flex-col">
-          <div className="font-bold mb-1 bg-slate-700 p-1 rounded-md px-2 text-white w-max max-w-[100%]">
+          <div className="font-bold mb-1 bg-[#126b91] p-1 rounded-md px-2 text-white w-max max-w-[100%]">
             {slug.title}
           </div>
           <div className="font-bold">Wybierz podkategorię</div>
@@ -215,7 +215,7 @@ export default function TagsHandler() {
       )}
       {slug?.title !== "" && category?.title !== "" && (
         <div className="text-black font-gotham flex flex-col">
-          <div className="font-bold mb-1 bg-slate-700 p-1 rounded-md px-2 text-white w-max max-w-[100%]">
+          <div className="font-bold mb-1 bg-[#126b91] p-1 rounded-md px-2 text-white w-max max-w-[100%]">
             {category.title}
           </div>
           <div className="font-bold"></div>Wybierz stanowisko
@@ -225,7 +225,7 @@ export default function TagsHandler() {
         {!configurationOpen && slug.title === "" && (
           <button
             onClick={() => setConfigurationOpen(true)}
-            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-slate-700 rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
           >
             <FaPlus />
           </button>
@@ -233,7 +233,7 @@ export default function TagsHandler() {
         {configurationOpen && slug.title !== "" && category.title !== "" && (
           <button
             onClick={() => setCategory({ title: "", url: "" })}
-            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-slate-700 rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
           >
             <FaChevronLeft />
           </button>
@@ -243,7 +243,7 @@ export default function TagsHandler() {
             onClick={() => {
               setSlug({ title: "", url: "" }), setConfigurationOpen(false);
             }}
-            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-slate-700 rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
           >
             <FaChevronLeft />
           </button>
@@ -258,7 +258,7 @@ export default function TagsHandler() {
                     url: polishToEnglish(item.title),
                   })
                 }
-                className="m-0.5 bg-slate-700 rounded-lg text-white font-light p-2"
+                className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-2"
                 key={i}
               >
                 {item.title}
@@ -280,7 +280,7 @@ export default function TagsHandler() {
                             url: polishToEnglish(cat.title),
                           })
                         }
-                        className="m-0.5 bg-slate-700 rounded-lg text-white font-light p-2"
+                        className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-2"
                         key={i}
                       >
                         {cat.title}
@@ -398,7 +398,7 @@ export default function TagsHandler() {
                                     setSlug({ title: "", url: "" });
                                   }
                                 }}
-                                className="m-0.5 bg-slate-700 rounded-lg text-white font-light p-2"
+                                className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-2"
                                 key={i}
                               >
                                 {job.title}

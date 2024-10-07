@@ -12,7 +12,7 @@ export default function OpenableOpportunity({
   return (
     <div
       key={i}
-      className={`font-gotham p-3 flex flex-col rounded-lg bg-gray-200 shadow-black !text-zinc-800`}
+      className={`font-gotham p-3 flex flex-col rounded-lg bg-gray-200 shadow-black !text-black`}
     >
       <div
         className={`
@@ -20,7 +20,7 @@ export default function OpenableOpportunity({
       >
         <div className="font-bold flex items-center">
           {" "}
-          <FaStar className="text-orange-500 mr-1" />
+          <FaStar className="text-cta mr-1" />
           <h2 className="text-lg">{opportunity.title}</h2>
         </div>
         <div className={`flex flex-row flex-wrap items-center mt-1 -ml-3 `}>

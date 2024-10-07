@@ -64,7 +64,7 @@ export default function PreferencesHandler({
         ))}
         {items.length > 6 && (
           <button
-            className="bg-orange-500 text-white px-3 py-2 ml-1 mt-1 rounded-md"
+            className="bg-[#126b91] text-white px-3 py-2 ml-1 mt-1 rounded-md"
             onClick={() => setExpand(!expand)}
           >
             {expand ? "Pokaż mniej" : "Pokaż więcej"}
