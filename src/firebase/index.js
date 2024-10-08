@@ -442,7 +442,27 @@ export async function getProducts() {
   const querySnapshot = await getDocs(collection(db, "products"));
   return querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 }
+export async function addJobOffer(jobOffer) {
+  const jobOfferDocRef = doc(collection(db, "offers"));
+  await setDoc(jobOfferDocRef, {
+    ...jobOffer,
+    createdAt: Date.now(),
+  });
+  return jobOfferDocRef;
+}
 
+export async function fetchJobOffer(jobOfferId) {
+  const jobOfferDocRef = doc(db, "offers", jobOfferId);
+  const jobOfferDoc = await getDoc(jobOfferDocRef);
+  return jobOfferDoc.exists()
+    ? { ...jobOfferDoc.data(), id: jobOfferDoc.id }
+    : null;
+}
+
+export async function fetchJobOffers() {
+  const querySnapshot = await getDocs(collection(db, "offers"));
+  return querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+}
 export async function getProduct(productId) {
   const productDocRef = doc(db, "products", productId);
   const productDoc = await getDoc(productDocRef);

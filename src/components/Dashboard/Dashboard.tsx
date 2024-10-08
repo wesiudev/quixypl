@@ -265,8 +265,13 @@ export default function Dashboard() {
                         Wielkość firmy
                       </h2>
                     )}
-                    {user?.seek && user?.seek !== "ask" && (
+                    {(user?.seek || user?.seek !== "ask") && (
                       <div className="-ml-1 flex items-center flex-wrap">
+                        {user?.preferences?.length === 0 && (
+                          <div className="ml-1 text-lg text-black font-light font-gotham">
+                            Brak danych...
+                          </div>
+                        )}
                         {user?.preferences ? (
                           user?.preferences?.map((item: any, i: any) => (
                             <h3

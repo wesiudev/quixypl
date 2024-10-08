@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
-import { storage, updateUser } from "@/firebase";
+import { addJobOffer, storage, updateUser } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import ImagePicker from "./ImagePicker";
 import TagsHandler from "../SettingsTagsHandler";
@@ -24,6 +24,7 @@ import { set_modals } from "@/redux/slices/modalsopen";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 import jobs from "../../../../../public/14.09.2024.json";
 import { v4 as uuidv4 } from "uuid";
+import { IProject } from "@/types";
 export default function UserEditDashboard({
   source,
   changesWereMade,
@@ -66,119 +67,140 @@ export default function UserEditDashboard({
     // Przykładowe przeliczenie ceny: baza + 0.5 jednostki za każdy dzień
     setPrice(15.99 + selectedDays * 8.42);
   };
+
   const handleRecruitmentStart = async () => {
     const hasEnoughTokens = source?.tokens >= price;
-    const isProjectValid =
-      project.name &&
-      project.time &&
-      project.desc &&
-      project?.images?.length > 0;
+    const isProjectValid = isProjectDataValid(project);
 
-    // Generate a unique ID for the project
-    const uniqueId = uuidv4();
+    if (!isProjectValid) {
+      return showToastError("Uzupełnij dane!");
+    }
 
     if (!hasEnoughTokens) {
-      if (isProjectValid) {
-        // Update user's project in the database
-        await updateUser(source.uid, {
-          projects: source?.projects
-            ? [
-                ...source.projects,
-                {
-                  ...project,
-                  id: uniqueId,
-                  isRecruitment: true,
-                  isPaid: false,
-                  price: price,
-                },
-              ]
-            : [
-                {
-                  ...project,
-                  id: uniqueId,
-                  isRecruitment: true,
-                  isPaid: false,
-                  price: price,
-                },
-              ],
-        });
-
-        // Update the project in local state
-        dispatch(
-          setUser({
-            ...source,
-            projects: source?.projects
-              ? [
-                  ...source.projects,
-                  {
-                    ...project,
-                    id: uniqueId,
-                    isRecruitment: true,
-                    isPaid: false,
-                    price: price,
-                  },
-                ]
-              : [
-                  {
-                    ...project,
-                    id: uniqueId,
-                    isRecruitment: true,
-                    isPaid: false,
-                    price: price,
-                  },
-                ],
-          })
-        );
-
-        // Reset the form state
-        setIsNewProject(false);
-        setProject({
-          days: 1,
-          images: [],
-          desc: "",
-          name: "",
-          time: "",
-        });
-
-        // Show success toast for saving the project
-        toast.success("Added to drafts!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
-      } else {
-        // Show error if required fields are missing
-        return toast.error("Please fill in all fields!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
-      }
-
-      // Show error for insufficient tokens
-      toast.error("You do not have enough Quixies!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-
-      // Trigger modal for adding tokens
-      dispatch(set_modals({ ...modals, quixies: true }));
+      await saveDraftProject();
+      showToastError("Nie posiadasz wystarczająco Quixies!");
+      openTokenModal();
     } else {
-      // Continue with recruitment process when the user has enough tokens
-      alert("You have sufficient funds to start recruitment!");
+      await proceedWithRecruitment();
     }
   };
 
+  // Helper function to check if the project is valid
+  const isProjectDataValid = (projectL: IProject) => {
+    return (
+      project.name &&
+      project.time &&
+      project.desc &&
+      project?.images?.length > 0
+    );
+  };
+
+  // Helper function to save the project as a draft
+  const saveDraftProject = async () => {
+    const updatedProjects = updateProjectsList(source.projects, project, {
+      isPaid: true,
+      isRecruitment: true,
+    });
+
+    await updateUser(source.uid, { projects: updatedProjects });
+    dispatch(setUser({ ...source, projects: updatedProjects }));
+
+    resetProjectForm();
+    showToastSuccess("Zapisano wersję roboczą!");
+  };
+
+  // Helper function to proceed with the recruitment when user has enough tokens
+  const proceedWithRecruitment = async () => {
+    const updatedProjects = updateProjectsList(source.projects, project, {
+      isPaid: true,
+      isRecruitment: true,
+    });
+    const updatedTokens = source.tokens - price;
+
+    await addJobOffer({
+      ...project,
+      expirationTime: getExpirationTime(project.days),
+      type: "quick",
+      companySize: getCompanySize(),
+    });
+    await updateUser(source.uid, {
+      tokens: updatedTokens,
+      projects: updatedProjects,
+    });
+    dispatch(
+      setUser({ ...source, tokens: updatedTokens, projects: updatedProjects })
+    );
+
+    showToastSuccess("Pomyślnie dodano ofertę!");
+  };
+
+  // Helper function to handle project list update
+  const updateProjectsList = (
+    existingProjects: any,
+    project: IProject,
+    additionalProps: any
+  ) => {
+    const newProject = {
+      ...project,
+      expirationTime: getExpirationTime(project.days),
+      creationTime: Date.now(),
+      companySize: getCompanySize(),
+      ...additionalProps,
+    };
+
+    return existingProjects ? [...existingProjects, newProject] : [newProject];
+  };
+
+  // Helper function to calculate the expiration time based on project days
+  const getExpirationTime = (days: number) => {
+    return Date.now() + days * 24 * 60 * 60 * 1000;
+  };
+
+  // Helper function to get the company size or fallback
+  const getCompanySize = () => {
+    return source?.preferences[0] || "Brak danych...";
+  };
+
+  // Helper function to reset the project form
+  const resetProjectForm = () => {
+    setIsNewProject(false);
+    setProject({
+      days: 1,
+      images: [],
+      desc: "",
+      name: "",
+      time: "",
+    });
+  };
+
+  // Helper function to show success toast
+  const showToastSuccess = (message: string) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+  };
+
+  // Helper function to show error toast
+  const showToastError = (message: string) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+  };
+
+  // Helper function to open the token modal
+  const openTokenModal = () => {
+    dispatch(set_modals({ ...modals, quixies: true }));
+  };
   const removePreference = (preference: any) => {
     const newPreferences = source?.preferences.filter(
       (item: string) => item !== preference
@@ -188,41 +210,61 @@ export default function UserEditDashboard({
     setChangesWereMade(true);
   };
   const [isUploading, setUploading] = useState(false);
-  const [uploadCount, setUploadCount] = useState();
-  const [project, setProject] = useState<any>({ images: [] });
-  async function uploadImages(files: any) {
+  const [uploadCount, setUploadCount] = useState<number | undefined>();
+  const [project, setProject] = useState<{ images: any[] }>({ images: [] });
+  const [isImageDescriptionOpen, setImageDescriptionOpen] =
+    useState<number>(-1);
+
+  const { modals } = useSelector((state: any) => state.modals);
+
+  async function uploadImages(files: File[]) {
     setUploadCount(files.length);
     setUploading(true);
-    const localImagesArray: any = [];
-    const uploadFile = async (file: any) => {
-      const randId = uuid();
-      const imageRef = ref(storage, randId);
-      try {
-        await uploadBytes(imageRef, file);
-        const url = await getDownloadURL(imageRef);
-        const data = {
-          src: url,
-        };
-        localImagesArray.push(data);
-      } catch (error) {
-        return;
-      }
-    };
-    const uploadPromises = files.map(uploadFile);
+
     try {
-      await Promise.all(uploadPromises);
-      const updatedImages = project?.images
-        ? [...project?.images, ...localImagesArray]
-        : localImagesArray;
+      const uploadedImages = await uploadMultipleFiles(files);
+      const updatedImages = mergeProjectImages(project.images, uploadedImages);
+
       setProject({ ...project, images: updatedImages });
-      setUploading(false);
     } catch (error) {
+      console.error("Image upload failed", error);
+    } finally {
       setUploading(false);
-      return;
     }
   }
-  const { modals } = useSelector((state: any) => state.modals);
-  const [isImageDescriptionOpen, setImageDescriptionOpen] = useState(-1);
+
+  // Helper function to upload multiple files and return uploaded image data
+  const uploadMultipleFiles = async (files: File[]) => {
+    const localImagesArray: any[] = [];
+
+    const uploadFile = async (file: File) => {
+      try {
+        const imageData = await uploadSingleFile(file);
+        localImagesArray.push(imageData);
+      } catch (error) {
+        console.error("Error uploading file", file.name, error);
+      }
+    };
+
+    await Promise.all(files.map(uploadFile));
+    return localImagesArray;
+  };
+
+  // Helper function to upload a single file and return its URL
+  const uploadSingleFile = async (file: File) => {
+    const randId = uuid();
+    const imageRef = ref(storage, randId);
+
+    await uploadBytes(imageRef, file);
+    const url = await getDownloadURL(imageRef);
+
+    return { src: url };
+  };
+
+  // Helper function to merge project images with newly uploaded images
+  const mergeProjectImages = (existingImages: any[], newImages: any[]) => {
+    return existingImages ? [...existingImages, ...newImages] : newImages;
+  };
   return (
     <>
       {isUploading && (
@@ -353,12 +395,6 @@ export default function UserEditDashboard({
                             Rekrutuj
                           </span>
                         )}
-                        <button
-                          onClick={() => console.log(project)}
-                          className=""
-                        >
-                          log
-                        </button>
                         {project?.tags?.length > 0 && (
                           <>
                             {" "}
@@ -1030,13 +1066,10 @@ export default function UserEditDashboard({
                         </button>
                       )}
                       <>
-                        {!source.seek &&
-                          source?.seek !== "ask" &&
-                          project?.name &&
+                        {project?.name &&
                           project?.time &&
                           project?.desc &&
-                          project?.images?.length > 0 &&
-                          project?.tags?.length > 0 && (
+                          project?.images?.length > 0 && (
                             <div className="w-full sticky bottom-0 flex flex-col bg-white p-4 rounded-xl">
                               <div
                                 className="w-full mb-4 bg-primary text-white rounded-xl p-4 lg:p-6"
@@ -1046,7 +1079,8 @@ export default function UserEditDashboard({
                                   htmlFor="days-range"
                                   className="font-bold"
                                 >
-                                  Na ile dni chcesz dodać ofertę? ({days} dni)
+                                  Na ile dni chcesz dodać ofertę pracy? ({days}{" "}
+                                  dni)
                                 </label>
                                 <div className="px-4">
                                   <input
@@ -1065,7 +1099,15 @@ export default function UserEditDashboard({
                               </div>
 
                               <button
-                                onClick={handleRecruitmentStart}
+                                onClick={() => {
+                                  handleRecruitmentStart();
+                                  setProject({
+                                    images: [],
+                                    name: "",
+                                    time: "",
+                                    desc: "",
+                                  });
+                                }}
                                 style={{ textShadow: "2px 2px 2px black" }}
                                 className="w-full sticky bottom-3 rounded-3xl left-0 bg-cta hover:bg-opacity-90 text-white font-gotham text-lg px-2 py-1.5"
                               >

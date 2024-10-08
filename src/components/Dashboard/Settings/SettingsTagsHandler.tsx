@@ -322,13 +322,13 @@ export default function TagsHandler() {
         {configurationOpen && category.title !== "" && (
           <div>
             {jobs.map((item: any, i: any) => (
-              <>
+              <div key={i}>
                 {item.title === slug.title && (
-                  <>
+                  <div key={i}>
                     {item.data.map((cat: any, i: any) => (
-                      <>
+                      <div key={i}>
                         {cat.title === category.title && (
-                          <>
+                          <div key={i}>
                             {cat.data.map((job: any, i: any) => (
                               <button
                                 onClick={() => {
@@ -431,13 +431,13 @@ export default function TagsHandler() {
                                 {job.title}
                               </button>
                             ))}
-                          </>
+                          </div>
                         )}
-                      </>
+                      </div>
                     ))}
-                  </>
+                  </div>
                 )}
-              </>
+              </div>
             ))}
           </div>
         )}

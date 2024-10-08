@@ -12,6 +12,10 @@ export interface IProject {
   isRecruitment: boolean;
   price: any;
   isPaid: boolean;
+  days: number;
+  type: "quick" | "normal";
+  id: string;
+  expirationTime: number;
 }
 
 export type GenerateIdeaParams = {
