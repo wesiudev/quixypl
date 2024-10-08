@@ -17,8 +17,8 @@ export default function AboutQuixyTalent() {
   const [content, setContent] = useState("client");
 
   return (
-    <div className="font-coco py-12">
-      <div className="relative z-50 container rounded-t-xl  mx-auto">
+    <div className="font-coco py-12 px-4 sm:px-8 lg:px-12 2xl:px-[15vw]">
+      <div className="relative z-50 rounded-t-xl  mx-auto">
         <div className="mb-8">
           <h2 className="text-3xl font-gotham text-black">
             Twoja Platforma Pracy Zdalnej

@@ -78,11 +78,11 @@ export default async function Page() {
   return (
     <div className="flex flex-col bg-white">
       <Header jobsList={itCategories} />
-      <div className="bg-black relative overflow-hidden">
+      <div className="bg-gradient-to-br from-zinc-700 via-slate-800 to-zinc-950 relative overflow-hidden">
         <Hero />
         <div className="flex flex-col items-center md:flex-row sm:mx-8 lg:mx-[7vw] 2xl:mx-[12vw] relative z-50">
-          <div className="md:h-[80vh] flex flex-col md:justify-end items-center">
-            <div className="group relative flex flex-col p-3 bg-white bg-opacity-10 rounded-xl w-max max-w-[100%] md:mr-12">
+          <div className="flex flex-col md:justify-center py-24 items-center">
+            <div className="group relative flex flex-col p-3 bg-black bg-opacity-20 rounded-xl w-max max-w-[100%] md:mr-12">
               <Image
                 src="/assets/quixy-logo.png"
                 width={140}
@@ -101,7 +101,7 @@ export default async function Page() {
               >
                 Twoja platforma pracy zdalnej
               </h2>
-              <h2 className="max-w-lg scale-90 sm:scale-100 px-3 sm:pl-1 font-light text-white mt-6 font-gotham lg:text-lg xl:text-xl sm:pr-8 lg:pr-12 2xl:pr-[10vw] text-center sm:text-left">
+              <h2 className="max-w-lg scale-90 sm:scale-100 px-3 sm:pl-1 font-light text-white font-gotham lg:text-lg xl:text-xl sm:pr-8 lg:pr-12 2xl:pr-[10vw] text-center sm:text-left">
                 Pierwszy polski serwis łączący{" "}
                 <b className="text-white">ekspertów</b> {" z "}
                 <b className="text-white">pracodawcami</b> technologią{" "}
@@ -158,7 +158,7 @@ export default async function Page() {
           <div className="md:h-[45vh] w-full md:w-1/2 rounded-3xl overflow-hidden items-center flex 2xl:pl-[10vw] relative">
             <Link
               href="/register"
-              className="bg-orange-500 p-3 rounded-bl-3xl rounded-tr-3xl px-12 left-0 bottom-0 absolute z-50 text-white font-gotham"
+              className="bg-primary hover:bg-opcatiy-90 p-3 rounded-bl-3xl rounded-tr-3xl px-12 left-0 bottom-0 absolute z-50 text-white font-gotham"
               style={{ textShadow: "2px 2px 2px black" }}
             >
               Wypróbuj Generator Obrazów
