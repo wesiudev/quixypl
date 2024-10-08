@@ -105,8 +105,8 @@ const OpinionsForm: React.FC = () => {
               disabled={sent}
               className={`w-full sm:w-full mx-auto py-3 px-6 rounded-lg font-semibold text-white transition-colors duration-300 ${
                 sent
-                  ? "bg-orange-300 cursor-not-allowed"
-                  : "bg-[#126b91] hover:bg-[#468CA9]"
+                  ? "bg-zinc-500 cursor-not-allowed"
+                  : "bg-cta hover:bg-opacity-80"
               }`}
             >
               {sent ? "Opinia wysłana" : "Wyślij opinię"}
@@ -116,13 +116,13 @@ const OpinionsForm: React.FC = () => {
 
         <div className="md:ml-3 opinions-list py-6  rounded-bl-lg  rounded-t-lg rounded-tr-lg rounded-br-lg max-h-[50vh] overflow-y-scroll w-full">
           <h3 className="text-2xl font-bold mb-4 text-gray-800 flex items-center">
-            <FaStar className="text-primary mr-2" /> Opinie naszych klientów
+            <FaStar className="text-cta mr-2" /> Opinie naszych klientów
           </h3>
           <ul className="space-y-6">
             {opinions?.map((opinion, index) => (
               <li
                 key={index}
-                className="flex flex-col lg:flex-row lg:items-center text-lg text-gray-600 italic border-b border-orange-300 pb-2 font-light"
+                className="flex flex-col lg:flex-row lg:items-center text-lg text-gray-600 italic border-b border-cta pb-2 font-light"
               >
                 <div className="flex items-center font-semibold text-gray-800 lg:mr-2 not-italic">
                   <FaUser className="mr-1" /> {opinion.name}:

@@ -1,6 +1,9 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { FaChevronDown } from "react-icons/fa";
+import { useEffect, useState } from "react";
+
 export default function HeaderComponent({
   destinations,
   showHeader,
@@ -33,7 +36,7 @@ export default function HeaderComponent({
   return (
     <div
       style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
-      className={`z-[500] sticky top-0 left-0 bg-white flex flex-row items-center w-full px-3 lg:px-12 ${
+      className={`sticky left-0 top-0 z-[99999999999999] bg-white flex flex-row items-center w-full px-3 lg:px-12 ${
         showHeader || menuShow || hovered || productsOpen
           ? "-translate-y-0"
           : "-translate-y-[100%]"
@@ -114,7 +117,7 @@ export default function HeaderComponent({
                   hovered === "cat" ? "rotate-180" : ""
                 } ml-1 duration-200 font-light`}
               />
-            </Link>{" "}
+            </Link>
           </div>
 
           <Link
@@ -147,6 +150,12 @@ export default function HeaderComponent({
           >
             Kontakt
           </Link>
+          <Link
+            href="/blog"
+            className="ml-3 text-base drop-shadow-sm shadow-black text-black "
+          >
+            Blog
+          </Link>
         </div>
         <div className="w-max flex">
           <Link
@@ -154,22 +163,8 @@ export default function HeaderComponent({
             className={`w-max ml-2 py-[2px] px-[10px] text-lg rounded-md bg-cta hover:bg-opacity-90 text-white drop-shadow-sm duration-100 cursor-default font-bold`}
           >
             Rejestracja
-          </Link>{" "}
+          </Link>
         </div>
-      </div>
-      <div className="flex flex-col items-end justify-center relative">
-        {/* MENU SHOW SUSTAIN ON HOVER */}
-        {hovered && helperNeeded && (
-          <div
-            onMouseEnter={() => {
-              width >= 1280 && handleMouseEnter();
-              setTimeout(() => {
-                setHelperNeeded(false);
-              }, 3500);
-            }}
-            className="absolute bottom-0 right-0 w-full h-[40%] z-[700] "
-          ></div>
-        )}
       </div>
     </div>
   );

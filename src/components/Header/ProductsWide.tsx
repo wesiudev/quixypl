@@ -35,8 +35,15 @@ export default function ProductsWide({
       } hidden lg:grid pl-4 md:pl-8 lg:pl-12 xl:pl-20 2xl:pl-32 border-y border-gray-300 shadow-sm`}
     >
       <div className="flex flex-col relative z-[500]">
-        <h2 className="text-black drop-shadow-xl shadow-black text-xl xl:text-2xl text-left pt-8">
-          Zatrudnij do pracy zdalnej
+        <h2 className="text-black font-gotham text-3xl 2xl:text-5xl text-left pt-8">
+          <b className="text-cta" style={{ textShadow: "2px 2px 2px black" }}>
+            Szukaj{" "}
+          </b>
+          pracy lub{" "}
+          <b className="text-cta" style={{ textShadow: "2px 2px 2px black" }}>
+            Zatrudnij{" "}
+          </b>
+          do pracy zdalnej
         </h2>
         <div className="-ml-3 flex flex-wrap pb-8 pt-4">
           {jobs.map((job: any, i: any) => (
@@ -47,12 +54,19 @@ export default function ProductsWide({
               <Link
                 href={`/praca-zdalna/${polishToEnglish(job.title)}`}
                 title={`Idź do ${job.title}`}
-                className={`flex flex-col text-lg mt-3 font-bold p-1 px-3 text-black bg-black bg-opacity-10 w-max`}
+                className={`flex flex-col text-2xl mt-3 font-bold`}
                 key={i}
                 onClick={() => setHovered(false)}
               >
-                <h2>{job.title}</h2>
-                <span className="text-sm font-light">kategoria</span>
+                <span
+                  className="text-cta"
+                  style={{ textShadow: "2px 2px 2px black" }}
+                >
+                  {job.title}
+                </span>
+                <span className="text-sm font-light italic text-black">
+                  kategoria
+                </span>
               </Link>
               <div className="flex flex-col mt-3">
                 {job.data.map((item: any, i: any) => (

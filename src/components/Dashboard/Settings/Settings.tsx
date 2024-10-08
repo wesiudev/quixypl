@@ -33,8 +33,8 @@ export default function Settings({
         }}
         className={`disabled:cursor-not-allowed fixed z-[99999] left-0 top-0 w-full h-full ${
           modals.config
-            ? "bg-opacity-80 lg:duration-500 translate-y-0"
-            : "lg:duration-1000 bg-opacity-0 translate-x-[100vw]"
+            ? "bg-opacity-80 translate-y-0"
+            : "bg-opacity-0 translate-x-[100vw]"
         }  bg-black hover:bg-opacity-60`}
       />
       <div
@@ -44,9 +44,9 @@ export default function Settings({
             : "w-[80%] max-w-[40rem] lg:max-w-[50rem] xl:max-w-[60rem] h-[80vh]"
         } overflow-y-scroll scrollbarChat left-1/2 -translate-x-1/2 top-0 ${
           modals.config
-            ? "z-[99999999999999999] opacity-100 lg:duration-500 -translate-y-1/2 top-1/2"
-            : "z-[-1000] opacity-0 lg:duration-500 -translate-y-[150vh] top-0"
-        } lg:duration-200`}
+            ? "z-[99999999999999999] opacity-100 -translate-y-1/2 top-1/2"
+            : "z-[-1000] opacity-0 -translate-y-[150vh] top-0"
+        } `}
       >
         <div className={`${error && "vibrate-screen"}`}>
           <UserEditDashboard

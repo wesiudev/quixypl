@@ -20,20 +20,22 @@ export default async function Page({ params }: { params: any }) {
   );
   const content = await getPageContent(polishToEnglish(slug.title));
   const talents = await getTalents();
-  const job_offers = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/getOffers?tubylytylkofigi=${
-      process.env.API_SECRET_KEY
-    }&cat=${polishToEnglish(slug.title)}`,
-    {
-      method: "POST",
-      cache: "no-store",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      next: { revalidate: 360 },
-    }
-  );
+  // const job_offers = await fetch(
+  //   `${process.env.NEXT_PUBLIC_URL}/api/getOffersByCategory?tubylytylkofigi=${
+  //     process.env.API_SECRET_KEY
+  //   }&cat=${polishToEnglish(slug.title)}`,
+  //   {
+  //     method: "POST",
+  //     cache: "no-store",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //     },
+  //     next: { revalidate: 360 },
+  //   }
+  // ).then((res) => {
+  //   return res.json();
+  // });
   return (
     <>
       <div className="bg-gray-200">
@@ -147,36 +149,36 @@ export default async function Page({ params }: { params: any }) {
           <h2 className="text-black mt-12 text-3xl lg:text-5xl font-bold font-coco">
             {slug?.title} <strong className="text-primary">Praca Zdalna</strong>
           </h2>
-          {!job_offers && (
-            <div className="bg-white rounded-xl p-3 mt-6 lg:mt-12 py-6 sm:py-12 lg:py-24">
-              <div className="bg-cta rounded-full aspect-square mx-auto w-40 flex items-center justify-center">
-                <TfiFlagAlt className="text-white text-7xl" />
-              </div>
 
-              <p className="font-light text-black text-base font-gotham my-3 text-center max-w-xl mx-auto">
-                Brak aktywnych ofert pracy zdalnej dla specjalistów w branży{" "}
-                {content?.genitive}
-              </p>
-              <h3 className="flex flex-col text-white p-2 font-gotham font-light text-center mx-auto max-w-[332px] group">
-                <Link
-                  href="/register"
-                  className="rounded-2xl bg-[#14a800] p-2 duration-100 group-hover:bg-opacity-80"
-                >
-                  Bądź szybszy/a i dodaj ogłoszenie
-                </Link>
-                <Link
-                  href="/register"
-                  className="rounded-b-2xl bg-[#14a800] w-max max-w-[100%] mx-auto p-2 px-4 duration-100 group-hover:bg-opacity-80"
-                >
-                  o pracę już dziś!
-                </Link>
-              </h3>
+          <div className="bg-white rounded-xl p-3 mt-6 lg:mt-12 py-6 sm:py-12 lg:py-24">
+            <div className="bg-cta rounded-full aspect-square mx-auto w-40 flex items-center justify-center">
+              <TfiFlagAlt className="text-white text-7xl" />
             </div>
-          )}
+
+            <p className="font-light text-black text-base font-gotham my-3 text-center max-w-xl mx-auto">
+              Brak aktywnych ofert pracy zdalnej dla specjalistów w branży{" "}
+              {content?.genitive}
+            </p>
+            <h3 className="flex flex-col text-white p-2 font-gotham font-light text-center mx-auto max-w-[332px] group">
+              <Link
+                href="/register"
+                className="rounded-2xl bg-[#14a800] p-2 duration-100 group-hover:bg-opacity-80"
+              >
+                Bądź szybszy/a i dodaj ogłoszenie
+              </Link>
+              <Link
+                href="/register"
+                className="rounded-b-2xl bg-[#14a800] w-max max-w-[100%] mx-auto p-2 px-4 duration-100 group-hover:bg-opacity-80"
+              >
+                o pracę już dziś!
+              </Link>
+            </h3>
+          </div>
+
           <div className="flex flex-row gap-6 my-16">
             <section className="text-left w-full lg:pr-24">
               <h2 className="text-3xl font-extrabold mb-6 text-black font-gotham">
-                Czym zajmują się specjaliści {content?.genitive}?
+                Czym zajmują się specjaliści pracujący w {content?.genitive}?
               </h2>
 
               <div
@@ -185,7 +187,7 @@ export default async function Page({ params }: { params: any }) {
                   __html: content?.description,
                 }}
               />
-              <div className="mt-12">
+              {/* <div className="mt-12">
                 <h3
                   style={{ lineHeight: 1.4 }}
                   className="text-3xl font-gotham text-black  mb-3"
@@ -210,7 +212,7 @@ export default async function Page({ params }: { params: any }) {
                 <p className="mt-3 text-black font-gotham font-light">
                   Brak nowych postów... Stay tuned 😎
                 </p>
-              </div>
+              </div> */}
             </section>
             <div className="flex flex-col max-w-[30rem]">
               <div>

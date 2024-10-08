@@ -47,7 +47,7 @@ export default function ChatList({
 
   return (
     <div className="z-[100001] w-[25rem] fixed h-screen top-0 left-0 bg-white overflow-y-scroll scrollbarChat">
-      <div className="bg-[#A6152D] h-24 w-full flex items-center justify-center sticky top-0 left-0 z-[100002]">
+      <div className="bg-[#fff] h-24 w-full flex items-center justify-center sticky top-0 left-0 z-[100002]">
         <Image
           src="/sexflix-logo.png"
           width={224}

@@ -5,26 +5,32 @@ import { Metadata } from "next";
 import Header from "@/components/Header";
 import FAQ from "@/components/Faq";
 import OpinionsForm from "@/components/OpinionsForm";
-import { FaRocket, FaUsers, FaRegLightbulb } from "react-icons/fa";
+import { FaRocket, FaUsers, FaRegLightbulb, FaCogs } from "react-icons/fa";
 import MainFooter from "@/components/MainFooter";
 import Hero from "@/components/Hero";
 import Image from "next/image";
-import ContactForm from "@/components/ContactForm";
+import Register from "@/app/(register)/register/Register";
 
 function HeroSection() {
   return (
-    <header className="text-center py-16 bg-black overflow-hidden text-white relative">
-      <Hero />
+    <header className="text-center py-16 overflow-hidden text-black relative">
       <h1
         style={{ lineHeight: 1.5 }}
-        className="text-4xl font-bold mb-4 leading-snug relative z-50 w-[90%] sm:max-w-[50rem] mx-auto"
+        className="text-2xl lg:text-4xl font-bold mb-4 leading-snug w-[90%] sm:max-w-[50rem] mx-auto z-50 relative"
       >
-        <b className="text-primary">Rozwijaj Projekty</b> z Najlepszymi
-        Ekspertami IT, Marketingu i Designu
-        <b className="text-primary px-3 py-1 rounded-md shadow-lg">
-          Praca Zdalna
+        <b
+          className="text-white bg-primary"
+          style={{ textShadow: "2px 2px 2px black" }}
+        >
+          Rozwijaj Projekty
+        </b>{" "}
+        z Najlepszymi Ekspertami IT, Marketingu i Designu
+        <b
+          className="text-white bg-primary px-3 py-1 shadow-lg"
+          style={{ textShadow: "2px 2px 2px black" }}
+        >
+          Znajdź Pracę Zdalną lub Dodaj Ofertę
         </b>
-        z Quixy Talent™
       </h1>
       <Breadcrumbs />
       <JoinButton />
@@ -56,7 +62,8 @@ function Breadcrumbs() {
 function JoinButton() {
   return (
     <Link
-      className="bg-[#126b91] text-white hover:bg-[#468CA9] py-1.5 px-2 font-gotham rounded-lg w-max mx-auto relative z-50"
+      className="bg-cta text-white hover:bg-opacity-90 py-1.5 px-2 font-gotham rounded-lg w-max mx-auto relative z-50"
+      style={{ textShadow: "2px 2px 2px black" }}
       href="/register"
     >
       Rejestracja
@@ -66,10 +73,11 @@ function JoinButton() {
 
 function WhyChooseQuixySection() {
   return (
-    <section className="text-left flex lg:items-center rounded-3xl flex-col-reverse lg:flex-row">
+    <section className="text-left flex lg:items-center rounded-3xl flex-col-reverse lg:flex-row bg-cta bg-opacity-10">
       <h3 className="text-left lg:text-center font-bold">
         <Link
-          className="p-3 flex lg:flex-col items-center justify-center bg-[#126b91] text-white hover:bg-[#468CA9] rounded-lg lg:rounded-3xl lg:h-full lg:aspect-square relative z-50 mt-6 lg:mt-0 lg:mb-0"
+          style={{ textShadow: "2px 2px 2px black" }}
+          className="p-3 flex lg:flex-col items-center justify-center bg-cta text-white hover:bg-opacity-80 rounded-lg lg:rounded-3xl lg:h-full lg:aspect-square relative z-50 mt-6 lg:mt-0 lg:mb-0"
           href="/register"
         >
           <div className="mb-0 lg:mb-3 mr-3 lg:mr-0">
@@ -78,14 +86,14 @@ function WhyChooseQuixySection() {
           Zarejestruj się by dodać ofertę pracy
         </Link>
       </h3>
-      <div className="flex flex-col lg:p-6 w-full bg-white rounded-xl lg:mx-8">
-        <h2 className="text-3xl lg:text-5xl font-bold text-black  font-coco">
+      <div className="flex flex-col lg:p-6 w-full bg-gray-200 rounded-xl lg:mx-8">
+        <h2 className="italic mb-4 text-3xl lg:text-5xl text-primary font-gotham">
           Dlaczego warto wybrać Quixy?
         </h2>
-        <p className="text-lg text-black">
-          Oferujemy dostęp do najlepszych specjalistów w dziedzinach takich jak{" "}
-          rozwój oprogramowania, IT, marketing, desig, i wiele więcej. Nasza
-          platforma łączy firmy z doświadczonymi profesjonalistami, którzy
+        <p className="text-lg text-black font-coco italic">
+          -Oferujemy dostęp do najlepszych specjalistów w dziedzinach takich jak{" "}
+          rozwój oprogramowania, IT, marketing, desig, i wiele więcej. <br />
+          Nasza platforma łączy firmy z doświadczonymi profesjonalistami, którzy
           dostarczają najwyższej jakości usługi, zawsze na czas i zgodnie z
           wymaganiami.
         </p>
@@ -101,22 +109,18 @@ function SpecialistsCategoriesSection() {
       <h2 className="text-3xl w-full sm:max-w-[40rem] font-bold text-black  text-left">
         Oferty pracy zdalnej, najlepsze projekty i specjaliści
       </h2>
-      <div className="mt-8 flex flex-col space-y-8">
+      <div className="mt-8 flex flex-col">
         <Link
           href="/praca-zdalna/rozwoj-oprogramowania"
-          className="rounded-3xl overflow-hidden flex flex-col lg:flex-row w-full"
-          style={{ boxShadow: "inset 0px 0px 4px black" }}
+          className="group hover:bg-cta hover:bg-opacity-20 overflow-hidden flex flex-col lg:flex-row w-full p-6"
         >
-          <div
-            className="relative h-full  
-          flex items-center"
-          >
+          <div className="relative h-full flex items-center">
             <Image
               src="/slug/rozwoj-oprogramowania.webp"
               width={1366}
               height={1366}
               alt="Zatrudnij ekspertów od Rozwoju Oprogramowania"
-              className="rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg h-full"
+              className="h-full"
             />
             <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
               Najlepsi specjaliści od rozwoju oprogramowania
@@ -142,16 +146,15 @@ function SpecialistsCategoriesSection() {
         </Link>
         <Link
           href="/praca-zdalna/e-commerce"
-          className="rounded-3xl overflow-hidden flex flex-col lg:flex-row w-full"
-          style={{ boxShadow: "inset 0px 0px 4px black" }}
+          className="group hover:bg-cta hover:bg-opacity-20 overflow-hidden flex flex-col lg:flex-row w-full p-6"
         >
-          <div className="relative h-full ">
+          <div className="relative h-full">
             <Image
               src="/slug/e-commerce.webp"
               width={1366}
               height={1366}
               alt="Wdrożenie Sklepów Internetowych z naszymi ekspertami"
-              className="rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg min-h-full w-auto"
+              className=" min-h-full w-auto"
             />
             <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
               Wdroż sklep internetowy z najlepszymi ekspertami
@@ -178,8 +181,7 @@ function SpecialistsCategoriesSection() {
         </Link>
         <Link
           href="/praca-zdalna/marketing"
-          className="rounded-3xl overflow-hidden flex flex-col lg:flex-row w-full"
-          style={{ boxShadow: "inset 0px 0px 4px black" }}
+          className="group hover:bg-cta hover:bg-opacity-20 overflow-hidden flex flex-col lg:flex-row w-full p-6"
         >
           <div className="relative h-full ">
             <Image
@@ -187,7 +189,7 @@ function SpecialistsCategoriesSection() {
               width={1366}
               height={1366}
               alt="Zatrudnij specjalistów od Marketingu"
-              className="rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg min-h-full w-auto"
+              className=" min-h-full w-auto"
             />
             <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
               Najlepsi specjaliści od marketingu
@@ -214,8 +216,7 @@ function SpecialistsCategoriesSection() {
         </Link>
         <Link
           href="/praca-zdalna/uslugi-it"
-          className="rounded-3xl overflow-hidden flex flex-col lg:flex-row w-full"
-          style={{ boxShadow: "inset 0px 0px 4px black" }}
+          className="group hover:bg-cta hover:bg-opacity-20 overflow-hidden flex flex-col lg:flex-row w-full p-6"
         >
           <div className="relative h-full ">
             <Image
@@ -223,7 +224,7 @@ function SpecialistsCategoriesSection() {
               width={1366}
               height={1366}
               alt="Zatrudnij ekspertów od Wsparcia IT"
-              className="rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg min-h-full w-auto"
+              className=" min-h-full w-auto"
             />
             <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
               Najlepsi specjaliści od wsparcia IT
@@ -250,8 +251,7 @@ function SpecialistsCategoriesSection() {
         </Link>
         <Link
           href="/praca-zdalna/uslugi-biznesowe"
-          className="rounded-3xl overflow-hidden flex flex-col lg:flex-row w-full"
-          style={{ boxShadow: "inset 0px 0px 4px black" }}
+          className="group hover:bg-cta hover:bg-opacity-20 overflow-hidden flex flex-col lg:flex-row w-full p-6"
         >
           <div className="relative h-full ">
             <Image
@@ -259,7 +259,7 @@ function SpecialistsCategoriesSection() {
               width={1366}
               height={1366}
               alt="Zatrudnij doradców biznesowych"
-              className="rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg min-h-full w-auto"
+              className=" min-h-full w-auto"
             />
             <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
               Najlepsi doradcy biznesowi
@@ -286,8 +286,7 @@ function SpecialistsCategoriesSection() {
         </Link>
         <Link
           href="/praca-zdalna/projektowanie"
-          className="rounded-3xl overflow-hidden flex flex-col lg:flex-row w-full"
-          style={{ boxShadow: "inset 0px 0px 4px black" }}
+          className="group hover:bg-cta hover:bg-opacity-20 overflow-hidden flex flex-col lg:flex-row w-full p-6"
         >
           <div className="relative h-full">
             <Image
@@ -295,7 +294,7 @@ function SpecialistsCategoriesSection() {
               width={1366}
               height={1366}
               alt="Zatrudnij Projektantów dla Twojego Biznesu"
-              className="rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg min-h-full w-auto"
+              className=" min-h-full w-auto"
             />
             <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
               Najlepsi specjaliści dla Twojego Biznesu
@@ -331,21 +330,27 @@ function WhatMakesUsUniqueSection() {
       <h2 className="text-3xl font-bold mb-6 text-black  font-gotham">
         Co nas wyróżnia?
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-8 text-center">
         <HighlightCard
-          icon={<FaRocket className="text-primary text-5xl" />}
+          icon={<FaRocket className="text-white text-5xl" />}
           title="Szybka rekrutacja"
           description="Proces rekrutacji jest szybki i efektywny, pozwalając Ci skupić się na rozwoju projektu."
           linkTitle="Quixy Talent™"
         />
         <HighlightCard
-          icon={<FaUsers className="text-primary text-5xl" />}
+          icon={<FaCogs className="text-white text-5xl" />}
+          title="Nasze Usługi AI"
+          description="Sprawdź za darmo generator obrazków oraz generator pomysłów na biznes"
+          linkTitle="Usługi AI™"
+        />
+        <HighlightCard
+          icon={<FaUsers className="text-white text-5xl" />}
           title="Najlepsi eksperci"
           description="Współpracujemy z doświadczonymi ekspertami, aby zapewnić najwyższą jakość usług."
           linkTitle="Quixy Talent™"
         />
         <HighlightCard
-          icon={<FaRegLightbulb className="text-primary text-5xl" />}
+          icon={<FaRegLightbulb className="text-white text-5xl" />}
           title="Innowacyjne pomysły"
           description="Nasze narzędzia i porady pomogą Ci stworzyć unikalne i skuteczne strategie biznesowe."
           linkTitle="Pomysły Quixy™"
@@ -369,43 +374,26 @@ function HighlightCard({
 }) {
   return (
     <div
-      className="font-coco p-6 rounded-xl bg-[#126b91] shadow-lg"
+      className="font-coco p-3 rounded-xl relative "
       style={{ boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.25)" }}
     >
-      <div className="bg-white rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
+      <div className="bg-primary rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
         {icon}
       </div>
-      <h3 className="text-xl font-bold text-white mb-2 mt-4">{title}</h3>
-      <p className="text-gray-200">{description}</p>
+      <h3 className="text-xl font-bold text-black mb-2 mt-4">{title}</h3>
+      <p className="text-black text-sm">{description}</p>
       <div className="mt-6" />
       <Link
-        className="font-bold bg-white hover:bg-opacity-90 duration-100 underline text-primary p-3 rounded-lg"
+        className="font-bold bg-cta hover:bg-opacity-90 duration-100 underline text-white p-3 rounded-lg"
         href="/register"
         title={linkTitle}
       >
         {linkTitle}
       </Link>
+      <div className="mb-3"></div>
     </div>
   );
 }
-
-// Sekcja Call to Action
-// Komponent formularza kontaktowego
-function ContactFormComponent() {
-  return (
-    <div className="bg-blue-100 p-6 rounded-lg shadow-lg my-12 max-w-lg mx-auto">
-      <h2 className="text-2xl font-bold text-blue-600 mb-4">
-        Skontaktuj się z nami!
-      </h2>
-      <p className="text-gray-700 mb-6">
-        Poszukujemy ludzi do pomocy w rozwoju <b>Quixy.pl</b>. To wersja beta
-        aplikacji, a Twoje wsparcie może być kluczowe.
-      </p>
-      <ContactForm />
-    </div>
-  );
-}
-
 function CallToActionSection() {
   return (
     <section className="flex flex-col lg:flex-row my-16 font-gotam text-left">
@@ -431,7 +419,7 @@ function CallToActionSection() {
         <Link
           href="/register"
           title="Dołącz do Quixy"
-          className="bg-[#126b91] text-white py-1.5 px-2 rounded-lg hover:bg-orange-600 transition font-gotham font-light"
+          className="bg-cta text-white py-1.5 px-2 rounded-lg hover:bg-opacity-80 transition font-gotham font-light"
         >
           Zarejestruj
         </Link>
@@ -455,11 +443,10 @@ export default function Page() {
         <OpinionsForm />
         <FunnyComponent />
       </main>
+      <Register />
       <MainFooter
-        heading={
-          "Zatrudnij Specjalistów IT, Marketingu i Designu w Quixy Talent™"
-        }
-        category={"praca-zdalna"}
+        heading={"Szukaj pracy lub dodaj ofertę"}
+        category={""}
         jobsList={jobs}
       />
     </div>
@@ -471,7 +458,7 @@ function FunnyComponent() {
   return (
     <div className="flex flex-col lg:flex-row lg:justify-between font-coco bg-[#126b91] p-6 rounded-lg shadow-lg my-12">
       <div className="">
-        <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
+        <h2 className="max-w-lg text-3xl lg:text-5xl font-bold text-white mb-4">
           Potrzebujesz chwili wytchnienia?
         </h2>
         <p className="text-white mb-4">
@@ -499,7 +486,7 @@ function FunnyComponent() {
         width={512}
         height={512}
         alt="Zabawny GIF"
-        className="rounded-lg w-[300px]"
+        className="rounded-lg w-[300px] mt-4 lg:mt-0"
       />
     </div>
   );

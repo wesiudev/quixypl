@@ -6,14 +6,24 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import ImagePicker from "./ImagePicker";
 import TagsHandler from "../SettingsTagsHandler";
 import PreferencesHandler from "../SettingsPreferencesHandler";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/slices/user";
 import Image from "next/image";
 import EssentialUserInfo from "./EssentialUserInfo";
 import SettingsHeader from "./SettingsHeader";
 import { toast } from "react-toastify";
-import { FaImage } from "react-icons/fa";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaImage,
+  FaMinusCircle,
+  FaPlus,
+} from "react-icons/fa";
 import SetClientAccountType from "@/components/SetClientAccountType";
+import { set_modals } from "@/redux/slices/modalsopen";
+import { polishToEnglish } from "../../../../../utils/polishToEnglish";
+import jobs from "../../../../../public/14.09.2024.json";
+import { v4 as uuidv4 } from "uuid";
 export default function UserEditDashboard({
   source,
   changesWereMade,
@@ -33,6 +43,14 @@ export default function UserEditDashboard({
 }) {
   const dispatch = useDispatch();
   const [isNewProject, setIsNewProject] = useState(false);
+  const [days, setDays] = useState(1);
+  const [price, setPrice] = useState(15.99);
+  const [configurationOpen, setConfigurationOpen] = useState(false);
+  const [slug, setSlug] = useState({ title: "", url: "" });
+  const [category, setCategory] = useState({ title: "", url: "" });
+  const [tagsOpenLevel, setTagsOpenLevel] = useState(0);
+  const [tagDeletion, setTagDeletion] = useState(false);
+  const [selectedTag, setSelectedTag] = useState<any>({});
   const addPreference = (preference: any) => {
     const newPreferences = source?.preferences
       ? [...source?.preferences, preference]
@@ -41,6 +59,126 @@ export default function UserEditDashboard({
     dispatch(setUser({ ...source, preferences: newPreferences }));
     setChangesWereMade(true);
   };
+  // Aktualizacja ceny w oparciu o liczbę dni
+  const handleDaysChange = (e: any) => {
+    const selectedDays = e.target.value;
+    setDays(selectedDays);
+    // Przykładowe przeliczenie ceny: baza + 0.5 jednostki za każdy dzień
+    setPrice(15.99 + selectedDays * 8.42);
+  };
+  const handleRecruitmentStart = async () => {
+    const hasEnoughTokens = source?.tokens >= price;
+    const isProjectValid =
+      project.name &&
+      project.time &&
+      project.desc &&
+      project?.images?.length > 0;
+
+    // Generate a unique ID for the project
+    const uniqueId = uuidv4();
+
+    if (!hasEnoughTokens) {
+      if (isProjectValid) {
+        // Update user's project in the database
+        await updateUser(source.uid, {
+          projects: source?.projects
+            ? [
+                ...source.projects,
+                {
+                  ...project,
+                  id: uniqueId,
+                  isRecruitment: true,
+                  isPaid: false,
+                  price: price,
+                },
+              ]
+            : [
+                {
+                  ...project,
+                  id: uniqueId,
+                  isRecruitment: true,
+                  isPaid: false,
+                  price: price,
+                },
+              ],
+        });
+
+        // Update the project in local state
+        dispatch(
+          setUser({
+            ...source,
+            projects: source?.projects
+              ? [
+                  ...source.projects,
+                  {
+                    ...project,
+                    id: uniqueId,
+                    isRecruitment: true,
+                    isPaid: false,
+                    price: price,
+                  },
+                ]
+              : [
+                  {
+                    ...project,
+                    id: uniqueId,
+                    isRecruitment: true,
+                    isPaid: false,
+                    price: price,
+                  },
+                ],
+          })
+        );
+
+        // Reset the form state
+        setIsNewProject(false);
+        setProject({
+          days: 1,
+          images: [],
+          desc: "",
+          name: "",
+          time: "",
+        });
+
+        // Show success toast for saving the project
+        toast.success("Added to drafts!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      } else {
+        // Show error if required fields are missing
+        return toast.error("Please fill in all fields!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
+
+      // Show error for insufficient tokens
+      toast.error("You do not have enough Quixies!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+
+      // Trigger modal for adding tokens
+      dispatch(set_modals({ ...modals, quixies: true }));
+    } else {
+      // Continue with recruitment process when the user has enough tokens
+      alert("You have sufficient funds to start recruitment!");
+    }
+  };
+
   const removePreference = (preference: any) => {
     const newPreferences = source?.preferences.filter(
       (item: string) => item !== preference
@@ -83,6 +221,7 @@ export default function UserEditDashboard({
       return;
     }
   }
+  const { modals } = useSelector((state: any) => state.modals);
   const [isImageDescriptionOpen, setImageDescriptionOpen] = useState(-1);
   return (
     <>
@@ -104,19 +243,20 @@ export default function UserEditDashboard({
             setChangesWereMade={setChangesWereMade}
           />
         )}
-        {source?.configured && source?.seek === "false" && (
-          <SetClientAccountType
-            source={source}
-            setChangesWereMade={setChangesWereMade}
-          />
-        )}
+        {source?.configured &&
+          (source?.seek === "false" || source?.seek === "ask") && (
+            <SetClientAccountType
+              source={source}
+              setChangesWereMade={setChangesWereMade}
+            />
+          )}
         {source?.configured && source?.seek !== "ask" && (
           <>
             <EssentialUserInfo
               source={source}
               setChangesWereMade={setChangesWereMade}
             />
-            {source?.seek === true && (
+            {source?.seek !== "ask" && (
               <>
                 <TagsHandler />
                 <PreferencesHandler
@@ -124,23 +264,46 @@ export default function UserEditDashboard({
                   removePreference={removePreference}
                   source={source}
                 />
-                <div className="p-4 lg:p-6 bg-gray-200 mt-6 font-coco">
-                  <div className="font-bold text-lg text-black font-gotham">
-                    Projekty
-                  </div>
-                  <p className="text-sm text-[green] mb-2">
-                    Brałeś/aś udział w jakichś projektach? Pochwal się tym swoim
-                    portfolio. Możesz uwzględnić linki, obrazy i opis projektu.
-                  </p>
+                <div className="p-4 lg:p-6 mt-6 font-coco">
+                  {source?.seek && source?.seek !== "ask" && (
+                    <div className="font-bold text-3xl lg:text-5xl text-black font-gotham">
+                      Projekty
+                    </div>
+                  )}
+                  {!source?.seek && source?.seek !== "ask" && (
+                    <div className="font-bold text-3xl lg:text-5xl text-black font-gotham">
+                      Szybka Rekrutacja
+                    </div>
+                  )}
+                  {source?.seek && (
+                    <p className="text-sm sm:text-base text-black mb-2 mt-4">
+                      Brałeś/aś udział w jakichś projektach? Pochwal się tym
+                      swoim portfolio. Możesz uwzględnić linki, obrazy i opis
+                      projektu.
+                    </p>
+                  )}
+                  {!source?.seek && (
+                    <p className="text-sm sm:text-base text-black mb-2 mt-4">
+                      Rekrutujesz do projektu? Przeprowadź ⚡
+                      <b>Szybką Rekrutację</b>! Pozwól talentom aplikować na
+                      Twoją ofertę!
+                    </p>
+                  )}
                   {!isNewProject && (
                     <>
                       <button
                         onClick={() => {
                           setIsNewProject(true);
                         }}
-                        className="bg-[#126b91] text-white p-2 rounded-md"
+                        style={{ textShadow: "2px 2px 2px black" }}
+                        className="bg-cta text-white font-gotham p-2 rounded-md"
                       >
-                        Dodaj projekt
+                        {source?.seek &&
+                          source?.seek !== "ask" &&
+                          "Dodaj projekt"}
+                        {!source?.seek &&
+                          source?.seek !== "ask" &&
+                          "Rozpocznij rekrutację"}
                       </button>
                       {source?.projects?.map((project: any, i: number) => (
                         <div
@@ -154,7 +317,7 @@ export default function UserEditDashboard({
                                 width={177}
                                 height={100}
                                 alt="image"
-                                className="rounded-lg h-[100px] w-auto"
+                                className="rounded-lg h-[100px] w-auto bg-white border-2 border-cta"
                               />
                             )}
                             {project?.images?.length === 0 && (
@@ -179,25 +342,510 @@ export default function UserEditDashboard({
                   )}
                   {isNewProject && (
                     <>
-                      <div className="p-6 lg:p-12 2xl:p-16 bg-white rounded-xl mt-3 font-coco">
-                        <h1 className="text-black font-gotham font-light text-lg">
-                          Dodajesz projekt do portfolio
-                        </h1>
-                        <div className="grid sm:grid-cols-2 gap-3">
-                          <div>
-                            <h3 className="font-gotham font-light  text-black drop-shadow-lg mt-1.5">
-                              Nazwa
-                            </h3>
-                            <input
-                              type="text"
-                              value={project.name}
-                              onChange={(e) =>
-                                setProject({ ...project, name: e.target.value })
-                              }
-                              placeholder="Podaj nazwę projektu"
-                              className="border border-primary rounded-md p-2 text-black  font-light w-full"
-                            />
+                      <div className="p-6 lg:p-12 2xl:p-16 bg-gray-200 rounded-xl mt-3 font-coco">
+                        {source?.seek && source?.seek !== "ask" && (
+                          <span className="text-3xl lg:text-5xl text-black font-gotham font-light mb-4">
+                            Dodajesz projekt do profilu
+                          </span>
+                        )}
+                        {!source?.seek && source?.seek !== "ask" && (
+                          <span className="underline text-3xl lg:text-5xl text-black font-gotham font-light">
+                            Rekrutuj
+                          </span>
+                        )}
+                        <button
+                          onClick={() => console.log(project)}
+                          className=""
+                        >
+                          log
+                        </button>
+                        {project?.tags?.length > 0 && (
+                          <>
+                            {" "}
+                            <h1 className="text-base font-bold text-black ">
+                              Stanowiska
+                            </h1>
+                            <div className="mt-2 w-full grid grid-cols-2 sm:grid-cols-3 gap-2 text-white font-bold text-sm md:text-lg">
+                              <button
+                                onClick={() => setTagsOpenLevel(0)}
+                                className={`bg-[#126b91] ${
+                                  tagsOpenLevel === 0
+                                    ? "bg-[#126b91]"
+                                    : "bg-opacity-80"
+                                } px-2 py-1.5 rounded-md`}
+                              >
+                                Prosty
+                              </button>
+                              <button
+                                onClick={() => setTagsOpenLevel(1)}
+                                className={`bg-[#126b91] ${
+                                  tagsOpenLevel === 1
+                                    ? "bg-[#126b91]"
+                                    : "bg-opacity-80"
+                                } px-2 py-1.5 rounded-md`}
+                              >
+                                Rozszerzony
+                              </button>
+                              <button
+                                onClick={() => setTagsOpenLevel(2)}
+                                className={`bg-[#126b91] ${
+                                  tagsOpenLevel === 2
+                                    ? "bg-[#126b91]"
+                                    : "bg-opacity-80"
+                                } px-2 py-1.5 rounded-md`}
+                              >
+                                Całość
+                              </button>
+                            </div>
+                          </>
+                        )}
+                        <div className="mt-2 font-bold text-sm text-black ">
+                          {project?.tags?.length === 0 &&
+                            !source?.seek &&
+                            source?.seek !== "ask" &&
+                            "Kogo szukasz?"}{" "}
+                          {project?.tags?.length > 0 &&
+                            tagsOpenLevel === 0 &&
+                            "Widok Prosty"}
+                          {project?.tags?.length > 0 &&
+                            tagsOpenLevel === 1 &&
+                            "Widok Rozszerzony"}
+                          {project?.tags?.length > 0 &&
+                            tagsOpenLevel === 2 &&
+                            "Twoja oferta w strukturze strony"}
+                          <div
+                            className={`${
+                              tagsOpenLevel === 0
+                                ? "flex flex-row flex-wrap -ml-2"
+                                : ""
+                            }`}
+                          >
+                            {project?.tags && tagsOpenLevel === 1
+                              ? project?.tags?.map((item: any, i: any) => (
+                                  <div
+                                    className="text-sm mt-4 bg-slate-300 rounded-xl p-2"
+                                    key={i}
+                                  >
+                                    <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
+                                      <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
+                                        {item.slugTitle}
+                                      </div>
+                                      <div className="flex items-center">
+                                        <FaChevronRight className="mx-1 mt-2" />
+                                        <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
+                                          {item.title}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))
+                              : tagsOpenLevel === 2
+                              ? project?.tags?.map((item: any, i: any) => (
+                                  <div
+                                    className="text-sm mt-4 bg-slate-300 rounded-xl p-2"
+                                    key={i}
+                                  >
+                                    <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
+                                      <div className="flex items-center">
+                                        <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
+                                          {item.slugTitle}
+                                        </div>
+                                      </div>
+                                      <div className="flex items-center">
+                                        <FaChevronRight className="mx-1 mt-2" />
+                                        <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
+                                          {item.categoryTitle}
+                                        </div>
+                                      </div>
+                                      <div className="flex items-center font-bold">
+                                        <FaChevronRight className="mx-1 mt-2" />
+                                        <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
+                                          {item.title}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))
+                              : project?.tags?.map((item: any, i: any) => (
+                                  <div
+                                    key={i}
+                                    className="w-max max-w-[100%] ml-2 mt-2 flex flex-wrap items-center font-gotham font-light text-white"
+                                  >
+                                    <div
+                                      className={`${
+                                        selectedTag.title === item.title
+                                          ? "flex-col"
+                                          : ""
+                                      } bg-[#126b91] rounded-lg flex items-center p-1`}
+                                    >
+                                      <div className="flex flex-row items-center">
+                                        {item.title}
+                                        <button
+                                          onClick={() => {
+                                            setTagDeletion(true);
+                                            setSelectedTag(item);
+                                          }}
+                                          className=""
+                                        >
+                                          <FaMinusCircle className="ml-2 text-white" />
+                                        </button>
+                                      </div>
+                                      {tagDeletion &&
+                                        selectedTag.title === item.title && (
+                                          <div className="flex flex-col w-[90%] my-2 sticky left-0 top-0 bg-black bg-opacity-60 p-3 rounded-md">
+                                            <h2>
+                                              Usunąć {selectedTag?.title}?
+                                            </h2>
+                                            <div className="grid grid-cols-2 gap-3 mt-3">
+                                              <button
+                                                onClick={() => {
+                                                  const newTags =
+                                                    project?.tags?.filter(
+                                                      (tag: any) =>
+                                                        tag.title !==
+                                                        selectedTag.title
+                                                    );
+                                                  setProject({
+                                                    ...project,
+                                                    tags: newTags,
+                                                  });
+                                                  toast.success(
+                                                    `Usunięto widok oferty w "${selectedTag.title}"`,
+                                                    {
+                                                      position: "top-right",
+                                                      autoClose: 5000,
+                                                      hideProgressBar: false,
+                                                      closeOnClick: true,
+                                                      pauseOnHover: true,
+                                                      draggable: true,
+                                                      progress: undefined,
+                                                    }
+                                                  );
+                                                  setTagDeletion(false);
+                                                  setSelectedTag({});
+                                                }}
+                                                className="bg-red-500 text-white px-3 py-1 rounded-md"
+                                              >
+                                                Usuń
+                                              </button>
+                                              <button
+                                                onClick={() => {
+                                                  setTagDeletion(false);
+                                                  setSelectedTag({});
+                                                }}
+                                                className="bg-green-500 text-white px-3 py-1 rounded-md"
+                                              >
+                                                Nie
+                                              </button>
+                                            </div>
+                                          </div>
+                                        )}
+                                    </div>
+                                  </div>
+                                ))}
                           </div>
+                        </div>
+                        {!source?.seek && source?.seek !== "ask" && (
+                          <div className="gap-3 mt-12">
+                            <p className="text-sm text-[green] mb-2"></p>
+                            {!configurationOpen && (
+                              <>
+                                <div className="font-gotham font-bold text-black">
+                                  Dodaj stanowisko(a)
+                                </div>
+                              </>
+                            )}
+                            {configurationOpen && !slug?.title && (
+                              <div className="font-gotham font-bold text-black">
+                                Wybierz kategorię
+                              </div>
+                            )}
+                            {slug?.title !== "" && category?.title === "" && (
+                              <div className="text-black font-gotham flex flex-col">
+                                <div className="font-bold mb-1 bg-[#126b91] p-1 rounded-md px-2 text-white w-max max-w-[100%]">
+                                  {slug.title}
+                                </div>
+                                <div className="font-bold">
+                                  Wybierz podkategorię
+                                </div>
+                              </div>
+                            )}
+                            {slug?.title !== "" && category?.title !== "" && (
+                              <div className="text-black font-gotham flex flex-col">
+                                <div className="font-bold mb-1 bg-[#126b91] p-1 rounded-md px-2 text-white w-max max-w-[100%]">
+                                  {category.title}
+                                </div>
+                                <div className="font-bold"></div>Wybierz
+                                stanowisko
+                              </div>
+                            )}
+                            <div className="-ml-0.5 flex flex-row items-start w-full">
+                              {!configurationOpen && slug.title === "" && (
+                                <button
+                                  onClick={() => setConfigurationOpen(true)}
+                                  className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+                                >
+                                  <FaPlus />
+                                </button>
+                              )}
+                              {configurationOpen &&
+                                slug.title !== "" &&
+                                category.title !== "" && (
+                                  <button
+                                    onClick={() =>
+                                      setCategory({ title: "", url: "" })
+                                    }
+                                    className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+                                  >
+                                    <FaChevronLeft />
+                                  </button>
+                                )}
+                              {configurationOpen &&
+                                slug.title !== "" &&
+                                category.title === "" && (
+                                  <button
+                                    onClick={() => {
+                                      setSlug({ title: "", url: "" }),
+                                        setConfigurationOpen(false);
+                                    }}
+                                    className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+                                  >
+                                    <FaChevronLeft />
+                                  </button>
+                                )}
+                              {configurationOpen && slug.title === "" && (
+                                <div>
+                                  {jobs.map((item: any, i: any) => (
+                                    <button
+                                      onClick={() =>
+                                        setSlug({
+                                          title: item.title,
+                                          url: polishToEnglish(item.title),
+                                        })
+                                      }
+                                      className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-2"
+                                      key={i}
+                                    >
+                                      {item.title}
+                                    </button>
+                                  ))}
+                                </div>
+                              )}
+                              {configurationOpen && category.title === "" && (
+                                <div>
+                                  {jobs.map((item: any, i: any) => (
+                                    <>
+                                      {item.title === slug.title && (
+                                        <>
+                                          {item.data.map((cat: any, i: any) => (
+                                            <button
+                                              onClick={() =>
+                                                setCategory({
+                                                  title: cat.title,
+                                                  url: polishToEnglish(
+                                                    cat.title
+                                                  ),
+                                                })
+                                              }
+                                              className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-2"
+                                              key={i}
+                                            >
+                                              {cat.title}
+                                            </button>
+                                          ))}
+                                        </>
+                                      )}
+                                    </>
+                                  ))}
+                                </div>
+                              )}
+                              {configurationOpen && category.title !== "" && (
+                                <div>
+                                  {jobs.map((item: any, i: any) => (
+                                    <>
+                                      {item.title === slug.title && (
+                                        <>
+                                          {item.data.map((cat: any, i: any) => (
+                                            <>
+                                              {cat.title === category.title && (
+                                                <>
+                                                  {cat.data.map(
+                                                    (job: any, i: any) => (
+                                                      <button
+                                                        onClick={() => {
+                                                          if (
+                                                            project?.tags?.find(
+                                                              (tag: any) =>
+                                                                tag.url ===
+                                                                polishToEnglish(
+                                                                  job.title
+                                                                )
+                                                            )
+                                                          ) {
+                                                            return (
+                                                              toast.error(
+                                                                `Oferta w ${category.title} i ${job.title} już się wyświetla.`,
+                                                                {
+                                                                  position:
+                                                                    "top-right",
+                                                                  autoClose: 5000,
+                                                                  hideProgressBar:
+                                                                    false,
+                                                                  closeOnClick:
+                                                                    true,
+                                                                  pauseOnHover:
+                                                                    true,
+                                                                  draggable:
+                                                                    true,
+                                                                  progress:
+                                                                    undefined,
+                                                                }
+                                                              ),
+                                                              setConfigurationOpen(
+                                                                false
+                                                              ),
+                                                              setCategory({
+                                                                title: "",
+                                                                url: "",
+                                                              }),
+                                                              setSlug({
+                                                                title: "",
+                                                                url: "",
+                                                              })
+                                                            );
+                                                          } else {
+                                                            setProject({
+                                                              ...project,
+                                                              tags: [
+                                                                ...(project?.tags ||
+                                                                  []),
+                                                                {
+                                                                  url: polishToEnglish(
+                                                                    job.title
+                                                                  ),
+                                                                  categoryUrl:
+                                                                    polishToEnglish(
+                                                                      category.title
+                                                                    ),
+                                                                  categoryTitle:
+                                                                    category.title,
+                                                                  slugUrl:
+                                                                    polishToEnglish(
+                                                                      slug.title
+                                                                    ),
+                                                                  slugTitle:
+                                                                    slug.title,
+                                                                  title:
+                                                                    job.title,
+                                                                },
+                                                              ],
+                                                            });
+                                                            toast.success(
+                                                              `Oferta wyświetli się w ${category.title} oraz ${job.title}.`,
+                                                              {
+                                                                position:
+                                                                  "top-right",
+                                                                autoClose: 5000,
+                                                                hideProgressBar:
+                                                                  false,
+                                                                closeOnClick:
+                                                                  true,
+                                                                pauseOnHover:
+                                                                  true,
+                                                                draggable: true,
+                                                                progress:
+                                                                  undefined,
+                                                              }
+                                                            );
+
+                                                            setConfigurationOpen(
+                                                              false
+                                                            );
+                                                            setCategory({
+                                                              title: "",
+                                                              url: "",
+                                                            });
+                                                            setSlug({
+                                                              title: "",
+                                                              url: "",
+                                                            });
+                                                          }
+                                                        }}
+                                                        className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-2"
+                                                        key={i}
+                                                      >
+                                                        {job.title}
+                                                      </button>
+                                                    )
+                                                  )}
+                                                </>
+                                              )}
+                                            </>
+                                          ))}
+                                        </>
+                                      )}
+                                    </>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+
+                            {!source?.seek && source?.seek !== "ask" && (
+                              <div>
+                                <h3 className="font-gotham font-light text-black drop-shadow-lg mt-1.5">
+                                  Nazwa Firmy/Działalności/Imię rekrutera
+                                </h3>
+                                <input
+                                  className="border border-primary rounded-md p-2 text-black font-light w-full"
+                                  value={project?.name}
+                                  onChange={(e) => {
+                                    setProject({
+                                      ...project,
+                                      name: e.target.value,
+                                    });
+                                  }}
+                                  placeholder="Kto dodaje ofertę?"
+                                />
+                              </div>
+                            )}
+                            {!source?.seek && source?.seek !== "ask" && (
+                              <div>
+                                <h3 className="font-gotham font-light text-black drop-shadow-lg mt-1.5">
+                                  Wynagrodzenie
+                                </h3>
+                                <select
+                                  value={project.time}
+                                  onChange={(e) =>
+                                    setProject({
+                                      ...project,
+                                      time: e.target.value,
+                                    })
+                                  }
+                                  className="border border-primary rounded-md p-2 text-black font-light w-full"
+                                >
+                                  <option value="Nie podano">
+                                    Rodzaj wynagrodzenia
+                                  </option>
+                                  <option value="Stawka godzinowa">
+                                    Stawka godzinowa
+                                  </option>
+                                  <option value="Stawka miesięczna">
+                                    Stawka miesięczna
+                                  </option>
+                                  <option value="Stawka miesięczna">
+                                    &quot;Per Milestone&quot;
+                                  </option>
+                                  <option value="Prowizja">Prowizja</option>
+                                  <option value="Akcje i udziały">
+                                    Akcje i udziały
+                                  </option>
+                                  <option value="Inne">Inne</option>
+                                </select>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                        {source?.seek && source?.seek !== "ask" && (
                           <div>
                             <h3 className="font-gotham font-light  text-black drop-shadow-lg mt-1.5">
                               Czas trwania
@@ -205,7 +853,10 @@ export default function UserEditDashboard({
                             <select
                               value={project.time}
                               onChange={(e) =>
-                                setProject({ ...project, time: e.target.value })
+                                setProject({
+                                  ...project,
+                                  time: e.target.value,
+                                })
                               }
                               className="border border-primary rounded-md p-2 text-black  font-light w-full"
                             >
@@ -222,7 +873,26 @@ export default function UserEditDashboard({
                               </option>
                             </select>
                           </div>
-                        </div>
+                        )}
+                        {source?.seek && source?.seek !== "ask" && (
+                          <div>
+                            <h3 className="font-gotham font-light  text-black drop-shadow-lg mt-1.5">
+                              Nazwa
+                            </h3>
+                            <input
+                              type="text"
+                              value={project.name}
+                              onChange={(e) =>
+                                setProject({
+                                  ...project,
+                                  name: e.target.value,
+                                })
+                              }
+                              placeholder="Podaj nazwę projektu"
+                              className="border border-primary rounded-md p-2 text-black  font-light w-full"
+                            />
+                          </div>
+                        )}
                         <div>
                           <h3 className="font-gotham font-light  text-black drop-shadow-lg mt-1.5">
                             Stanowisko
@@ -235,121 +905,181 @@ export default function UserEditDashboard({
                             onChange={(e) =>
                               setProject({ ...project, desc: e.target.value })
                             }
-                            placeholder="Jaka byla twoja rola w projekcie?"
+                            placeholder={`${
+                              source?.seek && source?.seek !== "ask"
+                                ? "Jaka była twoja rola w projekcie?"
+                                : "Opisz obowiązki stanowiska na które rekrutujesz..."
+                            }`}
                             className="border border-primary rounded-md p-2 text-black  font-light w-full"
                           />
                         </div>
                         <h3 className="font-gotham font-light text-black drop-shadow-lg mt-1.5 mb-3">
                           Zdjęcia projektu
                         </h3>
-                        <div className="p-3 rounded-t-lg bg-slate-300 flex flex-col space-y-4">
-                          {project?.images?.map((item: any, i: any) => (
-                            <div key={i}>
-                              <div className="relative flex flex-col">
-                                <Image
-                                  src={item?.src}
-                                  width={1920}
-                                  height={1920}
-                                  alt="image"
-                                  className="rounded-t-lg w-full h-auto border-[2px] border-primary"
-                                />
-                                {isImageDescriptionOpen === i && (
-                                  <>
-                                    <input
-                                      type="text"
-                                      value={project?.images[i]?.desc}
-                                      placeholder="Co przedstawia obraz?"
-                                      onChange={(e) => {
-                                        setProject({
-                                          ...project,
-                                          images: project.images.map(
-                                            (item: any, index: any) =>
-                                              index === i
-                                                ? {
-                                                    ...item,
-                                                    desc: e.target.value,
-                                                  }
-                                                : item
-                                          ),
-                                        });
-                                      }}
-                                      className="w-full border-x-[2px] border-primary text-black"
-                                    />
-                                    <button
-                                      className="w-full py-2 rounded-b-xl bg-[#126b91] text-white"
-                                      onClick={() => {
-                                        setImageDescriptionOpen(-1);
-                                        toast.success(
-                                          "Pomyślnie dodano opis!",
-                                          {
-                                            position: "top-right",
-                                            autoClose: 5000,
-                                            hideProgressBar: false,
-                                            closeOnClick: true,
-                                            pauseOnHover: true,
-                                          }
-                                        );
-                                      }}
-                                    >
-                                      Ok
-                                    </button>
-                                  </>
-                                )}
+                        {project?.images?.length > 0 && (
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                            {project?.images?.map((item: any, i: any) => (
+                              <div key={i}>
+                                <div className="relative flex flex-col">
+                                  <Image
+                                    src={item?.src}
+                                    width={1920}
+                                    height={1920}
+                                    alt="image"
+                                    className="rounded-t-lg w-full h-auto border-[2px] border-primary"
+                                  />
+                                  {isImageDescriptionOpen === i && (
+                                    <>
+                                      <input
+                                        type="text"
+                                        value={project?.images[i]?.desc}
+                                        placeholder="Co przedstawia obraz?"
+                                        onChange={(e) => {
+                                          setProject({
+                                            ...project,
+                                            images: project.images.map(
+                                              (item: any, index: any) =>
+                                                index === i
+                                                  ? {
+                                                      ...item,
+                                                      desc: e.target.value,
+                                                    }
+                                                  : item
+                                            ),
+                                          });
+                                        }}
+                                        className="w-full border-x-[2px] border-primary text-black"
+                                      />
+                                      <button
+                                        className="w-full py-2 rounded-b-xl bg-[#126b91] text-white"
+                                        onClick={() => {
+                                          setImageDescriptionOpen(-1);
+                                          toast.success(
+                                            "Pomyślnie dodano opis!",
+                                            {
+                                              position: "top-right",
+                                              autoClose: 5000,
+                                              hideProgressBar: false,
+                                              closeOnClick: true,
+                                              pauseOnHover: true,
+                                            }
+                                          );
+                                        }}
+                                      >
+                                        Ok
+                                      </button>
+                                    </>
+                                  )}
 
-                                {isImageDescriptionOpen !== i && (
-                                  <button
-                                    onClick={() => setImageDescriptionOpen(i)}
-                                    className="w-full bg-[#126b91] rounded-b-lg text-white"
-                                  >
-                                    Opisz obraz
-                                  </button>
-                                )}
+                                  {isImageDescriptionOpen !== i && (
+                                    <button
+                                      onClick={() => setImageDescriptionOpen(i)}
+                                      className="w-full bg-[#126b91] rounded-b-lg text-white"
+                                    >
+                                      Opisz obraz
+                                    </button>
+                                  )}
+                                </div>
                               </div>
-                            </div>
-                          ))}
-                        </div>
+                            ))}
+                          </div>
+                        )}
                         <ImagePicker handler={uploadImages} user={source} />
                       </div>
-                      <button
-                        onClick={() => {
-                          if (project.name && project.time && project.desc) {
-                            updateUser(source.uid, {
-                              ...source,
-                              projects: source?.projects
-                                ? [...source.projects, project]
-                                : [project],
-                            });
-                            dispatch(
-                              setUser({
+                      {source.seek && source?.seek !== "ask" && (
+                        <button
+                          onClick={() => {
+                            if (project.name && project.time && project.desc) {
+                              updateUser(source.uid, {
                                 ...source,
                                 projects: source?.projects
                                   ? [...source.projects, project]
                                   : [project],
-                              })
-                            );
-                            setIsNewProject(false);
-                            setProject({
-                              images: [],
-                              desc: "",
-                              name: "",
-                              time: "",
-                            });
-                          } else {
-                            toast.error("Uzupełnij wszystkie pola!", {
-                              position: "top-right",
-                              autoClose: 5000,
-                              hideProgressBar: false,
-                              closeOnClick: true,
-                              pauseOnHover: true,
-                              draggable: true,
-                              progress: undefined,
-                            });
-                          }
-                        }}
-                        className="sticky bottom-0 w-full left-0 bg-green-500 text-white font-bold text-lg px-2 py-1.5 rounded-b-xl"
-                      >
-                        Zatwierdź projekt
-                      </button>
+                              });
+                              dispatch(
+                                setUser({
+                                  ...source,
+                                  projects: source?.projects
+                                    ? [...source.projects, project]
+                                    : [project],
+                                })
+                              );
+                              setIsNewProject(false);
+                              setProject({
+                                images: [],
+                                desc: "",
+                                name: "",
+                                time: "",
+                              });
+                            } else {
+                              toast.error("Uzupełnij wszystkie pola!", {
+                                position: "top-right",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                              });
+                            }
+                          }}
+                          style={{ textShadow: "2px 2px 2px black" }}
+                          className="w-full mx-auto sticky bottom-3 rounded-3xl left-0 bg-cta hover:bg-opacity-90 text-white font-gotham text-lg px-2 py-1.5"
+                        >
+                          ZATWIERDŹ PROJEKT
+                        </button>
+                      )}
+                      <>
+                        {!source.seek &&
+                          source?.seek !== "ask" &&
+                          project?.name &&
+                          project?.time &&
+                          project?.desc &&
+                          project?.images?.length > 0 &&
+                          project?.tags?.length > 0 && (
+                            <div className="w-full sticky bottom-0 flex flex-col bg-white p-4 rounded-xl">
+                              <div
+                                className="w-full mb-4 bg-primary text-white rounded-xl p-4 lg:p-6"
+                                style={{ textShadow: "2px 2px 2px black" }}
+                              >
+                                <label
+                                  htmlFor="days-range"
+                                  className="font-bold"
+                                >
+                                  Na ile dni chcesz dodać ofertę? ({days} dni)
+                                </label>
+                                <div className="px-4">
+                                  <input
+                                    id="days-range"
+                                    type="range"
+                                    min="1"
+                                    max="30"
+                                    value={days}
+                                    onChange={handleDaysChange}
+                                    className="w-full mt-2"
+                                  />
+                                </div>
+                                <div className="text-lg font-semibold mt-2">
+                                  Cena: {price.toFixed(2)}💎
+                                </div>
+                              </div>
+
+                              <button
+                                onClick={handleRecruitmentStart}
+                                style={{ textShadow: "2px 2px 2px black" }}
+                                className="w-full sticky bottom-3 rounded-3xl left-0 bg-cta hover:bg-opacity-90 text-white font-gotham text-lg px-2 py-1.5"
+                              >
+                                ROZPOCZNIJ REKRUTACJĘ{" "}
+                                {project?.name &&
+                                  project?.time &&
+                                  project?.desc &&
+                                  project?.images?.length > 0 && (
+                                    <div>(💎{price.toFixed(2)})</div>
+                                  )}
+                              </button>
+                            </div>
+                          )}
+                      </>
                     </>
                   )}
                 </div>
@@ -382,10 +1112,10 @@ const ChooseAccountType = (props: any) => {
                 dispatch(setUser({ ...source, seek: false }));
                 setChangesWereMade(true);
               }}
-              className={`hover:bg-[#FFA50027] hover:shadow-sm hover:shadow-[#FFA500c5] duration-300 p-3 flex flex-col py-5 border-gray-300 border hover:border-[#FF8C00] ${
+              className={`hover:bg-[#FFA50027] hover:shadow-sm hover:shadow-primary duration-300 p-3 flex flex-col py-5 border-gray-300 border hover:border-primary ${
                 !source?.seek &&
                 source?.seek !== "ask" &&
-                "bg-[#FFA50027] shadow-[#FFA500c5] shadow-sm border-[#FF8C00]"
+                "bg-[#FFA50027] shadow-primary shadow-sm border-primary"
               }`}
             >
               <div className="flex flex-row justify-between items-start w-full">
@@ -400,8 +1130,8 @@ const ChooseAccountType = (props: any) => {
                   <div
                     className={`${
                       (!source?.seek || source?.seek === "ask") &&
-                      "border-[10px] duration-75 border-[#FF8C00]"
-                    } w-0 h-0 bg-[#FF8C00] rounded-full`}
+                      "border-[10px] duration-75 border-primary"
+                    } w-0 h-0 bg-primary rounded-full`}
                   ></div>
                   <div
                     className={`${
@@ -421,10 +1151,10 @@ const ChooseAccountType = (props: any) => {
                 dispatch(setUser({ ...source, seek: true }));
                 setChangesWereMade(true);
               }}
-              className={`hover:bg-[#FFA50027] hover:shadow-sm hover:shadow-[#FFA500c5] duration-300 p-3 flex flex-col py-5 border-gray-300 border hover:border-[#FF8C00] ${
+              className={`hover:bg-[#FFA50027] hover:shadow-sm hover:shadow-primary duration-300 p-3 flex flex-col py-5 border-gray-300 border hover:border-primary ${
                 source?.seek === true &&
                 source?.seek !== "ask" &&
-                "bg-[#FFA50027] shadow-[#FFA500c5] shadow-sm border-[#FF8C00]"
+                "bg-[#FFA50027] shadow-primary shadow-sm border-primary"
               }`}
             >
               <div className="flex flex-row justify-between items-start w-full">
@@ -440,8 +1170,8 @@ const ChooseAccountType = (props: any) => {
                     className={`${
                       source?.seek === true &&
                       source?.seek !== "ask" &&
-                      "border-[10px] duration-75 border-[#FF8C00]"
-                    } w-0 h-0 bg-[#FF8C00] rounded-full`}
+                      "border-[10px] duration-75 border-primary"
+                    } w-0 h-0 bg-primary  rounded-full`}
                   ></div>
                   <div
                     className={`${

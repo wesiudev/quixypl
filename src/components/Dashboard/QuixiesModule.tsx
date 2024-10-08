@@ -12,15 +12,15 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
         onClick={() => dispatch(set_modals({ ...modals, quixies: false }))}
         className={`disabled:cursor-not-allowed fixed z-[99999] left-0 top-0 w-full h-full ${
           modals.quixies
-            ? "bg-opacity-80 lg:duration-500 translate-y-0"
-            : "lg:duration-1000 bg-opacity-0 translate-x-[100vw]"
+            ? "bg-opacity-80 translate-y-0"
+            : "bg-opacity-0 translate-x-[100vw]"
         }  bg-black hover:bg-opacity-60`}
       />
       <div
         className={`w-full lg:max-w-[50rem] xl:max-w-[60rem] lg:h-[80vh] h-full fixed overflow-y-scroll scrollbarChat left-1/2 -translate-x-1/2 top-0 ${
           modals.quixies
-            ? "z-[99999999999999999] opacity-100 lg:duration-500 -translate-y-1/2 top-1/2"
-            : "z-[-1000] opacity-0 lg:duration-500 -translate-y-[150vh] top-0"
+            ? "z-[99999999999999999] opacity-100 -translate-y-1/2 top-1/2"
+            : "z-[-1000] opacity-0 -translate-y-[150vh] top-0"
         }`}
       >
         <div
@@ -43,7 +43,7 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
             {shopProducts?.map((item: any, i: any) => (
               <div
                 key={i}
-                className="group relative w-full h-full flex justify-between items-center flex-col bg-zinc-700 hover:bg-[#126b91] transition lg:duration-300 rounded-xl"
+                className="group relative w-full h-full flex justify-between items-center flex-col bg-zinc-700 hover:bg-[#126b91] transition  rounded-xl"
               >
                 <div className="relative w-full h-auto">
                   <Image

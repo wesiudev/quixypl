@@ -7,7 +7,7 @@ export default function FirstStepButtons({
   userData: any;
   step: any;
   setStep: any;
-  seek: boolean;
+  seek: any;
 }) {
   return (
     <div>
@@ -20,13 +20,22 @@ export default function FirstStepButtons({
           Pomyślmy nad biznesem!
         </button>
       )}
-      {seek && step === 1 && (
+      {seek && seek !== "ask" && step === 1 && (
         <button
           style={{ borderRadius: "0px" }}
           onClick={() => setStep(2)}
           className="button !font-normal !px-12"
         >
           Znajdźmy pracę!
+        </button>
+      )}
+      {seek === "ask" && step === 1 && (
+        <button
+          style={{ borderRadius: "0px" }}
+          onClick={() => setStep(2)}
+          className="button !font-normal !px-12"
+        >
+          Wypróbuj AI!
         </button>
       )}
     </div>

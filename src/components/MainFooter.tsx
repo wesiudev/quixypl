@@ -2,7 +2,6 @@ import Link from "next/link";
 import Discord from "./Discord";
 import Image from "next/image";
 import { polishToEnglish } from "../../utils/polishToEnglish";
-import Hero from "./Hero";
 
 /**
  * @function MainFooter
@@ -28,18 +27,21 @@ export default function MainFooter({
         <div className="mb-12">
           <h2 className="text-4xl font-bold text-black">
             {!heading && <div>Szukaj lub zatrudnij w pracy zdalnej</div>}
-            {heading && <>{heading}</>}
+            {heading && <div>{heading}</div>}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
             {jobsList.map((item: any, i: any) => (
               <div key={i} className="flex flex-col mt-8">
-                <h2 className="flex items-center text-cta text-2xl font-bold">
+                <h2
+                  style={{ textShadow: "2px 2px 2px black" }}
+                  className="flex items-center text-cta text-2xl font-gotham"
+                >
                   {item.title}
                 </h2>
                 {item.data.map((cat: any, i: any) => (
                   <h3
                     key={i}
-                    className="group mt-2 hover:underline underline-offset-2 font-light"
+                    className="group mt-2 hover:underline underline-offset-2"
                   >
                     <Link
                       href={`/praca-zdalna/${

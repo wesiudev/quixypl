@@ -9,6 +9,9 @@ export interface IProject {
   images: IProjectImage[];
   url: string;
   time: string;
+  isRecruitment: boolean;
+  price: any;
+  isPaid: boolean;
 }
 
 export type GenerateIdeaParams = {

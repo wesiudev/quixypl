@@ -1,7 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+.add_content_btn {
+  @apply bg-white text-zinc-800 font-bold py-2 px-4 cursor-pointer border-zinc-800 border-2 w-full hover:bg-gray-300 duration-300;
+}
+.add_image_btn {
+  @apply bg-white text-zinc-800 font-bold py-2 px-4 cursor-pointer border-zinc-800 border-2 w-full aspect-square hover:bg-gray-300 duration-300;
+}
+.add_content_btn2 {
+  @apply bg-red-500 text-zinc-800 font-bold py-2 px-4 cursor-pointer border-zinc-800 border-2 w-full hover:bg-gray-300 duration-300;
+}
+.add_image_btn2 {
+  @apply bg-red-500 text-zinc-800 font-bold py-2 px-4 cursor-pointer border-zinc-800 border-2 w-full aspect-square hover:bg-gray-300 duration-300;
+}
 #root {
   background: #1d1d1d;
 }
@@ -239,38 +250,38 @@ html {
   width: max-content;
 }
 .vibrate-screen {
-  animation: vibrate 0.3s infinite linear;
+  animation: vibrate 0.5s infinite linear;
 }
 @keyframes vibrate {
   0% {
     transform: translate(0px, 0px);
   }
   10% {
-    transform: translate(-2px, 4px);
+    transform: translate(-1px, 2px);
   }
   20% {
-    transform: translate(0px, -4px);
+    transform: translate(0px, -1px);
   }
   30% {
-    transform: translate(-4px, 4px);
+    transform: translate(-2px, 2px);
   }
   40% {
-    transform: translate(0px, -4px);
+    transform: translate(0px, -2px);
   }
   50% {
-    transform: translate(-4px, 4px);
+    transform: translate(-4px, 2px);
   }
   60% {
-    transform: translate(0px, -4px);
+    transform: translate(0px, -2px);
   }
   70% {
-    transform: translate(-4px, 4px);
+    transform: translate(-2px, 2px);
   }
   80% {
-    transform: translate(0px, -4px);
+    transform: translate(0px, -2px);
   }
   90% {
-    transform: translate(-4px, 4px);
+    transform: translate(-2px, 2px);
   }
   100% {
     transform: translate(0px, 0px);

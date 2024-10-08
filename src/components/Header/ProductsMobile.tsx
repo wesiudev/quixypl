@@ -25,7 +25,7 @@ export default function ProductsMobile({
           productsOpen ? "pt-[74px] opacity-100 z-[500]" : "z-[-10] opacity-0"
         } scrollbar lg:hidden`}
       >
-        <div className="w-full sticky top-[0px] left-0 py-4 px-3 sm:px-5 flex items-center justify-between z-[200] bg-white border-b-[4px] border-primary">
+        <div className="w-full py-4 px-3 sm:px-5 flex items-center justify-between z-[200] border-b-[4px]">
           <h2 className="text-black drop-shadow-md shadow-black sm:text-lg lg:text-xl font-bold">
             Dodaj ofertę lub szukaj pracy
           </h2>
@@ -43,30 +43,49 @@ export default function ProductsMobile({
         <div className="mt-3 flex items-center justify-start mx-auto flex-wrap px-3 sm:px-5">
           <Link
             href="/business-ideas"
+            style={{ textShadow: "2px 2px 2px black" }}
             className="ml-1.5 p-1 rounded-lg text-base drop-shadow-sm shadow-black text-white bg-cta mt-1.5"
           >
             Pomysły AI&trade;
           </Link>
           <Link
             href="/register"
+            style={{ textShadow: "2px 2px 2px black" }}
             className="ml-1.5 p-1 rounded-lg text-base drop-shadow-sm shadow-black text-white bg-cta mt-1.5"
           >
             Obrazy AI&trade;
           </Link>
           <Link
             href="/marketplace"
+            style={{ textShadow: "2px 2px 2px black" }}
             className="ml-1.5 p-1 rounded-lg text-base drop-shadow-sm shadow-black text-white bg-cta mt-1.5"
           >
             Rynek projektów&trade;
           </Link>
           <Link
             href="/about"
+            style={{ textShadow: "2px 2px 2px black" }}
+            className="ml-1.5 p-1 rounded-lg text-base drop-shadow-sm shadow-black text-white bg-cta mt-1.5"
+          >
+            O nas
+          </Link>
+          <Link
+            href="/talent"
+            style={{ textShadow: "2px 2px 2px black" }}
+            className="ml-1.5 p-1 rounded-lg text-base drop-shadow-sm shadow-black text-white bg-cta mt-1.5"
+          >
+            Quixy Talent&trade;
+          </Link>
+          <Link
+            href="/blog"
+            style={{ textShadow: "2px 2px 2px black" }}
             className="ml-1.5 p-1 rounded-lg text-base drop-shadow-sm shadow-black text-white bg-cta mt-1.5"
           >
             O nas
           </Link>
           <Link
             href="/contact"
+            style={{ textShadow: "2px 2px 2px black" }}
             className="ml-1.5 p-1 rounded-lg text-base drop-shadow-sm shadow-black text-white bg-cta mt-1.5"
           >
             Kontakt
@@ -76,7 +95,7 @@ export default function ProductsMobile({
           {jobs.map((job: any, i: any) => (
             <div className="flex flex-col" key={i}>
               <Link
-                className={`bg-black bg-opacity-10 w-max max-w-[100%] flex mb-3 flex-col text-lg text-black text-left p-3`}
+                className={`bg-black bg-opacity-10 w-full flex mb-3 flex-col text-lg text-black text-left p-3`}
                 href={`/praca-zdalna/${polishToEnglish(job.title)}`}
                 key={i}
                 title={`Dodaj ofertę pracy`}
@@ -92,7 +111,8 @@ export default function ProductsMobile({
                         job.title
                       )}/${polishToEnglish(item.title)}`}
                       title={`Zobacz oferty pracy zdalnej ${item.title}`}
-                      className="my-3 w-full text-black drop-shadow-md shadow-black text-xl"
+                      style={{ textShadow: "3px 3px 3px black" }}
+                      className="my-3 w-full text-cta font-gotham text-3xl"
                       key={i}
                     >
                       <h3>{item.title}</h3>
@@ -106,7 +126,7 @@ export default function ProductsMobile({
                             offer.title
                           )}`}
                           title={`Zobacz oferty pracy zdalnej ${offer.title}`}
-                          className="w-full text-black  font-light text-lg py-2"
+                          className="w-full text-black font-coco text-lg py-2"
                           key={i}
                         >
                           <h4>{offer.title}</h4>

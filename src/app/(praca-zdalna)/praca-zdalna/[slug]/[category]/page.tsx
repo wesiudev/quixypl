@@ -4,11 +4,12 @@ import { polishToEnglish } from "../../../../../../utils/polishToEnglish";
 import jobs from "../../../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
 import { FaBriefcase } from "react-icons/fa";
 import AboutQuixyTalent from "@/app/(about)/AboutQuixyTalent";
 import { TfiFlagAlt } from "react-icons/tfi";
 import { getPageContent } from "@/lib/getPageContent";
+import { getTalents } from "../../../../../../utils/getTalents";
+import Image from "next/image";
 
 // Generowanie parametrów statycznych
 export async function generateStaticParams() {
@@ -26,8 +27,24 @@ export default async function Page({ params }: { params: any }) {
     (item: any) => polishToEnglish(item.title) === params.category
   );
   const content = await getPageContent(polishToEnglish(slug?.title));
+  const talents = await getTalents();
+  // const job_offers = await fetch(
+  //   `${process.env.NEXT_PUBLIC_URL}/api/getOffersByCategory?tubylytylkofigi=${process.env.API_SECRET_KEY}&cat=${params.category}`,
+  //   {
+  //     method: "POST",
+  //     cache: "no-store",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //     },
+  //     next: { revalidate: 360 },
+  //   }
+  // ).then((res) => {
+  //   return res.json();
+  // });
+
   return (
-    <div className="bg-gradient-to-b !font-gotham relative bg-black">
+    <div className="bg-gradient-to-b !font-gotham relative bg-white">
       <Header jobsList={jobs} />
 
       {/* Hero Section */}
@@ -86,12 +103,12 @@ export default async function Page({ params }: { params: any }) {
       {/* Subcategories Section */}
       <div className="bg-white">
         {slug?.data?.length > 0 && (
-          <div className=" container mx-auto">
-            <h1 className="text-black bg-white px-8 text-lg lg:text-2xl pt-12">
+          <div className="container mx-auto">
+            <h1 className="text-black bg-white text-lg lg:text-2xl pt-12">
               {slug.title}
               <b className="text-primary ml-1">oferty pracy zdalnej</b>
             </h1>
-            <div className="bg-white p-8 relative z-50 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+            <div className="bg-white py-8 relative z-50 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
               {slug.data.map((item: any, index: number) => (
                 <Link
                   href={`/praca-zdalna/${params.slug}/${
@@ -110,7 +127,8 @@ export default async function Page({ params }: { params: any }) {
           </div>
         )}
       </div>
-      <div className="bg-white p-3 py-6 sm:py-12 lg:py-24">
+
+      <div className="bg-gray-200 rounded-3xl p-3 py-6 sm:py-12 lg:py-24 mt-6 container mx-auto my-12">
         <div className="bg-cta rounded-full aspect-square mx-auto w-40 flex items-center justify-center">
           <TfiFlagAlt className="text-white text-7xl" />
         </div>
@@ -134,6 +152,96 @@ export default async function Page({ params }: { params: any }) {
           </Link>
         </h3>
       </div>
+      <div className="px-8 bg-white w-full mb-20">
+        <div className="flex flex-col container mx-auto">
+          <div className="mt-6">
+            <h2 className="text-black font-gotham mb-3">
+              Specjaliści {content?.genitive}
+            </h2>
+            <div className="flex items-center flex-wrap -ml-2">
+              {talents
+                ?.filter((item) => item?.pseudo && item?.seek)
+                .map((talent: any) => (
+                  <Link
+                    href={`/talent/${talent.pseudo}`}
+                    className="flex items-center ml-2"
+                    key={talent?.uid}
+                  >
+                    {talent?.photoURL ? (
+                      <div className="w-12 aspect-square rounded-lg bg-gray-200">
+                        <div
+                          className="rounded-lg"
+                          style={{ boxShadow: "0px 0px 4px black" }}
+                        >
+                          <Image
+                            src={talent?.photoURL}
+                            width={224}
+                            height={224}
+                            alt={`Zdjęcie talentu ${
+                              talent?.name || talent?.pseudo
+                            }`}
+                            className="rounded-lg"
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <span
+                        style={{ boxShadow: "0px 0px 4px black" }}
+                        className="w-12 aspect-square mr-2 rounded-lg bg-white flex items-center justify-center text-2xl text-primary"
+                      >
+                        {talent?.name?.[0].toUpperCase() ||
+                          talent?.pseudo?.[0].toUpperCase()}
+                      </span>
+                    )}
+                  </Link>
+                ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="bg-white w-full px-4">
+        <div className="flex flex-col lg:flex-row gap-6 p-6 lg:p-12 2xl:p-24 bg-gray-200 rounded-3xl container mx-auto">
+          <section className="text-left w-full lg:pr-24">
+            <h2 className="text-3xl font-extrabold mb-6 text-black font-gotham">
+              Czym zajmują się specjaliści {content?.genitive}?
+            </h2>
+
+            <div
+              className="text-black max-w-3xl markdownSlug font-light font-gotham"
+              dangerouslySetInnerHTML={{
+                __html: content?.description,
+              }}
+            />
+            {/* <div className="mt-12">
+              <h3
+                style={{ lineHeight: 1.4 }}
+                className="text-3xl font-gotham text-black  mb-3"
+              >
+                Odwiedź naszego bloga o tematyce poświęconej nie tylko{" "}
+                {content?.dative}
+                {", "} ale także pracy zdalnej.
+              </h3>
+              <Link
+                href="https://wesiudev.com/pl"
+                target="_blank"
+                title="zobacz autora bloga"
+              >
+                <Image
+                  src="/assets/wesiudev3.png"
+                  width={224}
+                  height={224}
+                  alt="Logo serwisu wesiudev.com"
+                  className="w-32 h-auto"
+                />
+              </Link>
+              <p className="mt-3 text-black font-gotham font-light">
+                Brak nowych postów... Stay tuned 😎
+              </p>
+            </div> */}
+          </section>
+        </div>
+      </div>
+
       <AboutQuixyTalent />
       {/* Footer Section */}
       <MainFooter

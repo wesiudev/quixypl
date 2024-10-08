@@ -17,7 +17,7 @@ export default function CreateAccountForm({
   createAccount: any;
   loading: any;
   setLoading: any;
-  seek?: boolean;
+  seek?: any;
 }) {
   return (
     <div className="w-full h-full flex items-center justify-center font-gotham">
@@ -25,7 +25,11 @@ export default function CreateAccountForm({
         <h2
           className={`text-black py-3 font-bold text-2xl lg:text-3xl drop-shadow-xl shadow-black mb-6 flex flex-row items-center font-gotham`}
         >
-          <div>Utwórz swoje konto</div>
+          <div>
+            {seek === true && seek !== "ask" && "Utwórz konto talentu"}
+            {seek === false && seek !== "ask" && "Utwórz konto klienta"}
+            {seek === "ask" && "Wypróbuj nasze AI"}
+          </div>
         </h2>
         <div className="grid grid-cols-1 gap-3 h-max">
           <div className="flex flex-col">

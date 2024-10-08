@@ -3,10 +3,10 @@ import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import moment from "moment";
-import Hero from "@/components/Hero";
 import { IProject } from "@/types";
 import ProjectCard from "@/components/Dashboard/ImageGenerator/dashboard/ProjectCard";
 import AboutQuixyTalent from "@/app/(about)/AboutQuixyTalent";
+import { getTalents } from "../../../../../utils/getTalents";
 
 export const revalidate = 300;
 export default async function Page({
@@ -21,7 +21,11 @@ export default async function Page({
       process.env.API_SECRET_KEY
     }&pseudo=${polishToEnglish(params.slug)}`
   ).then((res) => res.json());
-  slug?.projects.flatMap((project: any) => project.images).flat().length;
+  const talents = await getTalents();
+  const talentTags = Array.from(
+    new Set(slug?.tags?.map((item: any) => item.slugTitle))
+  );
+
   return (
     <div className="container relative sm:px-8 lg:px-12 mx-auto">
       {/* Breadcrumbs with Icons */}
@@ -58,9 +62,7 @@ export default async function Page({
               <div className="w-full flex items-start justify-between text-black font-gotham mb-6">
                 <div className="flex flex-col">
                   <div className="flex items-center flex-wrap -ml-3">
-                    {Array.from(
-                      new Set(slug?.tags?.map((item: any) => item.slugTitle))
-                    ).map((item: any, i: any) => (
+                    {talentTags.map((item: any, i: any) => (
                       <Link
                         href={`/praca-zdalna/${polishToEnglish(item)}`}
                         key={item}
@@ -140,14 +142,14 @@ export default async function Page({
             {!slug?.title && (
               <div>
                 <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
-                  Pseudonim
+                  Nazwa w Quixy
                 </h2>
                 <h3
                   className={`text-black  text-lg ${
                     slug?.pseudo && "!text-3xl lg:text-5xl"
                   }`}
                 >
-                  {slug?.pseudo ? slug?.pseudo : "Brak pseudonimu..."}
+                  {slug?.pseudo ? slug?.pseudo : "Brak nazwy..."}
                 </h3>
               </div>
             )}
@@ -207,12 +209,13 @@ export default async function Page({
         {slug?.projects?.length > 0 && (
           <div
             style={{ boxShadow: "inset 0px 0px 5px black" }}
-            className={`bg-[#126b91] p-5 lg:p-10 2xl:p-12 mt-6 mb-3 rounded-xl h-max w-full`}
+            className={` p-5 lg:p-10 2xl:p-12 mt-6 mb-3 rounded-xl h-max w-full`}
           >
             <h2
-              className={`text-3xl lg:text-5xl text-white drop-shadow-lg font-gotham mb-3`}
+              className={`text-3xl lg:text-5xl text-black drop-shadow-lg font-gotham mb-3`}
             >
-              Projekty
+              {slug?.seek && slug?.seek !== "ask" && "Projekty"}
+              {!slug?.seek && slug?.seek !== "ask" && "Aktywne oferty pracy"}
             </h2>
             <div>
               {slug?.projects?.map((project: IProject, i: any) => (
@@ -222,7 +225,46 @@ export default async function Page({
           </div>
         )}
       </div>
-      <div className="mb-12">
+      <div className="mt-6">
+        <h2 className="text-black font-gotham mb-3">Przeglądaj kategorie</h2>
+        <div className="flex items-center flex-wrap -ml-2">
+          {talents.map((item: any) => (
+            <div key={item.uid}>
+              <Link
+                href={`/talent/${item.pseudo}`}
+                className="flex items-center ml-2"
+                key={item?.uid}
+              >
+                {item?.photoURL ? (
+                  <div className="w-12 aspect-square rounded-lg bg-gray-200">
+                    <div
+                      className="rounded-lg"
+                      style={{ boxShadow: "0px 0px 4px black" }}
+                    >
+                      <Image
+                        src={item?.photoURL}
+                        width={224}
+                        height={224}
+                        alt={`Zdjęcie talentu ${item?.name || item?.pseudo}`}
+                        className="rounded-lg"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <span
+                    style={{ boxShadow: "0px 0px 4px black" }}
+                    className="w-12 aspect-square mr-2 rounded-lg bg-white flex items-center justify-center text-2xl text-primary"
+                  >
+                    {(item?.name && item?.name[0]?.toUpperCase()) ||
+                      item?.pseudo?.toUpperCase()}
+                  </span>
+                )}
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="">
         <AboutQuixyTalent />
       </div>
     </div>

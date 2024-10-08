@@ -30,12 +30,19 @@ export default function TagsHandler() {
       {user?.tags?.length > 0 && (
         <>
           {" "}
-          <h1 className="text-base font-bold text-black ">Stanowiska</h1>
+          <h1 className="text-base font-bold text-black">
+            {user?.seek && user?.seek !== "ask" && "Stanowiska"}
+            {!user?.seek &&
+              user?.seek !== "ask" &&
+              "Specjalizacje działalności"}
+          </h1>
           <div className="mt-2 w-full grid grid-cols-2 sm:grid-cols-3 gap-2 text-white font-bold text-sm md:text-lg">
             <button
               onClick={() => setTagsOpenLevel(0)}
               className={`bg-[#126b91] ${
-                tagsOpenLevel === 0 ? "bg-[#126b91]" : "bg-orange-400"
+                tagsOpenLevel === 0
+                  ? "bg-opacity-100 hover:bg-opacity-90"
+                  : "bg-opacity-80 hover:bg-opacity-100"
               } px-2 py-1.5 rounded-md`}
             >
               Prosty
@@ -43,7 +50,9 @@ export default function TagsHandler() {
             <button
               onClick={() => setTagsOpenLevel(1)}
               className={`bg-[#126b91] ${
-                tagsOpenLevel === 1 ? "bg-[#126b91]" : "bg-orange-400"
+                tagsOpenLevel === 1
+                  ? "bg-opacity-100 hover:bg-opacity-90"
+                  : "bg-opacity-80 hover:bg-opacity-100"
               } px-2 py-1.5 rounded-md`}
             >
               Rozszerzony
@@ -51,7 +60,9 @@ export default function TagsHandler() {
             <button
               onClick={() => setTagsOpenLevel(2)}
               className={`bg-[#126b91] ${
-                tagsOpenLevel === 2 ? "bg-[#126b91]" : "bg-orange-400"
+                tagsOpenLevel === 2
+                  ? "bg-opacity-100 hover:bg-opacity-90"
+                  : "bg-opacity-80 hover:bg-opacity-100"
               } px-2 py-1.5 rounded-md`}
             >
               Całość
@@ -64,8 +75,15 @@ export default function TagsHandler() {
         {user?.tags?.length > 0 && tagsOpenLevel === 0 && "Widok Prosty"}
         {user?.tags?.length > 0 && tagsOpenLevel === 1 && "Widok Rozszerzony"}
         {user?.tags?.length > 0 &&
+          user?.seek &&
+          user?.seek !== "ask" &&
           tagsOpenLevel === 2 &&
           "Twoja obecność w strukturze strony"}
+        {user?.tags?.length > 0 &&
+          !user?.seek &&
+          user?.seek !== "ask" &&
+          tagsOpenLevel === 2 &&
+          "Obecność działalności w strukturze strony"}
         <div
           className={`${
             tagsOpenLevel === 0 ? "flex flex-row flex-wrap -ml-2" : ""
@@ -196,9 +214,18 @@ export default function TagsHandler() {
       </div>
       <p className="text-sm text-[green] mb-2"></p>
       {!configurationOpen && (
-        <div className="font-gotham font-bold text-black">
-          Dodaj stanowisko(a)
-        </div>
+        <>
+          {user?.seek && user?.seek !== "ask" && (
+            <div className="font-gotham font-bold text-black">
+              Dodaj stanowisko(a)
+            </div>
+          )}
+          {!user?.seek && user?.seek !== "ask" && (
+            <div className="font-gotham font-bold text-black">
+              Specjalizacje(a) firmy
+            </div>
+          )}
+        </>
       )}
       {configurationOpen && !slug?.title && (
         <div className="font-gotham font-bold text-black">

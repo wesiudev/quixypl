@@ -88,7 +88,7 @@ export default function Dashboard() {
                             className="flex items-center text-black"
                           >
                             <FaCog className="text-xl mr-1" />
-                            Konfiguruj konto
+                            Moje konto
                           </button>
                         </div>
                       )}
@@ -123,162 +123,259 @@ export default function Dashboard() {
                           className="flex items-center text-black mt-2"
                         >
                           <FaCog className="text-primary text-2xl mr-1" />
-                          Konfiguruj konto
+                          Moje konto
                         </button>
                       </div>
                     )}
                   </div>
                 </div>
-                <div
-                  style={{ boxShadow: "inset 0px 0px 5px black" }}
-                  className={`bg-white p-5 lg:p-10 2xl:p-12 mt-6 mb-3 rounded-xl ${
-                    !user?.configured && (user?.seek === "ask" || !user?.seek)
-                      ? "hidden"
-                      : ""
-                  }`}
-                >
-                  <h2 className="text-3xl lg:text-5xl text-black  drop-shadow-lg font-gotham mb-3">
-                    Informacje
-                  </h2>
-                  {!user?.configured && (
-                    <div className="text-black font-gotham font-light text-lg">
-                      Skonfiguruj typ konta w ustawieniach
-                    </div>
-                  )}
-                  {!user?.title && (
-                    <div>
-                      <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
-                        Tytuł
-                      </h2>
-                      <h3
-                        className={`text-black text-lg font-gotham font-light`}
-                      >
-                        {user?.title ? user?.title : "Brak tytułu..."}
-                      </h3>
-                    </div>
-                  )}
-                  {!user?.title && (
-                    <div>
-                      <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
-                        Pseudonim
-                      </h2>
-
-                      <h3
-                        className={`text-black text-lg font-gotham font-light`}
-                      >
-                        {user?.pseudo ? user?.pseudo : "Brak pseudonimu..."}
-                      </h3>
-                    </div>
-                  )}
-                  <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
-                    Link profilu
-                  </h2>
-                  <h3 className="text-black text-lg font-gotham font-light">
-                    {user?.pseudo && (
-                      <Link
-                        className="text-primary"
-                        href={`https://quixy.pl/talent/${user?.pseudo}`}
-                      >
-                        {user?.pseudo && `quixy.pl/talent/${user?.pseudo}`}
-                      </Link>
+                {user?.seek !== "ask" && (
+                  <div
+                    style={{ boxShadow: "inset 0px 0px 5px black" }}
+                    className={`bg-white p-5 lg:p-10 2xl:p-12 mt-6 mb-3 rounded-xl ${
+                      !user?.configured && (user?.seek === "ask" || !user?.seek)
+                        ? "hidden"
+                        : ""
+                    }`}
+                  >
+                    <h2 className="text-3xl lg:text-5xl text-black  drop-shadow-lg font-gotham mb-3">
+                      Informacje
+                    </h2>
+                    {!user?.configured && (
+                      <div className="text-black font-gotham font-light text-lg">
+                        Skonfiguruj typ konta w ustawieniach
+                      </div>
                     )}
-                    {!user?.pseudo && (
+                    {!user?.title && (
                       <div>
-                        <button
-                          className="text-primary font-bold"
-                          onClick={() =>
-                            dispatch(set_modals({ ...modals, config: true }))
-                          }
-                        >
-                          Ustaw swój pseudonim,
-                        </button>{" "}
-                        aby otrzymać unikalny link, dzięki któremu dotrzesz do
-                        pracodawców.
-                      </div>
-                    )}
-                  </h3>
-                  <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
-                    Specjalizacje
-                  </h2>
-                  <div className="w-full -ml-1 mt-1 flex flex-wrap items-center font-coco font-light text-white">
-                    {user?.tags?.map((item: any, i: any) => (
-                      <div className="text-sm" key={i}>
-                        <div className="ml-1 mt-1 rounded-xl bg-[#126b91] flex items-center px-2 py-0.5">
-                          {item.title}
-                        </div>
-                      </div>
-                    ))}
-                    {!user?.tags?.length && (
-                      <h3 className="text-black text-lg font-gotham font-light ml-1">
-                        Brak podanych specjalizacji
-                      </h3>
-                    )}
-                  </div>
-                  <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
-                    Dostępność
-                  </h2>
-                  <div className="-ml-1 flex items-center flex-wrap">
-                    {user?.preferences ? (
-                      user?.preferences?.map((item: any, i: any) => (
+                        {user?.seek && user?.seek !== "ask" && (
+                          <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
+                            Tytuł
+                          </h2>
+                        )}
+                        {(!user?.seek || user?.seek === "ask") && (
+                          <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
+                            Nazwa firmy lub działalności
+                          </h2>
+                        )}
                         <h3
-                          key={i}
-                          className={`ml-1 mt-1 rounded-xl bg-[#126b91] flex items-center px-2 py-0.5 text-sm font-coco font-light text-white`}
+                          className={`text-black text-lg font-gotham font-light`}
                         >
-                          {item}
+                          {user?.title ? user?.title : "Brak..."}
                         </h3>
-                      ))
-                    ) : (
-                      <h3 className="text-black text-lg font-gotham font-light ml-1">
-                        Brak danych o dostępności
-                      </h3>
+                      </div>
                     )}
-                  </div>
+                    {!user?.title && (
+                      <div>
+                        <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
+                          Unikalny link
+                        </h2>
 
-                  <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
-                    Opis użytkownika
-                  </h2>
-                  <h3 className={`text-black text-lg font-gotham font-light`}>
-                    {user?.bio ? user?.bio : "Brak opisu..."}
-                  </h3>
-                </div>
+                        <h3
+                          className={`text-black text-lg font-gotham font-light`}
+                        >
+                          {user?.pseudo ? user?.pseudo : "Brak..."}
+                        </h3>
+                      </div>
+                    )}
+                    <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
+                      Unikalna nazwa
+                    </h2>
+                    <h3 className="text-black text-lg font-gotham font-light">
+                      {user?.pseudo && (
+                        <Link
+                          className="text-primary"
+                          href={`https://quixy.pl/${
+                            user?.seek && user?.seek !== "ask"
+                              ? "talent"
+                              : "client"
+                          }/${user?.pseudo}`}
+                        >
+                          {user?.pseudo &&
+                            `https://quixy.pl/${
+                              user?.seek && user?.seek !== "ask"
+                                ? "talent"
+                                : "client"
+                            }/${user?.pseudo}`}
+                        </Link>
+                      )}
+                      {!user?.pseudo && user?.seek && (
+                        <div>
+                          <button
+                            className="text-primary font-bold"
+                            onClick={() =>
+                              dispatch(set_modals({ ...modals, config: true }))
+                            }
+                          >
+                            Ustaw swoją unikalną nazwę talentu,
+                          </button>{" "}
+                          aby otrzymać unikalny link, dzięki któremu dotrzesz do
+                          pracodawców.
+                        </div>
+                      )}
+                      {!user?.pseudo &&
+                        (!user?.seek || user?.seek === "ask") && (
+                          <div>
+                            <button
+                              className="text-primary font-bold"
+                              onClick={() =>
+                                dispatch(
+                                  set_modals({ ...modals, config: true })
+                                )
+                              }
+                            >
+                              Ustaw swoją unikalną nazwę klienta,
+                            </button>{" "}
+                            aby otrzymać unikalny link, dzięki któremu dotrzesz
+                            do ekspertów poszukujących pracy.
+                          </div>
+                        )}
+                    </h3>
+                    {user?.seek && user?.seek !== "ask" && (
+                      <h2 className="text-xl text-black font-gotham mt-6">
+                        Specjalizacje
+                      </h2>
+                    )}
+                    {!user?.seek && user?.seek !== "ask" && (
+                      <h2 className="text-xl text-black font-gotham mt-6">
+                        Specjalizacje firmy
+                      </h2>
+                    )}
+                    <div className="w-full -ml-1 mt-1 flex flex-wrap items-center font-coco font-light text-white">
+                      {user?.tags?.map((item: any, i: any) => (
+                        <div className="text-sm" key={i}>
+                          <div className="ml-1 mt-1 rounded-xl bg-[#126b91] flex items-center px-2 py-0.5">
+                            {item.title}
+                          </div>
+                        </div>
+                      ))}
+                      {!user?.tags?.length && (
+                        <h3 className="text-black text-lg font-gotham font-light ml-1">
+                          Brak podanych specjalizacji...
+                        </h3>
+                      )}
+                    </div>
+                    {user?.seek && user?.seek !== "ask" && (
+                      <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
+                        Dostępność
+                      </h2>
+                    )}
+                    {!user?.seek && user?.seek !== "ask" && (
+                      <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
+                        Wielkość firmy
+                      </h2>
+                    )}
+                    {user?.seek && user?.seek !== "ask" && (
+                      <div className="-ml-1 flex items-center flex-wrap">
+                        {user?.preferences ? (
+                          user?.preferences?.map((item: any, i: any) => (
+                            <h3
+                              key={i}
+                              className={`ml-1 mt-1 rounded-xl bg-[#126b91] flex items-center px-2 py-0.5 text-sm font-coco font-light text-white`}
+                            >
+                              {item}
+                            </h3>
+                          ))
+                        ) : (
+                          <h3 className="text-black text-lg font-gotham font-light ml-1">
+                            Brak danych o dostępności...
+                          </h3>
+                        )}
+                      </div>
+                    )}
+                    {!user?.seek && user?.seek !== "ask" && (
+                      <div className="-ml-1 flex items-center flex-wrap">
+                        {user?.preferences ? (
+                          user?.preferences?.map((item: any, i: any) => (
+                            <h3
+                              key={i}
+                              className={`ml-1 mt-1 rounded-xl bg-[#126b91] flex items-center px-2 py-0.5 text-sm font-coco font-light text-white`}
+                            >
+                              {item}
+                            </h3>
+                          ))
+                        ) : (
+                          <h3 className="text-black text-lg font-gotham font-light ml-1">
+                            Brak danych o liczbie pracowników...
+                          </h3>
+                        )}
+                      </div>
+                    )}
+
+                    {user?.seek && user?.seek !== "ask" && (
+                      <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
+                        Opis użytkownika
+                      </h2>
+                    )}
+                    {!user?.seek && user?.seek !== "ask" && (
+                      <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
+                        Opis firmy
+                      </h2>
+                    )}
+                    <h3 className={`text-black text-lg font-gotham font-light`}>
+                      {user?.bio ? user?.bio : "Brak..."}
+                    </h3>
+                  </div>
+                )}
               </div>
             </div>
-            <div
-              style={{ boxShadow: "inset 0px 0px 5px black" }}
-              className={`${
-                !user?.configured && (user?.seek === "ask" || !user?.seek)
-                  ? "hidden"
-                  : ""
-              } bg-white p-5 lg:p-10 2xl:p-12 mt-6 mb-3 rounded-xl h-max w-full`}
-            >
-              <h2
+            {user?.seek !== "ask" && (
+              <div
+                style={{ boxShadow: "inset 0px 0px 5px black" }}
                 className={`${
-                  user?.projects?.length > 0 ? "ml-3" : ""
-                } text-3xl lg:text-5xl text-black drop-shadow-lg font-gotham mb-3`}
+                  !user?.configured && (user?.seek === "ask" || !user?.seek)
+                    ? "hidden"
+                    : ""
+                } bg-white p-5 lg:p-10 2xl:p-12 mt-6 mb-3 rounded-xl h-max w-full`}
               >
-                Projekty
-              </h2>
-              {user?.projects?.length === 0 && (
-                <div className="text-lg text-black  font-light">
-                  Nie dodano żadnych projektów - możesz tego dokonać{" "}
-                  <button
-                    onClick={() =>
-                      dispatch(set_modals({ ...modals, config: true }))
-                    }
-                    className="text-primary hover:no-underline underline font-bold"
-                  >
-                    klikając tutaj
-                  </button>{" "}
-                </div>
-              )}
-              {user?.projects?.length > 0 && (
-                <div>
-                  {user?.projects?.map((project: IProject, i: any) => (
-                    <ProjectCard key={i} project={project} />
-                  ))}
-                </div>
-              )}
-            </div>
+                <h2
+                  className={`${
+                    user?.projects?.length > 0 ? "ml-3" : ""
+                  } text-3xl lg:text-5xl text-black drop-shadow-lg font-gotham mb-3`}
+                >
+                  {user?.seek && user?.seek !== "ask" && "Projekty"}
+                  {!user?.seek && user?.seek !== "ask" && "Oferty pracy"}
+                </h2>
+                {user?.projects?.length === 0 &&
+                  user?.seek !== "ask" &&
+                  user?.seek && (
+                    <div className="text-lg text-black font-light">
+                      Nie dodano żadnych projektów - możesz tego dokonać{" "}
+                      <button
+                        onClick={() =>
+                          dispatch(set_modals({ ...modals, config: true }))
+                        }
+                        className="text-primary hover:no-underline underline"
+                      >
+                        klikając tutaj
+                      </button>{" "}
+                    </div>
+                  )}
+                {user?.projects?.length === 0 &&
+                  user?.seek !== "ask" &&
+                  !user?.seek && (
+                    <div className="text-lg text-black font-light">
+                      Nie dodano żadnych ofert pracy - przeprowadź ⚡
+                      <b>Szybką Rekrutację</b>{" "}
+                      <button
+                        onClick={() =>
+                          dispatch(set_modals({ ...modals, config: true }))
+                        }
+                        className="text-primary hover:no-underline underline"
+                      >
+                        klikając tutaj
+                      </button>{" "}
+                    </div>
+                  )}
+                {user?.projects?.length > 0 && (
+                  <div>
+                    {user?.projects?.map((project: IProject, i: any) => (
+                      <ProjectCard key={i} project={project} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
           <div
             style={{ boxShadow: "inset 0px 0px 5px black" }}

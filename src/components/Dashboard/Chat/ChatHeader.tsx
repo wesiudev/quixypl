@@ -19,7 +19,7 @@ export default function ChatHeader({
 }: ChatHeaderProps) {
   return (
     <>
-      <div className="bg-[#A6152D] flex items-center justify-between h-24 px-6 2xl:px-10 sticky left-0 top-0 lg:border-r-[4px] lg:border-[#3f3f3f]">
+      <div className="bg-[#fff] flex items-center justify-between h-24 px-6 2xl:px-10 sticky left-0 top-0 lg:border-r-[4px] lg:border-[#3f3f3f]">
         <div className="flex items-center text-white font-bold text-2xl">
           <button onClick={closeChat} className="scale-x-110 mr-2">
             <FaArrowLeftLong />
@@ -69,7 +69,7 @@ export default function ChatHeader({
               )}
               {!clickedUserData?.photoURL && (
                 <>
-                  <div className="flex items-center justify-center text-2xl p-3 w-full h-full text-white rounded-full bg-[#A6152D] mr-4">
+                  <div className="flex items-center justify-center text-2xl p-3 w-full h-full text-white rounded-full bg-[#fff] mr-4">
                     {clickedUserData?.login[0].toUpperCase()}{" "}
                   </div>
                 </>
@@ -106,7 +106,7 @@ export default function ChatHeader({
         {!clickedUserData?.photoURL && (
           <div
             style={{ boxShadow: "0px 0px 5px #000000" }}
-            className="flex items-center justify-center text-2xl p-3 w-16 h-16 text-white rounded-full bg-[#A6152D] mr-4"
+            className="flex items-center justify-center text-2xl p-3 w-16 h-16 text-white rounded-full bg-[#fff] mr-4"
           >
             {clickedUserData?.login[0].toUpperCase()}
           </div>
@@ -120,7 +120,7 @@ export default function ChatHeader({
             </div>
           )}
           {clickedUserData?.premium && (
-            <div title="PREMIUM" className="text-[#A6152D] text-xl ml-3">
+            <div title="PREMIUM" className="text-[#fff] text-xl ml-3">
               <FaTrophy />
             </div>
           )}

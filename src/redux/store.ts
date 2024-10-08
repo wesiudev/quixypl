@@ -3,6 +3,7 @@ import usersReducer from "./slices/users";
 import userReducer from "./slices/user";
 import modalsReducer from "./slices/modalsopen";
 import joboffersReducer from "./slices/joboffers";
+import postsReducer from "./slices/posts";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     user: userReducer,
     job_offers: joboffersReducer,
     modals: modalsReducer,
+    posts: postsReducer,
   },
 });
 

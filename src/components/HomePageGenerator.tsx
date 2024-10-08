@@ -224,8 +224,14 @@ export default function HomePageGenerator({
           <div className="flex flex-col md:flex-row w-full">
             <div className="flex flex-col w-full md:w-3/5 lg:w-4/5">
               <h2 className="font-gotham text-3xl text-black font-bold drop-shadow-xl shadow-black p-6 lg:p-12">
-                Twój nowy, <b className="text-primary">unikalny</b> pomysł na
-                biznes!
+                Twój nowy,{" "}
+                <b
+                  className="text-primary"
+                  style={{ textShadow: "2px 2px 2px black" }}
+                >
+                  unikalny
+                </b>{" "}
+                pomysł na biznes!
               </h2>
               <GenerateIdeaInputs setConfig={setConfig} config={config} />
             </div>
@@ -246,7 +252,8 @@ export default function HomePageGenerator({
               </div>
               <button
                 disabled={isThinking ? true : false}
-                className="disabled:cursor-not-allowed disabled:bg-orange-300 disabled:opacity-80 group rounded-xl p-3 w-full h-max bg-[#126b91] hover:bg-[#468CA9] duration-150 text-white font-bold mt-3 relative"
+                style={{ textShadow: "2px 2px 2px black" }}
+                className="disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-80 group rounded-xl p-3 w-full h-max bg-cta hover:bg-opacity-90 duration-150 text-white font-bold mt-3 relative"
                 onClick={handleGenerateIdea}
               >
                 <div className="w-[250px] cursor-default absolute left-1/2 -translate-x-1/2 -top-[170%] p-2 rounded-2xl text-white bg-blue-500 font-bold -translate-y-[50px] group-hover:-translate-y-[0px] z-[-10] group-hover:z-[25] select-none opacity-0 group-hover:opacity-100 duration-150 ease-in-out">

@@ -138,7 +138,7 @@ export default function ChatListElement({
               ) : (
                 <div
                   style={{ boxShadow: "0px 0px 5px #000000" }}
-                  className="aspect-square flex items-center justify-center text-2xl w-12 text-white rounded-full bg-[#A6152D]"
+                  className="aspect-square flex items-center justify-center text-2xl w-12 text-white rounded-full bg-[#fff]"
                 >
                   {value?.login[0].toUpperCase()}
                 </div>

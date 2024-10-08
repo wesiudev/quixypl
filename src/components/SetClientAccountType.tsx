@@ -10,7 +10,14 @@ export default function SetClientAccountType(props: any) {
       <div className="flex flex-col">
         <div>
           <label className="text-lg text-black">
-            Wybrano rodzaj konta <strong>{source?.seek}</strong>
+            Wybrano rodzaj konta{" "}
+            <strong>{source?.seek === "ask" && "Zainteresowany AI"}</strong>
+            <strong>
+              {source?.seek !== "ask" && source?.seek && "Talent"}
+            </strong>
+            <strong>
+              {source?.seek !== "ask" && !source?.seek && "Klient"}
+            </strong>
           </label>
           <p className="font-gotham font-light text-black">
             🚀Ostatnie pytanie i możemy startować! Jesteś firmą czy osobą
@@ -22,10 +29,10 @@ export default function SetClientAccountType(props: any) {
                 dispatch(setUser({ ...source, seek: false }));
                 setChangesWereMade(true);
               }}
-              className={`hover:bg-[#FFA50027] hover:shadow-sm hover:shadow-[#FFA500c5] duration-300 p-3 flex flex-col py-5 border-gray-300 border hover:border-[#FF8C00] ${
+              className={`hover:bg-opacity-80 hover:shadow-sm hover:shadow-primary duration-300 p-3 flex flex-col py-5 border-gray-300 border hover:border-primary ${
                 !source?.seek &&
                 source?.seek !== "ask" &&
-                "bg-[#FFA50027] shadow-[#FFA500c5] shadow-sm border-[#FF8C00]"
+                "bg-opacity-80 shadow-primary shadow-sm border-primary"
               }`}
             >
               <div className="flex flex-row justify-between items-start w-full">
@@ -40,8 +47,8 @@ export default function SetClientAccountType(props: any) {
                   <div
                     className={`${
                       (!source?.seek || source?.seek === "ask") &&
-                      "border-[10px] duration-75 border-[#FF8C00]"
-                    } w-0 h-0 bg-[#FF8C00] rounded-full`}
+                      "border-[10px] duration-75 border-primary"
+                    } w-0 h-0 bg-primary rounded-full`}
                   ></div>
                   <div
                     className={`${
@@ -61,10 +68,10 @@ export default function SetClientAccountType(props: any) {
                 dispatch(setUser({ ...source, seek: true }));
                 setChangesWereMade(true);
               }}
-              className={`hover:bg-[#FFA50027] hover:shadow-sm hover:shadow-[#FFA500c5] duration-300 p-3 flex flex-col py-5 border-gray-300 border hover:border-[#FF8C00] ${
+              className={`hover:bg-opacity-80 hover:shadow-sm hover:shadow-primary duration-300 p-3 flex flex-col py-5 border-gray-300 border hover:border-primary ${
                 source?.seek === true &&
                 source?.seek !== "ask" &&
-                "bg-[#FFA50027] shadow-[#FFA500c5] shadow-sm border-[#FF8C00]"
+                "bg-opacity-80 shadow-primary shadow-sm border-primary"
               }`}
             >
               <div className="flex flex-row justify-between items-start w-full">
@@ -80,8 +87,8 @@ export default function SetClientAccountType(props: any) {
                     className={`${
                       source?.seek === true &&
                       source?.seek !== "ask" &&
-                      "border-[10px] duration-75 border-[#FF8C00]"
-                    } w-0 h-0 bg-[#FF8C00] rounded-full`}
+                      "border-[10px] duration-75 border-primary"
+                    } w-0 h-0 bg-primary rounded-full`}
                   ></div>
                   <div
                     className={`${

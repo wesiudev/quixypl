@@ -45,7 +45,7 @@ export default function ChatMessage({
             <div className="w-max">
               <div
                 style={{ boxShadow: "0px 0px 5px #000000" }}
-                className="flex items-center justify-center xl:text-2xl p-3 w-12 h-12 aspect-square text-white rounded-full bg-[#A6152D]"
+                className="flex items-center justify-center xl:text-2xl p-3 w-12 h-12 aspect-square text-white rounded-full bg-[#fff]"
               >
                 {clickedUserData?.login[0].toUpperCase()}
               </div>
@@ -64,7 +64,7 @@ export default function ChatMessage({
           <div className="w-max">
             <div
               style={{ boxShadow: "0px 0px 5px #000000" }}
-              className="flex items-center justify-center xl:text-2xl p-3 w-12 h-12 aspect-square text-white rounded-full bg-[#A6152D]"
+              className="flex items-center justify-center xl:text-2xl p-3 w-12 h-12 aspect-square text-white rounded-full bg-[#fff]"
             >
               {source?.login[0].toUpperCase()}
             </div>
@@ -73,7 +73,7 @@ export default function ChatMessage({
         <div
           className={`text-xs ${
             clickedUserData?.uid === message?.sender
-              ? "text-left bg-[#A6152D] ml-3 p-3 rounded-md"
+              ? "text-left bg-[#fff] ml-3 p-3 rounded-md"
               : "text-right bg-green-700 mr-3 p-3 rounded-md"
           } w-auto`}
         >

@@ -70,19 +70,23 @@ export default function EssentialUserInfo({
               />
             </div>
           </div>
-          {source?.seek && (
+
+          {!source?.pseudo && (
             <>
               <div className="flex flex-col mt-2">
-                <label className="text-lg text-black">Pseudonim</label>
+                <label className="text-lg text-black">
+                  Unikalna nazwa konta
+                </label>
                 <div className="font-gotham font-light text-black">
                   {!localPseudo &&
-                    "Pseudonim jest warunkiem wyświetlania profilu w zakładce pracy zdalnej."}
+                    "Unikalna nazwa konta jest warunkiem wyświetlania profilu w zakładce pracy zdalnej."}
                   {localPseudo && pseudoWasChanged && pseudoIsAvailable && (
                     <div className="">
-                      To będzie Twój unikalny link w Quixy.pl, dzięki któremu
-                      trafią do Ciebie pracodawcy!{" "}
+                      To będzie Twój Unikalny Link w Quixy.pl, dzięki któremu
+                      pracodawcy łączą się z talentami!{" "}
                       <strong className="text-primary">
-                        quixy.pl/talent/{localPseudo}
+                        quixy.pl/{source?.seek ? "talent" : "client"}/
+                        {localPseudo}
                       </strong>
                     </div>
                   )}

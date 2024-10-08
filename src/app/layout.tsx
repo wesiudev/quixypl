@@ -6,6 +6,8 @@ import "../styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { scrollToTop } from "@/lib/scrollToTop";
+import { FaChevronRight } from "react-icons/fa";
 export default function RootLayout({
   children,
 }: {
@@ -19,6 +21,14 @@ export default function RootLayout({
         <Providers>
           <div className="relative z-[9999999999]">
             <ToastContainer />
+            <button
+              onClick={scrollToTop}
+              className="group flex flex-col fixed bottom-12 right-12 text-black bg-gray-300 px-3 py-2 rounded-md hover:bg-gray-400 duration-200"
+            >
+              <FaChevronRight className="text-sm -rotate-[90deg] group-hover:scale-75" />
+              <FaChevronRight className="text-sm -mt-2 -rotate-[90deg] scale-75 group-hover:scale-100" />
+              <FaChevronRight className="text-sm -mt-2 -rotate-[90deg] scale-50 group-hover:scale-75" />
+            </button>
           </div>
           {children}
         </Providers>

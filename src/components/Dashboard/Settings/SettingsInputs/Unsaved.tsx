@@ -87,7 +87,8 @@ export default function Unsaved({
 
               setChangesWereMade(false);
             }}
-            className="text-white rounded-lg bg-[green] font-bold px-6 py-2"
+            style={{ textShadow: "2px 2px 2px black" }}
+            className="text-white text-xl rounded-xl bg-cta font-gotham px-6 py-2"
           >
             Zapisz
           </button>

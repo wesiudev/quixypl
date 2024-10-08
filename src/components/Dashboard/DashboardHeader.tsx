@@ -116,11 +116,13 @@ export default function DashboardHeader() {
             </div>
             <h2 className="text-3xl flex w-full justify-between items-end mt-3">
               <div className="text-3xl text-primary font-gotham">Nawigacja</div>
-              <div className="text-black font-light text-base mt-6 lg:mt-0">
-                Panel Użytkownika
-              </div>
-              <div className="mt-6 lg:mt-0 text-black font-gotham text-3xl">
-                💎{user?.tokens?.toFixed(2)}
+              <div className="flex flex-col items-end">
+                <div className="text-black font-light text-base mt-6 lg:mt-0">
+                  Panel Użytkownika
+                </div>
+                <div className="mt-6 lg:mt-0 text-black font-gotham text-3xl">
+                  💎{user?.tokens?.toFixed(2)}
+                </div>
               </div>
             </h2>
             <Link
@@ -229,8 +231,8 @@ export default function DashboardHeader() {
             {user?.configured && (
               <div className="font-light">
                 {user?.seek === true && "Talent"}
-                {user?.seek === "ask" && "Klient"}
-                {!user?.seek && "Klient"}
+                {user?.seek === "ask" && "Zainteresowany AI"}
+                {!user?.seek && user?.seek !== "ask" && "Klient"}
               </div>
             )}
             {!user?.configured && (

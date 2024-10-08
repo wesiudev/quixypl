@@ -1,5 +1,6 @@
 "use client";
 
+import Hero from "@/components/Hero";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -16,19 +17,22 @@ export default function AboutQuixyTalent() {
   const [content, setContent] = useState("client");
 
   return (
-    <div className="font-coco px-4 bg-white pt-12">
-      <div className="container bg-gray-200 rounded-t-xl p-6 lg:p-12 2xl:p-24 mx-auto">
+    <div className="font-coco py-12">
+      <div className="relative z-50 container rounded-t-xl  mx-auto">
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-black">
+          <h2 className="text-3xl font-gotham text-black">
             Twoja Platforma Pracy Zdalnej
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 mt-6">
+        <div className="grid grid-cols-2 gap-3 mt-6 font-gotham">
           <button
+            style={{ textShadow: "2px 2px 2px black" }}
             onClick={() => setContent("client")}
-            className={`border-[6px] border-primary text-white rounded-xl flex items-center justify-center p-4 bg-primary ${
-              content === "talent" ? "bg-opacity-100" : "bg-opacity-70"
+            className={`lg:text-xl border-[6px]   rounded-xl flex items-center justify-center p-4  ${
+              content === "talent"
+                ? "border-primary text-white bg-primary"
+                : "border-cta text-white bg-cta"
             }`}
           >
             <FaUserTie className="mr-2" />
@@ -36,8 +40,11 @@ export default function AboutQuixyTalent() {
           </button>
           <button
             onClick={() => setContent("talent")}
-            className={`border-[6px] border-primary text-white rounded-xl flex items-center justify-center p-4 bg-primary ${
-              content === "client" ? "bg-opacity-100" : "bg-opacity-70"
+            style={{ textShadow: "2px 2px 2px black" }}
+            className={`lg:text-xl border-[6px]  rounded-xl flex items-center justify-center p-4  ${
+              content === "client"
+                ? "border-primary text-white bg-primary"
+                : "border-cta text-white bg-cta"
             }`}
           >
             <FaBriefcase className="mr-2" />
@@ -93,7 +100,8 @@ export default function AboutQuixyTalent() {
             </ul>
             <Link
               href="/register"
-              className="text-white bg-[#14A800] font-gotham py-1.5 px-2 rounded-md w-max font-light hover:bg-opacity-90 h-max"
+              style={{ textShadow: "2px 2px 2px black" }}
+              className="text-white bg-[#14A800] font-gotham py-1.5 px-2 rounded-lg w-max hover:bg-opacity-90 h-max"
             >
               Otwórz konto klienta
             </Link>
@@ -126,7 +134,8 @@ export default function AboutQuixyTalent() {
                 </p>
                 <Link
                   href="/register"
-                  className="text-white bg-[#14A800] font-gotham py-1.5 px-2 rounded-md w-max font-light hover:bg-opacity-90 h-max"
+                  style={{ textShadow: "2px 2px 2px black" }}
+                  className="text-white bg-[#14A800] font-gotham py-1.5 px-2 rounded-lg w-max hover:bg-opacity-90 h-max"
                 >
                   Otwórz konto talentu
                 </Link>

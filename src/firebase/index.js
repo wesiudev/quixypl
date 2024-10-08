@@ -289,6 +289,12 @@ export async function fetchTalents() {
   const talents = response.docs.map((doc) => doc.data());
   return talents;
 }
+export async function fetchOffers() {
+  const ref = collection(db, "offers");
+  const response = await getDocs(ref);
+  const offers = response.docs.map((doc) => doc.data());
+  return offers;
+}
 async function getDocuments(collectionName) {
   const ref = collection(db, collectionName);
   const response = await getDocs(ref);

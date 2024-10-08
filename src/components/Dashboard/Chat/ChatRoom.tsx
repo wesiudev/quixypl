@@ -54,7 +54,7 @@ export default function ChatRoom({
                 {!clickedUserData?.photoURL && (
                   <div
                     style={{ boxShadow: "0px 0px 5px #000000" }}
-                    className="flex items-center justify-center text-2xl p-3 w-[124px] h-[124px] aspect-square mb-3 text-white rounded-full bg-[#A6152D]"
+                    className="flex items-center justify-center text-2xl p-3 w-[124px] h-[124px] aspect-square mb-3 text-white rounded-full bg-[#fff]"
                   >
                     {clickedUserData?.login[0].toUpperCase()}
                   </div>
@@ -64,7 +64,7 @@ export default function ChatRoom({
                   <div className="mb-3">
                     {clickedUserData?.name || clickedUserData?.login}
                   </div>
-                  <div className="font-bold text-[#A6152D] text-center">
+                  <div className="font-bold text-[#fff] text-center">
                     {clickedUserData?.bio}
                   </div>
                   <div className="font-bold text-gray-500 text-center">

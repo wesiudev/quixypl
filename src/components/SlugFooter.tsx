@@ -2,7 +2,6 @@ import Link from "next/link";
 import Discord from "./Discord";
 import Image from "next/image";
 import { polishToEnglish } from "../../utils/polishToEnglish";
-import Hero from "./Hero";
 
 /**
  * @function SlugFooter

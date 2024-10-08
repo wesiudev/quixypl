@@ -82,7 +82,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
       {(source?.chat || source?.messages > 0) && (
         <button
           onClick={() => handleSendMessage()}
-          className="w-24 aspect-square h-24 text-2xl p-3 bg-[#A6152D] text-white font-bold flex items-center justify-center"
+          className="w-24 aspect-square h-24 text-2xl p-3 bg-[#fff] text-white font-bold flex items-center justify-center"
         >
           <BiSend />
         </button>
@@ -94,14 +94,14 @@ const MessageInput: React.FC<MessageInputProps> = ({
         source?.messages === 0 && (
           <Link
             href="/premium"
-            className="h-24 text-sm p-3 bg-[#A6152D] text-white font-bold flex items-center justify-center"
+            className="h-24 text-sm p-3 bg-[#fff] text-white font-bold flex items-center justify-center"
           >
             <BiTrophy className="text-yellow-400 mr-2" />{" "}
             <div className="w-max">Wykup Dostęp</div>
           </Link>
         )}
       {(!source?.bio || !source?.name || !source?.age) && (
-        <button className="h-24 w-max text-sm p-3 bg-[#A6152D] text-white font-bold flex items-center justify-center">
+        <button className="h-24 w-max text-sm p-3 bg-[#fff] text-white font-bold flex items-center justify-center">
           <FaUsers className="text-yellow-400 mr-2" />
           <div className="w-max">Uzupełnij profil</div>
         </button>

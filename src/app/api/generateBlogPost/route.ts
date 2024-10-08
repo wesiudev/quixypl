@@ -1,4 +1,4 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createChat } from "completions";
 
 export async function GET(req: NextRequest) {
@@ -6,12 +6,12 @@ export async function GET(req: NextRequest) {
 
   const chat = createChat({
     apiKey: "sk-proj-m5F97TxvGplJe3a2yfloT3BlbkFJG1TEpMpZ3ms6QfONLsMT",
-    model: "gpt-3.5-turbo",
+    model: "gpt-4",
   });
 
   await chat.sendMessage("Ping");
   const response = await chat.sendMessage(
-    `Generujesz posta na bloga, przykład podany pod kątem długości, prosze, nie sugeruj się schematem pisania i utwórz piękny post pod kątem ${topic}, od któego rozpocznie się generacja posta.`,
+    `Generujesz posta na bloga, przykład podany pod kątem długości, nie sugeruj się podanym kontentem i utwórz post na temat ${topic}.`,
     {
       expect: {
         examples: [

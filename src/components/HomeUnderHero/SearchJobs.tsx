@@ -4,7 +4,7 @@ export default function SearchJobs() {
   return (
     <div className="flex flex-col">
       <h2
-        style={{ textShadow: "0px 2px 2px #000000" }}
+        style={{ textShadow: "2px 2px 2px #000000" }}
         className="text-cta mb-6 text-4xl lg:text-6xl font-coco font-extrabold"
       >
         <a href="/praca-zdalna">Quixy Talent&trade;</a>

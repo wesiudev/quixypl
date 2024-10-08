@@ -20,7 +20,8 @@ export default function Register() {
     email: "",
     type: "",
   });
-  const [seek, setSeek] = useState(false);
+  const [configured, setConfigured] = useState(false);
+  const [seek, setSeek] = useState<any>(false);
   const [isLoading, setLoading] = useState(false);
   function createAccount() {
     setLoading(true);
@@ -74,6 +75,7 @@ export default function Register() {
               },
             ],
             seek: seek === true || seek === false ? seek : "ask",
+            configured: configured,
           });
           toastUpdate("Konto utworzone pomyślnie!", id, "success");
           router.push("/dashboard");
@@ -111,7 +113,20 @@ export default function Register() {
               step={step}
               seek={seek}
               setSeek={setSeek}
+              setConfigured={setConfigured}
             />
+            <button
+              onClick={() => {
+                setStep(1);
+                setSeek("ask");
+              }}
+              className={`text-cta mt-4 text-xl max-w-sm font-gotham ${
+                seek === "ask" && "underline"
+              }`}
+              style={{ textShadow: "2px 2px 2px black" }}
+            >
+              Chcę skorzystać z usług AI
+            </button>
           </>
         )}
         {step === 2 && (

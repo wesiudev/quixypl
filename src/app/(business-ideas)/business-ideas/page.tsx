@@ -53,7 +53,8 @@ export default async function Page() {
             <Link
               title="Sprawdź Nasz Nowy Generator Pomysłów Na Biznes"
               href="#generator"
-              className="bg-[#126b91] text-white p-1.5 px-2 rounded-lg font-gotham"
+              style={{ textShadow: "2px 2px 2px black" }}
+              className="bg-cta text-white p-1.5 px-2 rounded-lg font-gotham"
             >
               Wypróbuj za darmo
             </Link>
