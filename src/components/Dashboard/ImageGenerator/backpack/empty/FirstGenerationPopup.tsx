@@ -76,7 +76,7 @@ export default function FirstGenerationPopup(props: FirstGenerationPopupProps) {
         };
 
         // Get user history and generated images with safety checks
-        const history = user?.history ? [...user.history] : [];
+        const history = user?.history ? [...user?.history] : [];
         const generatedImages = user?.generatedImages || [];
 
         // Update the user's image collection in Firestore

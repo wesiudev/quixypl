@@ -13,7 +13,7 @@ export default function UrlConfig({
     <div>
       <h2 className="font-bold mt-6 text-xl text-zinc-800 drop-shadow-xl shadow-black">
         Link do aktualności (np.
-        https://quixy.pl/blog/Quixy--jest-juz-w-internecie)
+        https://quixy.pl/blog/quixy-jest-juz-w-internecie)
       </h2>
       <div className="flex items-center">
         <h2 className="text-lg">https://quixy.pl/blog/</h2>{" "}

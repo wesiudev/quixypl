@@ -26,10 +26,10 @@ export default function GoogleAuthButton({
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const user = result.user;
         createUser({
-          uid: user.uid,
-          name: user.displayName,
-          email: user.email,
-          photoURL: user.photoURL,
+          uid: user?.uid,
+          name: user?.displayName,
+          email: user?.email,
+          photoURL: user?.photoURL,
           totalSpent: 0,
           totalReceived: 0,
           tokens: 3,
@@ -50,7 +50,7 @@ export default function GoogleAuthButton({
           ],
           seek: seek === true || seek === false ? seek : "ask",
         });
-        sendVerificationEmail(user.email, user.uid).then(() => {
+        sendVerificationEmail(user?.email, user?.uid).then(() => {
           router.push(`${process.env.NEXT_PUBLIC_URL}/dashboard`);
         });
       })

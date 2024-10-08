@@ -41,9 +41,7 @@ export default function Unsaved({
         } `}
       >
         <div className="text-white text-sm pr-3">
-          <b>Uwaga!</b> - Masz niezapisane zmiany
-        </div>
-        <div className="flex flex-col-reverse sm:flex-row items-center w-max">
+          <b>Uwaga!</b> - Masz niezapisane zmiany{" "}
           <button
             onClick={() => {
               getDocument("users", source?.uid).then((snapshot) => {
@@ -53,10 +51,12 @@ export default function Unsaved({
               setChangesWereMade(false);
               dispatch(set_modals({ ...modals, config: false }));
             }}
-            className="text-white px-6 pt-2 sm:pt-0 text-xs underline hover:no-underline"
+            className="text-white px-1 pt-2 sm:pt-0 text-xs underline hover:no-underline"
           >
             Cofnij
           </button>
+        </div>
+        <div className="flex flex-col-reverse sm:flex-row items-center w-max">
           <button
             onClick={() => {
               const history = source?.history ? [...source?.history] : [];
@@ -87,8 +87,7 @@ export default function Unsaved({
 
               setChangesWereMade(false);
             }}
-            style={{ textShadow: "2px 2px 2px black" }}
-            className="text-white text-xl rounded-xl bg-cta font-gotham px-6 py-2"
+            className="text-white text-sm rounded-lg bg-[green] font-gotham px-6 py-2"
           >
             Zapisz
           </button>

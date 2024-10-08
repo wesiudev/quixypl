@@ -7,7 +7,7 @@ export default async function Page() {
       <h1 className="text-4xl font-bold mb-[60px]">Użytkownicy</h1>
       <div className="grid grid-cols-4 w-full">
         {users.map((user: any, index: number) => (
-          <div key={index}>{user.email}</div>
+          <div key={index}>{user?.email}</div>
         ))}
       </div>
     </div>

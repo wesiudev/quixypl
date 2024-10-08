@@ -8,7 +8,6 @@ import ContentButton from "@/components/AdminComponents/ContentButton";
 import HtmlInput from "@/components/AdminComponents/HtmlInput";
 import { v4 as uuid } from "uuid";
 import {
-  createDraft,
   createProduct,
   deleteDraft,
   deleteProduct,

@@ -92,10 +92,10 @@ export default function HomePageGenerator({
           userData.email,
           userData.password
         ).then((res) => {
-          addDocument("users", res.user.uid, {
-            uid: res.user.uid,
+          addDocument("users", res.user?.uid, {
+            uid: res.user?.uid,
             name: "",
-            email: res.user.email,
+            email: res.user?.email,
             photoURL: "",
             totalSpent: 0,
             totalReceived: 0,
@@ -122,7 +122,7 @@ export default function HomePageGenerator({
           });
           toastUpdate("Sukces!", id, "success");
 
-          sendVerificationEmail(userData.email, res.user.uid).then(() => {
+          sendVerificationEmail(userData.email, res.user?.uid).then(() => {
             router.push(`${process.env.NEXT_PUBLIC_URL}/dashboard`);
           });
         });
@@ -257,7 +257,7 @@ export default function HomePageGenerator({
                 onClick={handleGenerateIdea}
               >
                 <div className="w-[250px] cursor-default absolute left-1/2 -translate-x-1/2 -top-[170%] p-2 rounded-2xl text-white bg-blue-500 font-bold -translate-y-[50px] group-hover:-translate-y-[0px] z-[-10] group-hover:z-[25] select-none opacity-0 group-hover:opacity-100 duration-150 ease-in-out">
-                  Wygeneruj pomysł na biznes, utwórz konto i odbierz 3💎
+                  Wygeneruj pomysł na biznes, utwórz konto i odbierz 💎3
                 </div>
                 <div className="absolute left-1/2 -translate-x-1/2 w-5 h-5 rotate-45 bg-blue-500 -top-[57%] cursor-default -translate-y-[50px] group-hover:-translate-y-[0px] z-[-10] group-hover:z-[24] select-none opacity-0 group-hover:opacity-100 duration-150 ease-in-out" />
                 Wypróbuj za darmo
@@ -325,7 +325,7 @@ export default function HomePageGenerator({
             </p>
             <div className="mt-3 text-sm text-gray-500 ">
               Zaloguj się by odebrać{" "}
-              <b className="text-primary">nowy pomysł na biznes</b> oraz 3💎 na
+              <b className="text-primary">nowy pomysł na biznes</b> oraz 💎3 na
               start
             </div>
           </div>

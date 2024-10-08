@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   }
   try {
     const users = await getUsers();
-    const user = users.find((user) => user.pseudo === pseudo);
+    const user = users.find((user) => user?.pseudo === pseudo);
     if (!user) {
       return NextResponse.json({ available: true });
     } else {

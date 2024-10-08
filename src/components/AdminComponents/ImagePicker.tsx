@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
-import { FaPlus, FaSignOutAlt } from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
 import { FaUpload } from "react-icons/fa6";
 export default function ImagePicker({
   handler,

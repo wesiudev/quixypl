@@ -29,7 +29,7 @@ export default function GenerateIdea({
   const [config, setConfig] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
   const [user] = useAuthState(auth);
-  const userData = useSelector((state: any) => state.user.user);
+  const userData = useSelector((state: any) => state.user?.user);
   const dispatch = useDispatch();
   const showError = (message: string) => {
     toast.error(<span>{message}</span>, {

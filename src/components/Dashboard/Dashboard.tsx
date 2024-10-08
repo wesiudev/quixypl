@@ -5,20 +5,24 @@ import Loading from "../../app/loading";
 import { useDispatch, useSelector } from "react-redux";
 import AccountHistory from "./ImageGenerator/dashboard/AccountHistory";
 import Image from "next/image";
-import { FaCog, FaUser, FaUserCog } from "react-icons/fa";
+import { FaClipboard, FaCog, FaCogs, FaUser } from "react-icons/fa";
 import { set_modals } from "@/redux/slices/modalsopen";
-import { useState } from "react";
 import Link from "next/link";
 import ProjectCard from "./ImageGenerator/dashboard/ProjectCard";
 import { IProject } from "@/types";
 import { FaCoins } from "react-icons/fa6";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function Dashboard() {
   moment.locale("pl");
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.user);
   const { modals } = useSelector((state: any) => state.modals);
-  const [emailInfo, setEmailInfo] = useState(false);
+
+  function copyToClipboard(text: string) {
+    navigator.clipboard.writeText(text);
+  }
   return (
     <>
       {user ? (
@@ -31,15 +35,12 @@ export default function Dashboard() {
                     Panel Użytkownika
                   </h1>
                   {!user?.verified && (
-                    <div className="bg-[#126b91] text-white p-3 font-gotham font-light mb-4 rounded-xl w-max max-w-[100%]">
+                    <div
+                      className="bg-white text-black p-3 font-coco mb-4 rounded-xl w-full"
+                      style={{ boxShadow: "inset 0px 0px 5px black" }}
+                    >
                       Witaj w Quixy!🔥 Wysłaliśmy wiadomość aktywującą konto na
                       podany adres e-mail - {user?.email}{" "}
-                      <button
-                        onClick={() => setEmailInfo(true)}
-                        className="underline"
-                      >
-                        zamknij
-                      </button>
                     </div>
                   )}
                   <div
@@ -50,7 +51,7 @@ export default function Dashboard() {
                       onClick={() => dispatch(set_modals({ config: true }))}
                       className="hover:opacity-80 duration-200 group"
                     >
-                      {user.photoURL && (
+                      {user?.photoURL && (
                         <div className="rounded-full h-24 w-24 overflow-hidden relative">
                           <Image
                             src={user?.photoURL}
@@ -62,7 +63,7 @@ export default function Dashboard() {
                           />
                         </div>
                       )}
-                      {!user.photoURL && (
+                      {!user?.photoURL && (
                         <div
                           style={{ boxShadow: "inset 0px 0px 8px black" }}
                           className="bg-[#126b91] rounded-full h-24 w-24 text-white flex items-center justify-center"
@@ -87,8 +88,24 @@ export default function Dashboard() {
                             }
                             className="flex items-center text-black"
                           >
-                            <FaCog className="text-xl mr-1" />
-                            Moje konto
+                            {user?.seek && user?.seek !== "ask" && (
+                              <>
+                                <FaCog className="text-xl mr-1 text-primary" />
+                                Moje konto
+                              </>
+                            )}
+                            {!user?.seek && user?.seek !== "ask" && (
+                              <>
+                                <FaUser className="text-xl mr-1 text-primary" />
+                                Panel Klienta
+                              </>
+                            )}
+                            {user?.seek === "ask" && (
+                              <>
+                                <FaCogs className="text-xl mr-1 text-primary" />
+                                Skonfiguruj konto
+                              </>
+                            )}
                           </button>
                         </div>
                       )}
@@ -102,10 +119,10 @@ export default function Dashboard() {
                         <h3 className="text-primary text-xl font-gotham font-bold">
                           {user?.name ? user?.name : "Nie podano"}
                         </h3>
-                        <h3 className="text-black text-lg">
+                        <h3 className="text-black text-lg font-gotham">
                           {user?.title && user?.title}
                         </h3>
-                        <h3 className="text-black text-lg">
+                        <h3 className="text-black text-lg font-light font-gotham">
                           {user?.pseudo && user?.pseudo}
                         </h3>
 
@@ -122,8 +139,24 @@ export default function Dashboard() {
                           }
                           className="flex items-center text-black mt-2"
                         >
-                          <FaCog className="text-primary text-2xl mr-1" />
-                          Moje konto
+                          {user?.seek && user?.seek !== "ask" && (
+                            <>
+                              <FaCog className="text-xl mr-1 text-primary" />
+                              Moje konto
+                            </>
+                          )}
+                          {!user?.seek && user?.seek !== "ask" && (
+                            <>
+                              <FaUser className="text-xl mr-1 text-primary" />
+                              Panel Klienta
+                            </>
+                          )}
+                          {user?.seek === "ask" && (
+                            <>
+                              <FaCogs className="text-xl mr-1 text-primary" />
+                              Skonfiguruj konto
+                            </>
+                          )}
                         </button>
                       </div>
                     )}
@@ -165,39 +198,64 @@ export default function Dashboard() {
                         </h3>
                       </div>
                     )}
-                    {!user?.title && (
-                      <div>
-                        <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
-                          Unikalny link
-                        </h2>
 
-                        <h3
-                          className={`text-black text-lg font-gotham font-light`}
-                        >
-                          {user?.pseudo ? user?.pseudo : "Brak..."}
-                        </h3>
-                      </div>
-                    )}
-                    <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
-                      Unikalna nazwa
-                    </h2>
-                    <h3 className="text-black text-lg font-gotham font-light">
+                    <div>
+                      <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
+                        Unikalny link
+                      </h2>
+                      <h3
+                        className={`text-black text-lg font-gotham font-light`}
+                      >
+                        {user?.pseudo ? user?.pseudo : "Brak..."}
+                      </h3>
+                    </div>
+
+                    <h3 className="text-black text-lg font-coco font-bold">
                       {user?.pseudo && (
-                        <Link
-                          className="text-primary"
-                          href={`https://quixy.pl/${
-                            user?.seek && user?.seek !== "ask"
-                              ? "talent"
-                              : "client"
-                          }/${user?.pseudo}`}
-                        >
-                          {user?.pseudo &&
-                            `https://quixy.pl/${
+                        <div className="flex flex-col">
+                          <Link
+                            className="text-black"
+                            href={`https://quixy.pl/${
                               user?.seek && user?.seek !== "ask"
                                 ? "talent"
                                 : "client"
                             }/${user?.pseudo}`}
-                        </Link>
+                          >
+                            {user?.pseudo &&
+                              `https://quixy.pl/${
+                                user?.seek && user?.seek !== "ask"
+                                  ? "talent"
+                                  : "client"
+                              }/${user?.pseudo}`}
+                          </Link>
+                          <div className="flex items-center mt-2">
+                            <button
+                              onClick={() => {
+                                copyToClipboard(
+                                  `https://quixy.pl/${
+                                    user?.seek && user?.seek !== "ask"
+                                      ? "talent"
+                                      : "client"
+                                  }/${user?.pseudo}`
+                                );
+                                toast.success("Skopiowano pomyślnie!", {
+                                  position: "top-right",
+                                  autoClose: 5000,
+                                  hideProgressBar: false,
+                                  closeOnClick: true,
+                                  pauseOnHover: true,
+                                  draggable: true,
+                                  progress: undefined,
+                                });
+                              }}
+                              className="relative flex items-center"
+                              title="Skopiuj"
+                            >
+                              <FaClipboard className="mr-2 text-2xl text-white bg-cta p-1 rounded-md" />{" "}
+                              <div className="text-sm">Skopiuj link</div>
+                            </button>
+                          </div>
+                        </div>
                       )}
                       {!user?.pseudo && user?.seek && (
                         <div>
@@ -207,7 +265,7 @@ export default function Dashboard() {
                               dispatch(set_modals({ ...modals, config: true }))
                             }
                           >
-                            Ustaw swoją unikalną nazwę talentu,
+                            Ustaw swoją nazwę talentu,
                           </button>{" "}
                           aby otrzymać unikalny link, dzięki któremu dotrzesz do
                           pracodawców.
@@ -224,7 +282,7 @@ export default function Dashboard() {
                                 )
                               }
                             >
-                              Ustaw swoją unikalną nazwę klienta,
+                              Ustaw swoją nazwę klienta,
                             </button>{" "}
                             aby otrzymać unikalny link, dzięki któremu dotrzesz
                             do ekspertów poszukujących pracy.
@@ -265,7 +323,7 @@ export default function Dashboard() {
                         Wielkość firmy
                       </h2>
                     )}
-                    {(user?.seek || user?.seek !== "ask") && (
+                    {user?.seek && user?.seek !== "ask" && (
                       <div className="-ml-1 flex items-center flex-wrap">
                         {user?.preferences?.length === 0 && (
                           <div className="ml-1 text-lg text-black font-light font-gotham">
@@ -339,7 +397,7 @@ export default function Dashboard() {
                   } text-3xl lg:text-5xl text-black drop-shadow-lg font-gotham mb-3`}
                 >
                   {user?.seek && user?.seek !== "ask" && "Projekty"}
-                  {!user?.seek && user?.seek !== "ask" && "Oferty pracy"}
+                  {!user?.seek && user?.seek !== "ask" && "Twoje oferty pracy"}
                 </h2>
                 {user?.projects?.length === 0 &&
                   user?.seek !== "ask" &&
@@ -356,19 +414,36 @@ export default function Dashboard() {
                       </button>{" "}
                     </div>
                   )}
-                {user?.projects?.length === 0 &&
+                {!user?.projects?.length &&
                   user?.seek !== "ask" &&
                   !user?.seek && (
-                    <div className="text-lg text-black font-light">
+                    <div className="text-lg text-black font-light font-coco">
                       Nie dodano żadnych ofert pracy - przeprowadź ⚡
-                      <b>Szybką Rekrutację</b>{" "}
+                      <b>Szybką Rekrutację</b>
                       <button
                         onClick={() =>
                           dispatch(set_modals({ ...modals, config: true }))
                         }
-                        className="text-primary hover:no-underline underline"
+                        className="text-primary font-bold hover:no-underline underline flex items-center"
                       >
-                        klikając tutaj
+                        {user?.seek && user?.seek !== "ask" && (
+                          <>
+                            <FaCog className="text-xl mr-1 text-primary" />
+                            Moje konto
+                          </>
+                        )}
+                        {!user?.seek && user?.seek !== "ask" && (
+                          <>
+                            <FaUser className="text-xl mr-1 text-primary" />
+                            Panel Klienta
+                          </>
+                        )}
+                        {user?.seek === "ask" && (
+                          <>
+                            <FaCogs className="text-xl mr-1 text-primary" />
+                            Skonfiguruj konto
+                          </>
+                        )}
                       </button>{" "}
                     </div>
                   )}

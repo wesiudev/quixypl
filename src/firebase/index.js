@@ -443,11 +443,17 @@ export async function getProducts() {
   return querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 }
 export async function addJobOffer(jobOffer) {
-  const jobOfferDocRef = doc(collection(db, "offers"));
+  const jobOfferDocRef = doc(collection(db, "offers"), jobOffer.id);
   await setDoc(jobOfferDocRef, {
     ...jobOffer,
     createdAt: Date.now(),
   });
+  return jobOfferDocRef;
+}
+
+export async function updateJobOffer(jobOfferId, jobOffer) {
+  const jobOfferDocRef = doc(db, "offers", jobOfferId);
+  await updateDoc(jobOfferDocRef, jobOffer);
   return jobOfferDocRef;
 }
 

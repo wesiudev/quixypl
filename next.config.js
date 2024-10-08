@@ -9,6 +9,16 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "cdn.discordapp.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "discord.com",
+        port: "",
+      },
+      {
+        protocol: "https",
         hostname: "firebasestorage.googleapis.com",
         port: "",
       },

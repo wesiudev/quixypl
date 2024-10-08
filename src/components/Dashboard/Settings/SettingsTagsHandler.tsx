@@ -36,6 +36,10 @@ export default function TagsHandler() {
               user?.seek !== "ask" &&
               "Specjalizacje działalności"}
           </h1>
+          <p className="text-black font-gotham font-light sm:text-base">
+            Oferta twojej działalności trafi do poszczególnych widoków naszej
+            aplikacji
+          </p>
           <div className="mt-2 w-full grid grid-cols-2 sm:grid-cols-3 gap-2 text-white font-bold text-sm md:text-lg">
             <button
               onClick={() => setTagsOpenLevel(0)}
@@ -72,8 +76,8 @@ export default function TagsHandler() {
       )}
       <div className="mt-2 font-bold text-sm text-black ">
         {user?.tags?.length === 0 && "Czym się zajmujesz?"}{" "}
-        {user?.tags?.length > 0 && tagsOpenLevel === 0 && "Widok Prosty"}
-        {user?.tags?.length > 0 && tagsOpenLevel === 1 && "Widok Rozszerzony"}
+        {user?.tags?.length > 0 && tagsOpenLevel === 0 && "Wybrane Stanowiska"}
+        {user?.tags?.length > 0 && tagsOpenLevel === 1 && "Kategorie Stanowisk"}
         {user?.tags?.length > 0 &&
           user?.seek &&
           user?.seek !== "ask" &&
@@ -83,7 +87,7 @@ export default function TagsHandler() {
           !user?.seek &&
           user?.seek !== "ask" &&
           tagsOpenLevel === 2 &&
-          "Obecność działalności w strukturze strony"}
+          "Profil firmy w strukturze strony"}
         <div
           className={`${
             tagsOpenLevel === 0 ? "flex flex-row flex-wrap -ml-2" : ""
@@ -217,7 +221,7 @@ export default function TagsHandler() {
         <>
           {user?.seek && user?.seek !== "ask" && (
             <div className="font-gotham font-bold text-black">
-              Dodaj stanowisko(a)
+              Szukane stanowisk(a)
             </div>
           )}
           {!user?.seek && user?.seek !== "ask" && (
@@ -285,7 +289,7 @@ export default function TagsHandler() {
                     url: polishToEnglish(item.title),
                   })
                 }
-                className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-2"
+                className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-1 text-sm sm:text-base hover:bg-opacity-80"
                 key={i}
               >
                 {item.title}
@@ -307,7 +311,7 @@ export default function TagsHandler() {
                             url: polishToEnglish(cat.title),
                           })
                         }
-                        className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-2"
+                        className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-1 text-sm sm:text-base hover:bg-opacity-80"
                         key={i}
                       >
                         {cat.title}
@@ -425,7 +429,7 @@ export default function TagsHandler() {
                                     setSlug({ title: "", url: "" });
                                   }
                                 }}
-                                className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-2"
+                                className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-1 text-sm sm:text-base hover:bg-opacity-80"
                                 key={i}
                               >
                                 {job.title}

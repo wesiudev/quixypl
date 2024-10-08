@@ -52,8 +52,8 @@ export default function Register() {
           userData.email,
           userData.password
         ).then((userCredential) => {
-          addDocument("users", userCredential.user.uid, {
-            uid: userCredential.user.uid,
+          addDocument("users", userCredential.user?.uid, {
+            uid: userCredential.user?.uid,
             name: "",
             email: userData.email,
             photoURL: "",

@@ -12,9 +12,9 @@ export default function AccountHistory() {
         <h1 className="mt-8 2xl:mt-0 text-3xl text-black  mb-6">
           Historia konta
         </h1>
-        {user.history?.length && (
+        {user?.history?.length && (
           <div className="max-h-[30vh] overflow-y-scroll">
-            {user.history
+            {user?.history
               ?.slice()
               .reverse()
               .map((item: any, idx: number) => (

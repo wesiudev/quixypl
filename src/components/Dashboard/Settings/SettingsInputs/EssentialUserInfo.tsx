@@ -44,7 +44,10 @@ export default function EssentialUserInfo({
         <div className={`relative w-full bg-white px-4 sm:px-6`}>
           <div className="grid grid-cols-2 mt-6 gap-4">
             <div className="flex flex-col">
-              <label className="text-lg text-black">Imię</label>
+              <label className="text-lg text-black">
+                {source?.seek && "Imię"}
+                {!source?.seek && "Nazwa Firmy"}
+              </label>
               <input
                 type="text"
                 value={source?.name}
@@ -66,7 +69,9 @@ export default function EssentialUserInfo({
                   setChangesWereMade(true);
                 }}
                 className="border border-primary rounded-md p-2 text-black  font-light"
-                placeholder="np. Młodszy Księgowy"
+                placeholder={`np. ${source?.seek ? "Młodszy Księgowy" : ""}${
+                  !source?.seek && "Project Manager"
+                }`}
               />
             </div>
           </div>

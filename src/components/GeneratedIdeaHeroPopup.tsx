@@ -94,7 +94,7 @@ export default function GeneratedIdeaHeroPopup({
             </p>
             <p className="mt-3 text-sm text-gray-500 ">
               Zaloguj się by odebrać{" "}
-              <b className="text-primary">nowy pomysł na biznes</b> oraz 3💎 na
+              <b className="text-primary">nowy pomysł na biznes</b> oraz 💎3 na
               start
             </p>
           </div>

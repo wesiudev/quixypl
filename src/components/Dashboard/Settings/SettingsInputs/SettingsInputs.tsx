@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { v4 as uuid } from "uuid";
 import { addJobOffer, storage, updateUser } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -12,6 +12,7 @@ import Image from "next/image";
 import EssentialUserInfo from "./EssentialUserInfo";
 import SettingsHeader from "./SettingsHeader";
 import { toast } from "react-toastify";
+
 import {
   FaChevronLeft,
   FaChevronRight,
@@ -23,8 +24,8 @@ import SetClientAccountType from "@/components/SetClientAccountType";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 import jobs from "../../../../../public/14.09.2024.json";
-import { v4 as uuidv4 } from "uuid";
 import { IProject } from "@/types";
+import moment from "moment";
 export default function UserEditDashboard({
   source,
   changesWereMade,
@@ -33,6 +34,7 @@ export default function UserEditDashboard({
   isFullscreen,
   setIsFullscreen,
   setError,
+  scrollIntoView,
 }: {
   source: any;
   changesWereMade: any;
@@ -41,11 +43,10 @@ export default function UserEditDashboard({
   isFullscreen: any;
   setIsFullscreen: any;
   setError: any;
+  scrollIntoView: any;
 }) {
   const dispatch = useDispatch();
   const [isNewProject, setIsNewProject] = useState(false);
-  const [days, setDays] = useState(1);
-  const [price, setPrice] = useState(15.99);
   const [configurationOpen, setConfigurationOpen] = useState(false);
   const [slug, setSlug] = useState({ title: "", url: "" });
   const [category, setCategory] = useState({ title: "", url: "" });
@@ -63,13 +64,13 @@ export default function UserEditDashboard({
   // Aktualizacja ceny w oparciu o liczbę dni
   const handleDaysChange = (e: any) => {
     const selectedDays = e.target.value;
-    setDays(selectedDays);
+    setProject({ ...project, days: selectedDays });
     // Przykładowe przeliczenie ceny: baza + 0.5 jednostki za każdy dzień
-    setPrice(15.99 + selectedDays * 8.42);
+    setProject({ ...project, price: 15.99 + selectedDays * 8.42 });
   };
 
   const handleRecruitmentStart = async () => {
-    const hasEnoughTokens = source?.tokens >= price;
+    const hasEnoughTokens = source?.tokens >= project?.price;
     const isProjectValid = isProjectDataValid(project);
 
     if (!isProjectValid) {
@@ -98,7 +99,7 @@ export default function UserEditDashboard({
   // Helper function to save the project as a draft
   const saveDraftProject = async () => {
     const updatedProjects = updateProjectsList(source.projects, project, {
-      isPaid: true,
+      isPaid: false,
       isRecruitment: true,
     });
 
@@ -112,10 +113,14 @@ export default function UserEditDashboard({
   // Helper function to proceed with the recruitment when user has enough tokens
   const proceedWithRecruitment = async () => {
     const updatedProjects = updateProjectsList(source.projects, project, {
+      ...project,
       isPaid: true,
       isRecruitment: true,
+      expirationTime: moment().add(project.days, "days").valueOf(),
+      type: "quick",
+      companySize: getCompanySize(),
     });
-    const updatedTokens = source.tokens - price;
+    const updatedTokens = source.tokens - project?.price;
 
     await addJobOffer({
       ...project,
@@ -158,7 +163,9 @@ export default function UserEditDashboard({
 
   // Helper function to get the company size or fallback
   const getCompanySize = () => {
-    return source?.preferences[0] || "Brak danych...";
+    return source?.preferences?.length > 0
+      ? source?.preferences[0]
+      : "Brak danych...";
   };
 
   // Helper function to reset the project form
@@ -210,61 +217,45 @@ export default function UserEditDashboard({
     setChangesWereMade(true);
   };
   const [isUploading, setUploading] = useState(false);
-  const [uploadCount, setUploadCount] = useState<number | undefined>();
-  const [project, setProject] = useState<{ images: any[] }>({ images: [] });
-  const [isImageDescriptionOpen, setImageDescriptionOpen] =
-    useState<number>(-1);
-
-  const { modals } = useSelector((state: any) => state.modals);
-
-  async function uploadImages(files: File[]) {
+  const [uploadCount, setUploadCount] = useState();
+  const [project, setProject] = useState<any>({
+    images: [],
+    days: 1,
+    price: 24.41,
+  });
+  async function uploadImages(files: any) {
     setUploadCount(files.length);
     setUploading(true);
-
-    try {
-      const uploadedImages = await uploadMultipleFiles(files);
-      const updatedImages = mergeProjectImages(project.images, uploadedImages);
-
-      setProject({ ...project, images: updatedImages });
-    } catch (error) {
-      console.error("Image upload failed", error);
-    } finally {
-      setUploading(false);
-    }
-  }
-
-  // Helper function to upload multiple files and return uploaded image data
-  const uploadMultipleFiles = async (files: File[]) => {
-    const localImagesArray: any[] = [];
-
-    const uploadFile = async (file: File) => {
+    const localImagesArray: any = [];
+    const uploadFile = async (file: any) => {
+      const randId = uuid();
+      const imageRef = ref(storage, randId);
       try {
-        const imageData = await uploadSingleFile(file);
-        localImagesArray.push(imageData);
+        await uploadBytes(imageRef, file);
+        const url = await getDownloadURL(imageRef);
+        const data = {
+          src: url,
+        };
+        localImagesArray.push(data);
       } catch (error) {
-        console.error("Error uploading file", file.name, error);
+        return;
       }
     };
-
-    await Promise.all(files.map(uploadFile));
-    return localImagesArray;
-  };
-
-  // Helper function to upload a single file and return its URL
-  const uploadSingleFile = async (file: File) => {
-    const randId = uuid();
-    const imageRef = ref(storage, randId);
-
-    await uploadBytes(imageRef, file);
-    const url = await getDownloadURL(imageRef);
-
-    return { src: url };
-  };
-
-  // Helper function to merge project images with newly uploaded images
-  const mergeProjectImages = (existingImages: any[], newImages: any[]) => {
-    return existingImages ? [...existingImages, ...newImages] : newImages;
-  };
+    const uploadPromises = files.map(uploadFile);
+    try {
+      await Promise.all(uploadPromises);
+      const updatedImages = project?.images
+        ? [...project?.images, ...localImagesArray]
+        : localImagesArray;
+      setProject({ ...project, images: updatedImages });
+      setUploading(false);
+    } catch (error) {
+      setUploading(false);
+      return;
+    }
+  }
+  const { modals } = useSelector((state: any) => state.modals);
+  const [isImageDescriptionOpen, setImageDescriptionOpen] = useState(-1);
   return (
     <>
       {isUploading && (
@@ -278,6 +269,7 @@ export default function UserEditDashboard({
           setError={setError}
           isFullscreen={isFullscreen}
           changesWereMade={changesWereMade}
+          user={source}
         />
         {!source?.configured && (
           <ChooseAccountType
@@ -336,6 +328,7 @@ export default function UserEditDashboard({
                       <button
                         onClick={() => {
                           setIsNewProject(true);
+                          scrollIntoView();
                         }}
                         style={{ textShadow: "2px 2px 2px black" }}
                         className="bg-cta text-white font-gotham p-2 rounded-md"
@@ -384,14 +377,17 @@ export default function UserEditDashboard({
                   )}
                   {isNewProject && (
                     <>
-                      <div className="p-6 lg:p-12 2xl:p-16 bg-gray-200 rounded-xl mt-3 font-coco">
+                      <div className="p-3 lg:p-6 2xl:p-12 bg-gray-200 rounded-xl mt-3 font-coco">
                         {source?.seek && source?.seek !== "ask" && (
                           <span className="text-3xl lg:text-5xl text-black font-gotham font-light mb-4">
                             Dodajesz projekt do profilu
                           </span>
                         )}
                         {!source?.seek && source?.seek !== "ask" && (
-                          <span className="underline text-3xl lg:text-5xl text-black font-gotham font-light">
+                          <span
+                            id="recruit"
+                            className="underline text-3xl lg:text-5xl text-black font-gotham font-light"
+                          >
                             Rekrutuj
                           </span>
                         )}
@@ -401,13 +397,17 @@ export default function UserEditDashboard({
                             <h1 className="text-base font-bold text-black ">
                               Stanowiska
                             </h1>
+                            <p className=" text-black font-gotham font-light sm:text-base">
+                              Twoja oferta pracy trafi do poszczególnych widoków
+                              naszej aplikacji
+                            </p>
                             <div className="mt-2 w-full grid grid-cols-2 sm:grid-cols-3 gap-2 text-white font-bold text-sm md:text-lg">
                               <button
                                 onClick={() => setTagsOpenLevel(0)}
                                 className={`bg-[#126b91] ${
                                   tagsOpenLevel === 0
                                     ? "bg-[#126b91]"
-                                    : "bg-opacity-80"
+                                    : "bg-opacity-80 hover:bg-opacity-95"
                                 } px-2 py-1.5 rounded-md`}
                               >
                                 Prosty
@@ -417,7 +417,7 @@ export default function UserEditDashboard({
                                 className={`bg-[#126b91] ${
                                   tagsOpenLevel === 1
                                     ? "bg-[#126b91]"
-                                    : "bg-opacity-80"
+                                    : "bg-opacity-80 hover:bg-opacity-95"
                                 } px-2 py-1.5 rounded-md`}
                               >
                                 Rozszerzony
@@ -427,7 +427,7 @@ export default function UserEditDashboard({
                                 className={`bg-[#126b91] ${
                                   tagsOpenLevel === 2
                                     ? "bg-[#126b91]"
-                                    : "bg-opacity-80"
+                                    : "bg-opacity-80 hover:bg-opacity-95"
                                 } px-2 py-1.5 rounded-md`}
                               >
                                 Całość
@@ -442,10 +442,10 @@ export default function UserEditDashboard({
                             "Kogo szukasz?"}{" "}
                           {project?.tags?.length > 0 &&
                             tagsOpenLevel === 0 &&
-                            "Widok Prosty"}
+                            "Wybrane Stanowiska"}
                           {project?.tags?.length > 0 &&
                             tagsOpenLevel === 1 &&
-                            "Widok Rozszerzony"}
+                            "Kategorie Stanowisk"}
                           {project?.tags?.length > 0 &&
                             tagsOpenLevel === 2 &&
                             "Twoja oferta w strukturze strony"}
@@ -587,7 +587,7 @@ export default function UserEditDashboard({
                             {!configurationOpen && (
                               <>
                                 <div className="font-gotham font-bold text-black">
-                                  Dodaj stanowisko(a)
+                                  Szukaj stanowisk(a)
                                 </div>
                               </>
                             )}
@@ -598,7 +598,7 @@ export default function UserEditDashboard({
                             )}
                             {slug?.title !== "" && category?.title === "" && (
                               <div className="text-black font-gotham flex flex-col">
-                                <div className="font-bold mb-1 bg-[#126b91] p-1 rounded-md px-2 text-white w-max max-w-[100%]">
+                                <div className="font-bold mb-1 bg-[#126b91] p-1 rounded-md text-white w-max max-w-[100%]">
                                   {slug.title}
                                 </div>
                                 <div className="font-bold">
@@ -608,7 +608,7 @@ export default function UserEditDashboard({
                             )}
                             {slug?.title !== "" && category?.title !== "" && (
                               <div className="text-black font-gotham flex flex-col">
-                                <div className="font-bold mb-1 bg-[#126b91] p-1 rounded-md px-2 text-white w-max max-w-[100%]">
+                                <div className="font-bold mb-1 bg-[#126b91] p-1 rounded-md text-white w-max max-w-[100%]">
                                   {category.title}
                                 </div>
                                 <div className="font-bold"></div>Wybierz
@@ -619,7 +619,7 @@ export default function UserEditDashboard({
                               {!configurationOpen && slug.title === "" && (
                                 <button
                                   onClick={() => setConfigurationOpen(true)}
-                                  className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+                                  className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80 rounded-lg duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
                                 >
                                   <FaPlus />
                                 </button>
@@ -631,7 +631,7 @@ export default function UserEditDashboard({
                                     onClick={() =>
                                       setCategory({ title: "", url: "" })
                                     }
-                                    className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+                                    className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80 rounded-lg duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
                                   >
                                     <FaChevronLeft />
                                   </button>
@@ -644,7 +644,7 @@ export default function UserEditDashboard({
                                       setSlug({ title: "", url: "" }),
                                         setConfigurationOpen(false);
                                     }}
-                                    className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+                                    className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80 rounded-lg duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
                                   >
                                     <FaChevronLeft />
                                   </button>
@@ -659,7 +659,7 @@ export default function UserEditDashboard({
                                           url: polishToEnglish(item.title),
                                         })
                                       }
-                                      className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-2"
+                                      className="hover:bg-opacity-80 duration-100 text-sm sm:text-base m-0.5 bg-[#126b91] rounded-lg text-white font-light p-1"
                                       key={i}
                                     >
                                       {item.title}
@@ -683,7 +683,7 @@ export default function UserEditDashboard({
                                                   ),
                                                 })
                                               }
-                                              className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-2"
+                                              className="hover:bg-opacity-80 duration-100 text-sm sm:text-base m-0.5 bg-[#126b91] rounded-lg text-white font-light p-1"
                                               key={i}
                                             >
                                               {cat.title}
@@ -807,7 +807,7 @@ export default function UserEditDashboard({
                                                             });
                                                           }
                                                         }}
-                                                        className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-2"
+                                                        className="hover:bg-opacity-80 duration-100 text-sm sm:text-base m-0.5 bg-[#126b91] rounded-lg text-white font-light p-1"
                                                         key={i}
                                                       >
                                                         {job.title}
@@ -868,8 +868,8 @@ export default function UserEditDashboard({
                                   <option value="Stawka miesięczna">
                                     Stawka miesięczna
                                   </option>
-                                  <option value="Stawka miesięczna">
-                                    &quot;Per Milestone&quot;
+                                  <option value="Per Milestone">
+                                    Per Milestone
                                   </option>
                                   <option value="Prowizja">Prowizja</option>
                                   <option value="Akcje i udziały">
@@ -944,7 +944,7 @@ export default function UserEditDashboard({
                             placeholder={`${
                               source?.seek && source?.seek !== "ask"
                                 ? "Jaka była twoja rola w projekcie?"
-                                : "Opisz obowiązki stanowiska na które rekrutujesz..."
+                                : "Opisz obowiązki stanowisk na które rekrutujesz..."
                             }`}
                             className="border border-primary rounded-md p-2 text-black  font-light w-full"
                           />
@@ -1079,8 +1079,8 @@ export default function UserEditDashboard({
                                   htmlFor="days-range"
                                   className="font-bold"
                                 >
-                                  Na ile dni chcesz dodać ofertę pracy? ({days}{" "}
-                                  dni)
+                                  Na ile dni chcesz dodać ofertę pracy? (
+                                  {project?.days} dni)
                                 </label>
                                 <div className="px-4">
                                   <input
@@ -1088,13 +1088,19 @@ export default function UserEditDashboard({
                                     type="range"
                                     min="1"
                                     max="30"
-                                    value={days}
-                                    onChange={handleDaysChange}
+                                    value={project?.days || 1}
+                                    onChange={(e: any) =>
+                                      setProject({
+                                        ...project,
+                                        days: e.target.value,
+                                        price: 15.99 + e.target.value * 8.42,
+                                      })
+                                    }
                                     className="w-full mt-2"
                                   />
                                 </div>
                                 <div className="text-lg font-semibold mt-2">
-                                  Cena: {price.toFixed(2)}💎
+                                  Cena: 💎{project?.price?.toFixed(2)}
                                 </div>
                               </div>
 
@@ -1116,7 +1122,7 @@ export default function UserEditDashboard({
                                   project?.time &&
                                   project?.desc &&
                                   project?.images?.length > 0 && (
-                                    <div>(💎{price.toFixed(2)})</div>
+                                    <div>(💎{project?.price?.toFixed(2)})</div>
                                   )}
                               </button>
                             </div>
@@ -1224,7 +1230,6 @@ const ChooseAccountType = (props: any) => {
                   ></div>
                 </div>
               </div>
-
               <span className="text-left font-gotham font-light text-black mt-4">
                 Szukam pracy zdalnej, chcę realizować projekty sam lub w grupie
               </span>

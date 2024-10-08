@@ -8,17 +8,22 @@ export default function SettingsHeader({
   isFullscreen,
   changesWereMade,
   setError,
+  user,
 }: {
   setIsFullscreen: any;
   isFullscreen: any;
   changesWereMade: any;
   setError: any;
+  user: any;
 }) {
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
   return (
     <div className="bg-[#126b91] text-base text-white font-bold p-3 sticky left-0 top-[-1px] z-[5000] flex items-center justify-between w-full">
-      <div className="ml-3">Skonfiguruj swoje konto</div>
+      <div className="ml-3">
+        {!user?.seek && user?.seek !== "ask" && "Witaj w panelu klienta"}
+        {(user?.seek || user?.seek === "ask") && "Skonfiguruj swoje konto"}
+      </div>
       <div className="flex">
         <button
           className="lg:hidden"

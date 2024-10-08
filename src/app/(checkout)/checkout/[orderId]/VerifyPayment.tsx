@@ -19,9 +19,9 @@ export default function VerifyPayment({
       await updateDocument(["realized"], [true], "orders", orderToCompare.id);
       await updateDocument(
         ["tokens"],
-        [user.tokens + orderToCompare.quantity],
+        [user?.tokens + orderToCompare.quantity],
         "users",
-        user.uid
+        user?.uid
       );
       setIsMounted(true);
     } catch (error) {

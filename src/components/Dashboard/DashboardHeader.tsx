@@ -1,6 +1,7 @@
 "use client";
 import {
   FaCog,
+  FaCogs,
   FaCoins,
   FaDollarSign,
   FaHome,
@@ -68,7 +69,7 @@ export default function DashboardHeader() {
                     width={224}
                     height={224}
                     alt="Logo serwisu quixy.pl"
-                    className="w-16 h-auto"
+                    className="w-12 h-auto"
                   />
                 </div>
               </div>
@@ -117,7 +118,7 @@ export default function DashboardHeader() {
             <h2 className="text-3xl flex w-full justify-between items-end mt-3">
               <div className="text-3xl text-primary font-gotham">Nawigacja</div>
               <div className="flex flex-col items-end">
-                <div className="text-black font-light text-base mt-6 lg:mt-0">
+                <div className="text-black font-light text-base">
                   Panel Użytkownika
                 </div>
                 <div className="mt-6 lg:mt-0 text-black font-gotham text-3xl">
@@ -253,8 +254,24 @@ export default function DashboardHeader() {
             onClick={() => dispatch(set_modals({ ...modals, config: true }))}
             className="flex items-center text-black font-coco mt-1 text-lg"
           >
-            <FaCog className="mr-2 text-primary text-2xl" />
-            Ustawienia konta
+            {user?.seek && user?.seek !== "ask" && (
+              <>
+                <FaCog className="text-2xl mr-2 text-primary" />
+                Moje konto
+              </>
+            )}
+            {!user?.seek && user?.seek !== "ask" && (
+              <>
+                <FaUser className="text-2xl mr-2 text-primary" />
+                Panel Klienta
+              </>
+            )}
+            {user?.seek === "ask" && (
+              <>
+                <FaCogs className="text-2xl mr-2 text-primary" />
+                Skonfiguruj konto
+              </>
+            )}
           </button>
           <button
             className="mt-2 text-black drop-shadow-xl"

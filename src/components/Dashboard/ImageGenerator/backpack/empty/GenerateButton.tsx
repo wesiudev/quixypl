@@ -23,7 +23,7 @@ export default function GenerateButton(props: any) {
   const { user } = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
   const handleImageGeneration = async (prompt: string) => {
-    if (user.tokens < 0.28) {
+    if (user?.tokens < 0.28) {
       return toast.error("Brak Quixies", {
         position: "bottom-right",
         autoClose: 5000,

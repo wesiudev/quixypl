@@ -307,7 +307,7 @@ export default async function Page({ params }: { params: any }) {
           {/* <h2 className="text-xl font-semibold text-primary mb-4">
           Najlepsi specjaliści {slug.title}
         </h2> */}
-          {/* display users with seek:true and user.categories includes slug.title, else display "no users, want to be first? man with black glasses italic" */}
+          {/* display users with seek:true and user?.categories includes slug.title, else display "no users, want to be first? man with black glasses italic" */}
         </div>
       </div>
       <SlugFooter

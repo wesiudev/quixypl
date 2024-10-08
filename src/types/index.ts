@@ -16,6 +16,9 @@ export interface IProject {
   type: "quick" | "normal";
   id: string;
   expirationTime: number;
+  companySize: string;
+  creationTime: number;
+  extraDays: number;
 }
 
 export type GenerateIdeaParams = {

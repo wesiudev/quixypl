@@ -1,6 +1,6 @@
 "use client";
 import UserEditDashboard from "./SettingsInputs/SettingsInputs";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Unsaved from "./SettingsInputs/Unsaved";
 import { updateUser } from "@/firebase";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,11 +14,17 @@ export default function Settings({
   setSource: any;
   data: any;
 }) {
+  const wrapperRef = useRef<any>(null);
   const [error, setError] = useState(false);
   const [changesWereMade, setChangesWereMade] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const { modals } = useSelector((state: any) => state.modals);
   const dispatch = useDispatch();
+  function scrollIntoView() {
+    setTimeout(() => {
+      wrapperRef.current.scrollTop += 500;
+    }, 50);
+  }
   return (
     <div className="overflow-x-hidden">
       <button
@@ -38,6 +44,7 @@ export default function Settings({
         }  bg-black hover:bg-opacity-60`}
       />
       <div
+        ref={wrapperRef}
         className={`fixed bg-white ${
           isFullscreen
             ? "w-screen lg:w-full h-screen"
@@ -50,6 +57,7 @@ export default function Settings({
       >
         <div className={`${error && "vibrate-screen"}`}>
           <UserEditDashboard
+            scrollIntoView={scrollIntoView}
             source={source}
             setSource={setSource}
             changesWereMade={changesWereMade}

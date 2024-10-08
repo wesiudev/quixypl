@@ -5,7 +5,7 @@ import { FaDivide } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 export default function IdeaGenerator({ setIdeaOpen }: { setIdeaOpen: any }) {
-  const userData = useSelector((state: any) => state.user.user);
+  const userData = useSelector((state: any) => state.user?.user);
   return (
     <>
       <div className="mt-2 rounded-lg flex flex-col bg-white w-full">

@@ -1,6 +1,7 @@
 "use client";
-import { addJobOffer, updateUser } from "@/firebase";
+import { addJobOffer, updateJobOffer, updateUser } from "@/firebase";
 import { set_modals } from "@/redux/slices/modalsopen";
+import { setUser } from "@/redux/slices/user";
 import { IProject, IProjectImage } from "@/types";
 import moment from "moment";
 import Image from "next/image";
@@ -39,7 +40,7 @@ export default function ProjectCard({ project }: { project: IProject }) {
     }).then(() => {
       addJobOffer({
         ...project,
-        expirationTime: Date.now() + project?.days * 24 * 60 * 60 * 1000,
+        expirationTime: moment().add(project.days, "days").valueOf(),
         isPaid: true,
         isRecruitment: true,
         type: "quick",
@@ -49,6 +50,50 @@ export default function ProjectCard({ project }: { project: IProject }) {
           : "Brak danych...",
       });
     });
+  }
+  async function bid() {
+    if (user?.tokens < 4.99) {
+      return toast.error("Niewystarczająca ilość Quixies", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      await updateUser(user?.uid, {
+        tokens: user?.tokens - 4.99,
+        projects: user?.projects.map((p: IProject) =>
+          p.id === project.id ? { ...p, extraDays: (p.extraDays || 0) + 1 } : p
+        ),
+      });
+      await updateJobOffer(project?.id, {
+        ...project,
+        extraDays: project?.extraDays || 0 + 1,
+      });
+      dispatch(
+        setUser({
+          ...user,
+          tokens: user?.tokens - 4.99,
+          projects: user?.projects.map((p: IProject) =>
+            p.id === project.id
+              ? { ...p, extraDays: (p.extraDays || 0) + 1 }
+              : p
+          ),
+        })
+      );
+      toast.success("Pomyślnie podbito ofertę", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   }
   return (
     <>
@@ -61,9 +106,11 @@ export default function ProjectCard({ project }: { project: IProject }) {
           {projectImages.map((item: IProjectImage, i: number) => (
             <div
               key={i}
-              className="w-auto max-h-[90vh] justify-center rotate-90 scale-110 sm:rotate-0 sm:scale-100 fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-[99999999999999]"
+              className="w-max max-w-[100%] justify-center fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-[99999999999999]"
             >
               <div className="relative mx-auto w-[100%]">
+                {project?.name}
+                {project?.companySize}
                 {item.desc && (
                   <div
                     className={`${
@@ -128,17 +175,21 @@ export default function ProjectCard({ project }: { project: IProject }) {
             width={224}
             height={224}
             alt={project?.images[0]?.desc || "Zdjęcie projektu"}
-            className="bg-white w-[100px] sm:w-[125px] md:w-[150px] h-auto rounded-lg border-2 border-primary sticky top-[93px] lg:top-24"
+            className="bg-white w-[100px] sm:w-[125px] md:w-[150px] h-auto rounded-lg border-2 border-primary sticky top-[111px] lg:top-24"
           />
         )}
         <div className="px-3 flex flex-col items-start justify-start text-left">
-          <h2 className="font-gotham text-3xl text-primary">{project?.name}</h2>
-          <div className="p-3">
+          <h2 className="font-coco italic font-light bg-cta p-3 rounded-lg text-white text-3xl">
+            {project?.name}
+          </h2>
+          <div className="p-1 sm:p-3">
             {!project?.isRecruitment && (
               <div className="text-lg font-gotham">Czas trwania</div>
             )}
             {project?.isRecruitment && (
-              <div className="text-lg font-gotham">Szczegóły oferty pracy</div>
+              <div className="text-sm font-gotham font-light">
+                Szczegóły oferty pracy
+              </div>
             )}
             {project?.isRecruitment && (
               <div className="flex flex-col mt-3">
@@ -148,12 +199,6 @@ export default function ProjectCard({ project }: { project: IProject }) {
                     ? "⚡Szybka Rekrutacja"
                     : "⭐Pełna Rekrutacja"}
                 </span>
-              </div>
-            )}
-            {project?.isRecruitment && (
-              <div className="font-light flex flex-col mt-3">
-                <b className="font-gotham">Czas trwania</b>
-                {project?.days} {project?.days === 1 ? "dzień" : "dni"}
               </div>
             )}
             {project?.isRecruitment && (
@@ -169,7 +214,7 @@ export default function ProjectCard({ project }: { project: IProject }) {
             <p className="max-w-lg font-gotham font-light">{project?.desc}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-2 gap-3">
-            {project?.images?.map((image, i) => (
+            {project?.images?.map((image: IProjectImage, i: number) => (
               <button
                 onClick={() => handleImageClick(i)}
                 key={i}
@@ -190,14 +235,49 @@ export default function ProjectCard({ project }: { project: IProject }) {
               </button>
             ))}
             {project?.isRecruitment && project?.isPaid && (
-              <div className="flex flex-col mt-3 font-gotham px-3">
-                <h2>Oferta pracy ważna do</h2>
-                {project?.expirationTime && (
-                  <span>
-                    {moment(project?.expirationTime).format("DD.MM.YYYY")}
-                  </span>
-                )}
+              <div className="flex flex-col font-gotham px-1 sm:px-3 mt-1">
+                <h2>Oferta pracy wygasa</h2>
+                <div className="flex items-center">
+                  {project?.expirationTime && (
+                    <span>
+                      <span
+                        style={{
+                          color:
+                            project?.expirationTime &&
+                            moment(project?.expirationTime)
+                              .add(project?.extraDays || 0, "days")
+                              .diff(moment(), "days") <= 3
+                              ? "red"
+                              : project?.expirationTime &&
+                                moment(project?.expirationTime)
+                                  .add(project?.extraDays || 0, "days")
+                                  .diff(moment(), "days") <= 7
+                              ? "blue"
+                              : "green",
+                        }}
+                      >
+                        {/* {moment(project?.expirationTime).format(
+                        "DD.MM.YYYY hh:mm:ss"
+                      )} */}
+                        {moment(project?.creationTime)
+                          .add(project?.days, "days")
+                          .add(project?.extraDays || 0, "days")
+                          .format("DD.MM.YYYY hh:mm:ss")}
+                      </span>
+                    </span>
+                  )}
+                </div>
+                <button
+                  onClick={() => bid()}
+                  className="mt-3 bg-primary hover:bg-opacity-80 text-white font-gotham text-lg p-2 rounded-lg"
+                  style={{ textShadow: "2px 2px 2px black" }}
+                >
+                  Podbij o 1 dzień (💎4.99)
+                </button>
               </div>
+            )}
+            {project?.isRecruitment && project?.isPaid && (
+              <div className="mt-4"></div>
             )}
           </div>
           {project?.isRecruitment && !project?.isPaid && (
@@ -221,7 +301,7 @@ export default function ProjectCard({ project }: { project: IProject }) {
               className="bg-cta text-white text-2xl p-3 font-gotham mt-4 rounded-xl hover:bg-opacity-80"
               style={{ textShadow: "2px 2px 2px black" }}
             >
-              Opublikuj {project?.price?.toFixed(2)}💎
+              Opublikuj (💎{project?.price?.toFixed(2)})
             </button>
           )}
         </div>
