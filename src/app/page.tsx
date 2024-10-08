@@ -1,12 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  FaEdit,
-  FaLongArrowAltRight,
-  FaStar,
-  FaUpload,
-  FaUser,
-} from "react-icons/fa";
+import { FaEdit, FaLongArrowAltRight, FaStar, FaUpload } from "react-icons/fa";
 
 import HomePageGenerator from "@/components/HomePageGenerator";
 import UserSearchWrapper from "@/components/HomeUnderHero/UserSearchWrapper";
@@ -226,7 +220,9 @@ export default async function Page() {
           ))}
         </Opportunities>
       </UserSearchWrapper>
-      <AboutQuixyTalent />
+      <div className="mx-auto px-4 sm:px-8 lg:px-12 2xl:px-[15vw]">
+        <AboutQuixyTalent />
+      </div>
       <div
         id="generator"
         className="mb-24 py-12 px-4 sm:px-8 lg:px-12 2xl:px-[15vw] bg-[#2E3C56]"
