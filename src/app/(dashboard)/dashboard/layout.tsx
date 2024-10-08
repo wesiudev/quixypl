@@ -21,7 +21,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             const users = await getUsers();
             dispatch(setUsers(users));
             const currentUser = users.find(
-              (anyUser) => anyuser?.uid === user?.uid
+              (anyUser) => anyUser?.uid === user?.uid
             );
             dispatch(setUser(currentUser));
           } catch (error) {
