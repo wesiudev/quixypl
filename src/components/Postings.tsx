@@ -520,7 +520,7 @@ export default function Postings() {
                   </div>
                 </div>
                 {!user?.seek && user?.seek !== "ask" && (
-                  <div className="gap-3 mt-12">
+                  <div className="gap-3">
                     <p className="text-sm text-[green] mb-2"></p>
                     {!configurationOpen && (
                       <>

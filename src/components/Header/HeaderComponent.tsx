@@ -2,10 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaChevronDown } from "react-icons/fa";
-import { useEffect, useState } from "react";
 
 export default function HeaderComponent({
-  destinations,
   showHeader,
   menuShow,
   hovered,
@@ -14,12 +12,8 @@ export default function HeaderComponent({
   handleMouseEnter,
   handleMouseLeave,
   width,
-  setHelperNeeded,
-  helperNeeded,
   setMenuShow,
-  setHovered,
 }: {
-  destinations: any;
   showHeader: boolean;
   menuShow: boolean;
   hovered: string;
@@ -28,24 +22,21 @@ export default function HeaderComponent({
   handleMouseEnter: Function;
   handleMouseLeave: Function;
   width: number;
-  setHelperNeeded: Function;
-  helperNeeded: boolean;
   setMenuShow: Function;
-  setHovered: Function;
 }) {
   return (
     <div
       style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
-      className={`sticky left-0 top-0 z-[99999999999999] bg-white flex flex-row items-center w-full px-3 lg:px-12 ${
+      className={`sticky left-0 top-0 z-[99999999999999] px-4 bg-white flex flex-row items-center justify-center w-full ${
         showHeader || menuShow || hovered || productsOpen
           ? "-translate-y-0"
           : "-translate-y-[100%]"
       } duration-300 font-coco`}
     >
       {/* Header Content */}
-      <div className="flex w-full items-center justify-between">
+      <div className="flex w-full items-center justify-between container">
         <div className="flex items-center">
-          <div className={`scale-[0.85] mr-1 w-max h-full group lg:hidden`}>
+          <div className={`mr-1 w-max group lg:hidden`}>
             <button
               onClick={() => {
                 if (!menuShow) {
@@ -59,10 +50,10 @@ export default function HeaderComponent({
                   setMenuShow(false);
                 }
               }}
-              title="Burger menu"
+              title="Menu z Pracą Zdalną"
               className={`${
                 (menuShow || productsOpen) && "opened"
-              } w-max text-sm sm:text-base drop-shadow-sm duration-100 cursor-default font-bold`}
+              } flex items-center h-full w-max text-sm sm:text-base drop-shadow-sm duration-100 cursor-pointer font-bold`}
             >
               <svg width="65" height="65" viewBox="0 0 100 100">
                 <path
@@ -78,7 +69,7 @@ export default function HeaderComponent({
             </button>
           </div>
           <Link
-            title="Idź do Centrum Biznesu w Internecie Quixy"
+            title="Platforma internetowa pracy zdalnej Quixy"
             href="/"
             className="flex flex-col font-light w-[60px]"
           >
@@ -86,7 +77,8 @@ export default function HeaderComponent({
               src="/assets/quixy-logo.png"
               width={224}
               height={224}
-              alt="LOGO Centrum Biznesu w Internecie Quixy"
+              alt="Poszukujesz pracy zdalnej?"
+              title="Zajmij się pracą zdalną!"
               className="w-full"
             />
           </Link>
@@ -95,7 +87,6 @@ export default function HeaderComponent({
           <div
             onMouseEnter={() => {
               width >= 1024 && handleMouseEnter("cat");
-              setHelperNeeded(true);
             }}
             onMouseLeave={() => {
               width >= 1024 && handleMouseLeave();
@@ -108,10 +99,16 @@ export default function HeaderComponent({
                 setProductsOpen(true);
                 setMenuShow(false);
               }}
-              title="Lista specjalistów "
-              className={`flex text-black items-center rounded-md ml-3 sm:ml-12 w-max py-[10px] px-[10px] drop-shadow-sm duration-500 cursor-default relative text-base`}
+              title="Lista specjalistów Pracy Zdalnej w Quixy"
+              className={`flex text-black items-center rounded-md ml-3 sm:ml-12 w-max py-[10px] px-[10px] drop-shadow-sm duration-500 relative text-base cursor-pointer`}
             >
-              Praca zdalna
+              <span
+                className={`relative z-50 ${
+                  hovered === "cat" && "bg-cta text-white"
+                } rounded-lg px-1.5 py-1`}
+              >
+                Praca zdalna
+              </span>
               <FaChevronDown
                 className={`${
                   hovered === "cat" ? "rotate-180" : ""
@@ -122,49 +119,57 @@ export default function HeaderComponent({
 
           <Link
             href="/business-ideas"
-            className="ml-3 text-base drop-shadow-sm shadow-black text-black "
+            className="group text-base drop-shadow-sm shadow-black text-black px-2 py-1 rounded-lg hover:bg-cta hover:text-white relative pr-6"
           >
-            Pomysły AI&trade;
+            <span className="relative z-50">Pomysły</span>
+            <div className="group-hover:text-white absolute right-[4px] -top-[1px] px-1 rounded-full text-black text-[10px] font-gotham">
+              AI
+            </div>
           </Link>
           <Link
             href="/register"
-            className="ml-3 text-base drop-shadow-sm shadow-black text-black "
+            className="group text-base drop-shadow-sm shadow-black text-black px-2 py-1 rounded-lg hover:bg-cta hover:text-white relative pr-6"
           >
-            Obrazy AI&trade;
+            <span className="relative z-50">Obrazy</span>
+
+            <div className="group-hover:text-white absolute right-[4px] -top-[1px] px-1 rounded-full text-black text-[10px] font-gotham">
+              AI
+            </div>
           </Link>
           <Link
             href="/marketplace"
-            className="ml-3 text-base drop-shadow-sm shadow-black text-black "
+            className="group text-base drop-shadow-sm shadow-black text-black px-2 py-1 rounded-lg hover:bg-cta hover:text-white relative pr-6"
           >
-            Rynek projektów&trade;
+            <span className="relative z-50">Rynek projektów</span>
+            <div className="group-hover:text-white absolute right-[4px] -top-[1px] px-1 rounded-full text-black text-[8px] font-gotham">
+              TM
+            </div>
           </Link>
           <Link
             href="/about"
-            className="ml-3 text-base drop-shadow-sm shadow-black text-black "
+            className="text-base drop-shadow-sm shadow-black text-black px-2 py-1 rounded-lg hover:bg-cta hover:text-white "
           >
             O nas
           </Link>
           <Link
             href="/contact"
-            className="ml-3 text-base drop-shadow-sm shadow-black text-black "
+            className="text-base drop-shadow-sm shadow-black text-black px-2 py-1 rounded-lg hover:bg-cta hover:text-white "
           >
             Kontakt
           </Link>
           <Link
             href="/blog"
-            className="ml-3 text-base drop-shadow-sm shadow-black text-black "
+            className="text-base drop-shadow-sm shadow-black text-black px-2 py-1 rounded-lg hover:bg-cta hover:text-white "
           >
             Blog
           </Link>
         </div>
-        <div className="w-max flex">
-          <Link
-            href="/register"
-            className={`w-max ml-2 py-[2px] px-[10px] text-lg rounded-md bg-cta hover:bg-opacity-90 text-white drop-shadow-sm duration-100 cursor-default font-bold`}
-          >
-            Rejestracja
-          </Link>
-        </div>
+        <Link
+          href="/register"
+          className={`w-max py-[2px] px-[10px] text-lg rounded-md bg-cta hover:bg-opacity-90 text-white drop-shadow-sm duration-100 cursor-pointer font-gotham font-light`}
+        >
+          Rejestracja
+        </Link>
       </div>
     </div>
   );

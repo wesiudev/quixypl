@@ -120,7 +120,7 @@ export default function Register() {
                 setStep(1);
                 setSeek("ask");
               }}
-              className={`text-cta mt-4 text-xl max-w-sm font-gotham ${
+              className={`bg-primary text-white p-1 mt-4 text-xl max-w-sm font-gotham ${
                 seek === "ask" && "underline"
               }`}
               style={{ textShadow: "2px 2px 2px black" }}

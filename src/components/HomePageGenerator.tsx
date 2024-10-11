@@ -223,14 +223,14 @@ export default function HomePageGenerator({
         <div className="flex flex-row w-full">
           <div className="flex flex-col md:flex-row w-full">
             <div className="flex flex-col w-full md:w-3/5 lg:w-4/5">
-              <h2 className="font-gotham text-3xl text-black font-bold drop-shadow-xl shadow-black p-6 lg:p-12">
+              <h2 className="font-gotham text-3xl text-black drop-shadow-xl shadow-black p-6 lg:p-12">
                 Twój nowy,{" "}
-                <b
-                  className="text-primary"
+                <span
+                  className="text-cta"
                   style={{ textShadow: "2px 2px 2px black" }}
                 >
                   unikalny
-                </b>{" "}
+                </span>{" "}
                 pomysł na biznes!
               </h2>
               <GenerateIdeaInputs setConfig={setConfig} config={config} />

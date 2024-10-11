@@ -4,15 +4,10 @@ import useWindowDimensions from "../useWidth";
 import ProductsWide from "./ProductsWide";
 import ProductsMobile from "./ProductsMobile";
 import HeaderComponent from "./HeaderComponent";
-import {
-  FaFileSignature,
-  FaImages,
-  FaList,
-  FaPlus,
-  FaRobot,
-  FaUsers,
-} from "react-icons/fa";
+import { FaFileSignature, FaImages, FaList, FaUsers } from "react-icons/fa";
+import { IoSparkles } from "react-icons/io5";
 import { FaFileArrowUp } from "react-icons/fa6";
+
 export const destinations = [
   {
     title: "FIRMA",
@@ -26,7 +21,6 @@ export const destinations = [
 
 export default function Header({ jobsList }: { jobsList: any[] }) {
   const { width } = useWindowDimensions();
-  const [helperNeeded, setHelperNeeded] = useState(true);
   const [hovered, setHovered] = useState("");
   const [productsOpen, setProductsOpen] = useState(false);
   const handleMouseEnter = (target: string) => {
@@ -81,7 +75,6 @@ export default function Header({ jobsList }: { jobsList: any[] }) {
       />
       {/* HEADER */}
       <HeaderComponent
-        destinations={destinations}
         showHeader={showHeader}
         menuShow={menuShow}
         hovered={hovered}
@@ -90,10 +83,7 @@ export default function Header({ jobsList }: { jobsList: any[] }) {
         handleMouseEnter={handleMouseEnter}
         handleMouseLeave={handleMouseLeave}
         width={width}
-        setHelperNeeded={setHelperNeeded}
-        helperNeeded={helperNeeded}
         setMenuShow={setMenuShow}
-        setHovered={setHovered}
       />
     </>
   );
@@ -101,9 +91,9 @@ export default function Header({ jobsList }: { jobsList: any[] }) {
 const secondMenuItems = [
   {
     urlLabel: "Wygeneruj pomysł",
-    url: "/register",
+    url: "/business-ideas",
     color: "#A6BFFD",
-    icon: FaRobot,
+    icon: IoSparkles,
   },
   {
     urlLabel: "Wygeneruj obraz",
@@ -126,7 +116,7 @@ const secondMenuItems = [
   {
     urlLabel: "Kup projekt",
     url: "/marketplace",
-    color: "green",
+    color: "#468CA9",
     icon: FaFileSignature,
   },
   {

@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 import { FaFileArrowUp } from "react-icons/fa6";
 import { Metadata } from "next";
+import { IoSparkles } from "react-icons/io5";
 
 export default function Page() {
   return (
@@ -62,63 +63,47 @@ export default function Page() {
                 ></div>
               ))}
             </div>
-            <div className="w-full px-6 grid grid-cols-2 gap-3 md:grid-cols-3 h-max">
-              {secondMenuItems.map((item, i) => (
-                <article key={i} className="w-full">
-                  {item && (
-                    <Link
-                      title={`Wypróbuj Quixy Talent™: ${item.urlLabel}`}
-                      aria-label={`Link to ${item.urlLabel}`}
-                      href={item.url}
-                      className={`aspect-square rounded-lg group w-full h-max text-white font-bold text-sm sm:text-lg text-center relative overflow-hidden flex flex-col items-center justify-center`}
-                      style={{
-                        backgroundColor: item.color,
-                        boxShadow: "0px 0px 3px rgb(0, 0, 0)",
-                      }}
-                    >
-                      <div className="bg-black bg-opacity-50 duration-500 absolute top-0 left-0 w-full h-full z-[200]"></div>
-                      <div className="absolute w-full h-full left-0 top-0 z-[50] opacity-100 hover:opacity-0 duration-300" />
-                      <div className="mx-auto my-auto h-full w-full flex items-center justify-center relative z-[201]">
-                        <div
-                          className="group-hover:scale-90 duration-300 flex items-center justify-center w-[40%] p-[10%] rounded-full bg-opacity-50"
-                          style={{
-                            backgroundColor: item.color,
-                            boxShadow: "0px 0px 5px black",
-                          }}
-                        >
-                          <item.icon className="text-white drop-shadow-sm shadow-black w-full h-auto" />
-                        </div>
-                      </div>
-                      <h4 className="bg-black bg-opacity-50 font-gotham text-white font-bold sticky bottom-0 left-0 w-full drop-shadow-xl shadow-black z-[202] text-xs sm:text-sm 2xl:text-base py-2">
-                        {item.urlLabel}
-                      </h4>
-                    </Link>
-                  )}
-                </article>
-              ))}
-            </div>
           </section>
         </div>
-        {/* Call to Action Section */}
-        <section className="cta-section bg-orange-600 text-white py-16 px-10">
-          <h2 className="text-3xl font-bold text-center">
-            Chcesz kupić lub sprzedać projekt?
-          </h2>
-          <p className="text-center mt-4 text-lg">
-            Dołącz do naszego marketplace już dziś i wystaw swój projekt, aby
-            przyciągnąć inwestorów lub potencjalnych partnerów!
-          </p>
-          <div className="flex justify-center mt-8">
-            <Link
-              href="/contact"
-              className="bg-white text-orange-600 py-3 px-8 rounded hover:bg-gray-200 transition"
-              aria-label="Kontaktuj się z nami"
-            >
-              Kontaktuj się z nami
-            </Link>
-          </div>
-        </section>
       </main>
+      <div className="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 h-max w-full">
+        {secondMenuItems.map((item: any, i: number) => (
+          <article key={i} className="w-full">
+            {item && (
+              <Link
+                title={`Wypróbuj Quixy Talent™: ${item.urlLabel}`}
+                aria-label={`Link to ${item.urlLabel}`}
+                href={item.url}
+                className={`aspect-square group w-full h-max text-white font-bold text-sm sm:text-lg text-center relative overflow-hidden flex flex-col items-center justify-center`}
+                style={{
+                  backgroundColor: item.color,
+                  boxShadow: "0px 0px 3px rgb(0, 0, 0)",
+                }}
+              >
+                <div className="bg-black bg-opacity-50 duration-500 absolute top-0 left-0 w-full h-full z-[200]"></div>
+                <div className="absolute w-full h-full left-0 top-0 z-[50] opacity-100 hover:opacity-0 duration-300" />
+                <div className="mx-auto my-auto h-full w-full flex items-center justify-center relative z-[201]">
+                  <div
+                    className="group-hover:scale-90 duration-300 flex items-center justify-center w-[40%] p-[10%] rounded-full bg-opacity-50"
+                    style={{
+                      backgroundColor: item.color,
+                      boxShadow: "0px 0px 5px black",
+                    }}
+                  >
+                    <item.icon className="text-white drop-shadow-sm shadow-black w-full h-auto" />
+                  </div>
+                </div>
+                <h4
+                  style={{ textShadow: "0px 4px 6px rgb(0, 0, 0)" }}
+                  className="text-center absolute bg-opacity-50 font-gotham text-white font-bold bottom-[10%] left-1/2 -translate-x-1/2 h-max w-full drop-shadow-xl shadow-black z-[202] py-2 text-lg sm:text-xl"
+                >
+                  {item.urlLabel}
+                </h4>
+              </Link>
+            )}
+          </article>
+        ))}
+      </div>
 
       {/* Footer */}
       <MainFooter jobsList={jobs} />
@@ -129,9 +114,9 @@ export default function Page() {
 const secondMenuItems = [
   {
     urlLabel: "Wygeneruj pomysł",
-    url: "/register",
+    url: "/business-ideas",
     color: "#A6BFFD",
-    icon: FaRobot,
+    icon: IoSparkles,
   },
   {
     urlLabel: "Wygeneruj obraz",
@@ -154,7 +139,7 @@ const secondMenuItems = [
   {
     urlLabel: "Kup projekt",
     url: "/marketplace",
-    color: "green",
+    color: "#468CA9",
     icon: FaFileSignature,
   },
   {

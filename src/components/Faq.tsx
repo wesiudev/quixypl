@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 
 interface FAQItem {
@@ -29,32 +30,42 @@ const FAQ: React.FC<FAQProps> = ({ faqItems }) => {
 
   return (
     <div className="font-gotham">
-      <h2 className="text-3xl mb-6 text-black">
-        FAQ: Najczęściej Zadawane Pytania
+      <h2 className="z-50 py-3 text-xl sm:text-3xl w-full">
+        <span className="p-3 text-white bg-gradient-to-r from-primary to-cta rounded-t-xl">
+          Często zadawane pytania
+        </span>
       </h2>
-      <ul className="space-y-4 text-lg text-black">
+      <ul className="-mt-[2px] p-3 rounded-lg rounded-tl-none  cursor-default select-none lg:hover:bg-gradient-to-r lg:hover:from-primary/20 lg:hover:to-cta/20 bg-gradient-to-r from-primary/20 to-cta/20 text-lg text-black">
         {faqItems.slice(0, visibleItems).map((faq, index) => (
           <li
             key={index}
-            className="!font-coco border-x-[12px] rounded-xl border-primary p-3 border-y-2 bg-primary bg-opacity-80 text-white"
+            className={`lg:hover:!text-white text-zinc-800 lg:hover:bg-gradient-to-r lg:hover:from-primary lg:hover:to-cta font-gotham p-3 ${
+              index + 1 !== visibleItems && "border-primary/50 border-b-2"
+            }`}
           >
-            <strong style={{ textShadow: "2px 2px 2px black" }}>
-              {faq.question}
-            </strong>
+            <h4 className="">{faq.question}</h4>
             <p className="font-light">{faq.answer}</p>
           </li>
         ))}
       </ul>
 
-      {visibleItems < faqItems.length && (
-        <div className="text-center mt-8">
+      {visibleItems < faqItems.length ? (
+        <div className="mt-3 w-full flex items-start justify-start">
           <button
             onClick={handleShowMore}
-            style={{ textShadow: "2px 2px 2px black" }}
-            className="bg-[#126b91] text-white py-2 px-4 rounded-lg hover:bg-cta transition"
+            className="bg-[#126b91] text-white py-2 px-4 rounded-lg lg:hover:bg-cta transition"
           >
             Pokaż więcej
           </button>
+        </div>
+      ) : (
+        <div className="mt-3 w-full flex items-start justify-start">
+          <Link
+            href="/contact"
+            className="bg-gradient-to-r from-primary to-cta text-white py-2 px-4 rounded-lg lg:hover:bg-cta transition"
+          >
+            Masz inne pytanie?
+          </Link>
         </div>
       )}
     </div>

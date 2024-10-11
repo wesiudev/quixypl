@@ -9,6 +9,8 @@ import { getPageContent } from "@/lib/getPageContent";
 import Image from "next/image";
 import { TfiFlagAlt } from "react-icons/tfi";
 import { getTalents } from "../../../../../utils/getTalents";
+import BlogPostList from "@/components/BlogPostList";
+import { getProducts } from "@/firebase";
 export async function generateStaticParams() {
   return jobs.flatMap((service: any) => ({
     slug: polishToEnglish(service.title),
@@ -19,6 +21,7 @@ export default async function Page({ params }: { params: any }) {
     (page: any) => polishToEnglish(page.title) === params.slug
   );
   const content = await getPageContent(polishToEnglish(slug.title));
+  const products: any = await getProducts();
   const talents = await getTalents();
   // const job_offers = await fetch(
   //   `${process.env.NEXT_PUBLIC_URL}/api/getOffersByCategory?tubylytylkofigi=${
@@ -41,17 +44,27 @@ export default async function Page({ params }: { params: any }) {
       <div className="bg-gray-200">
         <Header jobsList={jobs} />
         {/* Hero Section */}
-        <div className="relative text-center text-white bg-black py-12 !font-coco">
+        <div className="relative text-center text-white bg-black py-12 font-gotham">
           <Hero />
-          <p className="text-4xl font-bold mb-4 relative z-50 font-coco">
-            Praca Zdalna Quixy - <b className="text-cta">{slug.title}</b>
+          <p
+            style={{ textShadow: "2px 2px 2px black", lineHeight: 1.35 }}
+            className="text-4xl mb-4 relative z-50 font-gotham"
+          >
+            <span className="bg-primary text-white p-1 mr-2">Praca Zdalna</span>
+
+            {slug.title}
           </p>
           {/* <h2 className="text-2xl font-semibold mb-6">{slug.h2}</h2> */}
-          <h2 className="text-lg  relative z-50 w-[90%] mx-auto sm:max-w-[40rem] font-coco">
-            Interesujesz się pracą w{" "}
-            <b className="text-cta">{content?.genitive}</b>? Szukaj pracy lub
-            dodaj ofertę pracy zdalnej i zatrudnij najlepszych ekspertów w
-            Polsce.
+          <h2 className="text-lg  relative z-50 w-[90%] mx-auto sm:max-w-[40rem] ">
+            Zainteresowany/a pracą zdalną w{" "}
+            <span
+              className="bg-primary text-white p-1 mr-1.5"
+              style={{ textShadow: "2px 2px 2px black", lineHeight: 1.35 }}
+            >
+              {content?.genitive}?
+            </span>
+            Szukaj pracy lub dodaj ofertę pracy zdalnej i zatrudnij najlepszych
+            ekspertów w Polsce.
           </h2>
           <div className="px-6 sm:px-12 breadcrumbs text-sm bg-transparent mb-3 mx-auto relative z-50">
             <ul className="flex items-center justify-center flex-wrap font-light">
@@ -71,7 +84,10 @@ export default async function Page({ params }: { params: any }) {
             </ul>
           </div>
           <Link href="/register" className="relative z-50">
-            <button className="bg-cta text-white font-semibold px-6 py-3 rounded-lg hover:bg-opacity-90">
+            <button
+              style={{ textShadow: "2px 2px 2px black" }}
+              className="bg-cta text-white px-2 py-1.5 rounded-lg hover:bg-opacity-90"
+            >
               Dodaj ofertę pracy
             </button>
           </Link>
@@ -113,6 +129,7 @@ export default async function Page({ params }: { params: any }) {
                 <div className="flex items-end justify-end w-full">
                   <Link
                     href="/register"
+                    style={{ textShadow: "2px 2px 2px black" }}
                     className="text-white bg-[#126b91] font-bold p-2 rounded-br-lg rounded-tl-lg flex items-center"
                   >
                     Stwórz konto klienta
@@ -135,6 +152,7 @@ export default async function Page({ params }: { params: any }) {
                 <div className="flex items-end justify-end w-full">
                   <Link
                     href="/register"
+                    style={{ textShadow: "2px 2px 2px black" }}
                     className="text-white bg-[#14A800] font-bold p-2 rounded-br-lg rounded-tl-lg flex items-center"
                   >
                     Stwórz konto talentu
@@ -146,13 +164,19 @@ export default async function Page({ params }: { params: any }) {
           </div>
 
           {/* Content */}
-          <h2 className="text-black mt-12 text-3xl lg:text-5xl font-bold font-coco">
-            {slug?.title} <strong className="text-primary">Praca Zdalna</strong>
+          <h2 className="text-black mt-12 text-3xl lg:text-5xl font-gotham">
+            {slug?.title}{" "}
+            <span
+              className="text-cta"
+              style={{ textShadow: "2px 2px 2px black" }}
+            >
+              Oferty Pracy
+            </span>
           </h2>
 
           <div className="bg-white rounded-xl p-3 mt-6 lg:mt-12 py-6 sm:py-12 lg:py-24">
-            <div className="bg-cta rounded-full aspect-square mx-auto w-40 flex items-center justify-center">
-              <TfiFlagAlt className="text-white text-7xl" />
+            <div className=" rounded-full aspect-square mx-auto w-40 flex items-center justify-center">
+              <TfiFlagAlt className="text-cta text-7xl" />
             </div>
 
             <p className="font-light text-black text-base font-gotham my-3 text-center max-w-xl mx-auto">
@@ -162,12 +186,14 @@ export default async function Page({ params }: { params: any }) {
             <h3 className="flex flex-col text-white p-2 font-gotham font-light text-center mx-auto max-w-[332px] group">
               <Link
                 href="/register"
+                style={{ textShadow: "2px 2px 2px black" }}
                 className="rounded-2xl bg-[#14a800] p-2 duration-100 group-hover:bg-opacity-80"
               >
                 Bądź szybszy/a i dodaj ogłoszenie
               </Link>
               <Link
                 href="/register"
+                style={{ textShadow: "2px 2px 2px black" }}
                 className="rounded-b-2xl bg-[#14a800] w-max max-w-[100%] mx-auto p-2 px-4 duration-100 group-hover:bg-opacity-80"
               >
                 o pracę już dziś!
@@ -187,93 +213,9 @@ export default async function Page({ params }: { params: any }) {
                   __html: content?.description,
                 }}
               />
-              {/* <div className="mt-12">
-                <h3
-                  style={{ lineHeight: 1.4 }}
-                  className="text-3xl font-gotham text-black  mb-3"
-                >
-                  Odwiedź naszego bloga o tematyce poświęconej nie tylko{" "}
-                  {content?.dative}
-                  {", "} ale także pracy zdalnej.
-                </h3>
-                <Link
-                  href="https://wesiudev.com/pl"
-                  target="_blank"
-                  title="zobacz autora bloga"
-                >
-                  <Image
-                    src="/assets/wesiudev3.png"
-                    width={224}
-                    height={224}
-                    alt="Logo serwisu wesiudev.com"
-                    className="w-32 h-auto"
-                  />
-                </Link>
-                <p className="mt-3 text-black font-gotham font-light">
-                  Brak nowych postów... Stay tuned 😎
-                </p>
-              </div> */}
+              <BlogPostList posts={products} />
             </section>
-            <div className="flex flex-col max-w-[30rem]">
-              <div>
-                <h2 className="text-black font-gotham mb-3">
-                  Kategorie Pracy Zdalnej
-                </h2>
-                {slug?.data.map((job: any) => (
-                  <h3 key={job.title} className="">
-                    <Link
-                      title={`${job.title} Praca Zdalna`}
-                      className="text-black font-coco items-center"
-                      href={`/praca-zdalna/${polishToEnglish(
-                        slug?.title
-                      )}/${polishToEnglish(job.title)}`}
-                      key={job.title}
-                    >
-                      {job.title}
-                    </Link>
-                  </h3>
-                ))}
-              </div>
-              <div className="mt-6">
-                <h2 className="text-black font-gotham mb-3">
-                  Specjaliści {content?.genitive}
-                </h2>
-                <div className="flex items-center flex-wrap -ml-2">
-                  {talents
-                    ?.filter((item) => item?.pseudo && item?.seek)
-                    .map((talent: any) => (
-                      <Link
-                        href={`/talent/${talent.pseudo}`}
-                        className="flex items-center ml-2"
-                        key={talent?.uid}
-                      >
-                        {talent?.photoURL ? (
-                          <div className="w-12 aspect-square rounded-lg p-3 bg-[#126b91]">
-                            <div
-                              className="rounded-lg"
-                              style={{ boxShadow: "0px 0px 4px black" }}
-                            >
-                              <Image
-                                src={talent?.photoURL}
-                                width={224}
-                                height={224}
-                                alt={`Zdjęcie talentu ${
-                                  talent?.name || talent?.pseudo
-                                }`}
-                                className="rounded-lg"
-                              />
-                            </div>
-                          </div>
-                        ) : (
-                          <span className="w-12 aspect-square mr-2 rounded-full bg-white flex items-center justify-center text-2xl text-primary">
-                            {talent?.name?.[0].toUpperCase() ||
-                              talent?.pseudo?.[0].toUpperCase()}
-                          </span>
-                        )}
-                      </Link>
-                    ))}
-                </div>
-              </div>
+            <div className="flex flex-col">
               <h3
                 style={{ lineHeight: 1.4 }}
                 className="mt-6 bg-white p-6 rounded-t-xl text-3xl font-gotham text-black "
@@ -285,7 +227,7 @@ export default async function Page({ params }: { params: any }) {
                 {" - "}
                 Jak rozpocząć swoją przygodę?
               </h3>
-              <span className="font-coco text-black text-opacity-60 py-3 italic">
+              <span className=" text-black text-opacity-60 py-3 italic">
                 Koniec ze starymi nawykami i prokrastynacją - dzięki{" "}
                 {/* <Link href="/e-booki" className="text-primary underline"> */}
                 e-bookom Quixy - już wkrótce!

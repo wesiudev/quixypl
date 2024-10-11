@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { addOpinion, app, getOpinions } from "@/firebase/";
 import { collection, getFirestore, onSnapshot } from "firebase/firestore";
 import { toast } from "react-toastify";
-import { FaStar, FaUser } from "react-icons/fa";
+import { FaChevronRight, FaStar, FaUser } from "react-icons/fa";
 
 interface Opinion {
   name: string;
@@ -58,19 +58,19 @@ const OpinionsForm: React.FC = () => {
   };
 
   return (
-    <div className="my-16 rounded-lg !font-gotham">
+    <div className="my-16 rounded-xl font-gotham bg-gradient-to-r from-primary/50 to-cta/50 p-6">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col-reverse md:flex-row justify-start items-start space-y-12"
+        className="flex flex-col md:flex-row justify-start items-start space-y-12"
       >
         <div className="h-full w-full">
-          <h2 className="w-full text-xl lg:text-3xl font-bold text-black drop-shadow-md shadow-black text-left mb-2">
+          <h2 className="w-full text-3xl text-white drop-shadow-md shadow-black text-left mb-2 italic">
             Podziel się swoją opinią
           </h2>
           <div className="flex flex-col justify-between w-full h-full">
             <div className="">
               <div className="">
-                <label htmlFor="name" className="text-black font-light">
+                <label htmlFor="name" className="text-white font-light">
                   Przedstaw się
                 </label>
                 <input
@@ -80,11 +80,11 @@ const OpinionsForm: React.FC = () => {
                   value={name}
                   maxLength={30}
                   onChange={(e) => setName(e.target.value)}
-                  className="placeholder:text-white placeholder:font-light input input-bordered w-full py-3 px-4 rounded-lg shadow-sm mb-2 text-white border border-gray-300"
+                  className="bg-gray-700 placeholder:text-white placeholder:font-light input input-bordered w-full py-3 px-4 rounded-lg shadow-sm mb-2 text-white border border-gray-300"
                 />
               </div>
               <div className="">
-                <label htmlFor="opinion" className="text-black font-light">
+                <label htmlFor="opinion" className="text-white font-light">
                   Twoja opinia
                 </label>
                 <textarea
@@ -95,7 +95,7 @@ const OpinionsForm: React.FC = () => {
                   placeholder="Wpisz opinię"
                   value={feedback}
                   onChange={(e) => setFeedback(e.target.value)}
-                  className="h-full placeholder:text-white placeholder:font-light input input-bordered w-full py-3 px-4 rounded-lg shadow-sm mb-2 text-white border border-gray-300"
+                  className="bg-gray-700 h-full placeholder:text-white placeholder:font-light input input-bordered w-full py-3 px-4 rounded-lg shadow-sm mb-2 text-white border border-gray-300"
                 />
               </div>
             </div>
@@ -103,31 +103,42 @@ const OpinionsForm: React.FC = () => {
             <button
               type="submit"
               disabled={sent}
-              className={`w-full sm:w-full mx-auto py-3 px-6 rounded-lg font-semibold text-white transition-colors duration-300 ${
+              className={`w-full sm:w-full mx-auto py-3 px-6 rounded-lg font-light font-gotham text-white transition-colors duration-300 ${
                 sent
                   ? "bg-zinc-500 cursor-not-allowed"
-                  : "bg-cta hover:bg-opacity-80"
+                  : "bg-cta hover:bg-cta/80"
               }`}
             >
-              {sent ? "Opinia wysłana" : "Wyślij opinię"}
+              {sent ? "Dziękujemy!!" : "Wyślij opinię"}
             </button>
+            <p className="text-white text-xs sm:text-sm font-coco text-justify py-3">
+              Przesyłając opinię, wyrażasz zgodę na upublicznienie wprowadzonych
+              danych na naszej stronie internetowej oraz potwierdzasz akceptację
+              Regulaminu serwisu Quixy.pl. Przed opublikowaniem Twojej opinii,
+              prosimy o zapoznanie się z treścią Regulaminu.
+            </p>
           </div>
         </div>
 
-        <div className="md:ml-3 opinions-list py-6  rounded-bl-lg  rounded-t-lg rounded-tr-lg rounded-br-lg max-h-[50vh] overflow-y-scroll w-full">
-          <h3 className="text-2xl font-bold mb-4 text-gray-800 flex items-center">
-            <FaStar className="text-cta mr-2" /> Opinie naszych klientów
+        <div
+          className="bg-white md:ml-3 rounded-xl overflow-hidden w-full"
+          style={{ boxShadow: "0px 0px 5px black" }}
+        >
+          <h3 className="bg-gradient-to-r from-primary to-cta text-2xl font-bold py-4 text-white flex items-center justify-center text-center italic drop-shadow-md">
+            Opinie naszych klientów
           </h3>
-          <ul className="space-y-6">
+          <ul className="space-y-6 h-[50vh] overflow-y-scroll p-3">
             {opinions?.map((opinion, index) => (
               <li
                 key={index}
-                className="flex flex-col lg:flex-row lg:items-center text-lg text-gray-600 italic border-b border-cta pb-2 font-light"
+                className="flex flex-col items-start text-lg border-b border-cta pb-2 font-light"
               >
-                <div className="flex items-center font-semibold text-gray-800 lg:mr-2 not-italic">
-                  <FaUser className="mr-1" /> {opinion.name}:
-                </div>
-                &quot;{opinion.feedback}&quot;
+                <span className="flex items-center font-semibold text-black">
+                  {opinion.name}
+                </span>
+                <p className="text-black font-gotham font-light">
+                  {opinion.feedback}
+                </p>
               </li>
             ))}
           </ul>

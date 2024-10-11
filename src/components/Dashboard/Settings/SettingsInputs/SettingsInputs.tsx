@@ -277,13 +277,6 @@ export default function UserEditDashboard({
             setChangesWereMade={setChangesWereMade}
           />
         )}
-        {source?.configured &&
-          (source?.seek === "false" || source?.seek === "ask") && (
-            <SetClientAccountType
-              source={source}
-              setChangesWereMade={setChangesWereMade}
-            />
-          )}
         {source?.configured && source?.seek !== "ask" && (
           <>
             <EssentialUserInfo
@@ -298,9 +291,9 @@ export default function UserEditDashboard({
                   removePreference={removePreference}
                   source={source}
                 />
-                <div className="p-4 lg:p-6 mt-6 font-coco">
+                <div className="p-4 lg:p-6 font-coco">
                   {source?.seek && source?.seek !== "ask" && (
-                    <div className="font-bold text-3xl lg:text-5xl text-black font-gotham">
+                    <div className="font-bold text-lg text-black font-gotham">
                       Projekty
                     </div>
                   )}
@@ -340,29 +333,6 @@ export default function UserEditDashboard({
                           source?.seek !== "ask" &&
                           "Rozpocznij rekrutację"}
                       </button>
-                      {source?.projects?.map((project: any, i: number) => (
-                        <div
-                          key={i}
-                          className="flex flex-row flex-wrap pb-4 bg-slate-300 mt-4 rounded-xl"
-                        >
-                          <div className="ml-3 mt-3">
-                            {project?.images?.length > 0 && (
-                              <Image
-                                src={project?.images[0]?.src}
-                                width={177}
-                                height={100}
-                                alt="image"
-                                className="rounded-lg h-[100px] w-auto bg-white border-2 border-cta"
-                              />
-                            )}
-                            {project?.images?.length === 0 && (
-                              <div className="h-[100px] w-[177px] rounded-lg bg-slate-500 flex items-center justify-center">
-                                <FaImage className="h-[50%] w-auto text-white" />
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      ))}
                     </>
                   )}
                   {isNewProject && (
@@ -582,7 +552,7 @@ export default function UserEditDashboard({
                           </div>
                         </div>
                         {!source?.seek && source?.seek !== "ask" && (
-                          <div className="gap-3 mt-12">
+                          <div className="gap-3">
                             <p className="text-sm text-[green] mb-2"></p>
                             {!configurationOpen && (
                               <>
@@ -619,7 +589,7 @@ export default function UserEditDashboard({
                               {!configurationOpen && slug.title === "" && (
                                 <button
                                   onClick={() => setConfigurationOpen(true)}
-                                  className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80 rounded-lg duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+                                  className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80 rounded-lg duration-100 text-white flex flex-row items-center justify-center outline-none h-[28px] sm:h-[32px] aspect-square"
                                 >
                                   <FaPlus />
                                 </button>
@@ -631,7 +601,7 @@ export default function UserEditDashboard({
                                     onClick={() =>
                                       setCategory({ title: "", url: "" })
                                     }
-                                    className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80 rounded-lg duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+                                    className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80 rounded-lg duration-100 text-white flex flex-row items-center justify-center outline-none h-[28px] sm:h-[32px] aspect-square"
                                   >
                                     <FaChevronLeft />
                                   </button>
@@ -644,7 +614,7 @@ export default function UserEditDashboard({
                                       setSlug({ title: "", url: "" }),
                                         setConfigurationOpen(false);
                                     }}
-                                    className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80 rounded-lg duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+                                    className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80 rounded-lg duration-100 text-white flex flex-row items-center justify-center outline-none h-[28px] sm:h-[32px] aspect-square"
                                   >
                                     <FaChevronLeft />
                                   </button>
@@ -1067,6 +1037,7 @@ export default function UserEditDashboard({
                       )}
                       <>
                         {project?.name &&
+                          !source?.seek &&
                           project?.time &&
                           project?.desc &&
                           project?.images?.length > 0 && (
@@ -1160,10 +1131,10 @@ const ChooseAccountType = (props: any) => {
                 dispatch(setUser({ ...source, seek: false }));
                 setChangesWereMade(true);
               }}
-              className={`hover:bg-[#FFA50027] hover:shadow-sm hover:shadow-primary duration-300 p-3 flex flex-col py-5 border-gray-300 border hover:border-primary ${
+              className={`hover:bg-opacity-80 hover:shadow-sm hover:shadow-primary duration-300 p-3 flex flex-col py-5 border-gray-300 border hover:border-primary ${
                 !source?.seek &&
                 source?.seek !== "ask" &&
-                "bg-[#FFA50027] shadow-primary shadow-sm border-primary"
+                "bg-opacity-80 shadow-primary shadow-sm border-primary"
               }`}
             >
               <div className="flex flex-row justify-between items-start w-full">
@@ -1199,10 +1170,10 @@ const ChooseAccountType = (props: any) => {
                 dispatch(setUser({ ...source, seek: true }));
                 setChangesWereMade(true);
               }}
-              className={`hover:bg-[#FFA50027] hover:shadow-sm hover:shadow-primary duration-300 p-3 flex flex-col py-5 border-gray-300 border hover:border-primary ${
+              className={`hover:bg-opacity-80 hover:shadow-sm hover:shadow-primary duration-300 p-3 flex flex-col py-5 border-gray-300 border hover:border-primary ${
                 source?.seek === true &&
                 source?.seek !== "ask" &&
-                "bg-[#FFA50027] shadow-primary shadow-sm border-primary"
+                "bg-opacity-80 shadow-primary shadow-sm border-primary"
               }`}
             >
               <div className="flex flex-row justify-between items-start w-full">

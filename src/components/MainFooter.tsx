@@ -2,16 +2,8 @@ import Link from "next/link";
 import Discord from "./Discord";
 import Image from "next/image";
 import { polishToEnglish } from "../../utils/polishToEnglish";
+import Hero from "./Hero";
 
-/**
- * @function MainFooter
- * @description Renders the main footer of the application.
- * @param {Object} props Component props
- * @param {any} props.jobsList List of jobs to be rendered in the footer
- * @param {string} [props.heading] Optional heading to be rendered above the job list
- * @param {string} [props.category] Optional category to be used when generating links
- * @returns {JSX.Element} The rendered footer
- */
 export default function MainFooter({
   jobsList,
   heading,
@@ -22,39 +14,38 @@ export default function MainFooter({
   category?: any;
 }) {
   return (
-    <div className="flex flex-col px-6 lg:px-12 p-6 py-12 bg-white relative z-50 overflow-hidden font-coco">
+    <div className="flex flex-col px-6 lg:px-12 p-6 py-12 bg-gradient-to-r from-zinc-800 via-gray-800 to-zinc-950 relative z-50 overflow-hidden font-gotham">
+      <Hero />
       <div className="flex flex-col relative z-50">
         <div className="mb-12">
-          <h2 className="text-4xl font-bold text-black">
-            {!heading && <div>Szukaj lub zatrudnij w pracy zdalnej</div>}
+          <h2 className="text-4xl text-white italic">
+            {!heading && <div>Szukaj lub zatrudnij do pracy zdalnej</div>}
             {heading && <div>{heading}</div>}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+          <div className="bg-black/50 p-3 lg:p-6 mt-12 rounded-xl grid grid-cols-1 md:grid-cols-2 md:gap-4 xl:grid-cols-3 2xl:grid-cols-4 w-full">
             {jobsList.map((item: any, i: any) => (
-              <div key={i} className="flex flex-col mt-8">
-                <h2
-                  style={{ textShadow: "2px 2px 2px black" }}
-                  className="flex items-center text-cta text-2xl font-gotham"
-                >
-                  {item.title}
+              <div key={i} className="flex flex-col w-full">
+                <h2 className="pt-[9px] text-white w-max max-w-full font-coco font-light italic text-xl lg:text-2xl 2xl:text-xl">
+                  <span className="p-[9px] bg-gradient-to-r from-primary to-cta rounded-xl">
+                    {item.title}
+                  </span>
                 </h2>
-                {item.data.map((cat: any, i: any) => (
-                  <h3
-                    key={i}
-                    className="group mt-2 hover:underline underline-offset-2"
-                  >
-                    <Link
-                      href={`/praca-zdalna/${
-                        category ? `${category}/` : ""
-                      }${polishToEnglish(item.title)}/${polishToEnglish(
-                        cat.title
-                      )}`}
-                      className="flex items-center text-black"
-                    >
-                      {cat.title}
-                    </Link>
-                  </h3>
-                ))}
+                <div className="flex flex-row flex-wrap w-full justify-start my-4">
+                  {item.data.map((cat: any, i: any) => (
+                    <h3 key={i} className="w-full lg:w-max max-w-full">
+                      <Link
+                        href={`/praca-zdalna/${
+                          category ? `${category}/` : ""
+                        }${polishToEnglish(item.title)}/${polishToEnglish(
+                          cat.title
+                        )}`}
+                        className="hover:underline w-full lg:w-max max-w-full font-light text-white text-sm sm:text-base p-2"
+                      >
+                        {cat.title}
+                      </Link>
+                    </h3>
+                  ))}
+                </div>
               </div>
             ))}
           </div>

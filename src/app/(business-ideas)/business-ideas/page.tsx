@@ -68,7 +68,7 @@ export default async function Page() {
         <HomePageGenerator sendGenerateIdeaRequest={sendGenerateIdeaRequest} />
       </div>
       <IdeaList ideas={ideas} />
-      <Register />
+     
       <MainFooter jobsList={jobs} />
     </div>
   );

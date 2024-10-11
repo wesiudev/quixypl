@@ -6,7 +6,7 @@ import { IProject, IProjectImage } from "@/types";
 import moment from "moment";
 import Image from "next/image";
 import { useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaCog } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -95,6 +95,59 @@ export default function ProjectCard({ project }: { project: IProject }) {
       });
     }
   }
+  const [imageOptionsOpen, setImageOptionsOpen] = useState(false);
+  function removeImageFromProject(item: IProjectImage) {
+    // Filter out the selected image from the project's images
+    const updatedProjects = user?.projects.map((p: IProject) =>
+      p.id === project.id
+        ? {
+            ...p,
+            images: p.images.filter((i: IProjectImage) => i !== item),
+          }
+        : p
+    );
+
+    // Update the component state
+    setProjectImages((prevImages: any) =>
+      prevImages.filter((i: IProjectImage) => i !== item)
+    );
+
+    // Dispatch Redux action to update user state
+    dispatch(
+      setUser({
+        ...user,
+        projects: updatedProjects,
+      })
+    );
+
+    // Update the user in Firebase and show a success message
+    updateUser(user?.uid, {
+      ...user,
+      projects: updatedProjects,
+    })
+      .then(() => {
+        toast.success("Pomyślnie usunięto obraz!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      })
+      .catch((error) => {
+        toast.error("Wystąpił błąd przy usuwaniu obrazu.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
+  }
   return (
     <>
       {projectImages.length > 0 && (
@@ -106,20 +159,36 @@ export default function ProjectCard({ project }: { project: IProject }) {
           {projectImages.map((item: IProjectImage, i: number) => (
             <div
               key={i}
-              className="w-max max-w-[100%] justify-center fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-[99999999999999]"
+              className="px-3 w-max max-w-[100%] justify-center fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-[99999999999999]"
             >
               <div className="relative mx-auto w-[100%]">
-                {project?.name}
+                {imageOptionsOpen && (
+                  <div className="absolute top-8 right-8 bg-black text-white p-2 text-left">
+                    <button
+                      onClick={() => removeImageFromProject(item)}
+                      className="z-50 relative hover:bg-opacity-80"
+                    >
+                      Usuń zdjęcie
+                    </button>
+                  </div>
+                )}
+                <button
+                  onClick={() => setImageOptionsOpen(!imageOptionsOpen)}
+                  className="absolute right-2 top-2 bg-black text-white text-xl p-2 rounded-full aspect-square z-[50]"
+                >
+                  <FaCog />
+                </button>
                 {project?.companySize}
                 {item.desc && (
                   <div
                     className={`${
                       currentIndex === i ? "opacity-100" : "opacity-0"
-                    } flex flex-col absolute left-6 top-6 bg-primary text-white p-3 rounded-xl text-xl`}
+                    } text-white rounded-xl text-xl`}
                   >
                     <div className="font-gotham">{item.desc}</div>
                   </div>
                 )}
+                <div className="mb-1">{project?.name}</div>
                 <Image
                   src={item.src}
                   width={1024}
@@ -131,12 +200,7 @@ export default function ProjectCard({ project }: { project: IProject }) {
                       : "opacity-0 duration-200"
                   } w-[100%] rounded-xl mx-auto bg-white`}
                 />
-                <button
-                  onClick={() => setProjectImages([])}
-                  className="absolute rounded-b-xl bottom-0 left-0 p-3 w-full bg-black text-white font-gotham text-xl z-[999999999999999]"
-                >
-                  Zamknij
-                </button>
+
                 <div className="flex items-center space-x-4 mt-3 mx-auto w-full px-6 justify-between absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
                   <button
                     onClick={() =>
@@ -227,11 +291,6 @@ export default function ProjectCard({ project }: { project: IProject }) {
                   alt={image.desc || "zdjęcie projektu"}
                   className="rounded-lg border-2 border-primary bg-white"
                 />
-                {image.desc && (
-                  <div className="text-white bg-primary text-sm absolute left-0 bottom-0 max-w-[100%] w-max p-3 rounded-bl-xl rounded-tr-xl">
-                    {image.desc}
-                  </div>
-                )}
               </button>
             ))}
             {project?.isRecruitment && project?.isPaid && (
@@ -257,8 +316,8 @@ export default function ProjectCard({ project }: { project: IProject }) {
                         }}
                       >
                         {/* {moment(project?.expirationTime).format(
-                        "DD.MM.YYYY hh:mm:ss"
-                      )} */}
+                  "DD.MM.YYYY hh:mm:ss"
+                )} */}
                         {moment(project?.creationTime)
                           .add(project?.days, "days")
                           .add(project?.extraDays || 0, "days")

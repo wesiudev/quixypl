@@ -43,7 +43,7 @@ export default function ProductsWide({
             <div className="mt-3 ml-3 w-[300px] flex flex-col" key={i}>
               <Link
                 href={`/praca-zdalna/${polishToEnglish(job.title)}`}
-                title={`Idź do ${job.title}`}
+                title={`Pracuj zdalnie w ${job.title}`}
                 style={{ boxShadow: "0px 0px 4px black" }}
                 className={`text-lg mt-3 font-bold p-1 px-3 rounded-md text-white bg-[#126b91] w-max`}
                 key={i}
@@ -55,7 +55,7 @@ export default function ProductsWide({
                 {job.data.map((item: any, i: any) => (
                   <div key={i} className="relative group">
                     <h2
-                      title={`Idź do ${job.title}:${item.title}`}
+                      title={`Oferty pracy zdalnej w ${item.title}`}
                       className="p-0.5 font-light group-hover:text-white group-hover:bg-[#126b91] w-max text-gray-800 text-sm"
                     >
                       {item.title}
@@ -64,7 +64,7 @@ export default function ProductsWide({
                     {/* Hover dropdown */}
                     <div className="flex flex-col absolute max-w-[300px] left-0 top-0 group-hover:z-10 z-[-10] opacity-0 group-hover:opacity-100 transition-opacity duration-75">
                       <Link
-                        title={`Idź do ${job.title}:${item.title}`}
+                        title={`Szukaj pracy zdalnej w ${item.title}`}
                         className="p-0.5  group-hover:text-white font-bold group-hover:bg-[#126b91] w-max text-gray-800 text-sm"
                         href={`/praca-zdalna/${polishToEnglish(
                           job.title
@@ -74,7 +74,7 @@ export default function ProductsWide({
                       </Link>
                       {item.data.map((subcategory: any, i: any) => (
                         <Link
-                          title={`Idź do ${job.title}:${item.title}:${subcategory.title}`}
+                          title={`Szukaj pracy zdalnej jako ${subcategory.title}`}
                           key={i}
                           style={{ boxShadow: "1px 0px 4px black" }}
                           className="max-w-[300px] bg-[#126b91] hover:bg-orange-300 duration-75 font-light text-white text-sm p-2"

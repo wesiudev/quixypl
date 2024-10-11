@@ -28,92 +28,84 @@ export default function ProductsWide({
       onMouseLeave={() => {
         width >= 1024 && handleMouseLeave();
       }}
-      className={`z-[210] fixed grid-cols-2 w-full max-h-[80vh] overflow-y-scroll top-0 left-0 bg-white xl:space-x-3 shadow-black ${
+      className={`z-[210] fixed lg:grid-cols-2 w-full max-h-[80vh] overflow-y-scroll top-0 left-0 bg-white xl:space-x-3 shadow-black ${
         hovered === "cat"
           ? "translate-y-[116px] lg:translate-y-[84px]"
           : "-translate-y-[100vh] opacity-0"
-      } hidden lg:grid pl-4 md:pl-8 lg:pl-12 xl:pl-20 2xl:pl-32 border-y border-gray-300 shadow-sm`}
+      } hidden lg:grid shadow-sm`}
     >
-      <div className="flex flex-col relative z-[500]">
-        <h2 className="text-black font-gotham text-3xl 2xl:text-5xl text-left pt-8">
-          <b className="text-cta" style={{ textShadow: "2px 2px 2px black" }}>
-            Szukaj{" "}
-          </b>
-          pracy lub{" "}
-          <b className="text-cta" style={{ textShadow: "2px 2px 2px black" }}>
-            Zatrudnij{" "}
-          </b>
-          do pracy zdalnej
-        </h2>
-        <div className="-ml-3 flex flex-wrap pb-8 pt-4">
-          {jobs.map((job: any, i: any) => (
-            <div
-              className="mt-3 ml-3 w-[300px] flex flex-col font-gotham"
-              key={i}
-            >
-              <Link
-                href={`/praca-zdalna/${polishToEnglish(job.title)}`}
-                title={`Idź do ${job.title}`}
-                className={`flex flex-col text-2xl mt-3 font-bold`}
-                key={i}
-                onClick={() => setHovered(false)}
-              >
-                <span
-                  className="text-cta"
-                  style={{ textShadow: "2px 2px 2px black" }}
+      <div className="relative mt-12 pb-36">
+        <div className="sticky top-0 left-0 flex flex-col z-[500] container pl-4">
+          <div className="flex flex-wrap pb-8 pt-4 mx-auto justify-center">
+            {jobs.map((job: any, i: any) => (
+              <div className={`w-[300px] flex flex-col font-coco`} key={i}>
+                <Link
+                  href={`/praca-zdalna/${polishToEnglish(job.title)}`}
+                  title={`Praca Zdalna ${job.title}`}
+                  className={`flex flex-col mt-3`}
+                  key={i}
+                  onClick={() => setHovered(false)}
                 >
-                  {job.title}
-                </span>
-                <span className="text-sm font-light italic text-black">
-                  kategoria
-                </span>
-              </Link>
-              <div className="flex flex-col mt-3">
-                {job.data.map((item: any, i: any) => (
-                  <div key={i} className="relative group">
-                    <h2
-                      title={`Idź do ${job.title}:${item.title}`}
-                      className="p-0.5 font-light group-hover:text-white group-hover:bg-[#126b91] w-max text-gray-800 text-sm"
-                    >
-                      {item.title}
-                    </h2>
-
-                    {/* Hover dropdown */}
-                    <div className="flex flex-col absolute max-w-[300px] left-0 top-0 group-hover:z-10 z-[-10] opacity-0 group-hover:opacity-100 transition-opacity duration-75">
-                      <Link
-                        title={`Idź do ${job.title}:${item.title}`}
-                        className="p-0.5  group-hover:text-white font-bold group-hover:bg-[#126b91] w-max text-gray-800 text-sm"
-                        href={`/praca-zdalna/${polishToEnglish(
-                          job.title
-                        )}/${polishToEnglish(item.title)}`}
+                  <span
+                    style={{ textShadow: "2px 2px 5px gray" }}
+                    className="text-white bg-gradient-to-r from-primary to-cta text-xl p-2 rounded-xl w-max font-light italic"
+                  >
+                    {job.title}
+                  </span>
+                </Link>
+                <div className="flex flex-col mt-3">
+                  {job.data.map((item: any, i: any) => (
+                    <div key={i} className="relative group w-max">
+                      <span
+                        title={`Praca zdalna w ${job.title} jako ${item.title}`}
+                        className="p-1 font-light w-max text-base text-black"
                       >
                         {item.title}
-                      </Link>
-                      {item.data.map((subcategory: any, i: any) => (
+                      </span>
+
+                      {/* Hover dropdown */}
+                      <div className="flex flex-col absolute left-0 top-0 group-hover:-translate-y-0 -translate-y-[1000%] opacity-0 group-hover:opacity-100 z-50">
                         <Link
-                          title={`Idź do ${job.title}:${item.title}:${subcategory.title}`}
-                          key={i}
-                          style={{ boxShadow: "1px 0px 4px black" }}
-                          className="max-w-[300px] bg-[#126b91] hover:bg-[#468CA9] duration-75 font-light text-white text-sm p-2"
+                          title={`Pracuj Zdalnie jako ${item.title}`}
+                          className="rounded-t-lg p-1 px-2 text-white font-bold bg-gradient-to-r group-hover:from-primary group-hover:to-cta w-full text-left text-base"
                           href={`/praca-zdalna/${polishToEnglish(
                             job.title
-                          )}/${polishToEnglish(item.title)}/${polishToEnglish(
-                            subcategory.title
-                          )}`}
+                          )}/${polishToEnglish(item.title)}`}
                         >
-                          {subcategory.title}
+                          {item.title}
                         </Link>
-                      ))}
+                        <div className="flex flex-col xl:flex-row xl:flex-wrap xl:w-[420px] w-[210px] rounded-b-lg overflow-hidden">
+                          {item.data.map((subcategory: any, i: any) => (
+                            <Link
+                              title={`Szukaj pracy w ${job.title}/${item.title}/${subcategory.title}`}
+                              key={i}
+                              style={{ boxShadow: "0px 0px 4px black" }}
+                              className={`bg-primary hover:bg-[#468CA9] duration-75 font-light p-2 text-white w-[210px] xl:min-w-[210px] max-w-[420px] ${
+                                item.data.length % 2 !== 0 &&
+                                i + 1 === item.data.length &&
+                                "rounded-b-lg"
+                              }`}
+                              href={`/praca-zdalna/${polishToEnglish(
+                                job.title
+                              )}/${polishToEnglish(
+                                item.title
+                              )}/${polishToEnglish(subcategory.title)}`}
+                            >
+                              {subcategory.title}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-      <div className="flex flex-col">
-        <div className="grid grid-cols-2 2xl:grid-cols-3 h-max gap-3 2xl:gap-4 mt-3 2xl:mt-4">
+      <div className="sticky top-0 right-0 flex flex-col">
+        <div className="grid grid-cols-2 h-max">
           {secondMenuItems.map((item: any, i: number) => (
             <article key={i} className="w-full">
               {item && (
@@ -121,7 +113,7 @@ export default function ProductsWide({
                   title={`Wypróbuj Quixy Talent™: ${item.urlLabel}`}
                   aria-label={`Link to ${item.urlLabel}`}
                   href={item.url}
-                  className={`aspect-square rounded-lg group w-full h-max text-white font-bold text-sm sm:text-lg text-center relative overflow-hidden flex flex-col items-center justify-center`}
+                  className={`aspect-square group w-full h-max text-white font-bold text-sm sm:text-lg text-center relative overflow-hidden flex flex-col items-center justify-center`}
                   style={{
                     backgroundColor: item.color,
                     boxShadow: "0px 0px 3px rgb(0, 0, 0)",
@@ -140,7 +132,10 @@ export default function ProductsWide({
                       <item.icon className="text-white drop-shadow-sm shadow-black w-full h-auto" />
                     </div>
                   </div>
-                  <h4 className="bg-black bg-opacity-50 font-gotham text-white font-bold sticky bottom-0 left-0 w-full drop-shadow-xl shadow-black z-[202] text-xs sm:text-sm 2xl:text-base py-2">
+                  <h4
+                    style={{ textShadow: "0px 4px 6px rgb(0, 0, 0)" }}
+                    className="text-center absolute bg-opacity-50 font-gotham text-white font-bold bottom-[10%] left-1/2 -translate-x-1/2 h-max w-full drop-shadow-xl shadow-black z-[202] py-2 text-lg sm:text-xl"
+                  >
                     {item.urlLabel}
                   </h4>
                 </Link>

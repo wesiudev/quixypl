@@ -22,7 +22,7 @@ export default function Settings({
   const dispatch = useDispatch();
   function scrollIntoView() {
     setTimeout(() => {
-      wrapperRef.current.scrollTop += 500;
+      wrapperRef.current.scrollTop += 400;
     }, 50);
   }
   return (

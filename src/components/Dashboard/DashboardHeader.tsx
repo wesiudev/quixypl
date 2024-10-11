@@ -87,9 +87,9 @@ export default function DashboardHeader() {
           boxShadow: "0px 0px 5px black",
         }}
       >
-        <div className={`font-coco`}>
-          <div className="px-6">
-            <div className="mt-8 w-full flex flex-col lg:flex-row lg:justify-between lg:items-start items-end justify-end lg:mt-6">
+        <div className={`font-coco w-full mt-24 lg:mt-0`}>
+          <div className="px-6 w-full">
+            <div className="mt-8 w-full flex flex-row justify-between items-start">
               <button
                 onClick={() =>
                   dispatch(set_modals({ ...modals, quixies: true }))
@@ -100,17 +100,17 @@ export default function DashboardHeader() {
                   width={500}
                   height={500}
                   alt=""
-                  className="w-[225px] lg:w-[350px] h-auto rounded-xl transition-all duration-[0.2s] cursor-pointer"
+                  className="max-w-[225px] h-auto rounded-xl transition-all duration-[0.2s] cursor-pointer"
                 />
               </button>
-              <div className="w-full flex lg:flex-col-reverse lg:items-end justify-between items-start">
-                <div className="flex items-end justify-end">
+              <div className="w-max max-w-[75px] flex lg:flex-col-reverse lg:items-end justify-between items-start">
+                <div className="flex items-start justify-start">
                   <Image
                     src="/assets/quixy-logo.png"
                     width={224}
                     height={224}
                     alt="Logo serwisu quixy.pl"
-                    className="w-24 h-auto"
+                    className="w-full h-auto"
                   />
                 </div>
               </div>

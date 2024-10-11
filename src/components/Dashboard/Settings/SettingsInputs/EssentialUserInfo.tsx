@@ -70,7 +70,7 @@ export default function EssentialUserInfo({
                 }}
                 className="border border-primary rounded-md p-2 text-black  font-light"
                 placeholder={`np. ${source?.seek ? "Młodszy Księgowy" : ""}${
-                  !source?.seek && "Project Manager"
+                  !source?.seek ? "Project Manager" : ""
                 }`}
               />
             </div>
@@ -160,7 +160,6 @@ export default function EssentialUserInfo({
               </div>
             </>
           )}
-
           <textarea
             value={source?.bio}
             onChange={(e) => {

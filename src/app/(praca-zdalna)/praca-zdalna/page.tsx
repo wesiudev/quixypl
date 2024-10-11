@@ -9,28 +9,20 @@ import { FaRocket, FaUsers, FaRegLightbulb, FaCogs } from "react-icons/fa";
 import MainFooter from "@/components/MainFooter";
 import Hero from "@/components/Hero";
 import Image from "next/image";
-import Register from "@/app/(register)/register/Register";
+import { FaChevronRight, FaChevronLeft } from "react-icons/fa6";
 
 function HeroSection() {
   return (
-    <header className="text-center py-16 overflow-hidden text-black relative">
+    <header className="text-center py-16 overflow-hidden text-white relative bg-black">
+      <Hero />
       <h1
-        style={{ lineHeight: 1.5 }}
-        className="text-2xl lg:text-4xl font-bold mb-4 leading-snug w-[90%] sm:max-w-[50rem] mx-auto z-50 relative"
+        style={{ lineHeight: 1.7 }}
+        className="text-xl lg:text-4xl font-bold mb-4 leading-snug w-[90%] sm:max-w-lg lg:max-w-4xl mx-auto z-50 relative"
       >
-        <b
-          className="text-white bg-primary"
-          style={{ textShadow: "2px 2px 2px black" }}
-        >
-          Rozwijaj Projekty
-        </b>{" "}
-        z Najlepszymi Ekspertami IT, Marketingu i Designu
-        <b
-          className="text-white bg-primary px-3 py-1 shadow-lg"
-          style={{ textShadow: "2px 2px 2px black" }}
-        >
-          Znajdź Pracę Zdalną lub Dodaj Ofertę
-        </b>
+        Dodaj ofertę lub szukaj pracy w{" "}
+        <span className="p-[4px] lg:p-[7px] text-white bg-gradient-to-r from-primary to-cta">
+          IT, projektowaniu, księgowości, czy E-Commerce!
+        </span>
       </h1>
       <Breadcrumbs />
       <JoinButton />
@@ -41,7 +33,7 @@ function HeroSection() {
 // Komponent Breadcrumbs
 function Breadcrumbs() {
   return (
-    <div className="mb-4 px-6 sm:px-12 breadcrumbs text-sm bg-transparent mx-auto relative z-50">
+    <div className="!text-white mb-2 px-6 sm:px-12 breadcrumbs text-sm bg-transparent mx-auto relative z-50">
       <ul className="flex items-center justify-center flex-wrap font-light">
         <li>
           <Link title="home" href={`/`}>
@@ -62,8 +54,7 @@ function Breadcrumbs() {
 function JoinButton() {
   return (
     <Link
-      className="bg-cta text-white hover:bg-opacity-90 py-1.5 px-2 font-gotham rounded-lg w-max mx-auto relative z-50"
-      style={{ textShadow: "2px 2px 2px black" }}
+      className="bg-cta text-white hover:bg-opacity-90 py-1.5 px-2 font-gotham font-light rounded-lg w-max mx-auto relative z-50"
       href="/register"
     >
       Rejestracja
@@ -73,26 +64,28 @@ function JoinButton() {
 
 function WhyChooseQuixySection() {
   return (
-    <section className="text-left flex lg:items-center rounded-3xl flex-col-reverse lg:flex-row bg-cta bg-opacity-10">
+    <section className="text-left flex lg:items-start rounded-3xl flex-col-reverse lg:flex-row">
       <h3 className="text-left lg:text-center font-bold">
         <Link
-          style={{ textShadow: "2px 2px 2px black" }}
-          className="p-3 flex lg:flex-col items-center justify-center bg-cta text-white hover:bg-opacity-80 rounded-lg lg:rounded-3xl lg:h-full lg:aspect-square relative z-50 mt-6 lg:mt-0 lg:mb-0"
+          className="w-max max-w-[100%] lg:mx-auto text-center p-3 flex lg:flex-col items-center justify-center bg-gradient-to-r from-primary to-cta hover:from-primary/80 hover:to-cta/80 text-white rounded-lg lg:rounded-3xl lg:h-max relative z-50 mt-6 lg:mt-0 lg:mb-0"
           href="/register"
         >
           <div className="mb-0 lg:mb-3 mr-3 lg:mr-0">
             <FaRocket className="lg:text-6xl text-xl" />
           </div>
-          Zarejestruj się by dodać ofertę pracy
+          <div className="lg:w-[200px] lg:text-center">
+            Zarejestruj się by dodać ofertę pracy
+          </div>
         </Link>
       </h3>
-      <div className="flex flex-col lg:p-6 w-full bg-gray-200 rounded-xl lg:mx-8">
-        <h2 className="italic mb-4 text-3xl lg:text-5xl text-primary font-gotham">
+      <div className="flex flex-col lg:px-6 w-full  rounded-xl lg:mx-8">
+        <h2 className="mb-4 text-3xl lg:text-5xl text-zinc-800 font-gotham">
           Dlaczego warto wybrać Quixy?
         </h2>
-        <p className="text-lg text-black font-coco italic">
-          -Oferujemy dostęp do najlepszych specjalistów w dziedzinach takich jak{" "}
-          rozwój oprogramowania, IT, marketing, desig, i wiele więcej. <br />
+        <p className="text-lg text-black font-gotham font-light lg:max-w-3xl">
+          Oferujemy połączenie z najlepszymi specjalistami w rozwoju
+          oprogramowania, usługach IT, marketing, designu, i wiele więcej.{" "}
+          <br />
           Nasza platforma łączy firmy z doświadczonymi profesjonalistami, którzy
           dostarczają najwyższej jakości usługi, zawsze na czas i zgodnie z
           wymaganiami.
@@ -105,220 +98,59 @@ function WhyChooseQuixySection() {
 // Sekcja kategorii specjalistów
 function SpecialistsCategoriesSection() {
   return (
-    <section className="lg:mt-8 mb-16 font-gotham rounded-xl w-full">
-      <h2 className="text-3xl w-full sm:max-w-[40rem] font-bold text-black  text-left">
-        Oferty pracy zdalnej, najlepsze projekty i specjaliści
+    <section className="lg:mt-8 mb-16 font-gotham rounded-xl w-full p-3 lg:p-6">
+      <h2 className="lg:flex lg:items-start lg:justify-between text-black text-3xl font-gotham text-left">
+        <span className="border-b-2 border-primary/30">
+          Oferty pracy zdalnej, gotowe projekty i profile specjalistów!
+        </span>
       </h2>
-      <div className="mt-8 flex flex-col">
-        <Link
-          href="/praca-zdalna/rozwoj-oprogramowania"
-          className="group hover:bg-cta hover:bg-opacity-20 overflow-hidden flex flex-col lg:flex-row w-full p-6"
-        >
-          <div className="relative h-full flex items-center">
-            <Image
-              src="/slug/rozwoj-oprogramowania.webp"
-              width={1366}
-              height={1366}
-              alt="Zatrudnij ekspertów od Rozwoju Oprogramowania"
-              className="h-full"
-            />
-            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
-              Najlepsi specjaliści od rozwoju oprogramowania
-            </h2>
-          </div>
-          <div className="p-6 lg:min-w-[85%]">
-            <h2 className="hidden lg:block text-2xl font-bold text-black  !font-gotham">
-              Zatrudnij ekspertów od rozwoju oprogramowania
-            </h2>
-            <p className="mt-2 font-light text-black">
-              Poszukujesz doświadczonych programistów? Nasza platforma łączy Cię
-              z profesjonalistami, którzy dostosują i stworzą oprogramowanie
-              idealnie odpowiadające Twoim potrzebom biznesowym. Skorzystaj z
-              naszej sieci talentów, by przyspieszyć rozwój swojego projektu IT.
-            </p>
-            <div
-              className="text-primary mt-4 block hover:underline"
-              aria-label="Dowiedz się więcej o tworzeniu aplikacji"
-            >
-              Dowiedz się więcej
+      <div className="flex flex-col mt-3 lg:mt-0">
+        {links.map((link, index) => (
+          <Link
+            key={index}
+            href={link.href}
+            className="rounded-xl lg:py-6 group hover:bg-primary hover:bg-opacity-20 overflow-hidden flex flex-col lg:flex-row w-full items-start justify-start lg:px-6"
+          >
+            <div className="relative h-full p-3 lg:p-0">
+              <Image
+                src={link.imageSrc}
+                width={1366}
+                height={1366}
+                alt={link.imageAlt}
+                style={{ boxShadow: "0px 0px 3px black" }}
+                className="rounded-xl w-full lg:w-[250px] h-auto"
+              />
+              <div
+                className="lg:hidden absolute left-0 bottom-3 w-full px-3 text-white group-hover:underline font-light"
+                aria-label={link.goTo}
+              >
+                <span className="mx-auto justify-center text-sm italic w-max max-w-full bg-gradient-to-r from-primary to-cta p-1.5 rounded-lg flex items-center">
+                  <FaChevronLeft className="mr-2" />
+                  {link.goTo}
+                  <FaChevronRight className="ml-2" />
+                </span>
+              </div>
             </div>
-          </div>
-        </Link>
-        <Link
-          href="/praca-zdalna/e-commerce"
-          className="group hover:bg-cta hover:bg-opacity-20 overflow-hidden flex flex-col lg:flex-row w-full p-6"
-        >
-          <div className="relative h-full">
-            <Image
-              src="/slug/e-commerce.webp"
-              width={1366}
-              height={1366}
-              alt="Wdrożenie Sklepów Internetowych z naszymi ekspertami"
-              className=" min-h-full w-auto"
-            />
-            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
-              Wdroż sklep internetowy z najlepszymi ekspertami
-            </h2>
-          </div>
-          <div className="p-6 lg:min-w-[85%]">
-            <h2 className="hidden lg:block text-2xl font-bold text-black  !font-gotham">
-              Wdróż sklep internetowy z najlepszymi specjalistami
-            </h2>
-            <p className="mt-2 font-light text-black">
-              Chcesz stworzyć lub zoptymalizować swój sklep online? Nasza
-              platforma oferuje dostęp do specjalistów od e-commerce, którzy
-              pomogą Ci maksymalizować sprzedaż i poprawić doświadczenia
-              użytkowników. Zatrudnij naszych ekspertów i przekształć swoje
-              cyfrowe przedsięwzięcia w sukces.
-            </p>
-            <div
-              className="text-primary mt-4 block hover:underline"
-              aria-label="Dowiedz się więcej o tworzeniu aplikacji"
-            >
-              Dowiedz się więcej
+            <div className="lg:ml-6 w-3/4 p-3 lg:p-6 rounded-lg group-hover:bg-white">
+              <h2 className="hidden lg:block text-2xl font-bold text-black !font-gotham">
+                {link.title}
+              </h2>
+              <p className="mt-2 lg:mb-3 font-light text-black">
+                {link.description}
+              </p>
+              <div
+                className="w-full text-white lg:mt-0 group-hover:underline font-light"
+                aria-label={link.goTo}
+              >
+                <span className="justify-center text-sm italic w-max max-w-full bg-gradient-to-r from-primary to-cta p-1.5 rounded-lg flex items-center">
+                  <FaChevronLeft className="group-hover:translate-x-[2px] group-hover:scale-100 scale-125 mr-1 duration-150" />
+                  {link.goTo}
+                  <FaChevronRight className="group-hover:translate-x-[-2px] group-hover:scale-100 scale-125 ml-1 duration-150" />
+                </span>
+              </div>
             </div>
-          </div>
-        </Link>
-        <Link
-          href="/praca-zdalna/marketing"
-          className="group hover:bg-cta hover:bg-opacity-20 overflow-hidden flex flex-col lg:flex-row w-full p-6"
-        >
-          <div className="relative h-full ">
-            <Image
-              src="/slug/marketing.webp"
-              width={1366}
-              height={1366}
-              alt="Zatrudnij specjalistów od Marketingu"
-              className=" min-h-full w-auto"
-            />
-            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
-              Najlepsi specjaliści od marketingu
-            </h2>
-          </div>
-          <div className="p-6 lg:min-w-[85%]">
-            <h2 className="hidden lg:block text-2xl font-bold text-black  !font-gotham">
-              Zatrudnij specjalistów od marketingu
-            </h2>
-            <p className="mt-2 font-light text-black">
-              Potrzebujesz skutecznej promocji? Skorzystaj z wiedzy naszych
-              ekspertów marketingowych, którzy zaplanują i zrealizują kampanie
-              reklamowe, które zwiększą Twoją rozpoznawalność i sprzedaż. Nasza
-              platforma umożliwia łatwe i szybkie zatrudnianie doświadczonych
-              marketerów online.
-            </p>
-            <div
-              className="text-primary mt-4 block hover:underline"
-              aria-label="Dowiedz się więcej o tworzeniu aplikacji"
-            >
-              Dowiedz się więcej
-            </div>
-          </div>
-        </Link>
-        <Link
-          href="/praca-zdalna/uslugi-it"
-          className="group hover:bg-cta hover:bg-opacity-20 overflow-hidden flex flex-col lg:flex-row w-full p-6"
-        >
-          <div className="relative h-full ">
-            <Image
-              src="/slug/uslugi-it.webp"
-              width={1366}
-              height={1366}
-              alt="Zatrudnij ekspertów od Wsparcia IT"
-              className=" min-h-full w-auto"
-            />
-            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
-              Najlepsi specjaliści od wsparcia IT
-            </h2>
-          </div>
-          <div className="p-6 lg:min-w-[85%]">
-            <h2 className="hidden lg:block text-2xl font-bold text-black  !font-gotham">
-              Zatrudnij ekspertów od wsparcia IT
-            </h2>
-            <p className="mt-2 font-light text-black">
-              Nasza platforma oferuje szybki dostęp do specjalistów IT, którzy
-              zapewnią wsparcie techniczne, zarządzanie infrastrukturą, a także
-              optymalizację Twoich systemów. Zatrudnij naszych ekspertów, by
-              utrzymać ciągłość i efektywność Twojej działalności
-              technologicznej.
-            </p>
-            <div
-              className="text-primary mt-4 block hover:underline"
-              aria-label="Dowiedz się więcej o tworzeniu aplikacji"
-            >
-              Dowiedz się więcej
-            </div>
-          </div>
-        </Link>
-        <Link
-          href="/praca-zdalna/uslugi-biznesowe"
-          className="group hover:bg-cta hover:bg-opacity-20 overflow-hidden flex flex-col lg:flex-row w-full p-6"
-        >
-          <div className="relative h-full ">
-            <Image
-              src="/slug/uslugi-biznesowe.webp"
-              width={1366}
-              height={1366}
-              alt="Zatrudnij doradców biznesowych"
-              className=" min-h-full w-auto"
-            />
-            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
-              Najlepsi doradcy biznesowi
-            </h2>
-          </div>
-          <div className="p-6 lg:min-w-[85%]">
-            <h2 className="hidden lg:block text-2xl font-bold text-black  !font-gotham">
-              Zatrudnij doradców biznesowych
-            </h2>
-            <p className="mt-2 font-light text-black">
-              Nasza platforma umożliwia łatwe znalezienie i zatrudnienie
-              ekspertów, którzy pomogą w optymalizacji procesów, planowaniu
-              strategicznym i zarządzaniu. Skorzystaj z doświadczenia naszych
-              specjalistów, aby przyspieszyć rozwój i zwiększyć efektywność
-              swojego przedsięwzięcia biznesowego.
-            </p>
-            <div
-              className="text-primary mt-4 block hover:underline"
-              aria-label="Dowiedz się więcej o tworzeniu aplikacji"
-            >
-              Dowiedz się więcej
-            </div>
-          </div>
-        </Link>
-        <Link
-          href="/praca-zdalna/projektowanie"
-          className="group hover:bg-cta hover:bg-opacity-20 overflow-hidden flex flex-col lg:flex-row w-full p-6"
-        >
-          <div className="relative h-full">
-            <Image
-              src="/slug/projektowanie.webp"
-              width={1366}
-              height={1366}
-              alt="Zatrudnij Projektantów dla Twojego Biznesu"
-              className=" min-h-full w-auto"
-            />
-            <h2 className="lg:hidden rounded-lg absolute bottom-3 w-[90%] left-1/2 -translate-x-1/2 bg-[#126b91] bg-opacity-80 text-2xl font-bold text-white p-3 !font-gotham">
-              Najlepsi specjaliści dla Twojego Biznesu
-            </h2>
-          </div>
-          <div className="p-6 lg:min-w-[85%]">
-            <h2 className="hidden lg:block text-2xl font-bold text-black  !font-gotham">
-              Zatrudnij Projektantów dla Twojego Biznesu
-            </h2>
-            <p className="mt-2 font-light text-black">
-              Czy potrzebujesz profesjonalnego projektu graficznego lub strony
-              internetowej? Nasza platforma łączy Cię z doświadczonymi
-              projektantami, którzy przekształcą Twoje wizje w rzeczywistość.
-              Wybierz naszych specjalistów i daj się zauważyć dzięki unikalnym i
-              efektownym projektom.
-            </p>
-            <div
-              className="text-primary mt-4 block hover:underline"
-              aria-label="Dowiedz się więcej o tworzeniu aplikacji"
-            >
-              Dowiedz się więcej
-            </div>
-          </div>
-        </Link>
+          </Link>
+        ))}
       </div>
     </section>
   );
@@ -327,7 +159,7 @@ function SpecialistsCategoriesSection() {
 function WhatMakesUsUniqueSection() {
   return (
     <section className="my-16">
-      <h2 className="text-3xl font-bold mb-6 text-black  font-gotham">
+      <h2 className="text-3xl mb-6 text-zinc-800  font-gotham">
         Co nas wyróżnia?
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-8 text-center">
@@ -335,25 +167,25 @@ function WhatMakesUsUniqueSection() {
           icon={<FaRocket className="text-white text-5xl" />}
           title="Szybka rekrutacja"
           description="Proces rekrutacji jest szybki i efektywny, pozwalając Ci skupić się na rozwoju projektu."
-          linkTitle="Quixy Talent™"
+          linkTitle="Dodaj ofertę"
         />
         <HighlightCard
           icon={<FaCogs className="text-white text-5xl" />}
           title="Nasze Usługi AI"
-          description="Sprawdź za darmo generator obrazków oraz generator pomysłów na biznes"
-          linkTitle="Usługi AI™"
+          description="Sprawdź za darmo generator obrazów oraz pomysłów na biznes"
+          linkTitle="Sprawdź za darmo"
         />
         <HighlightCard
           icon={<FaUsers className="text-white text-5xl" />}
-          title="Najlepsi eksperci"
-          description="Współpracujemy z doświadczonymi ekspertami, aby zapewnić najwyższą jakość usług."
-          linkTitle="Quixy Talent™"
+          title="Najlepsze firmy"
+          description="Współpracujemy z doświadczonymi firmami, aby zapewnić najwyższą jakość ogłoszeń."
+          linkTitle="Szukaj pracy"
         />
         <HighlightCard
           icon={<FaRegLightbulb className="text-white text-5xl" />}
           title="Innowacyjne pomysły"
-          description="Nasze narzędzia i porady pomogą Ci stworzyć unikalne i skuteczne strategie biznesowe."
-          linkTitle="Pomysły Quixy™"
+          description="Nasze narzędzia i pomogą Ci stworzyć unikalne i skuteczne strategie biznesowe."
+          linkTitle="Zarejestruj"
         />
       </div>
     </section>
@@ -373,18 +205,15 @@ function HighlightCard({
   linkTitle: string;
 }) {
   return (
-    <div
-      className="font-coco p-3 rounded-xl relative "
-      style={{ boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.25)" }}
-    >
-      <div className="bg-primary rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
+    <div className="font-gotham p-3 rounded-xl relative bg-gradient-to-r from-primary/10 to-cta/10">
+      <div className="bg-primary/75 rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
         {icon}
       </div>
-      <h3 className="text-xl font-bold text-black mb-2 mt-4">{title}</h3>
-      <p className="text-black text-sm">{description}</p>
+      <h3 className="text-xl  text-black mb-2 mt-4">{title}</h3>
+      <p className="text-black text-sm font-coco">{description}</p>
       <div className="mt-6" />
       <Link
-        className="font-bold bg-cta hover:bg-opacity-90 duration-100 underline text-white p-3 rounded-lg"
+        className=" font-light bg-cta hover:bg-cta/80 duration-100 text-white px-2 py-1.5 rounded-lg"
         href="/register"
         title={linkTitle}
       >
@@ -396,21 +225,24 @@ function HighlightCard({
 }
 function CallToActionSection() {
   return (
-    <section className="flex flex-col lg:flex-row my-16 font-gotam text-left">
-      <div className="overflow-hidden h-full rounded-tl-[80px] rounded-3xl">
+    <section className="flex flex-col lg:flex-row my-24 font-gotham text-left">
+      <div
+        style={{ boxShadow: "0px 0px 5px black" }}
+        className="overflow-hidden h-full rounded-tl-[80px] rounded-3xl"
+      >
         <Image
           src="/happy.jpg"
           width={500}
           height={500}
           alt="Logo serwisu quixy.pl"
-          className=""
+          className="w-full h-auto"
         />
       </div>
-      <div className="lg:p-6">
-        <h2 className="text-3xl font-semibold mb-6 text-black mt-6 lg:mt-0">
-          Znajdź wolne stanowisko pracy zdalnej!
+      <div className="lg:px-6">
+        <h2 className="text-3xl mb-6 text-zinc-800 mt-6 lg:mt-0">
+          Znajdziesz wolne stanowisko pracy zdalnej!
         </h2>
-        <p className="mb-3 text-lg text-black max-w-2xl">
+        <p className="mb-3 text-lg text-black max-w-2xl font-gotham font-light">
           Quixy.pl to najlepsza platforma z pracą zdalną w Polsce. Technologia z
           której korzystamy jest szybka i niezawodna. Zapraszamy do
           przeprowadzania rekrutacji, tworzenia wspólnych projektów i poszukiwań
@@ -441,9 +273,8 @@ export default function Page() {
         <WhatMakesUsUniqueSection />
         <FAQ faqItems={faqItems} />
         <OpinionsForm />
-        <FunnyComponent />
       </main>
-      <Register />
+      {/* <FunnyComponent /> */}
       <MainFooter
         heading={"Szukaj pracy lub dodaj ofertę"}
         category={""}
@@ -456,38 +287,35 @@ export default function Page() {
 // Zabawny komponent
 function FunnyComponent() {
   return (
-    <div className="flex flex-col lg:flex-row lg:justify-between font-coco bg-[#126b91] p-6 rounded-lg shadow-lg my-12">
-      <div className="">
-        <h2 className="max-w-lg text-3xl lg:text-5xl font-bold text-white mb-4">
-          Potrzebujesz chwili wytchnienia?
-        </h2>
-        <p className="text-white mb-4">
-          Praca zdalna może być intensywna, ale kto powiedział, że nie może być
-          zabawnie?
-        </p>
+    <div className="mx-auto w-full bg-gradient-to-r from-primary/20 to-cta/20 p-3 lg:p-6">
+      <div className="flex flex-col-reverse md:flex-row md:items-center mx-auto text-black text-xl max-w-xl">
+        <Image
+          src="/assets/gif/giremotework.webp"
+          width={512}
+          height={512}
+          alt="Praca zdalna w biurze"
+          title="Praca zdalna w biurze"
+          style={{ boxShadow: "0px 0px 5px black" }}
+          className="rounded-xl w-auto h-full mt-4 lg:mt-0"
+        />
+        <div className="md:pl-6">
+          <h2 className="max-w-lg text-3xl lg:text-5xl font-bold text-black mb-4">
+            Potrzebujesz chwili wytchnienia?
+          </h2>
+          <p className="text-black mb-4">
+            Praca zdalna może być intensywna, ale kto powiedział, że nie może
+            być zabawnie?
+          </p>
 
-        <p className="bg-white rounded-xl p-3 text-xl text-black font-bold italic w-max max-w-[100%]">
-          „Zatrudnij mnie, zanim zrobi to ktoś inny! 🤖” – Najnowsza AI
-        </p>
-        <p className="mt-4 text-sm text-white">
-          *Tylko żart, obiecujemy, że nie zatrudniamy robotów... jeszcze.*
-        </p>
-        <div className="my-3" />
-        <Link
-          href="/register"
-          title="Zarejestruj się w platformie z pracą zdalną"
-          className="mb-3 bg-white text-primary py-1.5 px-2 rounded-lg hover:bg-opacity-90 durtion-100 font-bold"
-        >
-          Zarejestruj
-        </Link>
+          <p className="bg-gradient-to-r from-primary to-cta rounded-xl p-2 text-xl text-white italic w-max max-w-[100%]">
+            „Zatrudnij mnie, zanim zrobi to ktoś inny! 🤖” – Najnowsza AI
+          </p>
+          <p className="mt-4 text-sm text-black">
+            *Tylko żart, obiecujemy, że nie zatrudniamy robotów... jeszcze.*
+          </p>
+          <div className="my-3" />
+        </div>
       </div>
-      <Image
-        src="https://media.giphy.com/media/Wv9kcISbTN0B2/giphy.gif"
-        width={512}
-        height={512}
-        alt="Zabawny GIF"
-        className="rounded-lg w-[300px] mt-4 lg:mt-0"
-      />
     </div>
   );
 }
@@ -613,5 +441,62 @@ const faqItems = [
   {
     question: "Jak mogę zdobyć więcej Quixies?",
     answer: "Możesz zakupić Quixies bezpośrednio poprzez naszą platformę.",
+  },
+];
+
+const links = [
+  {
+    href: "/praca-zdalna/rozwoj-oprogramowania",
+    imageSrc: "/slug/rozwoj-oprogramowania.webp",
+    imageAlt: "Zatrudnij ekspertów od Rozwoju Oprogramowania",
+    title: "Specjaliści rozwoju oprogramowania",
+    description:
+      "Poszukujesz doświadczonych programistów? Nasza platforma łączy Cię z profesjonalistami, którzy dostosują i stworzą oprogramowanie idealnie odpowiadające Twoim potrzebom biznesowym. Skorzystaj z naszej sieci talentów, by przyspieszyć rozwój swojego projektu IT.",
+    goTo: "Rozwój oprogramowania",
+  },
+  {
+    href: "/praca-zdalna/e-commerce",
+    imageSrc: "/slug/e-commerce.webp",
+    imageAlt: "Wdrożenie Sklepów Internetowych z naszymi ekspertami",
+    title: "Programiści sklepów internetowych",
+    description:
+      "Chcesz stworzyć lub zoptymalizować swój sklep online? Nasza platforma oferuje dostęp do specjalistów od e-commerce, którzy pomogą Ci maksymalizować sprzedaż i poprawić doświadczenia użytkowników. Zatrudnij naszych ekspertów i przekształć swoje cyfrowe przedsięwzięcia w sukces.",
+    goTo: "E-Commerce",
+  },
+  {
+    href: "/praca-zdalna/marketing",
+    imageSrc: "/slug/marketing.webp",
+    imageAlt: "Zatrudnij specjalistów od Marketingu",
+    title: "Specjaliści marketingu",
+    description:
+      "Potrzebujesz skutecznej promocji? Skorzystaj z wiedzy naszych ekspertów marketingowych, którzy zaplanują i zrealizują kampanie reklamowe, które zwiększą Twoją rozpoznawalność i sprzedaż. Nasza platforma umożliwia łatwe i szybkie zatrudnianie doświadczonych marketerów online.",
+    goTo: "Marketing",
+  },
+  {
+    href: "/praca-zdalna/uslugi-it",
+    imageSrc: "/slug/uslugi-it.webp",
+    imageAlt: "Zatrudnij ekspertów od Wsparcia IT",
+    title: "Specjaliści Wsparcia IT",
+    description:
+      "Nasza platforma oferuje szybki dostęp do specjalistów IT, którzy zapewnią wsparcie techniczne, zarządzanie infrastrukturą, a także optymalizację Twoich systemów. Zatrudnij naszych ekspertów, by utrzymać ciągłość i efektywność Twojej działalności technologicznej.",
+    goTo: "Usługi IT",
+  },
+  {
+    href: "/praca-zdalna/uslugi-biznesowe",
+    imageSrc: "/slug/uslugi-biznesowe.webp",
+    imageAlt: "Zatrudnij doradców biznesowych",
+    title: "Doradcy biznesowi",
+    description:
+      "Nasza platforma umożliwia łatwe znalezienie i zatrudnienie ekspertów, którzy pomogą w optymalizacji procesów, planowaniu strategicznym i zarządzaniu. Skorzystaj z doświadczenia naszych specjalistów, aby przyspieszyć rozwój i zwiększyć efektywność swojego przedsięwzięcia biznesowego.",
+    goTo: "Usługi biznesowe",
+  },
+  {
+    href: "/praca-zdalna/projektowanie",
+    imageSrc: "/slug/projektowanie.webp",
+    imageAlt: "Zatrudnij Projektantów dla Twojego Biznesu",
+    title: "Projektanci i designerzy",
+    description:
+      "Czy potrzebujesz profesjonalnego projektu graficznego lub strony internetowej? Nasza platforma łączy Cię z doświadczonymi projektantami, którzy przekształcą Twoje wizje w rzeczywistość. Wybierz naszych specjalistów i daj się zauważyć dzięki unikalnym i efektownym projektom.",
+    goTo: "Projektowanie",
   },
 ];

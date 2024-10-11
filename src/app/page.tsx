@@ -1,6 +1,13 @@
+import { IoSparkles } from "react-icons/io5";
 import Image from "next/image";
 import Link from "next/link";
-import { FaEdit, FaLongArrowAltRight, FaStar, FaUpload } from "react-icons/fa";
+import {
+  FaChevronRight,
+  FaEdit,
+  FaLongArrowAltRight,
+  FaStar,
+  FaUpload,
+} from "react-icons/fa";
 
 import HomePageGenerator from "@/components/HomePageGenerator";
 import UserSearchWrapper from "@/components/HomeUnderHero/UserSearchWrapper";
@@ -72,143 +79,149 @@ export default async function Page() {
   return (
     <div className="flex flex-col bg-white">
       <Header jobsList={itCategories} />
-      <div className="bg-gradient-to-br from-zinc-700 via-slate-800 to-zinc-950 relative overflow-hidden">
-        <Hero />
-        <div className="flex flex-col items-center md:flex-row sm:mx-8 lg:mx-[7vw] 2xl:mx-[12vw] relative z-50">
-          <div className="flex flex-col md:justify-center py-24 items-center">
-            <div className="group relative flex flex-col p-3 bg-black bg-opacity-20 rounded-xl w-max max-w-[100%] md:mr-12">
-              <Image
-                src="/assets/quixy-logo.png"
-                width={140}
-                height={140}
-                alt="Pracuj Zdalnie Z Quixy Talent"
-                title="Pracuj Zdalnie Z Quixy Talent"
-                className="w-[130px] sm:w-[100px] h-auto mx-auto sm:mx-0"
-              />
-              <h2
-                style={{
-                  lineHeight: 1,
-                  letterSpacing: "-2px",
-                  textShadow: "0px 0px 2px black",
-                }}
-                className="scale-90 sm:scale-100 font-gotham text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white font-bold lg:max-w-[40rem] sm:pr-12 text-center sm:text-left leading-relaxed drop-shadow-3xl shadow-black max-w-sm mx-auto sm:mx-0"
+      <div className="">
+        <div className="px-4 container mx-auto w-full flex flex-col items-center lg:grid lg:grid-cols-2 relative z-50 py-32">
+          <div className="group relative flex flex-col mx-auto">
+            <Image
+              src="/assets/quixy-logo.png"
+              width={140}
+              height={140}
+              alt="Pracuj Zdalnie Z Quixy Talent"
+              title="Pracuj Zdalnie Z Quixy Talent"
+              className="w-[100px] lg:hidden h-auto mx-auto"
+            />
+            <h2 className="lg:max-w-sm font-extrabold font-coco text-3xl lg:text-5xl text-zinc-800 text-center sm:text-left  mx-auto sm:mx-0">
+              Twoja platforma pracy zdalnej
+            </h2>
+            <h2 className="max-w-[100%] mx-auto lg:mx-0 px-6 sm:px-0 sm:max-w-sm lg:max-w-lg font-light text-black font-gotham lg:text-lg xl:text-xl text-center md:text-left mt-2">
+              Pierwszy polski serwis łączący{" "}
+              <b className="text-black">ekspertów</b> {" z "}
+              <b className="text-black">pracodawcami</b> technologią{" "}
+              <Link href="/about#ccrm">
+                <b>CCRM!</b>
+              </Link>
+            </h2>
+            <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 w-full justify-center mt-2 lg:justify-start">
+              <Link
+                href="/praca-zdalna"
+                title="Rekrutuj do pracy zdalnej na panelu Quixy"
+                className="font-gotham font-light rounded-md bg-primary hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
               >
-                Twoja platforma pracy zdalnej
-              </h2>
-              <h2 className="max-w-lg scale-90 sm:scale-100 px-3 sm:pl-1 font-light text-white font-gotham lg:text-lg xl:text-xl sm:pr-8 lg:pr-12 2xl:pr-[10vw] text-center sm:text-left">
-                Pierwszy polski serwis łączący{" "}
-                <b className="text-white">ekspertów</b> {" z "}
-                <b className="text-white">pracodawcami</b> technologią{" "}
-                <Link href="/about#ccrm">
-                  <b>CCRM!</b>
-                </Link>
-              </h2>
-              <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 w-full justify-center mt-2 sm:justify-start">
-                <Link
-                  href="/praca-zdalna"
-                  title="Rekrutuj do pracy zdalnej na panelu Quixy"
-                  style={{ textShadow: "2px 2px 2px black" }}
-                  className="font-gotham rounded-md bg-primary hover:bg-opacity-90 duration-100 text-white text-sm lg:text-base p-2 py-1.5 text-center"
-                >
-                  <h2 className="w-max mx-auto">Zatrudnij talent</h2>
-                </Link>
-                <Link
-                  href="/praca-zdalna"
-                  title="Szukaj pracy zdalnej na panelu Quixy"
-                  style={{ textShadow: "2px 2px 2px black" }}
-                  className="font-gotham rounded-md bg-cta hover:bg-opacity-90 duration-100 text-white text-sm lg:text-base p-2 py-1.5 text-center"
-                >
-                  <h2 className="w-max mx-auto">Pracuj zdalnie</h2>
-                </Link>
-              </div>
-              <div className="mt-4 text-base font-gotham text-white font-light text-center sm:text-left max-w-xl ">
-                Zaufało nam 97% klientów
-              </div>
-              <div className="mt-6 flex items-center flex-wrap w-full -ml-6 justify-center sm:justify-start">
-                <Image
-                  src="/assets/google.png"
-                  width={224}
-                  height={224}
-                  alt="google nam zaufało"
-                  className="max-h-[38px] w-auto ml-6 mt-6"
-                />
-                <Image
-                  src="/assets/deviant.png"
-                  width={224}
-                  height={224}
-                  alt="deviant nam zaufał"
-                  className="max-h-[38px] w-auto ml-6 mt-6 bg-white px-1 rounded-md"
-                />
-                <Image
-                  src="/assets/pinterest.png"
-                  width={224}
-                  height={224}
-                  alt="pinterest nam zaufał"
-                  className="max-h-[38px] w-auto ml-6 mt-6"
-                />
-              </div>
+                <h2 className="w-max mx-auto">Zatrudnij talent</h2>
+              </Link>
+              <Link
+                href="/praca-zdalna"
+                title="Szukaj pracy zdalnej na panelu Quixy"
+                className="font-gotham font-light rounded-md bg-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
+              >
+                <h2 className="w-max mx-auto">Pracuj zdalnie</h2>
+              </Link>
+            </div>
+            <span className="mt-12 text-base font-gotham text-gray-700 font-light text-center lg:text-left">
+              Zaufało nam 97% klientów
+            </span>
+            <div className="flex items-center flex-wrap w-full -ml-6 justify-center lg:justify-start">
+              <Image
+                src="/assets/google.png"
+                width={224}
+                height={224}
+                alt="google nam zaufało"
+                className="max-h-[38px] w-auto ml-6 mt-3"
+              />
+              <Image
+                src="/assets/deviant.png"
+                width={224}
+                height={224}
+                alt="deviant nam zaufał"
+                className="max-h-[38px] w-auto ml-6 mt-3 bg-white px-1 rounded-md"
+              />
+              <Image
+                src="/assets/pinterest.png"
+                width={224}
+                height={224}
+                alt="pinterest nam zaufał"
+                className="max-h-[38px] w-auto ml-6 mt-3"
+              />
             </div>
           </div>
-          <div className="md:h-[45vh] w-full md:w-1/2 rounded-3xl overflow-hidden items-center flex 2xl:pl-[10vw] relative">
-            <Link
-              href="/register"
-              className="bg-primary hover:bg-opcatiy-90 p-3 rounded-bl-3xl rounded-tr-3xl px-12 left-0 bottom-0 absolute z-50 text-white font-gotham"
-              style={{ textShadow: "2px 2px 2px black" }}
+          <div
+            style={{ boxShadow: "0px 0px 5px black" }}
+            className="flex flex-col items-center justify-center w-full h-full mx-auto lg:rounded-xl mt-12 lg:mt-0 overflow-hidden relative"
+          >
+            <div
+              style={{ boxShadow: "0px 0px 5px black" }}
+              className="absolute left-3 top-3 flex items-center z-50"
             >
-              Wypróbuj Generator Obrazów
-            </Link>
+              <Link href="/register">
+                {" "}
+                <h2 className="rounded-tl-xl font-gotham font-light text-white bg-gradient-to-r from-primary to-cta p-2 flex items-center">
+                  Wygeneruj obraz za darmo!
+                  <FaChevronRight className="text-lg ml-2" />
+                </h2>
+              </Link>
+            </div>
             <Image
-              src="/assets/heroimg.png"
-              width={1500}
-              height={1028}
-              alt="Quixy Hero Image"
-              className="absolute inset-0 object-cover w-full h-full group-hover:scale-110 duration-500"
+              src="/assets/heroImg.png"
+              width={1024}
+              height={1024}
+              alt="Quixy Praca Zdalna"
+              className="left-0 top-0 absolute inset-0 object-cover w-full h-full"
             />
+            <Link
+              style={{ boxShadow: "0px 0px 5px black" }}
+              href="/register"
+              className="rounded-bl-xl p-2 absolute bottom-3 left-3 w-[90%] container z-50 text-white bg-gradient-to-r from-primary to-cta"
+            >
+              <h2 className="font-coco text-2xl">
+                Promuj swój biznes w Quixy!
+              </h2>
+              <p className="font-coco font-light italic text-xs">
+                Quixy talent to nie tylko rozwiązanie dla talentów pracujących
+                zdalnie, to także rozwiązanie dla firm - zarejestruj u nas swoją
+                firmę i wyświetlaj swoje usługi!
+              </p>
+            </Link>
           </div>
         </div>
       </div>
-      <div className="infinite-bg p-3 sm:px-12 py-6 h-max">
+      <div className="infinite-bg p-3 sm:px-12 py-16 h-max">
         <div className="flex flex-col justify-center items-center">
           <div className="flex flex-row">
             <h2
-              style={{
-                lineHeight: 1.325,
-                textShadow: "2px 2px 2px #000",
-              }}
-              className="w-full md:max-w-[50rem] font-gotham text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white text-center"
+              style={{ textShadow: "2px 2px 6px black" }}
+              className="w-full md:max-w-[50rem] xl:max-w-[1024px] font-gotham font-light italic text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white text-center"
             >
-              Wyobraź sobie swój wymarzony biznes, pomnożony przez
-              maksymalizację efektywności💎
+              Wyobraź sobie wymarzony biznes, pomnożony przez maksymalizację
+              efektywności💎
             </h2>
           </div>
         </div>
       </div>
-      <div className="w-full rounded-3xl mx-4 sm:mx-8 lg:mx-12 2xl:mx-[15vw] mt-16 mb-4">
-        <div className="flex flex-col md:flex-row mx-auto text-black text-xl">
-          <div className="flex flex-col w-full">
-            <h2 className="font-gotham mb-3 text-2xl sm:text-4xl  font-bold flex items-center">
-              Darmowy wstęp
+      <div className="mx-auto mt-16 mb-4 w-max max-w-full px-4">
+        <div className="flex flex-col-reverse md:flex-row md:items-center mx-auto text-black text-xl">
+          <Image
+            src="/assets/gif/gihome.webp"
+            width={512}
+            height={512}
+            alt="Praca zdalna za darmo"
+            title="Praca zdalna za darmo"
+            style={{ boxShadow: "0px 0px 5px black" }}
+            className="mt-4 md:mt-0 rounded-2xl w-full md:max-w-[300px]"
+          />
+          <div className="flex flex-col md:pl-6 md:py-4">
+            <h2 className="font-gotham mb-3 text-3xl lg:text-5xl font-bold flex items-center">
+              Darmowy dostęp!
             </h2>
-            <p className="font-gotham font-light flex text-left max-w-[40rem] pr-6">
+            <p className="font-gotham font-light flex text-left max-w-[40rem] mb-3">
               Dołączenie do naszej platformy pracy jest w pełni darmowe!
               Zapraszamy do dodawania ofert pracy oraz zatrudnienia talentów.
             </p>
             <Link
               href="/register"
-              style={{ textShadow: "2px 2px 2px black" }}
-              className="text-white bg-[#14A800] font-gotham py-1.5 px-2 rounded-lg w-max mt-2 hover:bg-opacity-90"
+              className="w-max font-gotham font-light rounded-md bg-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
             >
               Rejestracja
             </Link>
-          </div>
-          <div className="w-full">
-            <Image
-              src="https://media.giphy.com/media/U2O50cAkpmTjG/giphy.gif"
-              width={512}
-              height={512}
-              alt=""
-              className="mt-4 md:mt-0 rounded-2xl max-w-[300px]"
-            />
           </div>
         </div>
       </div>
@@ -260,10 +273,10 @@ export default async function Page() {
               height={1024}
               alt="Praca zdalna Quixy Talent"
               style={{ boxShadow: "0px 0px 5px black" }}
-              className="rounded-t-2xl rounded-b-2xl rounded-tl-[80px]"
+              className="rounded-t-2xl rounded-b-2xl rounded-tl-[60px]"
             />
           </div>
-          <div className="flex flex-col px-3 md:pl-6 lg:pl-12 font-coco text-black">
+          <div className="flex flex-col px-3 md:pl-3 lg:pl-12 font-coco text-black">
             <h2
               style={{ lineHeight: 1.325 }}
               className="font-gotham text-3xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold  drop-shadow-md shadow-black mb-6 mt-6 md:mt-0"
@@ -420,23 +433,23 @@ export default async function Page() {
             </div>
           </div>
         </div>
-        <div className="rounded-2xl md:w-[33%] w-full bg-[#126b91] lg:bg-transparent relative md:rounded-xl md:flex-col grid grid-cols-2 md:flex md:justify-end p-4 md:p-6">
-          <div className="h-full flex flex-col justify-end">
-            <h3 className="max-w-[250px] text-base sm:text-2xl lg:text-3xl font-gotham mb-3 text-white lg:text-black">
-              Polska Platforma Z Pracą Zdalną
+        <div className="rounded-2xl md:w-[40%] w-full relative md:flex-col flex flex-rowp-4 md:p-6">
+          <div className="w-max max-w-[100%] h-full flex flex-col">
+            <h3 className="text-2xl lg:text-3xl font-gotham mb-3 text-white lg:text-black">
+              Polska Platforma Pracy Zdalnej
             </h3>
-            <div className="flex flex-row items-start bg-white md:bg-gray-200 p-2 rounded-xl w-full">
+            <div className="flex flex-row items-start max-w-[100%]">
               <FaStar className="ml-2 min-w-[60px] h-auto max-w-[60px] font-bold text-cta" />
               <div className="ml-3 flex flex-col">
                 <h3 className="text-lg lg:text-2xl text-black  font-bold -mt-1">
                   4.95/5
                 </h3>
-                <p className="text-black text-xs sm:text-sm md:text-base font-coco">
+                <p className="text-black text-xs sm:text-sm md:text-base">
                   Według opinii naszych klientów
                 </p>
               </div>
             </div>
-            <div className="flex flex-row items-start bg-white md:bg-gray-200 p-2 rounded-xl mt-2">
+            <div className="flex flex-row items-start mt-2 max-w-[100%]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="ml-2 min-w-[60px] max-w-[60px]"
@@ -472,19 +485,19 @@ export default async function Page() {
                 <h3 className="text-lg lg:text-2xl text-black font-bold -mt-1">
                   5/5
                 </h3>
-                <p className="text-black text-xs sm:text-sm md:text-base font-coco">
+                <p className="text-black text-xs sm:text-sm md:text-base">
                   Korzystamy z niezawodnej technologii
                 </p>
               </div>
             </div>
+
+            <Link
+              href="/register"
+              className="text-center mt-1.5 bg-primary px-1.5 py-1 rounded-lg font-gotham font-bold text-white hover:bg-opacity-90"
+            >
+              Zarejestruj się
+            </Link>
           </div>
-          <Image
-            src="/assets/ninja.png"
-            width={222}
-            height={222}
-            alt="Gwarancja jakości Quixy"
-            className="relative md:absolute -right-6 -top-24 md:-left-44 md:-top-6 h-auto mx-auto md:mx-0 md:scale-75"
-          />
         </div>
       </div>
       {/* just a component for the future 🤷‍♀️ */}
@@ -520,7 +533,7 @@ export default async function Page() {
       <div className="mx-4 bg-white relative md:mx-8 lg:mx-12 2xl:mx-[15vw] h-max rounded-xl mb-20">
         <FAQ faqItems={faqItems} />
       </div>
-      <Register />
+     
       <MainFooter jobsList={itCategories} />
     </div>
   );
