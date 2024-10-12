@@ -48,12 +48,12 @@ export default function ProductsMobile({
           >
             Zatrudnij talent
           </Link>
-          <Link
+          {/* <Link
             href="/client"
             className="ml-1.5 rounded-lg py-1 px-1.5 text-base drop-shadow-sm shadow-black text-white bg-primary hover:bg-primary/80 mt-1.5"
           >
             Przeglądaj Firmy
-          </Link>
+          </Link> */}
           <Link
             href="/about"
             className="ml-1.5 rounded-lg py-1 px-1.5 text-base drop-shadow-sm shadow-black text-white bg-primary hover:bg-primary/80 mt-1.5"
