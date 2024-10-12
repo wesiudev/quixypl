@@ -1,10 +1,8 @@
 import Link from "next/link";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 import jobs from "../../../../../public/14.09.2024.json";
-const Header = dynamic(() => import("@/components/Header"), { ssr: false });
-const SlugFooter = dynamic(() => import("@/components/SlugFooter"), {
-  ssr: false,
-});
+import SlugFooter from "@/components/SlugFooter";
+import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { getPageContent } from "@/lib/getPageContent";
@@ -13,22 +11,18 @@ import { TfiFlagAlt } from "react-icons/tfi";
 import { getTalents } from "../../../../../utils/getTalents";
 import BlogPostList from "@/components/BlogPostList";
 import { getProducts } from "@/firebase";
-import dynamic from "next/dynamic";
 export async function generateStaticParams() {
   return jobs.flatMap((service: any) => ({
     slug: polishToEnglish(service.title),
   }));
 }
-
-export const revalidate = 300;
-
 export default async function Page({ params }: { params: any }) {
   const slug: any = jobs.find(
     (page: any) => polishToEnglish(page.title) === params.slug
   );
   const content = await getPageContent(polishToEnglish(slug.title));
   const products: any = await getProducts();
-  // const talents = await getTalents();
+  const talents = await getTalents();
   // const job_offers = await fetch(
   //   `${process.env.NEXT_PUBLIC_URL}/api/getOffersByCategory?tubylytylkofigi=${
   //     process.env.API_SECRET_KEY
@@ -109,7 +103,6 @@ export default async function Page({ params }: { params: any }) {
               alt={`Prace Zdalne w ${content?.genitive}`}
               style={{ boxShadow: "0px 0px 8px black" }}
               className="rounded-full w-full h-auto mb-6 lg:mb-0"
-              loading="lazy"
             />
             <div className="flex flex-col w-full justify-center font-gotham">
               <h1 className="text-2xl lg:text-4xl text-black  drop-shadow-md">
