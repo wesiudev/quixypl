@@ -103,6 +103,7 @@ export default async function Page({ params }: { params: any }) {
               alt={`Prace Zdalne w ${content?.genitive}`}
               style={{ boxShadow: "0px 0px 8px black" }}
               className="rounded-full w-full h-auto mb-6 lg:mb-0"
+              loading="lazy"
             />
             <div className="flex flex-col w-full justify-center font-gotham">
               <h1 className="text-2xl lg:text-4xl text-black  drop-shadow-md">
