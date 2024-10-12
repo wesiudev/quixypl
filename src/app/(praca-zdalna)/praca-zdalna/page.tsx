@@ -231,9 +231,13 @@ function CallToActionSection() {
         className="overflow-hidden h-full rounded-tl-[80px] rounded-3xl"
       >
         <Image
-          src="https://firebasestorage.googleapis.com/v0/b/reklamy-figurscy.appspot.com/o/happy.jpg?alt=media&token=c276d324-5abd-4f96-ad26-d9271f3942a8"
+          src="/happy.webp"
           width={500}
           height={500}
+          loading="lazy"
+          quality={75}
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAA"
+          placeholder="blur"
           alt="Logo serwisu quixy.pl"
           className="w-full h-auto"
         />

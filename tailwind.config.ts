@@ -27,7 +27,7 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         login: "url('/assets/login.webp')",
-        register: "url('/happy.jpg')",
+        register: "url('/happy.webp')",
       },
     },
   },
