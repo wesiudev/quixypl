@@ -15,16 +15,18 @@ interface IdeasProps {
 
 const IdeaList: React.FC<IdeasProps> = ({ ideas }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; // Customize this value as needed
+  const [itemsPerPage, setItemsPerPage] = useState(6); // Initially, 6 items per page
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  const indexOfLastIdea = currentPage * itemsPerPage;
-  const indexOfFirstIdea = indexOfLastIdea - itemsPerPage;
-  const currentIdeas = ideas?.slice(indexOfFirstIdea, indexOfLastIdea);
+  const handleShowMore = () => {
+    setItemsPerPage((prev) => prev + 6); // Load 6 more talents each time the button is clicked
+  };
 
+  const indexOfLastIdea = currentPage * itemsPerPage;
+  const currentIdeas = ideas?.slice(0, indexOfLastIdea);
   return (
     <div className="bg-white p-4 sm:p-8 mx-auto font-gotham sm:rounded-xl sm:my-12">
       <h2 className="text-xl sm:text-3xl max-w-2xl text-black">
@@ -52,6 +54,7 @@ const IdeaList: React.FC<IdeasProps> = ({ ideas }) => {
 
       {/* Render Pagination Component */}
       <Pagination
+        onShowMore={handleShowMore}
         totalItems={ideas?.length}
         itemsPerPage={itemsPerPage}
         currentPage={currentPage}

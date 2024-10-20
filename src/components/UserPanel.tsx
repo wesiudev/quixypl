@@ -59,7 +59,7 @@ const UserPanel = ({ userData }: { userData: any }) => {
         {linksData.map((link, index) => (
           <Link
             key={index}
-            className={`relative  p-12 w-full flex items-center flex-col h-full justify-center text-xs sm:text-sm font-gotham aspect-square sm:rounded-xl bg-gradient-to-br from-primary to-cta text-white hover:scale-105 duration-200`}
+            className={`relative rounded-md p-12 w-full flex items-center flex-col h-full justify-center text-xs sm:text-sm font-gotham aspect-square sm:rounded-xl bg-gradient-to-br from-primary to-cta text-white hover:scale-105 duration-200`}
             href={link.href}
             rel="noopener noreferrer"
           >

@@ -68,7 +68,7 @@ export default function Dashboard() {
                           {!user?.photoURL && (
                             <div
                               style={{ boxShadow: "inset 0px 0px 8px black" }}
-                              className="bg-[#126b91] rounded-l-xl w-24 aspect-square sm:w-40 text-white flex items-center justify-center"
+                              className="bg-[#126b91] rounded-full w-24 aspect-square sm:w-40 text-white flex items-center justify-center"
                             >
                               <FaUser className="text-3xl lg:text-5xl group-hover:scale-110 duration-200" />
                             </div>

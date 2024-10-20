@@ -2,20 +2,22 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Pagination from "./pagination/Pagination";
-import { polishToEnglish } from "../../utils/polishToEnglish";
 import Image from "next/image";
 
 const BlogPostList = ({ posts }: { posts: any }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; // Customize this value as needed
+  const [itemsPerPage, setItemsPerPage] = useState(6); // Initially, 6 items per page
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  const indexOfLastPost = currentPage * itemsPerPage;
-  const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-  const currentPosts = posts?.slice(indexOfFirstPost, indexOfLastPost);
+  const handleShowMore = () => {
+    setItemsPerPage((prev) => prev + 6); // Load 6 more talents each time the button is clicked
+  };
+
+  const indexOfLastIdea = currentPage * itemsPerPage;
+  const currentIdeas = posts?.slice(0, indexOfLastIdea);
 
   return (
     <div className="mt-12">
@@ -23,7 +25,7 @@ const BlogPostList = ({ posts }: { posts: any }) => {
         Interesujesz się pracą zdalną, biznesem lub AI? Sprawdź naszego bloga!
       </h3>
       <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4">
-        {currentPosts?.map((post: any, i: number) => (
+        {currentIdeas?.map((post: any, i: number) => (
           <Link
             href={`/blog/${post.url}`}
             key={i}
@@ -48,6 +50,7 @@ const BlogPostList = ({ posts }: { posts: any }) => {
 
       {/* Render Pagination Component */}
       <Pagination
+        onShowMore={handleShowMore}
         totalItems={posts?.length}
         itemsPerPage={itemsPerPage}
         currentPage={currentPage}
