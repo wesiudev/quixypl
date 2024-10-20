@@ -16,12 +16,6 @@ import { cutSentence } from "@/lib/cutSentence";
 import RegisterPopup from "./RegisterPopup";
 import { FaCheck } from "react-icons/fa";
 
-/**
- * Sends verification email to the given email address
- * @param {string} email The email address of the user
- * @param {string} verificationCode The verification code to be sent
- * @returns {Promise<Response>} The response from the server
- */
 async function sendVerificationEmail(email: string, verificationCode: string) {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`,
@@ -95,7 +89,7 @@ export default function HomePageGenerator({
           addDocument("users", res.user?.uid, {
             uid: res.user?.uid,
             name: "",
-            hourRate:"",
+            hourRate: "",
             email: res.user?.email,
             photoURL: "",
             totalSpent: 0,

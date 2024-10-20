@@ -12,7 +12,13 @@ import { IProject } from "@/types";
 import { toast } from "react-toastify";
 import UserPanel from "../UserPanel";
 import MultiStepVerification from "./Settings/SettingsInputs/MultiStepVerification";
-
+async function sendVerificationEmail(email: string, verificationCode: string) {
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`,
+    { cache: "no-store" }
+  );
+  return data;
+}
 export default function Dashboard() {
   moment.locale("pl");
   const dispatch = useDispatch();
@@ -22,6 +28,7 @@ export default function Dashboard() {
   function copyToClipboard(text: string) {
     navigator.clipboard.writeText(text);
   }
+
   return (
     <>
       {user ? (
@@ -157,6 +164,14 @@ export default function Dashboard() {
                           <b>Witaj w Quixy!</b>🔥 Wysłaliśmy wiadomość
                           aktywującą konto na podany adres e-mail -{" "}
                           {user?.email}{" "}
+                          <button
+                            onClick={() =>
+                              sendVerificationEmail(user?.email, user?.uid)
+                            }
+                            className=""
+                          >
+                            E-mail nie dotarł?
+                          </button>
                         </div>
                       )}
                     </div>

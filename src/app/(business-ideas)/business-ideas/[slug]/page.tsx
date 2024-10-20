@@ -9,7 +9,7 @@ import UserStickyTop from "@/components/UserStickyTop";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const slug = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/ideas?tubylytylkofigi=${
+    `${process.env.NEXT_PUBLIC_URL}/api/getSingleIdea?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&name=${polishToEnglish(params.slug)}`
   ).then((res) => res.json());
