@@ -1,4 +1,4 @@
-import AddJobOffer from "@/components/AddJobOffer";
+import AddJobOffer from "@/components/AddJobOffer/AddJobOffer";
 import { Metadata } from "next";
 
 export default async function Page() {

@@ -288,3 +288,58 @@ html {
     transform: translate(0px, 0px);
   }
 }
+
+.multistep-indicator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.step {
+  text-align: center;
+  position: relative;
+}
+
+.step-number {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  background-color: #ddd;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.step-label {
+  display: block;
+  font-size: 14px;
+  color: #666;
+}
+
+.step-separator {
+  flex-grow: 1;
+  height: 2px;
+  background-color: #ddd;
+  margin: 0 10px;
+}
+
+.step.completed .step-number {
+  background-color: #4caf50;
+  color: white;
+}
+
+.step.active .step-number {
+  background-color: #2196f3;
+  color: white;
+}
+
+.step.completed + .step-separator {
+  background-color: #4caf50;
+}
+
+.step.active + .step-separator {
+  background-color: #2196f3;
+}

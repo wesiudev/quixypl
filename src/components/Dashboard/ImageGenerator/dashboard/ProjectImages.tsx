@@ -62,7 +62,7 @@ export default function ProjectImages({
   return (
     <>
       {modals.isProjectOpen && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-75 z-[99999999999999999999999999999999999]">
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-75">
           <button
             onClick={() =>
               dispatch(set_modals({ ...modals, isProjectOpen: false }))
@@ -71,8 +71,8 @@ export default function ProjectImages({
           >
             ✕
           </button>
-          <div className="container fixed flex items-center justify-center top-1/2 -translate-y-1/2 z-[9999999999999999999999999999] mx-auto p-4">
-            <div className="relative h-max max-h-[80%] w-full sm:w-3/5 lg:w-3/4 group">
+          <div className="container fixed flex items-center justify-center top-1/2 -translate-y-1/2 mx-auto p-4">
+            <div className="relative h-max max-h-[70%] w-full sm:w-3/5 lg:w-3/4 group">
               {project.images.map((image: IProjectImage, i: number) => (
                 <div
                   onTouchStart={onTouchStart}

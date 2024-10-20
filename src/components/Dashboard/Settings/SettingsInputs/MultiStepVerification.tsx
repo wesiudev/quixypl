@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
-import { IoCheckmarkCircle, IoClose, IoCloseCircle } from "react-icons/io5";
+import { IoCheckmarkCircle, IoCloseCircle } from "react-icons/io5";
+import { updateUser } from "@/firebase"; // Assuming updateUser is imported from "@/firebase"
+import Confetti from "react-confetti"; // Assuming react-confetti is installed
 
 // MultiStepVerification Component
 export default function MultiStepVerification({
@@ -10,42 +12,51 @@ export default function MultiStepVerification({
   seek,
   configured,
   pseudo,
+  user,
+  isAnimating,
+  setIsAnimating,
 }: {
   name: any;
   emailVerified: any;
   seek: any;
   configured: any;
   pseudo: any;
+  user: any;
+  isAnimating: any;
+  setIsAnimating: any;
 }) {
-  // State to track progress percentage
   const [progress, setProgress] = useState(0);
 
-  // Function to calculate the percentage completion
   const calculateProgress = () => {
     let completion = 0;
-
-    // Add points for each completed step
-    if (name) completion += 20; // 20% for name
-    if (emailVerified) completion += 20; // 20% for email verification
-    if (pseudo) completion += 20; // 20% for having ideas
-    if (seek === true || seek === false) completion += 20; // 20% if seek is true/false
-    if (configured) completion += 20; // 20% if configured
-
+    if (name) completion += 20;
+    if (emailVerified) completion += 20;
+    if (pseudo) completion += 20;
+    if (seek === true || seek === false) completion += 20;
+    if (configured) completion += 20;
     return completion;
   };
 
-  // Update progress whenever the component mounts or data changes
   useEffect(() => {
     setProgress(calculateProgress());
   }, [name, emailVerified, seek, configured, pseudo]);
 
+  const handleAccessClick = () => {
+    updateUser(user?.uid, { access: true }); // Call the updateUser function
+    setIsAnimating(true); // Show confetti
+    setTimeout(() => setIsAnimating(false), 5000); // Hide confetti after 5 seconds
+  };
+
   return (
-    <div className="p-6 bg-white shadow-lg rounded-lg w-full mx-auto font-coco">
+    <div
+      className={`${
+        user?.access === true && "hidden"
+      } p-6 bg-white shadow-lg rounded-lg w-full mx-auto font-coco`}
+    >
       <h2 className="text-xl font-bold text-gray-800 mb-6 text-left">
         Weryfikacja przed wyświetlaniem na stronie
       </h2>
 
-      {/* Progress Bar */}
       <div className="relative w-full h-6 bg-gray-300 rounded-full mb-6">
         <div
           className="h-full bg-gradient-to-r from-primary to-cta rounded-full transition-all duration-500 ease-in-out"
@@ -56,7 +67,6 @@ export default function MultiStepVerification({
         {progress}% ukończono
       </p>
 
-      {/* Steps List */}
       <div className="space-y-4">
         <StepItem
           step={3}
@@ -74,9 +84,9 @@ export default function MultiStepVerification({
         />
         <StepItem
           step={2}
-          title="Jesteś klientem?"
+          title="Typ profilu"
           isCompleted={(seek === true || seek === false) && seek !== "ask"}
-          completedText={seek ? "Klient" : "Talent"}
+          completedText={seek ? "Talent" : "Klient"}
           incompleteText="Wybierz typ profilu"
         />
         <StepItem
@@ -94,6 +104,15 @@ export default function MultiStepVerification({
           incompleteText="Otwórz panel konfiguracji"
         />
       </div>
+
+      {progress === 100 && (
+        <button
+          onClick={handleAccessClick}
+          className="mt-6 bg-blue-600 text-white py-2 px-4 rounded-lg font-bold"
+        >
+          Wpisz się!
+        </button>
+      )}
     </div>
   );
 }
@@ -115,13 +134,11 @@ function StepItem({
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center">
-        <div className="flex">
-          {isCompleted ? (
-            <IoCheckmarkCircle className="text-3xl aspect-square text-green-500 mr-2" />
-          ) : (
-            <IoCloseCircle className="text-3xl aspect-square  text-red-500 mr-2" />
-          )}
-        </div>
+        {isCompleted ? (
+          <IoCheckmarkCircle className="text-3xl aspect-square text-green-500 mr-2" />
+        ) : (
+          <IoCloseCircle className="text-3xl aspect-square text-red-500 mr-2" />
+        )}
         <p className="text-sm sm:text-base font-coco font-medium text-gray-800">
           {title}
         </p>

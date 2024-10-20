@@ -98,7 +98,7 @@ export default function TagsHandler() {
           {user?.tags && tagsOpenLevel === 1
             ? user?.tags?.map((item: any, i: any) => (
                 <div
-                  className="text-sm mt-4 bg-slate-300 rounded-xl p-2"
+                  className="text-sm mt-2 bg-slate-300 rounded-xl p-2"
                   key={i}
                 >
                   <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
@@ -117,7 +117,7 @@ export default function TagsHandler() {
             : tagsOpenLevel === 2
             ? user?.tags?.map((item: any, i: any) => (
                 <div
-                  className="text-sm mt-4 bg-slate-300 rounded-xl p-2"
+                  className="text-sm mt-2 bg-slate-300 rounded-xl p-2"
                   key={i}
                 >
                   <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
@@ -233,13 +233,11 @@ export default function TagsHandler() {
       {!configurationOpen && (
         <>
           {user?.seek && user?.seek !== "ask" && (
-            <div className="font-gotham font-bold text-black">
-              Szukane stanowisk(a)
-            </div>
+            <div className="font-gotham font-bold text-black">Umiejętności</div>
           )}
           {!user?.seek && user?.seek !== "ask" && (
             <div className="font-gotham font-bold text-black">
-              Specjalizacje(a) firmy
+              Specjalizacje firmy
             </div>
           )}
         </>
@@ -312,7 +310,7 @@ export default function TagsHandler() {
                     url: polishToEnglish(item.title),
                   })
                 }
-                className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-1 text-sm sm:text-base hover:bg-opacity-80"
+                className="h-[40px] m-0.5 bg-[#126b91] rounded-lg text-white font-light p-1 text-sm sm:text-base hover:bg-opacity-80"
                 key={i}
               >
                 {item.title}
@@ -334,7 +332,7 @@ export default function TagsHandler() {
                             url: polishToEnglish(cat.title),
                           })
                         }
-                        className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-1 text-sm sm:text-base hover:bg-opacity-80"
+                        className="h-[40px] m-0.5 bg-[#126b91] rounded-lg text-white font-light p-1 text-sm sm:text-base hover:bg-opacity-80"
                         key={i}
                       >
                         {cat.title}
@@ -452,7 +450,7 @@ export default function TagsHandler() {
                                     setSlug({ title: "", url: "" });
                                   }
                                 }}
-                                className="m-0.5 bg-[#126b91] rounded-lg text-white font-light p-1 text-sm sm:text-base hover:bg-opacity-80"
+                                className="h-[40px] m-0.5 bg-[#126b91] rounded-lg text-white font-light p-1 text-sm sm:text-base hover:bg-opacity-80"
                                 key={i}
                               >
                                 {job.title}

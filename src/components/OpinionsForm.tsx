@@ -65,7 +65,7 @@ const OpinionsForm: React.FC = () => {
       >
         <div className="h-full w-full">
           <h2 className="w-full text-3xl text-white drop-shadow-md shadow-black text-left mb-2 italic">
-            Podziel się swoją opinią
+            Napisz opinię lub coś od siebie
           </h2>
           <div className="flex flex-col justify-between w-full h-full">
             <div className="">
@@ -125,7 +125,7 @@ const OpinionsForm: React.FC = () => {
           style={{ boxShadow: "0px 0px 5px black" }}
         >
           <h3 className="bg-gradient-to-r from-primary to-cta text-2xl font-bold py-4 text-white flex items-center justify-center text-center italic drop-shadow-md">
-            Opinie naszych klientów
+            Wpisy
           </h3>
           <ul className="space-y-6 h-[50vh] overflow-y-scroll p-3">
             {opinions?.map((opinion, index) => (

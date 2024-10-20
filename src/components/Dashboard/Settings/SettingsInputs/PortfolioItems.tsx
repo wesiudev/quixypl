@@ -19,6 +19,7 @@ import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { addJobOffer, storage, updateUser } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { InputField } from "@/components/AddJobOffer/InputField";
 export default function PortfolioItems({
   source,
   isNewProject,
@@ -456,7 +457,7 @@ export default function PortfolioItems({
                 {!configurationOpen && (
                   <>
                     <div className="font-gotham font-bold text-black">
-                      Szukaj stanowisk(a)
+                      Szukaj stanowiska
                     </div>
                   </>
                 )}
@@ -702,30 +703,46 @@ export default function PortfolioItems({
                   </div>
                 )}
                 {!source?.seek && source?.seek !== "ask" && (
-                  <div>
-                    <h3 className="font-gotham font-light text-black drop-shadow-lg mt-1.5">
-                      Wynagrodzenie
-                    </h3>
-                    <select
-                      value={project.time}
+                  <div className="">
+                    <div>
+                      <h3 className="font-gotham font-light text-black drop-shadow-lg mt-1.5">
+                        Wynagrodzenie
+                      </h3>
+                      <select
+                        value={project.time}
+                        onChange={(e) =>
+                          setProject({
+                            ...project,
+                            time: e.target.value,
+                          })
+                        }
+                        className="border border-primary rounded-md p-2 text-black font-light w-full"
+                      >
+                        <option value="Nie podano">Rodzaj wynagrodzenia</option>
+                        <option value="Stawka godzinowa">
+                          Stawka godzinowa
+                        </option>
+                        <option value="Stawka miesięczna">
+                          Stawka miesięczna
+                        </option>
+                        <option value="Per Milestone">Per Milestone</option>
+                        <option value="Prowizja">Prowizja</option>
+                        <option value="Akcje i udziały">Akcje i udziały</option>
+                        <option value="Inne">Inne</option>
+                      </select>
+                    </div>
+                    <InputField
+                      id="salaryValue"
+                      label="Wynagrodzenie"
+                      value={project.salaryValue}
                       onChange={(e) =>
                         setProject({
                           ...project,
-                          time: e.target.value,
+                          salaryValue: e.target.value,
                         })
                       }
-                      className="border border-primary rounded-md p-2 text-black font-light w-full"
-                    >
-                      <option value="Nie podano">Rodzaj wynagrodzenia</option>
-                      <option value="Stawka godzinowa">Stawka godzinowa</option>
-                      <option value="Stawka miesięczna">
-                        Stawka miesięczna
-                      </option>
-                      <option value="Per Milestone">Per Milestone</option>
-                      <option value="Prowizja">Prowizja</option>
-                      <option value="Akcje i udziały">Akcje i udziały</option>
-                      <option value="Inne">Inne</option>
-                    </select>
+                      placeholder="Wpisz wynagrodzenie"
+                    />
                   </div>
                 )}
               </div>

@@ -12,6 +12,8 @@ import { IProject } from "@/types";
 import { toast } from "react-toastify";
 import UserPanel from "../UserPanel";
 import MultiStepVerification from "./Settings/SettingsInputs/MultiStepVerification";
+import { useState } from "react";
+import ReactConfetti from "react-confetti";
 async function sendVerificationEmail(email: string, verificationCode: string) {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`,
@@ -28,9 +30,12 @@ export default function Dashboard() {
   function copyToClipboard(text: string) {
     navigator.clipboard.writeText(text);
   }
+  const [isAnimating, setIsAnimating] = useState(false);
 
   return (
     <>
+      {isAnimating && <ReactConfetti />}
+
       {user ? (
         <div className="relative p-4 bg-gray-300 sm:p-6 md:p-8 lg:p-6 xl:p-12 ">
           <div className="grid grid-cols-1 h-max font-coco relative w-full mx-auto">
@@ -187,6 +192,9 @@ export default function Dashboard() {
                         name={user?.name}
                         emailVerified={user?.emailVerified}
                         configured={user?.configured}
+                        user={user}
+                        setIsAnimating={setIsAnimating}
+                        isAnimating={isAnimating}
                       />
                     )}
                   </div>

@@ -90,3 +90,27 @@ export type Comment = {
   offerId?: string;
   candidateId?: string;
 };
+export interface JobListing {
+  days: number;
+  description: string;
+  email: string;
+  isPaid: boolean;
+  location: string;
+  name: string;
+  phone: string;
+  price: number;
+  requirements: string;
+  salary: string;
+  salaryValue: string;
+  tags: Tag[];
+  title: string;
+  website: string;
+}
+
+export interface Tag {
+  url: string;
+  categoryUrl: string;
+  categoryTitle: string;
+  slugUrl: string;
+  slugTitle: string;
+}

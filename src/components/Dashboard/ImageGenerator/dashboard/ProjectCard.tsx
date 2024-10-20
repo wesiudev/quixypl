@@ -17,88 +17,73 @@ export default function ProjectCard({
   isSlug,
 }: {
   project: IProject;
-  isSlug?: any;
+  isSlug?: boolean;
 }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.user);
   const { modals } = useSelector((state: any) => state.modals);
   const [currentIndex, setCurrentIndex] = useState(0);
+
   async function finishUpQuickOffer() {
     toast.success("Pomyślnie dodano ofertę!", {
       position: "top-right",
       autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
     });
-    updateUser(user?.uid, {
+
+    const updatedUser = {
       ...user,
       tokens: user?.tokens - project?.price,
       projects: user?.projects.map((p: IProject) =>
         p.id === project.id ? { ...p, isPaid: true } : p
       ),
-    }).then(() => {
-      addJobOffer({
-        ...project,
-        expirationTime: moment().add(project.days, "days").valueOf(),
-        isPaid: true,
-        isRecruitment: true,
-        type: "quick",
-        creationTime: Date.now(),
-        companySize: user?.preferences[0]
-          ? user?.preferences[0]
-          : "Brak danych...",
-      });
+    };
+
+    await updateUser(user?.uid, updatedUser);
+    await addJobOffer({
+      ...project,
+      expirationTime: moment().add(project.days, "days").valueOf(),
+      isPaid: true,
+      isRecruitment: true,
+      type: "quick",
+      creationTime: Date.now(),
+      companySize: user?.preferences[0] ?? "Brak danych...",
     });
   }
+
   async function bid() {
     if (user?.tokens < 4.99) {
       return toast.error("Niewystarczająca ilość Quixies", {
         position: "top-right",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    } else {
-      await updateUser(user?.uid, {
-        tokens: user?.tokens - 4.99,
-        projects: user?.projects.map((p: IProject) =>
-          p.id === project.id ? { ...p, extraDays: (p.extraDays || 0) + 1 } : p
-        ),
-      });
-      await updateJobOffer(project?.id, {
-        ...project,
-        extraDays: project?.extraDays || 0 + 1,
-      });
-      dispatch(
-        setUser({
-          ...user,
-          tokens: user?.tokens - 4.99,
-          projects: user?.projects.map((p: IProject) =>
-            p.id === project.id
-              ? { ...p, extraDays: (p.extraDays || 0) + 1 }
-              : p
-          ),
-        })
-      );
-      toast.success("Pomyślnie podbito ofertę", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       });
     }
+
+    const updatedTokens = user?.tokens - 4.99;
+    const updatedProjects = user?.projects.map((p: IProject) =>
+      p.id === project.id ? { ...p, extraDays: (p.extraDays || 0) + 1 } : p
+    );
+
+    await updateUser(user?.uid, {
+      tokens: updatedTokens,
+      projects: updatedProjects,
+    });
+    await updateJobOffer(project?.id, {
+      ...project,
+      extraDays: project?.extraDays || 0 + 1,
+    });
+
+    dispatch(
+      setUser({ ...user, tokens: updatedTokens, projects: updatedProjects })
+    );
+
+    toast.success("Pomyślnie podbito ofertę", {
+      position: "top-right",
+      autoClose: 5000,
+    });
   }
+
   return (
-    <div className="pb-3">
+    <div className="pb-3 z-[99999999999]">
       <ProjectImages
         project={project}
         currentIndex={currentIndex}
@@ -111,22 +96,19 @@ export default function ProjectCard({
           !isSlug && "md:p-6 lg:p-12"
         } flex flex-row items-start rounded-xl w-full relative`}
       >
-        <div className=" flex flex-col items-start justify-start text-left">
-          <h2
-            onClick={() => console.log(project)}
-            className="font-coco bg-gradient-to-r from-primary to-cta p-3 rounded-lg text-white text-3xl"
-          >
+        <div className="flex flex-col items-start justify-start text-left">
+          <h2 className="font-coco bg-gradient-to-r from-primary to-cta p-3 rounded-lg text-white text-3xl">
             {project?.name}
           </h2>
+
           {!project?.isRecruitment && (
             <div className="p-2 sm:px-3">
               <div className="text-lg font-gotham">Link</div>
-              {!project?.link && (
+              {!project?.link ? (
                 <div className="text-base font-gotham font-light">
                   Nie podano...
                 </div>
-              )}
-              {project?.link && (
+              ) : (
                 <button
                   onClick={() => {
                     copyToClipboard(project?.link);
@@ -141,29 +123,29 @@ export default function ProjectCard({
               )}
             </div>
           )}
-          <div className="">
+
+          <div>
             {!project?.isRecruitment && (
               <div className="text-lg font-gotham">Czas trwania</div>
             )}
             {project?.isRecruitment && (
-              <div className="text-sm font-gotham font-light mt-2">
-                Szczegóły oferty pracy
-              </div>
-            )}
-            {project?.isRecruitment && (
-              <div className="flex flex-col mt-3">
-                <b className="font-gotham">Typ rekrutacji</b>
-                <span className="font-light">
-                  {project?.type === "quick"
-                    ? "⚡Szybka Rekrutacja"
-                    : "⭐Pełna Rekrutacja"}
-                </span>
-              </div>
-            )}
-            {project?.isRecruitment && (
-              <div className="text-lg font-gotham mt-3">Wynagrodzenie</div>
+              <>
+                <div className="text-sm font-gotham font-light mt-2">
+                  Szczegóły oferty pracy
+                </div>
+                <div className="flex flex-col mt-3">
+                  <b className="font-gotham">Typ rekrutacji</b>
+                  <span className="font-light">
+                    {project?.type === "quick"
+                      ? "⚡Szybka Rekrutacja"
+                      : "⭐Pełna Rekrutacja"}
+                  </span>
+                </div>
+                <div className="text-lg font-gotham mt-3">Wynagrodzenie</div>
+              </>
             )}
             <span className="font-light">{project?.time}</span>
+
             {!project?.isRecruitment && (
               <div className="text-lg font-gotham mt-2">Rola w projekcie</div>
             )}
@@ -172,6 +154,7 @@ export default function ProjectCard({
             )}
             <p className="max-w-lg font-gotham font-light">{project?.desc}</p>
           </div>
+
           <div className="mt-3 grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2">
             {project?.images?.map((image: IProjectImage, i: number) => (
               <button
@@ -179,7 +162,7 @@ export default function ProjectCard({
                   dispatch(set_modals({ ...modals, isProjectOpen: true }))
                 }
                 key={i}
-                className={`w-full cursor-pointer bg-white`}
+                className="w-full cursor-pointer bg-white"
               >
                 <Image
                   src={image.src}
@@ -195,52 +178,43 @@ export default function ProjectCard({
                 <h2>Oferta pracy wygasa</h2>
                 <div className="flex items-center">
                   {project?.expirationTime && (
-                    <span>
-                      <span
-                        style={{
-                          color:
-                            project?.expirationTime &&
-                            moment(project?.expirationTime)
-                              .add(project?.extraDays || 0, "days")
-                              .diff(moment(), "days") <= 3
-                              ? "red"
-                              : project?.expirationTime &&
-                                moment(project?.expirationTime)
-                                  .add(project?.extraDays || 0, "days")
-                                  .diff(moment(), "days") <= 7
-                              ? "blue"
-                              : "green",
-                        }}
-                      >
-                        {/* {moment(project?.expirationTime).format(
-                  "DD.MM.YYYY hh:mm:ss"
-                )} */}
-                        {moment(project?.creationTime)
-                          .add(project?.days, "days")
-                          .add(project?.extraDays || 0, "days")
-                          .format("DD.MM.YYYY hh:mm:ss")}
-                      </span>
+                    <span
+                      style={{
+                        color:
+                          moment(project?.expirationTime)
+                            .add(project?.extraDays || 0, "days")
+                            .diff(moment(), "days") <= 3
+                            ? "red"
+                            : moment(project?.expirationTime)
+                                .add(project?.extraDays || 0, "days")
+                                .diff(moment(), "days") <= 7
+                            ? "blue"
+                            : "green",
+                      }}
+                    >
+                      {moment(project?.creationTime)
+                        .add(project?.days, "days")
+                        .add(project?.extraDays || 0, "days")
+                        .format("DD.MM.YYYY hh:mm:ss")}
                     </span>
                   )}
                 </div>
-                {/* <button
-                  onClick={() => bid()}
-                  className="mt-3 bg-primary hover:bg-opacity-80 text-white font-gotham text-lg p-2 rounded-lg"
-                  style={{ textShadow: "2px 2px 2px black" }}
-                >
-                  Podbij o 1 dzień (💎4.99)
-                </button> */}
               </div>
             )}
           </div>
-          {project?.isRecruitment && project?.isPaid && (
-            <Link
-              href="/dashboard/applications"
-              className="mt-4 text-white bg-gradient-to-r from-primary to-cta py-0.5 px-2 rounded-md"
-            >
-              Przeglądaj aplikacje
-            </Link>
-          )}
+
+          {project?.isRecruitment &&
+            project?.isPaid &&
+            user?.uid ===
+            (
+              <Link
+                href="/dashboard/applications"
+                className="mt-4 text-white bg-gradient-to-r from-primary to-cta py-0.5 px-2 rounded-md"
+              >
+                Przeglądaj aplikacje
+              </Link>
+            )}
+
           {project?.isRecruitment && !project?.isPaid && !isSlug && (
             <button
               onClick={() => {
@@ -249,11 +223,6 @@ export default function ProjectCard({
                   toast.error("Brak wystarczającej ilości Quixies", {
                     position: "top-right",
                     autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
                   });
                 } else {
                   finishUpQuickOffer();

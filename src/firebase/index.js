@@ -446,7 +446,7 @@ export async function addJobOffer(jobOffer) {
   const jobOfferDocRef = doc(collection(db, "offers"), jobOffer.id);
   await setDoc(jobOfferDocRef, {
     ...jobOffer,
-    createdAt: Date.now(),
+    creationTime: Date.now(),
   });
   return jobOfferDocRef;
 }

@@ -10,7 +10,6 @@ import { FaUser } from "react-icons/fa6";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/firebase";
-import UserSocialLinksAdder from "./UserSocialLinksAdder";
 export default function EssentialUserInfo({
   source,
   setChangesWereMade,
@@ -328,21 +327,23 @@ export default function EssentialUserInfo({
               </div>
             </div>
           )}
-          <textarea
-            value={source?.bio}
-            onChange={(e) => {
-              handleReduxUserState(e.target.value, "bio");
-              setChangesWereMade(true);
-            }}
-            rows={4}
-            maxLength={2000}
-            className="border border-primary rounded-lg p-2 mt-3 w-full text-black"
-            placeholder={
-              source?.seek
-                ? "Jakie usługi wykonujesz? Opisz szczegółowo to, co możesz zeoferować w zespole lub dla klienta."
-                : "Czym zajmuje się Twoja firma? Jesteś klientem indywidualnym? - Krótko opisz swoją działalność."
-            }
-          />
+          <div className="relative w-full mt-3">
+            <textarea
+              value={source?.bio}
+              onChange={(e) => {
+                handleReduxUserState(e.target.value, "bio");
+                setChangesWereMade(true);
+              }}
+              rows={4}
+              maxLength={2000}
+              className="border border-primary rounded-lg p-2 w-full text-black"
+              placeholder={
+                source?.seek
+                  ? "Jakie usługi wykonujesz? Opisz szczegółowo to, co możesz zeoferować w zespole lub dla klienta."
+                  : "Czym zajmuje się Twoja firma? Jesteś klientem indywidualnym? - Krótko opisz swoją działalność."
+              }
+            />
+          </div>
         </div>
       )}
     </div>
