@@ -10,21 +10,28 @@ import MainFooter from "@/components/MainFooter";
 import Hero from "@/components/Hero";
 import Image from "next/image";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa6";
+import GoogleAuthButton from "@/components/Auth/GoogleButton";
+import TalentList from "@/components/TalentList";
 
 function HeroSection() {
   return (
-    <header className="text-center py-16 overflow-hidden text-white relative bg-black">
+    <header className="px-4 text-center py-16 overflow-hidden text-white relative bg-gradient-to-r from-zinc-900 via-gray-900 to-zinc-950">
       <Hero />
-      <h1
-        style={{ lineHeight: 1.7 }}
-        className="text-xl lg:text-4xl font-bold mb-4 leading-snug w-[90%] sm:max-w-lg lg:max-w-4xl mx-auto z-50 relative"
-      >
-        Dodaj ofertę lub szukaj pracy w{" "}
-        <span className="p-[4px] lg:p-[7px] text-white bg-gradient-to-r from-primary to-cta">
-          IT, projektowaniu, księgowości, czy E-Commerce!
-        </span>
-      </h1>
+      <div className="bg-black/50 text-white font-coco font-light italic rounded-xl mx-auto w-max max-w-[90%]">
+        <h1
+          style={{ lineHeight: 1.7 }}
+          className="p-2 px-4 rounded-t-xl lg:p-[7px] text-white bg-gradient-to-r from-primary to-cta text-lg lg:text-4xl font-bold mb-4 leading-snug w-full text-center sm:max-w-lg lg:max-w-4xl mx-auto z-50 relative"
+        >
+          Praca zdalna i usługi AI dla Ciebie
+        </h1>
+        <p className="w-full p-3 sm:max-w-lg mx-auto">
+          Znajdź pracę lub dodaj ofertę pracy zdalnej. Nasza platforma oferuje
+          nie tylko oferty pracy dla talentów, ale także usługi AI typu
+          Generator Obrazów, czy Generator Pomysłów!.
+        </p>
+      </div>
       <Breadcrumbs />
+      <div className="mt-2"></div>
       <JoinButton />
     </header>
   );
@@ -33,7 +40,7 @@ function HeroSection() {
 // Komponent Breadcrumbs
 function Breadcrumbs() {
   return (
-    <div className="!text-white mb-2 px-6 sm:px-12 breadcrumbs text-sm bg-transparent mx-auto relative z-50">
+    <div className="!text-white px-6 sm:px-12 breadcrumbs text-sm bg-transparent mx-auto relative z-50">
       <ul className="flex items-center justify-center flex-wrap font-light">
         <li>
           <Link title="home" href={`/`}>
@@ -54,10 +61,10 @@ function Breadcrumbs() {
 function JoinButton() {
   return (
     <Link
-      className="bg-cta text-white hover:bg-opacity-90 py-1.5 px-2 font-gotham font-light rounded-lg w-max mx-auto relative z-50"
+      className="bg-gradient-to-r from-primary to-cta text-white hover:bg-opacity-90 py-2 px-3 font-gotham font-light rounded-lg w-max mx-auto relative z-50"
       href="/register"
     >
-      Rejestracja
+      Zarejestruj się
     </Link>
   );
 }
@@ -84,8 +91,7 @@ function WhyChooseQuixySection() {
         </h2>
         <p className="text-lg text-black font-gotham font-light lg:max-w-3xl">
           Oferujemy połączenie z najlepszymi specjalistami w rozwoju
-          oprogramowania, usługach IT, marketing, designu, i wiele więcej.{" "}
-          <br />
+          oprogramowania, usługach IT, marketingu, designu, i nie tylko. <br />
           Nasza platforma łączy firmy z doświadczonymi profesjonalistami, którzy
           dostarczają najwyższej jakości usługi, zawsze na czas i zgodnie z
           wymaganiami.
@@ -100,53 +106,45 @@ function SpecialistsCategoriesSection() {
   return (
     <section className="lg:mt-8 mb-16 font-gotham rounded-xl w-full p-3 lg:p-6">
       <h2 className="lg:flex lg:items-start lg:justify-between text-black text-3xl font-gotham text-left">
-        <span className="border-b-2 border-primary/30">
-          Oferty pracy zdalnej, gotowe projekty i profile specjalistów!
-        </span>
+        Oferty pracy zdalnej, gotowe projekty i profile specjalistów!
       </h2>
       <div className="flex flex-col mt-3 lg:mt-0">
         {links.map((link, index) => (
           <Link
             key={index}
             href={link.href}
-            className="rounded-xl lg:py-6 group hover:bg-primary hover:bg-opacity-20 overflow-hidden flex flex-col lg:flex-row w-full items-start justify-start lg:px-6"
+            className="rounded-xl py-3 lg:py-6 group hover:bg-primary hover:bg-opacity-20 overflow-hidden flex flex-col lg:flex-row w-full items-start justify-start lg:px-6"
           >
-            <div className="relative h-full p-3 lg:p-0">
+            <div className="relative w-full lg:w-max h-full p-3 lg:p-0">
               <Image
                 src={link.imageSrc}
-                width={1366}
-                height={1366}
+                width={500}
+                height={500}
+                loading="lazy"
+                quality={75}
                 alt={link.imageAlt}
                 style={{ boxShadow: "0px 0px 3px black" }}
                 className="rounded-xl w-full lg:w-[250px] h-auto"
               />
-              <div
-                className="lg:hidden absolute left-0 bottom-3 w-full px-3 text-white group-hover:underline font-light"
-                aria-label={link.goTo}
-              >
-                <span className="mx-auto justify-center text-sm italic w-max max-w-full bg-gradient-to-r from-primary to-cta p-1.5 rounded-lg flex items-center">
-                  <FaChevronLeft className="mr-2" />
-                  {link.goTo}
-                  <FaChevronRight className="ml-2" />
-                </span>
-              </div>
             </div>
-            <div className="lg:ml-6 w-3/4 p-3 lg:p-6 rounded-lg group-hover:bg-white">
-              <h2 className="hidden lg:block text-2xl font-bold text-black !font-gotham">
-                {link.title}
-              </h2>
-              <p className="mt-2 lg:mb-3 font-light text-black">
-                {link.description}
-              </p>
-              <div
-                className="w-full text-white lg:mt-0 group-hover:underline font-light"
-                aria-label={link.goTo}
-              >
-                <span className="justify-center text-sm italic w-max max-w-full bg-gradient-to-r from-primary to-cta p-1.5 rounded-lg flex items-center">
-                  <FaChevronLeft className="group-hover:translate-x-[2px] group-hover:scale-100 scale-125 mr-1 duration-150" />
-                  {link.goTo}
-                  <FaChevronRight className="group-hover:translate-x-[-2px] group-hover:scale-100 scale-125 ml-1 duration-150" />
-                </span>
+            <div className="px-3 lg:px-0 w-full lg:w-3/4">
+              <div className="lg:ml-6 p-3 lg:p-6 rounded-lg group-hover:bg-white">
+                <h2 className="text-2xl font-bold text-black !font-gotham">
+                  {link.title}
+                </h2>
+                <p className="mt-2 mb-3 font-light text-black">
+                  {link.description}
+                </p>
+                <div
+                  className="w-full text-white group-hover:underline font-light"
+                  aria-label={link.goTo}
+                >
+                  <span className="justify-center text-sm italic w-max bg-gradient-to-r from-primary to-cta p-1.5 rounded-lg flex items-center">
+                    <FaChevronLeft className="group-hover:translate-x-[2px] group-hover:scale-100 scale-125 mr-1 duration-150" />
+                    {link.goTo}
+                    <FaChevronRight className="group-hover:translate-x-[-2px] group-hover:scale-100 scale-125 ml-1 duration-150" />
+                  </span>
+                </div>
               </div>
             </div>
           </Link>
@@ -213,7 +211,7 @@ function HighlightCard({
       <p className="text-black text-sm font-coco">{description}</p>
       <div className="mt-6" />
       <Link
-        className=" font-light bg-cta hover:bg-cta/80 duration-100 text-white px-2 py-1.5 rounded-lg"
+        className=" font-light bg-gradient-to-r from-primary to-cta duration-100 text-white px-3 py-2 rounded-lg"
         href="/register"
         title={linkTitle}
       >
@@ -225,7 +223,7 @@ function HighlightCard({
 }
 function CallToActionSection() {
   return (
-    <section className="flex flex-col lg:flex-row my-24 font-gotham text-left">
+    <section className="flex flex-col lg:flex-row my-12 font-gotham text-left">
       <div
         style={{ boxShadow: "0px 0px 5px black" }}
         className="overflow-hidden h-full rounded-tl-[80px] rounded-3xl"
@@ -236,7 +234,7 @@ function CallToActionSection() {
           height={500}
           loading="lazy"
           quality={75}
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAA"
+          blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
           placeholder="blur"
           alt="Logo serwisu quixy.pl"
           className="w-full h-auto"
@@ -255,23 +253,51 @@ function CallToActionSection() {
         <Link
           href="/register"
           title="Dołącz do Quixy"
-          className="bg-cta text-white py-1.5 px-2 rounded-lg hover:bg-opacity-80 transition font-gotham font-light"
+          className="bg-gradient-to-r from-primary to-cta text-white py-2 px-3 rounded-lg hover:bg-opacity-80 transition font-gotham font-light"
         >
-          Zarejestruj
+          Dołącz już dziś!
         </Link>
+        <div className="mt-12">
+          <p className="font-coco text-zinc-800 text-sm">
+            Posiadasz konto Google?
+          </p>
+          <GoogleAuthButton landing={"yes"} />
+        </div>
       </div>
     </section>
   );
 }
 
 // Główna strona
-export default function Page() {
+export default async function Page() {
+  const talents = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/talents?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
+  const categoryTalents = talents?.filter(
+    (item: any) =>
+      item?.pseudo &&
+      item?.seek &&
+      item?.seek !== "ask" &&
+      item?.tags?.filter((tag: any) => tag.categoryUrl === "web-development")
+        .length > 0
+  );
   return (
     <div className="w-full h-full bg-white">
       <Header jobsList={jobs} />
       <HeroSection />
-      <main className="container mx-auto px-6 py-10">
+      <main className="container mx-auto px-6 py-12">
         <WhyChooseQuixySection />
+        <div className="mt-12 bg-gradient-to-r from-primary/20 to-cta/20 rounded-xl pb-4">
+          <h2 className="text-white text-xl lg:text-3xl p-4">
+            <span className="p-1 rounded-md bg-gradient-to-r from-primary via-cta to-primary">
+              Specjaliści Quixy Talent&trade;
+            </span>
+          </h2>
+          <TalentList categoryTalents={categoryTalents} />
+        </div>
         <CallToActionSection />
         <SpecialistsCategoriesSection />
         <WhatMakesUsUniqueSection />

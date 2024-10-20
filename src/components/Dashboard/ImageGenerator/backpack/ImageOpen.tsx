@@ -38,7 +38,7 @@ export default function ImageOpen({ imageOpen, setImageOpen }: ImageOpenProps) {
                   height={1080}
                   alt=""
                   className={`rounded-t-xl relative z-[505] bg-[#126b91] bg-opacity-70`}
-                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAA"
+                 blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
                   placeholder="blur"
                 />
 

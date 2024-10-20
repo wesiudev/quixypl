@@ -105,18 +105,15 @@ export default function ImagePicker({
             const validSize = fileSize <= 5 * 1024 * 1024;
 
             if (!validType || !validSize) {
-              toast.error(
-                "Tylko zdjęcia o rozmiarze do 5MB są dozwolone (kwadratowe lub 16:9)",
-                {
-                  position: "top-center",
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                }
-              );
+              toast.error("Tylko zdjęcia o rozmiarze do 5MB są dozwolone", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
               return false;
             }
             return true;

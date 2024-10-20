@@ -20,7 +20,7 @@ export default function GenerateIdeaInputs({
   const places = ["🌐 Przez internet", "🏢 Na żywo"];
   return (
     <>
-      <div className="flex flex-row flex-wrap lg:grid lg:grid-cols-2 -ml-4 px-6 pb-6 font-gotham lg:px-12">
+      <div className="flex flex-row flex-wrap lg:grid lg:grid-cols-2 -ml-4 pb-6 font-gotham">
         <div className="flex flex-col mt-4 ml-4 w-full lg:w-auto">
           <label htmlFor="place">Miejsce:</label>
           <select
@@ -87,7 +87,7 @@ export default function GenerateIdeaInputs({
         </div>
       </div>
       {config?.product === "Tak" && (
-        <div className="pb-6 px-6 lg:px-12">
+        <div className="">
           <h2 className="font-gotham">Dodatkowe informacje:</h2>
           <textarea
             value={config.additional}

@@ -1,13 +1,11 @@
 import jobs from "../../../../../public/14.09.2024.json";
-import Image from "next/image";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 import Link from "next/link";
 import moment from "moment";
-import Hero from "@/components/Hero";
 import Header from "@/components/Header";
 import MainFooter from "@/components/MainFooter";
 import IdeaListSlug from "@/components/IdeaListSlug";
-import { FaChevronRight } from "react-icons/fa";
+import UserStickyTop from "@/components/UserStickyTop";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const slug = await fetch(
@@ -20,97 +18,57 @@ export default async function Page({ params }: { params: { slug: string } }) {
   ).then((res) => res.json());
 
   return (
-    <div>
+    <div className="bg-gray-200">
       <Header jobsList={jobs} />
-      <div className="relative bg-black sm:p-8 lg:p-16 xl:p-24">
-        <Hero />
-        <div className="bg-white text-black sm:rounded-xl breadcrumbs-container relative z-50 sm:mb-8 px-4">
-          <ul className="breadcrumbs flex items-center flex-wrap">
-            <h2 className="breadcrumb-title mr-2">
-              <Link href="/business-ideas">Pomysły na biznes Quixy&trade;</Link>
-            </h2>
-            <FaChevronRight className="mr-2" />
+      <div className="sm:px-4 mx-auto container relative font-gotham">
+        <div className="font-light pt-6 sm:py-2 sm:mt-8 breadcrumbs mx-auto bg-white text-black sm:rounded-xl relative z-50 sm:mb-8 px-4">
+          <ul className="flex items-center flex-wrap">
+            <li className="mr-2">
+              <Link href="/business-ideas">business-ideas</Link>
+            </li>
             <li className="mr-2">
               <Link href={`/business-ideas/${params.slug}`} title={params.slug}>
-                {slug.name}
+                {polishToEnglish(slug.name)}
               </Link>
             </li>
           </ul>
         </div>
-        <div className="content-container bg-white p-6 grid grid-cols-1 w-full mx-auto relative z-50 sm:rounded-xl">
-          <div className="flex items-center justify-between">
-            <div className="flex items-start">
-              <div className="text-white bg-orange-300 p-4 rounded-full mr-3 ">
-                <Image
-                  src="/assets/lightbulb.png"
-                  width={224}
-                  height={224}
-                  alt="Logo serwisu quixy.pl"
-                  className="w-16 h-auto"
-                />
-              </div>
-              <div className="">
-                <div className="italic font-light text-lg text-black">
-                  Wygenerowano z AI Pomysły Quixy&trade;
-                </div>
-                <Link href="/business-ideas" className="font-bold text-primary">
-                  Wypróbuj za darmo
-                </Link>
-              </div>
-            </div>
-            <Image
-              src="/assets/quixy-logo.png"
-              width={224}
-              height={224}
-              alt="Logo serwisu quixy.pl"
-              className="w-auto h-16"
-            />
-          </div>
-          <div
-            className="mx-auto p-6 lg:p-12 2xl:p-24 mt-12 container flex text-black bg-white rounded-xl flex-col"
-            style={{ boxShadow: "inset 0px 0px 5px black" }}
-          >
-            {slug?.photoURL && (
-              <Image
-                src={slug?.photoURL}
-                width={256}
-                height={256}
-                alt="Idea image"
-                className="rounded-l-xl w-48 mb-0"
-              />
-            )}
-
+        <div className="pt-6 sm:pt-8 container bg-white px-4 sm:p-8 grid grid-cols-1 w-full mx-auto relative z-50 sm:rounded-xl">
+          <div className="mx-auto container flex text-black bg-white rounded-xl flex-col">
             <div className="flex flex-col h-max w-full">
               <div className="flex items-start justify-between mb-4">
-                <h2 className="text-3xl lg:text-5xl">
+                <h1 className="text-2xl sm:text-3xl lg:text-5xl pr-4">
                   {slug?.name || "Nie podano"}
-                </h2>
-                <div className="w-48 text-sm font-light !text-white bg-[#126b91] p-2 rounded-lg">
-                  <div>Data Utworzenia</div>
-                  <div>{moment(slug?.createdAt).format("DD-MM-yyyy")}</div>
+                </h1>
+                <div className="w-max text-sm font-light !text-white bg-[#126b91] p-2 rounded-lg">
+                  <span className="font-bold">Dodano</span>
+                  <div className="w-max">
+                    {moment(slug?.creationTime).format("DD-MM-yyyy")}
+                  </div>
                 </div>
               </div>
-
-              <p className="text-lg text-black">
+              <h3 className="flex items-center text-xl text-white bg-gradient-to-r from-primary to-cta px-3 py-2 w-max rounded-lg">
+                Opis projektu
+              </h3>
+              <p className="text-lg font-light mt-2">
                 {slug?.content || "Brak opisu pomysłu..."}
               </p>
             </div>
 
-            <section className="details-section mt-6">
-              <h3 className="flex items-center text-lg">
-                Szczegóły pomysłu{" "}
-                <FaChevronRight className="text-primary ml-2" />
+            <section className="mt-6">
+              <h3 className="flex items-center text-xl text-white bg-gradient-to-r from-primary to-cta px-3 py-2 w-max rounded-lg">
+                Szczegóły projektu
               </h3>
-              <h3 className="text-2xl mt-4">Marketing</h3>
-              <p className="text-lg font-light">
+              <h3 className="text-base text-black w-max mt-6">Marketing</h3>
+              <p className="text-lg font-light mt-1 ">
                 {slug?.marketing || "Brak danych..."}
               </p>
             </section>
 
             {slug?.businessplan && (
               <section className="mt-6">
-                <h2 className="section-title text-3xl">Plan Biznesowy</h2>
-                <p className="text-lg font-light">
+                <h2 className="text-base text-black w-max">Plan Biznesowy</h2>
+                <p className="text-lg font-light mt-1 ">
                   {slug?.businessplan || "Brak planu biznesowego..."}
                 </p>
               </section>
@@ -118,25 +76,34 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
             {slug?.staff && (
               <section className="mt-6">
-                <h2 className="section-title text-xl">Zespół</h2>
-                <p className="text-lg font-light">
+                <h2 className="text-base text-black w-max">Zespół</h2>
+                <p className="text-lg font-light mt-1 ">
                   {slug?.staff || "Brak zespołu..."}
                 </p>
               </section>
             )}
 
             <section className="mt-6">
-              <h2 className="section-title text-xl">
+              <h2 className="text-base text-black w-max">
                 Szacowany Czas Realizacji
               </h2>
-              <p className="text-lg font-light">
+              <p className="text-lg font-light mt-1 ">
                 {slug?.estimatedRealizationTime || "Brak danych..."}
               </p>
             </section>
           </div>
-          <IdeaListSlug ideas={ideas} />
+          <div className="mt-6">
+            <h2 className="text-base text-black w-max">Tagi</h2>
+            <p className="mt-1 text-black font-light font-gotham">
+              {slug?.tags.join(", ")}
+            </p>
+          </div>
         </div>
       </div>
+      <div className="container mx-auto px-4">
+        <IdeaListSlug ideas={ideas} />
+      </div>
+      <UserStickyTop isIdea={true} slugData={slug}/>
       <MainFooter heading={"Zrealizuj pomysł z Quixy Talent"} jobsList={jobs} />
     </div>
   );
@@ -146,7 +113,7 @@ export async function generateMetadata({ params }: { params: any }) {
   const slug = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/ideas?tubylytylkofigi=${
       process.env.API_SECRET_KEY
-    }&name=${`${polishToEnglish(params.slug)}`}`
+    }&name=${polishToEnglish(params.slug)}`
   ).then((res) => res.json());
 
   const title = `Pomysły na biznes - ${slug?.name}`;

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FaSignOutAlt } from "react-icons/fa";
 import { FaUpload } from "react-icons/fa6";
+import { toast } from "react-toastify";
 export default function ImagePicker({
   handler,
   closeImagePicker,
@@ -39,7 +40,7 @@ export default function ImagePicker({
           <div className="w-full min-h-[50vh] flex items-center justify-center text-center flex-col">
             <b>Brak zdjęć dla tego wpisu.</b>
             <label
-              htmlFor="uploader"
+              htmlFor="uploader3"
               className="w-max mt-4 py-3 px-12 text-center justify-center items-center flex font-bold hover:bg-green-400 bg-green-500 duration-300 text-white"
             >
               <FaUpload className="mr-2" />
@@ -112,7 +113,7 @@ export default function ImagePicker({
               </div>
             )}
             <label
-              htmlFor="uploader"
+              htmlFor="uploader3"
               className="w-max mt-4 py-3 px-12 text-center justify-center items-center flex font-bold hover:bg-green-400 bg-green-500 duration-300 text-white"
             >
               <FaUpload className="mr-2" />
@@ -125,13 +126,19 @@ export default function ImagePicker({
             multiple
             onChange={(e: any) => {
               const files = e.target.files;
+              const tooLargeFiles = Array.from(files).filter(
+                (file: any) => file.size > 2 * 1024 * 1024
+              );
+              if (tooLargeFiles.length > 0) {
+                return toast.error(`Some images are larger than 2MB`);
+              }
               // Filter out non-image files if needed
               const imageFiles = Array.from(files).filter((file: any) =>
                 file.type.startsWith("image/")
               );
               handler(imageFiles);
             }}
-            id="uploader"
+            id="uploader3"
             className="text-white hidden"
           />
         </div>

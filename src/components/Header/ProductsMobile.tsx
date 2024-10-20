@@ -19,6 +19,10 @@ export default function ProductsMobile({
   setHovered: Function;
   secondMenuItems: any;
 }) {
+  function resetHeader() {
+    setMenuShow(false);
+    setProductsOpen(false);
+  }
   return (
     <div className="font-gotham">
       <div
@@ -35,79 +39,69 @@ export default function ProductsMobile({
               setMenuShow(true);
               setProductsOpen(false);
             }}
-            style={{ boxShadow: "0px 0px 5px black" }}
-            className="text-white p-2 rounded-md bg-[#126b91] text-sm"
+            className="text-white px-2 py-1.5 bg-gradient-to-r from-primary to-cta text-sm"
           >
             Więcej
           </button>
         </div>
-        <div className="mt-2 flex items-center justify-start mx-auto flex-wrap">
+        <div className="px-6 py-3 bg-gradient-to-r from-primary/20 to-cta/20 flex items-center justify-start mx-auto flex-wrap">
           <Link
             href="/talent"
-            className="ml-1.5 rounded-lg py-1 px-1.5 text-base drop-shadow-sm shadow-black text-white bg-primary hover:bg-primary/80 mt-1.5"
+            style={{ boxShadow: "1px 0px 4px black" }}
+            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 font-light text-white text-sm p-2 w-max"
           >
             Zatrudnij talent
           </Link>
-          {/* <Link
-            href="/client"
-            className="ml-1.5 rounded-lg py-1 px-1.5 text-base drop-shadow-sm shadow-black text-white bg-primary hover:bg-primary/80 mt-1.5"
-          >
-            Przeglądaj Firmy
-          </Link> */}
           <Link
             href="/about"
-            className="ml-1.5 rounded-lg py-1 px-1.5 text-base drop-shadow-sm shadow-black text-white bg-primary hover:bg-primary/80 mt-1.5"
+            style={{ boxShadow: "1px 0px 4px black" }}
+            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 font-light text-white text-sm p-2 w-max"
           >
             O nas
           </Link>
           <Link
             href="/contact"
-            className="ml-1.5 rounded-lg py-1 px-1.5 text-base drop-shadow-sm shadow-black text-white bg-primary hover:bg-primary/80 mt-1.5"
+            style={{ boxShadow: "1px 0px 4px black" }}
+            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 font-light text-white text-sm p-2 w-max"
           >
             Kontakt
           </Link>
           <Link
             href="/blog"
-            className="ml-1.5 rounded-lg py-1 px-1.5 text-base drop-shadow-sm shadow-black text-white bg-primary hover:bg-primary/80 mt-1.5"
+            style={{ boxShadow: "1px 0px 4px black" }}
+            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 font-light text-white text-sm p-2 w-max"
           >
             Blog
           </Link>
         </div>
-        <div className="grid grid-cols-1 gap-3 w-full pb-20">
+        <div className="grid grid-cols-1 w-full">
           {jobs.map((job: any, i: any) => (
-            <div className="mt-3 flex flex-col font-gotham" key={i}>
-              <Link
-                href={`/praca-zdalna/${polishToEnglish(job.title)}`}
-                title={`${job.title} Oferty Pracy Zdalnej`}
-                className={`flex flex-col mt-3`}
-                key={i}
-                onClick={() => setHovered(false)}
-              >
-                <Image
-                  src={`/slug/${polishToEnglish(job.title)}1.webp`}
-                  width={1024}
-                  height={1024}
-                  alt={`${polishToEnglish(job.title)} - Pracuj Zdalnie`}
-                  style={{ boxShadow: "inset 0px 0px 6px black" }}
-                />
-              </Link>
+            <div className="flex flex-col font-gotham" key={i}>
+              <Image
+                src={`/slug/${polishToEnglish(job.title)}1.webp`}
+                width={1024}
+                height={1024}
+                alt={`${polishToEnglish(job.title)} - Pracuj Zdalnie`}
+                style={{ boxShadow: "inset 0px 0px 6px black" }}
+              />
               <div className="flex flex-col bg-gradient-to-r from-primary/50 to-cta/50">
                 {job.data.map((item: any, i: any) => (
                   <div key={i} className="relative">
                     <div
                       title={`Pracuj zdalnie w ${item.title}`}
-                      className="p-3 text-white font-bold bg-gradient-to-r from-primary to-cta w-full font-coco italic text-center text-3xl"
+                      className="py-3 text-white font-light bg-gradient-to-r from-primary to-cta w-full font-coco italic text-xl"
                     >
-                      {item.title}
+                      <div className="w-[90%] mx-auto">{item.title}</div>
                     </div>
 
                     {/* Hover dropdown */}
-                    <div className="flex items-center justify-center w-[90%] mx-auto flex-wrap my-3">
+                    <div className="flex w-[90%] mx-auto flex-wrap my-3">
                       {item.data.map((subcategory: any, i: any) => (
                         <Link
                           title={`Pracuj zdalnie w ${subcategory.title}`}
                           key={i}
                           style={{ boxShadow: "1px 0px 4px black" }}
+                          onClick={resetHeader}
                           className="max-w-[300px] bg-[#126b91] hover:bg-[#468CA9] duration-75 font-light text-white text-sm p-2 w-max"
                           href={`/praca-zdalna/${polishToEnglish(
                             job.title
@@ -140,7 +134,7 @@ export default function ProductsMobile({
               setMenuShow(false);
               setProductsOpen(false);
             }}
-            className="text-white p-2 rounded-lg bg-[#126b91] text-sm"
+            className="text-white px-2 py-1.5 bg-gradient-to-r from-primary to-cta text-sm"
           >
             Zamknij
           </button>

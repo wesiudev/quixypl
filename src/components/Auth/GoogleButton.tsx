@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { createUser, provider } from "@/firebase";
 import { signInWithPopup, getAuth, GoogleAuthProvider } from "firebase/auth";
@@ -14,9 +15,11 @@ async function sendVerificationEmail(email: string, verificationCode: string) {
 export default function GoogleAuthButton({
   ideas,
   seek,
+  landing,
 }: {
   ideas?: any;
   seek?: boolean;
+  landing?: "yes" | "no" | unknown;
 }) {
   const router = useRouter();
   function googleHandler() {
@@ -29,6 +32,7 @@ export default function GoogleAuthButton({
           uid: user?.uid,
           name: user?.displayName,
           email: user?.email,
+          hourRate: "",
           photoURL: user?.photoURL,
           totalSpent: 0,
           totalReceived: 0,
@@ -64,7 +68,9 @@ export default function GoogleAuthButton({
       <button
         onClick={() => googleHandler()}
         type="button"
-        className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-black font-gotham text-lg font-semibold px-4 py-3 border border-gray-300"
+        className={`${
+          landing === "yes" ? "w-[200px] text-sm rounded-xl" : "w-full text-lg"
+        } block bg-white hover:bg-gray-100 focus:bg-gray-100 text-black font-gotham font-semibold px-4 py-3 border border-gray-300`}
       >
         <div className="flex items-center justify-center">
           <svg

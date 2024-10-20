@@ -35,7 +35,7 @@ const FAQ: React.FC<FAQProps> = ({ faqItems }) => {
           Często zadawane pytania
         </span>
       </h2>
-      <ul className="-mt-[2px] p-3 rounded-lg rounded-tl-none  cursor-default select-none lg:hover:bg-gradient-to-r lg:hover:from-primary/20 lg:hover:to-cta/20 bg-gradient-to-r from-primary/20 to-cta/20 text-lg text-black">
+      <ul className="-mt-[2px] p-3 rounded-lg rounded-tl-none rounded-bl-none cursor-default select-none lg:hover:bg-gradient-to-r lg:hover:from-primary/20 lg:hover:to-cta/20 bg-gradient-to-r from-primary/20 to-cta/20 text-lg text-black">
         {faqItems.slice(0, visibleItems).map((faq, index) => (
           <li
             key={index}
@@ -50,19 +50,19 @@ const FAQ: React.FC<FAQProps> = ({ faqItems }) => {
       </ul>
 
       {visibleItems < faqItems.length ? (
-        <div className="mt-3 w-full flex items-start justify-start">
+        <div className="w-full flex items-start justify-start">
           <button
             onClick={handleShowMore}
-            className="bg-[#126b91] text-white py-2 px-4 rounded-lg lg:hover:bg-cta transition"
+            className="bg-primary hover:bg-primaryHover text-white py-2 px-4 rounded-b-lg"
           >
             Pokaż więcej
           </button>
         </div>
       ) : (
-        <div className="mt-3 w-full flex items-start justify-start">
+        <div className=" w-full flex items-start justify-start">
           <Link
             href="/contact"
-            className="bg-gradient-to-r from-primary to-cta text-white py-2 px-4 rounded-lg lg:hover:bg-cta transition"
+            className="bg-gradient-to-r from-primary to-cta text-white py-2 px-4 rounded-b-lg transition"
           >
             Masz inne pytanie?
           </Link>

@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { polishToEnglish } from "../../../utils/polishToEnglish";
-import { FaFacebook, FaTiktok } from "react-icons/fa";
 
 export default function ProductsWide({
   width,

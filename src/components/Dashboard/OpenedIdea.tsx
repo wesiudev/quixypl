@@ -1,16 +1,17 @@
 import moment from "moment";
 import "moment/locale/pl";
-import { useState } from "react";
 
 export default function OpenedIdea({
   ideaOpen,
   setIdeaOpen,
+  setJobRequest,
+  jobRequest,
 }: {
   ideaOpen: any;
   setIdeaOpen: Function;
-  setJobRequestOpen:Function
+  setJobRequest: Function;
+  jobRequest: boolean;
 }) {
-  const [jobRequest, setJobRequest] = useState<any>({});
   return (
     <div
       onClick={() => {
@@ -42,10 +43,32 @@ export default function OpenedIdea({
             onClick={() => setJobRequest(ideaOpen)}
             className="bg-green-500 ml-2 text-white font-bold rounded-md px-1 py-0.5"
           >
-            Szukaj ekspertów
+            Szukaj współpracy
           </button>
         </div>
-
+        {jobRequest && (
+          <div className="flex flex-col text-black">
+            <h2>Pozwolić ekspertom na kontakt w sprawie projektu?</h2>
+            <div className="flex">
+              <button
+                onClick={() => {
+                  setJobRequest(false);
+                }}
+                className="bg-gradient-to-r from-primary to-cta py-0.5 px-2 text-white mr-2 rounded-md"
+              >
+                TAK
+              </button>
+              <button
+                onClick={() => {
+                  setJobRequest(false);
+                }}
+                className="text-white py-0.5 px-2 rounded-md bg-red-500 hover:bg-red-400"
+              >
+                NIE
+              </button>
+            </div>
+          </div>
+        )}
         <div className="space-y-2">
           <h2 className="text-3xl lg:text-5xl text-black pt-6">Pomysł</h2>
           <div className="text-xl text-black w-[100%] max-w-[50rem] font-light">

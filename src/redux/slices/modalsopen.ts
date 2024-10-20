@@ -4,6 +4,8 @@ const initialState: any = {
   modals: {
     quixies: false,
     config: false,
+    isProjectOpen: false,
+    currentChat: "",
   },
 };
 

@@ -1,14 +1,14 @@
 import Header from "@/components/Header";
 import jobs from "../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
-import Hero from "@/components/Hero";
 import Link from "next/link";
 import HomePageGenerator from "@/components/HomePageGenerator";
 import { sendGenerateIdeaRequest } from "../../../../utils/sendGenerateIdeaRequest";
-import Register from "@/app/(register)/register/Register";
 import Image from "next/image";
 import { Metadata } from "next";
 import IdeaList from "@/components/IdeaList";
+import Toast from "@/components/Toast";
+import Hero from "@/components/Hero";
 export default async function Page() {
   const ideas = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/getIdeas?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
@@ -18,34 +18,15 @@ export default async function Page() {
   return (
     <div>
       <Header jobsList={jobs} />
-      <div className="flex items-center justify-center h-max py-16 w-full relative overflow-hidden bg-black">
+      <Toast />
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between h-max w-full relative overflow-hidden bg-gradient-to-r from-primary to-cta rounded-b-3xl">
         <Hero />
-        <div className="relative z-50 px-6 lg:px-0">
-          <div
-            className="p-4 lg:p-8 2xl:p-12 rounded-lg bg-white relative z-50 mt-12"
-            style={{ boxShadow: "inset 0px 0px 5px black" }}
-          >
-            <Image
-              src="/favicons/android-chrome-192x192.png"
-              width={150}
-              height={150}
-              alt="Pomysły Na Biznes Logo Quixy.pl"
-              className="w-16 h-auto absolute left-6 -top-6 bg-white p-1.5 rounded-full"
-              style={{ boxShadow: "0px 0px 5px black" }}
-            />
-            <div className="flex items-center justify-between w-full">
-              <h1 className="text-3xl lg:text-5xl font-gotham text-black ">
-                Pomysły na biznes Quixy&trade;
-              </h1>
-              <Image
-                src="/assets/lightbulbshadow.png"
-                width={500}
-                height={500}
-                alt="Logo serwisu quixy.pl"
-                className="relative lg:right-auto lg:top-auto w-[120px]"
-              />
-            </div>
-            <p className="text-xl text-left text-black  mb-6 font-light font-gotham max-w-xl">
+        <div className="w-full relative z-10 p-4 lg:p-8">
+          <div className="p-4 lg:p-8 2xl:p-12 rounded-xl bg-white relative z-50">
+            <h1 className="text-3xl lg:text-5xl font-gotham text-zinc-800">
+              Twój generator pomysłów na biznes!
+            </h1>
+            <p className="mt-4 text-xl text-black mb-6 font-light font-gotham max-w-xl text-justify">
               Szukasz pomysłu na biznes? Nasze narzędzie do tworzenia
               biznesplanu połączy wizję projektu z jego wykonawcami dzięki Quixy
               Talent&trade;
@@ -53,22 +34,29 @@ export default async function Page() {
             <Link
               title="Sprawdź Nasz Nowy Generator Pomysłów Na Biznes"
               href="#generator"
-              style={{ textShadow: "2px 2px 2px black" }}
-              className="bg-cta text-white p-1.5 px-2 rounded-lg font-gotham"
+              className="bg-gradient-to-r from-primary to-cta text-white py-2 px-3 rounded-lg font-gotham"
             >
               Wypróbuj za darmo
             </Link>
           </div>
         </div>
+        <div className="z-10 w-full">
+          <Image
+            src="/assets/lightbulbshadow.png"
+            width={500}
+            height={500}
+            alt="Top 32 Pomysłów na Biznes"
+            className="w-[250px] h-auto mx-auto"
+          />
+        </div>
       </div>
-      <div
-        id="generator"
-        className="py-12 2xl:py-24 container mx-auto px-6 lg:px-0 rounded-xl"
-      >
+      <div id="generator" className="my-12 container mx-auto rounded-xl">
         <HomePageGenerator sendGenerateIdeaRequest={sendGenerateIdeaRequest} />
       </div>
-      <IdeaList ideas={ideas} />
-     
+      <div className="my-12 container mx-auto rounded-xl">
+        <IdeaList ideas={ideas} />
+      </div>
+
       <MainFooter jobsList={jobs} />
     </div>
   );

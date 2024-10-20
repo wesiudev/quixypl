@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { polishToEnglish } from "../../../../../../utils/polishToEnglish";
 import jobs from "../../../../../../public/14.09.2024.json";
@@ -8,8 +7,10 @@ import { FaBriefcase } from "react-icons/fa";
 import AboutQuixyTalent from "@/app/(about)/AboutQuixyTalent";
 import { TfiFlagAlt } from "react-icons/tfi";
 import { getPageContent } from "@/lib/getPageContent";
-import { getTalents } from "../../../../../../utils/getTalents";
 import Image from "next/image";
+import Hero from "@/components/Hero";
+import TalentList from "@/components/TalentList";
+import JobOffers from "@/components/JobOffers";
 
 // Generowanie parametrów statycznych
 export async function generateStaticParams() {
@@ -27,35 +28,41 @@ export default async function Page({ params }: { params: any }) {
     (item: any) => polishToEnglish(item.title) === params.category
   );
   const content = await getPageContent(polishToEnglish(slug?.title));
-  const talents = await getTalents();
-  // const job_offers = await fetch(
-  //   `${process.env.NEXT_PUBLIC_URL}/api/getOffersByCategory?tubylytylkofigi=${process.env.API_SECRET_KEY}&cat=${params.category}`,
-  //   {
-  //     method: "POST",
-  //     cache: "no-store",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     },
-  //     next: { revalidate: 360 },
-  //   }
-  // ).then((res) => {
-  //   return res.json();
-  // });
-
+  const talents = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/talents?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
+  const categoryTalents = talents
+    ?.map((item: any) => {
+      const { email, ...talent } = item;
+      return talent;
+    })
+    .filter(
+      (item: any) =>
+        item?.pseudo &&
+        item?.seek &&
+        item?.seek !== "ask" &&
+        item?.tags?.filter((tag: any) => tag.categoryUrl === params.category)
+    );
   return (
     <div className="bg-gradient-to-b !font-gotham relative bg-white">
       <Header jobsList={jobs} />
 
       {/* Hero Section */}
-      <div className="relative text-center py-16 overflow-hidden bg-gray-200">
+      <div className="px-4 relative flex flex-col items-center justify-center text-center text-white bg-gradient-to-r from-zinc-900 via-gray-900 to-zinc-950 py-12 font-gotham">
+        <Hero />
         <div className="p-3 sm:p-6 lg:p-12 !py-0 relative z-50">
-          <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 text-black">
-            Praca zdalna <b>{slug?.title}</b>
+          <h1 className="text-2xl sm:text-3xl lg:text-5xl mb-4">
+            Praca zdalna{" "}
+            <b className="bg-gradient-to-r from-primary via-cta to-primary p-1 rounded-lg !leading-snug">
+              {slug?.title}
+            </b>
           </h1>
         </div>
         <div className=" breadcrumbs text-sm bg-transparent mx-auto flex items-center justify-center relative z-50">
-          <ul className="flex-wrap flex items-center justify-center px-3 font-light text-black">
+          <ul className="flex-wrap flex items-center justify-center px-3 font-light text-white">
             <li>
               <Link title="praca zdalna" href={`/praca-zdalna`}>
                 praca-zdalna
@@ -76,13 +83,13 @@ export default async function Page({ params }: { params: any }) {
             </li>
           </ul>
         </div>
-        <p className="max-w-2xl mx-auto text-lg text-black px-3 mt-3 font-light">
+        <p className="max-w-2xl mx-auto text-lg text-white px-3 mt-3 font-light z-50">
           Zatrudnij najlepszych specjalistów od{" "}
           <b className="text-cta">{content?.genitive}</b> na polskim rynku
           pracy. Zrealizuj swój projekt z ich wsparciem! Odkryj naszą platformę
           pracy zdalnej.
         </p>
-        <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 justify-center mt-4 w-full">
+        <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 justify-center mt-4 w-full z-50">
           <Link
             href="/register"
             title="Rekrutuj do pracy zdalnej na panelu Quixy"
@@ -101,12 +108,14 @@ export default async function Page({ params }: { params: any }) {
       </div>
 
       {/* Subcategories Section */}
-      <div className="bg-white">
+      <div className="bg-white px-4 container mx-auto">
         {slug?.data?.length > 0 && (
-          <div className="container mx-auto">
-            <h1 className="text-black bg-white text-lg lg:text-2xl pt-12">
+          <div className="">
+            <h1 className="!leading-normal text-black bg-white text-xl lg:text-3xl pt-12">
               {slug.title}
-              <b className="text-primary ml-1">oferty pracy zdalnej</b>
+              <b className="bg-gradient-to-r from-primary via-cta to-primary p-1 rounded-lg ml-1 text-white">
+                oferty pracy zdalnej
+              </b>
             </h1>
             <div className="bg-white py-8 relative z-50 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
               {slug.data.map((item: any, index: number) => (
@@ -115,11 +124,10 @@ export default async function Page({ params }: { params: any }) {
                     params.category
                   }/${polishToEnglish(item.title)}`}
                   key={index}
-                  className="flex flex-col md:flex-row items-start md:items-center justify-between bg-[#126b91] px-4 py-2 rounded-xl font-coco italic"
+                  className="flex flex-col md:flex-row items-start md:items-center justify-between bg-[#126b91] px-4 py-2 rounded-xl font-coco"
                 >
                   <h2 className="flex items-center text-white">
-                    <FaBriefcase className="w-10 h-10 mr-3" />{" "}
-                    <div className="font-light">{item.title}</div>
+                    <FaBriefcase className="w-10 h-10 mr-3" /> {item.title}
                   </h2>
                 </Link>
               ))}
@@ -127,83 +135,35 @@ export default async function Page({ params }: { params: any }) {
           </div>
         )}
       </div>
+      <JobOffers categoryUrl={params.category} content={content} />
 
-      <div className="bg-gray-200 rounded-3xl p-3 py-6 sm:py-12 lg:py-24 mt-6 container mx-auto my-12">
-        <div className="bg-cta rounded-full aspect-square mx-auto w-40 flex items-center justify-center">
-          <TfiFlagAlt className="text-white text-7xl" />
-        </div>
-
-        <p className="font-light text-black text-base font-gotham my-3 text-center max-w-xl mx-auto">
-          Brak aktywnych ofert pracy zdalnej dla specjalistów w branży{" "}
-          {content?.genitive}
-        </p>
-        <h3 className="flex flex-col text-white p-2 font-gotham font-light text-center mx-auto max-w-[332px] group">
-          <Link
-            href="/register"
-            className="rounded-2xl bg-[#14a800] p-2 duration-100 group-hover:bg-opacity-80"
-          >
-            Bądź szybszy/a i dodaj ogłoszenie
-          </Link>
-          <Link
-            href="/register"
-            className="rounded-b-2xl bg-[#14a800] w-max max-w-[100%] mx-auto p-2 px-4 duration-100 group-hover:bg-opacity-80"
-          >
-            o pracę już dziś!
-          </Link>
-        </h3>
-      </div>
-      <div className="px-8 bg-white w-full mb-20">
+      <div className="px-4 bg-white w-full mb-12">
         <div className="flex flex-col container mx-auto">
-          <div className="mt-6">
-            <h2 className="text-black font-gotham mb-3">
-              Specjaliści {content?.genitive}
-            </h2>
-            <div className="flex items-center flex-wrap -ml-2">
-              {talents
-                ?.filter((item) => item?.pseudo && item?.seek)
-                .map((talent: any) => (
-                  <Link
-                    href={`/talent/${talent.pseudo}`}
-                    className="flex items-center ml-2"
-                    key={talent?.uid}
-                  >
-                    {talent?.photoURL ? (
-                      <div className="w-12 aspect-square rounded-lg bg-gray-200">
-                        <div
-                          className="rounded-lg"
-                          style={{ boxShadow: "0px 0px 4px black" }}
-                        >
-                          <Image
-                            src={talent?.photoURL}
-                            width={224}
-                            height={224}
-                            alt={`Zdjęcie talentu ${
-                              talent?.name || talent?.pseudo
-                            }`}
-                            className="rounded-lg"
-                          />
-                        </div>
-                      </div>
-                    ) : (
-                      <span
-                        style={{ boxShadow: "0px 0px 4px black" }}
-                        className="w-12 aspect-square mr-2 rounded-lg bg-white flex items-center justify-center text-2xl text-primary"
-                      >
-                        {talent?.name?.[0].toUpperCase() ||
-                          talent?.pseudo?.[0].toUpperCase()}
-                      </span>
-                    )}
-                  </Link>
-                ))}
-            </div>
+          <div className="">
+            <h2
+              style={{ lineHeight: 1.5 }}
+              className="text-black font-gotham text-xl lg:text-3xl my-12"
+            >
+              {content?.informal_title_plural}{" "}
+              <span className="bg-gradient-to-r from-primary to-cta text-white p-2 ml-1 rounded-lg">
+                w Quixy Talent&trade;
+              </span>
+            </h2>{" "}
+            <TalentList categoryTalents={categoryTalents} />
           </div>
         </div>
       </div>
       <div className="bg-white w-full px-4">
-        <div className="flex flex-col lg:flex-row gap-6 p-6 lg:p-12 2xl:p-24 bg-gray-200 rounded-3xl container mx-auto">
+        <div className="flex flex-col lg:flex-row gap-6 rounded-3xl container mx-auto">
           <section className="text-left w-full lg:pr-24">
-            <h2 className="text-3xl font-extrabold mb-6 text-black font-gotham">
-              Czym zajmują się specjaliści {content?.genitive}?
+            <h2
+              style={{ lineHeight: 1.5 }}
+              className="text-3xl mb-6 text-black font-gotham"
+            >
+              Czym zajmują się
+              <span className="ml-2 rounded-lg p-2 px-3 bg-gradient-to-r text-white from-primary via-cta to-primary">
+                {content?.informal_title_plural.toLowerCase()}?
+              </span>
             </h2>
 
             <div
@@ -212,37 +172,13 @@ export default async function Page({ params }: { params: any }) {
                 __html: content?.description,
               }}
             />
-            {/* <div className="mt-12">
-              <h3
-                style={{ lineHeight: 1.4 }}
-                className="text-3xl font-gotham text-black  mb-3"
-              >
-                Odwiedź naszego bloga o tematyce poświęconej nie tylko{" "}
-                {content?.dative}
-                {", "} ale także pracy zdalnej.
-              </h3>
-              <Link
-                href="https://wesiudev.com/pl"
-                target="_blank"
-                title="zobacz autora bloga"
-              >
-                <Image
-                  src="/assets/wesiudev3.png"
-                  width={224}
-                  height={224}
-                  alt="Logo serwisu wesiudev.com"
-                  className="w-32 h-auto"
-                />
-              </Link>
-              <p className="mt-3 text-black font-gotham font-light">
-                Brak nowych postów... Stay tuned 😎
-              </p>
-            </div> */}
           </section>
         </div>
       </div>
 
-      <AboutQuixyTalent />
+      <div className="container mx-auto mt-3">
+        <AboutQuixyTalent />
+      </div>
       {/* Footer Section */}
       <MainFooter
         jobsList={cat.data}

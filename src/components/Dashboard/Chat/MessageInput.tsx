@@ -1,11 +1,8 @@
 "use client";
-// wesiudev entertainment
 import React, { useState } from "react";
-import { BiSend, BiTrophy } from "react-icons/bi";
+import { BiSend } from "react-icons/bi";
 import { addMessageToConversation } from "@/firebase/";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { FaUsers } from "react-icons/fa6";
 import { updateUser } from "@/firebase/";
 
 interface MessageInputProps {
@@ -51,61 +48,27 @@ const MessageInput: React.FC<MessageInputProps> = ({
     }
   };
   return (
-    <div className="flex items-center sticky bottom-0 left-0 bg-white shadow-md">
+    <div className="w-full flex bg-white shadow-md">
       <textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        placeholder={
-          !source?.bio || !source?.name || !source?.age
-            ? "Uzupełnij profil..."
-            : source?.chat || source?.messages > 0
-            ? "Wpisz wiadomość..."
-            : "Kup premium lub doładuj profil..."
-        }
+        placeholder="Wpisz wiadomość"
         autoFocus
         onKeyDown={handleKeyPress}
-        className={`${
-          (!source?.chat ||
-            !source?.bio ||
-            !source?.name ||
-            !source?.age ||
-            !source?.premium ||
-            !source?.chat) &&
-          source?.messages === 0 &&
-          "placeholder:text-[red] font-bold"
-        } p-3 h-24 w-full resize-none focus:outline-none text-xl`}
+        className={`p-3 h-24 w-full resize-none focus:outline-none text-xl font-gotham font-light`}
         disabled={
           (!source?.chat || !source?.bio || !source?.name || !source?.age) &&
           source?.messages === 0
         }
       />
-      {(source?.chat || source?.messages > 0) && (
+      <div className="w-24 h-24">
         <button
           onClick={() => handleSendMessage()}
-          className="w-24 aspect-square h-24 text-2xl p-3 bg-[#fff] text-white font-bold flex items-center justify-center"
+          className="h-full w-full text-2xl bg-cta text-white font-bold flex items-center justify-center"
         >
           <BiSend />
         </button>
-      )}
-      {source?.bio &&
-        source?.name &&
-        source?.age &&
-        !source?.chat &&
-        source?.messages === 0 && (
-          <Link
-            href="/premium"
-            className="h-24 text-sm p-3 bg-[#fff] text-white font-bold flex items-center justify-center"
-          >
-            <BiTrophy className="text-yellow-400 mr-2" />{" "}
-            <div className="w-max">Wykup Dostęp</div>
-          </Link>
-        )}
-      {(!source?.bio || !source?.name || !source?.age) && (
-        <button className="h-24 w-max text-sm p-3 bg-[#fff] text-white font-bold flex items-center justify-center">
-          <FaUsers className="text-yellow-400 mr-2" />
-          <div className="w-max">Uzupełnij profil</div>
-        </button>
-      )}
+      </div>
     </div>
   );
 };

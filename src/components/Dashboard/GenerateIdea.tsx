@@ -147,14 +147,14 @@ export default function GenerateIdea({
                 </h2>
               </div>
               <GenerateIdeaInputs config={config} setConfig={setConfig} />
-              <div className="px-6 lg:px-12">
+              <div className="">
                 <button
                   onClick={generate}
                   disabled={isLoading}
                   className={`p-3 w-full h-max text-white font-bold mb-6 ${
                     isLoading
-                      ? "cursor-not-allowed bg-green-500"
-                      : "bg-[#126b91] rounded-lg hover:bg-[#468CA9] duration-100"
+                      ? "cursor-not-allowed bg-gradient-to-r from-primary to-cta rounded-lg"
+                      : "bg-gradient-to-r from-primary to-cta rounded-lg"
                   }`}
                 >
                   {isLoading ? (

@@ -2,13 +2,14 @@
 import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, getUsers } from "@/firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { setUsers } from "@/redux/slices/users";
 import { setUser } from "@/redux/slices/user";
 import { Providers } from "@/redux/Provider";
 import DashboardHeader from "@/components/Dashboard/DashboardHeader";
 import Loading from "@/app/loading";
+import Chat from "@/components/Dashboard/Chat/Chat";
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [user, loading] = useAuthState(auth);
   const dispatch = useDispatch();
@@ -37,10 +38,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       router.push(`${process.env.NEXT_PUBLIC_URL}/login`);
     }
   }, [loading, user, router]);
+  const { modals } = useSelector((state: any) => state.modals);
   return (
     <div className="bg-[#126b91]">
       <Providers>
         {!user && <Loading />}
+        {modals?.currentChat?.pseudo && <Chat />}
         <div className="sticky top-0 left-0 z-[999999]">
           <DashboardHeader />
         </div>

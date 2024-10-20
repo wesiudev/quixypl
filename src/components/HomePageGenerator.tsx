@@ -95,6 +95,7 @@ export default function HomePageGenerator({
           addDocument("users", res.user?.uid, {
             uid: res.user?.uid,
             name: "",
+            hourRate:"",
             email: res.user?.email,
             photoURL: "",
             totalSpent: 0,
@@ -102,7 +103,9 @@ export default function HomePageGenerator({
             tokens: 3,
             isPremium: false,
             emailVerified: false,
-            ideas: [{ ...generatedIdea, creationTime: Date.now() }],
+            ideas: [
+              { ...generatedIdea, creationTime: Date.now(), seen: false },
+            ],
             jobOffers: [],
             groups: [],
             profileComments: [],
@@ -216,77 +219,54 @@ export default function HomePageGenerator({
 
   return (
     <div className="w-full flex flex-col md:flex-row">
-      <div
-        className="rounded-xl text-black h-full bg-white w-full"
-        style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
-      >
+      <div className="rounded-xl text-black h-full bg-white w-full p-6">
         <div className="flex flex-row w-full">
           <div className="flex flex-col md:flex-row w-full">
-            <div className="flex flex-col w-full md:w-3/5 lg:w-4/5">
-              <h2 className="font-gotham text-3xl text-black drop-shadow-xl shadow-black p-6 lg:p-12">
+            <div className="flex flex-col w-full md:w-3/5 p-3 lg:p-0">
+              <h2 className="font-gotham text-3xl text-black drop-shadow-xl shadow-black p-3">
                 Twój nowy,{" "}
-                <span
-                  className="text-cta"
-                  style={{ textShadow: "2px 2px 2px black" }}
-                >
+                <span className="rounded-md bg-gradient-to-r from-primary to-cta p-1 text-white">
                   unikalny
                 </span>{" "}
                 pomysł na biznes!
               </h2>
-              <GenerateIdeaInputs setConfig={setConfig} config={config} />
+              <div className="px-3">
+                <GenerateIdeaInputs setConfig={setConfig} config={config} />
+              </div>
             </div>
 
             <div
-              style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
-              className="rounded-3xl p-6 lg:p-12 2xl:p-16 bg-gray-200 w-full h-full flex flex-col justify-between md:w-2/5"
+              style={{ boxShadow: "0px 0px 5px black" }}
+              className="md:w-2/5 rounded-lg"
             >
-              <div className="h-full flex flex-col">
-                <h2 className="font-gotham text-2xl text-black font-bold drop-shadow-xl shadow-black">
-                  Generuj nowy pomysł na biznes
-                </h2>
-                <p className="mt-3 font-gotham text-lg font-light text-black">
-                  Pomysły Quixy&trade; to rozwiązanie AI, które wygeneruje
-                  pomysł i przedstawi biznesplan, a eksperci z Quixy
-                  Talent&trade; zrealizują go od A do Z!
-                </p>
-              </div>
-              <button
-                disabled={isThinking ? true : false}
-                style={{ textShadow: "2px 2px 2px black" }}
-                className="disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-80 group rounded-xl p-3 w-full h-max bg-cta hover:bg-opacity-90 duration-150 text-white font-bold mt-3 relative"
-                onClick={handleGenerateIdea}
-              >
-                <div className="w-[250px] cursor-default absolute left-1/2 -translate-x-1/2 -top-[170%] p-2 rounded-2xl text-white bg-blue-500 font-bold -translate-y-[50px] group-hover:-translate-y-[0px] z-[-10] group-hover:z-[25] select-none opacity-0 group-hover:opacity-100 duration-150 ease-in-out">
-                  Wygeneruj pomysł na biznes, utwórz konto i odbierz 💎3
+              <div className="rounded-lg p-6 bg-gray-200 w-full h-full flex flex-col justify-between">
+                <div className="h-full flex flex-col">
+                  <h2 className="font-gotham text-2xl text-black font-bold drop-shadow-xl shadow-black">
+                    Generator pomysłów na biznes
+                  </h2>
+                  <p className="mt-3 font-gotham text-lg font-light text-black">
+                    Nasz generator to rozwiązanie AI, które wygeneruje pomysł i
+                    przedstawi biznesplan, a eksperci z Quixy Talent&trade;
+                    zrealizują go od A do Z!
+                  </p>
                 </div>
-                <div className="absolute left-1/2 -translate-x-1/2 w-5 h-5 rotate-45 bg-blue-500 -top-[57%] cursor-default -translate-y-[50px] group-hover:-translate-y-[0px] z-[-10] group-hover:z-[24] select-none opacity-0 group-hover:opacity-100 duration-150 ease-in-out" />
-                Wypróbuj za darmo
-                {!isThinking && generatedIdea?.content && generatorPopup && (
-                  <div className="flex items-center justify-center">
-                    <FaCheck className="mr-2 text-green-500" />
-                    Pomysł gotowy
+                <button
+                  disabled={isThinking ? true : false}
+                  className="disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-80 group rounded-xl p-3 w-full h-max bg-cta hover:bg-opacity-90 duration-150 text-white font-bold mt-3 relative"
+                  onClick={handleGenerateIdea}
+                >
+                  <div className="w-[250px] cursor-default absolute left-1/2 -translate-x-1/2 -top-[170%] p-2 rounded-2xl text-white bg-blue-500 font-bold -translate-y-[50px] group-hover:-translate-y-[0px] z-[-10] group-hover:z-[25] select-none opacity-0 group-hover:opacity-100 duration-150 ease-in-out">
+                    Wygeneruj pomysł na biznes, utwórz konto i odbierz 💎3
                   </div>
-                )}
-              </button>
+                  <div className="absolute left-1/2 -translate-x-1/2 w-5 h-5 rotate-45 bg-blue-500 -top-[57%] cursor-default -translate-y-[50px] group-hover:-translate-y-[0px] z-[-10] group-hover:z-[24] select-none opacity-0 group-hover:opacity-100 duration-150 ease-in-out" />
+                  {isThinking ? "Proszę czekać..." : "Wypróbuj za darmo"}
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      {/* popups */}
-      <button
-        onClick={() => {
-          setRegisterPopupOpen(false);
-          setGeneratorPopup(false);
-        }}
-        style={{ boxShadow: "0 0 16px 0 white" }}
-        className={`fixed z-[9999] border border-black bg-white bg-opacity-5 text-white text-4xl top-5 right-5 p-2 rounded-xl w-10 h-10 flex items-center justify-center ${
-          registerPopupOpen || generatorPopup
-            ? "translate-x-0 duration-[1000ms]"
-            : "translate-x-[100vw]"
-        }`}
-      >
-        <IoIosClose className="w-8 h-8 text-gray-400" />{" "}
-      </button>
+
       <button
         onClick={() => {
           setRegisterPopupOpen(false);
@@ -294,7 +274,7 @@ export default function HomePageGenerator({
         }}
         className={`bg-[#202020] ${
           registerPopupOpen || generatorPopup
-            ? "z-[30] w-full h-full fixed left-0 top-0 duration-500 delay-500 bg-opacity-80"
+            ? "z-[30] w-full h-full fixed left-0 top-0 duration-500 bg-opacity-80 hover:bg-opacity-50 cursor-pointer"
             : "fixed -z-[25] bg-opacity-0"
         }`}
       ></button>
@@ -303,7 +283,7 @@ export default function HomePageGenerator({
           setRegisterPopupOpen(false);
           setGeneratorPopup(false);
         }}
-        className={`fixed left-0 top-0 w-full h-full flex justify-center items-center z-[999999999999999] ${
+        className={`w-max max-w-[90%] fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex justify-center items-center z-[999999999999999] ${
           generatorPopup ? "flex" : "hidden"
         } ease-in-out duration-500`}
       >
@@ -311,19 +291,21 @@ export default function HomePageGenerator({
           onClick={(e: any) => {
             e.stopPropagation();
           }}
-          className="bg-white rounded-lg flex flex-col w-[90%] sm:max-w-[40rem] h-[50vh] relative bg-opacity-90"
+          className="bg-white rounded-lg flex flex-col w-full sm:max-w-[40rem] max-h-[90vh] relative"
         >
-          <h2 className="bg-[#126b91] rounded-t-lg p-4 md:p-6 font-gotham text-2xl text-white font-bold drop-shadow-xl shadow-black sticky top-0">
+          <h2 className="bg-gradient-to-r from-primary to-cta rounded-t-lg p-4 md:p-6 font-gotham text-2xl text-white font-bold drop-shadow-xl shadow-black sticky top-0">
             Twój nowy pomysł jest gotowy!
           </h2>
           <div className="w-full p-4 md:p-6 flex flex-col h-full overflow-y-scroll">
-            <div className="text-black text-xl font-bold">
+            <div className="text-black text-xl font-bold font-coco">
               Wygenerowany pomysł:
             </div>
-            <p className="text-gray-800 text-justify mt-3">
-              {cutSentence(generatedIdea?.content)}
-            </p>
-            <div className="mt-3 text-sm text-gray-500 ">
+            <div className="text-white text-justify mt-3">
+              <span className="w-max max-w-full bg-gradient-to-r from-primary to-cta p-[2px]">
+                {cutSentence(generatedIdea?.content)}
+              </span>
+            </div>
+            <div className="text-sm text-gray-700 mt-24">
               Zaloguj się by odebrać{" "}
               <b className="text-primary">nowy pomysł na biznes</b> oraz 💎3 na
               start
@@ -335,7 +317,7 @@ export default function HomePageGenerator({
               setGeneratorPopup(false);
               e.stopPropagation();
             }}
-            className="py-3 mx-auto rounded-b-lg bg-green-500 font-bold text-white w-full sticky bottom-0 left-0"
+            className="py-3 mx-auto rounded-b-lg bg-primary font-bold text-white w-full"
           >
             Dołącz teraz
           </button>

@@ -23,7 +23,7 @@ export default function RootLayout({
             <ToastContainer />
             <button
               onClick={scrollToTop}
-              className="group flex flex-col fixed md:right-6 md:bottom-6 xl:right-12 xl:bottom-12 right-3 bottom-3 text-white bg-primaryHover px-3 py-2 rounded-md duration-200"
+              className="group flex flex-col fixed right-0 bottom-0 text-white bg-primaryHover px-3 py-2 rounded-tl-md duration-200"
             >
               <FaChevronRight className="text-sm -rotate-[90deg] group-hover:scale-125 duration-100" />
               <FaChevronRight className="text-sm -mt-2 -rotate-[90deg] scale-75 group-hover:scale-100 duration-300" />

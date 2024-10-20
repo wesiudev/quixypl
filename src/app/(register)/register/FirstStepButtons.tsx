@@ -35,7 +35,7 @@ export default function FirstStepButtons({
           onClick={() => setStep(2)}
           className="button !font-normal !px-12"
         >
-          Wypróbuj AI!
+          Wypróbuj za darmo!
         </button>
       )}
     </div>

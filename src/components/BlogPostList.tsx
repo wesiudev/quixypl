@@ -18,30 +18,28 @@ const BlogPostList = ({ posts }: { posts: any }) => {
   const currentPosts = posts?.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <div className="px-4 md:px-8 lg:px-12 xl:px-20 2xl:px-32">
-      <h3 className="text-primary">wszystkie posty:</h3>
-      <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
+    <div className="mt-12">
+      <h3 className="text-black font-coco text-xl font-bold">
+        Interesujesz się pracą zdalną, biznesem lub AI? Sprawdź naszego bloga!
+      </h3>
+      <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4">
         {currentPosts?.map((post: any, i: number) => (
           <Link
             href={`/blog/${post.url}`}
             key={i}
             title={`Przejdź do artykułu ${post.title}`}
-            className="group relative aspect-square h-max flex flex-col hover:bg-[#74B901] hover:bg-opacity-30 hover:p-1 duration-300 ease-in-out"
-            style={{ boxShadow: "0px 0px 5px #000000" }}
+            className="rounded-lg group relative aspect-square h-max flex flex-col duration-300 ease-in-out"
           >
-            <div className="w-full overflow-hidden flex items-start">
+            <div className="w-full overflow-hidden flex items-start rounded-lg">
               <Image
                 src={post.primaryImage}
                 width={512}
                 height={512}
                 alt={`Obrazek ${post.title}`}
-                className="absolute inset-0 object-cover w-full h-full"
+                className="absolute inset-0 object-cover w-full h-full rounded-lg"
               />
             </div>
-            <h2
-              style={{ boxShadow: "0px 0px 5px #000000" }}
-              className="group-hover:bg-gray-300 bg-gray-200 duration-300 absolute bottom-3 left-3 right-3 text-base lg:text-xl mt-3 text-black font-light text-left px-3 py-1"
-            >
+            <h2 className="rounded-lg hover:shadow-sm group-hover:shadow-primary group-hover:scale-x-105 group-hover:bg-primary/100 bg-black/50 duration-300 absolute bottom-3 left-3 right-3 text-sm mt-3 text-white font-light text-left px-3 py-1 font-coco">
               {post.title}
             </h2>
           </Link>

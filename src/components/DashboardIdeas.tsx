@@ -1,24 +1,21 @@
 "use client";
 import GenerateIdea from "@/components/Dashboard/GenerateIdea";
 import OpenedIdea from "@/components/Dashboard/OpenedIdea";
+import { addJobOffer } from "@/firebase";
 import moment from "moment";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function DashboardIdeas() {
   const [ideaOpen, setIdeaOpen] = useState<any>({});
+  const [jobRequestOpen, setJobRequestOpen] = useState<boolean>(false);
   const { user } = useSelector((state: any) => state.user);
-  const [isJobRequestOpen, setJobRequestOpen] = useState(false);
   return (
     <>
       <div className="flex flex-col bg-white w-full">
         <GenerateIdea userTokens={user?.tokens} setIdeaOpen={setIdeaOpen} />
       </div>
-      {isJobRequestOpen && (
-        <div className="fixed left-0 top-0 w-full h-screen lg:left-[30rem]">
-          <h2>Zatrudnij do wykonania pomysłu</h2>
-        </div>
-      )}
+
       {user?.ideas?.length > 0 && (
         <div className="p-8 md:p-12 lg:p-12 flex justify-center flex-col bg-gray-200">
           <div className="flex">
@@ -44,7 +41,10 @@ export default function DashboardIdeas() {
                     style={{ boxShadow: "0px 0px 10px black" }}
                   >
                     <button
-                      onClick={() => setIdeaOpen(idea)}
+                      onClick={() => {
+                        setIdeaOpen(idea);
+                        setJobRequestOpen(idea);
+                      }}
                       className="flex-col flex text-left items-start justify-start font-bold rounded-lg p-2 bg-white w-full h-full"
                     >
                       <div className="flex flex-col justify-start">
@@ -56,16 +56,22 @@ export default function DashboardIdeas() {
                         </div>
                       </div>
 
-                      <div key={i}>{idea.tags.join(", ")}</div>
+                      <div
+                        key={i}
+                        className="text-black font-light font-gotham"
+                      >
+                        {idea.tags.join(", ")}
+                      </div>
                     </button>
                   </div>
                 </div>
               ))}
           </div>
           <OpenedIdea
-            setJobRequestOpen={setJobRequestOpen}
+            jobRequest={jobRequestOpen}
             ideaOpen={ideaOpen}
             setIdeaOpen={setIdeaOpen}
+            setJobRequest={setJobRequestOpen}
           />
         </div>
       )}

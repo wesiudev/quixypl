@@ -58,34 +58,40 @@ export default function Unsaved({
         </div>
         <div className="flex flex-col-reverse sm:flex-row items-center w-max">
           <button
-            onClick={() => {
+            onClick={async () => {
               const history = source?.history ? [...source?.history] : [];
-              updateUser(source?.uid, {
-                ...source,
-                ...data,
-                configured: true,
-                history: [
-                  ...history,
-                  { creationTime: Date.now(), action: "Aktualizacja profilu" },
-                ],
-              }).then(() => {
-                dispatch(set_modals({ ...modals, config: false })),
-                  dispatch(
-                    setUser({
-                      ...source,
-                      configured: true,
-                      history: [
-                        ...history,
-                        {
-                          creationTime: Date.now(),
-                          action: "Aktualizacja profilu",
-                        },
-                      ],
-                    })
-                  );
-              });
-
-              setChangesWereMade(false);
+              try {
+                await updateUser(source?.uid, {
+                  ...source,
+                  ...data,
+                  configured: true,
+                  history: [
+                    ...history,
+                    {
+                      creationTime: Date.now(),
+                      action: "Aktualizacja profilu",
+                    },
+                  ],
+                });
+                dispatch(set_modals({ ...modals, config: false }));
+                dispatch(
+                  setUser({
+                    ...source,
+                    configured: true,
+                    history: [
+                      ...history,
+                      {
+                        creationTime: Date.now(),
+                        action: "Aktualizacja profilu",
+                      },
+                    ],
+                  })
+                );
+              } catch (error) {
+                console.error(error);
+              } finally {
+                setChangesWereMade(false);
+              }
             }}
             className="text-white text-sm rounded-lg bg-[green] font-gotham px-6 py-2"
           >

@@ -19,6 +19,7 @@ export interface IProject {
   companySize: string;
   creationTime: number;
   extraDays: number;
+  link: string;
 }
 
 export type GenerateIdeaParams = {

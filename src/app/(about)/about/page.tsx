@@ -22,10 +22,9 @@ export default function Page() {
       {/* Hero Section */}
       <div className="flex-grow">
         <div
-          className="h-full w-full bg-black overflow-hidden text-white py-12 relative z-50 px-10 text-center"
+          className="h-full w-full bg-gradient-to-r from-zinc-800 via-gray-800 to-zinc-950 overflow-hidden text-white py-12 relative z-50 px-10 text-center"
           style={{ textShadow: "2px 2px 2px black" }}
         >
-          <Hero />
           <h1 className="text-5xl font-bold text-cta">Czym jest Quixy.pl?</h1>
           <p className="text-xl italic mt-4 max-w-xl mx-auto">
             Quixy to platforma z pracą zdalną i nie tylko - na bieżąco rozwijamy
@@ -209,12 +208,22 @@ export default function Page() {
           >
             Zarejestruj się już teraz i zyskaj darmowe Quixies 💎 na start!
           </p>
-          <button
-            style={{ textShadow: "1px 1px 1px black" }}
-            className="bg-cta text-white font-bold relative z-50 py-1.5 px-2 rounded mt-6 hover:bg-opacity-90 transition"
-          >
-            Rejestracja
-          </button>
+          <div className="flex items-center space-x-3">
+            <Link
+              href="/talent"
+              style={{ textShadow: "1px 1px 1px black" }}
+              className="bg-cta text-white font-bold relative z-50 py-1.5 px-2 rounded mt-6 hover:bg-opacity-90 transition"
+            >
+              Talent
+            </Link>
+            <Link
+              href="/company"
+              style={{ textShadow: "1px 1px 1px black" }}
+              className="bg-cta text-white font-bold relative z-50 py-1.5 px-2 rounded mt-6 hover:bg-opacity-90 transition"
+            >
+              Firma
+            </Link>
+          </div>
         </div>
       </div>
 

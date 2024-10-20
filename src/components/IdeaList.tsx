@@ -26,27 +26,24 @@ const IdeaList: React.FC<IdeasProps> = ({ ideas }) => {
   const currentIdeas = ideas?.slice(indexOfFirstIdea, indexOfLastIdea);
 
   return (
-    <div
-      style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
-      className="py-12 px-6 lg:px-12 bg-white container mx-auto font-gotham rounded-xl mb-12 lg:mb-24"
-    >
-      <h2 className="text-3xl lg:text-5xl max-w-2xl text-black">
+    <div className="bg-white p-4 sm:p-8 mx-auto font-gotham sm:rounded-xl sm:my-12">
+      <h2 className="text-xl sm:text-3xl max-w-2xl text-black">
         Wolisz zobaczyć generacje użytkowników?
       </h2>
       <p className="text-black max-w-2xl mt-6 mb-3">
         Przejdź do najlepszych pomysłów na biznes. Dołącz do innych ambitnych
         osób, które wyznaczają sobie cele, a później do nich dążą!
       </p>
-      <h3 className="text-primary">Zobacz listę pomysłów:</h3>
+      <h3 className="text-primary">Sprawdź projekty</h3>
 
-      <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {currentIdeas?.map((idea: Idea, i: number) => (
           <Link
             key={i}
             href={`/business-ideas/${polishToEnglish(
               idea?.name
             )}${idea?.creationTime?.toString()}`}
-            className="text-black flex flex-col justify-between p-6 border rounded-lg shadow-sm hover:shadow-lg hover:border-primary hover:shadow-primary hover:scale-105 duration-300"
+            className="bg-gradient-to-r from-primary to-cta text-white flex flex-col justify-between p-6 border rounded-lg shadow-sm hover:shadow-lg hover:border-primary hover:shadow-primary hover:scale-105 duration-300"
           >
             {idea?.name}
           </Link>

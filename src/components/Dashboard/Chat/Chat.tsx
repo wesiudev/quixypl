@@ -10,10 +10,11 @@ import ServicesList from "./ServicesList";
 import ChatHeader from "./ChatHeader";
 import ChatRoom from "./ChatRoom";
 import ChatList from "./ChatList";
+import { useDispatch, useSelector } from "react-redux";
+import { set_modals } from "@/redux/slices/modalsopen";
 
 export default function Chat() {
   const [currentConversation, setCurrentConversation] = useState<any>();
-  const [clickedUserData, setClickedUserData] = useState<any>();
   const [chat, setChat] = useState<any>();
   const [source, setSource] = useState<any>();
   const [user, loading] = useAuthState(auth);
@@ -46,48 +47,42 @@ export default function Chat() {
       unsub();
     };
   }, [loading]);
-  const closeChat = () => {
-    setCurrentConversation(null);
-    setClickedUserData(null);
-  };
+  const dispatch = useDispatch();
+  const { modals } = useSelector((state: any) => state.modals);
+  const [chatListOpen, setChatListOpen] = useState(false);
+
   return (
     <>
       <div>
+        <button
+          onClick={() => dispatch(set_modals({ ...modals, currentChat: "" }))}
+          className={`z-[10001] fixed left-0 top-0 h-full w-full ${
+            modals.currentChat !== "" && modals.currentChat !== null
+              ? "scale-y-100 bg-black/70 duration-500 hover:bg-black/50"
+              : "scale-y-0"
+          }`}
+        ></button>
         <div
-          style={{ flex: 1, boxShadow: "0px 0px 5px #000000" }}
-          className={`w-[calc(100%-50rem)] h-screen z-[10000] fixed left-[25rem] top-0`}
+          className={`${
+            modals.currentChat !== "" && modals.currentChat !== null
+              ? "translate-y-[0vh] duration-700"
+              : "translate-y-[100vh]"
+          } lg:w-[50vw] z-[10002] fixed left-1/2 -translate-x-1/2 w-full bottom-0`}
         >
-          {clickedUserData && (
-            <ChatHeader
-              clickedUserData={clickedUserData}
-              closeChat={closeChat}
-              chattingWith={
-                chat?.participants.find((item: any) => item.uid !== user?.uid)
-                  .name
-              }
-              source={source}
-            />
-          )}
-          {clickedUserData && (
+          {modals.currentChat !== "" && modals.currentChat !== null && (
             <ChatRoom
               chat={chat}
               authorId={user?.uid}
-              clickedUserData={clickedUserData}
+              clickedUserData={modals.currentChat}
               source={source}
             />
           )}
-          <ChatHeaderNoConversation source={source} />
-          <ChatRoomNoConversation source={source} />
         </div>
-        <ChatList
-          clickedUserData={clickedUserData}
-          setClickedUserData={setClickedUserData}
-          userId={user?.uid}
+        {/* <ChatList
           source={source}
-          currentConversation={currentConversation}
-          setCurrentConversation={setCurrentConversation}
-        />
-        <ServicesList source={source} />
+          chatListOpen={chatListOpen}
+          setChatListOpen={setChatListOpen}
+        /> */}
       </div>
     </>
   );

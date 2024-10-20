@@ -26,26 +26,22 @@ const IdeaListSlug: React.FC<IdeasProps> = ({ ideas }) => {
   const currentIdeas = ideas.slice(indexOfFirstIdea, indexOfLastIdea);
 
   return (
-    <div
-      style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
-      className="py-12 px-6 mt-24 mx-auto font-gotham rounded-xl mb-12 lg:mb-24"
-    >
-      <h2 className="text-3xl max-w-2xl text-black">
-        Zobacz wszystkie pomysły wygenerowane przez użytkowników Quixy&trade;!
+    <div className="bg-white p-4 sm:p-8 mx-auto font-gotham sm:rounded-xl sm:my-12">
+      <h2 className="text-xl sm:text-3xl max-w-2xl text-black">
+        Zobacz wszystkie pomysły wygenerowane przez naszych użytkowników
       </h2>
-      <p className="text-black max-w-2xl mt-6 mb-3">
-        Przejrzyj listę pomysłów i dołącz do grupy, lub utwórz swój pomysł i
+      <p className="text-black max-w-2xl mt-4 mb-3 font-light text-lg">
+        Przejrzyj listę projektów i dołącz do grupy, lub utwórz swój pomysł i
         niech inni dołączą do Ciebie!
       </p>
-      <h3 className="text-primary">Zobacz listę pomysłów:</h3>
-      <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {currentIdeas.map((idea: Idea, i: number) => (
           <Link
             key={i}
             href={`/business-ideas/${polishToEnglish(
               idea?.name
             )}${idea?.creationTime?.toString()}`}
-            className="text-black flex flex-col justify-between p-6 border rounded-lg shadow-sm hover:shadow-lg hover:border-primary hover:shadow-primary hover:scale-105 duration-300"
+            className="bg-gradient-to-r from-primary to-cta text-white flex flex-col justify-between p-6 border rounded-lg shadow-sm hover:shadow-lg hover:border-primary hover:shadow-primary hover:scale-105 duration-300"
           >
             {idea?.name}
           </Link>

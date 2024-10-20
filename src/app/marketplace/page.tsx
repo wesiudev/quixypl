@@ -23,8 +23,7 @@ export default function Page() {
 
       <main className="bg-gray-100 ">
         {/* Hero Section */}
-        <section className="hero-section h-full w-full bg-black text-white py-20 px-10 relative overflow-hidden">
-          <Hero />
+        <section className="hero-section h-full w-full bg-gradient-to-r from-zinc-800 via-gray-800 to-zinc-950 text-white py-20 px-10 relative overflow-hidden">
           <h1 className="text-4xl font-bold text-center z-50 relative">
             Rynek gotowych aplikacji, stron internetowych i projektów.
           </h1>

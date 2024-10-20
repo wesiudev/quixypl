@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getTalents } from "../../../../utils/getTalents";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
+import { fetchTalents } from "@/firebase";
 
 export async function GET(req: NextRequest) {
   const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
@@ -12,12 +12,11 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const talents = await getTalents();
+    const talents = await fetchTalents();
     const allIdeas = talents.flatMap((talent) => talent.ideas || []);
     const idea = allIdeas.find(
       (idea) =>
-        `${name}${idea.creationTime.toString()}` ===
-        polishToEnglish(`${idea.name}${idea.creationTime.toString()}`)
+        name === polishToEnglish(`${idea.name}${idea.creationTime.toString()}`)
     );
     return NextResponse.json(idea);
   } catch (error) {

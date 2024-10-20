@@ -1,7 +1,9 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { FaChevronDown } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 export default function HeaderComponent({
   showHeader,
@@ -24,10 +26,13 @@ export default function HeaderComponent({
   width: number;
   setMenuShow: Function;
 }) {
+  const { modals } = useSelector((state: any) => state.modals);
   return (
     <div
       style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
-      className={`sticky left-0 top-0 z-[99999999999999] px-4 bg-white flex flex-row items-center justify-center w-full ${
+      className={`${
+        modals.isProjectOpen && "hidden"
+      } sticky left-0 top-0 z-[10000] px-4 bg-white flex flex-row items-center justify-center w-full ${
         showHeader || menuShow || hovered || productsOpen
           ? "-translate-y-0"
           : "-translate-y-[100%]"
@@ -166,7 +171,7 @@ export default function HeaderComponent({
         </div>
         <Link
           href="/register"
-          className={`w-max py-[2px] px-[10px] text-lg rounded-md bg-cta hover:bg-opacity-90 text-white drop-shadow-sm duration-100 cursor-pointer font-gotham font-light`}
+          className={`w-max py-[2px] px-[10px] text-lg rounded-md bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 text-white drop-shadow-sm duration-100 cursor-pointer font-gotham font-light`}
         >
           Rejestracja
         </Link>

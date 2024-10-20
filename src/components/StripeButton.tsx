@@ -38,13 +38,13 @@ function StripeButton({ item }: { item: any }) {
   };
   return (
     <button
-      className={`w-full disabled:cursor-not-allowed`}
+      className={`w-full disabled:cursor-not-allowed font-coco`}
       disabled={isLoading || success}
       onClick={sendCheckoutRequest}
     >
       <div
         style={{ boxShadow: "0px 0px 16px cyan" }}
-        className={`w-full font-bold relative flex items-center justify-center text-center text-white bg-[#126b91] px-6 py-1 rounded-b-xl mt-2 text-base rounded-xl`}
+        className={`w-full font-bold relative flex items-center justify-center text-center text-white bg-gradient-to-r from-primary to-cta px-6 py-1 mt-2 text-base rounded-b-lg`}
       >
         {isLoading && (
           <div className="bg-white h-full aspect-square rounded-md flex flex-row items-center justify-center px-2 font-bold mx-auto">
@@ -59,20 +59,25 @@ function StripeButton({ item }: { item: any }) {
         )}
         {!isLoading && (
           <>
-            <div className="w-max text-sm sm:text-base group-hover:scale-y-100 duration-100 group-hover:delay-150 scale-y-0 absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
+            <div
+              style={{ textShadow: "1px 1px 1px black" }}
+              className="w-max text-sm sm:text-base group-hover:scale-y-100 duration-100 group-hover:delay-150 scale-y-0 absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]"
+            >
               Kup za {item.price},99 PLN
             </div>
             <div
-              className={`group-hover:scale-y-0 duration-150 ease-in-out ${
+              style={{ textShadow: "1px 1px 1px black" }}
+              className={`text-lg group-hover:scale-y-0 duration-150 ease-in-out ${
                 item.discount > 0 && "line-through text-gray-400"
               }`}
             >
               💎{item.quantity}{" "}
             </div>{" "}
             <div
+              style={{ textShadow: "1px 1px 1px black" }}
               className={`${
                 item.discount === 0 && "hidden"
-              } group-hover:scale-y-0 duration-150 ease-in-out`}
+              } text-lg group-hover:scale-y-0 duration-150 ease-in-out`}
             >
               {" "}
               💎{item.quantity + item.quantity * item.discount}

@@ -57,7 +57,7 @@ export default function PreferencesHandler({
     items.slice(0, expand ? items.length : limit).map((item) => (
       <button
         key={item}
-        className={`duration-200 text-white px-1.5 py-1 ml-1 mt-1 text-sm sm:text-base rounded-md ${
+        className={`font-coco duration-200 text-white px-1.5 py-1 ml-1 mt-1 text-sm rounded-md ${
           source?.preferences?.includes(item) ? "bg-cta" : "bg-gray-400"
         }`}
         onClick={() => {
@@ -131,9 +131,9 @@ export default function PreferencesHandler({
   const { title, description, type } = getTitleAndDescription();
 
   return (
-    <div className="flex flex-col w-full px-4 sm:px-6">
-      <div className="mt-3 font-bold text-lg text-black">{title}</div>
-      <p className="text-sm text-black mb-2 mt-4">{description}</p>
+    <div className="flex flex-col w-full px-4 sm:px-6 font-coco">
+      <div className="mt-3 text-lg text-black">{title}</div>
+      <p className="text-sm text-black mb-2">{description}</p>
       <div className="-ml-1 -mt-1 flex flex-wrap items-center w-full">
         {source?.seek && source?.seek !== "ask"
           ? renderPreferences(itemsForTalent, 6, type)
@@ -143,7 +143,7 @@ export default function PreferencesHandler({
         {(source?.seek && itemsForTalent.length > 6) ||
         (!source?.seek && companySize.length > 6) ? (
           <button
-            className="bg-[#126b91] text-white text-sm sm:text-base p-1 ml-1 mt-1 rounded-md"
+            className="bg-[#126b91] text-white text-sm p-1 px-2 ml-1 mt-1 rounded-md"
             onClick={() => setExpand(!expand)}
           >
             {expand ? "Pokaż mniej" : "Pokaż więcej"}

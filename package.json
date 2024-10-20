@@ -46,6 +46,7 @@
     "next-sitemap": "^4.2.3",
     "nodemailer": "^6.9.7",
     "openai": "^4.57.0",
+    "polskie-miejscowosci": "^1.0.2",
     "postcss": "8.4.29",
     "random-id": "^1.0.4",
     "react": "latest",

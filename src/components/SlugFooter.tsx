@@ -22,51 +22,43 @@ export default function SlugFooter({
   footerTitle: string;
 }) {
   return (
-    <div className="bg-white flex flex-col px-6 lg:px-12 p-6 py-12 font-gotham overflow-hidden">
+    <div className="flex flex-col px-6 lg:px-12 p-6 py-12 bg-gradient-to-r from-zinc-800 via-gray-800 to-zinc-950 relative z-50 overflow-hidden font-gotham">
       <div className="flex flex-col z-50 relative">
         <div className="mb-12">
-          <h2
-            className="text-4xl font-bold text-black"
-            style={{ lineHeight: 1.35 }}
-          >
+          <h2 className="text-4xl text-white" style={{ lineHeight: 1.35 }}>
             Przeglądasz {footerTitle}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+          <div className="bg-black/50 p-3 lg:p-6 mt-12 rounded-xl grid grid-cols-1 md:grid-cols-2 md:gap-4 xl:grid-cols-3 2xl:grid-cols-4 w-full">
             {jobsList.map((item: any, i: any) => (
-              <div key={i} className="flex flex-col mt-8">
-                <h2 className="group">
-                  <Link
-                    href={`/praca-zdalna${
-                      title !== "praca-zdalna" && `/${polishToEnglish(title)}`
-                    }/${polishToEnglish(item.title)}`}
-                    title={item.h1}
-                    className="w-max flex items-center text-cta text-2xl font-bold"
-                  >
+              <div key={i} className="flex flex-col w-full">
+                <h2 className="pt-[9px] text-white w-max max-w-full font-coco font-light italic text-xl lg:text-2xl 2xl:text-xl">
+                  <span className="p-[9px] bg-gradient-to-r from-primary to-cta rounded-xl">
                     {item.title}
-                  </Link>
+                  </span>
                 </h2>
-                {item.data.map((cat: any, i: any) => (
-                  <h3
-                    key={i}
-                    className="group mt-2 hover:underline underline-offset-2"
-                  >
-                    <Link
-                      href={`/praca-zdalna/${polishToEnglish(
-                        title
-                      )}/${polishToEnglish(item.title)}/${polishToEnglish(
-                        cat.title
-                      )}`}
-                      className="flex items-center text-black font-light"
-                    >
-                      {cat.title}
-                    </Link>
-                  </h3>
-                ))}
+                <div className="flex flex-row flex-wrap w-full justify-start my-4">
+                  {item.data.map((cat: any, i: any) => (
+                    <h3 key={i} className="w-full lg:w-max max-w-full">
+                      <Link
+                        href={`/praca-zdalna/${
+                          polishToEnglish(title)
+                            ? `${polishToEnglish(title)}/`
+                            : ""
+                        }${polishToEnglish(item.title)}/${polishToEnglish(
+                          cat.title
+                        )}`}
+                        className="hover:underline w-full lg:w-max max-w-full font-light text-white text-sm sm:text-base p-2"
+                      >
+                        {cat.title}
+                      </Link>
+                    </h3>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
         </div>
-        <div className="p-3 lg:p-6 bg-zinc-600 rounded-xl">
+        <div className="p-3 lg:p-6 bg-zinc-600/50 rounded-xl">
           <div className="text-white text-lg drop-shadow-lg shadow-black italic mb-3">
             Powered by
           </div>
@@ -115,10 +107,10 @@ export default function SlugFooter({
                 >
                   <Image
                     src="/assets/wesiudev3.png"
-                    width={100}
-                    height={100}
+                    width={300}
+                    height={300}
                     alt="autor"
-                    className="group-hover:scale-105 duration-200"
+                    className="group-hover:scale-105 duration-200 w-48 h-auto mx-auto"
                   />
                 </Link>
                 <Link

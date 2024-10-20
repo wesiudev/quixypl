@@ -50,7 +50,7 @@ export default function MainFooter({
             ))}
           </div>
         </div>
-        <div className="p-3 lg:p-6 bg-zinc-600 rounded-xl">
+        <div className="p-3 lg:p-6 bg-zinc-600/50 rounded-xl">
           <div className="text-white text-lg drop-shadow-lg shadow-black italic mb-3">
             Powered by
           </div>
@@ -99,10 +99,10 @@ export default function MainFooter({
                 >
                   <Image
                     src="/assets/wesiudev3.png"
-                    width={100}
-                    height={100}
+                    width={300}
+                    height={300}
                     alt="autor"
-                    className="group-hover:scale-105 duration-200"
+                    className="group-hover:scale-105 duration-200 w-48 h-auto mx-auto"
                   />
                 </Link>
                 <Link

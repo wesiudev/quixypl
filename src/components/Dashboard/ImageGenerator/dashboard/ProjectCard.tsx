@@ -6,21 +6,23 @@ import { IProject, IProjectImage } from "@/types";
 import moment from "moment";
 import Image from "next/image";
 import { useState } from "react";
-import { FaChevronLeft, FaChevronRight, FaCog } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import ProjectImages from "./ProjectImages";
+import { copyToClipboard } from "@/lib/copyToClipboard";
+import Link from "next/link";
 
-export default function ProjectCard({ project }: { project: IProject }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [projectImages, setProjectImages] = useState([] as any);
-
-  const handleImageClick = (index: number) => {
-    setProjectImages(project?.images || []);
-    setCurrentIndex(index);
-  };
-  const { user } = useSelector((state: any) => state.user);
+export default function ProjectCard({
+  project,
+  isSlug,
+}: {
+  project: IProject;
+  isSlug?: any;
+}) {
   const dispatch = useDispatch();
+  const { user } = useSelector((state: any) => state.user);
   const { modals } = useSelector((state: any) => state.modals);
+  const [currentIndex, setCurrentIndex] = useState(0);
   async function finishUpQuickOffer() {
     toast.success("Pomyślnie dodano ofertę!", {
       position: "top-right",
@@ -95,163 +97,56 @@ export default function ProjectCard({ project }: { project: IProject }) {
       });
     }
   }
-  const [imageOptionsOpen, setImageOptionsOpen] = useState(false);
-  function removeImageFromProject(item: IProjectImage) {
-    // Filter out the selected image from the project's images
-    const updatedProjects = user?.projects.map((p: IProject) =>
-      p.id === project.id
-        ? {
-            ...p,
-            images: p.images.filter((i: IProjectImage) => i !== item),
-          }
-        : p
-    );
-
-    // Update the component state
-    setProjectImages((prevImages: any) =>
-      prevImages.filter((i: IProjectImage) => i !== item)
-    );
-
-    // Dispatch Redux action to update user state
-    dispatch(
-      setUser({
-        ...user,
-        projects: updatedProjects,
-      })
-    );
-
-    // Update the user in Firebase and show a success message
-    updateUser(user?.uid, {
-      ...user,
-      projects: updatedProjects,
-    })
-      .then(() => {
-        toast.success("Pomyślnie usunięto obraz!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      })
-      .catch((error) => {
-        toast.error("Wystąpił błąd przy usuwaniu obrazu.", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      });
-  }
   return (
-    <>
-      {projectImages.length > 0 && (
-        <div className="fixed w-screen h-screen left-0 top-0 z-[99999999999999999999]">
-          <button
-            onClick={() => setProjectImages([])}
-            className="bg-black bg-opacity-80 hover:bg-opacity-60 duration-500 w-full h-full"
-          ></button>
-          {projectImages.map((item: IProjectImage, i: number) => (
-            <div
-              key={i}
-              className="px-3 w-max max-w-[100%] justify-center fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-[99999999999999]"
-            >
-              <div className="relative mx-auto w-[100%]">
-                {imageOptionsOpen && (
-                  <div className="absolute top-8 right-8 bg-black text-white p-2 text-left">
-                    <button
-                      onClick={() => removeImageFromProject(item)}
-                      className="z-50 relative hover:bg-opacity-80"
-                    >
-                      Usuń zdjęcie
-                    </button>
-                  </div>
-                )}
-                <button
-                  onClick={() => setImageOptionsOpen(!imageOptionsOpen)}
-                  className="absolute right-2 top-2 bg-black text-white text-xl p-2 rounded-full aspect-square z-[50]"
-                >
-                  <FaCog />
-                </button>
-                {project?.companySize}
-                {item.desc && (
-                  <div
-                    className={`${
-                      currentIndex === i ? "opacity-100" : "opacity-0"
-                    } text-white rounded-xl text-xl`}
-                  >
-                    <div className="font-gotham">{item.desc}</div>
-                  </div>
-                )}
-                <div className="mb-1">{project?.name}</div>
-                <Image
-                  src={item.src}
-                  width={1024}
-                  height={1024}
-                  alt={item.desc || "zdjęcie projektu"}
-                  className={`${
-                    currentIndex === i
-                      ? "opacity-100 duration-200"
-                      : "opacity-0 duration-200"
-                  } w-[100%] rounded-xl mx-auto bg-white`}
-                />
-
-                <div className="flex items-center space-x-4 mt-3 mx-auto w-full px-6 justify-between absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
-                  <button
-                    onClick={() =>
-                      setCurrentIndex(
-                        currentIndex > 0
-                          ? currentIndex - 1
-                          : projectImages.length - 1
-                      )
-                    }
-                    className="bg-black bg-opacity-50 rounded-full p-3 text-white"
-                  >
-                    <FaChevronLeft className="text-3xl" />
-                  </button>
-                  <button
-                    onClick={() =>
-                      setCurrentIndex(
-                        currentIndex < projectImages.length - 1
-                          ? currentIndex + 1
-                          : 0
-                      )
-                    }
-                    className="bg-black bg-opacity-50 rounded-full p-3 text-white"
-                  >
-                    <FaChevronRight className="text-3xl" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-      <div className="hover:bg-gray-300 text-black p-2 sm:p-4 2xl:p-12 flex flex-row items-start rounded-xl w-full relative">
-        {project?.images?.length > 0 && project?.images[0]?.src && (
-          <Image
-            src={project?.images[0]?.src}
-            width={224}
-            height={224}
-            alt={project?.images[0]?.desc || "Zdjęcie projektu"}
-            className="bg-white w-[100px] sm:w-[125px] md:w-[150px] h-auto rounded-lg border-2 border-primary sticky top-[111px] lg:top-24"
-          />
-        )}
-        <div className="px-3 flex flex-col items-start justify-start text-left">
-          <h2 className="font-coco italic font-light bg-cta p-3 rounded-lg text-white text-3xl">
+    <div className="pb-3">
+      <ProjectImages
+        project={project}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
+      />
+      <div
+        className={`${
+          !isSlug && "md:hover:bg-primary/30"
+        } text-black mt-6 md:mt-0 ${
+          !isSlug && "md:p-6 lg:p-12"
+        } flex flex-row items-start rounded-xl w-full relative`}
+      >
+        <div className=" flex flex-col items-start justify-start text-left">
+          <h2
+            onClick={() => console.log(project)}
+            className="font-coco bg-gradient-to-r from-primary to-cta p-3 rounded-lg text-white text-3xl"
+          >
             {project?.name}
           </h2>
-          <div className="p-1 sm:p-3">
+          {!project?.isRecruitment && (
+            <div className="p-2 sm:px-3">
+              <div className="text-lg font-gotham">Link</div>
+              {!project?.link && (
+                <div className="text-base font-gotham font-light">
+                  Nie podano...
+                </div>
+              )}
+              {project?.link && (
+                <button
+                  onClick={() => {
+                    copyToClipboard(project?.link);
+                    toast.success(
+                      `Pomyślnie skopiowano link ${project?.link} do schowka.`
+                    );
+                  }}
+                  className="text-primary font-gotham hover:no-underline underline text-right"
+                >
+                  {project?.link}
+                </button>
+              )}
+            </div>
+          )}
+          <div className="">
             {!project?.isRecruitment && (
               <div className="text-lg font-gotham">Czas trwania</div>
             )}
             {project?.isRecruitment && (
-              <div className="text-sm font-gotham font-light">
+              <div className="text-sm font-gotham font-light mt-2">
                 Szczegóły oferty pracy
               </div>
             )}
@@ -277,24 +172,26 @@ export default function ProjectCard({ project }: { project: IProject }) {
             )}
             <p className="max-w-lg font-gotham font-light">{project?.desc}</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-2 gap-3">
+          <div className="mt-3 grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2">
             {project?.images?.map((image: IProjectImage, i: number) => (
               <button
-                onClick={() => handleImageClick(i)}
+                onClick={() =>
+                  dispatch(set_modals({ ...modals, isProjectOpen: true }))
+                }
                 key={i}
-                className={`${i === 0 && "hidden"} relative`}
+                className={`w-full cursor-pointer bg-white`}
               >
                 <Image
                   src={image.src}
-                  width={224}
-                  height={224}
+                  width={420}
+                  height={420}
                   alt={image.desc || "zdjęcie projektu"}
-                  className="rounded-lg border-2 border-primary bg-white"
+                  className="w-max max-w-full bg-white"
                 />
               </button>
             ))}
             {project?.isRecruitment && project?.isPaid && (
-              <div className="flex flex-col font-gotham px-1 sm:px-3 mt-1">
+              <div className="flex flex-col font-gotham mt-1">
                 <h2>Oferta pracy wygasa</h2>
                 <div className="flex items-center">
                   {project?.expirationTime && (
@@ -326,20 +223,25 @@ export default function ProjectCard({ project }: { project: IProject }) {
                     </span>
                   )}
                 </div>
-                <button
+                {/* <button
                   onClick={() => bid()}
                   className="mt-3 bg-primary hover:bg-opacity-80 text-white font-gotham text-lg p-2 rounded-lg"
                   style={{ textShadow: "2px 2px 2px black" }}
                 >
                   Podbij o 1 dzień (💎4.99)
-                </button>
+                </button> */}
               </div>
             )}
-            {project?.isRecruitment && project?.isPaid && (
-              <div className="mt-4"></div>
-            )}
           </div>
-          {project?.isRecruitment && !project?.isPaid && (
+          {project?.isRecruitment && project?.isPaid && (
+            <Link
+              href="/dashboard/applications"
+              className="mt-4 text-white bg-gradient-to-r from-primary to-cta py-0.5 px-2 rounded-md"
+            >
+              Przeglądaj aplikacje
+            </Link>
+          )}
+          {project?.isRecruitment && !project?.isPaid && !isSlug && (
             <button
               onClick={() => {
                 if (project?.price > user?.tokens) {
@@ -365,6 +267,6 @@ export default function ProjectCard({ project }: { project: IProject }) {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

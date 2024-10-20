@@ -54,6 +54,7 @@ export default function Register() {
         ).then((userCredential) => {
           addDocument("users", userCredential.user?.uid, {
             uid: userCredential.user?.uid,
+            hourRate: "",
             name: "",
             email: userData.email,
             photoURL: "",
@@ -120,10 +121,9 @@ export default function Register() {
                 setStep(1);
                 setSeek("ask");
               }}
-              className={`bg-primary text-white p-1 mt-4 text-xl max-w-sm font-gotham ${
+              className={`bg-gradient-to-r from-primary via-cta to-primary text-white px-2 py-1 rounded-md mt-4 text-xl max-w-sm font-gotham ${
                 seek === "ask" && "underline"
               }`}
-              style={{ textShadow: "2px 2px 2px black" }}
             >
               Chcę skorzystać z usług AI
             </button>

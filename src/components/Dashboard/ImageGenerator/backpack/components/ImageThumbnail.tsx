@@ -22,7 +22,7 @@ export default function BackpackImageThumbnail(props: BackpackThumbnail) {
         height={500}
         src={image?.src}
         alt=""
-        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAA"
+        blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
         placeholder="blur"
         onLoad={() => setIsLoading(false)}
       />

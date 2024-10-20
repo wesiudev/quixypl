@@ -108,7 +108,7 @@ export default function CreateAccountForm({
         </button>
         <div className="my-6 flex flex-row items-center justify-center">
           <div className="h-px w-full bg-[#126b91]"></div>
-          <div className="px-12 font-gotham">lub</div>
+          <div className="px-12 font-gotham text-gray-600">lub</div>
           <div className="h-px w-full bg-[#126b91]"></div>
         </div>
         <GoogleAuthButton seek={seek} />

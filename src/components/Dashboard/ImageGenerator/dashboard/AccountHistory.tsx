@@ -9,23 +9,21 @@ export default function AccountHistory() {
   return (
     <div className="flex flex-col relative">
       <div className="h-full bg-white w-full font-gotham">
-        <h1 className="mt-8 2xl:mt-0 text-3xl text-black  mb-6">
-          Historia konta
-        </h1>
+        <h1 className="mt-3 2xl:mt-0 text-3xl text-zinc-800">Historia konta</h1>
         {user?.history?.length && (
           <div className="max-h-[30vh] overflow-y-scroll">
             {user?.history
               ?.slice()
               .reverse()
               .map((item: any, idx: number) => (
-                <div className="flex flex-col p-4" key={idx}>
-                  <div className="flex flex-row sm:items-center">
-                    <FaClock className="w-6 h-6 mt-px mr-1 text-primary" />
-                    <div className="flex flex-col sm:flex-row">
-                      <span className="text-lg text-slate-800 font-light">
+                <div className="flex flex-col py-2" key={idx}>
+                  <div className="flex">
+                    <FaClock className="w-6 h-6 mt-px mr-1 text-gray-500" />
+                    <div className="flex items-center">
+                      <span className="text-base text-slate-800 font-light">
                         {moment(item.creationTime).format("DD-MM-yyyy hh:mm a")}{" "}
                       </span>
-                      <div className="sm:ml-2 font-light text-xl text-[green]">
+                      <div className="ml-2 font-coco text-base lg:text-xl text-cta">
                         {moment(item.creationTime).fromNow()}
                       </div>
                     </div>

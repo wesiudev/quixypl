@@ -28,6 +28,8 @@ export default function AddJobOffer() {
     email: "",
     phone: "",
     website: "",
+    days: 1,
+    isPaid: false,
   });
   const handleChange = (
     e: React.ChangeEvent<
@@ -63,6 +65,8 @@ export default function AddJobOffer() {
         email: "",
         phone: "",
         website: "",
+        days: 1,
+        isPaid: false,
       });
       toast.success("Oferta pracy dodana pomyślnie!");
     } catch (error: any) {
@@ -82,12 +86,15 @@ export default function AddJobOffer() {
   }
 
   return (
-    <div className="relative overflow-hidden min-h-screen flex flex-col justify-center items-center p-6 bg-gray-200">
-      <div
-        style={{ boxShadow: "0px 0px 5px black" }}
-        className="w-[100%] max-w-[40rem] h-max bg-white p-6 z-50 relative"
-      >
-        <h1 className="text-3xl font-gotham text-black">Dodaj ofertę pracy</h1>
+    <div className="relative overflow-hidden min-h-screen flex flex-col p-6 bg-gray-200">
+      <div className="w-[100%] max-w-[40rem] h-max bg-white p-6 z-50 relative">
+        <h1 className="text-xl md:text-3xl font-gotham text-zinc-800">
+          Dodaj ofertę pracy
+        </h1>
+        <p className="mt-2 text-sm font-coco">
+          Podaj najważniejsze informacje dotyczące rekrutacji. Możesz uwzględnić
+          zdjęcia oraz filmy.
+        </p>
         <div
           //   onSubmit={handleSubmit}
           className="flex flex-col w-full font-coco"
@@ -124,6 +131,7 @@ export default function AddJobOffer() {
             formData={formData}
             handleChange={handleChange}
             currentStep={currentStep}
+            setFormData={setFormData}
           />
         </div>
         <Link
@@ -166,7 +174,7 @@ const InputField: React.FC<InputFieldProps> = ({
   return (
     <div>
       <label
-        className="font-gotham font-light text-black drop-shadow-lg"
+        className="font-gotham font-light text-black drop-shadow-lg mt-2"
         htmlFor={id}
       >
         {label}
@@ -313,33 +321,35 @@ function StepTwo({
   setCategory: any;
 }) {
   return (
-    <div>
+    <div className="w-full">
       {currentStep === 2 && (
-        <div>
+        <div className="w-full mt-2">
           {formData?.tags?.length === 0 && (
             <h1 className="text-base font-bold text-black">Stanowiska</h1>
           )}
 
           <div className="font-bold text-sm text-black flex flex-col">
             <div className="flex flex-row items-center flex-wrap">
-              {formData?.tags?.length === 0 &&
-                !user?.seek &&
-                user?.seek !== "ask" &&
-                "Wybierz kategorie stanowisk"}{" "}
-              {formData?.tags?.length > 0 &&
-                tagsOpenLevel === 0 &&
-                "Wybrane Stanowiska"}
-              {formData?.tags?.length > 0 &&
-                tagsOpenLevel === 1 &&
-                "Kategorie Stanowisk"}
-              {formData?.tags?.length > 0 &&
-                tagsOpenLevel === 2 &&
-                "Twoja oferta w strukturze strony"}
-              <div className={`${tagsOpenLevel === 0 ? "flex flex-col" : ""}`}>
+              <div className="flex flex-col">
+                {formData?.tags?.length === 0 &&
+                  !user?.seek &&
+                  user?.seek !== "ask" &&
+                  "Kogo chcesz zatrudnić?"}{" "}
+                {formData?.tags?.length > 0 &&
+                  tagsOpenLevel === 0 &&
+                  "Wybrane Stanowiska"}
+                {formData?.tags?.length > 0 &&
+                  tagsOpenLevel === 1 &&
+                  "Kategorie Stanowisk"}
+                {formData?.tags?.length > 0 &&
+                  tagsOpenLevel === 2 &&
+                  "Twoja oferta w strukturze strony"}
+              </div>
+              <div className={"mb-2 flex items-center flex-wrap w-full"}>
                 {formData?.tags && tagsOpenLevel === 1
                   ? formData?.tags?.map((item: any, i: any) => (
                       <div className="text-sm bg-slate-300 rounded-xl" key={i}>
-                        <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
+                        <div className="mt-2 w-full flex flex-wrap items-center font-gotham font-light">
                           <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
                             {item.slugTitle}
                           </div>
@@ -355,7 +365,7 @@ function StepTwo({
                   : tagsOpenLevel === 2
                   ? formData?.tags?.map((item: any, i: any) => (
                       <div className="text-sm bg-slate-300 rounded-xl" key={i}>
-                        <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
+                        <div className="mt-2 w-full flex flex-wrap items-center font-gotham font-light">
                           <div className="flex items-center">
                             <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
                               {item.slugTitle}
@@ -379,9 +389,7 @@ function StepTwo({
                   : formData?.tags?.map((item: any, i: any) => (
                       <div
                         key={i}
-                        className={`w-max max-w-[100%] ${
-                          i > 0 && "ml-2"
-                        } mt-2 flex flex-wrap items-center font-gotham font-light text-white`}
+                        className={`  pr-1 mt-1 flex flex-wrap items-center font-gotham font-light text-white`}
                       >
                         <div
                           className={`${
@@ -448,21 +456,14 @@ function StepTwo({
                         </div>
                       </div>
                     ))}
-                <div className="gap-3">
-                  {!configurationOpen && (
-                    <>
-                      <div className="font-gotham font-bold text-black">
-                        Dodaj stanowisko(a)
-                      </div>
-                    </>
-                  )}
+                <div className="w-full">
                   {configurationOpen && !slug?.title && (
-                    <div className="font-gotham font-bold text-black">
+                    <div className="my-1.5 font-gotham font-bold text-black">
                       Wybierz kategorię
                     </div>
                   )}
                   {slug?.title !== "" && category?.title === "" && (
-                    <div className="text-black font-gotham flex flex-col">
+                    <div className="text-black font-gotham flex flex-col mt-1">
                       <div className="font-bold mb-1 bg-[#126b91] p-1 rounded-md px-2 text-white w-max max-w-[100%]">
                         {slug.title}
                       </div>
@@ -470,7 +471,7 @@ function StepTwo({
                     </div>
                   )}
                   {slug?.title !== "" && category?.title !== "" && (
-                    <div className="text-black font-gotham flex flex-col">
+                    <div className="text-black font-gotham flex flex-col mt-1">
                       <div className="font-bold mb-1 bg-[#126b91] p-1 rounded-md px-2 text-white w-max max-w-[100%]">
                         {category.title}
                       </div>
@@ -663,7 +664,7 @@ function StepTwo({
 
                   {!user?.seek && user?.seek !== "ask" && (
                     <div>
-                      <h3 className="font-gotham font-light text-black drop-shadow-lg">
+                      <h3 className="font-gotham font-light text-black drop-shadow-lg mt-2">
                         Nazwa Firmy/Działalności/Imię rekrutera
                       </h3>
                       <input
@@ -720,13 +721,13 @@ function StepTwo({
             </div>
           </div>
           <InputField
-            id="salary"
+            id="salaryValue"
             label="Wynagrodzenie"
-            value={formData.salary}
+            value={formData.salaryValue}
             onChange={handleChange}
             placeholder="Wpisz wynagrodzenie"
           />
-          <div className="flex justify-between">
+          <div className="flex justify-between mt-4">
             <button
               type="button"
               onClick={prevStep}
@@ -737,10 +738,16 @@ function StepTwo({
             <button
               type="button"
               onClick={() => {
-                if (formData.category && formData.salary) {
+                if (
+                  formData.tags &&
+                  formData.salary &&
+                  formData.name &&
+                  formData.salaryValue
+                ) {
                   nextStep();
                 } else {
-                  return toast.error("Uzupełnij dane!", {
+                  console.log(formData);
+                  toast.error("Uzupełnij dane!", {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -766,12 +773,14 @@ function StepThree({
   currentStep,
   prevStep,
   nextStep,
+  setFormData,
 }: {
   formData: any;
   handleChange: any;
   currentStep: number;
   prevStep: any;
   nextStep: any;
+  setFormData: any;
 }) {
   return (
     <div>
@@ -797,8 +806,40 @@ function StepThree({
             label="Strona internetowa"
             value={formData.website}
             onChange={handleChange}
-            placeholder="Podaj link do strony"
+            placeholder="Wpisz link (opcjonalnie)"
           />
+          {formData.website && formData.phone && formData.email && (
+            <div className="w-full sticky bottom-0 flex flex-col bg-white p-4 rounded-xl">
+              <div
+                className="w-full mb-4 bg-primary text-white rounded-xl p-4 lg:p-6"
+                style={{ textShadow: "2px 2px 2px black" }}
+              >
+                <label htmlFor="days-range" className="font-bold">
+                  Na ile dni chcesz dodać ofertę pracy? ({formData?.days} dni)
+                </label>
+                <div className="px-4">
+                  <input
+                    id="days-range"
+                    type="range"
+                    min="1"
+                    max="30"
+                    value={formData?.days || 1}
+                    onChange={(e: any) => {
+                      setFormData({
+                        ...formData,
+                        days: e.target.value,
+                        price: 15.99 + e.target.value * 8.42,
+                      });
+                    }}
+                    className="w-full mt-2"
+                  />
+                </div>
+                <div className="text-lg font-semibold mt-2">
+                  Cena: 💎{formData?.price?.toFixed(2)}
+                </div>
+              </div>
+            </div>
+          )}
           <div className="flex justify-between mt-4">
             <button
               type="button"
@@ -811,7 +852,6 @@ function StepThree({
               type="submit"
               className="p-2 bg-cta hover:bg-opacity-80 text-white rounded-md hover:bg-primary-dark flex items-center justify-center"
             >
-              <FaSave className="mr-2 text-xl" />
               Dodaj ofertę
             </button>
           </div>

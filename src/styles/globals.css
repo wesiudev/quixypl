@@ -32,13 +32,13 @@ html {
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background: rgb(126 34 206);
+  background: #14a800;
   border-radius: 99px;
   padding: 2px;
 }
 
 .scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgb(141, 67, 206);
+  background: #14a800;
 }
 .borderBar::-webkit-scrollbar {
   width: 15px;
@@ -252,6 +252,7 @@ html {
 .vibrate-screen {
   animation: vibrate 0.5s infinite linear;
 }
+
 @keyframes vibrate {
   0% {
     transform: translate(0px, 0px);

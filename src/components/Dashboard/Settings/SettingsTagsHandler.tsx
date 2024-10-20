@@ -1,18 +1,20 @@
 "use client";
 import jobs from "../../../../public/14.09.2024.json";
 import {
+  FaArrowLeft,
   FaChevronLeft,
   FaChevronRight,
   FaMinus,
   FaMinusCircle,
 } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa6";
+import { FaArrowLeftLong, FaPlus } from "react-icons/fa6";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
 import { useState } from "react";
 import { updateUser } from "@/firebase";
 import { toast } from "react-toastify";
 import { setUser } from "@/redux/slices/user";
 import { useDispatch, useSelector } from "react-redux";
+import { IoClose } from "react-icons/io5";
 
 export default function TagsHandler() {
   // Handle changes to the tag input field
@@ -36,7 +38,7 @@ export default function TagsHandler() {
               user?.seek !== "ask" &&
               "Specjalizacje działalności"}
           </h1>
-          <p className="text-black font-gotham font-light sm:text-base">
+          <p className="text-black font-coco">
             Oferta twojej działalności trafi do poszczególnych widoków naszej
             aplikacji
           </p>
@@ -194,6 +196,17 @@ export default function TagsHandler() {
                                   ],
                                 })
                               );
+                              setTagDeletion(false);
+                              setSelectedTag({});
+                              toast.success(`Pomyślnie usunięto kategorię.`, {
+                                position: "top-right",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                              });
                             }}
                             className="bg-red-500 text-white px-3 py-1 rounded-md"
                           >
@@ -261,22 +274,32 @@ export default function TagsHandler() {
             <FaPlus />
           </button>
         )}
-        {configurationOpen && slug.title !== "" && category.title !== "" && (
+        {configurationOpen && slug.title === "" && (
           <button
-            onClick={() => setCategory({ title: "", url: "" })}
+            onClick={() => {
+              setConfigurationOpen(false);
+            }}
+            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+          >
+            <IoClose />
+          </button>
+        )}
+        {configurationOpen && slug.title !== "" && category.title === "" && (
+          <button
+            onClick={() => setSlug({ title: "", url: "" })}
             className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
           >
             <FaChevronLeft />
           </button>
         )}
-        {configurationOpen && slug.title !== "" && category.title === "" && (
+        {configurationOpen && slug.title !== "" && category.title !== "" && (
           <button
             onClick={() => {
-              setSlug({ title: "", url: "" }), setConfigurationOpen(false);
+              setCategory({ title: "", url: "" });
             }}
             className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
           >
-            <FaChevronLeft />
+            <FaArrowLeftLong />
           </button>
         )}
         {configurationOpen && slug.title === "" && (

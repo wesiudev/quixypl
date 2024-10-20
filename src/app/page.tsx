@@ -1,14 +1,6 @@
-import { IoSparkles } from "react-icons/io5";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  FaChevronRight,
-  FaEdit,
-  FaLongArrowAltRight,
-  FaStar,
-  FaUpload,
-} from "react-icons/fa";
-
+import { FaChevronRight } from "react-icons/fa";
 import HomePageGenerator from "@/components/HomePageGenerator";
 import UserSearchWrapper from "@/components/HomeUnderHero/UserSearchWrapper";
 import SearchJobs from "@/components/HomeUnderHero/SearchJobs";
@@ -21,7 +13,6 @@ import { sendGenerateIdeaRequest } from "../../utils/sendGenerateIdeaRequest";
 import Header from "@/components/Header";
 import FAQ from "@/components/Faq";
 import AboutQuixyTalent from "./(about)/AboutQuixyTalent";
-import Register from "./(register)/register/Register";
 import Hero from "@/components/Hero";
 
 export const metadata: Metadata = {
@@ -93,7 +84,7 @@ export default async function Page() {
             <h2 className="lg:max-w-sm font-extrabold font-coco text-3xl lg:text-5xl text-zinc-800 text-center sm:text-left  mx-auto sm:mx-0">
               Twoja platforma pracy zdalnej
             </h2>
-            <h2 className="max-w-[100%] mx-auto lg:mx-0 px-6 sm:px-0 sm:max-w-sm lg:max-w-lg font-light text-black font-gotham lg:text-lg xl:text-xl text-center md:text-left mt-2">
+            <h2 className="max-w-[100%] mx-auto lg:mx-0 px-6 sm:px-0 sm:max-w-sm lg:max-w-lg font-light text-black font-gotham lg:text-lg xl:text-xl text-center lg:text-left mt-2">
               Pierwszy polski serwis łączący{" "}
               <b className="text-black">ekspertów</b> {" z "}
               <b className="text-black">pracodawcami</b> technologią{" "}
@@ -150,7 +141,7 @@ export default async function Page() {
           >
             <div
               style={{ boxShadow: "0px 0px 5px black" }}
-              className="absolute left-3 top-3 flex items-center z-50"
+              className="rounded-tl-xl absolute left-3 top-3 flex items-center z-50"
             >
               <Link href="/register">
                 {" "}
@@ -197,7 +188,7 @@ export default async function Page() {
           </div>
         </div>
       </div>
-      <div className="mx-auto mt-16 mb-4 w-max max-w-full px-4">
+      {/* <div className="mx-auto mt-16 mb-4 w-max max-w-full px-4">
         <div className="flex flex-col-reverse md:flex-row md:items-center mx-auto text-black text-xl">
           <Image
             src="/assets/gif/gihome.webp"
@@ -224,7 +215,7 @@ export default async function Page() {
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
       <UserSearchWrapper>
         <SearchJobs />
         <Opportunities>
@@ -238,29 +229,16 @@ export default async function Page() {
       </div>
       <div
         id="generator"
-        className="mb-24 py-12 px-4 sm:px-8 lg:px-12 2xl:px-[15vw] bg-[#2E3C56]"
+        className="mb-12 py-12 px-4 sm:px-8 lg:px-12 2xl:px-[15vw] bg-[#2E3C56]"
       >
-        <div className="flex flex-col mb-12">
+        <div className="flex flex-col mb-6">
           <h2 className="font-gotham text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-md shadow-black">
-            Wygeneruj nowy pomysł z{" "}
-            <b
-              style={{ textShadow: "2px 2px 2px black" }}
-              className="font-bold text-cta"
-            >
-              Quixy AI&trade;
-            </b>
+            Wygeneruj nowy pomysł
           </h2>
           <p className="max-w-[40rem] text-white mt-6 mb-3">
             Burza mózgów, dzięki której stworzysz pomysły na biznes internetowy
             lub in-person. Stworzone z myślą o Twoich potrzebach.
           </p>
-          <Link
-            href="/business-ideas"
-            style={{ textShadow: "2px 2px 2px black" }}
-            className="text-white bg-cta font-gotham py-1.5 px-2 rounded-md w-max hover:bg-opacity-90"
-          >
-            Zobacz wszystkie pomysły
-          </Link>
         </div>
         <HomePageGenerator sendGenerateIdeaRequest={sendGenerateIdeaRequest} />
       </div>
@@ -284,8 +262,8 @@ export default async function Page() {
               Realizuj projekty z ekspertami.
             </h2>
             <div className="flex">
-              <FaEdit className="h-8 w-8 font-bold text-cta" />
-              <div className="ml-3 flex flex-col">
+              <span className="text-2xl mt-1">🤝</span>
+              <div className="ml-1.5 flex flex-col">
                 <h3 className="font-bold text-lg lg:text-xl">
                   Wstęp jest darmowy
                 </h3>
@@ -296,8 +274,8 @@ export default async function Page() {
               </div>
             </div>
             <div className="flex mt-3">
-              <FaUpload className="h-8 w-8 font-bold text-cta" />
-              <div className="ml-3 flex flex-col">
+              <span className="text-2xl mt-1">🌍</span>
+              <div className="ml-1.5 flex flex-col">
                 <h3 className="font-bold text-lg lg:text-xl text-black">
                   Dodaj ofertę i zatrudnij eksperta{" "}
                 </h3>
@@ -308,8 +286,8 @@ export default async function Page() {
               </div>
             </div>
             <div className="flex mt-3">
-              <FaStar className="h-8 w-8 font-bold text-cta" />
-              <div className="ml-3 flex flex-col">
+              <span className="text-2xl mt-1">🚀</span>
+              <div className="ml-1.5 flex flex-col">
                 <h3 className="font-bold text-lg lg:text-xl">
                   Pracuj z najlepszymi
                 </h3>
@@ -321,8 +299,7 @@ export default async function Page() {
             </div>
             <div className="flex flex-row">
               <Link
-                style={{ textShadow: "2px 2px 2px black" }}
-                className="rounded-lg p-1.5 px-12 bg-cta mt-6 text-white"
+                className="rounded-lg p-1.5 px-12 bg-gradient-to-r from-primary to-cta mt-6 text-white"
                 href={`${process.env.NEXT_PUBLIC_URL}/register`}
               >
                 Rejestracja
@@ -332,82 +309,133 @@ export default async function Page() {
         </div>
       </div>
 
-      <div className="relative mx-4 sm:mx-8 lg:mx-12 2xl:mx-[15vw] mt-24 bg-cover bg-center lg:bg-right-bottom p-4 lg:p-8 h-max bg-woman-pc rounded-xl">
+      <div className="relative mx-4 sm:mx-8 lg:mx-12 2xl:mx-[15vw] mt-12 bg-cover bg-center lg:bg-right-bottom p-4 lg:p-8 h-max bg-woman-pc rounded-xl">
         <div className="absolute left-0 top-0 rounded-xl bg-black bg-opacity-50 w-full h-full z-0"></div>
         <div className="absolute left-4 lg:left-6 top-4 lg:top-6 font-coco text-lg lg:text-xl text-white">
-          Quixy Talent&trade;
+          Dla klientów
         </div>
-        <div className="flex flex-col justify-end relative z-10 h-full w-full mt-[30vh]">
-          <h2
-            style={{ textShadow: "3px 3px 3px black" }}
-            className="text-4xl md:text-5xl lg:text-6xl text-white font-bold font-gotham"
-          >
-            Znajdź i zatrudnij specjalistę
+        <div className="flex flex-col justify-end relative z-10 h-full w-full mt-[40vh]">
+          <h2 className="text-2xl lg:text-3xl text-white font-bold font-gotham">
+            Poszukujesz specjalisty do współpracy?
           </h2>
-          <p className="text-white text-base my-6 lg:w-1/2">
-            Przeglądaj specjalistów i zleć wykonanie projektu.
-          </p>
-          <div
-            style={{ textShadow: "2px 2px 2px black" }}
-            className="grid grid-cols-1 md:grid-cols-2 font-gotham gap-4"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 font-gotham gap-2 md:gap-4 mt-4">
             <Link
               href={`${process.env.NEXT_PUBLIC_URL}/praca-zdalna`}
-              className="flex flex-col rounded-xl bg-cta text-white p-3"
+              className="group flex flex-col rounded-xl bg-black/50 text-white p-3"
             >
-              <h3 className="md:mb-3 text-xl sm:text-xl md:text-2xl lg:text-3xl">
+              <h3 className="group-hover:underline md:mb-3 text-xl sm:text-xl md:text-2xl lg:text-3xl">
                 Zatrudnij talent
               </h3>
               <div className="flex flex-row items-center font-light">
                 Chcesz znaleźć pomoc eksperta?
-                <FaLongArrowAltRight className="ml-2" />
               </div>
             </Link>
             <Link
               href={`${process.env.NEXT_PUBLIC_URL}/register`}
-              className="flex flex-col rounded-xl text-white bg-cta group p-3"
+              className="group flex flex-col rounded-xl text-white bg-black/50 group p-3"
             >
-              <h3 className="md:mb-3 text-xl sm:text-xl md:text-2xl lg:text-3xl">
+              <h3 className="group-hover:underline md:mb-3 text-xl sm:text-xl md:text-2xl lg:text-3xl">
                 Generator pomysłów
               </h3>
               <div className="flex flex-row items-center font-light">
-                Wygeneruj pomysł na biznes i zleć wykonanie ekspertowi Quixy
-                Talent&trade;
-                <FaLongArrowAltRight className="ml-2" />
+                Wygeneruj pomysł i zleć wykonanie ekspertowi
               </div>
             </Link>
             <Link
               href={`${process.env.NEXT_PUBLIC_URL}/praca-zdalna/rozwoj-oprogramowania/web-development`}
-              className="flex flex-col rounded-xl bg-cta text-white group p-3"
+              className="group flex flex-col rounded-xl bg-black/50 text-white group p-3"
             >
-              <h3 className="md:mb-3 text-xl sm:text-xl md:text-2xl lg:text-3xl font-bold">
+              <h3 className="group-hover:underline md:mb-3 text-xl sm:text-xl md:text-2xl lg:text-3xl font-bold">
                 Zamów stronę internetową
               </h3>
               <div className="flex flex-row items-center font-light">
-                Stwórz oprogramowanie z Quixy Talent&trade;
-                <FaLongArrowAltRight className="ml-2" />
+                Przeglądaj specjalistów Web Developmentu
               </div>
             </Link>
           </div>
         </div>
       </div>
-      <div className="mx-4 md:mx-8 lg:mx-12 2xl:mx-[15vw] mt-24 flex-col flex md:flex-row md:space-x-6">
-        <div className="md:w-[66%] w-full  text-black rounded-t-xl p-4 lg:p-6">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-coco">
-            Dlaczego warto wybrać Quixy?
-          </h2>
-          <div className="flex flex-col space-y-3 mt-6">
-            <div className="flex flex-row mt-3">
-              <span className="text-2xl">⭐</span>
-              <div className="ml-3 flex flex-col">
-                <h3 className="font-bold text-lg lg:text-2xl -mt-1">
-                  Gwarancja jakości
-                </h3>
-                <p className=" text-sm md:text-lg w-3/4">
-                  Korzystamy z własnych rozwiązań
-                </p>
+      <div className="mx-4 md:mx-8 lg:mx-12 2xl:mx-[15vw] mt-12 flex-col flex md:flex-row md:space-x-6 rounded-xl">
+        <div className="rounded-lg md:w-[45%] h-full w-full relative md:flex-col flex flex-row ">
+          <div className="flex w-full">
+            <div className="sm:w-full h-full flex flex-col">
+              <h3 className="text-2xl md:text-xl lg:text-3xl font-gotham mb-6 text-white">
+                <span className="bg-gradient-to-r from-primary to-cta py-1 px-2 rounded-md">
+                  Lider branży HR i AI
+                </span>
+              </h3>
+              <div className="flex rounded-xl px-3">
+                <span className="text-2xl">🏆</span>
+                <div className="ml-3 flex flex-col ">
+                  <h3 className="text-lg lg:text-2xl text-black font-bold">
+                    4.95/5
+                  </h3>
+                  <p className="text-black text-xs sm:text-sm md:text-base">
+                    Według opinii naszych klientów
+                  </p>
+                </div>
               </div>
+              <div className="flex mt-3 rounded-xl px-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className=" h-7 w-7"
+                  viewBox="0 0 48 48"
+                >
+                  <defs>
+                    <path
+                      id="a"
+                      d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"
+                    />
+                  </defs>
+                  <clipPath id="b">
+                    <use href="#a" overflow="visible" />
+                  </clipPath>
+                  <path clipPath="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z" />
+                  <path
+                    clipPath="url(#b)"
+                    fill="#EA4335"
+                    d="M0 11l17 13 7-6.1L48 14V0H0z"
+                  />
+                  <path
+                    clipPath="url(#b)"
+                    fill="#34A853"
+                    d="M0 37l30-23 7.9 1L48 0v48H0z"
+                  />
+                  <path
+                    clipPath="url(#b)"
+                    fill="#4285F4"
+                    d="M48 48L17 24l-4-3 35-10z"
+                  />
+                </svg>
+                <div className="ml-3 flex flex-col">
+                  <h3 className="text-lg lg:text-2xl text-black font-bold -mt-1">
+                    5/5
+                  </h3>
+                  <p className="text-black text-xs sm:text-sm md:text-base">
+                    Korzystamy z niezawodnej technologii
+                  </p>
+                </div>
+              </div>
+              <Link
+                href="/register"
+                className="w-max mt-3 px-2 py-1.5 bg-gradient-to-r from-primary to-cta rounded-md font-gotham font-light text-white"
+              >
+                Zarejestruj się
+              </Link>
             </div>
+            <div className="w-[33%] sm:w-full h-auto flex sm:items-center justify-center relative md:hidden">
+              <Image
+                src={"/assets/ninja.png"}
+                width={224}
+                height={224}
+                alt="Pracuj zdalnie jak samuraj programowania!"
+                className="mx-auto absolute inset-0 w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="mt-3 md:mt-0 md:w-[55%] w-full text-black">
+          <div className="flex flex-col xl:grid xl:grid-cols-2 xl:gap-3 xl:space-y-0 space-y-3 mx-auto">
             <div className="flex flex-row">
               <span className="text-2xl">💎</span>
               <div className="ml-3 flex flex-col">
@@ -420,121 +448,74 @@ export default async function Page() {
               </div>
             </div>
             <div className="flex flex-row">
+              <span className="text-2xl">⭐</span>
+              <div className="ml-3 flex flex-col">
+                <h3 className="font-bold text-lg lg:text-2xl -mt-1">
+                  Gwarancja jakości
+                </h3>
+                <p className=" text-sm md:text-lg w-3/4">
+                  Korzystamy z własnych rozwiązań
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-row">
               <span className="text-2xl">✔️</span>
               <div className="ml-3 flex flex-col">
                 <h3 className="font-bold text-lg lg:text-2xl -mt-1">
                   Zapewnimy bezpieczeństwo
                 </h3>
                 <p className=" text-sm md:text-lg w-3/4">
-                  Skoncentruj się na swojej pracy. Jesteśmy dostępni 24/7 by ci
-                  pomóc.
+                  Jesteśmy dostępni 24/7 by ci pomóc.
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-        <div className="rounded-2xl md:w-[40%] w-full relative md:flex-col flex flex-rowp-4 md:p-6">
-          <div className="w-max max-w-[100%] h-full flex flex-col">
-            <h3 className="text-2xl lg:text-3xl font-gotham mb-3 text-white lg:text-black">
-              Polska Platforma Pracy Zdalnej
-            </h3>
-            <div className="flex flex-row items-start max-w-[100%]">
-              <FaStar className="ml-2 min-w-[60px] h-auto max-w-[60px] font-bold text-cta" />
-              <div className="ml-3 flex flex-col">
-                <h3 className="text-lg lg:text-2xl text-black  font-bold -mt-1">
-                  4.95/5
-                </h3>
-                <p className="text-black text-xs sm:text-sm md:text-base">
-                  Według opinii naszych klientów
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-row items-start mt-2 max-w-[100%]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="ml-2 min-w-[60px] max-w-[60px]"
-                viewBox="0 0 48 48"
-              >
-                <defs>
-                  <path
-                    id="a"
-                    d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"
-                  />
-                </defs>
-                <clipPath id="b">
-                  <use href="#a" overflow="visible" />
-                </clipPath>
-                <path clipPath="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z" />
-                <path
-                  clipPath="url(#b)"
-                  fill="#EA4335"
-                  d="M0 11l17 13 7-6.1L48 14V0H0z"
-                />
-                <path
-                  clipPath="url(#b)"
-                  fill="#34A853"
-                  d="M0 37l30-23 7.9 1L48 0v48H0z"
-                />
-                <path
-                  clipPath="url(#b)"
-                  fill="#4285F4"
-                  d="M48 48L17 24l-4-3 35-10z"
-                />
-              </svg>
-              <div className="ml-3 flex flex-col">
-                <h3 className="text-lg lg:text-2xl text-black font-bold -mt-1">
-                  5/5
-                </h3>
-                <p className="text-black text-xs sm:text-sm md:text-base">
-                  Korzystamy z niezawodnej technologii
-                </p>
-              </div>
-            </div>
-
-            <Link
-              href="/register"
-              className="text-center mt-1.5 bg-primary px-1.5 py-1 rounded-lg font-gotham font-bold text-white hover:bg-opacity-90"
-            >
-              Zarejestruj się
-            </Link>
           </div>
         </div>
       </div>
       {/* just a component for the future 🤷‍♀️ */}
-      <div className="relative md:mx-8 lg:mx-12 2xl:mx-[15vw] mt-24 h-max md:h-[70vh] rounded-xl mb-20">
+      <div className="rounded-xl relative mx-4 md:mx-8 lg:mx-12 2xl:mx-[15vw] mt-12 h-max bg-gradient-to-r from-primary/20 to-cta/20 md:from-white md:to-white">
         <div className="grid grid-cols-1 md:grid-cols-2 w-full h-full relative">
-          <div className="bg-guitar-man bg-center md:rounded-l-xl h-[50vh] md:h-full"></div>
-          <div className="p-4 lg:p-6 text-white bg-[#126b91] md:rounded-r-xl w-full md:h-full grid grid-cols-1">
+          <div className="rounded-xl bg-guitar-man bg-center rounded-b-none md:rounded-b-xl md:rounded-xl h-[50vh] md:h-full"></div>
+          <div className="p-4 lg:p-6 text-black w-full md:h-full grid grid-cols-1">
             <div>
-              <span className="text-lg font-coco">Quixy Talent&trade;</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-gotham mt-6">
+              <span className="text-lg font-coco">Dla ekspertów</span>
+              <h2 className="text-zinc-800 text-4xl lg:text-6xl font-bold font-gotham mt-6">
                 Szukaj zleceń lub pracy zdalnej
               </h2>
-              <p className="text-base md:text-lg my-6 font-coco">
+              <p className="text-base lg:text-lg my-3 lg:my-6 lg:mb-3 font-coco">
                 Przeglądaj zlecenia klientów, szukaj pracy zdalnej lub
                 sprzedawaj gotowe strony internetowe, aplikacje lub projekty.
               </p>
               <Link
-                className="button !bg-white hover:!bg-gray-300 duration-300 !text-primary w-max h-max"
+                className="bg-gradient-to-r from-primary to-cta px-2 py-1.5 rounded-md font-gotham font-light text-white"
                 href="/register"
               >
                 Znajdź klientów
               </Link>
             </div>
             <div className="flex items-end font-coco text-base md:text-sm lg:text-base xl:text-lg">
-              <div className="w-full grid grid-cols-2 lg:grid-cols-3 gap-5 md:gap-3 lg:gap-5 xl:gap-6 pt-3 mt-12 border-t border-white">
-                <h4>Znajduj odpowiednie zlecenia dla siebie</h4>
-                <h4>Sprzedawaj swoje gotowe prace</h4>
+              <div className="w-full grid grid-cols-2 gap-3 pt-3 mt-12 border-t border-white">
+                <h4 className="bg-white p-2 rounded-md">
+                  Wysyłaj aplikacje do pracodawców
+                </h4>
+                <h4 className="bg-white p-2 rounded-md">
+                  Znajduj zlecenia dla siebie
+                </h4>
+                <h4 className="bg-white p-2 rounded-md">
+                  Sprzedawaj gotowe projekty
+                </h4>
+                <h4 className="bg-white p-2 rounded-md">Dołącz do projektu</h4>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="mx-4 bg-white relative md:mx-8 lg:mx-12 2xl:mx-[15vw] h-max rounded-xl mb-20">
+      <div className="mt-12 mx-4 bg-white relative md:mx-8 lg:mx-12 2xl:mx-[15vw] h-max rounded-xl mb-12">
         <FAQ faqItems={faqItems} />
       </div>
-     
-      <MainFooter jobsList={itCategories} />
+      <div className="relative">
+        <MainFooter jobsList={itCategories} />
+      </div>
     </div>
   );
 }

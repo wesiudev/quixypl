@@ -1,157 +1,141 @@
 "use client";
-import { addConversation } from "@/firebase/";
-import { getDocument, updateUser } from "@/firebase/";
-import Image from "next/image";
-import { FaTrophy } from "react-icons/fa6";
 
+import { addConversation, getDocument, updateUser } from "@/firebase/";
+import { set_modals } from "@/redux/slices/modalsopen";
+import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+
+// ChatListElement component that represents a user in the chat list
 export default function ChatListElement({
-  source,
-  value,
-  setCurrentConversation,
-  setClickedUserData,
+  source, // Current user object
+  value, // User object for the chat list element
 }: {
   source: any;
   value: any;
-  setCurrentConversation: any;
-  setClickedUserData: any;
 }) {
+  // Retrieve the modals state from the Redux store
+  const { modals } = useSelector((state: any) => state.modals);
+  const dispatch = useDispatch();
+
+  // Handles creating or opening a conversation
+  const handleConversation = async () => {
+    // Prevent creating a chat with yourself
+    if (value?.uid === source?.uid) return;
+
+    // If the user is not already in the related users list
+    if (!source?.relatedUsers?.some((u: any) => u?.uid === value?.uid)) {
+      // Add a new conversation between the two users
+      const newConversation = await addConversation([
+        {
+          email: source?.email,
+          uid: source?.uid,
+          photoURL: source?.photoURL || "",
+        },
+        {
+          email: value?.email,
+          uid: value?.uid,
+          photoURL: value?.photoURL || "",
+        },
+      ]);
+
+      // Update modals to set the current chat
+      dispatch(set_modals({ ...modals, currentChat: newConversation.pseudo }));
+
+      // Get user data for both users and update related users list
+      const [userData, clickedUserData] = await Promise.all([
+        getDocument("users", source?.uid),
+        getDocument("users", value?.uid),
+      ]);
+
+      const userRelatedUsers = Array.isArray(userData?.relatedUsers)
+        ? userData?.relatedUsers
+        : [];
+      const clickedUserRelatedUsers = Array.isArray(
+        clickedUserData?.relatedUsers
+      )
+        ? clickedUserData?.relatedUsers
+        : [];
+
+      // Update the related users list for both the source and clicked user
+      if (!userRelatedUsers.includes(value?.uid)) {
+        updateUser(source?.uid, {
+          relatedUsers: [
+            ...userRelatedUsers,
+            {
+              email: value?.email,
+              uid: value?.uid,
+              photoURL: value?.photoURL || "",
+            },
+          ],
+        });
+      }
+
+      if (!clickedUserRelatedUsers.includes(source?.uid)) {
+        updateUser(value?.uid, {
+          relatedUsers: [
+            ...clickedUserRelatedUsers,
+            {
+              email: source?.email,
+              uid: source?.uid,
+              photoURL: source?.photoURL || "",
+            },
+          ],
+        });
+      }
+
+      // Update the current user in the modals state
+      const clickedUserDataUpdated = await getDocument("users", value?.uid);
+      dispatch(set_modals({ ...modals, currentUser: clickedUserDataUpdated }));
+    } else {
+      // If the conversation already exists, just update the current user
+      const sortedParticipantIds = [source, value].map((p) => p.uid).sort();
+      const conversationId = sortedParticipantIds.join("_");
+
+      const clickedUserData = await getDocument("users", value?.uid);
+      dispatch(set_modals({ ...modals, currentUser: clickedUserData }));
+    }
+  };
+
   return (
-    <>
-      {value?.status === "online" && (
-        <div key={value?.uid} className={`bg-white w-full relative`}>
-          {value?.status === "online" && (
-            <div className="absolute top-1/2 -translate-y-1/2 right-3 w-5 h-5 bg-[green] rounded-full"></div>
-          )}
-          {value?.premium && (
-            <FaTrophy className="w-7 h-7 absolute top-1/2 -translate-y-1/2 right-12 text-yellow-500" />
-          )}
-          {value?.chat && !value.premium && (
-            <Image
-              src="/assets/devil.webp"
-              width={224}
-              height={224}
-              alt="PREMIUM"
-              className="w-7 h-7 absolute top-1/2 -translate-y-1/2 right-12"
-            />
-          )}
-          {(source?.premium || source?.chat) && (
+    <div key={value?.uid} className="bg-white w-full relative">
+      <div
+        className="flex items-center w-full p-2"
+        style={{ boxShadow: "0 0 10px 0 rgba(0,0,0,0.25)" }}
+      >
+        <button
+          onClick={handleConversation}
+          className="flex items-center w-full"
+        >
+          {value?.photoURL ? (
+            // If the user has a photo, display it
             <div
-              className="absolute left-2 bottom-2 text-yellow-400 z-[500]"
-              title={value?.premium ? "VIP" : "PREMIUM"}
-            ></div>
-          )}
-
-          <div
-            className="flex items-center w-full p-2"
-            style={{ boxShadow: "0 0 10px 0 rgba(0,0,0,0.25)" }}
-          >
-            <button
-              onClick={() => {
-                if (value?.uid === source?.uid) {
-                  return null;
-                }
-                if (
-                  !source?.relatedUsers?.some((u: any) => u?.uid === value?.uid)
-                ) {
-                  addConversation([
-                    {
-                      login: source?.login,
-                      uid: source?.uid,
-                      primaryImage: source?.photoURL || "",
-                    },
-                    {
-                      login: value?.login,
-                      uid: value?.uid,
-                      primaryImage: value?.photoURL || "",
-                    },
-                  ]).then((res) => {
-                    setCurrentConversation(res);
-                    Promise.all([
-                      getDocument("users", source?.uid),
-                      getDocument("users", value?.uid),
-                    ]).then(([userData, clickedUserData]) => {
-                      const userRelatedUsers =
-                        userData?.relatedUsers instanceof Array
-                          ? userData?.relatedUsers
-                          : [];
-                      const clickedUserRelatedUsers =
-                        clickedUserData?.relatedUsers instanceof Array
-                          ? clickedUserData?.relatedUsers
-                          : [];
-                      if (!userRelatedUsers.includes(value?.uid)) {
-                        updateUser(source?.uid, {
-                          relatedUsers: [
-                            ...userRelatedUsers,
-                            {
-                              login: value?.login,
-                              uid: value?.uid,
-                              primaryImage: value?.photoURL || "",
-                            },
-                          ],
-                        });
-                      }
-                      if (!clickedUserRelatedUsers.includes(source?.uid)) {
-                        updateUser(value?.uid, {
-                          relatedUsers: [
-                            ...clickedUserRelatedUsers,
-                            {
-                              login: source?.login,
-                              uid: source?.uid,
-                              primaryImage: source?.photoURL || "",
-                            },
-                          ],
-                        });
-                      }
-                    });
-                    getDocument("users", value?.uid).then((data) => {
-                      setClickedUserData(data);
-                    });
-                  });
-                } else {
-                  const sortedParticipantIds = [source, value]
-                    .map((p) => p.uid)
-                    .sort();
-                  const conversationId = sortedParticipantIds.join("_");
-
-                  setCurrentConversation(conversationId);
-
-                  getDocument("users", value?.uid).then((data) => {
-                    setClickedUserData(data);
-                  });
-                }
-              }}
-              className="flex items-center w-full"
+              className="w-12 aspect-square rounded-full relative"
+              style={{ boxShadow: "0px 0px 5px #000000" }}
             >
-              {value?.photoURL ? (
-                <div
-                  className="w-12 aspect-square rounded-full relative"
-                  style={{ boxShadow: "0px 0px 5px #000000" }}
-                >
-                  <Image
-                    src={value?.photoURL}
-                    width={50}
-                    height={50}
-                    alt=""
-                    className="rounded-full absolute inset-0 object-cover w-full h-full group-hover:scale-110 duration-500"
-                  />
-                </div>
-              ) : (
-                <div
-                  style={{ boxShadow: "0px 0px 5px #000000" }}
-                  className="aspect-square flex items-center justify-center text-2xl w-12 text-white rounded-full bg-[#fff]"
-                >
-                  {value?.login[0].toUpperCase()}
-                </div>
-              )}
-              <div className="text-black font-bold ml-3 flex items-center justify-between w-full overflow-hidden text-clip">
-                <div className="pr-6 w-max">
-                  {value?.login !== source?.login ? value?.login : "Ty"}
-                </div>
-              </div>
-            </button>
+              <Image
+                src={value?.photoURL}
+                width={50}
+                height={50}
+                alt=""
+                className="rounded-full absolute inset-0 object-cover w-full h-full group-hover:scale-110 duration-500"
+              />
+            </div>
+          ) : (
+            // If no photo, display the first letter of the user's email
+            <div
+              style={{ boxShadow: "0px 0px 5px #000000" }}
+              className="aspect-square flex items-center justify-center text-2xl w-12 text-black rounded-full bg-[#fff]"
+            >
+              {value?.email[0].toUpperCase()}
+            </div>
+          )}
+          <div className="text-black font-bold ml-3 flex items-center justify-between w-full overflow-hidden text-clip">
+            <div className="pr-6 w-max">
+              {value?.pseudo !== source?.pseudo ? value?.pseudo : "You"}
+            </div>
           </div>
-        </div>
-      )}
-    </>
+        </button>
+      </div>
+    </div>
   );
 }

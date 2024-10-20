@@ -14,7 +14,7 @@ import {
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import QuixiesModule from "./QuixiesModule";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import Link from "next/link";
@@ -29,16 +29,39 @@ export default function DashboardHeader() {
   const [menuShow, setMenuShow] = useState(false);
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
+  const [showHeader, setShowHeader] = useState(true);
+
+  useEffect(() => {
+    let previousScrollPosition = window.scrollY;
+
+    const scrollListener = () => {
+      const currentScrollPosition = window.scrollY;
+      const isScrolledDown = previousScrollPosition < currentScrollPosition;
+      previousScrollPosition = currentScrollPosition;
+
+      setShowHeader(
+        isScrolledDown && currentScrollPosition > 100 ? false : true
+      );
+    };
+
+    window.addEventListener("scroll", scrollListener);
+
+    return () => window.removeEventListener("scroll", scrollListener);
+  }, []);
   return (
     <>
       <Settings source={user} setSource={setUserData} data={userData} />
       <QuixiesModule userCoins={user?.tokens} />
       <div className="">
         <div
-          style={{ boxShadow: "0px 0px 5px black" }}
-          className="py-6 w-full mx-auto bg-white relative lg:hidden"
+          className={`${
+            (modals.quixies || modals.config || modals.currentChat !== "") &&
+            "hidden"
+          } py-2 w-full mx-auto bg-white relative z-[9999999999999999999] lg:hidden ${
+            showHeader ? "translate-y-0" : "-translate-y-24"
+          } duration-100`}
         >
-          <div className="px-4 lg:px-6 h-full flex flex-col items-center w-full">
+          <div className="px-6 h-full flex flex-col items-center w-full">
             <div className="flex flex-col justify-between md:flex-row items-center w-full h-full">
               <div className="flex items-center justify-between w-full">
                 <button
@@ -49,7 +72,7 @@ export default function DashboardHeader() {
                   title="Burger menu"
                   className={`${
                     menuShow && "opened"
-                  } bg-[#126b91] p-1 rounded-lg z-50 w-max text-sm sm:text-base drop-shadow-sm duration-100 cursor-default font-bold`}
+                  } bg-gradient-to-r from-primary to-cta p-1 rounded-lg z-50 w-max text-sm sm:text-base drop-shadow-sm duration-100 cursor-default font-bold`}
                 >
                   <svg width="30" height="30" viewBox="0 0 100 100">
                     <path
@@ -78,7 +101,9 @@ export default function DashboardHeader() {
         </div>
       </div>
       <div
-        className={`fixed left-0 top-0 h-screen w-full lg:w-[30rem] overflow-y-scroll overflow-x-hidden ${
+        className={`${
+          modals.currentChat !== "" && "hidden"
+        } fixed left-0 top-0 h-screen w-full lg:w-[30rem] overflow-y-scroll overflow-x-hidden ${
           menuShow
             ? "translate-x-0 bg-white"
             : "-translate-x-[100vw] lg:translate-x-0 bg-white"
@@ -94,38 +119,30 @@ export default function DashboardHeader() {
                 onClick={() =>
                   dispatch(set_modals({ ...modals, quixies: true }))
                 }
+                className="pr-6"
               >
                 <Image
                   src="/assets/quixies.png"
                   width={500}
                   height={500}
                   alt=""
-                  className="max-w-[225px] h-auto rounded-xl transition-all duration-[0.2s] cursor-pointer"
+                  className="w-full h-auto rounded-lg transition-all duration-[0.2s] cursor-pointer"
                 />
               </button>
-              <div className="w-max max-w-[75px] flex lg:flex-col-reverse lg:items-end justify-between items-start">
-                <div className="flex items-start justify-start">
-                  <Image
-                    src="/assets/quixy-logo.png"
-                    width={224}
-                    height={224}
-                    alt="Logo serwisu quixy.pl"
-                    className="w-full h-auto"
-                  />
+              <h2 className="text-3xl flex w-full justify-end items-end">
+                <div className="flex flex-col items-end">
+                  <div className="text-black font-light text-sm sm:text-base text-right w-max">
+                    Panel Użytkownika
+                  </div>
+                  <div className="mt-3 lg:mt-0 text-black font-gotham text-2xl sm:text-3xl">
+                    💎{user?.tokens?.toFixed(2)}
+                  </div>
                 </div>
-              </div>
+              </h2>
             </div>
-            <h2 className="text-3xl flex w-full justify-between items-end mt-3">
-              <div className="text-3xl text-primary font-gotham">Nawigacja</div>
-              <div className="flex flex-col items-end">
-                <div className="text-black font-light text-base">
-                  Panel Użytkownika
-                </div>
-                <div className="mt-6 lg:mt-0 text-black font-gotham text-3xl">
-                  💎{user?.tokens?.toFixed(2)}
-                </div>
-              </div>
-            </h2>
+            <div className="text-3xl text-black font-gotham mt-6">
+              Nawigacja
+            </div>
             <Link
               href="/dashboard"
               onClick={() => setMenuShow(false)}
@@ -153,7 +170,7 @@ export default function DashboardHeader() {
           </div>
         </div>
         <div className="font-coco px-6 mt-12">
-          <h2 className="text-3xl text-primary font-gotham">Praca Zdalna</h2>
+          <h2 className="text-3xl text-black font-gotham">Praca Zdalna</h2>
           {user?.seek && (
             <div>
               <Link
@@ -192,7 +209,7 @@ export default function DashboardHeader() {
           )}
         </div>
         <div className="font-coco px-6 mt-12 w-full">
-          <h2 className="text-3xl text-primary font-gotham">Marketplace</h2>
+          <h2 className="text-3xl text-black font-gotham">Marketplace</h2>
           <p className="font-coco text-lg text-left max-w-[30rem] mt-3 text-gray-600">
             Kup lub sprzedaj swoją aplikację, stronę internetową lub projekt.
             Już wkrótce!
@@ -217,7 +234,7 @@ export default function DashboardHeader() {
           )}
         </div>
         <div className={`pt-12 p-6 font-coco`}>
-          <h2 className="text-3xl text-primary font-gotham">
+          <h2 className="text-3xl text-black font-gotham">
             <div className="">Ustawienia</div>
           </h2>
 

@@ -68,7 +68,7 @@ export default async function Page({ params }: { params: any }) {
         <Image
           width={1920}
           height={1080}
-          src="/assets/banner-jobs.png"
+          src="/assets/banner-jobs.webp"
           alt="Praca Zdalna Banner"
           className="w-full rounded-lg shadow"
         />
@@ -80,7 +80,7 @@ export default async function Page({ params }: { params: any }) {
         <Image
           width={1920}
           height={1080}
-          src="/assets/banner-jobs-mobile.png"
+          src="/assets/banner-jobs-mobile.webp"
           alt="Praca Zdalna Banner"
           className="w-full rounded-lg shadow"
         />

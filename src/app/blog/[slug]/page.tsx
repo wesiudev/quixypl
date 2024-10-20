@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: any }) {
       <Header jobsList={jobs} />
 
       <div className="px-4 md:px-8 lg:px-12 xl:px-20 2xl:px-32 pt-12 pb-24 bg-white">
-        <div className="flex flex-row mb-12 text-zinc-800 text-lg flex-wrap items-center">
+        <div className="font-coco flex flex-row mb-12 text-zinc-800 text-lg flex-wrap items-center">
           <Link
             href="/"
             className="hover:underline text-sm md:text-base lg:text-lg xl:text-xl w-max"
@@ -31,7 +31,7 @@ export default async function Page({ params }: { params: any }) {
             strona główna
           </Link>
           <div className="mx-2 text-sm md:text-base lg:text-lg xl:text-xl">
-            <div className="text-[#8F5BBD] font-bold mx-2">|</div>
+            <div className="text-black font-bold mx-2">|</div>
           </div>
           <Link
             href="/blog"
@@ -40,7 +40,7 @@ export default async function Page({ params }: { params: any }) {
             blog
           </Link>
           <div className="flex items-center text-sm md:text-base lg:text-lg xl:text-xl w-max">
-            <div className="mx-2 text-[#8F5BBD] font-bold">|</div>
+            <div className="mx-2 text-black font-bold">|</div>
             {product?.url}
           </div>
         </div>
@@ -208,7 +208,9 @@ export default async function Page({ params }: { params: any }) {
             </div>
           )}
       </div>
-      {products?.length > 1 && <BlogPostList posts={products} />}
+      <div className="px-4 md:px-8 lg:px-12 xl:px-20 2xl:px-32 pt-12 pb-24">
+        {products?.length > 1 && <BlogPostList posts={products} />}
+      </div>
       <div className="w-full flex justify-center mt-12">
         <Image
           src="/assets/quixy-logo.png"
