@@ -80,6 +80,7 @@ export default function ChatRoom({
           </div>
           <div className="w-full">
             <MessageInput
+              value={clickedUserData}
               participants={chat?.participants}
               authorId={authorId}
               source={source}

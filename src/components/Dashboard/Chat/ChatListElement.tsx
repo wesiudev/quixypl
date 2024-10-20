@@ -57,7 +57,7 @@ export default function ChatListElement({
         : [];
 
       // Update the related users list for both the source and clicked user
-      if (!userRelatedUsers.includes(value?.uid)) {
+      if (!userRelatedUsers?.includes(value?.uid)) {
         updateUser(source?.uid, {
           relatedUsers: [
             ...userRelatedUsers,
@@ -70,7 +70,7 @@ export default function ChatListElement({
         });
       }
 
-      if (!clickedUserRelatedUsers.includes(source?.uid)) {
+      if (!clickedUserRelatedUsers?.includes(source?.uid)) {
         updateUser(value?.uid, {
           relatedUsers: [
             ...clickedUserRelatedUsers,
