@@ -103,7 +103,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <div className="container mx-auto px-4">
         <IdeaListSlug ideas={ideas} />
       </div>
-      <UserStickyTop isIdea={true} slugData={slug}/>
+      <UserStickyTop slugData={slug} />
       <MainFooter heading={"Zrealizuj pomysł z Quixy Talent"} jobsList={jobs} />
     </div>
   );

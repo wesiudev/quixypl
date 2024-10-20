@@ -161,19 +161,19 @@ export default function Dashboard() {
                       )}
                     </div>
 
-                    {!user?.seek &&
-                      !user?.pseudo &&
-                      !user?.name &&
-                      !user?.emailVerified &&
-                      !user?.configured && (
-                        <MultiStepVerification
-                          seek={user?.seek}
-                          pseudo={user?.pseudo}
-                          name={user?.name}
-                          emailVerified={user?.emailVerified}
-                          configured={user?.configured}
-                        />
-                      )}
+                    {(!user?.seek ||
+                      !user?.pseudo ||
+                      !user?.name ||
+                      !user?.emailVerified ||
+                      !user?.configured) && (
+                      <MultiStepVerification
+                        seek={user?.seek}
+                        pseudo={user?.pseudo}
+                        name={user?.name}
+                        emailVerified={user?.emailVerified}
+                        configured={user?.configured}
+                      />
+                    )}
                   </div>
                 </div>
 
