@@ -21,6 +21,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(idea);
   } catch (error) {
     // Handle any potential errors during the process
-    return new NextResponse("Internal Server Error", { status: 500 });
+    return new NextResponse("-", { status: 500 });
   }
 }

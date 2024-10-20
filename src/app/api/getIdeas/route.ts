@@ -11,6 +11,6 @@ export async function GET(req: NextRequest) {
     const allIdeas = talents.flatMap((talent) => talent.ideas || []);
     return NextResponse.json(allIdeas);
   } catch (error) {
-    return new NextResponse("Internal Server Error", { status: 500 });
+    return new NextResponse("-", { status: 500 });
   }
 }
