@@ -96,10 +96,18 @@ const MessageInput: React.FC<MessageInputProps> = ({
         : [];
 
       // Update the related users list for both the source and clicked user
-      if (!userRelatedUsers?.includes(value?.uid)) {
+      const userRelatedUsersArray = Array.isArray(userRelatedUsers)
+        ? userRelatedUsers
+        : [];
+      const clickedUserRelatedUsersArray = Array.isArray(
+        clickedUserRelatedUsers
+      )
+        ? clickedUserRelatedUsers
+        : [];
+      if (!userRelatedUsersArray.includes(value?.uid)) {
         updateUser(source?.uid, {
           relatedUsers: [
-            ...userRelatedUsers,
+            ...userRelatedUsersArray,
             {
               email: value?.email,
               uid: value?.uid,
@@ -109,10 +117,10 @@ const MessageInput: React.FC<MessageInputProps> = ({
         });
       }
 
-      if (!clickedUserRelatedUsers?.includes(source?.uid)) {
+      if (!clickedUserRelatedUsersArray.includes(source?.uid)) {
         updateUser(value?.uid, {
           relatedUsers: [
-            ...clickedUserRelatedUsers,
+            ...clickedUserRelatedUsersArray,
             {
               email: source?.email,
               uid: source?.uid,
