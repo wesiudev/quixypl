@@ -230,7 +230,7 @@ export async function generateMetadata({ params }: { params: any }) {
   const content = await getPageContent(
     polishToEnglish(slug?.tags[0].slugTitle)
   );
-  const title = `${slug?.pseudo} | Najlepsi eksperci ${content?.genitive} ${slug?.city}`;
+  const title = `${slug?.pseudo} | Ekspert ${content?.genitive} ${slug?.city}`;
   const description = `Sprawdź projekty ${params.slug} ${talentTags.join(
     ", "
   )}`;

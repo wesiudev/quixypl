@@ -1,8 +1,9 @@
-import { updateApplication } from "@/firebase";
+import { updateUser } from "@/firebase";
+import { set_modals } from "@/redux/slices/modalsopen";
 import moment from "moment";
-import Link from "next/link";
 import { useState } from "react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function LeadApplication({
   lead,
@@ -14,17 +15,24 @@ export default function LeadApplication({
   filter: string;
 }) {
   const [optionsOpen, setOptionsOpen] = useState(false);
-
+  const dispatch = useDispatch();
+  const handleUpdate = (status: string) =>
+    updateUser(lead.id, { ...lead, status });
+  const { modals } = useSelector((state: any) => state.modals);
   return (
     <div
       key={lead.id}
       className={`rounded relative bg-zinc-800 p-3 h-max border-[3px] overflow-hidden ${
-        lead.status === "trash" && "border-orange-700"
-      } ${lead.status === "reseted" && "border-white"} ${
-        lead.status === "accepted" && "border-green-500"
-      } ${lead.status === undefined && "border-zinc-800"} ${
-        lead.status === "rejected" && "border-red-500"
-      } ${lead?.status === "accepted" && "border-yellow-400"}`}
+        lead.status === "trash"
+          ? "border-orange-700"
+          : lead.status === "reseted"
+          ? "border-white"
+          : lead.status === "accepted"
+          ? "border-green-500"
+          : lead.status === undefined
+          ? "border-zinc-800"
+          : "border-red-500"
+      }`}
     >
       {optionsOpen && (
         <div className="w-full h-full absolute left-0 top-0 bg-black bg-opacity-50" />
@@ -49,15 +57,7 @@ export default function LeadApplication({
           }`}
         >
           <button
-            onClick={() =>
-              updateApplication(lead.id, {
-                ...lead,
-                isFinished: false,
-                isTrash: false,
-                signed: false,
-                status: "reseted",
-              }).then(() => setOptionsOpen(false))
-            }
+            onClick={() => handleUpdate("reseted")}
             className="w-full px-4 py-1 text-white bg-white bg-opacity-0 duration-150 hover:bg-opacity-20"
           >
             Resetuj
@@ -74,23 +74,6 @@ export default function LeadApplication({
           <tr className="bg-gray-700">
             <td>Imię i nazwisko:</td>
             <td>{lead.name}</td>
-          </tr>
-          <tr className="bg-gray-700">
-            <td>Tel:</td>
-            <td>{lead.phoneNumber}</td>
-          </tr>
-          <tr className="bg-gray-700">
-            <tr className="bg-gray-700">
-              <td colSpan={2}>
-                <a
-                  href={lead.file}
-                  download
-                  className="text-white underline font-light"
-                >
-                  Pobierz CV
-                </a>
-              </td>
-            </tr>
           </tr>
         </tbody>
       </table>
@@ -109,12 +92,7 @@ export default function LeadApplication({
       <div className="flex flex-col w-full mt-3">
         {!lead.isFinished && (
           <button
-            onClick={() =>
-              updateApplication(lead.id, {
-                ...lead,
-                isFinished: true,
-              })
-            }
+            onClick={() => handleUpdate("accepted")}
             className="w-full text-center bg-green-500 text-white py-2 hover:bg-green-400 font-light text-base rounded"
           >
             Oznacz jako sprawdzone
@@ -123,23 +101,13 @@ export default function LeadApplication({
         {lead.isFinished && (!lead?.status || lead.status === "reseted") && (
           <div className="grid grid-cols-2 mt-2 gap-2">
             <button
-              onClick={() =>
-                updateApplication(lead.id, {
-                  ...lead,
-                  status: "rejected",
-                })
-              }
+              onClick={() => handleUpdate("rejected")}
               className="bg-gray-500 hover:bg-gray-400 p-3 rounded"
             >
               Odrzuć
             </button>
             <button
-              onClick={() =>
-                updateApplication(lead.id, {
-                  ...lead,
-                  status: "accepted",
-                })
-              }
+              onClick={() => handleUpdate("accepted")}
               className="bg-green-500 hover:bg-green-400 p-3 rounded"
             >
               Akceptuj
@@ -148,12 +116,14 @@ export default function LeadApplication({
         )}
 
         {lead.isFinished && !lead?.status && (
-          <Link
+          <button
             className="w-full text-center bg-blue-500 text-white py-2 font-light text-base mt-2 rounded"
-            href={`mailto:${lead.email}`}
+            onClick={() => {
+              dispatch(set_modals({ ...modals, currentChat: lead?.pseudo }));
+            }}
           >
-            Napisz email
-          </Link>
+            Odpisz
+          </button>
         )}
       </div>
     </div>

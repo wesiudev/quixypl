@@ -63,6 +63,7 @@ export default async function Page({
               {slug.title}
             </p>
             {/* <h2 className="text-2xl font-semibold mb-6">{slug.h2}</h2> */}
+
             {isTalent && (
               <h2 className="text-lg  relative z-50 w-[90%] mx-auto sm:max-w-[40rem] ">
                 Jesteś zainteresowany/a pracą zdalną w{" "}
@@ -122,6 +123,22 @@ export default async function Page({
               className="rounded-3xl w-full h-auto mb-6 lg:mb-0"
             />
             <div className="flex flex-col w-full justify-center font-gotham">
+              {isTalent && (
+                <Link
+                  className="mb-12 font-coco underline hover:no-underline mx-auto text-white px-2 text-xl rounded-lg py-0.5 bg-gradient-to-r from-primary to-cta w-max"
+                  href={`/praca-zdalna/${params.slug}`}
+                >
+                  Klient
+                </Link>
+              )}
+              {!isTalent && (
+                <Link
+                  className="mb-12 font-coco underline hover:no-underline mx-auto text-white px-2 text-xl rounded-lg py-0.5 bg-gradient-to-r from-primary to-cta w-max"
+                  href={`/praca-zdalna/${params.slug}?talent`}
+                >
+                  Talent
+                </Link>
+              )}
               <h1 className="!leading-snug text-2xl lg:text-4xl text-black drop-shadow-md mb-6 lg:mb-10">
                 {isTalent && "Szukaj pracy zdalnej"}{" "}
                 {!isTalent && "Dodaj ofertę pracy"} w {content?.genitive}.{" "}

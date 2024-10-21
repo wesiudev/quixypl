@@ -57,7 +57,7 @@ const TalentList: React.FC<any> = ({ categoryTalents }) => {
                 <h3 className="badge badge-primary badge-outline text-base text-gray-700">
                   {talent?.title}
                 </h3>
-                <p className="text-black">{talent?.city}</p>
+                <p className="text-black text-sm">{talent?.city}</p>
               </div>
             </Link>
           ))

@@ -50,13 +50,13 @@ export const metadata: Metadata = {
   verification: {
     google: "google85185d3abec28326.html",
   },
-  title: "Quixy Praca Zdalna - Szukaj Pracy - Zatrudnij Talent",
+  title: "Twoja Praca Zdalna | Szukaj Pracy - Oferty Pracy",
   description:
     "Nasi eksperci czekają na Ciebie! Prowadzisz rekrutację lub szukasz pracy? Quixy to idealne połączenie tych dwóch rzeczy.",
   openGraph: {
     type: "website",
     url: "https://quixy.pl",
-    title: "Quixy Praca Zdalna - Szukaj Pracy - Zatrudnij Talent",
+    title: "Twoja Praca Zdalna | Szukaj Pracy - Oferty Pracy",
     description:
       "Nasi eksperci czekają na Ciebie! Prowadzisz rekrutację lub szukasz pracy? Quixy to idealne połączenie tych dwóch rzeczy.",
     siteName: "quixy.pl",

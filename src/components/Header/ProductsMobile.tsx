@@ -170,8 +170,8 @@ export default function ProductsMobile({
                     </div>
                   </div>
                   <h4
-                    style={{ textShadow: "0px 4px 6px rgb(0, 0, 0)" }}
-                    className="text-center absolute bg-opacity-50 font-gotham text-white font-bold bottom-[10%] left-1/2 -translate-x-1/2 h-max w-full drop-shadow-xl shadow-black z-[202] py-2 text-lg sm:text-xl"
+                    style={{ textShadow: "1px 1px 1px black" }}
+                    className="text-center absolute bg-opacity-50 font-coco italic text-white font-light bottom-[10%] left-1/2 -translate-x-1/2 h-max w-full drop-shadow-xl shadow-black z-[202] py-2 text-sm sm:text-lg lg:text-xl"
                   >
                     {item.urlLabel}
                   </h4>

@@ -22,10 +22,8 @@ export default async function Page({
     `${process.env.NEXT_PUBLIC_URL}/api/talents?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
     { next: { revalidate: 60 } }
   ).then((res: any) => res.json());
-  const slug = talents.find((item: any) => item.pseudo === params.slug);
-  const talentTags = Array.from(
-    new Set(slug?.tags?.map((item: any) => item.slugTitle))
-  );
+  const slug = talents?.find((item: any) => item?.pseudo === params?.slug);
+
   return (
     <>
       <div className="container relative mx-auto">
@@ -222,9 +220,7 @@ export async function generateMetadata({ params }: { params: any }) {
   const talentTags = Array.from(
     new Set(slug?.tags?.map((item: any) => item?.slugTitle))
   );
-  const content = await getPageContent(
-    polishToEnglish(slug?.tags[0].slugTitle)
-  );
+  const content = await getPageContent(polishToEnglish(params.slug));
   const title = `${slug?.name} | Specjaliści ${content?.genitive} ${slug?.city}`;
   const description = `Sprawdź projekty ${params.slug} ${talentTags.join(
     ", "
@@ -234,7 +230,7 @@ export async function generateMetadata({ params }: { params: any }) {
     description,
     openGraph: {
       type: "website",
-      url: `https://quixy.pl/talent/${params.slug}`,
+      url: `https://quixy.pl/company/${params.slug}`,
       title,
       description,
       siteName: "Quixy",
