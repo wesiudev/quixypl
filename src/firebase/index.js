@@ -473,7 +473,11 @@ export async function fetchJobOffer(jobOfferId) {
     ? { ...jobOfferDoc.data(), id: jobOfferDoc.id }
     : null;
 }
-
+export async function updateApplication(id, data) {
+  const docRef = doc(collection(db, "employees"), id);
+  await updateDoc(docRef, data);
+  return docRef;
+}
 export async function fetchJobOffers() {
   const querySnapshot = await getDocs(collection(db, "offers"));
   return querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));

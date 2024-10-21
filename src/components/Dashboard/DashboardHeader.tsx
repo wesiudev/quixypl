@@ -174,7 +174,7 @@ export default function DashboardHeader() {
           {user?.seek && (
             <div>
               <Link
-                href="/dashboard/job_search"
+                href="/dashboard/search"
                 onClick={() => setMenuShow(false)}
                 className="flex items-center text-xl text-black drop-shadow-xl mt-3"
               >
@@ -208,7 +208,7 @@ export default function DashboardHeader() {
             </>
           )}
         </div>
-        <div className="font-coco px-6 mt-12 w-full">
+        {/* <div className="font-coco px-6 mt-12 w-full">
           <h2 className="text-3xl text-black font-gotham">Marketplace</h2>
           <p className="font-coco text-lg text-left max-w-[30rem] mt-3 text-gray-600">
             Kup lub sprzedaj swoją aplikację, stronę internetową lub projekt.
@@ -232,7 +232,7 @@ export default function DashboardHeader() {
               <FaDollarSign className="mr-2 text-primary" /> Sprzedaj projekt
             </Link>
           )}
-        </div>
+        </div> */}
         <div className={`pt-12 p-6 font-coco`}>
           <h2 className="text-3xl text-black font-gotham">
             <div className="">Ustawienia</div>

@@ -124,7 +124,9 @@ export default async function Page({
                     {slug?.tags?.map((item: any, i: any) => (
                       <h3 className="text-sm" key={i}>
                         <Link
-                          href={`/praca-zdalna/${item?.slugUrl}/${item?.categoryUrl}/${item?.url}`}
+                          href={`/praca-zdalna/${item?.slugUrl}/${
+                            item?.categoryUrl
+                          }/${item?.url}/${polishToEnglish(slug?.city)}`}
                           className="badge badge-primary badge-outline ml-1 mt-1 rounded-xl duration-100 flex items-center px-2 py-0.5 text-sm font-coco font-light"
                         >
                           {item.title}

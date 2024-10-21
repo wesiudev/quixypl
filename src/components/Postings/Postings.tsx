@@ -37,7 +37,7 @@ const getExpirationColor = (expirationTime: number, extraDays: number) => {
   const expirationDate = moment(expirationTime).add(extraDays, "days");
   return expirationDate.isBefore(moment()) ? "text-red-500" : "text-cta";
 };
-const JobOfferList = () => {
+const JobOfferList = ({ jobOffers }: { jobOffers: any }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.user);
   const [loading, setLoading] = useState(false);

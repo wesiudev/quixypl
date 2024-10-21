@@ -59,12 +59,12 @@ export default function ChatRoom({
                     {clickedUserData?.login[0].toUpperCase()}
                   </div>
                 )}
+                <div className="text-black mt-2">{clickedUserData?.title}</div>
                 <div className="flex flex-col items-center justify-center font-coco text-center">
                   <div className="mb-3 font-gotham">
                     {clickedUserData?.name || clickedUserData?.pseudo}
                   </div>
                   Brak wiadomości
-                  <div className="text-black mt-2">{clickedUserData?.bio}</div>
                 </div>
               </div>
             )}

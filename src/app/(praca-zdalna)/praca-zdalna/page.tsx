@@ -277,12 +277,10 @@ export default async function Page() {
     }
   ).then((res: any) => res.json());
   const categoryTalents = talents?.filter(
-    (item: any) =>
-      item?.pseudo &&
-      item?.seek &&
-      item?.seek !== "ask" &&
-      item?.tags?.filter((tag: any) => tag.categoryUrl === "web-development")
-        .length > 0
+    (item: any) => item?.pseudo && item?.seek === true && item?.seek !== "ask"
+  );
+  const categoryCompanies = talents?.filter(
+    (item: any) => item?.pseudo && !item?.seek && item?.seek !== "ask"
   );
   return (
     <div className="w-full h-full bg-white">
@@ -297,6 +295,14 @@ export default async function Page() {
             </span>
           </h2>
           <TalentList categoryTalents={categoryTalents} />
+        </div>
+        <div className="mt-12 bg-gradient-to-r from-primary/20 to-cta/20 rounded-xl pb-4">
+          <h2 className="text-white text-xl lg:text-3xl p-4">
+            <span className="p-1 rounded-md bg-gradient-to-r from-primary via-cta to-primary">
+              Klienci Quixy Talent&trade;
+            </span>
+          </h2>
+          <TalentList categoryTalents={categoryCompanies} />
         </div>
         <CallToActionSection />
         <SpecialistsCategoriesSection />

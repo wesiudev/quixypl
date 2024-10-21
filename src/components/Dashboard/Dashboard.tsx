@@ -166,7 +166,7 @@ export default function Dashboard() {
                         )}{" "}
                       </div>
                       {!user?.emailVerified && (
-                        <div className="bg-white text-black p-3 font-coco my-3 rounded-xl w-full">
+                        <div className="bg-white text-black p-3 font-coco mt-3 rounded-xl w-full">
                           <b>Witaj w Quixy!</b>🔥 Wysłaliśmy wiadomość
                           aktywującą konto na podany adres e-mail -{" "}
                           {user?.email}{" "}
@@ -303,7 +303,7 @@ export default function Dashboard() {
                                   `https://quixy.pl/${
                                     user?.seek && user?.seek !== "ask"
                                       ? "talent"
-                                      : "client"
+                                      : "company"
                                   }/${user?.pseudo}`
                                 );
                                 toast.success("Skopiowano pomyślnie!", {
@@ -495,31 +495,12 @@ export default function Dashboard() {
                     <div className="text-lg text-black font-light font-coco px-3 lg:px-6 pb-3 lg:pb-6">
                       Nie dodano żadnych ofert pracy - przeprowadź ⚡
                       <b>Szybką Rekrutację</b>
-                      <button
-                        onClick={() =>
-                          dispatch(set_modals({ ...modals, config: true }))
-                        }
+                      <Link
+                        href="/dashboard/add_job_offer"
                         className="text-primary font-bold hover:no-underline underline flex items-center"
                       >
-                        {user?.seek && user?.seek !== "ask" && (
-                          <>
-                            <FaCog className="text-xl mr-1 text-primary" />
-                            Moje konto
-                          </>
-                        )}
-                        {!user?.seek && user?.seek !== "ask" && (
-                          <>
-                            <FaUser className="text-xl mr-1 text-primary" />
-                            Panel Klienta
-                          </>
-                        )}
-                        {user?.seek === "ask" && (
-                          <>
-                            <FaCogs className="text-xl mr-1 text-primary" />
-                            Skonfiguruj konto
-                          </>
-                        )}
-                      </button>{" "}
+                        Dodaj ofertę pracy
+                      </Link>{" "}
                     </div>
                   )}
                 {user?.projects?.length > 0 && (

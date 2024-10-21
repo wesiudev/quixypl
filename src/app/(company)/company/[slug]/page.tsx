@@ -2,15 +2,14 @@ import Image from "next/image";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import moment from "moment";
-import { IProject } from "@/types";
-import ProjectCard from "@/components/Dashboard/ImageGenerator/dashboard/ProjectCard";
+import { JobPosting } from "@/types";
 import TalentList from "@/components/TalentList";
-import UserStickyTop from "@/components/UserStickyTop";
 import HireButton from "@/components/HireButton/HireButton";
 import { IoLocationOutline } from "react-icons/io5";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 import { getPageContent } from "@/lib/getPageContent";
 import CompanyStickyTop from "@/components/CompanyStickyTop";
+import JobOfferCard from "@/components/JobOffer/JobOfferCard";
 
 export default async function Page({
   params,
@@ -37,12 +36,12 @@ export default async function Page({
             <div className="flex flex-col breadcrumbs">
               <ul className="flex items-center flex-wrap">
                 <li className="">
-                  <Link href={`/talent`} title="praca zdalna talent">
-                    talent
+                  <Link href={`/company`} title="praca zdalna firma">
+                    company
                   </Link>
                 </li>
                 <li className="">
-                  <Link href={`/talent/${params.slug}`} title={params.slug}>
+                  <Link href={`/company/${params.slug}`} title={params.slug}>
                     {params.slug}
                   </Link>
                 </li>
@@ -125,7 +124,9 @@ export default async function Page({
                     {slug?.tags?.map((item: any, i: any) => (
                       <h3 className="text-sm" key={i}>
                         <Link
-                          href={`/praca-zdalna/${item?.slugUrl}/${item?.categoryUrl}/${item?.url}`}
+                          href={`/praca-zdalna/${item?.slugUrl}/${
+                            item?.categoryUrl
+                          }/${item?.url}/${polishToEnglish(slug?.city)}`}
                           className="badge badge-primary badge-outline ml-1 mt-1 rounded-xl duration-100 flex items-center px-2 py-0.5 text-sm font-coco font-light"
                         >
                           {item.title}
@@ -157,7 +158,7 @@ export default async function Page({
               {slug?.bio && (
                 <>
                   <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
-                    Opis użytkownika
+                    Opis firmy
                   </h2>
                   <h3
                     className={`text-black text-base max-w-2xl my-3 ${
@@ -170,17 +171,16 @@ export default async function Page({
               )}
             </div>
           </div>
-          {slug?.projects?.length > 0 && (
+          {slug?.job_offers?.length > 0 && (
             <div className={`rounded-xl h-max w-full mt-3`}>
               <h2
                 className={`text-3xl text-black drop-shadow-lg font-gotham mb-3`}
               >
-                {slug?.seek && slug?.seek !== "ask" && "Portfolio"}
-                {!slug?.seek && slug?.seek !== "ask" && "Aktywne oferty pracy"}
+                Aktywne oferty pracy
               </h2>
               <div>
-                {slug?.projects?.map((project: IProject, i: any) => (
-                  <ProjectCard key={i} project={project} isSlug={true} />
+                {slug?.job_offers?.map((offer: JobPosting, i: any) => (
+                  <JobOfferCard key={i} jobOfferData={offer} />
                 ))}
               </div>
             </div>
@@ -225,7 +225,7 @@ export async function generateMetadata({ params }: { params: any }) {
   const content = await getPageContent(
     polishToEnglish(slug?.tags[0].slugTitle)
   );
-  const title = `${slug?.pseudo} | Najlepsze firmy ${content?.genitive} ${slug?.city}`;
+  const title = `${slug?.name} | Specjaliści ${content?.genitive} ${slug?.city}`;
   const description = `Sprawdź projekty ${params.slug} ${talentTags.join(
     ", "
   )}`;
