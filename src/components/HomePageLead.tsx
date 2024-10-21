@@ -4,11 +4,6 @@ import React, { useState } from "react";
 import { pushEmail } from "../../utils/pushEmail";
 import { toast } from "react-toastify";
 
-/**
- * Komponent, kt ry umo liwia zapisanie si  do newslettera
- *
- * @returns Komponent z formularzem do zapisu do newslettera
- */
 export default function HomePageLead() {
   const [isChecked, setIsChecked] = React.useState(true);
   const [email, setEmail] = useState("");

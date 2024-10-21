@@ -74,6 +74,15 @@ export async function addMessageToConversation(
     throw error; // Optionally rethrow the error to handle it further up the call stack
   }
 }
+export async function createConversation(conversationId, conversationData) {
+  try {
+    const conversationDocRef = doc(db, conversationId, conversationId);
+    await setDoc(conversationDocRef, conversationData);
+    return { id: conversationId, ...conversationData };
+  } catch (error) {
+    throw error;
+  }
+}
 export async function addConversation(participants) {
   try {
     // Sort participants by ID to ensure consistency

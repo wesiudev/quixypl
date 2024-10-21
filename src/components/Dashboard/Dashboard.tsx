@@ -14,6 +14,7 @@ import UserPanel from "../UserPanel";
 import MultiStepVerification from "./Settings/SettingsInputs/MultiStepVerification";
 import { useState } from "react";
 import ReactConfetti from "react-confetti";
+import Link from "next/link";
 async function sendVerificationEmail(email: string, verificationCode: string) {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`,
@@ -217,17 +218,28 @@ export default function Dashboard() {
                     </h2>
                     {!user?.conversations?.length && (
                       <div className="text-black italic font-light">
-                        Nowe wiadomości (0)
+                        Wszystkie Wiadomości ({user?.conversations?.length || 0}
+                        )
                       </div>
                     )}
-                    <button
-                      onClick={() =>
-                        dispatch(set_modals({ ...modals, currentChat: null }))
-                      }
+                    {!user?.conversations?.length && (
+                      <div className="text-black italic font-light">
+                        Nowe Wiadomości ({user?.conversations?.length || 0})
+                      </div>
+                    )}
+                    {!user?.conversations?.length && (
+                      <div className="text-black italic font-light">
+                        Zarchiwizowane Wiadomości (
+                        {user?.conversations?.length || 0})
+                      </div>
+                    )}
+                    <Link
+                      title="Zobacz wszystkie wiadomości"
+                      href="/dashboard/applications"
                       className="font-gotham underline text-cta text-sm"
                     >
-                      Przejdź do czatu
-                    </button>
+                      Zobacz wszystkie
+                    </Link>
                   </div>
                   <AccountHistory />
                 </div>
@@ -363,10 +375,10 @@ export default function Dashboard() {
                           Specjalizacje firmy
                         </h2>
                       )}
-                      <div className="w-full -ml-1 flex flex-wrap items-center font-coco font-light text-white">
+                      <div className="w-full -ml-1 flex flex-wrap items-center font-coco font-light">
                         {user?.tags?.map((item: any, i: any) => (
                           <div className="text-sm" key={i}>
-                            <div className="ml-1 mt-1 rounded-xl bg-[#126b91] flex items-center px-2 py-0.5">
+                            <div className="ml-1 mt-1 rounded-xl badge badge-primary badge-outline flex items-center px-2 py-0.5">
                               {item.title}
                             </div>
                           </div>
@@ -398,7 +410,7 @@ export default function Dashboard() {
                             user?.preferences?.map((item: any, i: any) => (
                               <h3
                                 key={i}
-                                className={`ml-1 mt-1 rounded-xl bg-[#126b91] flex items-center px-2 py-0.5 text-sm font-coco font-light text-white`}
+                                className={`ml-1 mt-1 rounded-xl badge badge-primary badge-outline flex items-center px-2 py-0.5 text-sm font-coco font-light`}
                               >
                                 {item}
                               </h3>
@@ -416,7 +428,7 @@ export default function Dashboard() {
                             user?.preferences?.map((item: any, i: any) => (
                               <h3
                                 key={i}
-                                className={`ml-1 mt-1 rounded-xl bg-[#126b91] flex items-center px-2 py-0.5 text-sm font-coco font-light text-white`}
+                                className={`ml-1 mt-1 rounded-xl badge badge-primary badge-outline flex items-center px-2 py-0.5 text-sm font-coco font-light text-white`}
                               >
                                 {item}
                               </h3>

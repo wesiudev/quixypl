@@ -93,7 +93,7 @@ export default function PortfolioItems({
   ) => {
     const newProject = {
       ...project,
-      expirationTime: getExpirationTime(project.days),
+      expirationTime: moment().add(project?.days, "days").valueOf(),
       creationTime: Date.now(),
       companySize: getCompanySize(),
       ...additionalProps,
@@ -136,13 +136,6 @@ export default function PortfolioItems({
       pauseOnHover: true,
       draggable: true,
     });
-  };
-
-  // Aktualizacja ceny w oparciu o liczbę dni
-  const handleDaysChange = (e: any) => {
-    const selectedDays = e.target.value;
-    setProject({ ...project, days: selectedDays });
-    setProject({ ...project, price: 15.99 + selectedDays * 8.42 });
   };
 
   // Main function to handle the project submission
@@ -204,7 +197,11 @@ export default function PortfolioItems({
     }
   }
   return (
-    <div className="px-6 font-coco mt-3">
+    <div
+      className={`px-6 font-coco mt-3 ${
+        !source?.seek && source?.seek !== "ask" && "hidden"
+      }`}
+    >
       {source?.seek && source?.seek !== "ask" && (
         <div className="font-bold text-lg text-black font-gotham">
           Portfolio

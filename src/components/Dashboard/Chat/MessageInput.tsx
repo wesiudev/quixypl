@@ -25,31 +25,46 @@ const MessageInput: React.FC<MessageInputProps> = ({
 }) => {
   const [message, setMessage] = useState<string>("");
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (message.trim() !== "") {
-      addMessageToConversation(message, authorId, participants);
+      await addMessageToConversation(message, authorId, participants);
       if (source?.messages > 0 && !source?.chat) {
-        updateUser(source?.uid, {
+        await updateUser(source?.uid, {
           ...source,
           messages: source?.messages - 1,
         });
+      }
+      if (source?.messages > 0) {
+        handleSendMessage();
+        if (source?.messages > 0 && !source?.chat) {
+          await updateUser(source?.uid, {
+            ...source,
+            messages: source?.messages - 1,
+          });
+        }
+      } else {
+        await handleConversation();
       }
       setMessage("");
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyPress = async (
+    e: React.KeyboardEvent<HTMLTextAreaElement>
+  ) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault(); // Prevent new line on Enter key press
       if (source?.messages > 0) {
         handleSendMessage();
         if (source?.messages > 0 && !source?.chat) {
-          updateUser(source?.uid, {
+          await updateUser(source?.uid, {
             ...source,
             messages: source?.messages - 1,
           });
         }
       }
+    } else {
+      await handleConversation();
     }
   };
   // Retrieve the modals state from the Redux store

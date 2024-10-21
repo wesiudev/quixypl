@@ -60,6 +60,32 @@ export type Offer = {
   opProfileVerified: boolean;
 };
 
+export type JobPosting = {
+  authorId: string;
+  creationTime: number;
+  days: string;
+  description: string;
+  email: string;
+  expirationTime: number;
+  id: string;
+  isPaid: boolean;
+  location: string;
+  name: string;
+  phone: string;
+  price: number;
+  requirements: string;
+  salary: string;
+  salaryValue: string;
+  tags: Array<{
+    categoryTitle: string;
+    categoryUrl: string;
+    slugTitle: string;
+    slugUrl: string;
+  }>;
+  title: string;
+  url: string;
+  website: string;
+};
 export type Candidate = {
   id: string;
   name: string;

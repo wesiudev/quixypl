@@ -11,7 +11,10 @@ export default function Loading() {
           alt="Logo serwisu quixy.pl"
           className="mb-6 w-24 h-auto animate-pulse"
         />
-        <div className="text-center">Wczytywanie danych...</div>
+        <div className="text-center flex items-center">
+          <div className="loading loading-ball scale-150 mr-3"></div>Wczytywanie
+          danych...
+        </div>
       </div>
     </div>
   );

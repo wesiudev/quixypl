@@ -4,6 +4,8 @@ import { FaCheckCircle } from "react-icons/fa";
 import { IoCheckmarkCircle, IoCloseCircle } from "react-icons/io5";
 import { updateUser } from "@/firebase"; // Assuming updateUser is imported from "@/firebase"
 import Confetti from "react-confetti"; // Assuming react-confetti is installed
+import { setUser } from "@/redux/slices/user";
+import { useDispatch } from "react-redux";
 
 // MultiStepVerification Component
 export default function MultiStepVerification({
@@ -40,11 +42,14 @@ export default function MultiStepVerification({
   useEffect(() => {
     setProgress(calculateProgress());
   }, [name, emailVerified, seek, configured, pseudo]);
-
+  const dispatch = useDispatch();
   const handleAccessClick = () => {
     updateUser(user?.uid, { access: true }); // Call the updateUser function
     setIsAnimating(true); // Show confetti
-    setTimeout(() => setIsAnimating(false), 5000); // Hide confetti after 5 seconds
+    setTimeout(() => {
+      setIsAnimating(false);
+      dispatch(setUser({ ...user, access: true }));
+    }, 5000); // Hide confetti after 5 seconds
   };
 
   return (

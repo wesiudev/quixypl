@@ -24,7 +24,7 @@ const TalentList: React.FC<any> = ({ categoryTalents }) => {
       <div
         className={` ${
           currentTalents.length > 0 &&
-          "w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3"
+          "w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 px-3"
         }`}
       >
         {currentTalents.length > 0 ? (
@@ -52,9 +52,12 @@ const TalentList: React.FC<any> = ({ categoryTalents }) => {
                   {talent?.pseudo && talent?.pseudo[0]?.toUpperCase()}
                 </span>
               )}
-              <div className="px-2 flex flex-col font-coco">
+              <div className="px-3 flex flex-col font-coco">
                 <h2 className="text-lg font-bold text-black">{talent?.name}</h2>
-                <h3 className="text-base text-gray-700">{talent?.title}</h3>
+                <h3 className="badge badge-primary badge-outline text-base text-gray-700">
+                  {talent?.title}
+                </h3>
+                <p className="text-black">{talent?.city}</p>
               </div>
             </Link>
           ))

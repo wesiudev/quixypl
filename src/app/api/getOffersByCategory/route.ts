@@ -1,5 +1,5 @@
+import { fetchOffers } from "@/firebase";
 import { NextRequest, NextResponse } from "next/server";
-import { getJobOffers } from "../../../../utils/getJobOffers";
 
 export async function GET(req: NextRequest) {
   const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
@@ -8,8 +8,8 @@ export async function GET(req: NextRequest) {
     return new NextResponse("not found", { status: 404 });
   }
   try {
-    const data = await getJobOffers();
-    const offers = data.filter((offer) => offer.category === cat);
+    const offers = await fetchOffers();
+
     return NextResponse.json(offers);
   } catch (error) {
     return new NextResponse("Internal Server Error", { status: 500 });

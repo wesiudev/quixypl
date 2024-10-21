@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import ProjectImages from "./ProjectImages";
 import { copyToClipboard } from "@/lib/copyToClipboard";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function ProjectCard({
   project,
@@ -23,7 +24,7 @@ export default function ProjectCard({
   const { user } = useSelector((state: any) => state.user);
   const { modals } = useSelector((state: any) => state.modals);
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const router = useRouter();
   async function finishUpQuickOffer() {
     toast.success("Pomyślnie dodano ofertę!", {
       position: "top-right",
@@ -47,6 +48,8 @@ export default function ProjectCard({
       type: "quick",
       creationTime: Date.now(),
       companySize: user?.preferences[0] ?? "Brak danych...",
+    }).then(() => {
+      router.push("/dashboard/my_listings");
     });
   }
 
@@ -215,7 +218,7 @@ export default function ProjectCard({
               </Link>
             )}
 
-          {project?.isRecruitment && !project?.isPaid && !isSlug && (
+          {!project?.isPaid && !isSlug && (
             <button
               onClick={() => {
                 if (project?.price > user?.tokens) {

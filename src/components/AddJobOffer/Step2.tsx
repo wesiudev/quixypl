@@ -45,13 +45,7 @@ export default function StepTwo({
                       />
                     </div>
                   )}
-                  <InputField
-                    id="location"
-                    label="Lokalizacja"
-                    placeholder="Lokalizacja biura (opcjonalnie)"
-                    value={formData?.location || ""}
-                    onChange={handleChange}
-                  />
+                  <div className="mt-3"></div>
 
                   {!user?.seek && user?.seek !== "ask" && (
                     <div>

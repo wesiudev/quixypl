@@ -4,6 +4,8 @@ import jobs from "../../../../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Header from "@/components/Header";
 import Image from "next/image";
+import JobOffers from "@/components/JobOffers";
+import JobOfferList from "@/components/Postings/Postings";
 
 export async function generateStaticParams() {
   return jobs
@@ -20,37 +22,42 @@ export default async function Page({ params }: { params: any }) {
     )
     .map((item: any) => ({ title: item.title }))
     .find((item) => polishToEnglish(item.title) === params.job);
-
+  const offers = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/offers/`, {
+    next: { revalidate: 15 },
+  }).then((res) => res.json());
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen flex flex-col">
       {/* Header */}
       <Header jobsList={jobs} />
 
-      {/* Breadcrumbs with Icons */}
-      <div className="px-6 sm:px-12 breadcrumbs text-sm bg-white !text-black ">
-        <ul className="flex items-center flex-wrap">
-          <li className="mr-2">
-            <Link href={`/praca-zdalna`} title="praca zdalna">
+      {/* Breadcrumbs Section */}
+      <div className="breadcrumbs px-6 sm:px-12 py-4 bg-gray-100 text-sm">
+        <ul className="flex items-center flex-wrap space-x-2">
+          <li>
+            <Link href={`/praca-zdalna`} className="link text-primary">
               praca-zdalna
             </Link>
           </li>
-          <li className="mr-2">
-            <Link href={`/praca-zdalna/${params.slug}`} title={params.slug}>
+          <li>
+            <Link
+              href={`/praca-zdalna/${params.slug}`}
+              className="link text-primary"
+            >
               {params.slug}
             </Link>
           </li>
-          <li className="mr-2">
+          <li>
             <Link
               href={`/praca-zdalna/${params.slug}/${params.category}`}
-              title={params.slug}
+              className="link text-primary"
             >
               {params.category}
             </Link>
           </li>
-          <li className="mr-2">
+          <li>
             <Link
               href={`/praca-zdalna/${params.slug}/${params.category}/${params.job}`}
-              title={params.slug}
+              className="link text-primary"
             >
               {params.job}
             </Link>
@@ -58,13 +65,15 @@ export default async function Page({ params }: { params: any }) {
         </ul>
       </div>
 
-      {/* Description Section with Banner */}
-      <div className="">
-        <h3 className="text-2xl font-bold text-black  text-center">
-          Praca zdalna <b className="text-primary">{job?.title}</b>
+      {/* Job Title Section */}
+      <div className="text-center px-6 sm:px-12 py-8">
+        <h3 className="text-3xl font-bold text-black">
+          Praca zdalna <span className="text-primary">{job?.title}</span>
         </h3>
       </div>
-      <div className="lg:block hidden bg-white px-6 sm:px-12 text-black ">
+
+      {/* Banner Section */}
+      <div className="hidden lg:block bg-white px-6 sm:px-12 py-4">
         <Image
           width={1920}
           height={1080}
@@ -72,11 +81,8 @@ export default async function Page({ params }: { params: any }) {
           alt="Praca Zdalna Banner"
           className="w-full rounded-lg shadow"
         />
-        <h3 className="text-2xl font-bold">
-          <b className="text-primary">Oferty Pracy</b> {job?.title}
-        </h3>
       </div>
-      <div className="lg:hidden bg-white px-6 sm:px-12 text-gray-800">
+      <div className="lg:hidden bg-white px-6 sm:px-12 py-4">
         <Image
           width={1920}
           height={1080}
@@ -86,49 +92,13 @@ export default async function Page({ params }: { params: any }) {
         />
       </div>
 
-      {/* Job Opportunities Section with Images */}
-      <div className="bg-white px-6 sm:px-12 text-gray-800">
-        <h2 className="bg-[#126b91] text-white rounded-md p-3">
-          Oferty Pracy - Quixy Talent&trade;
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {jobs.slice(0, 3).map((job, index) => (
-            <div
-              key={index}
-              className="p-4 border-2 border-gray-200 rounded-lg shadow-md bg-gray-100 hover:shadow-lg transition"
-            >
-              <h3 className="text-xl font-semibold text-cyan-500">
-                {job.title}
-              </h3>
-
-              <Link
-                href={`/praca-zdalna/${polishToEnglish(job.title)}`}
-                className="mt-4 inline-block text-primary font-semibold underline"
-              >
-                Zobacz więcej
-              </Link>
-            </div>
-          ))}
-        </div>
-
-        <div className="text-left">
-          <h2 className="bg-[#126b91] text-white rounded-md p-3">
-            Oferty pracy od firm
-          </h2>
-        </div>
+      {/* Job Opportunities Section */}
+      <h2 className="bg-[#126b91] text-white rounded-md p-3 mt-6">
+        Oferty pracy od firm
+      </h2>
+      <div className="bg-white px-6 sm:px-12 py-6 text-gray-800">
+        <JobOfferList />
       </div>
-
-      {/* Call to Action Section */}
-      <div className="flex flex-col space-y-3 bg-[#126b91] py-12 text-white text-center">
-        <h2 className="text-3xl font-bold mb-4">Gotowy, aby rozpocząć?</h2>
-        <Link
-          href="/register"
-          className="w-max mx-auto mt-4 bg-white text-primary py-3 px-8 rounded font-semibold hover:bg-gray-100 transition"
-        >
-          Wypróbuj Quixy Talent&trade; za darmo!
-        </Link>
-      </div>
-
       <MainFooter jobsList={jobs} />
     </div>
   );

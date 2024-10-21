@@ -260,7 +260,18 @@ export default function TagsHandler() {
           <div className="font-bold mb-1 bg-[#126b91] p-1 rounded-md px-2 text-white w-max max-w-[100%]">
             {category.title}
           </div>
-          <div className="font-bold"></div>Wybierz stanowisko
+          <div className="font-bold"></div>
+
+          {!user?.seek && user?.seek !== "ask" && (
+            <div className="font-gotham font-bold text-black">
+              Dodaj specjalizacje
+            </div>
+          )}
+          {user?.seek && user?.seek !== "ask" && (
+            <div className="font-gotham font-bold text-black">
+              Wybierz stanowisko
+            </div>
+          )}
         </div>
       )}
       <div className="-ml-0.5 flex flex-row items-start w-full">

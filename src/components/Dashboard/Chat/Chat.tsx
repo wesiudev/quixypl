@@ -49,7 +49,6 @@ export default function Chat() {
   }, [loading]);
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
-  const [chatListOpen, setChatListOpen] = useState(false);
 
   return (
     <>
@@ -78,11 +77,6 @@ export default function Chat() {
             />
           )}
         </div>
-        {/* <ChatList
-          source={source}
-          chatListOpen={chatListOpen}
-          setChatListOpen={setChatListOpen}
-        /> */}
       </div>
     </>
   );

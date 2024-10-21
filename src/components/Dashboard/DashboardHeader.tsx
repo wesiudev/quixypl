@@ -49,7 +49,7 @@ export default function DashboardHeader() {
     return () => window.removeEventListener("scroll", scrollListener);
   }, []);
   return (
-    <>
+    <div>
       <Settings source={user} setSource={setUserData} data={userData} />
       <QuixiesModule userCoins={user?.tokens} />
       <div className="">
@@ -301,6 +301,6 @@ export default function DashboardHeader() {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }

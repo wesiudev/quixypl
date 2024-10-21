@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { collection, addDoc } from "firebase/firestore";
 import Link from "next/link";
-import { auth, db } from "@/firebase";
+import { addJobOffer, auth, db, updateUser } from "@/firebase";
 import { toast } from "react-toastify";
 import { FaChevronLeft } from "react-icons/fa";
 import jobs from "../../../public/14.09.2024.json";
@@ -13,8 +13,13 @@ import StepOne from "./Step";
 import Loading from "@/app/loading";
 import { JobListing } from "@/types";
 import { useRouter } from "next/navigation";
+import ReactConfetti from "react-confetti";
+import { v4 as uuid } from "uuid";
+import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "@/redux/slices/user";
 export default function AddJobOffer() {
-  const [user, loading] = useAuthState(auth);
+  const { user } = useSelector((state: any) => state.user);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<JobListing>(InitialData);
   const handleChange = (
@@ -31,7 +36,10 @@ export default function AddJobOffer() {
   const [tagsOpenLevel, setTagsOpenLevel] = useState(0);
   const [tagDeletion, setTagDeletion] = useState(false);
   const [selectedTag, setSelectedTag] = useState<any>({});
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isSent, setIsSent] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const jobOffer = {
@@ -41,10 +49,38 @@ export default function AddJobOffer() {
     };
 
     try {
-      await addDoc(collection(db, "offers"), jobOffer).then(() => {
-        setFormData(InitialData);
-        router.replace("/dashboard/my_postings");
+      await addJobOffer({
+        ...formData,
+        expirationTime: moment().add(formData?.days, "days").valueOf(),
+        authorId: user?.uid,
+        id: uuid(),
+        isPaid: user?.tokens >= formData?.price,
       });
+      await updateUser(user?.uid, {
+        job_offers: user?.job_offers
+          ? [
+              ...user.job_offers,
+              {
+                ...formData,
+                expirationTime: moment().add(formData?.days, "days").valueOf(),
+                authorId: user?.uid,
+                id: uuid(),
+                isPaid: user?.tokens >= formData?.price,
+              },
+            ]
+          : [
+              {
+                ...formData,
+                expirationTime: moment().add(formData?.days, "days").valueOf(),
+                authorId: user?.uid,
+                id: uuid(),
+                isPaid: user?.tokens >= formData?.price,
+              },
+            ],
+      });
+      dispatch(
+        setUser({ ...user, job_offers: [...user.job_offers, formData] })
+      );
       toast.success("Oferta pracy dodana pomyślnie!");
     } catch (error: any) {
       toast.error(error.message || "Wystąpił błąd podczas dodawania oferty.");
@@ -54,16 +90,10 @@ export default function AddJobOffer() {
   const nextStep = () => setCurrentStep((prev) => prev + 1);
   const prevStep = () => setCurrentStep((prev) => prev - 1);
 
-  if (loading) {
-    return <Loading />;
-  }
-
-  if (!user) {
-    return <p>Proszę się zalogować, aby dodać ofertę pracy.</p>;
-  }
-
   return (
     <div className="relative overflow-hidden min-h-screen w-full flex flex-col bg-gray-200 rounded-lg hover:shadow-md shadow-cyan items-center">
+      {isAnimating && <ReactConfetti />}
+
       <div className="w-[100%] max-w-[40rem] h-max bg-white z-50 relative p-6 lg:p-10 mt-12 ">
         <h1 className="text-xl md:text-3xl font-gotham text-zinc-800">
           Dodaj ofertę pracy
@@ -113,6 +143,9 @@ export default function AddJobOffer() {
             setFormData={setFormData}
             user={user}
             InitialData={InitialData}
+            handleSubmit={handleSubmit}
+            setIsAnimating={setIsAnimating}
+            isAnimating={isAnimating}
           />
         </div>
         <Link

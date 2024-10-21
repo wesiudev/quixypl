@@ -8,6 +8,8 @@ import TalentList from "@/components/TalentList";
 import UserStickyTop from "@/components/UserStickyTop";
 import HireButton from "@/components/HireButton/HireButton";
 import { IoLocationOutline } from "react-icons/io5";
+import { polishToEnglish } from "../../../../../utils/polishToEnglish";
+import { getPageContent } from "@/lib/getPageContent";
 
 export default async function Page({
   params,
@@ -123,7 +125,7 @@ export default async function Page({
                       <h3 className="text-sm" key={i}>
                         <Link
                           href={`/praca-zdalna/${item?.slugUrl}/${item?.categoryUrl}/${item?.url}`}
-                          className="ml-1 mt-1 rounded-xl bg-primary duration-100 flex items-center px-2 py-0.5 text-sm font-coco font-light text-white"
+                          className="badge badge-primary badge-outline ml-1 mt-1 rounded-xl duration-100 flex items-center px-2 py-0.5 text-sm font-coco font-light"
                         >
                           {item.title}
                         </Link>
@@ -142,7 +144,7 @@ export default async function Page({
                       slug?.preferences?.map((item: any, i: any) => (
                         <h3
                           key={i}
-                          className={`ml-1 mt-1 rounded-xl bg-primary duration-100 flex items-center px-2 py-0.5 text-sm font-coco font-light text-white`}
+                          className={`badge badge-primary badge-outline ml-1 mt-1 rounded-xl duration-100 flex items-center px-2 py-0.5 text-sm font-coco font-light `}
                         >
                           {item}
                         </h3>
@@ -196,10 +198,15 @@ export default async function Page({
             </h2>
             <div className="p-2">
               <TalentList
-                categoryTalents={talents.filter((item: any) =>
-                  item?.tags?.find(
-                    (tag: any) => tag.slugUrl === slug?.tags[0]?.slugUrl
-                  )
+                categoryTalents={talents.filter(
+                  (item: any) =>
+                    item?.tags?.find(
+                      (tag: any) => tag.slugUrl === slug?.tags[0]?.slugUrl
+                    ) &&
+                    item?.seek === true &&
+                    item?.seek !== "ask" &&
+                    item?.pseudo !== slug?.pseudo &&
+                    slug?.access
                 )}
               />
             </div>
@@ -216,9 +223,12 @@ export async function generateMetadata({ params }: { params: any }) {
   ).then((res: any) => res.json());
   const slug = talents.find((item: any) => item.pseudo === params.slug);
   const talentTags = Array.from(
-    new Set(slug?.tags?.map((item: any) => item.slugTitle))
+    new Set(slug?.tags?.map((item: any) => item?.slugTitle))
   );
-  const title = `Eksperci ${params.slug} | Zatrudnij do Pracy Zdalnej`;
+  const content = await getPageContent(
+    polishToEnglish(slug?.tags[0].slugTitle)
+  );
+  const title = `${slug?.pseudo} | Najlepsi eksperci ${content?.genitive} ${slug?.city}`;
   const description = `Sprawdź projekty ${params.slug} ${talentTags.join(
     ", "
   )}`;

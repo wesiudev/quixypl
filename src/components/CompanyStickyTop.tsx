@@ -6,7 +6,7 @@ import { FaArrowRight, FaUser } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function UserStickyTop({ slugData }: { slugData: any }) {
+export default function CompanyStickyTop({ slugData }: { slugData: any }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => {
     const position = window.scrollY;
@@ -58,7 +58,7 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
             <div className="px-4 ">
               <div className="flex flex-col py-2">
                 <h1 className="flex items-center font-coco text-xl">
-                  Zatrudnij {slugData?.name}!
+                  Skontaktuj się z {slugData?.name}!
                 </h1>
                 <p className="font-bold mb-1">
                   {slugData?.title && slugData?.title}
