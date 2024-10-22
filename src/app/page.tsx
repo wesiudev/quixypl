@@ -79,7 +79,7 @@ export default async function Page() {
               height={140}
               alt="Pracuj Zdalnie Z Quixy Talent"
               title="Pracuj Zdalnie Z Quixy Talent"
-              className="w-[100px] lg:hidden h-auto mx-auto"
+              className="w-[140px] lg:hidden h-auto mx-auto mb-6"
             />
             <h2 className="lg:max-w-sm font-extrabold font-coco text-3xl lg:text-5xl text-zinc-800 text-center sm:text-left  mx-auto sm:mx-0">
               Twoja platforma pracy zdalnej

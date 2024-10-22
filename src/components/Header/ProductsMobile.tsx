@@ -67,7 +67,7 @@ export default function ProductsMobile({
             Kontakt
           </Link>
           <Link
-            href="/blog"
+            href="/news"
             style={{ boxShadow: "1px 0px 4px black" }}
             className="bg-[#126b91] hover:bg-[#468CA9] duration-75 font-light text-white text-sm p-2 w-max"
           >

@@ -163,7 +163,7 @@ export default function HeaderComponent({
             Kontakt
           </Link>
           <Link
-            href="/blog"
+            href="/news"
             className="text-base drop-shadow-sm shadow-black text-black px-2 py-1 rounded-lg hover:bg-cta hover:text-white "
           >
             Blog

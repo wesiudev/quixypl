@@ -31,10 +31,10 @@ export default async function Page() {
               </li>
               <li className="mr-2">
                 <Link
-                  href="/blog"
+                  href="/news"
                   className="hover:underline text-sm md:text-base lg:text-lg xl:text-xl"
                 >
-                  blog
+                  news
                 </Link>
               </li>
             </ul>
@@ -49,7 +49,7 @@ export default async function Page() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 mb-6">
                 {posts?.map((post: any, i: number) => (
                   <Link
-                    href={`/blog/${post.url}`}
+                    href={`/news/${post.url}`}
                     key={i}
                     title={`Przejdź do artykułu ${post.title}`}
                     className="group relative aspect-square h-max flex flex-col hover:bg-[#74B901] hover:bg-opacity-30 hover:p-1 duration-300 ease-in-out"
@@ -145,7 +145,7 @@ export const metadata: Metadata = {
     "Dołącz do platformy z pracą zdalną Quixy.pl znajdź pracę lub zlecenia, u nas pracodawcy poszukują ludzi do pracy zdalnej.",
   openGraph: {
     type: "website",
-    url: "https://quixy.pl/blog",
+    url: "https://quixy.pl/news",
     title: "Quixy | Czytaj - Znajdź pracę zdalną, biznes, AI",
     description:
       "Dołącz do platformy z pracą zdalną Quixy.pl znajdź pracę lub zlecenia, u nas pracodawcy poszukują ludzi do pracy zdalnej.",

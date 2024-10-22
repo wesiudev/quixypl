@@ -27,7 +27,7 @@ const BlogPostList = ({ posts }: { posts: any }) => {
       <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4">
         {currentIdeas?.map((post: any, i: number) => (
           <Link
-            href={`/blog/${post.url}`}
+            href={`/news/${post.url}`}
             key={i}
             title={`Przejdź do artykułu ${post.title}`}
             className="rounded-lg group relative aspect-square h-max flex flex-col duration-300 ease-in-out"

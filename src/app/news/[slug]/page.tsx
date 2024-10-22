@@ -34,10 +34,10 @@ export default async function Page({ params }: { params: any }) {
             <div className="text-black font-bold mx-2">|</div>
           </div>
           <Link
-            href="/blog"
+            href="/news"
             className="hover:underline text-sm md:text-base lg:text-lg xl:text-xl w-max"
           >
-            blog
+            news
           </Link>
           <div className="flex items-center text-sm md:text-base lg:text-lg xl:text-xl w-max">
             <div className="mx-2 text-black font-bold">|</div>
