@@ -28,7 +28,9 @@ export default async function Page({
   );
   return (
     <div>
-      <UserStickyTop slugData={slug} />
+      <div className="fixed top-0 left-0">
+        <UserStickyTop slugData={slug} />
+      </div>
       <div className="container relative mx-auto">
         {/* Breadcrumbs with Icons */}
         <div className="px-4  bg-white py-6 grid grid-cols-1 h-max font-coco w-full mx-auto relative z-50">

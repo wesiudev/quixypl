@@ -106,7 +106,22 @@ export default async function Page({ params }: { params: any }) {
           </Link>
         </div>
       </div>
-
+      <div className="px-4 bg-white w-full mb-12">
+        <div className="flex flex-col container mx-auto">
+          <div className="">
+            <h2
+              style={{ lineHeight: 1.5 }}
+              className="text-black font-gotham text-xl lg:text-3xl my-12"
+            >
+              {content?.informal_title_plural}{" "}
+              <span className="bg-gradient-to-r from-primary to-cta text-white p-2 ml-1 rounded-lg">
+                w Quixy Talent&trade;
+              </span>
+            </h2>{" "}
+            <TalentList categoryTalents={categoryTalents} />
+          </div>
+        </div>
+      </div>
       {/* Subcategories Section */}
       <div className="bg-white px-4 container mx-auto">
         {slug?.data?.length > 0 && (
@@ -137,22 +152,6 @@ export default async function Page({ params }: { params: any }) {
       </div>
       <JobOffers categoryUrl={params.category} content={content} />
 
-      <div className="px-4 bg-white w-full mb-12">
-        <div className="flex flex-col container mx-auto">
-          <div className="">
-            <h2
-              style={{ lineHeight: 1.5 }}
-              className="text-black font-gotham text-xl lg:text-3xl my-12"
-            >
-              {content?.informal_title_plural}{" "}
-              <span className="bg-gradient-to-r from-primary to-cta text-white p-2 ml-1 rounded-lg">
-                w Quixy Talent&trade;
-              </span>
-            </h2>{" "}
-            <TalentList categoryTalents={categoryTalents} />
-          </div>
-        </div>
-      </div>
       <div className="bg-white w-full px-4">
         <div className="flex flex-col lg:flex-row gap-6 rounded-3xl container mx-auto">
           <section className="text-left w-full lg:pr-24">

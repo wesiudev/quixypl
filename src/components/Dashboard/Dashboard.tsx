@@ -441,7 +441,7 @@ export default function Dashboard() {
                         </div>
                       )}
 
-                      {user?.seek && user?.seek !== "ask" && (
+                      {(user?.seek || user?.seek === "ask") && (
                         <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-3">
                           Opis użytkownika
                         </h2>
@@ -461,57 +461,102 @@ export default function Dashboard() {
                 )}
               </div>
             </div>
-            {user?.seek !== "ask" && (
-              <div
-                className={`${
-                  !user?.configured && (user?.seek === "ask" || !user?.seek)
-                    ? "hidden"
-                    : ""
-                } bg-white mb-3 rounded-xl h-max w-full`}
-              >
-                <h2 className="w-full px-3 lg:px-6 py-3 bg-gradient-to-r from-primary to-cta text-3xl lg:text-5xl text-white  drop-shadow-lg font-gotham mb-3 rounded-t-xl">
-                  {user?.seek && user?.seek !== "ask" && "Portfolio"}
-                  {!user?.seek && user?.seek !== "ask" && "Twoje oferty pracy"}
-                </h2>
-                {user?.projects?.length === 0 &&
-                  user?.seek !== "ask" &&
-                  user?.seek && (
-                    <div className="text-lg text-black px-3 lg:px-6 pb-3 lg:pb-6 lg:pt-3">
-                      Nie dodano żadnych projektów do portfolio - możesz tego
-                      dokonać{" "}
-                      <button
-                        onClick={() =>
-                          dispatch(set_modals({ ...modals, config: true }))
-                        }
-                        className="text-primary hover:no-underline underline"
-                      >
-                        klikając tutaj
-                      </button>{" "}
-                    </div>
-                  )}
-                {!user?.projects?.length &&
-                  user?.seek !== "ask" &&
-                  !user?.seek && (
-                    <div className="text-lg text-black font-light font-coco px-3 lg:px-6 pb-3 lg:pb-6">
-                      Nie dodano żadnych ofert pracy - przeprowadź ⚡
-                      <b>Szybką Rekrutację</b>
-                      <Link
-                        href="/dashboard/add_job_offer"
-                        className="text-primary font-bold hover:no-underline underline flex items-center"
-                      >
-                        Dodaj ofertę pracy
-                      </Link>{" "}
-                    </div>
-                  )}
-                {user?.projects?.length > 0 && (
-                  <div className="px-3">
-                    {user?.projects?.map((project: IProject, i: any) => (
-                      <ProjectCard key={i} project={project} />
-                    ))}
+
+            <div
+              className={`${
+                !user?.configured && (user?.seek === "ask" || !user?.seek)
+                  ? "hidden"
+                  : ""
+              } bg-white mb-3 rounded-xl h-max w-full`}
+            >
+              <h2 className="w-full px-3 lg:px-6 py-3 bg-gradient-to-r from-primary to-cta text-3xl lg:text-5xl text-white  drop-shadow-lg font-gotham mb-3 rounded-t-xl">
+                {user?.seek && "Portfolio"}
+                {!user?.seek && "Twoje oferty pracy"}
+              </h2>
+              {user?.projects?.length === 0 &&
+                user?.seek !== "ask" &&
+                user?.seek && (
+                  <div className="text-lg text-black px-3 lg:px-6 pb-3 lg:pb-6 lg:pt-3">
+                    Nie dodano żadnych projektów do portfolio - możesz tego
+                    dokonać{" "}
+                    <button
+                      onClick={() =>
+                        dispatch(set_modals({ ...modals, config: true }))
+                      }
+                      className="text-primary hover:no-underline underline"
+                    >
+                      klikając tutaj
+                    </button>{" "}
                   </div>
                 )}
-              </div>
-            )}
+              {!user?.projects?.length && !user?.seek && (
+                <div className="text-lg text-black font-light font-coco px-3 lg:px-6 pb-3 lg:pb-6">
+                  Nie dodano żadnych ofert pracy - przeprowadź ⚡
+                  <b>Szybką Rekrutację</b>
+                  <Link
+                    href="/dashboard/add_job_offer"
+                    className="text-primary font-bold hover:no-underline underline flex items-center"
+                  >
+                    Dodaj ofertę pracy
+                  </Link>{" "}
+                </div>
+              )}
+              {user?.projects?.length > 0 && (
+                <div className="px-3">
+                  {user?.projects?.map((project: IProject, i: any) => (
+                    <ProjectCard key={i} project={project} />
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div
+              className={`${
+                !user?.configured && !user?.seek ? "hidden" : ""
+              } bg-white mb-3 rounded-xl h-max w-full`}
+            >
+              <h2 className="w-full px-3 lg:px-6 py-3 bg-gradient-to-r from-primary to-cta text-3xl lg:text-5xl text-white  drop-shadow-lg font-gotham mb-3 rounded-t-xl">
+                {user?.seek && user?.seek !== "ask" && "Portfolio"}
+                {!user?.seek && user?.seek !== "ask" && "Twoje oferty pracy"}
+              </h2>
+              {user?.projects?.length === 0 &&
+                user?.seek !== "ask" &&
+                user?.seek && (
+                  <div className="text-lg text-black px-3 lg:px-6 pb-3 lg:pb-6 lg:pt-3">
+                    Nie dodano żadnych projektów do portfolio - możesz tego
+                    dokonać{" "}
+                    <button
+                      onClick={() =>
+                        dispatch(set_modals({ ...modals, config: true }))
+                      }
+                      className="text-primary hover:no-underline underline"
+                    >
+                      klikając tutaj
+                    </button>{" "}
+                  </div>
+                )}
+              {!user?.projects?.length &&
+                user?.seek !== "ask" &&
+                !user?.seek && (
+                  <div className="text-lg text-black font-light font-coco px-3 lg:px-6 pb-3 lg:pb-6">
+                    Nie dodano żadnych ofert pracy - przeprowadź ⚡
+                    <b>Szybką Rekrutację</b>
+                    <Link
+                      href="/dashboard/add_job_offer"
+                      className="text-primary font-bold hover:no-underline underline flex items-center"
+                    >
+                      Dodaj ofertę pracy
+                    </Link>{" "}
+                  </div>
+                )}
+              {user?.projects?.length > 0 && (
+                <div className="px-3">
+                  {user?.projects?.map((project: IProject, i: any) => (
+                    <ProjectCard key={i} project={project} />
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       ) : (
