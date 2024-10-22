@@ -28,8 +28,8 @@ export default async function Page({
   );
   return (
     <>
+      <UserStickyTop slugData={slug} />
       <div className="container relative mx-auto">
-        <UserStickyTop slugData={slug} />
         {/* Breadcrumbs with Icons */}
         <div className="px-4  bg-white py-6 grid grid-cols-1 h-max font-coco w-full mx-auto relative z-50">
           <div className="items-end flex justify-between w-full text-sm bg-white !text-black relative z-50">

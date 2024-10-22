@@ -26,8 +26,8 @@ export default async function Page({
 
   return (
     <>
-      <div className="container relative mx-auto">
-        <CompanyStickyTop slugData={slug} />
+      <CompanyStickyTop slugData={slug} />
+      <div className="container relative mx-auto z-0">
         {/* Breadcrumbs with Icons */}
         <div className="px-4  bg-white py-6 grid grid-cols-1 h-max font-coco w-full mx-auto relative z-50">
           <div className="items-end flex justify-between w-full text-sm bg-white !text-black relative z-50">
@@ -185,7 +185,7 @@ export default async function Page({
           )}
         </div>
       </div>
-      <div className="container mx-auto py-12 bg-white px-4">
+      <div className="container mx-auto py-12 bg-white px-4 z-0">
         <div className="bg-white relative overflow-hidden">
           <div className="bg-gradient-to-r from-primary/40 to-cta/40 text-xl lg:text-3xl mx-auto rounded-xl">
             <h2 className="text-white font-gotham w-full text-center px-2 py-1 rounded-t-xl bg-gradient-to-r from-primary to-cta">
