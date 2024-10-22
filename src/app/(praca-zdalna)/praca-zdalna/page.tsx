@@ -302,7 +302,7 @@ export default async function Page() {
               Klienci Quixy Talent&trade;
             </span>
           </h2>
-          <TalentList categoryTalents={categoryCompanies} />
+          <TalentList categoryTalents={categoryCompanies} client={true} />
         </div>
         <CallToActionSection />
         <SpecialistsCategoriesSection />

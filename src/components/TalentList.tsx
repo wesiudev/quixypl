@@ -5,7 +5,7 @@ import Pagination from "./pagination/Pagination";
 import Image from "next/image";
 import { TfiFlagAlt } from "react-icons/tfi";
 
-const TalentList: React.FC<any> = ({ categoryTalents }) => {
+const TalentList: React.FC<any> = ({ categoryTalents, client }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6); // Initially, 6 items per page
 
@@ -31,7 +31,7 @@ const TalentList: React.FC<any> = ({ categoryTalents }) => {
           currentTalents?.map((talent: any) => (
             <Link
               key={talent?.uid}
-              href={`/talent/${talent.pseudo}`}
+              href={`/${client ? "company" : "talent"}/${talent.pseudo}`}
               className="rounded-xl flex p-3 border-2 border-gray-500/30 hover:shadow-md duration-200 hover:scale-[1.03] hover:shadow-cta bg-white"
             >
               {talent?.photoURL ? (
