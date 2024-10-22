@@ -162,7 +162,10 @@ export async function pushAssistantMessage(data, uid) {
     return userDocRef;
   }
 }
-
+export async function deleteJobOffer(jobOfferId) {
+  const jobOfferRef = doc(db, "job_offers", jobOfferId);
+  await deleteDoc(jobOfferRef);
+}
 export async function createAIChat(data) {
   const chatId = uuidv4();
   const productDocRef = doc(collection(db, "chats"), chatId);

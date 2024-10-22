@@ -1,14 +1,12 @@
 "use client";
 import htmlToDraft from "html-to-draftjs";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { EditorState, convertToRaw, ContentState } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import { toast } from "react-toastify";
 import { updateContent, updateDocument } from "@/firebase";
-import { render } from "@react-three/fiber";
 import { polishToEnglish } from "../../../utils/polishToEnglish";
 import { generateDescription } from "../../../utils/generateDescription";
 import { EditorProps } from "react-draft-wysiwyg";

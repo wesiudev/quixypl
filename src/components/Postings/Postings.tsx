@@ -1,5 +1,4 @@
 "use client";
-import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa6";
@@ -8,7 +7,11 @@ import { JobPosting } from "@/types";
 import { updateJobOffer, updateUser } from "@/firebase";
 import { useState } from "react";
 import { setUser } from "@/redux/slices/user";
-
+import "quill/dist/quill.snow.css";
+import "moment/locale/pl";
+import { toast } from "react-toastify";
+import Posting from "./Posting";
+import { set_modals } from "@/redux/slices/modalsopen";
 interface IProjectImage {
   src: string;
   desc: string;
@@ -33,17 +36,23 @@ export interface IProject {
   link: string;
 }
 
-const getExpirationColor = (expirationTime: number, extraDays: number) => {
-  const expirationDate = moment(expirationTime).add(extraDays, "days");
-  return expirationDate.isBefore(moment()) ? "text-red-500" : "text-cta";
-};
 const JobOfferList = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.user);
   const [loading, setLoading] = useState(false);
+  const { modals } = useSelector((state: any) => state.modals);
   const pay = (jobOffer: JobPosting) => {
     setLoading(true);
-    if (user?.tokens < jobOffer.price) return setLoading(false);
+    if (user?.tokens < jobOffer.price) {
+      return (
+        dispatch(set_modals({ ...modals, quixies: true })),
+        setLoading(false),
+        toast.error("Niewystarczająca ilość Quixies", {
+          position: "top-right",
+          autoClose: 5000,
+        })
+      );
+    }
     updateJobOffer(jobOffer.id, { isPaid: true });
     updateUser(user.uid, {
       tokens: user.tokens - jobOffer.price,
@@ -81,101 +90,18 @@ const JobOfferList = () => {
   }
   return (
     <div className="flex flex-col w-full">
-      <h2 className="shadow-sm sticky top-0 text-black p-3 px-6 lg:p-6 bg-white font-bold font-coco text-lg sm:text-3xl">
+      <h2 className="z-50 shadow-sm sticky top-0 text-black p-3 px-6 lg:p-6 bg-white font-bold font-coco text-lg sm:text-3xl">
         Twoje Oferty Pracy
       </h2>
-      <div className="bg-gray-200 min-h-screen grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6 p-6">
+      <div className="bg-gray-200 min-h-screen grid grid-cols-1 2xl:grid-cols-2 gap-6 p-6">
         {user?.job_offers?.map((jobOffer: JobPosting, i: number) => (
-          <div
+          <Posting
             key={i}
-            className="bg-white rounded-lg shadow-md p-4 h-max font-coco"
-          >
-            <h3 className="text-lg font-bold text-black mb-2">
-              {jobOffer.name}
-            </h3>
-            <h2 className="text-lg mt-2 text-black font-light">
-              Opis stanowiska
-            </h2>
-            <p className="text-sm text-zinc-800 mb-4">{jobOffer.description}</p>
-            <h2 className="text-lg mt-2 text-black font-light">Wymagania</h2>
-            <p className="text-sm text-zinc-800 mb-4">
-              {jobOffer.requirements}
-            </p>
-
-            <div className="flex flex-col font-gotham mb-4 text-black">
-              {jobOffer.creationTime && (
-                <>
-                  <h2 className="font-semibold">Dzień dodania</h2>
-                  <span className="text-primary">
-                    {moment(jobOffer.creationTime).format(
-                      "DD.MM.YYYY hh:mm:ss"
-                    )}
-                  </span>
-                </>
-              )}
-              {jobOffer.expirationTime && (
-                <>
-                  <h2 className="font-semibold mt-2">Dzień wygaśnięcia</h2>
-                  {jobOffer.expirationTime && (
-                    <span
-                      className={getExpirationColor(jobOffer.expirationTime, 0)}
-                    >
-                      {moment(jobOffer.creationTime)
-                        .add(jobOffer.days, "days")
-                        .add(0, "days")
-                        .format("DD.MM.YYYY hh:mm:ss")}
-                    </span>
-                  )}
-                </>
-              )}
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 text-black">
-              {jobOffer.phone && (
-                <p className="text-sm col-span-1">
-                  <strong>Telefon:</strong> <br /> {jobOffer.phone}
-                </p>
-              )}
-              {jobOffer.email && (
-                <p className="text-xs col-span-1">
-                  <strong>Email:</strong> <br /> {jobOffer.email}
-                </p>
-              )}
-              <p className="text-sm col-span-1">
-                <strong>Wynagrodzenie:</strong> <br /> {jobOffer.salary} (
-                {jobOffer.salaryValue})
-              </p>
-              <div className="text-sm col-span-1">
-                <strong>Cena:</strong> <br /> {jobOffer.price} 💎
-                <p
-                  className={`${
-                    jobOffer.isPaid ? "text-green-500" : "text-red-500"
-                  } text-sm mb-2`}
-                >
-                  {jobOffer.isPaid ? "Opłacono" : "Nie opłacono"}
-                </p>
-                {!jobOffer.isPaid && (
-                  <button
-                    disabled={loading}
-                    onClick={() => pay(jobOffer)}
-                    className="bg-gradient-to-r from-primary to-cta px-2 py-0.5 rounded-md text-white"
-                  >
-                    Opublikuj{" "}
-                    {loading && (
-                      <div className="loading-lg loading-infinity"></div>
-                    )}
-                  </button>
-                )}
-                {jobOffer.isPaid && (
-                  <Link
-                    href="/dashboard/applications"
-                    className="bg-gradient-to-r from-primary to-cta px-2 py-0.5 rounded-md text-white"
-                  >
-                    Przeglądaj aplikacje
-                  </Link>
-                )}
-              </div>
-            </div>
-          </div>
+            jobOffer={jobOffer}
+            pay={pay}
+            loading={loading}
+            setLoading={setLoading}
+          />
         ))}
       </div>
     </div>

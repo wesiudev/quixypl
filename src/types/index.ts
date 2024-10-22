@@ -118,7 +118,7 @@ export type Comment = {
 };
 export interface JobListing {
   days: number;
-  description: string;
+  description: any;
   email: string;
   isPaid: boolean;
   location: string;

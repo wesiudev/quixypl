@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { collection, onSnapshot, getFirestore } from "firebase/firestore";
 import "moment/locale/pl";
 import Link from "next/link";
-import { FaLongArrowAltLeft } from "react-icons/fa";
+import { FaChevronLeft, FaLongArrowAltLeft } from "react-icons/fa";
 import Confetti from "react-confetti";
 import { ReactSketchCanvas } from "react-sketch-canvas";
 import { useSelector } from "react-redux";
@@ -22,46 +22,39 @@ export default function Leads() {
   return (
     <>
       <div className="bg-gray-600 h-max w-full font-sans">
-        <Link
-          href="/admin/leads"
-          className="bg-black py-3 px-6 text-white font-bold text-lg flex items-center"
-        >
-          <FaLongArrowAltLeft className="mr-2 text-xl" />
-          Powrót
-        </Link>
+        <div className="w-full justify-between bg-gradient-to-r from-primary to-cta py-3 px-6 text-white font-bold text-lg flex items-center">
+          <Link href="/dashboard" className="flex items-center">
+            <FaChevronLeft className="mr-2 text-xl" />
+            Powrót
+          </Link>
+          <div className="flex flex-col text-white pl-12">
+            <h2 className="text-sm sm:text-base">Aplikacje</h2>
+            <p className="text-xs sm:text-base ">
+              Tu znajdą się wszystkie aplikacje na twoje oferty pracy.
+            </p>
+          </div>
+        </div>
         <div className="font-gotham font-light grid grid-cols-2 sm:grid-cols-3 gap-2 p-6 !text-white">
           <button
             onClick={() => setFilter("new")}
-            className={`bg-black p-1 border-2 border-transparent border-dashed ${
-              filter === "new" && "border-white"
+            className={` p-1 border-2 border-transparent border-dashed ${
+              filter === "new"
+                ? "bg-gradient-to-r text-white from-primary to-cta"
+                : "bg-gradient-to-r text-white from-primary/50 to-cta/50"
             }`}
           >
             Nowe
           </button>
           <button
             onClick={() => setFilter("old")}
-            className={`bg-black p-1 border-2 border-transparent border-dashed ${
-              filter === "old" && "border-white"
+            className={`bg-gradient-to-r from-primary to-cta text-white p-1 border-2 border-transparent border-dashed ${
+              filter === "old"
+                ? "bg-gradient-to-r text-white from-primary to-cta"
+                : "bg-gradient-to-r text-white from-primary/50 to-cta/50"
             }`}
           >
             Sprawdzone
           </button>{" "}
-          <button
-            onClick={() => setFilter("signed")}
-            className={`bg-black p-1 border-2 border-transparent border-dashed ${
-              filter === "signed" && "border-white"
-            }`}
-          >
-            Podpisane
-          </button>{" "}
-          <button
-            onClick={() => setFilter("trashcan")}
-            className={`bg-black p-1 border-2 border-transparent border-dashed ${
-              filter === "trashcan" && "border-white"
-            }`}
-          >
-            🚽
-          </button>
         </div>
         <div className="px-6 py-3 grid grid-cols-1 xl:grid-cols-3 2xl:grid-cols-4 font-sans gap-6 min-h-screen text-white">
           {user?.applications?.map((lead: any, i: any) => (

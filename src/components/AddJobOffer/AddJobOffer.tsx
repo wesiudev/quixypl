@@ -3,14 +3,13 @@ import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { collection, addDoc } from "firebase/firestore";
 import Link from "next/link";
-import { addJobOffer, auth, db, updateUser } from "@/firebase";
+import { addJobOffer, updateUser } from "@/firebase";
 import { toast } from "react-toastify";
 import { FaChevronLeft } from "react-icons/fa";
 import jobs from "../../../public/14.09.2024.json";
 import StepThree from "./Step3";
 import StepTwo from "./Step2";
 import StepOne from "./Step";
-import Loading from "@/app/loading";
 import { JobListing } from "@/types";
 import { useRouter } from "next/navigation";
 import ReactConfetti from "react-confetti";
@@ -19,6 +18,22 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/slices/user";
 export default function AddJobOffer() {
+  const InitialData = {
+    days: 1,
+    description: "",
+    email: "",
+    isPaid: false,
+    location: "",
+    name: "",
+    phone: "",
+    price: 24.41,
+    requirements: "",
+    salary: "",
+    salaryValue: "",
+    tags: [],
+    title: "",
+    website: "",
+  };
   const { user } = useSelector((state: any) => state.user);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<JobListing>(InitialData);
@@ -82,8 +97,9 @@ export default function AddJobOffer() {
         setUser({ ...user, job_offers: [...user.job_offers, formData] })
       );
       toast.success("Oferta pracy dodana pomyślnie!");
+      router.push("/dashboard/my_postings");
     } catch (error: any) {
-      toast.error(error.message || "Wystąpił błąd podczas dodawania oferty.");
+      toast.error("Wystąpił błąd podczas dodawania oferty.");
     }
   };
 
@@ -91,10 +107,13 @@ export default function AddJobOffer() {
   const prevStep = () => setCurrentStep((prev) => prev - 1);
 
   return (
-    <div className="relative overflow-hidden min-h-screen w-full flex flex-col bg-gray-200 rounded-lg hover:shadow-md shadow-cyan items-center">
+    <div className="relative overflow-hidden min-h-screen w-full flex flex-col bg-gradient-to-r from-primary to-cta items-center">
       {isAnimating && <ReactConfetti />}
 
-      <div className="w-[100%] max-w-[40rem] h-max bg-white z-50 relative p-6 lg:p-10 mt-12 ">
+      <div
+        style={{ boxShadow: "0px 0px 5px black" }}
+        className="w-[100%] max-w-[55rem] h-max bg-white z-50 relative p-6 lg:p-10 my-12 rounded-xl"
+      >
         <h1 className="text-xl md:text-3xl font-gotham text-zinc-800">
           Dodaj ofertę pracy
         </h1>
@@ -146,6 +165,8 @@ export default function AddJobOffer() {
             handleSubmit={handleSubmit}
             setIsAnimating={setIsAnimating}
             isAnimating={isAnimating}
+            isSent={isSent}
+            setIsSent={setIsSent}
           />
         </div>
         <Link
@@ -159,20 +180,3 @@ export default function AddJobOffer() {
     </div>
   );
 }
-
-const InitialData = {
-  days: 1,
-  description: "",
-  email: "",
-  isPaid: false,
-  location: "",
-  name: "",
-  phone: "",
-  price: 24.41,
-  requirements: "",
-  salary: "",
-  salaryValue: "",
-  tags: [],
-  title: "",
-  website: "",
-};

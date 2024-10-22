@@ -343,3 +343,58 @@ html {
 .step.active + .step-separator {
   background-color: #2196f3;
 }
+.toolbarClassName {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  padding: 10px;
+}
+
+.wrapperClassName {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  padding: 10px;
+}
+
+.editorClassName {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  padding: 2px;
+}
+.controls {
+  display: flex;
+  border: 1px solid #ccc;
+  border-top: 0;
+  padding: 10px;
+}
+
+.controls-right {
+  margin-left: auto;
+}
+
+.state {
+  margin: 10px 0;
+  font-family: monospace;
+}
+
+.state-title {
+  color: #999;
+  text-transform: uppercase;
+}
+.quill-editor-container {
+  margin: 20px;
+}
+
+.output-section {
+  margin-top: 20px;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

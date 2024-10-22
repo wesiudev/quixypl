@@ -2,7 +2,7 @@ import Image from "next/image";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import moment from "moment";
-import { IProject } from "@/types";
+import { IProject, JobPosting } from "@/types";
 import ProjectCard from "@/components/Dashboard/ImageGenerator/dashboard/ProjectCard";
 import TalentList from "@/components/TalentList";
 import UserStickyTop from "@/components/UserStickyTop";
@@ -10,6 +10,7 @@ import HireButton from "@/components/HireButton/HireButton";
 import { IoLocationOutline } from "react-icons/io5";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 import { getPageContent } from "@/lib/getPageContent";
+import JobOfferCard from "@/components/JobOffer/JobOfferCard";
 
 export default async function Page({
   params,
@@ -167,9 +168,7 @@ export default async function Page({
                     Opis użytkownika
                   </h2>
                   <h3
-                    className={`text-black text-base max-w-2xl my-3 ${
-                      slug?.bio && ""
-                    }`}
+                    className={`text-black text-base my-3 ${slug?.bio && ""}`}
                   >
                     {slug?.bio ? slug?.bio : "Brak opisu..."}
                   </h3>
@@ -188,6 +187,20 @@ export default async function Page({
               <div>
                 {slug?.projects?.map((project: IProject, i: any) => (
                   <ProjectCard key={i} project={project} isSlug={true} />
+                ))}
+              </div>
+            </div>
+          )}
+          {slug?.job_offers?.length > 0 && (
+            <div className={`rounded-xl h-max w-full mt-3`}>
+              <h2
+                className={`text-3xl text-black drop-shadow-lg font-gotham mb-3`}
+              >
+                Aktywne oferty pracy
+              </h2>
+              <div>
+                {slug?.job_offers?.map((offer: JobPosting, i: any) => (
+                  <JobOfferCard key={i} jobOfferData={offer} />
                 ))}
               </div>
             </div>

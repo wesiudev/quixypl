@@ -8,7 +8,10 @@ import { useRouter } from "next/navigation";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { IProject } from "@/types";
-
+import { setUser } from "@/redux/slices/user";
+import { set_modals } from "@/redux/slices/modalsopen";
+import Link from "next/link";
+import { FaChevronRight } from "react-icons/fa6";
 export default function StepThree({
   formData,
   handleChange,
@@ -21,6 +24,8 @@ export default function StepThree({
   isAnimating,
   setIsAnimating,
   handleSubmit,
+  isSent,
+  setIsSent,
 }: {
   formData: any;
   handleChange: any;
@@ -33,48 +38,49 @@ export default function StepThree({
   isAnimating: any;
   setIsAnimating: any;
   handleSubmit: any;
+  isSent: any;
+  setIsSent: any;
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const [hasErrors, setHasErrors] = useState(false);
 
   const handleRecruitmentStart = async () => {
     const hasEnoughTokens = user.tokens >= formData.price;
     if (!hasEnoughTokens) {
       showToastError("Doładuj Quixies!");
-      showToastSuccess("Zapisano pomyślnie kopię oferty pracy!");
-
+      showToastSuccess("Pomyślnie zapisano ofertę pracy!");
       openTokenModal();
-      return;
     }
-
-    // Proceed to update the job offers
     await updateJobOffers();
   };
   const [saved, setSaved] = useState(false);
   const router = useRouter();
-  // Helper function to handle updating the job offers and user tokens
   const updateJobOffers = async () => {
     try {
       setIsLoading(true);
+
+      // Check if the user has enough tokens
+      const hasEnoughTokens = user.tokens >= formData.price;
 
       // Create new job offer
       const jobOfferId = uuid();
       const newJobOffer = {
         ...formData,
-        isPaid: true,
+        isPaid: hasEnoughTokens, // Set isPaid based on user's token balance
         id: jobOfferId,
         expirationTime: moment().add(formData.days, "days").valueOf(),
         creationTime: Date.now(),
       };
-      setSaved(true);
+
       // Update job offers list for the user
       const updatedJobOffers = user.job_offers
         ? [...user.job_offers, newJobOffer]
         : [newJobOffer];
 
-      // Deduct tokens
-      const updatedTokens = user.tokens - formData.price;
+      // Calculate updated tokens if user has enough
+      const updatedTokens = hasEnoughTokens
+        ? user.tokens - formData.price
+        : user.tokens;
 
       // Update user in the database
       await updateUser(user.uid, {
@@ -84,29 +90,29 @@ export default function StepThree({
         router.push("/dashboard/my_postings");
       });
 
-      // Dispatch updated user state
-      dispatch({
-        type: "SET_USER",
-        payload: {
+      // Dispatch updated user state to Redux
+      dispatch(
+        setUser({
           ...user,
           job_offers: updatedJobOffers,
           tokens: updatedTokens,
-        },
-      });
+        })
+      );
 
-      showToastSuccess("Job offer added successfully!");
       setIsAnimating(true);
     } catch (error) {
-      console.error("Error updating job offers:", error);
-      showToastError("Failed to update job offers.");
+      console.error("Error", error);
+      showToastError("Failed to add job offer.");
     } finally {
       setIsLoading(false);
     }
   };
 
+  const { modals } = useSelector((state: any) => state.modals);
   // Open token modal for insufficient tokens
+
   const openTokenModal = () => {
-    dispatch({ type: "OPEN_MODAL", payload: { modalType: "TOKEN_MODAL" } });
+    dispatch(set_modals({ ...modals, quixies: true }));
   };
 
   // Helper functions to show toast notifications
@@ -129,28 +135,28 @@ export default function StepThree({
             type="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="Enter contact email"
+            placeholder="Wpisz email"
           />
           <InputField
             id="phone"
             label="Phone"
             value={formData.phone}
             onChange={handleChange}
-            placeholder="Enter phone number"
+            placeholder="Wpisz numer telefonu (opcjonalnie)"
           />
           <InputField
             id="website"
             label="Website"
             value={formData.website}
             onChange={handleChange}
-            placeholder="Enter website (optional)"
+            placeholder="Dodaj stronę internetową (opcjonalnie)"
           />
-          {formData.website && formData.phone && formData.email && (
+          {formData.email && (
             <div className="sticky bottom-0 flex flex-col bg-white py-2 rounded-xl">
-              <div className="bg-gradient-to-r from-primary to-cta text-white rounded-xl p-4 lg:p-6">
+              <div className="bg-gradient-to-r from-primary via-cta to-primary text-white rounded-xl p-4 lg:p-6">
                 <label htmlFor="days-range" className="font-bold">
-                  For how many days do you want to post the job? (
-                  {formData.days} days)
+                  Przez jaki okres czasu oferta ma być wyświetlana? (
+                  {formData.days} dni)
                 </label>
                 <input
                   id="days-range"
@@ -168,7 +174,7 @@ export default function StepThree({
                   className="w-full mt-2"
                 />
                 <div className="text-lg font-semibold mt-2">
-                  Price: 💎{formData.price?.toFixed(2)}
+                  💎{formData.price?.toFixed(2)}
                 </div>
               </div>
             </div>
@@ -179,18 +185,29 @@ export default function StepThree({
               onClick={prevStep}
               className="p-2 bg-black text-white rounded-md hover:bg-cta"
             >
-              Back
+              Powrót
             </button>
-            <button
-              disabled={isLoading}
-              onClick={async () => {
-                setIsAnimating(true);
-                await handleRecruitmentStart();
-              }}
-              className="p-2 bg-gradient-to-r from-primary to-cta py-0.5 text-white rounded-md"
-            >
-              {isLoading ? "Loading..." : "Add Job Offer"}
-            </button>
+
+            {isSent && (
+              <Link
+                className="p-2 bg-gradient-to-r from-primary via-cta to-primary py-0.5 text-white rounded-md flex items-center"
+                href="/dashboard/applications"
+              >
+                Już dodano, przejdź do aplikacji <FaChevronRight />
+              </Link>
+            )}
+            {!isSent && (
+              <button
+                onClick={async () => {
+                  setIsAnimating(true);
+                  setIsSent(true);
+                  await handleRecruitmentStart();
+                }}
+                className="p-2 bg-gradient-to-r from-primary via-cta to-primary py-0.5 text-white rounded-md"
+              >
+                {isLoading ? "Wczytywanie..." : "Dodaj ofertę pracy"}
+              </button>
+            )}
           </div>
         </div>
       )}

@@ -27,55 +27,50 @@ export default function StepTwo({
             <div className="flex flex-row items-center flex-wrap">
               <div className={"mb-2 flex items-center flex-wrap w-full"}>
                 <div className="w-full">
-                  {!user?.seek && user?.seek !== "ask" && (
-                    <div>
-                      <h3 className="font-gotham font-light text-black drop-shadow-lg mt-2">
-                        Nazwa Firmy/Działalności/Imię rekrutera
-                      </h3>
-                      <input
-                        className="border border-primary rounded-md p-2 text-black font-light w-full"
-                        value={formData?.name}
-                        onChange={(e) => {
-                          setFormData({
-                            ...formData,
-                            name: e.target.value,
-                          });
-                        }}
-                        placeholder="Kto dodaje ofertę?"
-                      />
-                    </div>
-                  )}
+                  <div>
+                    <h3 className="font-gotham font-light text-black drop-shadow-lg mt-2">
+                      Nazwa Firmy/Działalności/Imię rekrutera
+                    </h3>
+                    <input
+                      className="border border-primary rounded-md p-2 text-black font-light w-full"
+                      value={formData?.name}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          name: e.target.value,
+                        });
+                      }}
+                      placeholder="Kto dodaje ofertę?"
+                    />
+                  </div>
+
                   <div className="mt-3"></div>
 
-                  {!user?.seek && user?.seek !== "ask" && (
-                    <div>
-                      <h3 className="font-gotham font-light text-black drop-shadow-lg">
-                        Rodzaj Wynagrodzenia
-                      </h3>
-                      <select
-                        value={formData?.salary || ""}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            salary: e.target.value,
-                          })
-                        }
-                        className="border border-primary rounded-md p-2 text-black w-full !font-gotham font-light"
-                      >
-                        <option value="Nie podano">Rodzaj wynagrodzenia</option>
-                        <option value="Stawka godzinowa">
-                          Stawka godzinowa
-                        </option>
-                        <option value="Stawka miesięczna">
-                          Stawka miesięczna
-                        </option>
-                        <option value="Per Milestone">Per Milestone</option>
-                        <option value="Prowizja">Prowizja</option>
-                        <option value="Akcje i udziały">Akcje i udziały</option>
-                        <option value="Inne">Inne</option>
-                      </select>
-                    </div>
-                  )}
+                  <div>
+                    <h3 className="font-gotham font-light text-black drop-shadow-lg">
+                      Rodzaj Wynagrodzenia
+                    </h3>
+                    <select
+                      value={formData?.salary || ""}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          salary: e.target.value,
+                        })
+                      }
+                      className="border border-primary rounded-md p-2 text-black w-full !font-gotham font-light"
+                    >
+                      <option value="Nie podano">Rodzaj wynagrodzenia</option>
+                      <option value="Stawka godzinowa">Stawka godzinowa</option>
+                      <option value="Stawka miesięczna">
+                        Stawka miesięczna
+                      </option>
+                      <option value="Per Milestone">Per Milestone</option>
+                      <option value="Prowizja">Prowizja</option>
+                      <option value="Akcje i udziały">Akcje i udziały</option>
+                      <option value="Inne">Inne</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -86,7 +81,7 @@ export default function StepTwo({
               label="Wynagrodzenie"
               value={formData.salaryValue}
               onChange={handleChange}
-              placeholder="Wpisz wynagrodzenie"
+              placeholder="Opisz wynagrodzenie"
             />
           </div>
           <div className="flex justify-between mt-4">

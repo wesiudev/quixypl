@@ -159,9 +159,7 @@ export default async function Page({
                     Opis firmy
                   </h2>
                   <h3
-                    className={`text-black text-base max-w-2xl my-3 ${
-                      slug?.bio && ""
-                    }`}
+                    className={`text-black text-base my-3 ${slug?.bio && ""}`}
                   >
                     {slug?.bio ? slug?.bio : "Brak opisu..."}
                   </h3>

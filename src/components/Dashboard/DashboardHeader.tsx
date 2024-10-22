@@ -171,42 +171,37 @@ export default function DashboardHeader() {
         </div>
         <div className="font-coco px-6 mt-12">
           <h2 className="text-3xl text-black font-gotham">Praca Zdalna</h2>
-          {user?.seek && (
-            <div>
-              <Link
-                href="/dashboard/search"
-                onClick={() => setMenuShow(false)}
-                className="flex items-center text-xl text-black drop-shadow-xl mt-3"
-              >
-                <FaMagnifyingGlass className="mr-2 text-primary" /> Szukaj pracy
-              </Link>
-              <Link
-                href="/dashboard/applications"
-                onClick={() => setMenuShow(false)}
-                className="flex items-center text-xl text-black drop-shadow-xl mt-3"
-              >
-                <FaList className="mr-2 text-primary" /> Moje aplikacje
-              </Link>
-            </div>
-          )}
-          {!user?.seek && (
-            <>
-              <Link
-                href="/dashboard/add_job_offer"
-                onClick={() => setMenuShow(false)}
-                className="flex items-center text-xl text-black drop-shadow-xl mt-3"
-              >
-                <FaPlus className="mr-2 text-primary" /> Dodaj ofertę pracy
-              </Link>
-              <Link
-                href="/dashboard/my_postings"
-                onClick={() => setMenuShow(false)}
-                className="flex items-center text-xl text-black drop-shadow-xl mt-3"
-              >
-                <FaRocket className="mr-2 text-primary" /> Moje oferty pracy
-              </Link>
-            </>
-          )}
+
+          <div>
+            <Link
+              href="/dashboard/search"
+              onClick={() => setMenuShow(false)}
+              className="flex items-center text-xl text-black drop-shadow-xl mt-3"
+            >
+              <FaMagnifyingGlass className="mr-2 text-primary" /> Szukaj pracy
+            </Link>
+            <Link
+              href="/dashboard/applications"
+              onClick={() => setMenuShow(false)}
+              className="flex items-center text-xl text-black drop-shadow-xl mt-3"
+            >
+              <FaList className="mr-2 text-primary" /> Moje aplikacje
+            </Link>
+          </div>
+          <Link
+            href="/dashboard/add_job_offer"
+            onClick={() => setMenuShow(false)}
+            className="flex items-center text-xl text-black drop-shadow-xl mt-3"
+          >
+            <FaPlus className="mr-2 text-primary" /> Dodaj ofertę pracy
+          </Link>
+          <Link
+            href="/dashboard/my_postings"
+            onClick={() => setMenuShow(false)}
+            className="flex items-center text-xl text-black drop-shadow-xl mt-3"
+          >
+            <FaRocket className="mr-2 text-primary" /> Moje oferty pracy
+          </Link>
         </div>
         {/* <div className="font-coco px-6 mt-12 w-full">
           <h2 className="text-3xl text-black font-gotham">Marketplace</h2>
