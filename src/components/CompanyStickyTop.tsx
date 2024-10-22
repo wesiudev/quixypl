@@ -28,7 +28,7 @@ export default function CompanyStickyTop({ slugData }: { slugData: any }) {
     <div
       className={`${
         (modals.isProjectOpen || modals.currentChat) && "hidden"
-      } px-4 w-full flex justify-center fixed bottom-0 left-1/2 -translate-x-1/2 z-[99999999999999999999999999]  ${
+      } px-4 w-full flex justify-center fixed top-0 left-0 z-[99999999999999999999999999]  ${
         isScrolled
           ? "opacity-100 translate-y-0 duration-500"
           : "translate-y-[30vh] opacity-0 duration-500"
