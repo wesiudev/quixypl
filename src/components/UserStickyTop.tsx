@@ -34,7 +34,6 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
     };
   }, [scrollPosition]);
 
-  const isScrolled = scrollPosition > 100;
   const { modals } = useSelector((state: any) => state.modals);
   const dispatch = useDispatch();
 
@@ -44,11 +43,7 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
         modals.isProjectOpen || modals.currentChat || !isScrollingDown
           ? "-translate-y-[30vh] opacity-0 duration-500 "
           : "opacity-100 translate-y-0 duration-500 "
-      } w-full flex justify-center fixed top-0 left-0 z-[99999999999999999999999999]  ${
-        isScrolled
-          ? "opacity-100 translate-y-0 duration-500"
-          : "-translate-y-[30vh] opacity-0 duration-500"
-      }`}
+      } w-full flex justify-center fixed top-0 left-0 z-[99999999999999999999999999]`}
     >
       <div
         style={{ boxShadow: "0px 0px 5px black" }}

@@ -27,7 +27,7 @@ export default async function Page({
     new Set(slug?.tags?.map((item: any) => item.slugTitle))
   );
   return (
-    <>
+    <div>
       <UserStickyTop slugData={slug} />
       <div className="container relative mx-auto">
         {/* Breadcrumbs with Icons */}
@@ -215,7 +215,7 @@ export default async function Page({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 export async function generateMetadata({ params }: { params: any }) {
