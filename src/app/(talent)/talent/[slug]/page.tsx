@@ -29,7 +29,7 @@ export default async function Page({
   );
   return (
     <div>
-      <div className="fixed top-0 left-0">
+      <div className="fixed top-0 left-0 z-[100] w-full">
         <UserStickyTop slugData={slug} />
       </div>
       <div className="container relative mx-auto">
@@ -118,7 +118,13 @@ export default async function Page({
                 </div>{" "}
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 mt-3">
+              <div
+                className={`grid ${
+                  slug?.tags?.length > 10
+                    ? "grid-cols-1"
+                    : "grid-cols-1 lg:grid-cols-2"
+                }  mt-3`}
+              >
                 <div className="mr-1">
                   <h2 className="w-max rounded-lg text-xl text-black font-gotham mt-3">
                     Specjalizacje
@@ -164,7 +170,7 @@ export default async function Page({
               </div>
               {slug?.bio && (
                 <>
-                  <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-6">
+                  <h2 className="text-xl text-black drop-shadow-lg font-gotham mt-3">
                     Opis użytkownika
                   </h2>
                   <h3
@@ -191,20 +197,28 @@ export default async function Page({
               </div>
             </div>
           )}
-          {slug?.job_offers?.length > 0 && (
-            <div className={`rounded-xl h-max w-full mt-3`}>
-              <h2
-                className={`text-3xl text-black drop-shadow-lg font-gotham mb-3`}
-              >
-                Aktywne oferty pracy
-              </h2>
-              <div>
-                {slug?.job_offers?.map((offer: JobPosting, i: any) => (
-                  <JobOfferCard key={i} jobOfferData={offer} />
-                ))}
+          {slug?.job_offers?.length > 0 &&
+            slug?.job_offers?.filter(
+              (jobOffer: JobPosting, i: number) => jobOffer.isPaid
+            )?.length > 0 && (
+              <div className={`rounded-xl h-max w-full mt-3`}>
+                <h2
+                  className={`text-xl text-black drop-shadow-lg font-gotham mb-3`}
+                >
+                  Aktywne oferty pracy
+                </h2>
+                <div>
+                  {slug?.job_offers?.map((offer: JobPosting, i: any) => (
+                    <div
+                      key={offer.id}
+                      className={`${!offer?.isPaid ? "hidden" : "block"}`}
+                    >
+                      <JobOfferCard key={i} jobOfferData={offer} />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
       </div>
       <div className="container mx-auto py-12 bg-white px-4">

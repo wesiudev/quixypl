@@ -1,20 +1,23 @@
 "use client";
+import { auth } from "@/firebase";
 import { set_modals } from "@/redux/slices/modalsopen";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { FaUser } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function UserStickyTop({ slugData }: { slugData: any }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
-
+  const [user, loading] = useAuthState(auth);
   const handleScroll = () => {
     const currentPosition = window.scrollY;
-
+    const currentScrollPosition = window.scrollY;
     // Compare current position with previous scroll position
-    if (currentPosition > scrollPosition) {
+    if (currentPosition > scrollPosition && currentScrollPosition > 200) {
       setIsScrollingDown(true);
     } else {
       setIsScrollingDown(false);
@@ -68,10 +71,10 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
             )}
             <div className="px-4 ">
               <div className="flex flex-col py-2">
-                <h1 className="flex items-center font-coco text-xl">
+                <h1 className="flex items-center font-coco text-base sm:text-xl">
                   Zatrudnij {slugData?.name}!
                 </h1>
-                <p className="font-bold mb-1">
+                <p className="font-bold mb-1 text-sm sm:text-base">
                   {slugData?.title && slugData?.title}
                 </p>
                 {slugData?.hourRate && (
@@ -84,9 +87,16 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
           </div>
 
           <button
-            onClick={() =>
-              dispatch(set_modals({ ...modals, currentChat: slugData }))
-            }
+            onClick={() => {
+              if (slugData?.uid === user?.uid) {
+                return toast.error("Nie możesz aplikować do samego siebie", {
+                  position: "top-right",
+                  autoClose: 5000,
+                });
+              } else {
+                dispatch(set_modals({ ...modals, currentChat: slugData }));
+              }
+            }}
             className={`flex text-white font-bold font-coco px-3 py-2 min-h-full max-w-[150px] text-sm sm:text-base rounded-br-xl bg-gradient-to-r from-primary to-cta items-center text-center`}
           >
             Kontakt

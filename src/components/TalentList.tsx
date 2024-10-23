@@ -24,7 +24,7 @@ const TalentList: React.FC<any> = ({ categoryTalents, client }) => {
       <div
         className={` ${
           currentTalents.length > 0 &&
-          "w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 px-3"
+          "w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3"
         }`}
       >
         {currentTalents.length > 0 ? (

@@ -60,13 +60,19 @@ export default function Posting({
         <div className="w-full h-full absolute left-0 top-0 bg-black bg-opacity-50" />
       )}
       <div
-        className={`px-2 z-50 rounded-lg absolute top-7 right-12 w-max h-max py-6 bg-zinc-800 flex flex-col items-start space-y-1 duration-500 ease-in-out ${
+        className={`px-2 z-10 rounded-lg absolute top-7 right-12 w-max h-max py-6 bg-zinc-800 flex flex-col items-start space-y-1 duration-500 ease-in-out ${
           !optionsOpen ? "-translate-y-[80px] scale-x-0" : "-translate-y-0"
         }`}
       >
-        <button className="w-full px-4 py-1 text-white bg-white bg-opacity-10 rounded-lg duration-150 hover:bg-opacity-20">
+        {/* <button className="w-full px-4 py-1 text-white bg-white bg-opacity-10 rounded-lg duration-150 hover:bg-opacity-20">
           Edytuj
-        </button>
+        </button> */}
+        <Link
+          href="/dashboard/applications"
+          className="w-full px-4 py-1 text-white bg-white bg-opacity-10 rounded-lg duration-150 hover:bg-opacity-20"
+        >
+          Aplikacje
+        </Link>
         <button
           onClick={() => {
             if (!deleteMenu) {
@@ -101,7 +107,11 @@ export default function Posting({
           <h3 className="font-coco text-lg sm:text-xl font-bold text-black mb-2 pr-6">
             {jobOffer.title}
           </h3>
-          <div className="text-sm col-span-1 font-coco">
+          <div
+            className={`${
+              jobOffer.isPaid ? "hidden" : "block"
+            } text-sm col-span-1 font-coco`}
+          >
             <div className="flex flex-col">
               <div className="flex items-center font-bold">Do zapłaty</div> 💎
               {jobOffer.price}
@@ -138,7 +148,7 @@ export default function Posting({
           <div className="flex items-end justify-end">
             <button
               onClick={() => setOptionsOpen(!optionsOpen)}
-              className={`w-max text-3xl text-white h-full px-2 bg-gradient-to-r from-primary to-cta hover:bg-opacity-20 rounded relative z-50 duration-200 `}
+              className={`w-max text-3xl text-white h-full px-2 bg-gradient-to-r from-primary to-cta hover:bg-opacity-20 rounded relative z-10 duration-200 `}
             >
               <HiOutlineDotsHorizontal
                 className={`${
@@ -147,57 +157,57 @@ export default function Posting({
               />
             </button>
           </div>
-          {jobOffer.creationTime && (
-            <div className="mt-6 flex">
-              <FaUserClock className="text-xl text-gray-600 mr-2 mt-1.5" />
-              <div className="flex flex-col font-coco">
-                <h2 className="font-bold">Dodano</h2>
-                <div className="text-primary text-sm w-max">
-                  {moment(jobOffer.creationTime).fromNow()}
-                </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 w-full gap-3">
+        {jobOffer.creationTime && (
+          <div className="flex p-3 bg-gray-200 rounded-lg">
+            <FaUserClock className="text-xl text-gray-600 mr-2 mt-1.5" />
+            <div className="flex flex-col font-coco text-black">
+              <h2 className="font-bold">Dodano</h2>
+              <div className="text-primary text-sm w-max">
+                {moment(jobOffer.creationTime).fromNow()}
               </div>
             </div>
-          )}
-          {jobOffer.expirationTime && (
-            <div className="flex mt-2">
-              <FaClock className="text-xl text-gray-600 mr-2 mt-1.5" />
-              <div className="flex flex-col font-coco">
-                <h2 className="font-bold">Wygasa</h2>
-                {jobOffer.expirationTime && (
-                  <div
-                    className={`${getExpirationColor(
-                      jobOffer.expirationTime,
-                      0
-                    )} text-sm w-max`}
-                  >
-                    {moment(jobOffer.creationTime)
-                      .add(jobOffer.days, "days")
-                      .add(0, "days")
-                      .fromNow()}
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          <div className="flex mt-2">
-            <FaRocket className="text-xl text-gray-600 mr-2 mt-1.5" />
-            <div className="flex flex-col font-coco">
-              <h2 className="font-bold">Status</h2>
+          </div>
+        )}
+        {jobOffer.expirationTime && (
+          <div className="flex p-3 bg-gray-200 rounded-lg">
+            <FaClock className="text-xl text-gray-600 mr-2 mt-1.5" />
+            <div className="flex flex-col font-coco text-black">
+              <h2 className="font-bold">Wygasa</h2>
               {jobOffer.expirationTime && (
                 <div
-                  className={`${
-                    jobOffer.isPaid ? "text-green-500" : "text-red-500"
-                  } text-sm w-max`}
+                  className={`${getExpirationColor(
+                    jobOffer.expirationTime,
+                    0
+                  )} text-sm w-max`}
                 >
-                  {jobOffer.isPaid ? "Aktywna" : "Nie opłacono"}
+                  {moment(jobOffer.creationTime)
+                    .add(jobOffer.days, "days")
+                    .add(0, "days")
+                    .fromNow()}
                 </div>
               )}
             </div>
           </div>
+        )}
+        <div className="flex p-3 bg-gray-200 rounded-lg">
+          <FaRocket className="text-xl text-gray-600 mr-2 mt-1.5" />
+          <div className="flex flex-col font-coco text-black">
+            <h2 className="font-bold">Status</h2>
+            {jobOffer.expirationTime && (
+              <div
+                className={`${
+                  jobOffer.isPaid ? "text-green-500" : "text-red-500"
+                } text-sm w-max`}
+              >
+                {jobOffer.isPaid ? "Aktywna" : "Nie opłacono"}
+              </div>
+            )}
+          </div>
         </div>
       </div>
-
       <div className="viewer mt-6">
         <Viewer value={jobOffer.description} />
       </div>

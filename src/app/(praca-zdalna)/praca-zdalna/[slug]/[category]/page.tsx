@@ -106,12 +106,12 @@ export default async function Page({ params }: { params: any }) {
           </Link>
         </div>
       </div>
-      <div className="px-4 bg-white w-full mb-12">
+      <div className="px-4 bg-white w-full mb-6 mt-12">
         <div className="flex flex-col container mx-auto">
           <div className="">
             <h2
               style={{ lineHeight: 1.5 }}
-              className="text-black font-gotham text-xl lg:text-3xl my-12"
+              className="text-black font-gotham text-xl lg:text-3xl my-6"
             >
               {content?.informal_title_plural}{" "}
               <span className="bg-gradient-to-r from-primary to-cta text-white p-2 ml-1 rounded-lg">
@@ -126,20 +126,20 @@ export default async function Page({ params }: { params: any }) {
       <div className="bg-white px-4 container mx-auto">
         {slug?.data?.length > 0 && (
           <div className="">
-            <h1 className="!leading-normal text-black bg-white text-xl lg:text-3xl pt-12">
+            <h1 className="!leading-normal text-black bg-white text-xl lg:text-3xl mt-6">
               {slug.title}
               <b className="bg-gradient-to-r from-primary via-cta to-primary p-1 rounded-lg ml-1 text-white">
                 oferty pracy zdalnej
               </b>
             </h1>
-            <div className="bg-white py-8 relative z-50 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+            <div className="bg-white mt-6 relative z-50 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3">
               {slug.data.map((item: any, index: number) => (
                 <Link
                   href={`/praca-zdalna/${params.slug}/${
                     params.category
                   }/${polishToEnglish(item.title)}`}
                   key={index}
-                  className="flex flex-col md:flex-row items-start md:items-center justify-between bg-[#126b91] px-4 py-2 rounded-xl font-coco"
+                  className="flex flex-col md:flex-row items-start md:items-center justify-between bg-[#126b91] px-4 py-2 rounded-lg font-coco"
                 >
                   <h2 className="flex items-center text-white">
                     <FaBriefcase className="w-10 h-10 mr-3" /> {item.title}
@@ -173,11 +173,11 @@ export default async function Page({ params }: { params: any }) {
             />
           </section>
         </div>
+        <div className="container mx-auto mt-6">
+          <AboutQuixyTalent />
+        </div>
       </div>
 
-      <div className="container mx-auto mt-3">
-        <AboutQuixyTalent />
-      </div>
       {/* Footer Section */}
       <MainFooter
         jobsList={cat.data}

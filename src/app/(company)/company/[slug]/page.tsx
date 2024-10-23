@@ -167,20 +167,28 @@ export default async function Page({
               )}
             </div>
           </div>
-          {slug?.job_offers?.length > 0 && (
-            <div className={`rounded-xl h-max w-full mt-3`}>
-              <h2
-                className={`text-3xl text-black drop-shadow-lg font-gotham mb-3`}
-              >
-                Aktywne oferty pracy
-              </h2>
-              <div>
-                {slug?.job_offers?.map((offer: JobPosting, i: any) => (
-                  <JobOfferCard key={i} jobOfferData={offer} />
-                ))}
+          {slug?.job_offers?.length > 0 &&
+            slug?.job_offers?.filter(
+              (jobOffer: JobPosting, i: number) => jobOffer.isPaid
+            )?.length > 0 && (
+              <div className={`rounded-xl h-max w-full mt-3`}>
+                <h2
+                  className={`text-xl text-black drop-shadow-lg font-gotham mb-3`}
+                >
+                  Aktywne oferty pracy
+                </h2>
+                <div>
+                  {slug?.job_offers?.map((offer: JobPosting, i: any) => (
+                    <div
+                      key={offer.id}
+                      className={`${!offer?.isPaid ? "hidden" : "block"}`}
+                    >
+                      <JobOfferCard key={i} jobOfferData={offer} />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
       </div>
       <div className="container mx-auto py-12 bg-white px-4 z-0">
