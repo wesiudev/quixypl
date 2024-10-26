@@ -162,7 +162,7 @@ export default function ProductEdit({
       }`}
     >
       <div
-        className={`fixed right-8 bottom-12 flex items-center group z-[1500] bg-black rounded-xl p-4 flex-col`}
+        className={`fixed right-8 bottom-12 flex items-center group z-[1500] bg-black  p-4 flex-col`}
       >
         <div className="my-4">
           <span>Wpisz tytuł posta</span> <br />
@@ -186,10 +186,10 @@ export default function ProductEdit({
         onClick={() => setIsFullscreen(!isFullscreen)}
         className={`fixed right-8 bottom-8 flex items-center group z-[1500]`}
       >
-        <div className="group-hover:opacity-100 duration-300 opacity-0 bg-green-500 h-11 px-3 rounded-l-md flex items-center text-white">
+        <div className="group-hover:opacity-100 duration-300 opacity-0 bg-green-500 h-11 px-3  flex items-center text-white">
           {isFullscreen ? "Zamknij" : "Pełny ekran"}
         </div>
-        <div className="text-2xl aspect-square w-11 h-11 group-hover:rounded-l-none rounded-md bg-green-500 group-hover:bg-green-400 text-white items-center justify-center flex">
+        <div className="text-2xl aspect-square w-11 h-11 group-hover:rounded-l-none  bg-green-500 group-hover:bg-green-400 text-white items-center justify-center flex">
           {!isFullscreen && <AiOutlineFullscreen />}
           {isFullscreen && <AiOutlineFullscreenExit />}
         </div>
@@ -277,7 +277,7 @@ export default function ProductEdit({
                         );
                       }
                     }}
-                    className="bg-red-500 hover:bg-red-400 text-white p-1.5 rounded-md"
+                    className="bg-red-500 hover:bg-red-400 text-white p-1.5 "
                   >
                     Usuń
                   </button>
@@ -299,7 +299,7 @@ export default function ProductEdit({
                       }
                     }}
                     className={`bg-gray-500 hover:bg-gray-400
-                   text-white p-1.5 rounded-md`}
+                   text-white p-1.5 `}
                   >
                     {!loading && "Zapisz zmiany"}
                   </button>

@@ -48,7 +48,7 @@ export default function ChatList({
         >
           <FaChevronRight />
         </button>
-        <h2 className="font-gotham text-3xl lg:text-5xl text-white bg-gradient-to-r from-primary to-cta mb-12 text-center w-max mx-auto rounded-lg p-2">
+        <h2 className="font-gotham text-3xl lg:text-5xl text-white bg-gradient-to-r from-primary to-cta mb-12 text-center w-max mx-auto  p-2">
           Czatuj
         </h2>
 

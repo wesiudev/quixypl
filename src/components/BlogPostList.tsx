@@ -30,18 +30,18 @@ const BlogPostList = ({ posts }: { posts: any }) => {
             href={`/news/${post.url}`}
             key={i}
             title={`Przejdź do artykułu ${post.title}`}
-            className="rounded-lg group relative aspect-square h-max flex flex-col duration-300 ease-in-out"
+            className=" group relative aspect-square h-max flex flex-col duration-300 ease-in-out"
           >
-            <div className="w-full overflow-hidden flex items-start rounded-lg">
+            <div className="w-full overflow-hidden flex items-start ">
               <Image
                 src={post.primaryImage}
                 width={512}
                 height={512}
                 alt={`Obrazek ${post.title}`}
-                className="absolute inset-0 object-cover w-full h-full rounded-lg"
+                className="absolute inset-0 object-cover w-full h-full "
               />
             </div>
-            <h2 className="rounded-lg hover:shadow-sm group-hover:shadow-primary group-hover:scale-x-105 group-hover:bg-primary/100 bg-black/50 duration-300 absolute bottom-3 left-3 right-3 text-sm mt-3 text-white font-light text-left px-3 py-1 font-coco">
+            <h2 className=" hover:shadow-sm group-hover:shadow-primary group-hover:scale-x-105 group-hover:bg-primary/100 bg-black/50 duration-300 absolute bottom-3 left-3 right-3 text-sm mt-3 text-white font-light text-left px-3 py-1 font-coco">
               {post.title}
             </h2>
           </Link>

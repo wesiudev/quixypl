@@ -42,7 +42,7 @@ export default function Editor(props: EditorProps) {
     <ReactQuill
       ref={reactQuillRef}
       theme="snow"
-      placeholder="Napisz treść oferty pracy"
+      placeholder=""
       className="text-black"
       modules={{
         toolbar: {

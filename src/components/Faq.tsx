@@ -31,11 +31,11 @@ const FAQ: React.FC<FAQProps> = ({ faqItems }) => {
   return (
     <div className="font-gotham">
       <h2 className="z-50 py-3 text-xl sm:text-3xl w-full">
-        <span className="p-3 text-white bg-gradient-to-r from-primary to-cta rounded-t-xl">
+        <span className="p-3 text-white bg-gradient-to-r from-primary to-cta ">
           Często zadawane pytania
         </span>
       </h2>
-      <ul className="-mt-[2px] p-3 rounded-lg rounded-tl-none rounded-bl-none cursor-default select-none lg:hover:bg-gradient-to-r lg:hover:from-primary/20 lg:hover:to-cta/20 bg-gradient-to-r from-primary/20 to-cta/20 text-lg text-black">
+      <ul className="-mt-[2px] p-3  rounded-tl-none rounded-bl-none cursor-default select-none lg:hover:bg-gradient-to-r lg:hover:from-primary/20 lg:hover:to-cta/20 bg-gradient-to-r from-primary/20 to-cta/20 text-lg text-black">
         {faqItems.slice(0, visibleItems).map((faq, index) => (
           <li
             key={index}
@@ -53,7 +53,7 @@ const FAQ: React.FC<FAQProps> = ({ faqItems }) => {
         <div className="w-full flex items-start justify-start">
           <button
             onClick={handleShowMore}
-            className="bg-primary hover:bg-primaryHover text-white py-2 px-4 rounded-b-lg"
+            className="bg-primary hover:bg-primaryHover text-white py-2 px-4 "
           >
             Pokaż więcej
           </button>
@@ -62,7 +62,7 @@ const FAQ: React.FC<FAQProps> = ({ faqItems }) => {
         <div className=" w-full flex items-start justify-start">
           <Link
             href="/contact"
-            className="bg-gradient-to-r from-primary to-cta text-white py-2 px-4 rounded-b-lg transition"
+            className="bg-gradient-to-r from-primary to-cta text-white py-2 px-4  transition"
           >
             Masz inne pytanie?
           </Link>

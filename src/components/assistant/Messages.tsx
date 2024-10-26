@@ -13,7 +13,7 @@ export default function Messages({
         <div className="w-max h-max flex items-end justify-end text-2xl text-white bg-black m-2 rounded-full aspect-square p-3">
           <FaRobot className="w-6 h-6" />
         </div>
-        <div className="bg-blue-500 text-white font-light p-3 rounded-xl max-w-[40rem]">
+        <div className="bg-blue-500 text-white font-light p-3  max-w-[40rem]">
           Dzień dobry, jestem asystentem. Jak mogę Ci pomóc? Wpisz wiadomość
           poniżej by otrzymać odpowiedź w mgnieniu oka.
         </div>
@@ -37,7 +37,7 @@ export default function Messages({
               )}
             </>
             <div
-              className={`w-[80%] p-3 rounded-md ${
+              className={`w-[80%] p-3  ${
                 message.role === "user"
                   ? "bg-green-300 text-black font-light"
                   : "bg-gray-300 text-black font-light"

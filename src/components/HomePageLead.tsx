@@ -33,7 +33,7 @@ export default function HomePageLead() {
           validateEmail(email) === false
             ? "border-red-500 text-red-500"
             : "border-primary text-green-500"
-        } placeholder:text-green-500 font-bold text-lg border-2 rounded-md p-3 my-3`}
+        } placeholder:text-green-500 font-bold text-lg border-2  p-3 my-3`}
         type="text"
         placeholder="Wpisz email"
         value={email}
@@ -109,7 +109,7 @@ export default function HomePageLead() {
         }
         className={`${
           !isChecked ? "cursor-not-allowed" : ""
-        } disabled:cursor-not-allowed bg-green-500 text-white font-bold text-xl mt-3 p-3 rounded-lg`}
+        } disabled:cursor-not-allowed bg-green-500 text-white font-bold text-xl mt-3 p-3 `}
       >
         {!isSent
           ? "Dołącz do Centrum Biznesu w internecie!"

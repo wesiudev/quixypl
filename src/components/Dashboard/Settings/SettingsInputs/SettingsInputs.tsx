@@ -14,8 +14,6 @@ export default function UserEditDashboard({
   changesWereMade,
   setChangesWereMade,
   setSource,
-  isFullscreen,
-  setIsFullscreen,
   setError,
   scrollIntoView,
 }: {
@@ -23,8 +21,6 @@ export default function UserEditDashboard({
   changesWereMade: any;
   setChangesWereMade: any;
   setSource: any;
-  isFullscreen: any;
-  setIsFullscreen: any;
   setError: any;
   scrollIntoView: any;
 }) {
@@ -64,9 +60,7 @@ export default function UserEditDashboard({
       )}
       <div className="relative">
         <SettingsHeader
-          setIsFullscreen={setIsFullscreen}
           setError={setError}
-          isFullscreen={isFullscreen}
           changesWereMade={changesWereMade}
           user={source}
         />

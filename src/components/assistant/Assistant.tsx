@@ -109,7 +109,7 @@ export default function Assistant({
                     <div className="w-max h-max flex items-end justify-end text-2xl text-white bg-black m-2 rounded-full aspect-square p-3">
                       <FaRobot className="w-6 h-6" />
                     </div>
-                    <p className="w-[80%] p-3 rounded-md bg-gray-300 text-black font-light">
+                    <p className="w-[80%] p-3  bg-gray-300 text-black font-light">
                       Proszę czekać...
                     </p>
                   </div>
@@ -127,7 +127,7 @@ export default function Assistant({
                     <div className="w-max h-max flex items-end justify-end text-2xl text-white bg-black m-2 rounded-full aspect-square p-3">
                       <FaRobot className="w-6 h-6" />
                     </div>
-                    <p className="w-[80%] p-3 rounded-md bg-gray-300 text-black font-light">
+                    <p className="w-[80%] p-3  bg-gray-300 text-black font-light">
                       Proszę czekać...
                     </p>
                   </div>
@@ -145,7 +145,7 @@ export default function Assistant({
                     <div className="w-max h-max flex items-end justify-end text-2xl text-white bg-black m-2 rounded-full aspect-square p-3">
                       <FaRobot className="w-6 h-6" />
                     </div>
-                    <p className="w-[80%] p-3 rounded-md bg-gray-300 text-black font-light">
+                    <p className="w-[80%] p-3  bg-gray-300 text-black font-light">
                       Proszę czekać...
                     </p>
                   </div>
@@ -159,7 +159,7 @@ export default function Assistant({
               onChange={(e) => setUserQuestion(e.target.value)}
               value={userQuestion}
               placeholder="Wpisz pytanie..."
-              className=" w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black font-bold"
+              className=" w-full p-2  border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black font-bold"
             />
             <button
               disabled={loading}

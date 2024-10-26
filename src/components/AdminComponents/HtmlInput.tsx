@@ -40,7 +40,7 @@ export default function HtmlInput({
     <>
       {type === "html" && (
         <div
-          className={`z-[250] fixed w-[50vw] min-h-[50vh] bg-slate-700 top-1/2 -translate-y-1/2 -translate-x-1/2 left-1/2 p-8 rounded-xl flex items-center justify-center flex-col`}
+          className={`z-[250] fixed w-[50vw] min-h-[50vh] bg-slate-700 top-1/2 -translate-y-1/2 -translate-x-1/2 left-1/2 p-8  flex items-center justify-center flex-col`}
         >
           <button
             onClick={() => {
@@ -71,7 +71,7 @@ export default function HtmlInput({
               submitHtmlContent();
               closeInput();
             }}
-            className="text-white w-full p-4 bg-green-500 hover:bg-green-600 rounded-xl mt-4"
+            className="text-white w-full p-4 bg-green-500 hover:bg-green-600  mt-4"
           >
             Zatwierdź
           </button>

@@ -23,40 +23,23 @@ html {
   scroll-behavior: smooth;
 }
 .scrollbar::-webkit-scrollbar {
-  width: 15px;
-  height: 6px;
-  background-color: #5e5c5d;
-  padding: 2px;
-  margin: 2px;
-  border-radius: 99px;
+  width: 10px;
 }
 
+/* Track */
+.scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
 .scrollbar::-webkit-scrollbar-thumb {
-  background: #14a800;
   border-radius: 99px;
-  padding: 2px;
+  background: linear-gradient(to bottom, #14a800, #126b91);
 }
 
+/* Handle on hover */
 .scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #14a800;
-}
-.borderBar::-webkit-scrollbar {
-  width: 15px;
-  height: 6px;
-  background-color: transparent;
-  padding: 2px;
-  margin: 2px;
-  border-radius: 99px;
-}
-
-.borderBar::-webkit-scrollbar-thumb {
-  background: #1d1d1d;
-  border-radius: 99px;
-  padding: 2px;
-}
-
-.borderBar::-webkit-scrollbar-thumb:hover {
-  background: #606060;
+  background: #555;
 }
 .menu {
   background-color: transparent;

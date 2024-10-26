@@ -48,7 +48,7 @@ export default function Page() {
             </p>
             <Link
               href="/register"
-              className="text-white py-1.5 px-2 bg-[#126b91] my-6 rounded-md w-max mx-auto"
+              className="text-white py-1.5 px-2 bg-[#126b91] my-6  w-max mx-auto"
             >
               Rejestracja
             </Link>
@@ -58,7 +58,7 @@ export default function Page() {
                 <div
                   style={{ backgroundColor: item.color }}
                   key={i}
-                  className="mx-auto my-12 w-12 h-4 rounded-3xl "
+                  className="mx-auto my-12 w-12 h-4  "
                 ></div>
               ))}
             </div>

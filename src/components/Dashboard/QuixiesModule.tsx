@@ -18,7 +18,7 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
         }  bg-black hover:bg-opacity-60`}
       />
       <div
-        className={`sm:rounded-xl w-screen sm:w-[90%] lg:max-w-[50rem] xl:max-w-[60rem] h-screen sm:h-[80vh] fixed overflow-y-scroll scrollbar  ${
+        className={`sm: w-screen sm:w-[90%] lg:max-w-[50rem] xl:max-w-[60rem] h-screen sm:h-[80vh] fixed overflow-y-scroll scrollbar  ${
           modals.quixies
             ? "z-[9999999999] opacity-100 left-0 top-0 sm:left-1/2 sm:-translate-x-1/2 sm:top-1/2 sm:-translate-y-1/2"
             : "z-[-1000] opacity-0 -translate-y-[150vh]"
@@ -26,7 +26,7 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
       >
         <div
           onClick={(e: any) => e.stopPropagation()}
-          className="flex flex-wrap w-full my-auto mx-auto bg-white sm:rounded-xl p-3 lg:p-6 relative"
+          className="flex flex-wrap w-full my-auto mx-auto bg-white sm: p-3 lg:p-6 relative"
         >
           <div className="flex flex-row sm:justify-between w-full font-gotham text-3xl">
             <div className="flex flex-col">
@@ -47,9 +47,9 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
             width={1024}
             height={1024}
             alt="Quixies"
-            className="w-full h-auto rounded-xl mb-6"
+            className="w-full h-auto  mb-6"
           /> */}
-          <div className="rounded-xl grid grid-cols-2 sm:grid-cols-3 gap-3 w-full mt-3 sm:mt-6">
+          <div className=" grid grid-cols-2 sm:grid-cols-3 gap-3 w-full mt-3 sm:mt-6">
             {shopProducts?.map((item: any, i: any) => (
               <div
                 key={i}
@@ -57,7 +57,7 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
                   i === 2 || i === 3
                     ? "bg-gradient-to-r from-primary/75 to-cta/75 hover:from-primary/85 hover:to-cta/85"
                     : "bg-primary/75 hover:bg-primary/90"
-                } group relative w-full h-full flex justify-between items-center flex-col transition rounded-lg shadow-sm shadow-zinc-800`}
+                } group relative w-full h-full flex justify-between items-center flex-col transition  shadow-sm shadow-zinc-800`}
               >
                 <div className="relative w-full h-full pt-6 pb-16 lg:pt-0 lg:pb-12 flex justify-center items-center">
                   <Image
@@ -69,7 +69,7 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
                   />
                   <p
                     style={{ textShadow: "1px 1px 1px black" }}
-                    className={`font-coco font-bold text-center text-white bg-primary rounded-tl-lg rounded-br-lg px-1.5 lg:px-3 py-1 lg:py-2 absolute top-0 left-0 text-sm sm:text-lg shadow-sm shadow-zinc-800`}
+                    className={`font-coco font-bold text-center text-white bg-primary   px-1.5 lg:px-3 py-1 lg:py-2 absolute top-0 left-0 text-sm sm:text-lg shadow-sm shadow-zinc-800`}
                   >
                     {item.price}
                     ,99 PLN
@@ -88,7 +88,7 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
                         boxShadow: "0px 0px 5px black",
                         textShadow: "1px 1px 1px black",
                       }}
-                      className="sticky bottom-0 top-0 left-0 bg-yellow-500 text-white font-bold px-2 py-1 rounded-3xl text-sm lg:text-base"
+                      className="sticky bottom-0 top-0 left-0 bg-yellow-500 text-white font-bold px-2 py-1  text-sm lg:text-base"
                     >
                       Najczęściej wybierany
                     </div>
@@ -99,7 +99,7 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
                 {item.discount > 0 && (
                   <div
                     style={{ textShadow: "1px 1px 1px black" }}
-                    className="shadow-sm shadow-zinc-800 w-max absolute top-0 right-0 bg-yellow-500 text-white text-sm sm:text-lg font-coco font-bold px-1.5 lg:px-3 py-1 lg:py-2 rounded-tr-lg rounded-bl-lg"
+                    className="shadow-sm shadow-zinc-800 w-max absolute top-0 right-0 bg-yellow-500 text-white text-sm sm:text-lg font-coco font-bold px-1.5 lg:px-3 py-1 lg:py-2  "
                   >
                     {item.discountSize}%
                   </div>
@@ -109,7 +109,7 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
           </div>
           <button
             onClick={() => dispatch(set_modals({ ...modals, quixies: false }))}
-            className="sm:hidden font-coco mt-12 sticky left-0 bottom-0 w-full px-3 py-1.5 bg-red-500 hover:bg-red-400 duration-200 text-white z-50 rounded-lg"
+            className="sm:hidden font-coco mt-12 sticky left-0 bottom-0 w-full px-3 py-1.5 bg-red-500 hover:bg-red-400 duration-200 text-white z-50 "
           >
             Zamknij okno
           </button>
@@ -177,7 +177,7 @@ const QuixiesInfo = () => {
       <ul className="list-none text-black text-lg mb-6">
         <li className="mb-3">
           <strong
-            className="text-white bg-gradient-to-r from-primary to-cta p-1 rounded-md px-2 text-xl font-coco"
+            className="text-white bg-gradient-to-r from-primary to-cta p-1  px-2 text-xl font-coco"
             style={{ textShadow: "1px 1px 1px black" }}
           >
             Usługi AI
@@ -191,7 +191,7 @@ const QuixiesInfo = () => {
         </li>
         <li className="mb-3">
           <strong
-            className="text-white bg-gradient-to-r from-primary to-cta p-1 rounded-md px-2 text-xl font-coco"
+            className="text-white bg-gradient-to-r from-primary to-cta p-1  px-2 text-xl font-coco"
             style={{ textShadow: "1px 1px 1px black" }}
           >
             Dodawanie ofert pracy
@@ -205,7 +205,7 @@ const QuixiesInfo = () => {
         </li>
         <li className="mb-3">
           <strong
-            className="text-white bg-gradient-to-r from-primary to-cta p-1 rounded-md px-2 text-xl font-coco"
+            className="text-white bg-gradient-to-r from-primary to-cta p-1  px-2 text-xl font-coco"
             style={{ textShadow: "1px 1px 1px black" }}
           >
             Aplikowanie na oferty
@@ -224,7 +224,7 @@ const QuixiesInfo = () => {
       <ul className="list-none text-black text-lg">
         <li className="mb-3">
           <strong
-            className="text-white bg-gradient-to-r from-primary to-cta p-1 rounded-md px-2 text-xl font-coco"
+            className="text-white bg-gradient-to-r from-primary to-cta p-1  px-2 text-xl font-coco"
             style={{ textShadow: "1px 1px 1px black" }}
           >
             Aktywne korzystanie z platformy
@@ -237,7 +237,7 @@ const QuixiesInfo = () => {
         </li>
         <li className="mb-3">
           <strong
-            className="text-white bg-gradient-to-r from-primary to-cta p-1 rounded-md px-2 text-xl font-coco"
+            className="text-white bg-gradient-to-r from-primary to-cta p-1  px-2 text-xl font-coco"
             style={{ textShadow: "1px 1px 1px black" }}
           >
             Zakup

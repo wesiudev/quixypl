@@ -58,7 +58,7 @@ const OpinionsForm: React.FC = () => {
   };
 
   return (
-    <div className="my-16 rounded-xl font-gotham bg-gradient-to-r from-primary/50 to-cta/50 p-6">
+    <div className="my-16  font-gotham bg-gradient-to-r from-primary/50 to-cta/50 p-6">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col md:flex-row justify-start items-start space-y-12"
@@ -80,7 +80,7 @@ const OpinionsForm: React.FC = () => {
                   value={name}
                   maxLength={30}
                   onChange={(e) => setName(e.target.value)}
-                  className="bg-gray-700 placeholder:text-white placeholder:font-light input input-bordered w-full py-3 px-4 rounded-lg shadow-sm mb-2 text-white border border-gray-300"
+                  className="bg-gray-700 placeholder:text-white placeholder:font-light input input-bordered w-full py-3 px-4  shadow-sm mb-2 text-white border border-gray-300"
                 />
               </div>
               <div className="">
@@ -95,7 +95,7 @@ const OpinionsForm: React.FC = () => {
                   placeholder="Wpisz opinię"
                   value={feedback}
                   onChange={(e) => setFeedback(e.target.value)}
-                  className="bg-gray-700 h-full placeholder:text-white placeholder:font-light input input-bordered w-full py-3 px-4 rounded-lg shadow-sm mb-2 text-white border border-gray-300"
+                  className="bg-gray-700 h-full placeholder:text-white placeholder:font-light input input-bordered w-full py-3 px-4  shadow-sm mb-2 text-white border border-gray-300"
                 />
               </div>
             </div>
@@ -103,7 +103,7 @@ const OpinionsForm: React.FC = () => {
             <button
               type="submit"
               disabled={sent}
-              className={`w-full sm:w-full mx-auto py-3 px-6 rounded-lg font-light font-gotham text-white transition-colors duration-300 ${
+              className={`w-full sm:w-full mx-auto py-3 px-6  font-light font-gotham text-white transition-colors duration-300 ${
                 sent
                   ? "bg-zinc-500 cursor-not-allowed"
                   : "bg-cta hover:bg-cta/80"
@@ -121,7 +121,7 @@ const OpinionsForm: React.FC = () => {
         </div>
 
         <div
-          className="bg-white md:ml-3 rounded-xl overflow-hidden w-full"
+          className="bg-white md:ml-3  overflow-hidden w-full"
           style={{ boxShadow: "0px 0px 5px black" }}
         >
           <h3 className="bg-gradient-to-r from-primary to-cta text-2xl font-bold py-4 text-white flex items-center justify-center text-center italic drop-shadow-md">

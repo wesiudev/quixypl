@@ -118,7 +118,7 @@ export default async function Page({ params }: { params: any }) {
               className="text-black font-gotham text-xl lg:text-3xl my-12"
             >
               {content?.informal_title_plural}{" "}
-              <span className="bg-gradient-to-r from-primary to-cta text-white p-2 ml-1 rounded-lg">
+              <span className="bg-gradient-to-r from-primary to-cta text-white p-2 ml-1 ">
                 w Quixy Talent&trade;
               </span>
             </h2>{" "}
@@ -132,13 +132,13 @@ export default async function Page({ params }: { params: any }) {
           className="text-3xl font-bold font-coco text-black mt-6"
         >
           Oferty pracy zdalnej{" "}
-          <span className="text-white bg-gradient-to-r from-primary to-cta px-2 py-0.5 rounded-md">
+          <span className="text-white bg-gradient-to-r from-primary to-cta px-2 py-0.5 ">
             {content?.title}
           </span>{" "}
         </h1>
         {offers?.length === 0 && (
           <div className="">
-            <div className="rounded-3xl p-6 bg-gradient-to-r from-primary/20 to-cta/20 mx-auto my-6">
+            <div className=" p-6 bg-gradient-to-r from-primary/20 to-cta/20 mx-auto my-6">
               <div className="bg-gradient-to-r from-primary to-cta rounded-full aspect-square mx-auto w-32 flex items-center justify-center">
                 <TfiFlagAlt className="text-white text-4xl animate-bounce" />
               </div>
@@ -150,13 +150,13 @@ export default async function Page({ params }: { params: any }) {
               <h3 className="flex flex-col text-white p-2 font-gotham font-light text-center mx-auto max-w-[332px] group">
                 <Link
                   href="/register"
-                  className="rounded-2xl bg-[#14a800] p-2 duration-100 group-hover:bg-opacity-80"
+                  className=" bg-[#14a800] p-2 duration-100 group-hover:bg-opacity-80"
                 >
                   Bądź szybszy/a i dodaj ogłoszenie
                 </Link>
                 <Link
                   href="/register"
-                  className="rounded-b-2xl bg-[#14a800] w-max max-w-[100%] mx-auto p-2 px-4 duration-100 group-hover:bg-opacity-80"
+                  className=" bg-[#14a800] w-max max-w-[100%] mx-auto p-2 px-4 duration-100 group-hover:bg-opacity-80"
                 >
                   o pracę już dziś!
                 </Link>
@@ -190,7 +190,7 @@ export default async function Page({ params }: { params: any }) {
             className="text-3xl mb-6 text-black font-gotham"
           >
             Czym zajmują się
-            <span className="ml-2 rounded-lg p-2 px-3 bg-gradient-to-r text-white from-primary via-cta to-primary">
+            <span className="ml-2  p-2 px-3 bg-gradient-to-r text-white from-primary via-cta to-primary">
               {content?.informal_title_plural.toLowerCase()}?
             </span>
           </h2>

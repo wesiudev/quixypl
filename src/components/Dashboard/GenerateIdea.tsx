@@ -129,7 +129,7 @@ export default function GenerateIdea({
   };
 
   return (
-    <div className="bg-white rounded-lg w-full flex flex-col lg:flex-row p-3 sm:p-6 lg:p-12 2xl:p-24">
+    <div className="bg-white  w-full flex flex-col lg:flex-row p-3 sm:p-6 lg:p-12 2xl:p-24">
       <div className="text-black h-full w-full">
         <div className="flex flex-row w-full">
           <div className="w-full">
@@ -153,8 +153,8 @@ export default function GenerateIdea({
                   disabled={isLoading}
                   className={`p-3 w-full h-max text-white font-bold mb-6 ${
                     isLoading
-                      ? "cursor-not-allowed bg-gradient-to-r from-primary to-cta rounded-lg"
-                      : "bg-gradient-to-r from-primary to-cta rounded-lg"
+                      ? "cursor-not-allowed bg-gradient-to-r from-primary to-cta "
+                      : "bg-gradient-to-r from-primary to-cta "
                   }`}
                 >
                   {isLoading ? (

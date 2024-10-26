@@ -111,7 +111,7 @@ export default function Nav() {
                     }}
                     className={`${
                       item.expandable ? "cursor-pointer" : ""
-                    } flex items-center justify-between py-2 px-4 rounded-md hover:bg-[#2F313C] w-full  ${
+                    } flex items-center justify-between py-2 px-4  hover:bg-[#2F313C] w-full  ${
                       expandedItems.includes(index as never)
                         ? "bg-[#2F313C]"
                         : "bg-[#222430]"
@@ -139,7 +139,7 @@ export default function Nav() {
                             }
                           }
                         }}
-                        className="hover:bg-[#3B3D47] p-1 lg:p-2 rounded-md"
+                        className="hover:bg-[#3B3D47] p-1 lg:p-2 "
                       >
                         <FaChevronDown
                           className={`duration-300 ${
@@ -158,7 +158,7 @@ export default function Nav() {
                     {item.subItems.map((subItem, subIndex) => (
                       <li key={subIndex}>
                         <Link href={subItem.href}>
-                          <button className="flex items-center py-2 px-4 rounded-md hover:bg-[#2F313C] w-full">
+                          <button className="flex items-center py-2 px-4  hover:bg-[#2F313C] w-full">
                             {subItem.icon}
                             <div className="ml-2">{subItem.title}</div>
                           </button>

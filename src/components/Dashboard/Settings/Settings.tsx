@@ -17,7 +17,6 @@ export default function Settings({
   const wrapperRef = useRef<any>(null);
   const [error, setError] = useState(false);
   const [changesWereMade, setChangesWereMade] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const { modals } = useSelector((state: any) => state.modals);
   const dispatch = useDispatch();
   function scrollIntoView() {
@@ -45,11 +44,7 @@ export default function Settings({
       />
       <div
         ref={wrapperRef}
-        className={`fixed bg-white ${
-          isFullscreen
-            ? "w-screen lg:w-full h-screen"
-            : "w-[80%] max-w-[40rem] lg:max-w-[50rem] xl:max-w-[60rem] h-[80vh]"
-        } overflow-y-scroll scrollbarChat left-1/2 -translate-x-1/2 top-0 ${
+        className={`fixed bg-white w-screen lg:w-full h-screen overflow-y-scroll scrollbarChat left-0 top-0 ${
           modals.config
             ? "z-[99999999999999999] opacity-100 -translate-y-1/2 top-1/2"
             : "z-[-1000] opacity-0 -translate-y-[150vh] top-0"
@@ -62,8 +57,6 @@ export default function Settings({
             setSource={setSource}
             changesWereMade={changesWereMade}
             setChangesWereMade={setChangesWereMade}
-            setIsFullscreen={setIsFullscreen}
-            isFullscreen={isFullscreen}
             setError={setError}
           />
           <Unsaved

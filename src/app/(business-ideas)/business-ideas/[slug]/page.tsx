@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     <div className="bg-gray-200">
       <Header jobsList={jobs} />
       <div className="sm:px-4 mx-auto container relative font-gotham">
-        <div className="font-light pt-6 sm:py-2 sm:mt-8 breadcrumbs mx-auto bg-white text-black sm:rounded-xl relative z-50 sm:mb-8 px-4">
+        <div className="font-light pt-6 sm:py-2 sm:mt-8 breadcrumbs mx-auto bg-white text-black sm: relative z-50 sm:mb-8 px-4">
           <ul className="flex items-center flex-wrap">
             <li className="mr-2">
               <Link href="/business-ideas">business-ideas</Link>
@@ -33,21 +33,21 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </li>
           </ul>
         </div>
-        <div className="pt-6 sm:pt-8 container bg-white px-4 sm:p-8 grid grid-cols-1 w-full mx-auto relative z-50 sm:rounded-xl">
-          <div className="mx-auto container flex text-black bg-white rounded-xl flex-col">
+        <div className="pt-6 sm:pt-8 container bg-white px-4 sm:p-8 grid grid-cols-1 w-full mx-auto relative z-50 sm:">
+          <div className="mx-auto container flex text-black bg-white  flex-col">
             <div className="flex flex-col h-max w-full">
               <div className="flex items-start justify-between mb-4">
                 <h1 className="text-2xl sm:text-3xl lg:text-5xl pr-4">
                   {slug?.name || "Nie podano"}
                 </h1>
-                <div className="w-max text-sm font-light !text-white bg-[#126b91] p-2 rounded-lg">
+                <div className="w-max text-sm font-light !text-white bg-[#126b91] p-2 ">
                   <span className="font-bold">Dodano</span>
                   <div className="w-max">
                     {moment(slug?.creationTime).format("DD-MM-yyyy")}
                   </div>
                 </div>
               </div>
-              <h3 className="flex items-center text-xl text-white bg-gradient-to-r from-primary to-cta px-3 py-2 w-max rounded-lg">
+              <h3 className="flex items-center text-xl text-white bg-gradient-to-r from-primary to-cta px-3 py-2 w-max ">
                 Opis projektu
               </h3>
               <p className="text-lg font-light mt-2">
@@ -56,7 +56,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </div>
 
             <section className="mt-6">
-              <h3 className="flex items-center text-xl text-white bg-gradient-to-r from-primary to-cta px-3 py-2 w-max rounded-lg">
+              <h3 className="flex items-center text-xl text-white bg-gradient-to-r from-primary to-cta px-3 py-2 w-max ">
                 Szczegóły projektu
               </h3>
               <h3 className="text-base text-black w-max mt-6">Marketing</h3>
@@ -103,7 +103,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <div className="container mx-auto px-4">
         <IdeaListSlug ideas={ideas} />
       </div>
-      <UserStickyTop slugData={slug} />
+      {/* <UserStickyTop slugData={slug} /> */}
       <MainFooter heading={"Zrealizuj pomysł z Quixy Talent"} jobsList={jobs} />
     </div>
   );
@@ -111,7 +111,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
 export async function generateMetadata({ params }: { params: any }) {
   const slug = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/ideas?tubylytylkofigi=${
+    `${process.env.NEXT_PUBLIC_URL}/api/getSingleIdea?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&name=${polishToEnglish(params.slug)}`
   ).then((res) => res.json());

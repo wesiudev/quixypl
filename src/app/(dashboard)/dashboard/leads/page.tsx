@@ -57,7 +57,7 @@ export default function Leads() {
           </button>{" "}
         </div>
         <div className="px-6 py-3 grid grid-cols-1 xl:grid-cols-3 2xl:grid-cols-4 font-sans gap-6 min-h-screen text-white">
-          {user?.applications?.map((lead: any, i: any) => (
+          {user?.leads?.map((lead: any, i: any) => (
             <>
               {filter === "new" && !lead.signed && lead.status !== "trash" && (
                 <LeadApplication
@@ -69,7 +69,7 @@ export default function Leads() {
               )}
             </>
           ))}
-          {user?.applications?.map((lead: any, i: any) => (
+          {user?.leads?.map((lead: any, i: any) => (
             <>
               {filter === "trashcan" &&
                 lead.isTrash &&
@@ -83,7 +83,7 @@ export default function Leads() {
                 )}
             </>
           ))}
-          {user?.applications?.map((lead: any, i: any) => (
+          {user?.leads?.map((lead: any, i: any) => (
             <>
               {filter === "old" &&
                 lead.isFinished &&
@@ -99,7 +99,7 @@ export default function Leads() {
                 )}
             </>
           ))}
-          {user?.applications?.map((lead: any, i: any) => (
+          {user?.leads?.map((lead: any, i: any) => (
             <>
               {filter === "signed" &&
                 lead.isFinished &&

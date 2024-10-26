@@ -25,7 +25,7 @@ export default function GenerateIdeaInputs({
           <label htmlFor="place">Miejsce:</label>
           <select
             id="place"
-            className="font-light text-lg rounded-lg px-4 py-2 w-full"
+            className="font-light text-lg  px-4 py-2 w-full"
             onChange={(e) => setConfig({ ...config, place: e.target.value })}
           >
             <option>Gdzie będziesz zarabiać?</option>
@@ -40,7 +40,7 @@ export default function GenerateIdeaInputs({
           <label htmlFor="investment">Inwestycja:</label>
           <select
             id="investment"
-            className="font-light text-lg rounded-lg px-4 py-2 w-full"
+            className="font-light text-lg  px-4 py-2 w-full"
             onChange={(e) =>
               setConfig({ ...config, investment: e.target.value })
             }
@@ -73,7 +73,7 @@ export default function GenerateIdeaInputs({
           <label htmlFor="product">Produkt:</label>
           <select
             id="product"
-            className="font-light text-lg rounded-lg px-4 py-2 w-full"
+            className="font-light text-lg  px-4 py-2 w-full"
             onChange={(e) => setConfig({ ...config, product: e.target.value })}
           >
             <option>Czy posiadasz produkt?</option>
@@ -91,7 +91,7 @@ export default function GenerateIdeaInputs({
           <h2 className="font-gotham">Dodatkowe informacje:</h2>
           <textarea
             value={config.additional}
-            className="rounded-lg w-full font-gotham font-light text-black"
+            className=" w-full font-gotham font-light text-black"
             placeholder="Opisz produkt"
             maxLength={300}
             onChange={(e) =>

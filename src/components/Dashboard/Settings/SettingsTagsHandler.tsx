@@ -49,7 +49,7 @@ export default function TagsHandler() {
                 tagsOpenLevel === 0
                   ? "bg-opacity-100 hover:bg-opacity-90"
                   : "bg-opacity-80 hover:bg-opacity-100"
-              } px-2 py-1.5 rounded-md`}
+              } px-2 py-1.5 `}
             >
               Prosty
             </button>
@@ -59,7 +59,7 @@ export default function TagsHandler() {
                 tagsOpenLevel === 1
                   ? "bg-opacity-100 hover:bg-opacity-90"
                   : "bg-opacity-80 hover:bg-opacity-100"
-              } px-2 py-1.5 rounded-md`}
+              } px-2 py-1.5 `}
             >
               Rozszerzony
             </button>
@@ -69,7 +69,7 @@ export default function TagsHandler() {
                 tagsOpenLevel === 2
                   ? "bg-opacity-100 hover:bg-opacity-90"
                   : "bg-opacity-80 hover:bg-opacity-100"
-              } px-2 py-1.5 rounded-md`}
+              } px-2 py-1.5 `}
             >
               Całość
             </button>
@@ -97,17 +97,14 @@ export default function TagsHandler() {
         >
           {user?.tags && tagsOpenLevel === 1
             ? user?.tags?.map((item: any, i: any) => (
-                <div
-                  className="text-sm mt-2 bg-slate-300 rounded-xl p-2"
-                  key={i}
-                >
+                <div className="text-sm mt-2 bg-slate-300  p-2" key={i}>
                   <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
-                    <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
+                    <div className="bg-[#126b91]  p-1 text-white mt-2">
                       {item.slugTitle}
                     </div>
                     <div className="flex items-center">
                       <FaChevronRight className="mx-1 mt-2" />
-                      <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
+                      <div className="bg-[#126b91]  p-1 text-white mt-2">
                         {item.title}
                       </div>
                     </div>
@@ -116,25 +113,22 @@ export default function TagsHandler() {
               ))
             : tagsOpenLevel === 2
             ? user?.tags?.map((item: any, i: any) => (
-                <div
-                  className="text-sm mt-2 bg-slate-300 rounded-xl p-2"
-                  key={i}
-                >
+                <div className="text-sm mt-2 bg-slate-300  p-2" key={i}>
                   <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
                     <div className="flex items-center">
-                      <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
+                      <div className="bg-[#126b91]  p-1 text-white mt-2">
                         {item.slugTitle}
                       </div>
                     </div>
                     <div className="flex items-center">
                       <FaChevronRight className="mx-1 mt-2" />
-                      <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
+                      <div className="bg-[#126b91]  p-1 text-white mt-2">
                         {item.categoryTitle}
                       </div>
                     </div>
                     <div className="flex items-center font-bold">
                       <FaChevronRight className="mx-1 mt-2" />
-                      <div className="bg-[#126b91] rounded-lg p-1 text-white mt-2">
+                      <div className="bg-[#126b91]  p-1 text-white mt-2">
                         {item.title}
                       </div>
                     </div>
@@ -149,7 +143,7 @@ export default function TagsHandler() {
                   <div
                     className={`${
                       selectedTag.title === item.title ? "flex-col" : ""
-                    } bg-[#126b91] rounded-lg flex items-center p-1`}
+                    } bg-[#126b91]  flex items-center p-1`}
                   >
                     <div className="flex flex-row items-center">
                       {item.title}
@@ -164,7 +158,7 @@ export default function TagsHandler() {
                       </button>
                     </div>
                     {tagDeletion && selectedTag.title === item.title && (
-                      <div className="flex flex-col w-[90%] my-2 sticky left-0 top-0 bg-black bg-opacity-60 p-3 rounded-md">
+                      <div className="flex flex-col w-[90%] my-2 sticky left-0 top-0 bg-black bg-opacity-60 p-3 ">
                         <h2>Usunąć {selectedTag?.title}?</h2>
                         <div className="grid grid-cols-2 gap-3 mt-3">
                           <button
@@ -208,7 +202,7 @@ export default function TagsHandler() {
                                 progress: undefined,
                               });
                             }}
-                            className="bg-red-500 text-white px-3 py-1 rounded-md"
+                            className="bg-red-500 text-white px-3 py-1 "
                           >
                             Usuń
                           </button>
@@ -217,7 +211,7 @@ export default function TagsHandler() {
                               setTagDeletion(false);
                               setSelectedTag({});
                             }}
-                            className="bg-green-500 text-white px-3 py-1 rounded-md"
+                            className="bg-green-500 text-white px-3 py-1 "
                           >
                             Nie
                           </button>
@@ -249,7 +243,7 @@ export default function TagsHandler() {
       )}
       {slug?.title !== "" && category?.title === "" && (
         <div className="text-black font-gotham flex flex-col">
-          <div className="font-bold mb-1 bg-[#126b91] p-1 rounded-md px-2 text-white w-max max-w-[100%]">
+          <div className="font-bold mb-1 bg-[#126b91] p-1  px-2 text-white w-max max-w-[100%]">
             {slug.title}
           </div>
           <div className="font-bold">Wybierz podkategorię</div>
@@ -257,7 +251,7 @@ export default function TagsHandler() {
       )}
       {slug?.title !== "" && category?.title !== "" && (
         <div className="text-black font-gotham flex flex-col">
-          <div className="font-bold mb-1 bg-[#126b91] p-1 rounded-md px-2 text-white w-max max-w-[100%]">
+          <div className="font-bold mb-1 bg-[#126b91] p-1  px-2 text-white w-max max-w-[100%]">
             {category.title}
           </div>
           <div className="font-bold"></div>
@@ -278,7 +272,7 @@ export default function TagsHandler() {
         {!configurationOpen && slug.title === "" && (
           <button
             onClick={() => setConfigurationOpen(true)}
-            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91]  hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
           >
             <FaPlus />
           </button>
@@ -288,7 +282,7 @@ export default function TagsHandler() {
             onClick={() => {
               setConfigurationOpen(false);
             }}
-            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91]  hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
           >
             <IoClose />
           </button>
@@ -296,7 +290,7 @@ export default function TagsHandler() {
         {configurationOpen && slug.title !== "" && category.title === "" && (
           <button
             onClick={() => setSlug({ title: "", url: "" })}
-            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91]  hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
           >
             <FaChevronLeft />
           </button>
@@ -306,7 +300,7 @@ export default function TagsHandler() {
             onClick={() => {
               setCategory({ title: "", url: "" });
             }}
-            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] rounded-lg hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+            className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91]  hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
           >
             <FaArrowLeftLong />
           </button>
@@ -321,7 +315,7 @@ export default function TagsHandler() {
                     url: polishToEnglish(item.title),
                   })
                 }
-                className="h-[40px] m-0.5 bg-[#126b91] rounded-lg text-white font-light p-1 text-sm sm:text-base hover:bg-opacity-80"
+                className="h-[40px] m-0.5 bg-[#126b91]  text-white font-light p-1 text-sm sm:text-base hover:bg-opacity-80"
                 key={i}
               >
                 {item.title}
@@ -343,7 +337,7 @@ export default function TagsHandler() {
                             url: polishToEnglish(cat.title),
                           })
                         }
-                        className="h-[40px] m-0.5 bg-[#126b91] rounded-lg text-white font-light p-1 text-sm sm:text-base hover:bg-opacity-80"
+                        className="h-[40px] m-0.5 bg-[#126b91]  text-white font-light p-1 text-sm sm:text-base hover:bg-opacity-80"
                         key={i}
                       >
                         {cat.title}
@@ -461,7 +455,7 @@ export default function TagsHandler() {
                                     setSlug({ title: "", url: "" });
                                   }
                                 }}
-                                className="h-[40px] m-0.5 bg-[#126b91] rounded-lg text-white font-light p-1 text-sm sm:text-base hover:bg-opacity-80"
+                                className="h-[40px] m-0.5 bg-[#126b91]  text-white font-light p-1 text-sm sm:text-base hover:bg-opacity-80"
                                 key={i}
                               >
                                 {job.title}

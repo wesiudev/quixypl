@@ -35,7 +35,7 @@ export default function LoginPage() {
   }
   return (
     <div className="relative flex flex-col h-screen justify-center items-center bg-gray-100 overflow-hidden">
-      <form className="flex flex-col w-full max-w-sm p-6 bg-white rounded-lg shadow-md relative z-50">
+      <form className="flex flex-col w-full max-w-sm p-6 bg-white  shadow-md relative z-50">
         <label className="text-gray-700 font-bold mb-2" htmlFor="email">
           Email
         </label>
@@ -43,7 +43,7 @@ export default function LoginPage() {
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="border border-gray-400 p-2 mb-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+          className="border border-gray-400 p-2 mb-4  focus:outline-none focus:ring-2 focus:ring-green-400"
           placeholder="Email"
           required
         />
@@ -55,7 +55,7 @@ export default function LoginPage() {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="border border-gray-400 p-2 mb-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+          className="border border-gray-400 p-2 mb-4  focus:outline-none focus:ring-2 focus:ring-green-400"
           placeholder="Password"
           required
         />
@@ -72,12 +72,12 @@ export default function LoginPage() {
             emailPasswordLogin();
           }}
           type="submit"
-          className="bg-green-400 text-white py-2 rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-400"
+          className="bg-green-400 text-white py-2  hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-400"
         >
           Login
         </button>
       </form>{" "}
-      <h1 className="text-center text-2xl py-12 bg-green-400 text-white px-3 rounded-b-xl relative z-50">
+      <h1 className="text-center text-2xl py-12 bg-green-400 text-white px-3  relative z-50">
         Quixy Admin v1.0
       </h1>
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-green-400 via-blue-500 to-red-500 opacity-25"></div>

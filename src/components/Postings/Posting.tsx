@@ -55,21 +55,21 @@ export default function Posting({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 h-max font-coco relative overflow-hidden">
+    <div className="bg-white  shadow-md p-4 h-max font-coco relative overflow-hidden">
       {optionsOpen && (
         <div className="w-full h-full absolute left-0 top-0 bg-black bg-opacity-50" />
       )}
       <div
-        className={`px-2 z-10 rounded-lg absolute top-7 right-12 w-max h-max py-6 bg-zinc-800 flex flex-col items-start space-y-1 duration-500 ease-in-out ${
+        className={`px-2 z-10  absolute top-7 right-12 w-max h-max py-6 bg-zinc-800 flex flex-col items-start space-y-1 duration-500 ease-in-out ${
           !optionsOpen ? "-translate-y-[80px] scale-x-0" : "-translate-y-0"
         }`}
       >
-        {/* <button className="w-full px-4 py-1 text-white bg-white bg-opacity-10 rounded-lg duration-150 hover:bg-opacity-20">
+        {/* <button className="w-full px-4 py-1 text-white bg-white bg-opacity-10  duration-150 hover:bg-opacity-20">
           Edytuj
         </button> */}
         <Link
           href="/dashboard/applications"
-          className="w-full px-4 py-1 text-white bg-white bg-opacity-10 rounded-lg duration-150 hover:bg-opacity-20"
+          className="w-full px-4 py-1 text-white bg-white bg-opacity-10  duration-150 hover:bg-opacity-20"
         >
           Aplikacje
         </Link>
@@ -82,7 +82,7 @@ export default function Posting({
             }
           }}
           disabled={loading}
-          className="w-full px-4 py-1 text-red-500 bg-white disabled:bg-red-400 bg-opacity-10 rounded-lg duration-150 hover:bg-opacity-20"
+          className="w-full px-4 py-1 text-red-500 bg-white disabled:bg-red-400 bg-opacity-10  duration-150 hover:bg-opacity-20"
         >
           {loading && <div className="loading loading-spinner"></div>}{" "}
           {deleteMenu ? "Anuluj" : "Usuń"}
@@ -95,7 +95,7 @@ export default function Posting({
                 setLoading(true);
                 handleDeleteJobOffer(jobOffer.id).then(() => setLoading(false));
               }}
-              className="disabled:bg-red-400 w-full px-4 py-1 text-white bg-red-500 bg-opacity-100 rounded-lg duration-150 hover:bg-opacity-90"
+              className="disabled:bg-red-400 w-full px-4 py-1 text-white bg-red-500 bg-opacity-100  duration-150 hover:bg-opacity-90"
             >
               {loading && <div className="loading loading-spinner"></div>} Usuń
             </button>
@@ -127,7 +127,7 @@ export default function Posting({
               <button
                 disabled={loading}
                 onClick={() => pay(jobOffer)}
-                className="bg-gradient-to-r from-primary to-cta px-2 py-0.5 rounded-md text-white"
+                className="bg-gradient-to-r from-primary to-cta px-2 py-0.5  text-white"
               >
                 Opublikuj{" "}
                 {loading && <div className="loading-lg loading-infinity"></div>}
@@ -136,7 +136,7 @@ export default function Posting({
             {jobOffer.isPaid && (
               <Link
                 href="/dashboard/applications"
-                className="bg-gradient-to-r from-primary to-cta px-2 py-0.5 rounded-md text-white"
+                className="bg-gradient-to-r from-primary to-cta px-2 py-0.5  text-white"
               >
                 Przeglądaj aplikacje
               </Link>
@@ -148,7 +148,7 @@ export default function Posting({
           <div className="flex items-end justify-end">
             <button
               onClick={() => setOptionsOpen(!optionsOpen)}
-              className={`w-max text-3xl text-white h-full px-2 bg-gradient-to-r from-primary to-cta hover:bg-opacity-20 rounded relative z-10 duration-200 `}
+              className={`w-max text-3xl text-white h-full px-2 bg-gradient-to-r from-primary to-cta hover:bg-opacity-20 relative z-10 duration-200 `}
             >
               <HiOutlineDotsHorizontal
                 className={`${
@@ -161,7 +161,7 @@ export default function Posting({
       </div>
       <div className="grid grid-cols-2 w-full gap-3">
         {jobOffer.creationTime && (
-          <div className="flex p-3 bg-gray-200 rounded-lg">
+          <div className="flex p-3 bg-gray-200 ">
             <FaUserClock className="text-xl text-gray-600 mr-2 mt-1.5" />
             <div className="flex flex-col font-coco text-black">
               <h2 className="font-bold">Dodano</h2>
@@ -172,7 +172,7 @@ export default function Posting({
           </div>
         )}
         {jobOffer.expirationTime && (
-          <div className="flex p-3 bg-gray-200 rounded-lg">
+          <div className="flex p-3 bg-gray-200 ">
             <FaClock className="text-xl text-gray-600 mr-2 mt-1.5" />
             <div className="flex flex-col font-coco text-black">
               <h2 className="font-bold">Wygasa</h2>
@@ -192,7 +192,7 @@ export default function Posting({
             </div>
           </div>
         )}
-        <div className="flex p-3 bg-gray-200 rounded-lg">
+        <div className="flex p-3 bg-gray-200 ">
           <FaRocket className="text-xl text-gray-600 mr-2 mt-1.5" />
           <div className="flex flex-col font-coco text-black">
             <h2 className="font-bold">Status</h2>

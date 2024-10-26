@@ -19,10 +19,10 @@ export default async function Page() {
     <div>
       <Header jobsList={jobs} />
       <Toast />
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between h-max w-full relative overflow-hidden bg-gradient-to-r from-primary to-cta rounded-b-3xl">
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between h-max w-full relative overflow-hidden bg-gradient-to-r from-primary to-cta ">
         <Hero />
         <div className="w-full relative z-10 p-4 lg:p-8">
-          <div className="p-4 lg:p-8 2xl:p-12 rounded-xl bg-white relative z-50">
+          <div className="p-4 lg:p-8 2xl:p-12  bg-white relative z-50">
             <h1 className="text-3xl lg:text-5xl font-gotham text-zinc-800">
               Twój generator pomysłów na biznes!
             </h1>
@@ -34,7 +34,7 @@ export default async function Page() {
             <Link
               title="Sprawdź Nasz Nowy Generator Pomysłów Na Biznes"
               href="#generator"
-              className="bg-gradient-to-r from-primary to-cta text-white py-2 px-3 rounded-lg font-gotham"
+              className="bg-gradient-to-r from-primary to-cta text-white py-2 px-3  font-gotham"
             >
               Wypróbuj za darmo
             </Link>
@@ -50,10 +50,10 @@ export default async function Page() {
           />
         </div>
       </div>
-      <div id="generator" className="my-12 container mx-auto rounded-xl">
+      <div id="generator" className="my-12 container mx-auto ">
         <HomePageGenerator sendGenerateIdeaRequest={sendGenerateIdeaRequest} />
       </div>
-      <div className="my-12 container mx-auto rounded-xl">
+      <div className="my-12 container mx-auto ">
         <IdeaList ideas={ideas} />
       </div>
 

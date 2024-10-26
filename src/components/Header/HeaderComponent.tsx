@@ -105,12 +105,12 @@ export default function HeaderComponent({
                 setMenuShow(false);
               }}
               title="Lista specjalistów Pracy Zdalnej w Quixy"
-              className={`flex text-black items-center rounded-md ml-3 sm:ml-12 w-max py-[10px] px-[10px] drop-shadow-sm duration-500 relative text-base cursor-pointer`}
+              className={`flex text-black items-center  ml-3 sm:ml-12 w-max py-[10px] px-[10px] drop-shadow-sm duration-500 relative text-base cursor-pointer`}
             >
               <span
                 className={`relative z-50 ${
                   hovered === "cat" && "bg-cta text-white"
-                } rounded-lg px-1.5 py-1`}
+                }  px-1.5 py-1`}
               >
                 Praca zdalna
               </span>
@@ -124,7 +124,7 @@ export default function HeaderComponent({
 
           <Link
             href="/business-ideas"
-            className="group text-base drop-shadow-sm shadow-black text-black px-2 py-1 rounded-lg hover:bg-cta hover:text-white relative pr-6"
+            className="group text-base drop-shadow-sm shadow-black text-black px-2 py-1  hover:bg-cta hover:text-white relative pr-6"
           >
             <span className="relative z-50">Pomysły</span>
             <div className="group-hover:text-white absolute right-[4px] -top-[1px] px-1 rounded-full text-black text-[10px] font-gotham">
@@ -133,7 +133,7 @@ export default function HeaderComponent({
           </Link>
           <Link
             href="/register"
-            className="group text-base drop-shadow-sm shadow-black text-black px-2 py-1 rounded-lg hover:bg-cta hover:text-white relative pr-6"
+            className="group text-base drop-shadow-sm shadow-black text-black px-2 py-1  hover:bg-cta hover:text-white relative pr-6"
           >
             <span className="relative z-50">Obrazy</span>
 
@@ -143,7 +143,7 @@ export default function HeaderComponent({
           </Link>
           <Link
             href="/marketplace"
-            className="group text-base drop-shadow-sm shadow-black text-black px-2 py-1 rounded-lg hover:bg-cta hover:text-white relative pr-6"
+            className="group text-base drop-shadow-sm shadow-black text-black px-2 py-1  hover:bg-cta hover:text-white relative pr-6"
           >
             <span className="relative z-50">Rynek projektów</span>
             <div className="group-hover:text-white absolute right-[4px] -top-[1px] px-1 rounded-full text-black text-[8px] font-gotham">
@@ -152,26 +152,26 @@ export default function HeaderComponent({
           </Link>
           <Link
             href="/about"
-            className="text-base drop-shadow-sm shadow-black text-black px-2 py-1 rounded-lg hover:bg-cta hover:text-white "
+            className="text-base drop-shadow-sm shadow-black text-black px-2 py-1  hover:bg-cta hover:text-white "
           >
             O nas
           </Link>
           <Link
             href="/contact"
-            className="text-base drop-shadow-sm shadow-black text-black px-2 py-1 rounded-lg hover:bg-cta hover:text-white "
+            className="text-base drop-shadow-sm shadow-black text-black px-2 py-1  hover:bg-cta hover:text-white "
           >
             Kontakt
           </Link>
           <Link
             href="/news"
-            className="text-base drop-shadow-sm shadow-black text-black px-2 py-1 rounded-lg hover:bg-cta hover:text-white "
+            className="text-base drop-shadow-sm shadow-black text-black px-2 py-1  hover:bg-cta hover:text-white "
           >
             Blog
           </Link>
         </div>
         <Link
           href="/register"
-          className={`w-max py-[2px] px-[10px] text-lg rounded-md bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 text-white drop-shadow-sm duration-100 cursor-pointer font-gotham font-light`}
+          className={`w-max py-[2px] px-[10px] text-lg  bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 text-white drop-shadow-sm duration-100 cursor-pointer font-gotham font-light`}
         >
           Rejestracja
         </Link>

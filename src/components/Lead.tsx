@@ -47,7 +47,7 @@ export default function Lead({
   return (
     <div
       key={lead.id}
-      className={`rounded relative bg-black p-3 h-max border-[3px] overflow-hidden ${
+      className={`relative bg-black p-3 h-max border-[3px] overflow-hidden ${
         lead.status === "trash" && "border-orange-700"
       } ${lead.status === "reseted" && "border-white"} ${
         lead.status === "accepted" && "border-green-500"
@@ -66,7 +66,7 @@ export default function Lead({
               setIsAnimating(false);
             }, 7750);
           }}
-          className="rounded cursor-pointer absolute w-full h-full z-50 bg-black left-0 top-0 bg-opacity-80 flex items-center justify-center"
+          className="cursor-pointer absolute w-full h-full z-50 bg-black left-0 top-0 bg-opacity-80 flex items-center justify-center"
         >
           <Image
             src="/dolar.gif"
@@ -85,7 +85,7 @@ export default function Lead({
               setIsAnimating(false);
             }, 7750);
           }}
-          className="rounded cursor-pointer absolute w-full h-full z-50 bg-black left-0 top-0 bg-opacity-80 flex items-center justify-center"
+          className="cursor-pointer absolute w-full h-full z-50 bg-black left-0 top-0 bg-opacity-80 flex items-center justify-center"
         >
           <Image
             src="/dolar.gif"
@@ -105,7 +105,7 @@ export default function Lead({
         </div>
         <button
           onClick={() => setOptionsOpen(!optionsOpen)}
-          className="text-3xl text-white h-full px-2 hover:bg-white hover:bg-opacity-20 rounded relative z-50"
+          className="text-3xl text-white h-full px-2 hover:bg-white hover:bg-opacity-20 relative z-50"
         >
           <HiOutlineDotsHorizontal />
         </button>
@@ -197,7 +197,7 @@ export default function Lead({
           onClick={() => {
             setNoteOpen(lead);
           }}
-          className="text-blue-500 font-light rounded p-0.5 px-2 hover:bg-white hover:bg-opacity-20"
+          className="text-blue-500 font-light p-0.5 px-2 hover:bg-white hover:bg-opacity-20"
         >
           Edytuj
         </button>
@@ -252,7 +252,7 @@ export default function Lead({
               setIsSigning(true);
               setSigningLead(lead);
             }}
-            className="w-full text-center bg-gradient-to-br from-yellow-800 via-yellow-400 to-yellow-800 hover:from-yellow-600 hover:via-yellow-400 hover:to-yellow-600 font-bold text-white py-2 text-base mt-2 rounded relative group"
+            className="w-full text-center bg-gradient-to-br from-yellow-800 via-yellow-400 to-yellow-800 hover:from-yellow-600 hover:via-yellow-400 hover:to-yellow-600 font-bold text-white py-2 text-base mt-2 relative group"
           >
             <span className="drop-shadow-xl shadow-black">Podpisz</span>{" "}
             <IoDiamondOutline className="group-hover:scale-150 duration-500 absolute right-3 top-1/2 -translate-y-1/2 text-white ml-2 text-2xl" />

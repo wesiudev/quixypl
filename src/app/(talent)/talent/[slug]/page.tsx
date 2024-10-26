@@ -50,7 +50,7 @@ export default async function Page({
                 </li>
               </ul>
             </div>
-            <div className="lg:block hidden w-max bg-gradient-to-r from-primary to-cta text-white font-bold text-lg font-gotham px-3 rounded-lg">
+            <div className="lg:block hidden w-max bg-gradient-to-r from-primary to-cta text-white font-bold text-lg font-gotham px-3 ">
               Quixy Talent&trade;
             </div>
           </div>
@@ -71,13 +71,13 @@ export default async function Page({
                       </div>
                     )}
                     {!slug?.photoURL && (
-                      <div className="bg-[#126b91] rounded-l-xl aspect-square text-white flex items-center justify-center w-24">
+                      <div className="bg-[#126b91]  aspect-square text-white flex items-center justify-center w-24">
                         <FaUser className="text-5xl" />
                       </div>
                     )}
                   </div>
                   <div className="px-3">
-                    <div className="flex flex-col h-max w-full rounded-xl">
+                    <div className="flex flex-col h-max w-full ">
                       <div className="text-black font-gotham font-bold w-full flex items-center justify-between">
                         <h2 className="text-base sm:text-xl lg:text-2xl">
                           {slug?.name ? slug?.name : "Nie podano"}
@@ -126,7 +126,7 @@ export default async function Page({
                 }  mt-3`}
               >
                 <div className="mr-1">
-                  <h2 className="w-max rounded-lg text-xl text-black font-gotham mt-3">
+                  <h2 className="w-max  text-xl text-black font-gotham mt-3">
                     Specjalizacje
                   </h2>
                   <div className="w-full -ml-1 mt-1 flex flex-wrap items-center font-coco text-black">
@@ -136,7 +136,7 @@ export default async function Page({
                           href={`/praca-zdalna/${item?.slugUrl}/${
                             item?.categoryUrl
                           }/${item?.url}/${polishToEnglish(slug?.city)}`}
-                          className="badge badge-primary badge-outline ml-1 mt-1 rounded-xl duration-100 flex items-center px-2 py-0.5 text-sm font-coco font-light"
+                          className="badge badge-primary badge-outline ml-1 mt-1  duration-100 flex items-center px-2 py-0.5 text-sm font-coco font-light"
                         >
                           {item.title}
                         </Link>
@@ -147,7 +147,7 @@ export default async function Page({
                   </div>
                 </div>
                 <div className="">
-                  <h2 className="w-max rounded-lg text-xl text-black font-gotham mt-3">
+                  <h2 className="w-max  text-xl text-black font-gotham mt-3">
                     Dostępność
                   </h2>
                   <div className="-ml-1 mt-1 flex items-center flex-wrap">
@@ -155,7 +155,7 @@ export default async function Page({
                       slug?.preferences?.map((item: any, i: any) => (
                         <h3
                           key={i}
-                          className={`badge badge-primary badge-outline ml-1 mt-1 rounded-xl duration-100 flex items-center px-2 py-0.5 text-sm font-coco font-light `}
+                          className={`badge badge-primary badge-outline ml-1 mt-1  duration-100 flex items-center px-2 py-0.5 text-sm font-coco font-light `}
                         >
                           {item}
                         </h3>
@@ -183,7 +183,7 @@ export default async function Page({
             </div>
           </div>
           {slug?.projects?.length > 0 && (
-            <div className={`rounded-xl h-max w-full mt-3`}>
+            <div className={` h-max w-full mt-3`}>
               <h2
                 className={`text-3xl text-black drop-shadow-lg font-gotham mb-3`}
               >
@@ -201,7 +201,7 @@ export default async function Page({
             slug?.job_offers?.filter(
               (jobOffer: JobPosting, i: number) => jobOffer.isPaid
             )?.length > 0 && (
-              <div className={`rounded-xl h-max w-full mt-3`}>
+              <div className={` h-max w-full mt-3`}>
                 <h2
                   className={`text-xl text-black drop-shadow-lg font-gotham mb-3`}
                 >
@@ -223,8 +223,8 @@ export default async function Page({
       </div>
       <div className="container mx-auto py-12 bg-white px-4">
         <div className="bg-white relative overflow-hidden">
-          <div className="bg-gradient-to-r from-primary/40 to-cta/40 text-xl lg:text-3xl mx-auto rounded-xl">
-            <h2 className="text-white font-gotham w-full text-center px-2 py-1 rounded-t-xl bg-gradient-to-r from-primary to-cta">
+          <div className="bg-gradient-to-r from-primary/40 to-cta/40 text-xl lg:text-3xl mx-auto ">
+            <h2 className="text-white font-gotham w-full text-center px-2 py-1  bg-gradient-to-r from-primary to-cta">
               Zobacz podobne profile
             </h2>
             <div className="p-2">

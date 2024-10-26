@@ -61,7 +61,7 @@ export default function RegisterPopup({
           : "hidden"
       }`}
     >
-      <div className="rounded-xl bg-white w-full sm:max-w-[40rem] max-h-[90vh] overflow-y-scroll">
+      <div className=" bg-white w-full sm:max-w-[40rem] max-h-[90vh] overflow-y-scroll">
         <h2 className="p-6 text-4xl font-gotham text-white font-bold drop-shadow-xl shadow-black mb-3 bg-gradient-to-r from-primary to-cta">
           {view === "register"
             ? "Dołącz i odbierz darmowe Quixies💎"

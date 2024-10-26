@@ -28,7 +28,7 @@ export default function BackpackEmpty({ user }: { user: any }) {
               <h2 className="text-3xl sm:text-5xl text-white mb-6">
                 Generator Obrazów
               </h2>
-              {/* <div className="text-xl sm:text-2xl text-white bg-[#126b91] rounded-xl p-3 w-max max-w-[100%]">
+              {/* <div className="text-xl sm:text-2xl text-white bg-[#126b91]  p-3 w-max max-w-[100%]">
                 Cześć, {user?.name || user?.email || user?.pseudo}!
               </div> */}
               <div className="mt-2 text-white text-xl sm:text-2xl">
@@ -53,7 +53,7 @@ export default function BackpackEmpty({ user }: { user: any }) {
                   value={userPrompt}
                   placeholder="Napisz co chcesz zobaczyć, aby wygenerować swój pierwszy obraz"
                   maxLength={300}
-                  className="text-black placeholder:text-black font-light z-20 w-full p-4 rounded-2xl text-xl lg:text-xl min-h-[25vh] bg-white outline-none resize-none"
+                  className="text-black placeholder:text-black font-light z-20 w-full p-4  text-xl lg:text-xl min-h-[25vh] bg-white outline-none resize-none"
                 />
               </div>
               <GenerateButton

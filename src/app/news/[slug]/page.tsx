@@ -64,7 +64,7 @@ export default async function Page({ params }: { params: any }) {
               />
             )}
             {!product?.primaryImage && (
-              <div className="bg-gray-300 hover:bg-opacity-80 duration-300 flex items-center justify-center rounded-3xl w-full aspect-square mt-6 lg:hidden text-7xl text-gray-500">
+              <div className="bg-gray-300 hover:bg-opacity-80 duration-300 flex items-center justify-center  w-full aspect-square mt-6 lg:hidden text-7xl text-gray-500">
                 <FaImage />
               </div>
             )}
@@ -116,7 +116,7 @@ export default async function Page({ params }: { params: any }) {
           </div>
           <div className="flex flex-col">
             {!product?.primaryImage && (
-              <div className="bg-gray-300 hover:bg-opacity-80 duration-300 items-center justify-center rounded-3xl w-full aspect-square hidden lg:flex text-7xl text-gray-500">
+              <div className="bg-gray-300 hover:bg-opacity-80 duration-300 items-center justify-center  w-full aspect-square hidden lg:flex text-7xl text-gray-500">
                 <FaImage />
               </div>
             )}
@@ -167,7 +167,7 @@ export default async function Page({ params }: { params: any }) {
                 {!product?.secondaryImage && (
                   <div
                     style={{ boxShadow: "0px 0px 5px #000000" }}
-                    className="bg-gray-300 hover:bg-opacity-80 duration-300 items-center justify-center rounded-3xl w-full aspect-square flex text-7xl text-gray-500"
+                    className="bg-gray-300 hover:bg-opacity-80 duration-300 items-center justify-center  w-full aspect-square flex text-7xl text-gray-500"
                   >
                     <FaImage />
                   </div>

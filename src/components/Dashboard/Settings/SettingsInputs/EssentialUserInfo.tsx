@@ -67,29 +67,26 @@ export default function EssentialUserInfo({
           className="cursor-pointer pl-3 lg:pl-6 relative h-max group w-max mb-3 lg:mb-0"
         >
           {source?.photoURL && (
-            <div className="bg-gradient-to-r from-primary to-cta p-1 rounded-t-xl">
-              <div className="rounded-t-lg relative w-max group-hover:bg-gray-200 duration-150">
+            <div className="bg-gradient-to-r from-primary to-cta p-1 ">
+              <div className=" relative w-max group-hover:bg-gray-200 duration-150">
                 <Image
                   src={source?.photoURL}
                   width={256}
                   height={256}
                   alt=""
-                  className="p-1 rounded-t-lg mb-0 w-20 sm:w-40 bg-white group-hover:bg-gray-200"
+                  className="p-1 mb-0 w-40 bg-white group-hover:bg-gray-200 rounded-full"
                 />
               </div>
             </div>
           )}
           {!source?.photoURL && (
-            <div
-              style={{ boxShadow: "0px 0px 5px black" }}
-              className="bg-[#126b91] h-full rounded-t-xl aspect-square text-white flex items-center justify-center w-20 sm:w-40 relative duration-150"
-            >
+            <div className="shadow-sm shadow-black bg-gradient-to-r from-primary to-cta h-full rounded-full aspect-square text-white flex items-center justify-center w-40 relative duration-150 flex-col group">
               <FaUser className="text-5xl" />
+              <div className="font-coco z-50 mt-2 px-2 py-1 relative w-max shadow-black text-center bg-gradient-to-r from-primary to-cta text-white shadow-sm group-hover:scale-125">
+                Zmień
+              </div>
             </div>
           )}
-          <div className="font-coco z-50 relative w-full text-center bg-gradient-to-r from-primary to-cta rounded-b-xl text-white py-1">
-            Zmień
-          </div>
         </label>
         <input
           type="file"
@@ -122,7 +119,7 @@ export default function EssentialUserInfo({
         />
         <div className="pl-3 lg:pl-6 grid lg:grid-cols-2 sm:gap-x-3 font-coco">
           <div className="flex flex-col lg:pt-0">
-            <div className="text-white py-1 px-2 rounded-md bg-gradient-to-r from-primary to-cta w-max">
+            <div className="text-white py-1 px-2 bg-gradient-to-r from-primary to-cta w-max">
               Email
             </div>{" "}
             <strong className="text-black mt-2 text-sm sm:text-base">
@@ -131,7 +128,7 @@ export default function EssentialUserInfo({
           </div>
           {source?.pseudo && (
             <div className="flex flex-col lg:pt-0">
-              <div className="text-white py-1 px-2 rounded-md bg-gradient-to-r from-primary to-cta w-max mt-2 lg:mt-0">
+              <div className="text-white py-1 px-2  bg-gradient-to-r from-primary to-cta w-max mt-2 lg:mt-0">
                 Unikalna nazwa
               </div>{" "}
               <strong className="text-black mt-2 text-sm sm:text-base">
@@ -141,7 +138,7 @@ export default function EssentialUserInfo({
           )}
           {source?.region && (
             <div className="flex flex-col lg:pt-0">
-              <div className="text-white py-1 px-2 rounded-md bg-gradient-to-r from-primary to-cta w-max mt-2 lg:mt-0">
+              <div className="text-white py-1 px-2  bg-gradient-to-r from-primary to-cta w-max mt-2 lg:mt-0">
                 Województwo
               </div>{" "}
               <strong className="text-black mt-2 text-sm sm:text-base">
@@ -151,7 +148,7 @@ export default function EssentialUserInfo({
           )}
           {source?.city && (
             <div className="flex flex-col lg:pt-0">
-              <div className="text-white py-1 px-2 rounded-md bg-gradient-to-r from-primary to-cta w-max mt-2 lg:mt-0">
+              <div className="text-white py-1 px-2  bg-gradient-to-r from-primary to-cta w-max mt-2 lg:mt-0">
                 Miasto
               </div>{" "}
               <strong className="text-black mt-2 text-sm sm:text-base">
@@ -177,7 +174,7 @@ export default function EssentialUserInfo({
                     handleReduxUserState(e.target.value, "name");
                     setChangesWereMade(true);
                   }}
-                  className="border border-primary rounded-md p-2 text-black  font-light"
+                  className="border border-primary  p-2 text-black  font-light"
                   placeholder="Imię lub imię i nazwisko"
                 />
               </div>
@@ -190,7 +187,7 @@ export default function EssentialUserInfo({
                     handleReduxUserState(e.target.value, "title");
                     setChangesWereMade(true);
                   }}
-                  className="border border-primary rounded-md p-2 text-black  font-light"
+                  className="border border-primary  p-2 text-black  font-light"
                   placeholder={`np. ${source?.seek ? "Młodszy Księgowy" : ""}${
                     !source?.seek ? "Project Manager" : ""
                   }`}
@@ -244,7 +241,7 @@ export default function EssentialUserInfo({
                     hasAnswer &&
                     !pseudoIsAvailable &&
                     "bg-red-500 text-white !font-bold"
-                  } border-primary rounded-md p-2 text-black font-light`}
+                  } border-primary  p-2 text-black font-light`}
                   placeholder="np. jan345"
                 />
                 <div className="grid grid-cols-2 gap-3">
@@ -254,7 +251,7 @@ export default function EssentialUserInfo({
                       <button
                         onClick={check}
                         disabled={isLoading}
-                        className="bg-gradient-to-r from-primary to-cta disabled:cursor-not-allowed w-max rounded-md disabled:bg-[#126b91] disabled:duration-500 duration-100 px-2 py-1.5 bg-[#126b91] text-white font-gotham mt-2"
+                        className="bg-gradient-to-r from-primary to-cta disabled:cursor-not-allowed w-max  disabled:bg-[#126b91] disabled:duration-500 duration-100 px-2 py-1.5 bg-[#126b91] text-white font-gotham mt-2"
                       >
                         {!isLoading && "Sprawdź dostępność"}
                         {isLoading && "Sprawdzam..."}
@@ -304,7 +301,7 @@ export default function EssentialUserInfo({
                     <input
                       onClick={() => console.log(source?.hourRate)}
                       id="hourRate"
-                      className="w-full border border-primary rounded-md p-2 text-black font-light"
+                      className="w-full border border-primary  p-2 text-black font-light"
                       placeholder={`np. ${source?.seek ? "100" : ""}`}
                       type="text"
                       value={source?.hourRate}
@@ -318,7 +315,7 @@ export default function EssentialUserInfo({
                         }
                       }}
                     />
-                    <div className="flex items-center justify-center absolute right-0 top-0 h-full bg-gradient-to-r from-primary to-cta text-white font-coco px-3 rounded-r-md">
+                    <div className="flex items-center justify-center absolute right-0 top-0 h-full bg-gradient-to-r from-primary to-cta text-white font-coco px-3 ">
                       zł/h
                     </div>
                   </div>
@@ -336,7 +333,7 @@ export default function EssentialUserInfo({
               }}
               rows={4}
               maxLength={2000}
-              className="border border-primary rounded-lg p-2 w-full text-black"
+              className="border border-primary  p-2 w-full text-black"
               placeholder={
                 source?.seek
                   ? "Jakie usługi wykonujesz? Opisz szczegółowo to, co możesz zeoferować w zespole lub dla klienta."

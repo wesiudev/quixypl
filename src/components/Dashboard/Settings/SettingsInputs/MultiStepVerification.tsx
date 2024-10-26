@@ -1,11 +1,10 @@
-import Link from "next/link";
 import { useState, useEffect } from "react";
-import { FaCheckCircle } from "react-icons/fa";
 import { IoCheckmarkCircle, IoCloseCircle } from "react-icons/io5";
 import { updateUser } from "@/firebase"; // Assuming updateUser is imported from "@/firebase"
 import Confetti from "react-confetti"; // Assuming react-confetti is installed
 import { setUser } from "@/redux/slices/user";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { set_modals } from "@/redux/slices/modalsopen";
 
 // MultiStepVerification Component
 export default function MultiStepVerification({
@@ -51,73 +50,83 @@ export default function MultiStepVerification({
       dispatch(setUser({ ...user, access: true }));
     }, 5000); // Hide confetti after 5 seconds
   };
-
+  const { modals } = useSelector((state: any) => state.modals);
   return (
-    <div
-      className={`${
-        user?.access === true && "hidden"
-      } p-6 bg-white shadow-lg rounded-lg w-full mx-auto font-coco`}
-    >
-      <h2 className="text-xl font-bold text-gray-800 mb-6 text-left">
-        Weryfikacja przed wyświetlaniem na stronie
-      </h2>
-
-      <div className="relative w-full h-6 bg-gray-300 rounded-full mb-6">
-        <div
-          className="h-full bg-gradient-to-r from-primary to-cta rounded-full transition-all duration-500 ease-in-out"
-          style={{ width: `${progress}%` }}
-        ></div>
-      </div>
-      <p className="text-center text-sm text-gray-600 mb-4">
-        {progress}% ukończono
-      </p>
-
-      <div className="space-y-4">
-        <StepItem
-          step={3}
-          title="Imię"
-          isCompleted={!!name}
-          completedText="Podane"
-          incompleteText={`Imię/nazwisko lub nazwa firmy`}
-        />
-        <StepItem
-          step={4}
-          title="E-mail zweryfikowany"
-          isCompleted={emailVerified}
-          completedText="Zweryfikowany"
-          incompleteText="Zweryfikuj adres e-mail"
-        />
-        <StepItem
-          step={2}
-          title="Typ profilu"
-          isCompleted={(seek === true || seek === false) && seek !== "ask"}
-          completedText={seek ? "Talent" : "Klient"}
-          incompleteText="Wybierz typ profilu"
-        />
-        <StepItem
-          step={5}
-          title="Nazwa profilu"
-          isCompleted={!!pseudo}
-          completedText="Tak"
-          incompleteText="Ustaw unikalną nazwe profilu"
-        />
-        <StepItem
-          step={1}
-          title="Rozpocznij konfigurację"
-          isCompleted={configured && seek !== "ask"}
-          completedText="Rozpoczęto proces"
-          incompleteText="Otwórz panel konfiguracji"
-        />
-      </div>
-
-      {progress === 100 && (
+    <div className="p-3 rounded-xl bg-primary/20">
+      {isAnimating && <Confetti />}
+      <div
+        className={`${
+          user?.access === true && "hidden"
+        } p-3 lg:p-6 w-full mx-auto font-coco`}
+      >
         <button
-          onClick={handleAccessClick}
-          className="mt-6 bg-blue-600 text-white py-2 px-4 rounded-lg font-bold"
+          onClick={() => dispatch(set_modals({ ...modals, config: true }))}
+          className="text-xl font-light text-white bg-gradient-to-r from-primary to-cta rounded-lg px-2 py-1 italic mb-3 text-left"
         >
-          Wpisz się!
+          Wyświetlaj swoje usługi
         </button>
-      )}
+
+        <div className="space-y-4">
+          <StepItem
+            step={1}
+            title="Konfiguracja"
+            isCompleted={configured && seek !== "ask"}
+            completedText="Proces rozpoczęty"
+            incompleteText="Rozpocznij konfigurację"
+          />
+          <StepItem
+            step={3}
+            title="Przedstaw się"
+            isCompleted={!!name}
+            completedText="Pomyślnie ukończono"
+            incompleteText={`Imię/nazwisko lub nazwa firmy`}
+          />
+          <StepItem
+            step={4}
+            title="E-mail"
+            isCompleted={emailVerified}
+            completedText="Pomyślnie ukończono"
+            incompleteText="Zweryfikuj E-mail"
+          />
+          <StepItem
+            step={2}
+            title="Rodzaj profilu"
+            isCompleted={(seek === true || seek === false) && seek !== "ask"}
+            completedText={seek ? "Talent" : "Klient"}
+            incompleteText="Wybierz typ profilu"
+          />
+          <StepItem
+            step={5}
+            title="Pseudonim"
+            isCompleted={pseudo}
+            completedText={pseudo}
+            incompleteText="Ustaw unikalną nazwę"
+          />
+        </div>
+        <div className="p-3 bg-gradient-to-r from-cta/50 to-primary/50 rounded-xl mt-3">
+          <p className="text-sm text-center text-white bg-gradient-to-r from-primary to-cta rounded-lg mb-3 p-1.5">
+            Uzupełnij swój profil, aby rozpocząć pozyskiwanie klientów lub
+            poszukiwanie pracy.
+          </p>
+          <div className="relative w-full h-6 bg-white rounded-full mb-3">
+            <div
+              className="h-full bg-gradient-to-r from-primary to-cta rounded-full transition-all duration-500 ease-in-out"
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+          <p className="text-center text-sm text-white rounded-xl px-2 mx-auto w-max bg-gradient-to-r from-primary to-cta">
+            {progress}% ukończono
+          </p>
+        </div>
+        {progress === 100 && (
+          <button
+            onClick={handleAccessClick}
+            className="mt-6 bg-blue-600 text-white py-2 px-4  font-bold"
+          >
+            Wpisz się!
+          </button>
+        )}
+      </div>
     </div>
   );
 }

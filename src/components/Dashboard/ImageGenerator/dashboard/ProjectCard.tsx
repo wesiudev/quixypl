@@ -97,10 +97,10 @@ export default function ProjectCard({
           !isSlug && "md:hover:bg-primary/30"
         } text-black mt-6 md:mt-0 ${
           !isSlug && "md:p-6 lg:p-12"
-        } flex flex-row items-start rounded-xl w-full relative`}
+        } flex flex-row items-start  w-full relative`}
       >
         <div className="flex flex-col items-start justify-start text-left">
-          <h2 className="font-coco bg-gradient-to-r from-primary to-cta p-3 rounded-lg text-white text-3xl">
+          <h2 className="font-coco bg-gradient-to-r from-primary to-cta p-3  text-white text-3xl">
             {project?.name}
           </h2>
 
@@ -212,7 +212,7 @@ export default function ProjectCard({
             (
               <Link
                 href="/dashboard/applications"
-                className="mt-4 text-white bg-gradient-to-r from-primary to-cta py-0.5 px-2 rounded-md"
+                className="mt-4 text-white bg-gradient-to-r from-primary to-cta py-0.5 px-2 "
               >
                 Przeglądaj aplikacje
               </Link>
@@ -231,7 +231,7 @@ export default function ProjectCard({
                   finishUpQuickOffer();
                 }
               }}
-              className="bg-cta text-white text-2xl p-3 font-gotham mt-4 rounded-xl hover:bg-opacity-80"
+              className="bg-cta text-white text-2xl p-3 font-gotham mt-4  hover:bg-opacity-80"
               style={{ textShadow: "2px 2px 2px black" }}
             >
               Opublikuj (💎{project?.price?.toFixed(2)})

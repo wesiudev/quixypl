@@ -22,11 +22,11 @@ export default function MainFooter({
             {!heading && <div>Szukaj lub zatrudnij do pracy zdalnej</div>}
             {heading && <div>{heading}</div>}
           </h2>
-          <div className="bg-black/50 p-3 lg:p-6 mt-12 rounded-xl grid grid-cols-1 md:grid-cols-2 md:gap-4 xl:grid-cols-3 2xl:grid-cols-4 w-full">
+          <div className="bg-black/50 p-3 lg:p-6 mt-12  grid grid-cols-1 md:grid-cols-2 md:gap-4 xl:grid-cols-3 2xl:grid-cols-4 w-full">
             {jobsList.map((item: any, i: any) => (
               <div key={i} className="flex flex-col w-full">
                 <h2 className="pt-[9px] text-white w-max max-w-full font-coco font-light italic text-xl lg:text-2xl 2xl:text-xl">
-                  <span className="p-[9px] bg-gradient-to-r from-primary to-cta rounded-xl">
+                  <span className="p-[9px] bg-gradient-to-r from-primary to-cta ">
                     {item.title}
                   </span>
                 </h2>
@@ -50,13 +50,13 @@ export default function MainFooter({
             ))}
           </div>
         </div>
-        <div className="p-3 lg:p-6 bg-zinc-600/50 rounded-xl">
+        <div className="p-3 lg:p-6 bg-zinc-600/50 ">
           <div className="text-white text-lg drop-shadow-lg shadow-black italic mb-3">
             Powered by
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col">
-              <div className="w-full grid grid-cols-2 justify-center space-x-6 items-center h-max bg-gradient-to-r from-blue-300 to-[#5865F2] p-4 rounded-md">
+              <div className="w-full grid grid-cols-2 justify-center space-x-6 items-center h-max bg-gradient-to-r from-blue-300 to-[#5865F2] p-4 ">
                 <Link
                   href="https://openai.com/"
                   target="_blank"
@@ -90,7 +90,7 @@ export default function MainFooter({
               <div className="text-white text-lg drop-shadow-lg shadow-black italic my-3">
                 Dev by
               </div>
-              <div className="w-full grid grid-cols-2 justify-center space-x-6 items-center h-max bg-gradient-to-r from-blue-300 to-[#5865F2] p-4 rounded-md">
+              <div className="w-full grid grid-cols-2 justify-center space-x-6 items-center h-max bg-gradient-to-r from-blue-300 to-[#5865F2] p-4 ">
                 <Link
                   href="https://wesiudev.com/"
                   target="_blank"

@@ -38,7 +38,7 @@ export default function CitiesPicker({
             openCitySelector(e.target.value);
             setChangesWereMade(true);
           }}
-          className="border border-primary rounded-md p-2 text-black  font-light"
+          className="border border-primary  p-2 text-black  font-light"
         >
           <option value="">Wybierz</option>
           {[
@@ -73,7 +73,7 @@ export default function CitiesPicker({
           <input
             disabled={loading}
             list="cities"
-            className={` disabled:bg-primary/50 text-black disabled:cursor-not-allowed disabled:font-bold disabled:text-white border border-primary rounded-md p-2 font-light`}
+            className={` disabled:bg-primary/50 text-black disabled:cursor-not-allowed disabled:font-bold disabled:text-white border border-primary  p-2 font-light`}
             value={inputCity === "" ? source?.city : inputCity}
             onClick={() => {
               if (!cities.length && source?.region) {

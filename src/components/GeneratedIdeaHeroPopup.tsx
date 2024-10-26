@@ -48,7 +48,7 @@ export default function GeneratedIdeaHeroPopup({
           setGeneratorPopup(false);
         }}
         style={{ boxShadow: "0 0 16px 0 white" }}
-        className={`fixed z-[9999] border border-black bg-white bg-opacity-5 text-white text-4xl top-5 right-5 p-2 rounded-xl w-10 h-10 flex items-center justify-center ${
+        className={`fixed z-[9999] border border-black bg-white bg-opacity-5 text-white text-4xl top-5 right-5 p-2  w-10 h-10 flex items-center justify-center ${
           registerPopupOpen || generatorPopup
             ? "translate-x-0 duration-[1000ms]"
             : "translate-x-[100vw]"
@@ -80,9 +80,9 @@ export default function GeneratedIdeaHeroPopup({
           onClick={(e: any) => {
             e.stopPropagation();
           }}
-          className="bg-white rounded-lg flex flex-col w-[90%] sm:max-w-[40rem] h-[50vh] relative bg-opacity-90 z-[999999999999]"
+          className="bg-white  flex flex-col w-[90%] sm:max-w-[40rem] h-[50vh] relative bg-opacity-90 z-[999999999999]"
         >
-          <h2 className="bg-[#126b91] rounded-t-lg p-6 font-gotham text-2xl text-white font-bold drop-shadow-xl shadow-black sticky top-0">
+          <h2 className="bg-[#126b91]  p-6 font-gotham text-2xl text-white font-bold drop-shadow-xl shadow-black sticky top-0">
             Twój nowy pomysł jest gotowy!
           </h2>
           <div className="w-full p-4 md:p-6 flex flex-col h-full overflow-y-scroll">
@@ -104,7 +104,7 @@ export default function GeneratedIdeaHeroPopup({
               setGeneratorPopup(false);
               e.stopPropagation();
             }}
-            className="py-3 mx-auto rounded-b-lg bg-green-500 font-bold text-white w-full sticky bottom-0 left-0"
+            className="py-3 mx-auto  bg-green-500 font-bold text-white w-full sticky bottom-0 left-0"
           >
             Dołącz teraz
           </button>

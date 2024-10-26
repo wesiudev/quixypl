@@ -48,7 +48,7 @@ export default function ExtraSettings({
             <h2 className="text-2xl font-bold">Ustawienia dodatkowe</h2>
             <button
               onClick={() => setExtraSettingsOpen(false)}
-              className="bg-gray-600 text-white rounded-xl px-3 py-1.5 hover:bg-gray-500 duration-300"
+              className="bg-gray-600 text-white  px-3 py-1.5 hover:bg-gray-500 duration-300"
             >
               Zamknij
             </button>

@@ -37,15 +37,15 @@ export default function ImageOpen({ imageOpen, setImageOpen }: ImageOpenProps) {
                   width={1920}
                   height={1080}
                   alt=""
-                  className={`rounded-t-xl relative z-[505] bg-[#126b91] bg-opacity-70`}
-                 blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
+                  className={` relative z-[505] bg-[#126b91] bg-opacity-70`}
+                  blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
                   placeholder="blur"
                 />
 
                 <div className="flex flex-col relative z-[505] h-full">
                   <div
                     style={{ boxShadow: "inset 0px 0px 5px black" }}
-                    className="rounded-b-xl p-3 lg:p-6 bg-white rounded-x-3xl"
+                    className=" p-3 lg:p-6 bg-white rounded-x-3xl"
                   >
                     <div className="text-2xl flex items-center text-black ">
                       Prompt

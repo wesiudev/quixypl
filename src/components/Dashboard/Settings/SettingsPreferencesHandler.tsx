@@ -57,7 +57,7 @@ export default function PreferencesHandler({
     items.slice(0, expand ? items.length : limit).map((item) => (
       <button
         key={item}
-        className={`font-coco duration-200 text-white px-1.5 py-1 ml-1 mt-1 text-sm rounded-md ${
+        className={`font-coco duration-200 text-white px-1.5 py-1 ml-1 mt-1 text-sm  ${
           source?.preferences?.includes(item) ? "bg-cta" : "bg-gray-400"
         }`}
         onClick={() => {
@@ -143,7 +143,7 @@ export default function PreferencesHandler({
         {(source?.seek && itemsForTalent.length > 6) ||
         (!source?.seek && companySize.length > 6) ? (
           <button
-            className="bg-[#126b91] text-white text-sm p-1 px-2 ml-1 mt-1 rounded-md"
+            className="bg-[#126b91] text-white text-sm p-1 px-2 ml-1 mt-1 "
             onClick={() => setExpand(!expand)}
           >
             {expand ? "Pokaż mniej" : "Pokaż więcej"}

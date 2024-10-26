@@ -71,7 +71,7 @@ export default async function Page() {
     <div className="flex flex-col bg-white">
       <Header jobsList={itCategories} />
       <div className="">
-        <div className="px-4 container mx-auto w-full flex flex-col items-center lg:grid lg:grid-cols-2 relative z-50 py-32">
+        <div className="px-4 container mx-auto w-full flex flex-col items-center lg:grid lg:grid-cols-2 relative z-50 pt-24 pb-12 lg:pt-32 lg:pb-32">
           <div className="group relative flex flex-col mx-auto">
             <Image
               src="/assets/quixy-logo.png"
@@ -79,10 +79,10 @@ export default async function Page() {
               height={140}
               alt="Pracuj Zdalnie Z Quixy Talent"
               title="Pracuj Zdalnie Z Quixy Talent"
-              className="w-[140px] lg:hidden h-auto mx-auto mb-6"
+              className="w-[125px] lg:hidden h-auto mx-auto mb-6"
             />
             <h2 className="lg:max-w-sm font-extrabold font-coco text-3xl lg:text-5xl text-zinc-800 text-center sm:text-left  mx-auto sm:mx-0">
-              Twoja platforma pracy zdalnej
+              Twoja platforma z pracą zdalną
             </h2>
             <h2 className="max-w-[100%] mx-auto lg:mx-0 px-6 sm:px-0 sm:max-w-sm lg:max-w-lg font-light text-black font-gotham lg:text-lg xl:text-xl text-center lg:text-left mt-2">
               Pierwszy polski serwis łączący{" "}
@@ -96,14 +96,14 @@ export default async function Page() {
               <Link
                 href="/praca-zdalna"
                 title="Rekrutuj do pracy zdalnej na panelu Quixy"
-                className="font-gotham font-light rounded-md bg-primary hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
+                className="font-gotham font-light  bg-primary hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
               >
                 <h2 className="w-max mx-auto">Zatrudnij talent</h2>
               </Link>
               <Link
                 href="/praca-zdalna"
                 title="Szukaj pracy zdalnej na panelu Quixy"
-                className="font-gotham font-light rounded-md bg-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
+                className="font-gotham font-light  bg-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
               >
                 <h2 className="w-max mx-auto">Pracuj zdalnie</h2>
               </Link>
@@ -124,7 +124,7 @@ export default async function Page() {
                 width={224}
                 height={224}
                 alt="deviant nam zaufał"
-                className="max-h-[38px] w-auto ml-6 mt-3 bg-white px-1 rounded-md"
+                className="max-h-[38px] w-auto ml-6 mt-3 bg-white px-1 "
               />
               <Image
                 src="/assets/pinterest.png"
@@ -137,15 +137,15 @@ export default async function Page() {
           </div>
           <div
             style={{ boxShadow: "0px 0px 5px black" }}
-            className="flex flex-col items-center justify-center w-full h-full mx-auto lg:rounded-xl mt-12 lg:mt-0 overflow-hidden relative"
+            className="flex flex-col items-center justify-center w-full h-full mx-auto lg: mt-12 lg:mt-0 overflow-hidden relative"
           >
             <div
               style={{ boxShadow: "0px 0px 5px black" }}
-              className="rounded-tl-xl absolute left-3 top-3 flex items-center z-50"
+              className=" absolute left-3 top-3 flex items-center z-50"
             >
               <Link href="/register">
                 {" "}
-                <h2 className="rounded-tl-xl font-gotham font-light text-white bg-gradient-to-r from-primary to-cta p-2 flex items-center">
+                <h2 className=" font-gotham font-light text-white bg-gradient-to-r from-primary to-cta p-2 flex items-center">
                   Wygeneruj obraz za darmo!
                   <FaChevronRight className="text-lg ml-2" />
                 </h2>
@@ -161,7 +161,7 @@ export default async function Page() {
             <Link
               style={{ boxShadow: "0px 0px 5px black" }}
               href="/register"
-              className="rounded-bl-xl p-2 absolute bottom-3 left-3 w-[90%] container z-50 text-white bg-gradient-to-r from-primary to-cta"
+              className=" p-2 absolute bottom-3 left-3 w-[90%] container z-50 text-white bg-gradient-to-r from-primary to-cta"
             >
               <h2 className="font-coco text-2xl">
                 Promuj swój biznes w Quixy!
@@ -175,7 +175,7 @@ export default async function Page() {
           </div>
         </div>
       </div>
-      <div className="infinite-bg p-3 sm:px-12 py-16 h-max">
+      <div className="infinite-bg p-3 sm:px-12 py-8 lg:py-16 h-max">
         <div className="flex flex-col justify-center items-center">
           <div className="flex flex-row">
             <h2
@@ -197,7 +197,7 @@ export default async function Page() {
             alt="Praca zdalna za darmo"
             title="Praca zdalna za darmo"
             style={{ boxShadow: "0px 0px 5px black" }}
-            className="mt-4 md:mt-0 rounded-2xl w-full md:max-w-[300px]"
+            className="mt-4 md:mt-0  w-full md:max-w-[300px]"
           />
           <div className="flex flex-col md:pl-6 md:py-4">
             <h2 className="font-gotham mb-3 text-3xl lg:text-5xl font-bold flex items-center">
@@ -209,7 +209,7 @@ export default async function Page() {
             </p>
             <Link
               href="/register"
-              className="w-max font-gotham font-light rounded-md bg-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
+              className="w-max font-gotham font-light  bg-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
             >
               Rejestracja
             </Link>
@@ -244,14 +244,14 @@ export default async function Page() {
       </div>
       <div className="mx-4 sm:mx-8 lg:mx-12 2xl:mx-[15vw] h-max">
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="h-full w-full md:p-3 lg:p-0 lg:bg-white md:bg-[#f7faf7] rounded-xl rounded-tl-[80px]">
+          <div className="h-full w-full md:p-3 lg:p-0 lg:bg-white md:bg-[#f7faf7]  ">
             <Image
               src="/assets/happy-woman.webp"
               width={1024}
               height={1024}
               alt="Praca zdalna Quixy Talent"
               style={{ boxShadow: "0px 0px 5px black" }}
-              className="rounded-t-2xl rounded-b-2xl rounded-tl-[60px]"
+              className="  "
             />
           </div>
           <div className="flex flex-col px-3 md:pl-3 lg:pl-12 font-coco text-black">
@@ -299,7 +299,7 @@ export default async function Page() {
             </div>
             <div className="flex flex-row">
               <Link
-                className="rounded-lg p-1.5 px-12 bg-gradient-to-r from-primary to-cta mt-6 text-white"
+                className=" p-1.5 px-12 bg-gradient-to-r from-primary to-cta mt-6 text-white"
                 href={`${process.env.NEXT_PUBLIC_URL}/register`}
               >
                 Rejestracja
@@ -309,8 +309,8 @@ export default async function Page() {
         </div>
       </div>
 
-      <div className="relative mx-4 sm:mx-8 lg:mx-12 2xl:mx-[15vw] mt-12 bg-cover bg-center lg:bg-right-bottom p-4 lg:p-8 h-max bg-woman-pc rounded-xl">
-        <div className="absolute left-0 top-0 rounded-xl bg-black bg-opacity-50 w-full h-full z-0"></div>
+      <div className="relative mx-4 sm:mx-8 lg:mx-12 2xl:mx-[15vw] mt-12 bg-cover bg-center lg:bg-right-bottom p-4 lg:p-8 h-max bg-woman-pc ">
+        <div className="absolute left-0 top-0  bg-black bg-opacity-50 w-full h-full z-0"></div>
         <div className="absolute left-4 lg:left-6 top-4 lg:top-6 font-coco text-lg lg:text-xl text-white">
           Dla klientów
         </div>
@@ -321,7 +321,7 @@ export default async function Page() {
           <div className="grid grid-cols-1 md:grid-cols-2 font-gotham gap-2 md:gap-4 mt-4">
             <Link
               href={`${process.env.NEXT_PUBLIC_URL}/praca-zdalna`}
-              className="group flex flex-col rounded-xl bg-black/50 text-white p-3"
+              className="group flex flex-col  bg-black/50 text-white p-3"
             >
               <h3 className="group-hover:underline md:mb-3 text-xl sm:text-xl md:text-2xl lg:text-3xl">
                 Zatrudnij talent
@@ -332,7 +332,7 @@ export default async function Page() {
             </Link>
             <Link
               href={`${process.env.NEXT_PUBLIC_URL}/register`}
-              className="group flex flex-col rounded-xl text-white bg-black/50 group p-3"
+              className="group flex flex-col  text-white bg-black/50 group p-3"
             >
               <h3 className="group-hover:underline md:mb-3 text-xl sm:text-xl md:text-2xl lg:text-3xl">
                 Generator pomysłów
@@ -343,7 +343,7 @@ export default async function Page() {
             </Link>
             <Link
               href={`${process.env.NEXT_PUBLIC_URL}/praca-zdalna/rozwoj-oprogramowania/web-development`}
-              className="group flex flex-col rounded-xl bg-black/50 text-white group p-3"
+              className="group flex flex-col  bg-black/50 text-white group p-3"
             >
               <h3 className="group-hover:underline md:mb-3 text-xl sm:text-xl md:text-2xl lg:text-3xl font-bold">
                 Zamów stronę internetową
@@ -355,16 +355,14 @@ export default async function Page() {
           </div>
         </div>
       </div>
-      <div className="mx-4 md:mx-8 lg:mx-12 2xl:mx-[15vw] mt-12 flex-col flex md:flex-row md:space-x-6 rounded-xl">
-        <div className="rounded-lg md:w-[45%] h-full w-full relative md:flex-col flex flex-row ">
+      <div className="mx-4 md:mx-8 lg:mx-12 2xl:mx-[15vw] mt-12 flex-col flex md:flex-row md:space-x-6 ">
+        <div className=" md:w-[45%] h-full w-full relative md:flex-col flex flex-row ">
           <div className="flex w-full">
             <div className="sm:w-full h-full flex flex-col">
-              <h3 className="text-2xl md:text-xl lg:text-3xl font-gotham mb-6 text-white">
-                <span className="bg-gradient-to-r from-primary to-cta py-1 px-2 rounded-md">
-                  Lider branży HR i AI
-                </span>
+              <h3 className="text-2xl md:text-xl lg:text-3xl font-gotham mb-6 text-black">
+                Lider branży HR i AI
               </h3>
-              <div className="flex rounded-xl px-3">
+              <div className="flex  px-3">
                 <span className="text-2xl">🏆</span>
                 <div className="ml-3 flex flex-col ">
                   <h3 className="text-lg lg:text-2xl text-black font-bold">
@@ -375,7 +373,7 @@ export default async function Page() {
                   </p>
                 </div>
               </div>
-              <div className="flex mt-3 rounded-xl px-3">
+              <div className="flex mt-3  px-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className=" h-7 w-7"
@@ -418,7 +416,7 @@ export default async function Page() {
               </div>
               <Link
                 href="/register"
-                className="w-max mt-3 px-2 py-1.5 bg-gradient-to-r from-primary to-cta rounded-md font-gotham font-light text-white"
+                className="w-max mt-3 px-2 py-1.5 bg-gradient-to-r from-primary to-cta  font-gotham font-light text-white"
               >
                 Zarejestruj się
               </Link>
@@ -473,9 +471,9 @@ export default async function Page() {
         </div>
       </div>
       {/* just a component for the future 🤷‍♀️ */}
-      <div className="rounded-xl relative mx-4 md:mx-8 lg:mx-12 2xl:mx-[15vw] mt-12 h-max bg-gradient-to-r from-primary/20 to-cta/20 md:from-white md:to-white">
+      <div className=" relative mx-4 md:mx-8 lg:mx-12 2xl:mx-[15vw] mt-12 h-max bg-gradient-to-r from-primary/20 to-cta/20 md:from-white md:to-white">
         <div className="grid grid-cols-1 md:grid-cols-2 w-full h-full relative">
-          <div className="rounded-xl bg-guitar-man bg-center rounded-b-none md:rounded-b-xl md:rounded-xl h-[50vh] md:h-full"></div>
+          <div className=" bg-guitar-man bg-center rounded-b-none md: md: h-[50vh] md:h-full"></div>
           <div className="p-4 lg:p-6 text-black w-full md:h-full grid grid-cols-1">
             <div>
               <span className="text-lg font-coco">Dla ekspertów</span>
@@ -487,7 +485,7 @@ export default async function Page() {
                 sprzedawaj gotowe strony internetowe, aplikacje lub projekty.
               </p>
               <Link
-                className="bg-gradient-to-r from-primary to-cta px-2 py-1.5 rounded-md font-gotham font-light text-white"
+                className="bg-gradient-to-r from-primary to-cta px-2 py-1.5  font-gotham font-light text-white"
                 href="/register"
               >
                 Znajdź klientów
@@ -495,22 +493,18 @@ export default async function Page() {
             </div>
             <div className="flex items-end font-coco text-base md:text-sm lg:text-base xl:text-lg">
               <div className="w-full grid grid-cols-2 gap-3 pt-3 mt-12 border-t border-white">
-                <h4 className="bg-white p-2 rounded-md">
+                <h4 className="bg-white p-2 ">
                   Wysyłaj aplikacje do pracodawców
                 </h4>
-                <h4 className="bg-white p-2 rounded-md">
-                  Znajduj zlecenia dla siebie
-                </h4>
-                <h4 className="bg-white p-2 rounded-md">
-                  Sprzedawaj gotowe projekty
-                </h4>
-                <h4 className="bg-white p-2 rounded-md">Dołącz do projektu</h4>
+                <h4 className="bg-white p-2 ">Znajduj zlecenia dla siebie</h4>
+                <h4 className="bg-white p-2 ">Sprzedawaj gotowe projekty</h4>
+                <h4 className="bg-white p-2 ">Dołącz do projektu</h4>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="mt-12 mx-4 bg-white relative md:mx-8 lg:mx-12 2xl:mx-[15vw] h-max rounded-xl mb-12">
+      <div className="mt-12 mx-4 bg-white relative md:mx-8 lg:mx-12 2xl:mx-[15vw] h-max  mb-12">
         <FAQ faqItems={faqItems} />
       </div>
       <div className="relative">

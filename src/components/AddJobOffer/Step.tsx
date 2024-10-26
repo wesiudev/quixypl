@@ -65,14 +65,14 @@ export default function StepOne({
           : "translate-y-[-500vh] duration-500 h-px overflow-hidden"
       }`}
     >
+      <InputField
+        id="title"
+        label="Kogo szukacie do pracy?"
+        value={formData.title}
+        onChange={handleChange}
+        placeholder="Wpisz tytuł ogłoszenia o pracę..."
+      />
       <div>
-        <InputField
-          id="title"
-          label="Tytuł ogłoszenia"
-          placeholder="Wpisz tytuł ogłoszenia"
-          value={formData.title}
-          onChange={handleChange}
-        />
         <CategorySelector
           setTagsOpenLevel={setTagsOpenLevel}
           tagsOpenLevel={tagsOpenLevel}
@@ -92,7 +92,7 @@ export default function StepOne({
           setFormData={setFormData}
         />
         <div className="mt-2"></div>
-        <p className="text-black text-lg mb-2">Treść:</p>
+        <p className="text-black text-lg mb-2">Treść oferty pracy:</p>
         <Editor
           value={initialMarkdownContent}
           onChange={onEditorContentChanged}
@@ -100,11 +100,7 @@ export default function StepOne({
         <button
           type="button"
           onClick={() => {
-            if (
-              formData.title &&
-              formData?.tags?.length > 0 &&
-              editorMarkdownValue
-            ) {
+            if (formData?.tags?.length > 0 && editorMarkdownValue) {
               setFormData({ ...formData, description: editorMarkdownValue });
               nextStep();
             } else {
@@ -117,7 +113,7 @@ export default function StepOne({
               });
             }
           }}
-          className="mt-3 p-2 bg-gradient-to-r from-primary to-cta py-0.5 text-white rounded-md"
+          className="mt-3 p-2 bg-gradient-to-r from-primary to-cta py-0.5 text-white "
         >
           Następny krok
         </button>

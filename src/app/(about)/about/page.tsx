@@ -30,7 +30,7 @@ export default function Page() {
             Quixy to platforma z pracą zdalną i nie tylko - na bieżąco rozwijamy
             nasz serwis i dbamy o doświadczenie użytkownika.
           </p>
-          <button className="bg-white text-primary font-bold relative z-50 py-3 px-8 rounded mt-6 hover:bg-gray-100 transition">
+          <button className="bg-white text-primary font-bold relative z-50 py-3 px-8 mt-6 hover:bg-gray-100 transition">
             Dołącz teraz
           </button>
         </div>
@@ -40,7 +40,7 @@ export default function Page() {
           <h2 className="text-3xl text-center">Jak możemy Ci pomóc?</h2>
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div
-              className="bg-white p-6 relative z-50 rounded-xl"
+              className="bg-white p-6 relative z-50 "
               style={{ boxShadow: "0px 0px 4px black" }}
             >
               <h3 className="text-xl text-black flex">
@@ -59,7 +59,7 @@ export default function Page() {
               </p>
             </div>
             <div
-              className="bg-white p-6 relative z-50 rounded-xl"
+              className="bg-white p-6 relative z-50 "
               style={{ boxShadow: "0px 0px 4px black" }}
             >
               <h3 className="text-xl text-black flex">
@@ -75,7 +75,7 @@ export default function Page() {
               </p>
             </div>
             <div
-              className="bg-white p-6 relative z-50 rounded-xl"
+              className="bg-white p-6 relative z-50 "
               style={{ boxShadow: "0px 0px 4px black" }}
             >
               <h3 className="text-xl text-black flex">
@@ -95,7 +95,7 @@ export default function Page() {
         <div className="py-2 bg-primary w-full relative">
           <Link
             style={{ boxShadow: "0px 0px 4px #000" }}
-            className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 bg-cta text-white font-bold z-50 py-3 px-8 rounded-lg hover:bg-white hover:text-cta transition"
+            className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 bg-cta text-white font-bold z-50 py-3 px-8  hover:bg-white hover:text-cta transition"
             href="/praca-zdalna"
           >
             Zobacz więcej
@@ -110,7 +110,7 @@ export default function Page() {
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 text-center">
             <div
-              className="p-6 bg-white rounded-xl"
+              className="p-6 bg-white "
               style={{ boxShadow: "0px 0px 5px black" }}
             >
               <div className="bg-[#126b91] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
@@ -124,7 +124,7 @@ export default function Page() {
             </div>
 
             <div
-              className="p-6 bg-white rounded-xl"
+              className="p-6 bg-white "
               style={{ boxShadow: "0px 0px 5px black" }}
             >
               <div className="bg-[#126b91] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
@@ -138,7 +138,7 @@ export default function Page() {
             </div>
 
             <div
-              className="p-6 bg-white rounded-xl"
+              className="p-6 bg-white "
               style={{ boxShadow: "0px 0px 5px black" }}
             >
               <div className="bg-[#126b91] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
@@ -152,7 +152,7 @@ export default function Page() {
             </div>
 
             <div
-              className="p-6 bg-white rounded-xl"
+              className="p-6 bg-white "
               style={{ boxShadow: "0px 0px 5px black" }}
             >
               <div className="bg-[#126b91] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
@@ -166,7 +166,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="bg-gray-200 p-4 lg:p-12 relative overflow-hidden container mx-auto my-24 rounded-xl">
+        <div className="bg-gray-200 p-4 lg:p-12 relative overflow-hidden container mx-auto my-24 ">
           <div className="absolute left-0 -top-36" id="ccrm" />
           <div className="flex w-full justify-between items-center">
             <h2 className="text-3xl font-bold text-black">
@@ -212,14 +212,14 @@ export default function Page() {
             <Link
               href="/talent"
               style={{ textShadow: "1px 1px 1px black" }}
-              className="bg-cta text-white font-bold relative z-50 py-1.5 px-2 rounded mt-6 hover:bg-opacity-90 transition"
+              className="bg-cta text-white font-bold relative z-50 py-1.5 px-2 mt-6 hover:bg-opacity-90 transition"
             >
               Talent
             </Link>
             <Link
               href="/company"
               style={{ textShadow: "1px 1px 1px black" }}
-              className="bg-cta text-white font-bold relative z-50 py-1.5 px-2 rounded mt-6 hover:bg-opacity-90 transition"
+              className="bg-cta text-white font-bold relative z-50 py-1.5 px-2 mt-6 hover:bg-opacity-90 transition"
             >
               Firma
             </Link>

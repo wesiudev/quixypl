@@ -32,7 +32,7 @@ export default function StepTwo({
                       Nazwa Firmy/Działalności/Imię rekrutera
                     </h3>
                     <input
-                      className="border border-primary rounded-md p-2 text-black font-light w-full"
+                      className="border border-primary  p-2 text-black font-light w-full"
                       value={formData?.name}
                       onChange={(e) => {
                         setFormData({
@@ -58,7 +58,7 @@ export default function StepTwo({
                           salary: e.target.value,
                         })
                       }
-                      className="border border-primary rounded-md p-2 text-black w-full !font-gotham font-light"
+                      className="border border-primary  p-2 text-black w-full !font-gotham font-light"
                     >
                       <option value="Nie podano">Rodzaj wynagrodzenia</option>
                       <option value="Stawka godzinowa">Stawka godzinowa</option>
@@ -88,7 +88,7 @@ export default function StepTwo({
             <button
               type="button"
               onClick={prevStep}
-              className="p-2 bg-black text-white rounded-md hover:bg-cta"
+              className="p-2 bg-black text-white  hover:bg-cta"
             >
               Wstecz
             </button>
@@ -113,7 +113,7 @@ export default function StepTwo({
                   });
                 }
               }}
-              className="p-2 bg-gradient-to-r from-primary to-cta py-0.5 text-white rounded-md"
+              className="p-2 bg-gradient-to-r from-primary to-cta py-0.5 text-white "
             >
               Następny krok
             </button>

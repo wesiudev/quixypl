@@ -6,7 +6,7 @@
  */
 export default function Discord() {
   return (
-    <div className="w-full rounded-lg overflow-hidden">
+    <div className="w-full  overflow-hidden">
       <iframe
         src="https://discord.com/widget?id=1263946404351709275&theme=dark"
         width="100%"

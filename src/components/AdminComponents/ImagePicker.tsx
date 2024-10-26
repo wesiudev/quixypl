@@ -29,7 +29,7 @@ export default function ImagePicker({
         <div className="text-2xl font-bold">Zdjęcia wpisu</div>
         <button
           onClick={() => closeImagePicker()}
-          className="flex items-center bg-red-500 text-white p-2 rounded-lg hover:bg-red-400 duration-300"
+          className="flex items-center bg-red-500 text-white p-2  hover:bg-red-400 duration-300"
         >
           <FaSignOutAlt className="mr-2" />
           Zamknij

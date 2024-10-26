@@ -22,7 +22,7 @@ export default function LeadApplication({
   return (
     <div
       key={lead.id}
-      className={`rounded relative bg-zinc-800 p-3 h-max border-[3px] overflow-hidden ${
+      className={`relative bg-zinc-800 p-3 h-max border-[3px] overflow-hidden ${
         lead.status === "trash"
           ? "border-orange-700"
           : lead.status === "reseted"
@@ -47,7 +47,7 @@ export default function LeadApplication({
         </div>
         <button
           onClick={() => setOptionsOpen(!optionsOpen)}
-          className="text-3xl text-white h-full px-2 hover:bg-white hover:bg-opacity-20 rounded relative z-50"
+          className="text-3xl text-white h-full px-2 hover:bg-white hover:bg-opacity-20 relative z-50"
         >
           <HiOutlineDotsHorizontal />
         </button>
@@ -81,7 +81,7 @@ export default function LeadApplication({
         <div>Notatka:</div>
         <button
           onClick={() => setNoteOpen(lead)}
-          className="text-blue-500 font-light rounded p-0.5 px-2 hover:bg-white hover:bg-opacity-20"
+          className="text-blue-500 font-light p-0.5 px-2 hover:bg-white hover:bg-opacity-20"
         >
           Edytuj
         </button>

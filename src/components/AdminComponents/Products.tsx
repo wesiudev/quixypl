@@ -29,7 +29,7 @@ export default function Products({
                 setIsSelectMode(!isSelectMode);
                 setChosenRows([]);
               }}
-              className={`flex items-center justify-center p-2 rounded-md text-zinc-800 drop-shadow-xl shadow-black ${
+              className={`flex items-center justify-center p-2  text-zinc-800 drop-shadow-xl shadow-black ${
                 isSelectMode
                   ? "bg-green-500 hover:bg-green-600"
                   : "bg-white hover:bg-gray-300"
@@ -40,7 +40,7 @@ export default function Products({
             </button>
             <button
               onClick={() => deleteRows(chosenRows)}
-              className="p-2 rounded-md text-zinc-800 drop-shadow-xl shadow-black bg-red-500 hover:bg-red-600 ml-2"
+              className="p-2  text-zinc-800 drop-shadow-xl shadow-black bg-red-500 hover:bg-red-600 ml-2"
             >
               Usuń
             </button>
@@ -53,7 +53,7 @@ export default function Products({
                 setSelectedAll(!selectedAll);
                 selectedAll && setChosenRows([]);
               }}
-              className="p-2 rounded-md text-zinc-800 drop-shadow-xl shadow-black bg-blue-500 hover:bg-blue-600"
+              className="p-2  text-zinc-800 drop-shadow-xl shadow-black bg-blue-500 hover:bg-blue-600"
             >
               {selectedAll ? <>Odznacz wszystkie</> : <>Zaznacz wszystkie</>}
             </button>

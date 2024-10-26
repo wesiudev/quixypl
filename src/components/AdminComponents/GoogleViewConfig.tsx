@@ -30,7 +30,7 @@ export default function GoogleViewConfig({
       <h2 className="text-xl my-3 font-bold text-zinc-800 drop-shadow-xl shadow-black">
         Wygląd w Google
       </h2>
-      <div className="flex flex-col justify-start w-full p-3 bg-gray-300 rounded-2xl mt-3">
+      <div className="flex flex-col justify-start w-full p-3 bg-gray-300  mt-3">
         <div className="flex items-center">
           <div className="w-12 h-12 p-3 rounded-full bg-white">
             <Image

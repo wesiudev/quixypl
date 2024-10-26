@@ -15,7 +15,7 @@ export default function HireButton({
   return (
     <div>
       <button
-        className={`bg-gradient-to-r from-primary to-cta px-2 py-1.5 rounded-md text-white font-gotham`}
+        className={`bg-gradient-to-r from-primary to-cta px-2 py-1.5  text-white font-gotham`}
         onClick={() => {
           if (talentSlugData.uid === user?.uid) {
             return toast.error("Nie możesz aplikować do samego siebie");

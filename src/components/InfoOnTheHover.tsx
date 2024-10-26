@@ -8,7 +8,7 @@ const InfoOnTheHover: React.FC<{
     <motion.div
       initial={{ opacity: 0 }}
       whileHover={{ opacity: 1 }}
-      className="absolute -mt-16 rounded-lg bg-white p-4 shadow-md transition duration-300"
+      className="absolute -mt-16  bg-white p-4 shadow-md transition duration-300"
       style={{
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.25)",
       }}

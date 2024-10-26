@@ -5,7 +5,7 @@ export default async function Page() {
   return (
     <div className="md:flex flex-col md:items-center md:justify-between md:space-x-8 md:space-y-0 space-y-8 md:py-12 py-8 px-4">
       <div className="mx-auto container px-4">
-        <h1 className="p-3 rounded-xl mt-12 bg-gradient-to-r from-primary to-cta text-white text-2xl lg:text-3xl font-gotham w-full">
+        <h1 className="p-3  mt-12 bg-gradient-to-r from-primary to-cta text-white text-2xl lg:text-3xl font-gotham w-full">
           NASZA MISJA - QUIXY – PRZYSZŁOŚĆ PRACY ZDALNEJ
         </h1>
         <div className="text-2xl lg:text-3xl font-gotham mt-12 mb-12">
@@ -38,7 +38,7 @@ export default async function Page() {
       </div>
       <Link
         href="/search?type=company"
-        className="w-max font-gotham font-light rounded-md bg-gradient-to-r from-primary to-cta text-white text-sm lg:text-base p-2 py-1.5 text-center"
+        className="w-max font-gotham font-light  bg-gradient-to-r from-primary to-cta text-white text-sm lg:text-base p-2 py-1.5 text-center"
       >
         Przeglądaj firmy
       </Link>
@@ -51,7 +51,7 @@ export default async function Page() {
             alt="Praca zdalna w biurze"
             title="Praca zdalna w biurze"
             style={{ boxShadow: "0px 0px 5px black" }}
-            className="rounded-xl w-[80%] sm:w-auto mt-4 lg:mt-0 h-auto sm:h-[200px]"
+            className=" w-[80%] sm:w-auto mt-4 lg:mt-0 h-auto sm:h-[200px]"
           />
         </div>
         <div className="mt-12 flex items-center justify-center">
@@ -62,7 +62,7 @@ export default async function Page() {
             alt="Praca zdalna w biurze"
             title="Praca zdalna w biurze"
             style={{ boxShadow: "0px 0px 5px black" }}
-            className="rounded-xl h-auto sm:h-[200px] mt-4 lg:mt-0 w-[80%] sm:w-auto"
+            className=" h-auto sm:h-[200px] mt-4 lg:mt-0 w-[80%] sm:w-auto"
           />
         </div>
       </div>

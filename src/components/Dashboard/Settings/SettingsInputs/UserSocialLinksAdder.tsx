@@ -126,7 +126,7 @@ export default function UserSocialLinksAdder({
                   social.key === "quixy"
                     ? "bg-gradient-to-r from-primary to-cta text-white cursor-pointer"
                     : "bg-white text-black"
-                } rounded-md p-2 font-light`}
+                }  p-2 font-light`}
                 placeholder={social.placeholder}
               />
             </div>

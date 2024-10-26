@@ -32,7 +32,7 @@ export default function ContentItem({ data }: { data: any }) {
     }
   }, [lead]);
   return (
-    <li className="bg-[#126b91] p-3 rounded-md !text-white font-gotham font-light">
+    <li className="bg-[#126b91] p-3  !text-white font-gotham font-light">
       <h2 className="text-2xl font-semibold mb-2">{lead?.title}</h2>
       <p>
         <b>Mianownik:</b> {lead?.nominative}
@@ -87,7 +87,7 @@ export default function ContentItem({ data }: { data: any }) {
                 });
               });
             }}
-            className="bg-green-600 hover:bg-green-700 mt-3 rounded-md py-3 w-full"
+            className="bg-green-600 hover:bg-green-700 mt-3  py-3 w-full"
           >
             Zapisz
           </button>
@@ -111,7 +111,7 @@ export default function ContentItem({ data }: { data: any }) {
                 });
               });
             }}
-            className="bg-purple-600 hover:bg-purple-700 mt-3 rounded-md py-3 w-full"
+            className="bg-purple-600 hover:bg-purple-700 mt-3  py-3 w-full"
           >
             Generuj opis
           </button>

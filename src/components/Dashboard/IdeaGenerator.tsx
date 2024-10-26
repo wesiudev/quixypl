@@ -8,10 +8,10 @@ export default function IdeaGenerator({ setIdeaOpen }: { setIdeaOpen: any }) {
   const userData = useSelector((state: any) => state.user?.user);
   return (
     <>
-      <div className="mt-2 rounded-lg flex flex-col bg-white w-full">
+      <div className="mt-2  flex flex-col bg-white w-full">
         <GenerateIdea userTokens={userData?.tokens} setIdeaOpen={setIdeaOpen} />
       </div>
-      <div className="mt-2 rounded-lg p-12 flex justify-center flex-col bg-gradient-to-r from-purple-400 via-orange-400 to-rose-400">
+      <div className="mt-2  p-12 flex justify-center flex-col bg-gradient-to-r from-purple-400 via-orange-400 to-rose-400">
         <div className=" flex justify-center items-center text-center">
           <span
             style={{ boxDecorationBreak: "slice", lineHeight: 1.19 }}
@@ -24,15 +24,15 @@ export default function IdeaGenerator({ setIdeaOpen }: { setIdeaOpen: any }) {
           {userData?.ideas?.map((idea: any, i: any) => (
             <div
               key={i}
-              className="p-3 group bg-white rounded-xl hover:bg-orange-200 duration-75 mt-4"
+              className="p-3 group bg-white  hover:bg-orange-200 duration-75 mt-4"
             >
               <div
-                className="rounded-lg group-hover:scale-105 duration-100 bg-white relative"
+                className=" group-hover:scale-105 duration-100 bg-white relative"
                 style={{ boxShadow: "0 0 16px 0 purple" }}
               >
                 <FaDivide
                   onClick={() => setIdeaOpen(idea)}
-                  className="flex text-left items-start justify-start font-bold rounded-lg p-2 bg-white w-full h-full"
+                  className="flex text-left items-start justify-start font-bold  p-2 bg-white w-full h-full"
                 >
                   {idea?.image && (
                     <Image

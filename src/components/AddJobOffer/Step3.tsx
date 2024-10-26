@@ -130,67 +130,74 @@ export default function StepThree({
       {currentStep === 3 && (
         <div>
           <InputField
-            id="email"
-            label="Email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Wpisz email"
-          />
-          <InputField
-            id="phone"
-            label="Phone"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="Wpisz numer telefonu (opcjonalnie)"
-          />
-          <InputField
             id="website"
-            label="Website"
+            label="Strona internetowa"
             value={formData.website}
             onChange={handleChange}
             placeholder="Dodaj stronę internetową (opcjonalnie)"
           />
-          {formData.email && (
-            <div className="sticky bottom-0 flex flex-col bg-white py-2 rounded-xl">
-              <div className="bg-gradient-to-r from-primary via-cta to-primary text-white rounded-xl p-4 lg:p-6">
-                <label htmlFor="days-range" className="font-bold">
-                  Przez jaki okres czasu oferta ma być wyświetlana? (
-                  {formData.days} dni)
-                </label>
-                <input
-                  id="days-range"
-                  type="range"
-                  min="1"
-                  max="30"
-                  value={formData?.days || 1}
-                  onChange={(e: any) =>
-                    setFormData({
-                      ...formData,
-                      days: e.target.value,
-                      price: 15.99 + e.target.value * 8.42,
-                    })
+
+          <div className="sticky bottom-0 flex flex-col bg-white py-2 ">
+            <div className="bg-gradient-to-r from-primary via-cta to-primary text-white  p-4 lg:p-6">
+              <label htmlFor="days-range" className="font-bold">
+                Przez jaki okres czasu oferta ma być wyświetlana? (
+                {formData.days} dni)
+              </label>
+              <input
+                id="days-range"
+                type="range"
+                min="1"
+                max="30"
+                value={formData?.days || 1}
+                onChange={(e: any) =>
+                  setFormData({
+                    ...formData,
+                    days: e.target.value,
+                    price: 15.99 + e.target.value * 8.42,
+                  })
+                }
+                className="w-full mt-2"
+              />
+              <div className="text-lg mt-2  text-black">
+                <button
+                  onClick={() =>
+                    dispatch(set_modals({ ...modals, quixies: true }))
                   }
-                  className="w-full mt-2"
-                />
-                <div className="text-lg font-semibold mt-2">
+                  className={` rounded-lg px-2 py-1 w-max ${
+                    user?.tokens < formData.price
+                      ? "bg-white text-red-500"
+                      : "text-white bg-gradient-to-r from-primary to-cta shadow-sm shadow-cyan"
+                  } font-bold`}
+                >
                   💎{formData.price?.toFixed(2)}
+                </button>
+                <div className="">
+                  {user?.tokens < formData.price && (
+                    <button
+                      onClick={() =>
+                        dispatch(set_modals({ ...modals, quixies: true }))
+                      }
+                      className="text-white mt-2"
+                    >
+                      kliknij tutaj by doładować Quixies
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
-          )}
+          </div>
           <div className="flex justify-between mt-4">
             <button
               type="button"
               onClick={prevStep}
-              className="p-2 bg-black text-white rounded-md hover:bg-cta"
+              className="p-2 bg-black text-white  hover:bg-cta"
             >
               Powrót
             </button>
 
             {isSent && (
               <Link
-                className="p-2 bg-gradient-to-r from-primary via-cta to-primary py-0.5 text-white rounded-md flex items-center"
+                className="p-2 bg-gradient-to-r from-primary via-cta to-primary py-0.5 text-white  flex items-center"
                 href="/dashboard/applications"
               >
                 Już dodano, przejdź do aplikacji <FaChevronRight />
@@ -203,7 +210,7 @@ export default function StepThree({
                   setIsSent(true);
                   await handleRecruitmentStart();
                 }}
-                className="p-2 bg-gradient-to-r from-primary via-cta to-primary py-0.5 text-white rounded-md"
+                className="px-2 py-1 rounded-lg bg-gradient-to-r from-primary via-cta to-primary text-white "
               >
                 {isLoading ? "Wczytywanie..." : "Dodaj ofertę pracy"}
               </button>

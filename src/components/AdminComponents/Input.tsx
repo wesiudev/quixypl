@@ -19,7 +19,7 @@ export default function Input({
     <>
       {type === "text" && (
         <div
-          className={`z-50 fixed w-[50vw] h-[max] bg-slate-700 top-1/2 -translate-y-1/2 -translate-x-1/2 left-1/2 p-8 rounded-xl flex items-center justify-center flex-col`}
+          className={`z-50 fixed w-[50vw] h-[max] bg-slate-700 top-1/2 -translate-y-1/2 -translate-x-1/2 left-1/2 p-8  flex items-center justify-center flex-col`}
         >
           <button
             onClick={() => closeInput()}

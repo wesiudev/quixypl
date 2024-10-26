@@ -28,7 +28,7 @@ const IdeaList: React.FC<IdeasProps> = ({ ideas }) => {
   const indexOfLastIdea = currentPage * itemsPerPage;
   const currentIdeas = ideas?.slice(0, indexOfLastIdea);
   return (
-    <div className="bg-white p-4 sm:p-8 mx-auto font-gotham sm:rounded-xl sm:my-12">
+    <div className="bg-white p-4 sm:p-8 mx-auto font-gotham sm: sm:my-12">
       <h2 className="text-xl sm:text-3xl max-w-2xl text-black">
         Wolisz zobaczyć generacje użytkowników?
       </h2>
@@ -45,7 +45,7 @@ const IdeaList: React.FC<IdeasProps> = ({ ideas }) => {
             href={`/business-ideas/${polishToEnglish(
               idea?.name
             )}${idea?.creationTime?.toString()}`}
-            className="bg-gradient-to-r from-primary to-cta text-white flex flex-col justify-between p-6 border rounded-lg shadow-sm hover:shadow-lg hover:border-primary hover:shadow-primary hover:scale-105 duration-300"
+            className="bg-gradient-to-r from-primary to-cta text-white flex flex-col justify-between p-6 border  shadow-sm hover:shadow-lg hover:border-primary hover:shadow-primary hover:scale-105 duration-300"
           >
             {idea?.name}
           </Link>

@@ -56,7 +56,7 @@ export default async function Page({ params }: { params: any }) {
         <div className="p-3 sm:p-6 lg:p-12 !py-0 relative z-50">
           <h1 className="text-2xl sm:text-3xl lg:text-5xl mb-4">
             Praca zdalna{" "}
-            <b className="bg-gradient-to-r from-primary via-cta to-primary p-1 rounded-lg !leading-snug">
+            <b className="bg-gradient-to-r from-primary via-cta to-primary p-1  !leading-snug">
               {slug?.title}
             </b>
           </h1>
@@ -93,14 +93,14 @@ export default async function Page({ params }: { params: any }) {
           <Link
             href="/register"
             title="Rekrutuj do pracy zdalnej na panelu Quixy"
-            className="font-gotham rounded-md bg-primary hover:bg-opacity-90 duration-100 text-white font-bold text-sm lg:text-base p-2 py-1.5 text-center"
+            className="font-gotham  bg-primary hover:bg-opacity-90 duration-100 text-white font-bold text-sm lg:text-base p-2 py-1.5 text-center"
           >
             <h2 className="w-max mx-auto">Zatrudnij talent</h2>
           </Link>
           <Link
             href="/register"
             title="Szukaj pracy zdalnej na panelu Quixy"
-            className="font-gotham rounded-md bg-cta hover:bg-opacity-90 duration-100 text-white font-bold text-sm lg:text-base p-2 py-1.5 text-center"
+            className="font-gotham  bg-cta hover:bg-opacity-90 duration-100 text-white font-bold text-sm lg:text-base p-2 py-1.5 text-center"
           >
             <h2 className="w-max mx-auto">Pracuj zdalnie</h2>
           </Link>
@@ -114,7 +114,7 @@ export default async function Page({ params }: { params: any }) {
               className="text-black font-gotham text-xl lg:text-3xl my-6"
             >
               {content?.informal_title_plural}{" "}
-              <span className="bg-gradient-to-r from-primary to-cta text-white p-2 ml-1 rounded-lg">
+              <span className="bg-gradient-to-r from-primary to-cta text-white p-2 ml-1 ">
                 w Quixy Talent&trade;
               </span>
             </h2>{" "}
@@ -128,7 +128,7 @@ export default async function Page({ params }: { params: any }) {
           <div className="">
             <h1 className="!leading-normal text-black bg-white text-xl lg:text-3xl mt-6">
               {slug.title}
-              <b className="bg-gradient-to-r from-primary via-cta to-primary p-1 rounded-lg ml-1 text-white">
+              <b className="bg-gradient-to-r from-primary via-cta to-primary p-1  ml-1 text-white">
                 oferty pracy zdalnej
               </b>
             </h1>
@@ -139,7 +139,7 @@ export default async function Page({ params }: { params: any }) {
                     params.category
                   }/${polishToEnglish(item.title)}`}
                   key={index}
-                  className="flex flex-col md:flex-row items-start md:items-center justify-between bg-[#126b91] px-4 py-2 rounded-lg font-coco"
+                  className="flex flex-col md:flex-row items-start md:items-center justify-between bg-[#126b91] px-4 py-2  font-coco"
                 >
                   <h2 className="flex items-center text-white">
                     <FaBriefcase className="w-10 h-10 mr-3" /> {item.title}
@@ -153,14 +153,14 @@ export default async function Page({ params }: { params: any }) {
       <JobOffers categoryUrl={params.category} content={content} />
 
       <div className="bg-white w-full px-4">
-        <div className="flex flex-col lg:flex-row gap-6 rounded-3xl container mx-auto">
+        <div className="flex flex-col lg:flex-row gap-6  container mx-auto">
           <section className="text-left w-full lg:pr-24">
             <h2
               style={{ lineHeight: 1.5 }}
               className="text-3xl mb-6 text-black font-gotham"
             >
               Czym zajmują się
-              <span className="ml-2 rounded-lg p-2 px-3 bg-gradient-to-r text-white from-primary via-cta to-primary">
+              <span className="ml-2  p-2 px-3 bg-gradient-to-r text-white from-primary via-cta to-primary">
                 {content?.informal_title_plural.toLowerCase()}?
               </span>
             </h2>

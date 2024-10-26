@@ -32,7 +32,7 @@ export default function Unsaved({
       } left-0 bottom-6 flex items-center justify-center`}
     >
       <div
-        className={`flex space-x-3 lg:space-x-6 p-3 px-5 rounded-md items-center justify-between max-w-[90%] ${
+        className={`flex space-x-3 lg:space-x-6 p-3 px-5 items-center justify-between max-w-[90%] ${
           error ? "bg-red-500" : "bg-gray-600"
         } ${
           changesWereMade
@@ -40,7 +40,7 @@ export default function Unsaved({
             : "translate-y-[200px] duration-300"
         } `}
       >
-        <div className="text-white text-sm pr-3">
+        <div className="text-white text-sm pr-3 font-coco">
           <b>Uwaga!</b> - Masz niezapisane zmiany{" "}
           <button
             onClick={() => {
@@ -51,7 +51,7 @@ export default function Unsaved({
               setChangesWereMade(false);
               dispatch(set_modals({ ...modals, config: false }));
             }}
-            className="text-white px-1 pt-2 sm:pt-0 text-xs underline hover:no-underline"
+            className="font-bold text-white text-xs underline hover:no-underline"
           >
             Cofnij
           </button>
@@ -93,7 +93,7 @@ export default function Unsaved({
                 setChangesWereMade(false);
               }
             }}
-            className="text-white text-sm rounded-lg bg-[green] font-gotham px-6 py-2"
+            className="text-white text-sm  bg-[green] font-gotham px-6 py-2"
           >
             Zapisz
           </button>

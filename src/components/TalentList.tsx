@@ -20,7 +20,7 @@ const TalentList: React.FC<any> = ({ categoryTalents, client }) => {
   const indexOfLastIdea = currentPage * itemsPerPage;
   const currentTalents = categoryTalents?.slice(0, indexOfLastIdea);
   return (
-    <div className="mx-auto font-gotham sm:rounded-xl">
+    <div className="mx-auto font-gotham sm:">
       <div
         className={` ${
           currentTalents.length > 0 &&
@@ -32,7 +32,7 @@ const TalentList: React.FC<any> = ({ categoryTalents, client }) => {
             <Link
               key={talent?.uid}
               href={`/${client ? "company" : "talent"}/${talent.pseudo}`}
-              className="rounded-xl flex p-3 border-2 border-gray-500/30 hover:shadow-md duration-200 hover:scale-[1.03] hover:shadow-cta bg-white"
+              className=" flex p-3 border-2 border-gray-500/30 hover:shadow-md duration-200 hover:scale-[1.03] hover:shadow-cta bg-white"
             >
               {talent?.photoURL ? (
                 <div className="w-12 md:w-24 aspect-square rounded-full">
@@ -67,14 +67,14 @@ const TalentList: React.FC<any> = ({ categoryTalents, client }) => {
               <div className="bg-gradient-to-r from-primary to-cta rounded-full aspect-square mx-auto w-32 flex items-center justify-center">
                 <TfiFlagAlt className="text-white text-4xl animate-bounce" />
               </div>
-              <p className="my-3 max-w-sm font-light text-black font-gotham bg-white p-3 text-base rounded-xl">
+              <p className="my-3 max-w-sm font-light text-black font-gotham bg-white p-3 text-base ">
                 Brak talentów - skonfiguruj profil i wyświetl się jako
                 pierwszy/a{" "}
               </p>
             </div>
             <Link
               href="/register"
-              className="w-max font-gotham font-light rounded-md bg-cta hover:bg-opacity-90 duration-100 text-white text-sm lg:text-base p-2 py-1.5 text-center"
+              className="w-max font-gotham font-light  bg-cta hover:bg-opacity-90 duration-100 text-white text-sm lg:text-base p-2 py-1.5 text-center"
             >
               Przejdź do panelu
             </Link>

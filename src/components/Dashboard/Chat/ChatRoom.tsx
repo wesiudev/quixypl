@@ -28,10 +28,10 @@ export default function ChatRoom({
     scrollToBottom();
   }, [chat?.messages]);
   return (
-    <div className="bg-white rounded-t-xl">
+    <div className="bg-white ">
       {clickedUserData && (
         <div className="h-full">
-          <h2 className="rounded-t-xl bg-gradient-to-r from-primary to-cta font-gotham p-3 lg:p-6 lg:text-xl text-white">
+          <h2 className=" bg-gradient-to-r from-primary to-cta font-gotham p-3 lg:p-6 lg:text-xl text-white">
             Napisz do {clickedUserData.name || clickedUserData.pseudo}
           </h2>{" "}
           <div

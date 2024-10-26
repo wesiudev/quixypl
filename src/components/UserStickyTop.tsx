@@ -50,7 +50,7 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
     >
       <div
         style={{ boxShadow: "0px 0px 5px black" }}
-        className={`container rounded-b-xl bg-white h-max text-black duration-500`}
+        className={`container  bg-white h-max text-black duration-500`}
       >
         <div className="flex w-full justify-between h-full relative">
           <div className="flex">
@@ -60,12 +60,12 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
                 width={256}
                 height={256}
                 alt={`Zdjęcie profilowe ${slugData.pseudo}`}
-                className="rounded-bl-xl w-24 mb-0 hidden sm:block"
+                className=" w-24 mb-0 hidden sm:block"
               />
             )}
 
             {!slugData?.photoURL && (
-              <div className="hidden sm:flex bg-[#126b91] rounded-bl-xl aspect-square w-24 text-white items-center justify-center">
+              <div className="hidden sm:flex bg-[#126b91]  aspect-square w-24 text-white items-center justify-center">
                 <FaUser className="text-3xl lg:text-4xl" />
               </div>
             )}
@@ -78,7 +78,7 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
                   {slugData?.title && slugData?.title}
                 </p>
                 {slugData?.hourRate && (
-                  <div className="w-max relative text-white px-1.5 py-0.5 rounded-md bg-gradient-to-r from-primary to-cta">
+                  <div className="w-max relative text-white px-1.5 py-0.5  bg-gradient-to-r from-primary to-cta">
                     {slugData?.hourRate} zł/h
                   </div>
                 )}
@@ -97,7 +97,7 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
                 dispatch(set_modals({ ...modals, currentChat: slugData }));
               }
             }}
-            className={`flex text-white font-bold font-coco px-3 py-2 min-h-full max-w-[150px] text-sm sm:text-base rounded-br-xl bg-gradient-to-r from-primary to-cta items-center text-center`}
+            className={`flex text-white font-bold font-coco px-3 py-2 min-h-full max-w-[150px] text-sm sm:text-base  bg-gradient-to-r from-primary to-cta items-center text-center`}
           >
             Kontakt
             <FaArrowRightLong className="ml-2" />

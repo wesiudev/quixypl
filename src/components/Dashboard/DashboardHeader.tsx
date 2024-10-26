@@ -1,28 +1,16 @@
 "use client";
-import {
-  FaCog,
-  FaCogs,
-  FaCoins,
-  FaDollarSign,
-  FaHome,
-  FaImage,
-  FaLightbulb,
-  FaList,
-  FaPlus,
-  FaRocket,
-  FaUser,
-} from "react-icons/fa";
+import { FaCog, FaCogs, FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import QuixiesModule from "./QuixiesModule";
-import { FaMagnifyingGlass } from "react-icons/fa6";
 import Link from "next/link";
 import { signOut } from "firebase/auth";
 import { auth } from "@/firebase";
 import { setUser } from "@/redux/slices/user";
 import Settings from "./Settings/Settings";
 import { set_modals } from "@/redux/slices/modalsopen";
+import UserPanel from "../UserPanel";
 export default function DashboardHeader() {
   const { user } = useSelector((state: any) => state.user);
   const [userData, setUserData] = useState<any>(user);
@@ -57,13 +45,13 @@ export default function DashboardHeader() {
           className={`${
             (modals.quixies || modals.config || modals.currentChat !== "") &&
             "hidden"
-          } py-2 w-full mx-auto bg-white relative z-[9999999999999999999] lg:hidden ${
-            showHeader ? "translate-y-0" : "-translate-y-24"
+          } py-2 w-full mx-auto bg-white relative z-[999999999999999999999999] lg:hidden ${
+            showHeader || menuShow ? "translate-y-0" : "-translate-y-24"
           } duration-100`}
         >
-          <div className="px-6 h-full flex flex-col items-center w-full">
-            <div className="flex flex-col justify-between md:flex-row items-center w-full h-full">
-              <div className="flex items-center justify-between w-full">
+          <div className="px-6 h-full flex items-center w-full justify-between">
+            <div className="flex justify-between md:flex-row items-center h-full">
+              <div className="flex items-center w-full mr-2">
                 <button
                   style={{ boxShadow: "0px 0px 4px #000" }}
                   onClick={() => {
@@ -72,7 +60,7 @@ export default function DashboardHeader() {
                   title="Burger menu"
                   className={`${
                     menuShow && "opened"
-                  } bg-gradient-to-r from-primary to-cta p-1 rounded-lg z-50 w-max text-sm sm:text-base drop-shadow-sm duration-100 cursor-default font-bold`}
+                  } bg-gradient-to-r from-primary to-cta p-1  z-50 w-max text-sm sm:text-base drop-shadow-sm duration-100 cursor-default font-bold`}
                 >
                   <svg width="30" height="30" viewBox="0 0 100 100">
                     <path
@@ -86,7 +74,7 @@ export default function DashboardHeader() {
                     />
                   </svg>
                 </button>
-                <div className="flex items-center">
+                <div className="flex items-center ml-3">
                   <Image
                     src="/assets/quixy-logo.png"
                     width={224}
@@ -97,6 +85,19 @@ export default function DashboardHeader() {
                 </div>
               </div>
             </div>
+            <button
+              onClick={() => dispatch(set_modals({ ...modals, config: true }))}
+              className="shadow-sm shadow-zinc-700 p-2 relative w-max font-gotham bg-gradient-to-br from-primary to-cta text-white hover:from-cta hover:to-cta "
+            >
+              <div className="flex items-center justify-center relative">
+                <div className="text-white opacity-50 mr-2">
+                  <FaCog className="text-2xl" />
+                </div>
+                <div className="mt-px z-50 relative text-center text-sm">
+                  MÓJ PROFIL
+                </div>
+              </div>
+            </button>
           </div>
         </div>
       </div>
@@ -108,11 +109,8 @@ export default function DashboardHeader() {
             ? "translate-x-0 bg-white"
             : "-translate-x-[100vw] lg:translate-x-0 bg-white"
         } w-screen`}
-        style={{
-          boxShadow: "0px 0px 5px black",
-        }}
       >
-        <div className={`font-coco w-full mt-24 lg:mt-0`}>
+        <div className={`font-coco w-full mt-24 lg:mt-0 relative`}>
           <div className="px-6 w-full">
             <div className="mt-8 w-full flex flex-row justify-between items-start">
               <button
@@ -140,151 +138,79 @@ export default function DashboardHeader() {
                 </div>
               </h2>
             </div>
-            <div className="text-3xl text-black font-gotham mt-6">
-              Nawigacja
-            </div>
-            <Link
-              href="/dashboard"
-              onClick={() => setMenuShow(false)}
-              className="flex items-center text-xl text-black drop-shadow-xl mt-3"
-            >
-              <FaHome className="mr-2 text-primary" />
-              Panel użytkownika
-            </Link>
-            <Link
-              href="/dashboard/image_generator"
-              onClick={() => setMenuShow(false)}
-              className="flex items-center text-xl text-black drop-shadow-xl mt-3"
-            >
-              <FaImage className="mr-2 text-primary" />
-              Obrazy Quixy&trade;
-            </Link>
-            <Link
-              href="/dashboard/idea_generator"
-              onClick={() => setMenuShow(false)}
-              className="flex items-center text-xl text-black drop-shadow-xl mt-3"
-            >
-              <FaLightbulb className="mr-2 text-primary" />
-              Pomysły Quixy&trade;
-            </Link>
           </div>
         </div>
-        <div className="font-coco px-6 mt-12">
-          <h2 className="text-3xl text-black font-gotham">Praca Zdalna</h2>
-
-          <div>
-            <Link
-              href="/dashboard/search"
-              onClick={() => setMenuShow(false)}
-              className="flex items-center text-xl text-black drop-shadow-xl mt-3"
+        <div className="flex flex-col px-6 group mt-6">
+          <div className="duration-300 absolute left-0 top-[12px] w-[12px] h-[calc(100%-24px)] group-hover:bg-gradient-to-b group-hover:from-primary group-hover:to-cta rounded-r-xl opacity-30 group-hover:opacity-100"></div>
+          <div className="duration-300 absolute right-0 top-[12px] w-[12px] h-[calc(100%-24px)] group-hover:bg-gradient-to-t group-hover:from-primary group-hover:to-cta rounded-l-xl opacity-30 group-hover:opacity-100"></div>
+          <div className="duration-300 absolute left-[12px] top-0 w-[calc(100%-24px)] h-[12px] group-hover:bg-gradient-to-b group-hover:from-primary group-hover:to-cta rounded-b-xl opacity-30 group-hover:opacity-100"></div>
+          <div className="duration-300 absolute left-[12px] bottom-0 w-[calc(100%-24px)] h-[12px] group-hover:bg-gradient-to-t group-hover:from-primary group-hover:to-cta rounded-t-xl opacity-30 group-hover:opacity-100"></div>
+          <div className="flex items-start bg-white h-max relative w-full">
+            <button
+              onClick={() => dispatch(set_modals({ ...modals, config: true }))}
+              className="hover:opacity-80 duration-200 group"
             >
-              <FaMagnifyingGlass className="mr-2 text-primary" /> Szukaj pracy
-            </Link>
-            <Link
-              href="/dashboard/applications"
-              onClick={() => setMenuShow(false)}
-              className="flex items-center text-xl text-black drop-shadow-xl mt-3"
-            >
-              <FaList className="mr-2 text-primary" /> Moje aplikacje
-            </Link>
+              {user?.photoURL && (
+                <div className="w-24 aspect-square sm:w-40 overflow-hidden relative">
+                  <Image
+                    style={{ boxShadow: "inset 0px 0px 8px black" }}
+                    src={user?.photoURL}
+                    width={256}
+                    height={256}
+                    alt=""
+                    className="shadow-sm shadow-zinc-700 rounded-full bg-white absolute inset-0 object-cover w-full h-full group-hover:scale-80 duration-75"
+                  />
+                </div>
+              )}
+              {!user?.photoURL && (
+                <div
+                  style={{ boxShadow: "inset 0px 0px 8px black" }}
+                  className="rounded-full bg-gradient-to-r from-primary to-cta w-24 aspect-square sm:w-40 text-white flex items-center justify-center"
+                >
+                  <FaUser className="text-3xl lg:text-5xl group-hover:scale-80 duration-75" />
+                </div>
+              )}
+            </button>
+            {!user?.configured && (user?.seek === "ask" || !user?.seek) && (
+              <div className="pl-4 pt-4">
+                <h2 className="text-white bg-gradient-to-r from-primary to-cta w-max rounded-xl px-2 font-gotham font-bold">
+                  Nie skonfigurowano profilu
+                </h2>
+                <p className="text-black font-light max-w-lg font-coco my-1 text-sm">
+                  Określ typ profilu w zakładce{" "}
+                  <b className="italic">MÓJ PROFIL</b>, by rozpocząć swoją
+                  przygodę w Quixy
+                </p>
+              </div>
+            )}
+            {user?.configured && user?.seek !== "ask" && (
+              <div className="flex flex-col h-max p-3">
+                {!user?.name && (
+                  <h2 className="text-sm text-black drop-shadow-lg font-bold font-coco italic">
+                    {user?.seek && "Imię (lub imię i nazwisko)"}
+                    {(!user?.seek || user?.seek === "ask") &&
+                      "Nazwa firmy/dane rekrutera"}
+                  </h2>
+                )}
+                <h3
+                  className={`text-lg sm:text-xl font-coco font-bold ${
+                    user?.name ? "text-black" : "text-primary"
+                  }`}
+                >
+                  {user?.name ? user?.name : "Nie podano"}
+                </h3>
+                <h3 className="text-black text-sm sm:text-lg font-coco font-bold">
+                  {user?.title && user?.title}
+                </h3>
+                <h3 className="text-black text-sm sm:text-lg font-light font-coco">
+                  {user?.pseudo && user?.pseudo}
+                </h3>
+              </div>
+            )}{" "}
           </div>
-          <Link
-            href="/dashboard/add_job_offer"
-            onClick={() => setMenuShow(false)}
-            className="flex items-center text-xl text-black drop-shadow-xl mt-3"
-          >
-            <FaPlus className="mr-2 text-primary" /> Dodaj ofertę pracy
-          </Link>
-          <Link
-            href="/dashboard/my_postings"
-            onClick={() => setMenuShow(false)}
-            className="flex items-center text-xl text-black drop-shadow-xl mt-3"
-          >
-            <FaRocket className="mr-2 text-primary" /> Moje oferty pracy
-          </Link>
         </div>
-        {/* <div className="font-coco px-6 mt-12 w-full">
-          <h2 className="text-3xl text-black font-gotham">Marketplace</h2>
-          <p className="font-coco text-lg text-left max-w-[30rem] mt-3 text-gray-600">
-            Kup lub sprzedaj swoją aplikację, stronę internetową lub projekt.
-            Już wkrótce!
-          </p>
-          {!user?.seek && (
-            <Link
-              href="/marketplace"
-              onClick={() => setMenuShow(false)}
-              className="flex items-center text-xl text-black drop-shadow-xl mt-3"
-            >
-              <FaDollarSign className="mr-2 text-primary" /> Kup projekt
-            </Link>
-          )}
-          {user?.seek && (
-            <Link
-              href="/marketplace"
-              onClick={() => setMenuShow(false)}
-              className="flex items-center text-xl text-black drop-shadow-xl mt-3"
-            >
-              <FaDollarSign className="mr-2 text-primary" /> Sprzedaj projekt
-            </Link>
-          )}
-        </div> */}
-        <div className={`pt-12 p-6 font-coco`}>
-          <h2 className="text-3xl text-black font-gotham">
-            <div className="">Ustawienia</div>
-          </h2>
-
-          <div
-            className={`text-lg font-gotham flex text-black ${
-              user?.configured && user?.seek !== "ask"
-                ? "space-x-3"
-                : "flex-col"
-            }`}
-          >
-            <div className="">Typ konta:</div>{" "}
-            {user?.configured && (
-              <div className="font-light">
-                {user?.seek === true && "Talent"}
-                {user?.seek === "ask" && "Zainteresowany AI"}
-                {!user?.seek && user?.seek !== "ask" && "Klient"}
-              </div>
-            )}
-            {!user?.configured && (
-              <div className="font-light">
-                Nie skonfigurowano jeszcze typu konta
-              </div>
-            )}
-          </div>
-          {/* SETTINGS CTA */}
-          <button
-            onClick={() => dispatch(set_modals({ ...modals, quixies: true }))}
-            className="flex items-center text-black font-coco mt-4 text-lg"
-          >
-            <FaCoins className="mr-2 text-primary text-2xl" />
-            Doładuj Quixies
-          </button>
-          <button
-            onClick={() => dispatch(set_modals({ ...modals, config: true }))}
-            className="flex items-center text-black font-coco mt-1 text-lg"
-          >
-            {user?.seek && user?.seek !== "ask" && (
-              <>
-                <FaCog className="text-2xl mr-2 text-primary" />
-                Moje konto
-              </>
-            )}
-            {!user?.seek && user?.seek !== "ask" && (
-              <>
-                <FaUser className="text-2xl mr-2 text-primary" />
-                Panel Klienta
-              </>
-            )}
-            {user?.seek === "ask" && (
-              <>
-                <FaCogs className="text-2xl mr-2 text-primary" />
-                Skonfiguruj konto
-              </>
-            )}
-          </button>
+        <UserPanel userData={user} />
+        <div className={`pt-12 p-6 font-coco flex items-center`}>
           <button
             className="mt-2 text-black drop-shadow-xl"
             onClick={() => {
@@ -294,6 +220,13 @@ export default function DashboardHeader() {
           >
             Wyloguj
           </button>
+          <Link
+            href="/terms-of-use"
+            target="_blank"
+            className="mt-2 text-black drop-shadow-xl ml-2"
+          >
+            Regulamin
+          </Link>
         </div>
       </div>
     </div>

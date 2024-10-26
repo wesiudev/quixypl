@@ -24,7 +24,7 @@ export default function ChatMessage({
           clickedUserData?.uid === message?.sender
             ? "animate-message-to-right"
             : "animate-message-to-left"
-        } my-3 p-2 rounded-md text-white flex items-start ${
+        } my-3 p-2  text-white flex items-start ${
           clickedUserData?.uid === message?.sender
             ? "flex-row"
             : "flex-row-reverse"
@@ -73,8 +73,8 @@ export default function ChatMessage({
         <div
           className={`text-xs ${
             clickedUserData?.uid === message?.sender
-              ? "text-left bg-[#fff] ml-3 p-3 rounded-md"
-              : "text-right bg-green-700 mr-3 p-3 rounded-md"
+              ? "text-left bg-[#fff] ml-3 p-3 "
+              : "text-right bg-green-700 mr-3 p-3 "
           } w-auto`}
         >
           {message?.content}

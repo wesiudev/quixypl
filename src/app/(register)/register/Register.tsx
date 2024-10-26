@@ -121,7 +121,7 @@ export default function Register() {
                 setStep(1);
                 setSeek("ask");
               }}
-              className={`bg-gradient-to-r from-primary via-cta to-primary text-white px-2 py-1 rounded-md mt-4 text-xl max-w-sm font-gotham ${
+              className={`text-zinc-800 px-2 py-1  mt-4 text-xl max-w-sm font-gotham ${
                 seek === "ask" && "underline"
               }`}
             >

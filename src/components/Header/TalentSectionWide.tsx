@@ -45,7 +45,7 @@ export default function ProductsWide({
                 href={`/praca-zdalna/${polishToEnglish(job.title)}`}
                 title={`Pracuj zdalnie w ${job.title}`}
                 style={{ boxShadow: "0px 0px 4px black" }}
-                className={`text-lg mt-3 font-bold p-1 px-3 rounded-md text-white bg-[#126b91] w-max`}
+                className={`text-lg mt-3 font-bold p-1 px-3  text-white bg-[#126b91] w-max`}
                 key={i}
                 onClick={() => setHovered(false)}
               >
@@ -104,7 +104,7 @@ export default function ProductsWide({
                   title={`Wypróbuj Quixy Talent™: ${item.urlLabel}`}
                   aria-label={`Link to ${item.urlLabel}`}
                   href={item.url}
-                  className={`aspect-square rounded-lg group w-full h-max text-white font-bold text-sm sm:text-lg text-center relative overflow-hidden flex flex-col items-center justify-center`}
+                  className={`aspect-square  group w-full h-max text-white font-bold text-sm sm:text-lg text-center relative overflow-hidden flex flex-col items-center justify-center`}
                   style={{
                     backgroundColor: item.color,
                     boxShadow: "0px 0px 3px rgb(0, 0, 0)",

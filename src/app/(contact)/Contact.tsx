@@ -48,7 +48,7 @@ export default function Contact() {
             <div className="mx-auto container flex flex-col lg:flex-row items-center lg:items-start justify-center lg:space-x-6">
               <div
                 style={{ boxShadow: "0px 0px 5px black" }}
-                className="max-w-lg lg:max-w-lg xl:max-w-2xl rounded-xl overflow-hidden"
+                className="max-w-lg lg:max-w-lg xl:max-w-2xl  overflow-hidden"
               >
                 <div className="bg-white shadow-lg relative z-50 pb-3 lg:pb-6 mx-auto lg:mx-0">
                   <h2 className="flex items-center p-6 text-3xl text-white bg-gradient-to-r font-light italic font-coco from-primary to-cta">
@@ -76,7 +76,7 @@ export default function Contact() {
                           value={data.name}
                           type="text"
                           id="name"
-                          className="w-full p-4 input-lg font-light text-black  rounded-xl"
+                          className="w-full p-4 input-lg font-light text-black  "
                           placeholder="Wpisz swoje imię"
                         />
                       </div>
@@ -95,7 +95,7 @@ export default function Contact() {
                           value={data.email}
                           type="email"
                           id="email"
-                          className="input-lg font-light text-black  w-full p-4 rounded-xl"
+                          className="input-lg font-light text-black  w-full p-4 "
                           placeholder="Wpisz swój email"
                         />
                       </div>
@@ -114,7 +114,7 @@ export default function Contact() {
                         }
                         value={data.message}
                         id="message"
-                        className=" text-black min-h-full w-full p-4 textarea-lg font-light rounded-xl"
+                        className=" text-black min-h-full w-full p-4 textarea-lg font-light "
                         placeholder="Wpisz swoją wiadomość"
                       ></textarea>
                     </div>
@@ -160,7 +160,7 @@ export default function Contact() {
               </div>
               <div className="text-zinc-800 py-12 lg:py-0 flex flex-col items-center justify-center lg:items-start lg:justify-start w-full">
                 <h2 className="pt-2 text-3xl text-white text-center lg:text-left">
-                  <span className="font-light italic font-coco p-2 rounded-xl w-max max-w-full bg-gradient-to-r from-primary to-cta">
+                  <span className="font-light italic font-coco p-2  w-max max-w-full bg-gradient-to-r from-primary to-cta">
                     Informacje Kontaktowe
                   </span>
                 </h2>

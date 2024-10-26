@@ -75,14 +75,14 @@ export default function ImagePicker({
       onDrop={handleDrop}
     >
       <div className="w-full">
-        <div className="w-full py-6 flex items-center justify-center text-center flex-col bg-[#126b91] rounded-xl">
+        <div className="w-full py-6 flex items-center justify-center text-center flex-col bg-[#126b91] ">
           <FaImages className="text-4xl text-white mb-3" />
           <div className="font-light text-white px-6 max-w-sm text-sm">
             Dodaj zdjęcia o rozmiarze do 5MB każde lub upuść pliki tutaj...
           </div>
           <label
             htmlFor="uploader"
-            className="w-max mt-4 py-3 px-12 text-center justify-center items-center flex font-gotham bg-white rounded-xl duration-300 text-primary hover:text-white hover:bg-cta hover:underline"
+            className="w-max mt-4 py-3 px-12 text-center justify-center items-center flex font-gotham bg-white  duration-300 text-primary hover:text-white hover:bg-cta hover:underline"
           >
             <FaUpload className="mr-2" />
             Dodaj zdjęcia

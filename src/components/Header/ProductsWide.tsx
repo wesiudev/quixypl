@@ -47,7 +47,7 @@ export default function ProductsWide({
                 >
                   <span
                     style={{ textShadow: "2px 2px 5px gray" }}
-                    className="text-white bg-gradient-to-r from-primary to-cta text-xl p-2 rounded-xl w-max font-light italic"
+                    className="text-white bg-gradient-to-r from-primary to-cta text-xl p-2  w-max font-light italic"
                   >
                     {job.title}
                   </span>
@@ -66,14 +66,14 @@ export default function ProductsWide({
                       <div className="flex flex-col absolute left-0 top-0 group-hover:-translate-y-0 -translate-y-[1000%] opacity-0 group-hover:opacity-100 z-50">
                         <Link
                           title={`Pracuj Zdalnie jako ${item.title}`}
-                          className="rounded-t-lg p-1 px-2 text-white font-bold bg-gradient-to-r group-hover:from-primary group-hover:to-cta w-full text-left text-base"
+                          className=" p-1 px-2 text-white font-bold bg-gradient-to-r group-hover:from-primary group-hover:to-cta w-full text-left text-base"
                           href={`/praca-zdalna/${polishToEnglish(
                             job.title
                           )}/${polishToEnglish(item.title)}`}
                         >
                           {item.title}
                         </Link>
-                        <div className="flex flex-col xl:flex-row xl:flex-wrap xl:w-[420px] w-[210px] rounded-b-lg overflow-hidden">
+                        <div className="flex flex-col xl:flex-row xl:flex-wrap xl:w-[420px] w-[210px]  overflow-hidden">
                           {item.data.map((subcategory: any, i: any) => (
                             <Link
                               title={`Szukaj pracy w ${job.title}/${item.title}/${subcategory.title}`}
@@ -82,7 +82,7 @@ export default function ProductsWide({
                               className={`bg-primary hover:bg-[#468CA9] duration-75 font-light p-2 text-white w-[210px] xl:min-w-[210px] max-w-[420px] ${
                                 item.data.length % 2 !== 0 &&
                                 i + 1 === item.data.length &&
-                                "rounded-b-lg"
+                                ""
                               }`}
                               href={`/praca-zdalna/${polishToEnglish(
                                 job.title

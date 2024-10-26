@@ -15,7 +15,7 @@ export default async function Page() {
     <>
       <Header jobsList={jobs} />
       <div className="py-48 bg-gradient-to-r from-zinc-800 via-gray-800 to-zinc-950 overflow-hidden">
-        <div className="container p-6 lg:p-12 bg-white rounded-xl relative z-50 mx-auto mb-24">
+        <div className="container p-6 lg:p-12 bg-white  relative z-50 mx-auto mb-24">
           <div className="w-full relative mx-auto">
             <ul className="breadcrumbs font-gotham font-light flex items-center flex-wrap text-black">
               <li className="mr-2">

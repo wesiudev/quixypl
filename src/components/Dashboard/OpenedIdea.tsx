@@ -35,13 +35,13 @@ export default function OpenedIdea({
         <div className="top-0 py-2 right-0 sticky flex flex-row bg-white">
           <button
             onClick={() => setIdeaOpen({ name: "" })}
-            className="bg-black text-white font-bold rounded-md px-1.5 py-1"
+            className="bg-black text-white font-bold  px-1.5 py-1"
           >
             Wróć do panelu
           </button>
           <button
             onClick={() => setJobRequest(ideaOpen)}
-            className="bg-green-500 ml-2 text-white font-bold rounded-md px-1 py-0.5"
+            className="bg-green-500 ml-2 text-white font-bold  px-1 py-0.5"
           >
             Szukaj współpracy
           </button>
@@ -54,7 +54,7 @@ export default function OpenedIdea({
                 onClick={() => {
                   setJobRequest(false);
                 }}
-                className="bg-gradient-to-r from-primary to-cta py-0.5 px-2 text-white mr-2 rounded-md"
+                className="bg-gradient-to-r from-primary to-cta py-0.5 px-2 text-white mr-2 "
               >
                 TAK
               </button>
@@ -62,7 +62,7 @@ export default function OpenedIdea({
                 onClick={() => {
                   setJobRequest(false);
                 }}
-                className="text-white py-0.5 px-2 rounded-md bg-red-500 hover:bg-red-400"
+                className="text-white py-0.5 px-2  bg-red-500 hover:bg-red-400"
               >
                 NIE
               </button>
@@ -111,13 +111,13 @@ export default function OpenedIdea({
           <div className="py-2 flex flex-row bg-white sm:hidden">
             <button
               onClick={() => setIdeaOpen({ name: "" })}
-              className="bg-black text-white font-bold rounded-md px-1.5 py-1"
+              className="bg-black text-white font-bold  px-1.5 py-1"
             >
               Wróć do panelu
             </button>
             <button
               onClick={() => setJobRequest(ideaOpen)}
-              className="bg-green-500 ml-2 text-white font-bold rounded-md px-1 py-0.5"
+              className="bg-green-500 ml-2 text-white font-bold  px-1 py-0.5"
             >
               Szukaj ekspertów
             </button>

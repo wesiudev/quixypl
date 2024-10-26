@@ -34,10 +34,10 @@ export default function DashboardIdeas() {
                 <div
                   key={i}
                   style={{ boxShadow: "inset 0px 0px 5px black" }}
-                  className="ml-3 mt-3 p-3 group bg-[#126b91] lg:w-max lg:max-w-[100%] rounded-xl hover:bg-[#468CA9] duration-75"
+                  className="ml-3 mt-3 p-3 group bg-[#126b91] lg:w-max lg:max-w-[100%]  hover:bg-[#468CA9] duration-75"
                 >
                   <div
-                    className="rounded-lg duration-100 h-full relative"
+                    className=" duration-100 h-full relative"
                     style={{ boxShadow: "0px 0px 10px black" }}
                   >
                     <button
@@ -45,7 +45,7 @@ export default function DashboardIdeas() {
                         setIdeaOpen(idea);
                         setJobRequestOpen(idea);
                       }}
-                      className="flex-col flex text-left items-start justify-start font-bold rounded-lg p-2 bg-white w-full h-full"
+                      className="flex-col flex text-left items-start justify-start font-bold  p-2 bg-white w-full h-full"
                     >
                       <div className="flex flex-col justify-start">
                         <div className="text-left text-black font-gotham">

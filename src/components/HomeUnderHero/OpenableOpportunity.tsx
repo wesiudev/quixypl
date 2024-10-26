@@ -12,7 +12,7 @@ export default function OpenableOpportunity({
   return (
     <div
       key={i}
-      className={`font-gotham p-3 flex flex-col rounded-lg bg-gray-200 shadow-black !text-black`}
+      className={`font-gotham p-3 flex flex-col  bg-gray-200 shadow-black !text-black`}
     >
       <div
         className={`

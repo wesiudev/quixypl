@@ -10,9 +10,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        cardo: ["var(--font-gotham)"],
+        cardo: ["var(--font-cocosharp)"],
         coco: ["var(--font-cocosharp)"],
-        gotham: ["var(--font-gotham)"],
+        gotham: ["var(--font-cocosharp)"],
       },
       colors: {
         cta: "#14A800",

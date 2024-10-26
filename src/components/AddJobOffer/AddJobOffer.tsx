@@ -112,14 +112,14 @@ export default function AddJobOffer() {
 
       <div
         style={{ boxShadow: "0px 0px 5px black" }}
-        className="w-[100%] max-w-[55rem] h-max bg-white z-50 relative p-6 lg:p-10 my-12 rounded-xl"
+        className="w-[100%] max-w-[55rem] h-max bg-white z-50 relative p-6 lg:p-10 my-12 "
       >
         <h1 className="text-xl md:text-3xl font-gotham text-zinc-800">
           Dodaj ofertę pracy
         </h1>
-        <p className="mt-2 text-sm font-coco">
+        <p className="mt-2 text-sm font-coco text-black">
           Podaj najważniejsze informacje dotyczące rekrutacji. Możesz uwzględnić
-          zdjęcia oraz filmy.
+          zdjęcia lub filmy.
         </p>
         <div className="mt-2"></div>
         <div className="flex flex-col w-full font-coco">
@@ -171,7 +171,7 @@ export default function AddJobOffer() {
         </div>
         <Link
           href="/dashboard"
-          className="mt-4 p-2 bg-primary text-white rounded-md hover:bg-primary-dark flex items-center justify-center"
+          className="mt-4 p-2 bg-primary text-white  hover:bg-primary-dark flex items-center justify-center"
         >
           <FaChevronLeft className="mr-2" />
           Powrót do panelu

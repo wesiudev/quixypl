@@ -69,7 +69,7 @@ export default function GoogleAuthButton({
         onClick={() => googleHandler()}
         type="button"
         className={`${
-          landing === "yes" ? "w-[200px] text-sm rounded-xl" : "w-full text-lg"
+          landing === "yes" ? "w-[200px] text-sm " : "w-full text-lg"
         } block bg-white hover:bg-gray-100 focus:bg-gray-100 text-black font-gotham font-semibold px-4 py-3 border border-gray-300`}
       >
         <div className="flex items-center justify-center">

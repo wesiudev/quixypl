@@ -16,11 +16,11 @@ export default function AboutQuixyTalent() {
 
   return (
     <div className="font-coco pb-12">
-      <div className="relative rounded-t-xl mx-auto">
+      <div className="relative  mx-auto">
         <div className="grid grid-cols-2 gap-3 mt-6 font-gotham">
           <button
             onClick={() => setContent("client")}
-            className={`lg:text-xl border-[6px] rounded-xl flex items-center justify-center p-4  ${
+            className={`lg:text-xl border-[2px]  flex items-center justify-center py-2  ${
               content === "talent"
                 ? "border-primary text-white bg-primary"
                 : "border-cta text-white bg-gradient-to-r from-primary to-cta"
@@ -30,7 +30,7 @@ export default function AboutQuixyTalent() {
           </button>
           <button
             onClick={() => setContent("talent")}
-            className={`lg:text-xl border-[6px] rounded-xl flex items-center justify-center p-4  ${
+            className={`lg:text-xl border-[2px]  flex items-center justify-center py-2  ${
               content === "client"
                 ? "border-primary text-white bg-primary"
                 : "border-cta text-white bg-gradient-to-r from-primary to-cta"
@@ -41,7 +41,7 @@ export default function AboutQuixyTalent() {
         </div>
 
         {content === "client" && (
-          <div className="mt-8 rounded-lg">
+          <div className="mt-4 ">
             <div className="mb-6 grid grid-cols-1 lg:grid-cols-2">
               <div className="lg:pr-6">
                 <h2 className="text-3xl font-bold text-zinc-800 flex items-center">
@@ -57,7 +57,7 @@ export default function AboutQuixyTalent() {
                 </p>
                 <Link
                   href="/register"
-                  className="text-white bg-gradient-to-r from-primary to-cta font-gotham py-2 px-3 rounded-lg w-max hover:bg-opacity-90 h-max"
+                  className="text-white bg-gradient-to-r from-primary to-cta font-gotham py-2 px-3  w-max hover:bg-opacity-90 h-max"
                 >
                   Otwórz konto klienta
                 </Link>
@@ -93,7 +93,7 @@ export default function AboutQuixyTalent() {
                 </ul>
               </div>
               <div className="w-full lg:flex lg:justify-end">
-                <div className="rounded-xl p-1 bg-gradient-to-r from-primary to-cta w-full h-auto lg:w-max lg:max-w-full lg:h-max lg:max-h-full">
+                <div className=" p-1 bg-gradient-to-r from-primary to-cta w-full h-auto lg:w-max lg:max-w-full lg:h-max lg:max-h-full">
                   <Image
                     src="/assets/client-banner.png"
                     width={1024}
@@ -102,7 +102,7 @@ export default function AboutQuixyTalent() {
                     placeholder="blur"
                     blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
                     alt="Współpraca zdalna z perspektywy klienta"
-                    className="rounded-lg bg-white w-full lg:max-w-xl"
+                    className=" bg-white w-full lg:max-w-xl"
                   />
                 </div>
               </div>
@@ -111,7 +111,7 @@ export default function AboutQuixyTalent() {
         )}
 
         {content === "talent" && (
-          <div className="mt-8 rounded-lg">
+          <div className="mt-4 ">
             <div className="mb-6 grid grid-cols-1 lg:grid-cols-2">
               <div className="lg:pr-6">
                 <h2 className="text-3xl font-bold text-zinc-800 flex items-center">
@@ -126,7 +126,7 @@ export default function AboutQuixyTalent() {
                 </p>
                 <Link
                   href="/register"
-                  className="text-white bg-gradient-to-r from-primary to-cta font-gotham py-2 px-3 rounded-lg w-max hover:bg-opacity-90 h-max"
+                  className="text-white bg-gradient-to-r from-primary to-cta font-gotham py-2 px-3  w-max hover:bg-opacity-90 h-max"
                 >
                   Otwórz konto talentu
                 </Link>
@@ -166,7 +166,7 @@ export default function AboutQuixyTalent() {
                 </ul>
               </div>
               <div className="w-full lg:flex lg:justify-end">
-                <div className="rounded-xl p-1 bg-gradient-to-r from-primary to-cta w-full h-auto lg:w-max lg:max-w-full lg:h-max lg:max-h-full">
+                <div className=" p-1 bg-gradient-to-r from-primary to-cta w-full h-auto lg:w-max lg:max-w-full lg:h-max lg:max-h-full">
                   <Image
                     src="/assets/talent-banner.png"
                     width={1024}
@@ -175,7 +175,7 @@ export default function AboutQuixyTalent() {
                     placeholder="blur"
                     blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
                     alt="Współpraca zdalna z perspektywy klienta"
-                    className="rounded-lg bg-white w-full lg:max-w-xl"
+                    className=" bg-white w-full lg:max-w-xl"
                   />
                 </div>
               </div>
@@ -189,7 +189,7 @@ export default function AboutQuixyTalent() {
             </p>
           </div>
         )}
-        <p className="mt-3 text-lg bg-primary bg-opacity-80 rounded-xl p-3 text-white font-light max-w-3xl">
+        <p className="mt-3 text-lg bg-primary bg-opacity-80  p-3 text-white font-light max-w-3xl">
           Nasz system CCRM umożliwia firmom nawiązywanie współpracy, dzielenie
           się zasobami i wspólne tworzenie innowacyjnych rozwiązań. To podejście
           oparte na partnerstwie oraz wzajemnym wsparciu pozwala na dynamiczny

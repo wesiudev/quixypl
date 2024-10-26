@@ -46,7 +46,7 @@ export default async function Page({
         >
           <FaChevronLeft className="mr-2" />
           <div
-            className="bg-[#126b91] p-2 text-white rounded-md hover:bg-opacity-90 durtion-100 font-light px-12"
+            className="bg-[#126b91] p-2 text-white  hover:bg-opacity-90 durtion-100 font-light px-12"
             style={{ boxShadow: "inset 0px 0px 16px black" }}
           >
             Panel Użytkownika
@@ -60,7 +60,7 @@ export default async function Page({
     <div className="text-center">
       <div className="bg-white w-full h-screen flex items-center justify-center flex-col left-0 top-0">
         {order.payment_status === "paid" && orderToCompare?.realized && (
-          <div className="bg-[#126b91] text-white font-bold text-center p-12 rounded-xl">
+          <div className="bg-[#126b91] text-white font-bold text-center p-12 ">
             Dziękujemy za zakupy, {order.metadata.quantity}💎 Quixies zostało
             dodane do twojego konta.
           </div>
