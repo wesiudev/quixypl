@@ -8,7 +8,6 @@ import Image from "next/image";
 import { Metadata } from "next";
 import IdeaList from "@/components/IdeaList";
 import Toast from "@/components/Toast";
-import Hero from "@/components/Hero";
 export default async function Page() {
   const ideas = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/getIdeas?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
@@ -20,7 +19,6 @@ export default async function Page() {
       <Header jobsList={jobs} />
       <Toast />
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between h-max w-full relative overflow-hidden bg-gradient-to-r from-primary to-cta ">
-        <Hero />
         <div className="w-full relative z-10 p-4 lg:p-8">
           <div className="p-4 lg:p-8 2xl:p-12  bg-white relative z-50">
             <h1 className="text-3xl lg:text-5xl font-gotham text-zinc-800">

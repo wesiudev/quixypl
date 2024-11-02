@@ -2,7 +2,6 @@ import Link from "next/link";
 import Discord from "./Discord";
 import Image from "next/image";
 import { polishToEnglish } from "../../utils/polishToEnglish";
-import Hero from "./Hero";
 
 export default function MainFooter({
   jobsList,
@@ -15,7 +14,6 @@ export default function MainFooter({
 }) {
   return (
     <div className="flex flex-col px-6 lg:px-12 p-6 py-12 bg-gradient-to-r from-zinc-800 via-gray-800 to-zinc-950 relative z-50 overflow-hidden font-gotham">
-      <Hero />
       <div className="flex flex-col relative z-50">
         <div className="mb-12">
           <h2 className="text-4xl text-white italic">

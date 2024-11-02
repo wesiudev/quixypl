@@ -21,7 +21,8 @@ export async function generateStaticParams() {
     .map((item: any) => ({ job: polishToEnglish(item.title) }));
 }
 
-export default async function Page({ params }: { params: any }) {
+export default async function Page(props: { params: Promise<any> }) {
+  const params = await props.params;
   const offers = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/offers/?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`,
     {
@@ -154,7 +155,8 @@ export default async function Page({ params }: { params: any }) {
   );
 }
 
-export async function generateMetadata({ params }: { params: any }) {
+export async function generateMetadata(props: { params: Promise<any> }) {
+  const params = await props.params;
   const category = jobs
     .flatMap((service: any) =>
       service.data.flatMap((subItem: any) => ({ category: subItem.title }))

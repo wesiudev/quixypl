@@ -7,7 +7,8 @@ import MainFooter from "@/components/MainFooter";
 import IdeaListSlug from "@/components/IdeaListSlug";
 import UserStickyTop from "@/components/UserStickyTop";
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const slug = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/getSingleIdea?tubylytylkofigi=${
       process.env.API_SECRET_KEY
@@ -109,7 +110,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   );
 }
 
-export async function generateMetadata({ params }: { params: any }) {
+export async function generateMetadata(props: { params: Promise<any> }) {
+  const params = await props.params;
   const slug = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/getSingleIdea?tubylytylkofigi=${
       process.env.API_SECRET_KEY

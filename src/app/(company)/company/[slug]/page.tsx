@@ -11,13 +11,13 @@ import { getPageContent } from "@/lib/getPageContent";
 import CompanyStickyTop from "@/components/CompanyStickyTop";
 import JobOfferCard from "@/components/Dashboard/JobOfferCard";
 
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: { slug: string };
-  searchParams: any;
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ slug: string }>;
+    searchParams: Promise<any>;
+  }
+) {
+  const params = await props.params;
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
     { next: { revalidate: 60 } }
@@ -225,7 +225,8 @@ export default async function Page({
     </>
   );
 }
-export async function generateMetadata({ params }: { params: any }) {
+export async function generateMetadata(props: { params: Promise<any> }) {
+  const params = await props.params;
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
     { next: { revalidate: 60 } }

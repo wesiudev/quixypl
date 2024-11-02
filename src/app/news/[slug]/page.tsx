@@ -15,7 +15,8 @@ export async function generateStaticParams() {
   }));
 }
 export const revalidate = 30;
-export default async function Page({ params }: { params: any }) {
+export default async function Page(props: { params: Promise<any> }) {
+  const params = await props.params;
   const product: any = await getProductByUrl(params?.slug);
   const products: any = await getProducts();
 
@@ -245,7 +246,8 @@ export default async function Page({ params }: { params: any }) {
     </>
   );
 }
-export async function generateMetadata({ params }: { params: any }) {
+export async function generateMetadata(props: { params: Promise<any> }) {
+  const params = await props.params;
   // Pobierz dane produktu
   const product: any = await getProductByUrl(params?.slug);
 

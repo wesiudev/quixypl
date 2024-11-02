@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Link from "next/link";
 import jobs from "../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
-import Hero from "@/components/Hero";
+
 import {
   FaFileSignature,
   FaImages,

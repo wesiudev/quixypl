@@ -5,11 +5,12 @@ import { getDocument } from "@/firebase";
 import { Metadata } from "next";
 import Image from "next/image";
 
-export default async function Page({
-  params,
-}: {
-  params: { orderId: string };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ orderId: string }>;
+  }
+) {
+  const params = await props.params;
   const orders = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/stripe/orders?secret=${process.env.API_SECRET_KEY}`,
     {

@@ -4,7 +4,8 @@ import VerifyEmail from "./VerifyEmail";
 import { Metadata } from "next";
 import Loading from "@/app/loading";
 
-export default async function Page({ params }: { params: { uid: string } }) {
+export default async function Page(props: { params: Promise<{ uid: string }> }) {
+  const params = await props.params;
   return (
     <div className="text-center">
       <div className="bg-white w-full h-screen flex items-center justify-center flex-col left-0 top-0">

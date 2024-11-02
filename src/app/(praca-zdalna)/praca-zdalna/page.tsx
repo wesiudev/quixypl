@@ -7,7 +7,6 @@ import FAQ from "@/components/Faq";
 import OpinionsForm from "@/components/OpinionsForm";
 import { FaRocket, FaUsers, FaRegLightbulb, FaCogs } from "react-icons/fa";
 import MainFooter from "@/components/MainFooter";
-import Hero from "@/components/Hero";
 import Image from "next/image";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa6";
 import GoogleAuthButton from "@/components/Auth/GoogleButton";
@@ -16,7 +15,6 @@ import TalentList from "@/components/TalentList";
 function HeroSection() {
   return (
     <header className="px-4 text-center py-12 overflow-hidden text-white relative bg-gradient-to-r from-zinc-900 via-gray-900 to-zinc-950">
-      <Hero />
       <div className="py-3 relative z-50 bg-black/50 text-white font-coco font-light italic  mx-auto w-max max-w-[90%]">
         <h1 className="p-2  lg:p-3 text-white bg-gradient-to-r from-primary to-cta text-xl lg:text-2xl sm:max-w-sm font-bold mb-4 leading-snug w-full text-center mx-auto z-50 relative">
           Praca zdalna - Znajdź pracę lub zatrudnij freelancera

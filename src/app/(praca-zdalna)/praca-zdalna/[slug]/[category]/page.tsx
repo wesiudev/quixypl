@@ -8,7 +8,6 @@ import AboutQuixyTalent from "@/app/(about)/AboutQuixyTalent";
 import { TfiFlagAlt } from "react-icons/tfi";
 import { getPageContent } from "@/lib/getPageContent";
 import Image from "next/image";
-import Hero from "@/components/Hero";
 import TalentList from "@/components/TalentList";
 import JobOffers from "@/components/JobOffers";
 
@@ -19,7 +18,8 @@ export async function generateStaticParams() {
   );
 }
 
-export default async function Page({ params }: { params: any }) {
+export default async function Page(props: { params: Promise<any> }) {
+  const params = await props.params;
   // Znalezienie odpowiednich danych
   const cat: any = jobs.find(
     (page: any) => polishToEnglish(page.title) === params.slug
@@ -53,7 +53,6 @@ export default async function Page({ params }: { params: any }) {
 
       {/* Hero Section */}
       <div className="px-4 relative flex flex-col items-center justify-center text-center text-white bg-gradient-to-r from-zinc-900 via-gray-900 to-zinc-950 py-12 font-gotham">
-        <Hero />
         <div className="p-3 sm:p-6 lg:p-12 !py-0 relative z-50">
           <h1 className="text-2xl sm:text-3xl lg:text-5xl mb-4">
             Praca zdalna{" "}
@@ -190,7 +189,8 @@ export default async function Page({ params }: { params: any }) {
 }
 
 // Metadata generation
-export async function generateMetadata({ params }: { params: any }) {
+export async function generateMetadata(props: { params: Promise<any> }) {
+  const params = await props.params;
   const category = jobs
     .flatMap((service: any) =>
       service.data.flatMap((subItem: any) => ({ category: subItem.title }))

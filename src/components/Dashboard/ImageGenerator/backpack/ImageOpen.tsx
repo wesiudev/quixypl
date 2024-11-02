@@ -1,11 +1,8 @@
 import FAQ from "@/components/Faq";
-import Hero from "@/components/Hero";
 import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
 import { FaChevronRight } from "react-icons/fa";
-import { polishToEnglish } from "../../../../../utils/polishToEnglish";
-import { toast } from "react-toastify";
 interface ImageOpenProps {
   imageOpen: {
     src: string;
@@ -26,7 +23,6 @@ export default function ImageOpen({ imageOpen, setImageOpen }: ImageOpenProps) {
       {imageOpen?.src !== "" && (
         <>
           <div className="w-full z-[500] bg-black">
-            <Hero />
             <div className="bg-white z-[506] fixed top-0 lg:left-[30rem] h-screen lg:w-[calc(100vw-30rem)] flex flex-col p-4 sm:p-8 lg:p-16 xl:p-24 overflow-y-scroll">
               <div className="flex flex-col w-full z-[505] relative">
                 <h2 className="lg:mt-0 text-black text-3xl font-bold">

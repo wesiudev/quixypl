@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
+
 import { getProducts } from "@/firebase";
 import { Metadata } from "next";
 import Image from "next/image";

@@ -11,7 +11,6 @@ import { sendGenerateIdeaRequest } from "../../utils/sendGenerateIdeaRequest";
 import Header from "@/components/Header";
 import FAQ from "@/components/Faq";
 import AboutQuixyTalent from "./(about)/AboutQuixyTalent";
-import Hero from "@/components/Hero";
 
 export const metadata: Metadata = {
   icons: [
@@ -69,20 +68,12 @@ export default async function Page() {
     <div className="flex flex-col bg-white">
       <Header jobsList={itCategories} />
       <div className="">
-        <div className="px-4 container mx-auto w-full flex flex-col items-center lg:grid lg:grid-cols-2 relative z-50 pt-24 pb-12 lg:pt-32 lg:pb-32">
-          <div className="group relative flex flex-col mx-auto">
-            <Image
-              src="/assets/quixy-logo.png"
-              width={140}
-              height={140}
-              alt="Pracuj Zdalnie Z Quixy Talent"
-              title="Pracuj Zdalnie Z Quixy Talent"
-              className="w-[125px] lg:hidden h-auto mx-auto mb-6"
-            />
-            <h2 className="lg:max-w-lg font-extrabold text-3xl lg:text-5xl text-zinc-800 text-center sm:text-left mx-auto sm:mx-0">
+        <div className="px-4 container w-full flex flex-col items-center lg:grid lg:grid-cols-2 relative z-50 pt-24 pb-12 lg:pt-32 lg:pb-32">
+          <div className="group relative flex flex-col">
+            <h2 className="lg:max-w-lg font-extrabold text-3xl lg:text-5xl text-zinc-800">
               Twoja platforma z pracą zdalną
             </h2>
-            <p className="max-w-[100%] mx-auto lg:mx-0 px-6 sm:px-0 sm:max-w-sm lg:max-w-lg text-black text-center lg:text-left mt-3">
+            <p className="max-w-[100%] sm:max-w-sm lg:max-w-lg text-black mt-3">
               Pierwsza platforma łącząca{" "}
               <b className="text-black">freelancerów</b> {" z "}
               <b className="text-black">klientami</b> napędzana technologią{" "}
@@ -90,7 +81,7 @@ export default async function Page() {
                 <b>CCRM!</b>
               </Link>
             </p>
-            <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 w-full justify-center mt-2 lg:justify-start">
+            <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 w-full mt-2">
               <Link
                 href="/praca-zdalna"
                 title="Rekrutuj do pracy zdalnej na panelu Quixy"
@@ -106,16 +97,14 @@ export default async function Page() {
                 <h2 className="w-max mx-auto">Jestem freelancerem</h2>
               </Link>
             </div>
-            <span className="mt-12  text-black text-center lg:text-left">
-              Zaufało nam 97% klientów
-            </span>
-            <div className="flex items-center flex-wrap w-full -ml-6 justify-center lg:justify-start">
+            <span className="mt-12 text-black">Zaufało nam 97% klientów</span>
+            <div className="flex items-center flex-wrap w-full">
               <Image
                 src="/assets/google.png"
                 width={224}
                 height={224}
                 alt="google nam zaufało"
-                className="max-h-[38px] w-auto ml-6 mt-3"
+                className="max-h-[38px] w-auto mt-3"
               />
               <Image
                 src="/assets/deviant.png"

@@ -3,7 +3,6 @@ import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 import jobs from "../../../../../public/14.09.2024.json";
 import SlugFooter from "@/components/SlugFooter";
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { getPageContent } from "@/lib/getPageContent";
 import Image from "next/image";
@@ -15,13 +14,12 @@ export async function generateStaticParams() {
     slug: polishToEnglish(service.title),
   }));
 }
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: any;
-  searchParams?: { [key: string]: string | string[] | undefined };
+export default async function Page(props: {
+  params: Promise<any>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const slug: any = jobs.find(
     (page: any) => polishToEnglish(page.title) === params.slug
   );
@@ -54,7 +52,6 @@ export default async function Page({
         {/* Hero Section */}
         <div className=" relative flex flex-col items-center justify-center text-center text-white bg-gradient-to-r from-zinc-800 via-gray-800 to-zinc-950 py-12 font-gotham">
           <div className="mt-3"></div>
-          <Hero />
           <div className="bg-black/50 px-3 py-6  relative z-50">
             <p className="!leading-normal text-2xl lg:text-4xl mb-4 relative z-50 font-gotham">
               <span className="bg-gradient-to-r from-primary to-cta px-1 py-1  text-white mr-2">
@@ -289,7 +286,8 @@ export default async function Page({
   );
 }
 
-export async function generateMetadata({ params }: { params: any }) {
+export async function generateMetadata(props: { params: Promise<any> }) {
+  const params = await props.params;
   const slug: any = jobs.find(
     (page: any) => polishToEnglish(page.title) === params.slug
   );

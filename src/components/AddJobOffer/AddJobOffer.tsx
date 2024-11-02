@@ -1,7 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { collection, addDoc } from "firebase/firestore";
 import Link from "next/link";
 import { addJobOffer, updateUser } from "@/firebase";
 import { toast } from "react-toastify";
