@@ -21,7 +21,7 @@ export default function Page() {
     <div className="flex flex-col bg-white">
       <Header jobsList={itCategories} />
       <div className="">
-        <div className="px-4 container w-full flex flex-col items-center lg:grid lg:grid-cols-2 relative z-50 pt-24 pb-12 lg:pt-32 lg:pb-32">
+        <div className="mx-auto px-4 container w-full flex flex-col lg:grid lg:grid-cols-2 relative z-50 pt-24 pb-12 lg:pt-32 lg:pb-32">
           <div className="group relative flex flex-col">
             <h2 className="lg:max-w-lg font-extrabold text-3xl lg:text-5xl text-zinc-800">
               Twoja platforma z pracą zdalną

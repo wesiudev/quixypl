@@ -219,7 +219,7 @@ function HighlightCard({
 }
 function CallToActionSection() {
   return (
-    <section className="flex flex-col lg:flex-row my-12 font-gotham text-left">
+    <section className="flex flex-col lg:flex-row my-12 text-left">
       <div
         style={{ boxShadow: "0px 0px 5px black" }}
         className="overflow-hidden h-full  "
@@ -236,11 +236,11 @@ function CallToActionSection() {
           className="w-full h-auto"
         />
       </div>
-      <div className="lg:px-6">
-        <h2 className="font-bold text-3xl mb-6 text-black mt-6 lg:mt-0">
+      <div className="lg:px-12">
+        <h2 className="font-bold text-3xl mb-2 text-black mt-6 lg:mt-0">
           Znajdziesz wolne stanowisko pracy zdalnej!
         </h2>
-        <p className="mb-3 text-lg text-black max-w-2xl font-gotham font-light">
+        <p className="mb-3 text-black max-w-2xl font-coco">
           Quixy.pl to najlepsza platforma z pracą zdalną w Polsce. Technologia z
           której korzystamy jest szybka i niezawodna. Zapraszamy do
           przeprowadzania rekrutacji, tworzenia wspólnych projektów i poszukiwań
@@ -249,16 +249,10 @@ function CallToActionSection() {
         <Link
           href="/register"
           title="Dołącz do Quixy"
-          className="bg-gradient-to-r from-primary to-cta text-white py-2 px-3  hover:bg-opacity-80 transition font-gotham font-light"
+          className="bg-gradient-to-r from-primary to-cta text-white py-2 px-3 hover:bg-opacity-80 transition font-gotham font-light"
         >
-          Dołącz już dziś!
+          Dołącz za darmo!
         </Link>
-        <div className="mt-3">
-          <p className="font-coco text-zinc-800 text-sm">
-            Posiadasz konto Google?
-          </p>
-          <GoogleAuthButton landing={"yes"} />
-        </div>
       </div>
     </section>
   );

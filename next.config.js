@@ -1,5 +1,5 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
+  productionBrowserSourceMaps: true,
   images: {
     remotePatterns: [
       {
@@ -55,5 +55,3 @@ const nextConfig = {
     ],
   },
 };
-
-module.exports = nextConfig;
