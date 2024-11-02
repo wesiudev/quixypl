@@ -41,18 +41,19 @@ export default async function Page({
     })
     .filter(
       (item: any) =>
+        item?.emailVerified &&
         item?.pseudo &&
         item?.seek &&
         item?.seek !== "ask" &&
-        item?.tags?.filter((tag: any) => tag.categoryUrl === params.slug)
+        item?.tags?.filter((tag: any) => tag.slugUrl === params.slug).length > 0
     );
-
   return (
     <>
-      <div className="bg-gray-200">
-        <Header jobsList={jobs} />
+      <Header jobsList={jobs} />
+      <div className="bg-gray-200 container px-3 mx-auto">
         {/* Hero Section */}
-        <div className="px-4 relative flex flex-col items-center justify-center text-center text-white bg-gradient-to-r from-zinc-800 via-gray-800 to-zinc-950 py-12 font-gotham">
+        <div className=" relative flex flex-col items-center justify-center text-center text-white bg-gradient-to-r from-zinc-800 via-gray-800 to-zinc-950 py-12 font-gotham">
+          <div className="mt-3"></div>
           <Hero />
           <div className="bg-black/50 px-3 py-6  relative z-50">
             <p className="!leading-normal text-2xl lg:text-4xl mb-4 relative z-50 font-gotham">
@@ -70,13 +71,13 @@ export default async function Page({
               </h2>
             )}
             {isTalent && (
-              <p className=" text-white font-light w-full px-4 text-sm sm:text-base lg:max-w-xl mx-auto">
+              <p className=" text-white font-light w-full  text-sm sm:text-base lg:max-w-xl mx-auto">
                 Tworzymy Quixy Talent by pomagać freelancerom i ludziom takim
                 jak my.
               </p>
             )}
             {!isTalent && (
-              <p className="font-light text-white w-full px-4 text-sm sm:text-base lg:max-w-xl mx-auto">
+              <p className="font-light text-white w-full  text-sm sm:text-base lg:max-w-xl mx-auto">
                 Pomożemy ci stworzyć najskuteczniejsze oferty pracy zdalnej w{" "}
                 {content?.genitive} w Polsce! Zajmij się swoim biznesem, a my
                 znajdziemy idealnych ekspertów.
@@ -108,7 +109,7 @@ export default async function Page({
           </div>
         </div>
         {/* Subcategories */}
-        <div className="container mx-auto px-6">
+        <div className="mx-auto px-6">
           <div className=" w-full h-full mx-auto grid grid-cols-1 lg:grid-cols-2 lg:gap-12 mt-12">
             <Image
               src={`/slug/${polishToEnglish(slug.title)}.webp`}
@@ -176,8 +177,8 @@ export default async function Page({
             </div>
           </div>
 
-          <div className="px-4 bg-white w-full my-12  p-6">
-            <div className="flex flex-col container mx-auto">
+          <div className=" bg-white w-full my-12  p-6">
+            <div className="flex flex-col  mx-auto">
               <div className="">
                 <h2
                   style={{ lineHeight: 1.5 }}
@@ -191,8 +192,8 @@ export default async function Page({
           </div>
           {/* Content */}
           <div className="flex flex-col lg:flex-row my-12">
-            <section className="text-left lg:w-[60%]">
-              <h2 className="text-xl lg:text-3xl mb-3 lg:mb-6 text-zinc-800 font-bold drop-shadow-xl shadow-black font-gotham">
+            <section className="text-left lg:pr-12">
+              <h2 className="text-xl lg:text-3xl mb-3 lg:mb-12 text-zinc-800 font-bold drop-shadow-xl shadow-black font-gotham">
                 Czym zajmują się {content?.informal_title_plural.toLowerCase()}?
               </h2>
 
@@ -204,7 +205,7 @@ export default async function Page({
               />
               <BlogPostList posts={products} />
             </section>
-            <div className="w-full lg:w-[40%]">
+            <div className="w-full lg:w-[40%] mt-12 lg:mt-0">
               {jobs.map((job: any, i: any) => (
                 <>
                   {polishToEnglish(job.title) === params.slug && (

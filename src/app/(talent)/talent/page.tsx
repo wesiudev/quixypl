@@ -36,10 +36,10 @@ export default async function Page() {
           </p>
         </div>
         <Link
-          href="/search?type=talent"
-          className="w-max font-gotham font-light  bg-gradient-to-r from-primary to-cta text-white text-sm lg:text-base p-2 py-1.5 text-center"
+          href="/register"
+          className="text-xl sm:text-2xl lg:text-3xl bg-gradient-to-r from-primary to-cta text-white mt-4 w-full p-2 py-1.5 text-center"
         >
-          Zatrudnij talent
+          Zarejestruj się
         </Link>
       </div>
       <div className="md:w-1/2 mb-12 grid grid-cols-1 sm:grid-cols-2">

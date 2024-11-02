@@ -495,7 +495,7 @@ export async function getProduct(productId) {
 export async function getProductByUrl(url) {
   const products = await getProducts();
   const product = products.find((product) => product.url === url);
-  return product ? { ...product, url } : null;
+  return product;
 }
 
 export async function updateProduct(productId, updates) {

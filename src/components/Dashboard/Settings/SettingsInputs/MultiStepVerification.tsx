@@ -52,21 +52,21 @@ export default function MultiStepVerification({
   };
   const { modals } = useSelector((state: any) => state.modals);
   return (
-    <div className="p-3 rounded-xl bg-primary/20">
+    <div className="p-3 lg:p-6 bg-gray-200">
       {isAnimating && <Confetti />}
       <div
         className={`${
           user?.access === true && "hidden"
-        } p-3 lg:p-6 w-full mx-auto font-coco`}
+        } w-full mx-auto font-coco`}
       >
         <button
           onClick={() => dispatch(set_modals({ ...modals, config: true }))}
-          className="text-xl font-light text-white bg-gradient-to-r from-primary to-cta rounded-lg px-2 py-1 italic mb-3 text-left"
+          className="font-bold w-full text-center text-xl text-white bg-gradient-to-r from-primary to-cta rounded-lg px-2 py-1 mb-3"
         >
-          Wyświetlaj swoje usługi
+          Uruchom ustawienia
         </button>
 
-        <div className="space-y-4">
+        <div className="space-y-3 p-3 lg:p-6">
           <StepItem
             step={1}
             title="Konfiguracja"
@@ -121,7 +121,7 @@ export default function MultiStepVerification({
         {progress === 100 && (
           <button
             onClick={handleAccessClick}
-            className="mt-6 bg-blue-600 text-white py-2 px-4  font-bold"
+            className="mt-6 bg-gradient-to-r from-primary to-cta text-white py-2 px-4 rounded-lg font-coco font-bold"
           >
             Wpisz się!
           </button>

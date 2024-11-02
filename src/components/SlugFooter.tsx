@@ -130,7 +130,7 @@ export default function SlugFooter({
               </div>
             </div>
             <div className="flex justify-center lg:justify-end w-full mt-6 md:mt-0">
-              <Discord />
+              {/* <Discord /> */}
             </div>
           </div>
         </div>

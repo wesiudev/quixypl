@@ -206,17 +206,20 @@ export default function PortfolioItems({
         <>
           <button
             onClick={() => {
-              if (
-                source?.seek &&
-                source?.pseudo &&
-                source?.name &&
-                source?.emailVerified &&
-                source?.configured
-              ) {
-                setIsNewProject(true);
-                scrollIntoView();
-              } else {
-                toast.error("Ukończ konfigurację profilu!");
+              if (!source?.seek) {
+                toast.error("Podaj informację o profilu aby rozpocząć");
+                if (!source?.pseudo) {
+                  toast.error("Podaj unikalną nazwę profilu aby rozpocząć");
+                } else if (!source?.name) {
+                  toast.error("Przedstaw się aby rozpocząć");
+                } else if (!source?.emailVerified) {
+                  toast.error("Zweryfikuj swój adres e-mail aby rozpocząć");
+                } else if (!source?.configured) {
+                  toast.error("Ukończ konfigurację profilu aby rozpocząć");
+                } else {
+                  setIsNewProject(true);
+                  scrollIntoView();
+                }
               }
             }}
             className="bg-cta text-white font-gotham p-2  mb-4 sm:mb-6"

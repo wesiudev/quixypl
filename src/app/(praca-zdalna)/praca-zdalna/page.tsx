@@ -19,10 +19,15 @@ function HeroSection() {
       <Hero />
       <div className="py-3 relative z-50 bg-black/50 text-white font-coco font-light italic  mx-auto w-max max-w-[90%]">
         <h1 className="p-2  lg:p-3 text-white bg-gradient-to-r from-primary to-cta text-xl lg:text-2xl sm:max-w-sm font-bold mb-4 leading-snug w-full text-center mx-auto z-50 relative">
-          Praca zdalna - Znajdź pracę lub zatrudnij talent
+          Praca zdalna - Znajdź pracę lub zatrudnij freelancera
         </h1>
         <p className="w-full px-3 sm:max-w-lg mx-auto">
-          Opublikuj ofertę pracy, stwórz swoje portfolio lub wypróbuj usługi AI.
+          Opublikuj ofertę pracy, lub swoje usługi i koniecznie wypróbuj nasze
+          usługi AI oraz naszych{" "}
+          <Link href="/praca-zdalna/rozwoj-oprogramowania/nowe-technologie/programista-sztucznej-inteligencji">
+            programistów sztucznej inteligencji
+          </Link>
+          !
         </p>
         <Breadcrumbs />
         <div className="mt-2"></div>
@@ -81,8 +86,8 @@ function WhyChooseQuixySection() {
           </div>
         </Link>
       </h3>
-      <div className="flex flex-col lg:px-6 w-full  lg:mx-8">
-        <h2 className="mb-4 text-xl lg:text-3xl text-zinc-800 font-bold drop-shadow-xl shadow-black font-gotham">
+      <div className="flex flex-col lg:px-6 w-full lg:mx-8">
+        <h2 className="mb-3 text-xl lg:text-3xl text-black font-bold drop-shadow-xl shadow-black font-gotham">
           Dlaczego warto wybrać Quixy?
         </h2>
         <p className="text-lg text-black font-gotham font-light lg:max-w-3xl">
@@ -234,7 +239,7 @@ function CallToActionSection() {
         />
       </div>
       <div className="lg:px-6">
-        <h2 className="text-3xl mb-6 text-zinc-800 mt-6 lg:mt-0">
+        <h2 className="font-bold text-3xl mb-6 text-black mt-6 lg:mt-0">
           Znajdziesz wolne stanowisko pracy zdalnej!
         </h2>
         <p className="mb-3 text-lg text-black max-w-2xl font-gotham font-light">
@@ -250,7 +255,7 @@ function CallToActionSection() {
         >
           Dołącz już dziś!
         </Link>
-        <div className="mt-12">
+        <div className="mt-3">
           <p className="font-coco text-zinc-800 text-sm">
             Posiadasz konto Google?
           </p>
@@ -269,9 +274,19 @@ export default async function Page() {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
-  const categoryTalents = talents?.filter(
-    (item: any) => item?.pseudo && item?.seek === true && item?.seek !== "ask"
-  );
+  const categoryTalents = talents
+    ?.map((item: any) => {
+      const { email, ...talent } = item;
+      return talent;
+    })
+    .filter(
+      (item: any) =>
+        item?.pseudo &&
+        item?.seek &&
+        item?.emailVerified &&
+        item?.seek !== "ask" &&
+        item?.tags?.length > 0
+    );
   const categoryCompanies = talents?.filter(
     (item: any) => item?.pseudo && !item?.seek && item?.seek !== "ask"
   );
@@ -283,7 +298,7 @@ export default async function Page() {
         <CallToActionSection />
         <WhyChooseQuixySection />
         <div className="mt-12 ">
-          <h2 className="text-black text-xl lg:text-3xl">
+          <h2 className="font-bold text-black text-xl lg:text-3xl">
             Przeglądaj profile talentów
           </h2>
           <div className="mt-6"></div>

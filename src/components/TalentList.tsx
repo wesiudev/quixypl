@@ -5,7 +5,11 @@ import Pagination from "./pagination/Pagination";
 import Image from "next/image";
 import { TfiFlagAlt } from "react-icons/tfi";
 
-const TalentList: React.FC<any> = ({ categoryTalents, client }) => {
+export default function TalentList({
+  categoryTalents,
+}: {
+  categoryTalents: any;
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6); // Initially, 6 items per page
 
@@ -20,7 +24,7 @@ const TalentList: React.FC<any> = ({ categoryTalents, client }) => {
   const indexOfLastIdea = currentPage * itemsPerPage;
   const currentTalents = categoryTalents?.slice(0, indexOfLastIdea);
   return (
-    <div className="mx-auto font-gotham sm:">
+    <div className="mx-auto font-gotham bg-gradient-to-r from-primary/20 to-cta/20 p-6">
       <div
         className={` ${
           currentTalents.length > 0 &&
@@ -31,7 +35,7 @@ const TalentList: React.FC<any> = ({ categoryTalents, client }) => {
           currentTalents?.map((talent: any) => (
             <Link
               key={talent?.uid}
-              href={`/${client ? "company" : "talent"}/${talent.pseudo}`}
+              href={`/${!talent?.seek ? "company" : "talent"}/${talent.pseudo}`}
               className=" flex p-3 border-2 border-gray-500/30 hover:shadow-md duration-200 hover:scale-[1.03] hover:shadow-cta bg-white"
             >
               {talent?.photoURL ? (
@@ -67,8 +71,8 @@ const TalentList: React.FC<any> = ({ categoryTalents, client }) => {
               <div className="bg-gradient-to-r from-primary to-cta rounded-full aspect-square mx-auto w-32 flex items-center justify-center">
                 <TfiFlagAlt className="text-white text-4xl animate-bounce" />
               </div>
-              <p className="my-3 max-w-sm font-light text-black font-gotham bg-white p-3 text-base ">
-                Brak talentów - skonfiguruj profil i wyświetl się jako
+              <p className="my-3 max-w-sm  text-black bg-white p-3 text-base ">
+                Brak freelancerów - skonfiguruj profil i wyświetl się jako
                 pierwszy/a{" "}
               </p>
             </div>
@@ -94,6 +98,4 @@ const TalentList: React.FC<any> = ({ categoryTalents, client }) => {
       )}
     </div>
   );
-};
-
-export default TalentList;
+}

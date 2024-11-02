@@ -1,10 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 
-/**
- * Returns an object with the innerWidth and innerHeight of the window.
- * @returns {{width: number, height: number}}
- */
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
   return {

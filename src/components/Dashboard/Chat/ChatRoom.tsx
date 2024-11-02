@@ -31,7 +31,7 @@ export default function ChatRoom({
     <div className="bg-white ">
       {clickedUserData && (
         <div className="h-full">
-          <h2 className=" bg-gradient-to-r from-primary to-cta font-gotham p-3 lg:p-6 lg:text-xl text-white">
+          <h2 className="bg-gradient-to-r from-primary to-cta font-gotham p-3 lg:p-6 lg:text-xl text-white">
             Napisz do {clickedUserData.name || clickedUserData.pseudo}
           </h2>{" "}
           <div
@@ -42,7 +42,7 @@ export default function ChatRoom({
             {!chat?.messages?.length && (
               <div className="text-center text-black flex flex-col items-center justify-center">
                 {clickedUserData?.photoURL && (
-                  <div className="rounded-full overflow-hidden w-32 h-32 mb-3 relative">
+                  <div className="shadow-sm shadow-black rounded-full overflow-hidden w-32 h-32 mb-3 relative">
                     <Image
                       src={clickedUserData?.photoURL}
                       width={122}
@@ -55,8 +55,8 @@ export default function ChatRoom({
                   </div>
                 )}
                 {!clickedUserData?.photoURL && (
-                  <div className="flex items-center justify-center text-2xl p-3 w-[124px] h-[124px] aspect-square mb-3 text-white rounded-full bg-[#fff]">
-                    {clickedUserData?.login[0].toUpperCase()}
+                  <div className="shadow-black shadow-sm flex items-center justify-center text-2xl p-3 w-[124px] h-[124px] aspect-square mb-3 text-white rounded-full bg-gradient-to-r from-primary to-cta">
+                    {clickedUserData?.pseudo[0].toUpperCase()}
                   </div>
                 )}
                 <div className="text-black mt-2">{clickedUserData?.title}</div>

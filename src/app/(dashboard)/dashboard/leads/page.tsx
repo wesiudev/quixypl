@@ -28,9 +28,9 @@ export default function Leads() {
             Powrót
           </Link>
           <div className="flex flex-col text-white pl-12">
-            <h2 className="text-sm sm:text-base">Aplikacje</h2>
+            <h2 className="text-sm sm:text-base">Sekcja Leadów</h2>
             <p className="text-xs sm:text-base ">
-              Tu znajdą się wszystkie aplikacje na twoje oferty pracy.
+              Tu znajdą się wszystkie twoje leady oraz zlecenia.
             </p>
           </div>
         </div>

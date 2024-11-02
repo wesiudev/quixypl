@@ -29,7 +29,7 @@ export default function ImageOpen({ imageOpen, setImageOpen }: ImageOpenProps) {
             <Hero />
             <div className="bg-white z-[506] fixed top-0 lg:left-[30rem] h-screen lg:w-[calc(100vw-30rem)] flex flex-col p-4 sm:p-8 lg:p-16 xl:p-24 overflow-y-scroll">
               <div className="flex flex-col w-full z-[505] relative">
-                <h2 className="mt-32 lg:mt-0 mb-12 lg:mb-24 text-black text-3xl lg:text-5xl font-bold">
+                <h2 className="lg:mt-0 text-black text-3xl font-bold">
                   Wygenerowany obraz
                 </h2>
                 <Image
@@ -37,7 +37,7 @@ export default function ImageOpen({ imageOpen, setImageOpen }: ImageOpenProps) {
                   width={1920}
                   height={1080}
                   alt=""
-                  className={` relative z-[505] bg-[#126b91] bg-opacity-70`}
+                  className={`w-full lg:w-1/2 relative z-[505] bg-[#126b91] bg-opacity-70`}
                   blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
                   placeholder="blur"
                 />

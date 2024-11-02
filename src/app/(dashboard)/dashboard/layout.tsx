@@ -26,7 +26,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             );
             dispatch(setUser(currentUser));
           } catch (error) {
-            console.error("Error fetching users: ", error);
+            if (error) return;
           }
         }
       };

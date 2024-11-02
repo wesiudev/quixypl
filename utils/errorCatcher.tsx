@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function errorCatcher(error: any) {
   let errorMessage = "";
-  switch (error.code) {
+  switch (error?.code) {
     case "auth/email-already-in-use":
       errorMessage = "Adres email jest już używany.";
       break;

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { createUser, provider } from "@/firebase";
+import { createUser, getDocument, provider } from "@/firebase";
 import { signInWithPopup, getAuth, GoogleAuthProvider } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { errorCatcher } from "../../../utils/errorCatcher";
@@ -22,13 +22,16 @@ export default function GoogleAuthButton({
   landing?: "yes" | "no" | unknown;
 }) {
   const router = useRouter();
-  function googleHandler() {
+
+  async function googleHandler() {
     const auth = getAuth();
-    signInWithPopup(auth, provider)
-      .then((result: any) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const user = result.user;
-        createUser({
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const user = result.user;
+      const existingUser = await getDocument("users", user?.uid);
+      if (!existingUser) {
+        await createUser({
           uid: user?.uid,
           name: user?.displayName,
           email: user?.email,
@@ -54,14 +57,12 @@ export default function GoogleAuthButton({
           ],
           seek: seek === true || seek === false ? seek : "ask",
         });
-        sendVerificationEmail(user?.email, user?.uid).then(() => {
-          router.push(`${process.env.NEXT_PUBLIC_URL}/dashboard`);
-        });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        errorCatcher(error);
-      });
+        await sendVerificationEmail(user?.email!, user?.uid);
+      }
+      router.push(`${process.env.NEXT_PUBLIC_URL}/dashboard`);
+    } catch (error: any) {
+      errorCatcher(error);
+    }
   }
   return (
     <div className="google-button-container">

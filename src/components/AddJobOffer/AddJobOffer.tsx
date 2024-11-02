@@ -57,11 +57,6 @@ export default function AddJobOffer() {
   const dispatch = useDispatch();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const jobOffer = {
-      ...formData,
-      createdAt: Date.now(),
-      authorId: user?.uid,
-    };
 
     try {
       await addJobOffer({
@@ -97,7 +92,7 @@ export default function AddJobOffer() {
         setUser({ ...user, job_offers: [...user.job_offers, formData] })
       );
       toast.success("Oferta pracy dodana pomyślnie!");
-      router.push("/dashboard/my_postings");
+      router.push("/dashboard/my-postings");
     } catch (error: any) {
       toast.error("Wystąpił błąd podczas dodawania oferty.");
     }
@@ -115,11 +110,10 @@ export default function AddJobOffer() {
         className="w-[100%] max-w-[55rem] h-max bg-white z-50 relative p-6 lg:p-10 my-12 "
       >
         <h1 className="text-xl md:text-3xl font-gotham text-zinc-800">
-          Dodaj ofertę pracy
+          Dodaj darmową ofertę pracy zdalnej
         </h1>
         <p className="mt-2 text-sm font-coco text-black">
-          Podaj najważniejsze informacje dotyczące rekrutacji. Możesz uwzględnić
-          zdjęcia lub filmy.
+          Podaj najważniejsze informacje dotyczące rekrutacji.
         </p>
         <div className="mt-2"></div>
         <div className="flex flex-col w-full font-coco">

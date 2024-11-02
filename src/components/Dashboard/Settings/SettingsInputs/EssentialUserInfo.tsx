@@ -10,6 +10,7 @@ import { FaUser } from "react-icons/fa6";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/firebase";
+import Editor, { EditorContentChanged } from "@/components/AddJobOffer/Editor";
 export default function EssentialUserInfo({
   source,
   setChangesWereMade,
@@ -22,6 +23,12 @@ export default function EssentialUserInfo({
     dispatch(setUser({ ...source, [key]: value }));
   }
   const [isLoading, setIsLoading] = useState(false);
+  const initialMarkdownContent = "";
+
+  const onEditorContentChanged = (content: EditorContentChanged) => {
+    handleReduxUserState(content.html, "description");
+    setChangesWereMade(true);
+  };
   const [triesCount, setTriesCount] = useState(0);
   const [localPseudo, setLocalPseudo] = useState(source?.pseudo);
   const [pseudoWasChanged, setPseudoWasChanged] = useState(false);
@@ -62,19 +69,20 @@ export default function EssentialUserInfo({
   return (
     <div className="relative">
       <div className="flex flex-col lg:flex-row pt-4 sm:pt-6">
+        {loading && <div className="loading loading-spinner  w-8 h-8"></div>}
         <label
           htmlFor="uploader2"
           className="cursor-pointer pl-3 lg:pl-6 relative h-max group w-max mb-3 lg:mb-0"
         >
           {source?.photoURL && (
-            <div className="bg-gradient-to-r from-primary to-cta p-1 ">
-              <div className=" relative w-max group-hover:bg-gray-200 duration-150">
+            <div className="rounded-full bg-gradient-to-r from-primary to-cta p-1 ">
+              <div className="rounded-full relative w-40 h-40 group-hover:bg-gray-200 duration-150">
                 <Image
                   src={source?.photoURL}
                   width={256}
                   height={256}
                   alt=""
-                  className="p-1 mb-0 w-40 bg-white group-hover:bg-gray-200 rounded-full"
+                  className="absolute inset-0 object-cover h-auto w-full group-hover:scale-110 duration-500 p-1 mb-0 bg-white group-hover:bg-gray-200 rounded-full"
                 />
               </div>
             </div>
@@ -117,12 +125,12 @@ export default function EssentialUserInfo({
           id="uploader2"
           className="text-white hidden"
         />
-        <div className="pl-3 lg:pl-6 grid lg:grid-cols-2 sm:gap-x-3 font-coco">
+        <div className="pl-3 lg:pl-6 grid lg:grid-cols-2 sm:gap-x-3">
           <div className="flex flex-col lg:pt-0">
             <div className="text-white py-1 px-2 bg-gradient-to-r from-primary to-cta w-max">
               Email
             </div>{" "}
-            <strong className="text-black mt-2 text-sm sm:text-base">
+            <strong className="font-coco text-black mt-2 text-sm sm:text-base">
               {source?.email}
             </strong>
           </div>
@@ -131,7 +139,7 @@ export default function EssentialUserInfo({
               <div className="text-white py-1 px-2  bg-gradient-to-r from-primary to-cta w-max mt-2 lg:mt-0">
                 Unikalna nazwa
               </div>{" "}
-              <strong className="text-black mt-2 text-sm sm:text-base">
+              <strong className="font-coco text-black mt-2 text-sm sm:text-base">
                 {source?.pseudo}
               </strong>
             </div>
@@ -141,7 +149,7 @@ export default function EssentialUserInfo({
               <div className="text-white py-1 px-2  bg-gradient-to-r from-primary to-cta w-max mt-2 lg:mt-0">
                 Województwo
               </div>{" "}
-              <strong className="text-black mt-2 text-sm sm:text-base">
+              <strong className="font-coco text-black mt-2 text-sm sm:text-base">
                 {source?.region}
               </strong>
             </div>
@@ -151,7 +159,7 @@ export default function EssentialUserInfo({
               <div className="text-white py-1 px-2  bg-gradient-to-r from-primary to-cta w-max mt-2 lg:mt-0">
                 Miasto
               </div>{" "}
-              <strong className="text-black mt-2 text-sm sm:text-base">
+              <strong className="font-coco text-black mt-2 text-sm sm:text-base">
                 {source?.city}
               </strong>
             </div>
@@ -159,13 +167,13 @@ export default function EssentialUserInfo({
         </div>
       </div>
       {source?.seek !== "ask" && (
-        <div className={`relative w-full bg-white px-4 sm:px-6 font-coco`}>
+        <div className={`relative w-full bg-white px-4 sm:px-6`}>
           <div className="mt-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="flex flex-col">
-                <label className="text-lg text-black">
+                <label className="font-bold text-black">
                   {source?.seek && "Imię"}
-                  {!source?.seek && "Nazwa Firmy"}
+                  {!source?.seek && "Nazwa klienta"}
                 </label>
                 <input
                   type="text"
@@ -174,12 +182,12 @@ export default function EssentialUserInfo({
                     handleReduxUserState(e.target.value, "name");
                     setChangesWereMade(true);
                   }}
-                  className="border border-primary  p-2 text-black  font-light"
+                  className="border border-primary  p-2 text-black font-light"
                   placeholder="Imię lub imię i nazwisko"
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-lg text-black">Tytuł</label>
+                <label className="font-bold text-black">Tytuł</label>
                 <input
                   type="text"
                   value={source?.title}
@@ -208,18 +216,13 @@ export default function EssentialUserInfo({
           {!source?.pseudo && (
             <>
               <div className="flex flex-col mt-2">
-                <label className="text-lg text-black">Unikalna nazwa</label>
-                <div className="font-gotham font-light text-black">
+                <label className="font-bold text-black">Unikalna nazwa</label>
+                <div className="text-black">
                   {!localPseudo &&
                     "Wartość ta pozwala na wyświetlanie profilu w zakładce pracy zdalnej."}
                   {localPseudo && pseudoWasChanged && pseudoIsAvailable && (
                     <div className="">
-                      To będzie Twój Unikalny Link w Quixy.pl, dzięki któremu
-                      pracodawcy łączą się z talentami!{" "}
-                      <strong className="text-primary">
-                        quixy.pl/{source?.seek ? "talent" : "company"}/
-                        {localPseudo}
-                      </strong>
+                      To będzie Twój Unikalny Link w Quixy.pl
                     </div>
                   )}
                 </div>
@@ -244,6 +247,9 @@ export default function EssentialUserInfo({
                   } border-primary  p-2 text-black font-light`}
                   placeholder="np. jan345"
                 />
+                <strong className="text-primary">
+                  quixy.pl/{source?.seek ? "talent" : "company"}/{localPseudo}
+                </strong>
                 <div className="grid grid-cols-2 gap-3">
                   {pseudoWasChanged &&
                     !pseudoIsAvailable &&
@@ -251,7 +257,7 @@ export default function EssentialUserInfo({
                       <button
                         onClick={check}
                         disabled={isLoading}
-                        className="bg-gradient-to-r from-primary to-cta disabled:cursor-not-allowed w-max  disabled:bg-[#126b91] disabled:duration-500 duration-100 px-2 py-1.5 bg-[#126b91] text-white font-gotham mt-2"
+                        className="animate-pulse bg-gradient-to-r from-primary to-cta disabled:cursor-not-allowed w-max  disabled:bg-[#126b91] disabled:duration-500 duration-100 px-2 py-1.5 bg-[#126b91] text-white font-gotham mt-2"
                       >
                         {!isLoading && "Sprawdź dostępność"}
                         {isLoading && "Sprawdzam..."}
@@ -260,7 +266,7 @@ export default function EssentialUserInfo({
                   {pseudoWasChanged && pseudoIsAvailable && (
                     <div className="flex flex-col">
                       <div className="font-gotham font-bold text-green-500">
-                        Nazwa dostępna
+                        Nazwa jest dostępna.
                       </div>
                       <button
                         disabled={
@@ -277,9 +283,9 @@ export default function EssentialUserInfo({
                           setHasAnswer(false);
                           setPseudoWasChanged(false);
                         }}
-                        className="disabled:cursor-not-allowed disabled:bg-[#126b91] disabled:duration-500 duration-100 px-2 py-1.5 bg-green-500 text-white font-gotham mt-2"
+                        className="animate-pulse bg-gradient-to-r from-primary to-cta disabled:cursor-not-allowed w-max  disabled:bg-[#126b91] disabled:duration-500 duration-100 px-2 py-1.5 bg-[#126b91] text-white font-gotham mt-2"
                       >
-                        Zmien nazwę
+                        Zarezerwuj nazwę
                       </button>
                     </div>
                   )}
@@ -324,8 +330,14 @@ export default function EssentialUserInfo({
               </div>
             </div>
           )}
-          <div className="relative w-full mt-3">
-            <textarea
+          <div className="relative w-full lg:w-1/2 mt-3">
+            <label className="font-bold text-black mb-2">Twój opis</label>
+            <div className="mt-2"></div>
+            <Editor
+              value={initialMarkdownContent}
+              onChange={onEditorContentChanged}
+            />
+            {/* <textarea
               value={source?.bio}
               onChange={(e) => {
                 handleReduxUserState(e.target.value, "bio");
@@ -339,7 +351,7 @@ export default function EssentialUserInfo({
                   ? "Jakie usługi wykonujesz? Opisz szczegółowo to, co możesz zeoferować w zespole lub dla klienta."
                   : "Czym zajmuje się Twoja firma? Jesteś klientem indywidualnym? - Krótko opisz swoją działalność."
               }
-            />
+            /> */}
           </div>
         </div>
       )}

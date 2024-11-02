@@ -9,7 +9,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 import { getPageContent } from "@/lib/getPageContent";
 import CompanyStickyTop from "@/components/CompanyStickyTop";
-import JobOfferCard from "@/components/JobOffer/JobOfferCard";
+import JobOfferCard from "@/components/Dashboard/JobOfferCard";
 
 export default async function Page({
   params,
@@ -115,8 +115,8 @@ export default async function Page({
 
               <div className="grid grid-cols-1 lg:grid-cols-2 mt-3">
                 <div className="mr-1">
-                  <h2 className="w-max  text-xl text-black font-gotham mt-3">
-                    Specjalizacje firmy
+                  <h2 className="w-max text-xl text-black font-gotham mt-3">
+                    Specjalizacje
                   </h2>
                   <div className="w-full -ml-1 mt-1 flex flex-wrap items-center font-coco text-black">
                     {slug?.tags?.map((item: any, i: any) => (
@@ -144,7 +144,7 @@ export default async function Page({
                       {slug?.preferences?.map((item: any, i: any) => (
                         <h3
                           key={i}
-                          className={`badge badge-primary badge-outline ml-1 mt-1  duration-100 flex items-center px-2 py-0.5 text-sm font-coco font-light `}
+                          className={`badge badge-neutral badge-outline ml-1 mt-1  duration-100 flex items-center px-2 py-0.5 text-sm font-coco font-light `}
                         >
                           {item}
                         </h3>
@@ -183,7 +183,15 @@ export default async function Page({
                       key={offer.id}
                       className={`${!offer?.isPaid ? "hidden" : "block"}`}
                     >
-                      <JobOfferCard key={i} jobOfferData={offer} />
+                      <JobOfferCard
+                        href={`${
+                          process.env.NEXT_PUBLIC_URL
+                        }/job_offers/${polishToEnglish(offer.title)}-${
+                          offer.id
+                        }`}
+                        key={i}
+                        offer={offer}
+                      />
                     </div>
                   ))}
                 </div>

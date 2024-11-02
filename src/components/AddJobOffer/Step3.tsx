@@ -12,6 +12,7 @@ import { setUser } from "@/redux/slices/user";
 import { set_modals } from "@/redux/slices/modalsopen";
 import Link from "next/link";
 import { FaChevronRight } from "react-icons/fa6";
+import { FaSave } from "react-icons/fa";
 export default function StepThree({
   formData,
   handleChange,
@@ -47,26 +48,28 @@ export default function StepThree({
   const handleRecruitmentStart = async () => {
     const hasEnoughTokens = user.tokens >= formData.price;
     if (!hasEnoughTokens) {
-      showToastError("Doładuj Quixies!");
       showToastSuccess("Pomyślnie zapisano ofertę pracy!");
-      openTokenModal();
+      await updateJobOffers();
+
+      setIsAnimating(true);
+      setTimeout(() => {
+        router.push("/dashboard/my-postings");
+      }, 5000);
     }
-    await updateJobOffers();
   };
-  const [saved, setSaved] = useState(false);
   const router = useRouter();
   const updateJobOffers = async () => {
     try {
       setIsLoading(true);
 
       // Check if the user has enough tokens
-      const hasEnoughTokens = user.tokens >= formData.price;
+      const hasEnoughTokens = true;
 
       // Create new job offer
       const jobOfferId = uuid();
       const newJobOffer = {
         ...formData,
-        isPaid: hasEnoughTokens, // Set isPaid based on user's token balance
+        isPaid: hasEnoughTokens,
         id: jobOfferId,
         expirationTime: moment().add(formData.days, "days").valueOf(),
         creationTime: Date.now(),
@@ -85,23 +88,24 @@ export default function StepThree({
       // Update user in the database
       await updateUser(user.uid, {
         job_offers: updatedJobOffers,
-        tokens: updatedTokens,
+        // tokens: updatedTokens,
       }).then(() => {
-        router.push("/dashboard/my_postings");
+        setTimeout(() => {
+          router.push("/dashboard/my-postings");
+        }, 5000);
       });
-
+      await addJobOffer(newJobOffer);
       // Dispatch updated user state to Redux
       dispatch(
         setUser({
           ...user,
           job_offers: updatedJobOffers,
-          tokens: updatedTokens,
+          // tokens: updatedTokens,
         })
       );
 
       setIsAnimating(true);
     } catch (error) {
-      console.error("Error", error);
       showToastError("Failed to add job offer.");
     } finally {
       setIsLoading(false);
@@ -137,55 +141,6 @@ export default function StepThree({
             placeholder="Dodaj stronę internetową (opcjonalnie)"
           />
 
-          <div className="sticky bottom-0 flex flex-col bg-white py-2 ">
-            <div className="bg-gradient-to-r from-primary via-cta to-primary text-white  p-4 lg:p-6">
-              <label htmlFor="days-range" className="font-bold">
-                Przez jaki okres czasu oferta ma być wyświetlana? (
-                {formData.days} dni)
-              </label>
-              <input
-                id="days-range"
-                type="range"
-                min="1"
-                max="30"
-                value={formData?.days || 1}
-                onChange={(e: any) =>
-                  setFormData({
-                    ...formData,
-                    days: e.target.value,
-                    price: 15.99 + e.target.value * 8.42,
-                  })
-                }
-                className="w-full mt-2"
-              />
-              <div className="text-lg mt-2  text-black">
-                <button
-                  onClick={() =>
-                    dispatch(set_modals({ ...modals, quixies: true }))
-                  }
-                  className={` rounded-lg px-2 py-1 w-max ${
-                    user?.tokens < formData.price
-                      ? "bg-white text-red-500"
-                      : "text-white bg-gradient-to-r from-primary to-cta shadow-sm shadow-cyan"
-                  } font-bold`}
-                >
-                  💎{formData.price?.toFixed(2)}
-                </button>
-                <div className="">
-                  {user?.tokens < formData.price && (
-                    <button
-                      onClick={() =>
-                        dispatch(set_modals({ ...modals, quixies: true }))
-                      }
-                      className="text-white mt-2"
-                    >
-                      kliknij tutaj by doładować Quixies
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
           <div className="flex justify-between mt-4">
             <button
               type="button"
@@ -205,14 +160,16 @@ export default function StepThree({
             )}
             {!isSent && (
               <button
+                disabled={isSent}
                 onClick={async () => {
                   setIsAnimating(true);
                   setIsSent(true);
                   await handleRecruitmentStart();
                 }}
-                className="px-2 py-1 rounded-lg bg-gradient-to-r from-primary via-cta to-primary text-white "
+                className="font-bold font-coco animate-pulse text-xl flex items-center px-2 py-1 rounded-lg bg-gradient-to-r from-primary via-cta to-primary text-white "
               >
-                {isLoading ? "Wczytywanie..." : "Dodaj ofertę pracy"}
+                <FaSave className="text-3xl mr-2" />{" "}
+                {isLoading ? "Wczytywanie..." : "Zapisz zmiany"}
               </button>
             )}
           </div>

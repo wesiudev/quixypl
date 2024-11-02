@@ -10,7 +10,7 @@ export default function VerifyEmail({ userId }: { userId: any }) {
     try {
       await updateDocument(["emailVerified"], [true], "users", userId).then(
         () => {
-          router.push("/dashboard");
+          window.close();
           setIsMounted(true);
         }
       );

@@ -10,10 +10,7 @@ export default function OpenableOpportunity({
   i: any;
 }) {
   return (
-    <div
-      key={i}
-      className={`font-gotham p-3 flex flex-col  bg-gray-200 shadow-black !text-black`}
-    >
+    <div key={i} className={`p-3 flex flex-col shadow-black !text-black`}>
       <div
         className={`
          ease-in-out w-full text-left`}

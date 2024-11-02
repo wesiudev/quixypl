@@ -45,7 +45,7 @@ export default function DashboardHeader() {
           className={`${
             (modals.quixies || modals.config || modals.currentChat !== "") &&
             "hidden"
-          } py-2 w-full mx-auto bg-white relative z-[999999999999999999999999] lg:hidden ${
+          } py-2 w-full mx-auto bg-gradient-to-r shadow-sm bg-slate-800 shadow-black relative z-[999999999999999999999999] lg:hidden ${
             showHeader || menuShow ? "translate-y-0" : "-translate-y-24"
           } duration-100`}
         >
@@ -60,7 +60,7 @@ export default function DashboardHeader() {
                   title="Burger menu"
                   className={`${
                     menuShow && "opened"
-                  } bg-gradient-to-r from-primary to-cta p-1  z-50 w-max text-sm sm:text-base drop-shadow-sm duration-100 cursor-default font-bold`}
+                  } rounded-lg bg-gradient-to-r from-primary to-cta p-1  z-50 w-max text-sm sm:text-base drop-shadow-sm duration-100 cursor-default font-bold`}
                 >
                   <svg width="30" height="30" viewBox="0 0 100 100">
                     <path
@@ -74,26 +74,17 @@ export default function DashboardHeader() {
                     />
                   </svg>
                 </button>
-                <div className="flex items-center ml-3">
-                  <Image
-                    src="/assets/quixy-logo.png"
-                    width={224}
-                    height={224}
-                    alt="Logo serwisu quixy.pl"
-                    className="w-12 h-auto"
-                  />
-                </div>
               </div>
             </div>
             <button
               onClick={() => dispatch(set_modals({ ...modals, config: true }))}
-              className="shadow-sm shadow-zinc-700 p-2 relative w-max font-gotham bg-gradient-to-br from-primary to-cta text-white hover:from-cta hover:to-cta "
+              className="shadow-sm shadow-zinc-700 p-2 relative w-max bg-gradient-to-br from-primary to-cta text-white hover:from-cta hover:to-cta rounded-lg"
             >
               <div className="flex items-center justify-center relative">
                 <div className="text-white opacity-50 mr-2">
                   <FaCog className="text-2xl" />
                 </div>
-                <div className="mt-px z-50 relative text-center text-sm">
+                <div className="mt-px z-50 relative text-center font-bold">
                   MÓJ PROFIL
                 </div>
               </div>
@@ -140,34 +131,30 @@ export default function DashboardHeader() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col px-6 group mt-6">
-          <div className="duration-300 absolute left-0 top-[12px] w-[12px] h-[calc(100%-24px)] group-hover:bg-gradient-to-b group-hover:from-primary group-hover:to-cta rounded-r-xl opacity-30 group-hover:opacity-100"></div>
-          <div className="duration-300 absolute right-0 top-[12px] w-[12px] h-[calc(100%-24px)] group-hover:bg-gradient-to-t group-hover:from-primary group-hover:to-cta rounded-l-xl opacity-30 group-hover:opacity-100"></div>
-          <div className="duration-300 absolute left-[12px] top-0 w-[calc(100%-24px)] h-[12px] group-hover:bg-gradient-to-b group-hover:from-primary group-hover:to-cta rounded-b-xl opacity-30 group-hover:opacity-100"></div>
-          <div className="duration-300 absolute left-[12px] bottom-0 w-[calc(100%-24px)] h-[12px] group-hover:bg-gradient-to-t group-hover:from-primary group-hover:to-cta rounded-t-xl opacity-30 group-hover:opacity-100"></div>
+        <div className="flex flex-col px-6 group mt-3">
           <div className="flex items-start bg-white h-max relative w-full">
             <button
               onClick={() => dispatch(set_modals({ ...modals, config: true }))}
-              className="hover:opacity-80 duration-200 group"
+              className=""
             >
               {user?.photoURL && (
-                <div className="w-24 aspect-square sm:w-40 overflow-hidden relative">
+                <div className="rounded-full w-24 aspect-square overflow-hidden relative">
                   <Image
                     style={{ boxShadow: "inset 0px 0px 8px black" }}
                     src={user?.photoURL}
                     width={256}
                     height={256}
                     alt=""
-                    className="shadow-sm shadow-zinc-700 rounded-full bg-white absolute inset-0 object-cover w-full h-full group-hover:scale-80 duration-75"
+                    className="shadow-sm shadow-black rounded-full bg-white absolute inset-0 object-cover w-full h-full"
                   />
                 </div>
               )}
               {!user?.photoURL && (
                 <div
                   style={{ boxShadow: "inset 0px 0px 8px black" }}
-                  className="rounded-full bg-gradient-to-r from-primary to-cta w-24 aspect-square sm:w-40 text-white flex items-center justify-center"
+                  className="rounded-full bg-gradient-to-r from-primary to-cta w-24 aspect-square text-white flex items-center justify-center"
                 >
-                  <FaUser className="text-3xl lg:text-5xl group-hover:scale-80 duration-75" />
+                  <FaUser className="text-3xl lg:text-5xl" />
                 </div>
               )}
             </button>
@@ -184,7 +171,7 @@ export default function DashboardHeader() {
               </div>
             )}
             {user?.configured && user?.seek !== "ask" && (
-              <div className="flex flex-col h-max p-3">
+              <div className="flex flex-col h-max px-3">
                 {!user?.name && (
                   <h2 className="text-sm text-black drop-shadow-lg font-bold font-coco italic">
                     {user?.seek && "Imię (lub imię i nazwisko)"}

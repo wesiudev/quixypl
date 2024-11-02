@@ -1,23 +1,20 @@
 import { deleteJobOffer, updateUser } from "@/firebase";
-import Link from "next/link";
-import { FaClock, FaRocket, FaUserClock } from "react-icons/fa6";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import Viewer from "../AddJobOffer/Viewer";
 import moment from "moment";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/slices/user";
+import OfferOptionsOpened from "./OfferOptionsOpened";
+import JobOfferDetails from "./JobOfferDetails";
 export default function Posting({
   jobOffer,
   loading,
   pay,
-  setLoading,
 }: {
   jobOffer: any;
   loading: any;
   pay: any;
-  setLoading: any;
 }) {
   const getExpirationColor = (expirationTime: number, extraDays: number) => {
     const expirationDate = moment(expirationTime).add(extraDays, "days");
@@ -25,6 +22,8 @@ export default function Posting({
   };
   const [deleteMenu, setDeleteMenu] = useState(false);
   const [optionsOpen, setOptionsOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [applicationsOpen, setApplicationsOpen] = useState(false);
   const { user } = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
   const handleDeleteJobOffer = async (jobOfferId: string) => {
@@ -56,176 +55,30 @@ export default function Posting({
 
   return (
     <div className="bg-white  shadow-md p-4 h-max font-coco relative overflow-hidden">
-      {optionsOpen && (
+      {(optionsOpen || editOpen || applicationsOpen) && (
         <div className="w-full h-full absolute left-0 top-0 bg-black bg-opacity-50" />
       )}
-      <div
-        className={`px-2 z-10  absolute top-7 right-12 w-max h-max py-6 bg-zinc-800 flex flex-col items-start space-y-1 duration-500 ease-in-out ${
-          !optionsOpen ? "-translate-y-[80px] scale-x-0" : "-translate-y-0"
-        }`}
-      >
-        {/* <button className="w-full px-4 py-1 text-white bg-white bg-opacity-10  duration-150 hover:bg-opacity-20">
-          Edytuj
-        </button> */}
-        <Link
-          href="/dashboard/applications"
-          className="w-full px-4 py-1 text-white bg-white bg-opacity-10  duration-150 hover:bg-opacity-20"
-        >
-          Aplikacje
-        </Link>
-        <button
-          onClick={() => {
-            if (!deleteMenu) {
-              setDeleteMenu(true);
-            } else {
-              setDeleteMenu(false);
-            }
-          }}
-          disabled={loading}
-          className="w-full px-4 py-1 text-red-500 bg-white disabled:bg-red-400 bg-opacity-10  duration-150 hover:bg-opacity-20"
-        >
-          {loading && <div className="loading loading-spinner"></div>}{" "}
-          {deleteMenu ? "Anuluj" : "Usuń"}
-        </button>
-        {deleteMenu && (
-          <>
-            <button
-              disabled={loading}
-              onClick={() => {
-                setLoading(true);
-                handleDeleteJobOffer(jobOffer.id).then(() => setLoading(false));
-              }}
-              className="disabled:bg-red-400 w-full px-4 py-1 text-white bg-red-500 bg-opacity-100  duration-150 hover:bg-opacity-90"
-            >
-              {loading && <div className="loading loading-spinner"></div>} Usuń
-            </button>
-          </>
-        )}
-      </div>
-      <div className="flex w-full justify-between font-gotham mb-4 text-black">
-        <div className="flex flex-col">
-          <h3 className="font-coco text-lg sm:text-xl font-bold text-black mb-2 pr-6">
-            {jobOffer.title}
-          </h3>
-          <div
-            className={`${
-              jobOffer.isPaid ? "hidden" : "block"
-            } text-sm col-span-1 font-coco`}
-          >
-            <div className="flex flex-col">
-              <div className="flex items-center font-bold">Do zapłaty</div> 💎
-              {jobOffer.price}
-            </div>
-            <p
-              className={`${
-                jobOffer.isPaid ? "text-green-500" : "text-red-500"
-              } text-sm mb-2`}
-            >
-              {jobOffer.isPaid ? "Opłacono" : "Nie opłacono"}
-            </p>
-            {!jobOffer.isPaid && (
-              <button
-                disabled={loading}
-                onClick={() => pay(jobOffer)}
-                className="bg-gradient-to-r from-primary to-cta px-2 py-0.5  text-white"
-              >
-                Opublikuj{" "}
-                {loading && <div className="loading-lg loading-infinity"></div>}
-              </button>
-            )}
-            {jobOffer.isPaid && (
-              <Link
-                href="/dashboard/applications"
-                className="bg-gradient-to-r from-primary to-cta px-2 py-0.5  text-white"
-              >
-                Przeglądaj aplikacje
-              </Link>
-            )}
-          </div>
-        </div>
-
-        <div className="flex flex-col">
-          <div className="flex items-end justify-end">
-            <button
-              onClick={() => setOptionsOpen(!optionsOpen)}
-              className={`w-max text-3xl text-white h-full px-2 bg-gradient-to-r from-primary to-cta hover:bg-opacity-20 relative z-10 duration-200 `}
-            >
-              <HiOutlineDotsHorizontal
-                className={`${
-                  optionsOpen ? "scale-125 hover:scale-110" : "hover:scale-90"
-                }`}
-              />
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="grid grid-cols-2 w-full gap-3">
-        {jobOffer.creationTime && (
-          <div className="flex p-3 bg-gray-200 ">
-            <FaUserClock className="text-xl text-gray-600 mr-2 mt-1.5" />
-            <div className="flex flex-col font-coco text-black">
-              <h2 className="font-bold">Dodano</h2>
-              <div className="text-primary text-sm w-max">
-                {moment(jobOffer.creationTime).fromNow()}
-              </div>
-            </div>
-          </div>
-        )}
-        {jobOffer.expirationTime && (
-          <div className="flex p-3 bg-gray-200 ">
-            <FaClock className="text-xl text-gray-600 mr-2 mt-1.5" />
-            <div className="flex flex-col font-coco text-black">
-              <h2 className="font-bold">Wygasa</h2>
-              {jobOffer.expirationTime && (
-                <div
-                  className={`${getExpirationColor(
-                    jobOffer.expirationTime,
-                    0
-                  )} text-sm w-max`}
-                >
-                  {moment(jobOffer.creationTime)
-                    .add(jobOffer.days, "days")
-                    .add(0, "days")
-                    .fromNow()}
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-        <div className="flex p-3 bg-gray-200 ">
-          <FaRocket className="text-xl text-gray-600 mr-2 mt-1.5" />
-          <div className="flex flex-col font-coco text-black">
-            <h2 className="font-bold">Status</h2>
-            {jobOffer.expirationTime && (
-              <div
-                className={`${
-                  jobOffer.isPaid ? "text-green-500" : "text-red-500"
-                } text-sm w-max`}
-              >
-                {jobOffer.isPaid ? "Aktywna" : "Nie opłacono"}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
+      <OfferOptionsOpened
+        optionsOpen={optionsOpen}
+        setEditOpen={setEditOpen}
+        setOptionsOpen={setOptionsOpen}
+        setApplicationsOpen={setApplicationsOpen}
+        handleDeleteJobOffer={handleDeleteJobOffer}
+        jobOffer={jobOffer}
+      />
+      <JobOfferDetails
+        setOptionsOpen={setOptionsOpen}
+        pay={pay}
+        optionsOpen={optionsOpen}
+        loading={loading}
+        jobOffer={jobOffer}
+      />
       <div className="viewer mt-6">
         <Viewer value={jobOffer.description} />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 text-black">
-        <div className="flex flex-col">
-          {jobOffer.phone && (
-            <p className="text-sm col-span-1">
-              <strong>Telefon:</strong> <br /> {jobOffer.phone}
-            </p>
-          )}
-          {jobOffer.email && (
-            <p className="text-sm col-span-1 mt-2">
-              <strong>Email:</strong> <br /> {jobOffer.email}
-            </p>
-          )}
-        </div>
-        <p className="text-sm col-span-1">
+        <p className="col-span-1">
           <strong>Wynagrodzenie:</strong> <br /> {jobOffer.salary} (
           {jobOffer.salaryValue})
         </p>

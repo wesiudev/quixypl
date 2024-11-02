@@ -105,24 +105,10 @@ export default function MainFooter({
                     className="group-hover:scale-105 duration-200 w-48 h-auto mx-auto"
                   />
                 </Link>
-                <Link
-                  href="http://goodday.great-site.net/"
-                  target="_blank"
-                  title="autor"
-                  className="duration-200 group flex items-center justify-center"
-                >
-                  <Image
-                    src="/assets/mrd.png"
-                    width={100}
-                    height={100}
-                    alt=""
-                    className="group-hover:scale-105 duration-200"
-                  />
-                </Link>
               </div>
             </div>
             <div className="flex justify-center lg:justify-end w-full mt-6 md:mt-0">
-              <Discord />
+              {/* <Discord /> */}
             </div>
           </div>
         </div>

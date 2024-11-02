@@ -30,9 +30,59 @@ export default function ProductsMobile({
           productsOpen ? "pt-[65px] opacity-100 z-[500]" : "z-[-10] opacity-0"
         } scrollbar lg:hidden`}
       >
+        <div className="px-6 py-3 bg-gradient-to-r from-primary/20 to-cta/20 flex items-center justify-start mx-auto flex-wrap">
+          <Link
+            onClick={resetHeader}
+            href="/praca-zdalna"
+            style={{ boxShadow: "1px 0px 4px black" }}
+            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 text-white p-2 w-max font-coco"
+          >
+            Klient
+          </Link>
+          <Link
+            onClick={resetHeader}
+            href="/praca-zdalna?talent"
+            style={{ boxShadow: "1px 0px 4px black" }}
+            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 text-white p-2 w-max font-coco"
+          >
+            Freelancer
+          </Link>
+          <Link
+            onClick={resetHeader}
+            href="/register"
+            style={{ boxShadow: "1px 0px 4px black" }}
+            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 text-white p-2 w-max font-coco"
+          >
+            Dołącz za darmo
+          </Link>
+          <Link
+            onClick={resetHeader}
+            href="/about"
+            style={{ boxShadow: "1px 0px 4px black" }}
+            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 text-white p-2 w-max font-coco"
+          >
+            O nas
+          </Link>
+          <Link
+            onClick={resetHeader}
+            href="/contact"
+            style={{ boxShadow: "1px 0px 4px black" }}
+            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 text-white p-2 w-max font-coco"
+          >
+            Kontakt
+          </Link>
+          <Link
+            onClick={resetHeader}
+            href="/news"
+            style={{ boxShadow: "1px 0px 4px black" }}
+            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 text-white p-2 w-max font-coco"
+          >
+            Blog
+          </Link>
+        </div>
         <div className="w-full py-4 px-3 sm:px-5 flex items-center justify-between z-[200] sticky top-0 left-0 bg-white drop-shadow-lg shadow-zinc-800">
           <h2 className="text-black drop-shadow-md shadow-black sm:text-lg lg:text-xl font-bold">
-            Dodaj ofertę lub szukaj pracy
+            Dodaj ofertę o pracę lub szukaj pracy zdalnej jako freelancer
           </h2>
           <button
             onClick={() => {
@@ -44,36 +94,6 @@ export default function ProductsMobile({
             Więcej
           </button>
         </div>
-        <div className="px-6 py-3 bg-gradient-to-r from-primary/20 to-cta/20 flex items-center justify-start mx-auto flex-wrap">
-          <Link
-            href="/talent"
-            style={{ boxShadow: "1px 0px 4px black" }}
-            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 font-light text-white text-sm p-2 w-max"
-          >
-            Zatrudnij talent
-          </Link>
-          <Link
-            href="/about"
-            style={{ boxShadow: "1px 0px 4px black" }}
-            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 font-light text-white text-sm p-2 w-max"
-          >
-            O nas
-          </Link>
-          <Link
-            href="/contact"
-            style={{ boxShadow: "1px 0px 4px black" }}
-            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 font-light text-white text-sm p-2 w-max"
-          >
-            Kontakt
-          </Link>
-          <Link
-            href="/news"
-            style={{ boxShadow: "1px 0px 4px black" }}
-            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 font-light text-white text-sm p-2 w-max"
-          >
-            Blog
-          </Link>
-        </div>
         <div className="grid grid-cols-1 w-full">
           {jobs.map((job: any, i: any) => (
             <div className="flex flex-col font-gotham" key={i}>
@@ -84,12 +104,12 @@ export default function ProductsMobile({
                 alt={`${polishToEnglish(job.title)} - Pracuj Zdalnie`}
                 style={{ boxShadow: "inset 0px 0px 6px black" }}
               />
-              <div className="flex flex-col bg-gradient-to-r from-primary/50 to-cta/50">
+              <div className="flex flex-col bg-gradient-to-r from-primary/20 to-cta/20">
                 {job.data.map((item: any, i: any) => (
                   <div key={i} className="relative">
                     <div
                       title={`Pracuj zdalnie w ${item.title}`}
-                      className="py-3 text-white font-light bg-gradient-to-r from-primary to-cta w-full font-coco italic text-xl"
+                      className="py-3 text-white font-bold bg-gradient-to-r from-primary to-cta w-full text-xl"
                     >
                       <div className="w-[90%] mx-auto">{item.title}</div>
                     </div>
@@ -102,7 +122,7 @@ export default function ProductsMobile({
                           key={i}
                           style={{ boxShadow: "1px 0px 4px black" }}
                           onClick={resetHeader}
-                          className="max-w-[300px] bg-[#126b91] hover:bg-[#468CA9] duration-75 font-light text-white text-sm p-2 w-max"
+                          className="max-w-[300px] bg-white hover:bg-gray-200 duration-75 text-black p-2 w-max"
                           href={`/praca-zdalna/${polishToEnglish(
                             job.title
                           )}/${polishToEnglish(item.title)}/${polishToEnglish(

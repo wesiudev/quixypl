@@ -2,7 +2,6 @@
 import Header from "@/components/Header";
 import jobs from "../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
-import Hero from "@/components/Hero";
 import Link from "next/link";
 import Image from "next/image";
 import { pushLead } from "@/firebase";
@@ -30,7 +29,7 @@ export default function Contact() {
               <ul className="flex items-center flex-wrap">
                 <li className="">
                   <Link href={`/`} title="praca zdalna">
-                    home
+                    hello!
                   </Link>
                 </li>
                 <li className="">

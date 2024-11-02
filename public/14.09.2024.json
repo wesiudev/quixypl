@@ -1,417 +1,417 @@
 [
-    {
-        "title": "Rozwój Oprogramowania",
+  {
+    "title": "Rozwój Oprogramowania",
+    "data": [
+      {
+        "title": "Aplikacje Mobilne",
         "data": [
-            {
-                "title": "Aplikacje Mobilne",
-                "data": [
-                    {
-                        "title": "Tworzenie Aplikacji Mobilnych"
-                    },
-                    {
-                        "title": "iOS Developer"
-                    },
-                    {
-                        "title": "Android Developer"
-                    },
-                    {
-                        "title": "Tworzenie Gier Mobilnych"
-                    },
-                    {
-                        "title": "Aplikacje Finansowe"
-                    }
-                ],
-                "description": "Tworzenie nowoczesnych aplikacji mobilnych na platformy iOS i Android, z wykorzystaniem najnowszych technologii oraz narzędzi. Specjalizacja w aplikacjach finansowych i grach mobilnych."
-            },
-            {
-                "title": "Oprogramowanie",
-                "data": [
-                    {
-                        "title": "Programista"
-                    },
-                    {
-                        "title": "Testowanie Oprogramowania"
-                    },
-                    {
-                        "title": "Programista Laravel"
-                    },
-                    {
-                        "title": "Microsoft SharePoint"
-                    },
-                    {
-                        "title": "Webflow Developer"
-                    }
-                ],
-                "description": "Zespół ekspertów w programowaniu w różnych językach, takich jak Laravel, SharePoint oraz Webflow, z naciskiem na testowanie jakości oprogramowania."
-            },
-            {
-                "title": "Web Development",
-                "data": [
-                    {
-                        "title": "Web Developer"
-                    },
-                    {
-                        "title": "Programista Python & Django"
-                    },
-                    {
-                        "title": "Programista PHP"
-                    },
-                    {
-                        "title": "Programista Wordpress"
-                    },
-                    {
-                        "title": "Programista Drupal"
-                    }
-                ],
-                "description": "Specjalizacja w programowaniu Python & Django, PHP, oraz tworzeniu dynamicznych stron opartych na platformach takich jak WordPress i Drupal."
-            },
-            {
-                "title": "Frameworki",
-                "data": [
-                    {
-                        "title": "Programista React Native"
-                    },
-                    {
-                        "title": "Programista Flutter"
-                    },
-                    {
-                        "title": "Programista .NET"
-                    },
-                    {
-                        "title": "Programista Ruby on Rails"
-                    },
-                    {
-                        "title": "Programista Java"
-                    }
-                ],
-                "description": "Doświadczeni programiści React Native, Flutter, .NET oraz Ruby on Rails, rozwijający oprogramowanie dostosowane do potrzeb biznesowych."
-            },
-            {
-                "title": "Nowe Technologie",
-                "data": [
-                    {
-                        "title": "Programista Sztucznej Inteligencji"
-                    },
-                    {
-                        "title": "Programista Blockchain"
-                    },
-                    {
-                        "title": "AR/VR Developer"
-                    },
-                    {
-                        "title": "IoT Developer"
-                    }
-                ],
-                "description": "Ekspertyza w sztucznej inteligencji, blockchain, AR/VR oraz Internet of Things, zapewniając innowacyjne rozwiązania technologiczne."
-            }
+          {
+            "title": "Tworzenie Aplikacji Mobilnych"
+          },
+          {
+            "title": "iOS Developer"
+          },
+          {
+            "title": "Android Developer"
+          },
+          {
+            "title": "Tworzenie Gier Mobilnych"
+          },
+          {
+            "title": "Aplikacje Finansowe"
+          }
         ],
-        "description": "Kompleksowy rozwój oprogramowania obejmujący aplikacje mobilne, tworzenie zaawansowanych systemów oraz web development z wykorzystaniem najnowszych technologii i frameworków. Ekspertyza w zakresie nowych technologii, takich jak sztuczna inteligencja czy blockchain."
-    },
-    {
-        "title": "E-Commerce",
+        "description": "Tworzenie nowoczesnych aplikacji mobilnych na platformy iOS i Android, z wykorzystaniem najnowszych technologii oraz narzędzi. Specjalizacja w aplikacjach finansowych i grach mobilnych."
+      },
+      {
+        "title": "Oprogramowanie",
         "data": [
-            {
-                "title": "Rozwiązania E-Commerce",
-                "data": [
-                    {
-                        "title": "Tworzenie sklepów internetowych"
-                    },
-                    {
-                        "title": "Programista Magento"
-                    },
-                    {
-                        "title": "Programista Shopify"
-                    },
-                    {
-                        "title": "Programista BigCommerce"
-                    },
-                    {
-                        "title": "Programista WooCommerce"
-                    }
-                ],
-                "description": "Tworzenie oraz wdrażanie sklepów internetowych na platformach takich jak Magento, Shopify, BigCommerce i WooCommerce, z pełnym wsparciem dla rozwiązań e-commerce."
-            }
+          {
+            "title": "Programista"
+          },
+          {
+            "title": "Testowanie Oprogramowania"
+          },
+          {
+            "title": "Programista Laravel"
+          },
+          {
+            "title": "Microsoft SharePoint"
+          },
+          {
+            "title": "Webflow Developer"
+          }
         ],
-        "description": "Kompleksowe rozwiązania dla e-commerce, w tym tworzenie oraz wdrażanie sklepów internetowych na platformach takich jak Magento, Shopify, BigCommerce i WooCommerce."
-    },
-    {
-        "title": "Usługi IT",
+        "description": "Zespół ekspertów w programowaniu w różnych językach, takich jak Laravel, SharePoint oraz Webflow, z naciskiem na testowanie jakości oprogramowania."
+      },
+      {
+        "title": "Web Development",
         "data": [
-            {
-                "title": "Doradztwo IT",
-                "data": [
-                    {
-                        "title": "Integracja Systemów"
-                    },
-                    {
-                        "title": "ERP"
-                    },
-                    {
-                        "title": "Salesforce"
-                    },
-                    {
-                        "title": "BI & Big Data"
-                    },
-                    {
-                        "title": "Cloud Computing"
-                    },
-                    {
-                        "title": "Konsulting w Chmurze"
-                    },
-                    {
-                        "title": "Microsoft Azure"
-                    },
-                    {
-                        "title": "AWS"
-                    }
-                ],
-                "description": "Usługi doradcze w zakresie integracji systemów, ERP, Salesforce, Big Data oraz chmur obliczeniowych (AWS, Azure)."
-            },
-            {
-                "title": "Wsparcie IT",
-                "data": [
-                    {
-                        "title": "Helpdesk IT"
-                    },
-                    {
-                        "title": "Wsparcie Techniczne"
-                    },
-                    {
-                        "title": "Usługi IT",
-                        "description": "Profesjonalne usługi IT obejmujące doradztwo, wsparcie techniczne oraz zarządzanie bezpieczeństwem IT, z naciskiem na nowoczesne rozwiązania chmurowe i cyberbezpieczeństwo."
-                    },
-                    {
-                        "title": "Outsourcing Specjalistów IT"
-                    },
-                    {
-                        "title": "Zarządzanie Usługami IT"
-                    }
-                ],
-                "description": "Kompleksowe wsparcie techniczne i helpdesk, outsourcing specjalistów IT oraz zarządzanie usługami IT."
-            },
-            {
-                "title": "Bezpieczeństwo IT",
-                "data": [
-                    {
-                        "title": "Cyberbezpieczeństwo"
-                    },
-                    {
-                        "title": "Testy Penetracyjne"
-                    },
-                    {
-                        "title": "Ochrona przed przejęciem kont"
-                    }
-                ],
-                "description": "Usługi w zakresie cyberbezpieczeństwa, testów penetracyjnych oraz ochrony kont użytkowników."
-            }
+          {
+            "title": "Web Developer"
+          },
+          {
+            "title": "Programista Python & Django"
+          },
+          {
+            "title": "Programista PHP"
+          },
+          {
+            "title": "Programista Wordpress"
+          },
+          {
+            "title": "Programista Drupal"
+          }
         ],
-        "description": "Profesjonalne usługi IT obejmujące doradztwo, wsparcie techniczne oraz zarządzanie bezpieczeństwem IT, z naciskiem na nowoczesne rozwiązania chmurowe i cyberbezpieczeństwo."
-    },
-    {
-        "title": "Marketing",
+        "description": "Specjalizacja w programowaniu Python & Django, PHP, oraz tworzeniu dynamicznych stron opartych na platformach takich jak WordPress i Drupal."
+      },
+      {
+        "title": "Frameworki",
         "data": [
-            {
-                "title": "Marketing Cyfrowy",
-                "data": [
-                    {
-                        "title": "SEO"
-                    },
-                    {
-                        "title": "Marketing w Social Media"
-                    },
-                    {
-                        "title": "Email Marketing"
-                    },
-                    {
-                        "title": "Content Marketing"
-                    }
-                ],
-                "description": "Strategie marketingowe w zakresie SEO, social media, e-mail marketingu oraz content marketingu."
-            },
-            {
-                "title": "Reklama",
-                "data": [
-                    {
-                        "title": "PPC (Pay Per Click)"
-                    },
-                    {
-                        "title": "Planowanie Mediów i Zakup"
-                    },
-                    {
-                        "title": "Branding"
-                    },
-                    {
-                        "title": "Strategie Namingowe"
-                    }
-                ],
-                "description": "Planowanie kampanii PPC, branding oraz strategie nazw i zakupów mediów."
-            },
-            {
-                "title": "Kreacja",
-                "data": [
-                    {
-                        "title": "Strategia Komunikacji"
-                    },
-                    {
-                        "title": "Public Relations"
-                    },
-                    {
-                        "title": "Badania Rynkowe"
-                    },
-                    {
-                        "title": "Strategia Cyfrowa"
-                    },
-                    {
-                        "title": "Produkcja Video"
-                    },
-                    {
-                        "title": "Filmy Wyjaśniające"
-                    },
-                    {
-                        "title": "Spoty Reklamowe"
-                    },
-                    {
-                        "title": "Filmy Korporacyjne"
-                    }
-                ],
-                "description": "Usługi w zakresie public relations, produkcji wideo oraz badań rynkowych."
-            },
-            {
-                "title": "Animacja",
-                "data": [
-                    {
-                        "title": "Animacja 2D"
-                    },
-                    {
-                        "title": "Animacja 3D"
-                    },
-                    {
-                        "title": "Motion Graphics"
-                    }
-                ],
-                "description": "Tworzenie animacji 2D i 3D, a także zaawansowane efekty motion graphics."
-            }
+          {
+            "title": "Programista React Native"
+          },
+          {
+            "title": "Programista Flutter"
+          },
+          {
+            "title": "Programista .NET"
+          },
+          {
+            "title": "Programista Ruby on Rails"
+          },
+          {
+            "title": "Programista Java"
+          }
         ],
-        "description": "Profesjonalne kampanie marketingowe, obejmujące SEO, social media, content marketing oraz kampanie reklamowe PPC."
-    },
-    {
-        "title": "Projektowanie",
+        "description": "Doświadczeni programiści React Native, Flutter, .NET oraz Ruby on Rails, rozwijający oprogramowanie dostosowane do potrzeb biznesowych."
+      },
+      {
+        "title": "Nowe Technologie",
         "data": [
-            {
-                "title": "Web Design",
-                "data": [
-                    {
-                        "title": "Projektowanie Stron Internetowych"
-                    },
-                    {
-                        "title": "UX/UI Design"
-                    },
-                    {
-                        "title": "Koncepcje Projektowe"
-                    },
-                    {
-                        "title": "Projektowanie Logo"
-                    },
-                    {
-                        "title": "Projektowanie Graficzne"
-                    },
-                    {
-                        "title": "Projektowanie Produktów"
-                    },
-                    {
-                        "title": "Projektowanie Opakowań"
-                    }
-                ],
-                "description": "Projektowanie stron internetowych, UX/UI, logotypów, grafik, produktów oraz opakowań z naciskiem na innowacyjność."
-            },
-            {
-                "title": "Pełna Obsługa",
-                "data": [
-                    {
-                        "title": "Agencje Kreatywne"
-                    },
-                    {
-                        "title": "Projektowanie Cyfrowe"
-                    }
-                ],
-                "description": "Kompleksowa obsługa przez agencje kreatywne, w tym projektowanie cyfrowe."
-            }
+          {
+            "title": "Programista Sztucznej Inteligencji"
+          },
+          {
+            "title": "Programista Blockchain"
+          },
+          {
+            "title": "AR/VR Developer"
+          },
+          {
+            "title": "IoT Developer"
+          }
         ],
-        "description": "Kompleksowe usługi projektowe obejmujące design stron internetowych, projektowanie UX/UI, logo, grafik oraz produktów."
-    },
-    {
-        "title": "Usługi Biznesowe",
+        "description": "Ekspertyza w sztucznej inteligencji, blockchain, AR/VR oraz Internet of Things, zapewniając innowacyjne rozwiązania technologiczne."
+      }
+    ],
+    "description": "Kompleksowy rozwój oprogramowania obejmujący aplikacje mobilne, tworzenie zaawansowanych systemów oraz web development z wykorzystaniem najnowszych technologii i frameworków. Ekspertyza w zakresie nowych technologii, takich jak sztuczna inteligencja czy blockchain."
+  },
+  {
+    "title": "E-Commerce",
+    "data": [
+      {
+        "title": "Rozwiązania E-Commerce",
         "data": [
-            {
-                "title": "Wsparcie Sprzedaży",
-                "data": [
-                    {
-                        "title": "Outsourcing Sprzedaży"
-                    },
-                    {
-                        "title": "Obsługa Klienta"
-                    },
-                    {
-                        "title": "Generowanie Leadów"
-                    },
-                    {
-                        "title": "Kwalifikacja Leadów"
-                    },
-                    {
-                        "title": "Usługi Call Center"
-                    }
-                ],
-                "description": "Outsourcing sprzedaży, generowanie leadów oraz zarządzanie call center."
-            },
-            {
-                "title": "Usługi Finansowe",
-                "data": [
-                    {
-                        "title": "Księgowość"
-                    },
-                    {
-                        "title": "Przetwarzanie Płac"
-                    },
-                    {
-                        "title": "Fuzje i Przejęcia"
-                    },
-                    {
-                        "title": "Zarządzanie Budżetem"
-                    }
-                ],
-                "description": "Księgowość, przetwarzanie płac, fuzje i przejęcia oraz zarządzanie budżetem."
-            },
-            {
-                "title": "Wsparcie Administracyjne",
-                "data": [
-                    {
-                        "title": "Umawianie Spotkań"
-                    },
-                    {
-                        "title": "Wirtualna Recepcja"
-                    },
-                    {
-                        "title": "Wirtualny Asystent"
-                    },
-                    {
-                        "title": "Wprowadzanie Danych"
-                    }
-                ],
-                "description": "Wirtualna recepcja, umawianie spotkań oraz wprowadzanie danych."
-            },
-            {
-                "title": "Zasoby Ludzkie",
-                "data": [
-                    {
-                        "title": "Outsourcing HR"
-                    },
-                    {
-                        "title": "Rekrutacja"
-                    }
-                ],
-                "description": "Outsourcing HR oraz rekrutacja specjalistów."
-            }
+          {
+            "title": "Tworzenie sklepów internetowych"
+          },
+          {
+            "title": "Programista Magento"
+          },
+          {
+            "title": "Programista Shopify"
+          },
+          {
+            "title": "Programista BigCommerce"
+          },
+          {
+            "title": "Programista WooCommerce"
+          }
         ],
-        "description": "Wsparcie dla biznesu obejmujące outsourcing sprzedaży, księgowość, zarządzanie zasobami ludzkimi oraz wsparcie administracyjne."
-    }
+        "description": "Tworzenie oraz wdrażanie sklepów internetowych na platformach takich jak Magento, Shopify, BigCommerce i WooCommerce, z pełnym wsparciem dla rozwiązań e-commerce."
+      }
+    ],
+    "description": "Kompleksowe rozwiązania dla e-commerce, w tym tworzenie oraz wdrażanie sklepów internetowych na platformach takich jak Magento, Shopify, BigCommerce i WooCommerce."
+  },
+  {
+    "title": "Usługi IT",
+    "data": [
+      {
+        "title": "Doradztwo IT",
+        "data": [
+          {
+            "title": "Integracja Systemów"
+          },
+          {
+            "title": "ERP"
+          },
+          {
+            "title": "Salesforce"
+          },
+          {
+            "title": "BI & Big Data"
+          },
+          {
+            "title": "Cloud Computing"
+          },
+          {
+            "title": "Konsulting w Chmurze"
+          },
+          {
+            "title": "Microsoft Azure"
+          },
+          {
+            "title": "AWS"
+          }
+        ],
+        "description": "Usługi doradcze w zakresie integracji systemów, ERP, Salesforce, Big Data oraz chmur obliczeniowych (AWS, Azure)."
+      },
+      {
+        "title": "Wsparcie IT",
+        "data": [
+          {
+            "title": "Helpdesk IT"
+          },
+          {
+            "title": "Wsparcie Techniczne"
+          },
+          {
+            "title": "Usługi IT",
+            "description": "Profesjonalne usługi IT obejmujące doradztwo, wsparcie techniczne oraz zarządzanie bezpieczeństwem IT, z naciskiem na nowoczesne rozwiązania chmurowe i cyberbezpieczeństwo."
+          },
+          {
+            "title": "Outsourcing Specjalistów IT"
+          },
+          {
+            "title": "Zarządzanie Usługami IT"
+          }
+        ],
+        "description": "Kompleksowe wsparcie techniczne i helpdesk, outsourcing specjalistów IT oraz zarządzanie usługami IT."
+      },
+      {
+        "title": "Bezpieczeństwo IT",
+        "data": [
+          {
+            "title": "Cyberbezpieczeństwo"
+          },
+          {
+            "title": "Testy Penetracyjne"
+          },
+          {
+            "title": "Ochrona przed przejęciem kont"
+          }
+        ],
+        "description": "Usługi w zakresie cyberbezpieczeństwa, testów penetracyjnych oraz ochrony kont użytkowników."
+      }
+    ],
+    "description": "Profesjonalne usługi IT obejmujące doradztwo, wsparcie techniczne oraz zarządzanie bezpieczeństwem IT, z naciskiem na nowoczesne rozwiązania chmurowe i cyberbezpieczeństwo."
+  },
+  {
+    "title": "Marketing",
+    "data": [
+      {
+        "title": "Marketing Cyfrowy",
+        "data": [
+          {
+            "title": "SEO"
+          },
+          {
+            "title": "Marketing w Social Media"
+          },
+          {
+            "title": "Email Marketing"
+          },
+          {
+            "title": "Content Marketing"
+          }
+        ],
+        "description": "Strategie marketingowe w zakresie SEO, social media, e-mail marketingu oraz content marketingu."
+      },
+      {
+        "title": "Reklama",
+        "data": [
+          {
+            "title": "PPC (Pay Per Click)"
+          },
+          {
+            "title": "Planowanie Mediów i Zakup"
+          },
+          {
+            "title": "Branding"
+          },
+          {
+            "title": "Strategie Namingowe"
+          }
+        ],
+        "description": "Planowanie kampanii PPC, branding oraz strategie nazw i zakupów mediów."
+      },
+      {
+        "title": "Kreacja",
+        "data": [
+          {
+            "title": "Strategia Komunikacji"
+          },
+          {
+            "title": "Public Relations"
+          },
+          {
+            "title": "Badania Rynkowe"
+          },
+          {
+            "title": "Strategia Cyfrowa"
+          },
+          {
+            "title": "Produkcja Video"
+          },
+          {
+            "title": "Filmy Wyjaśniające"
+          },
+          {
+            "title": "Spoty Reklamowe"
+          },
+          {
+            "title": "Filmy Korporacyjne"
+          }
+        ],
+        "description": "Usługi w zakresie public relations, produkcji wideo oraz badań rynkowych."
+      },
+      {
+        "title": "Animacja",
+        "data": [
+          {
+            "title": "Animacja 2D"
+          },
+          {
+            "title": "Animacja 3D"
+          },
+          {
+            "title": "Motion Graphics"
+          }
+        ],
+        "description": "Tworzenie animacji 2D i 3D, a także zaawansowane efekty motion graphics."
+      }
+    ],
+    "description": "Profesjonalne kampanie marketingowe, obejmujące SEO, social media, content marketing oraz kampanie reklamowe PPC."
+  },
+  {
+    "title": "Projektowanie",
+    "data": [
+      {
+        "title": "Web Design",
+        "data": [
+          {
+            "title": "Projektowanie Stron Internetowych"
+          },
+          {
+            "title": "UX/UI Design"
+          },
+          {
+            "title": "Koncepcje Projektowe"
+          },
+          {
+            "title": "Projektowanie Logo"
+          },
+          {
+            "title": "Projektowanie Graficzne"
+          },
+          {
+            "title": "Projektowanie Produktów"
+          },
+          {
+            "title": "Projektowanie Opakowań"
+          }
+        ],
+        "description": "Projektowanie stron internetowych, UX/UI, logotypów, grafik, produktów oraz opakowań z naciskiem na innowacyjność."
+      },
+      {
+        "title": "Pełna Obsługa",
+        "data": [
+          {
+            "title": "Agencje Kreatywne"
+          },
+          {
+            "title": "Projektowanie Cyfrowe"
+          }
+        ],
+        "description": "Kompleksowa obsługa przez agencje kreatywne, w tym projektowanie cyfrowe."
+      }
+    ],
+    "description": "Kompleksowe usługi projektowe obejmujące design stron internetowych, projektowanie UX/UI, logo, grafik oraz produktów."
+  },
+  {
+    "title": "Usługi Biznesowe",
+    "data": [
+      {
+        "title": "Wsparcie Sprzedaży",
+        "data": [
+          {
+            "title": "Outsourcing Sprzedaży"
+          },
+          {
+            "title": "Obsługa Klienta"
+          },
+          {
+            "title": "Generowanie Leadów"
+          },
+          {
+            "title": "Kwalifikacja Leadów"
+          },
+          {
+            "title": "Usługi Call Center"
+          }
+        ],
+        "description": "Outsourcing sprzedaży, generowanie leadów oraz zarządzanie call center."
+      },
+      {
+        "title": "Usługi Finansowe",
+        "data": [
+          {
+            "title": "Księgowość"
+          },
+          {
+            "title": "Przetwarzanie Płac"
+          },
+          {
+            "title": "Fuzje i Przejęcia"
+          },
+          {
+            "title": "Zarządzanie Budżetem"
+          }
+        ],
+        "description": "Księgowość, przetwarzanie płac, fuzje i przejęcia oraz zarządzanie budżetem."
+      },
+      {
+        "title": "Wsparcie Administracyjne",
+        "data": [
+          {
+            "title": "Umawianie Spotkań"
+          },
+          {
+            "title": "Wirtualna Recepcja"
+          },
+          {
+            "title": "Wirtualny Asystent"
+          },
+          {
+            "title": "Wprowadzanie Danych"
+          }
+        ],
+        "description": "Wirtualna recepcja, umawianie spotkań oraz wprowadzanie danych."
+      },
+      {
+        "title": "Zasoby Ludzkie",
+        "data": [
+          {
+            "title": "Outsourcing HR"
+          },
+          {
+            "title": "Rekrutacja"
+          }
+        ],
+        "description": "Outsourcing HR oraz rekrutacja specjalistów."
+      }
+    ],
+    "description": "Wsparcie dla biznesu obejmujące outsourcing sprzedaży, księgowość, zarządzanie zasobami ludzkimi oraz wsparcie administracyjne."
+  }
 ]

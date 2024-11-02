@@ -25,7 +25,7 @@ export default function VerifyPayment({
       );
       setIsMounted(true);
     } catch (error) {
-      return;
+      if (error) return;
     }
   };
 

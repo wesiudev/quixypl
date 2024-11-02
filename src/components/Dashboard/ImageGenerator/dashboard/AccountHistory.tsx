@@ -8,8 +8,10 @@ export default function AccountHistory() {
 
   return (
     <div className="flex flex-col relative">
-      <div className="h-full bg-white w-full font-gotham">
-        <h1 className="text-3xl text-zinc-800 lg:mt-3">Historia konta</h1>
+      <div className="h-full bg-white w-full">
+        <h1 className="text-3xl text-zinc-800 mt-3 lg:mt-0 font-bold">
+          Historia konta
+        </h1>
         {user?.history?.length && (
           <div className="max-h-[30vh] overflow-y-scroll">
             {user?.history
@@ -28,7 +30,7 @@ export default function AccountHistory() {
                       </div>
                     </div>
                   </div>
-                  <span className="text-lg flex text-black drop-shadow-sm font-coco">
+                  <span className="text-lg flex text-black drop-shadow-sm">
                     <BsArrowReturnRight className="mt-0.5 min-w-5 min-h-5 mr-1 ml-[9px]" />
                     {item.action}
                   </span>

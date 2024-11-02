@@ -112,7 +112,7 @@ export default function HeaderComponent({
                   hovered === "cat" && "bg-cta text-white"
                 }  px-1.5 py-1`}
               >
-                Praca zdalna
+                Kategorie
               </span>
               <FaChevronDown
                 className={`${

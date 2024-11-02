@@ -47,7 +47,7 @@ export default function ChatMessage({
                 style={{ boxShadow: "0px 0px 5px #000000" }}
                 className="flex items-center justify-center xl:text-2xl p-3 w-12 h-12 aspect-square text-white rounded-full bg-[#fff]"
               >
-                {clickedUserData?.login[0].toUpperCase()}
+                {clickedUserData?.pseudo[0].toUpperCase()}
               </div>
             </div>
           )}

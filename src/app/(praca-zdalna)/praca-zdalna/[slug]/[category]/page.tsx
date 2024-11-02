@@ -43,6 +43,7 @@ export default async function Page({ params }: { params: any }) {
       (item: any) =>
         item?.pseudo &&
         item?.seek &&
+        item.emailVerified &&
         item?.seek !== "ask" &&
         item?.tags?.filter((tag: any) => tag.categoryUrl === params.category)
     );
@@ -160,7 +161,7 @@ export default async function Page({ params }: { params: any }) {
               className="text-3xl mb-6 text-black font-gotham"
             >
               Czym zajmują się
-              <span className="ml-2  p-2 px-3 bg-gradient-to-r text-white from-primary via-cta to-primary">
+              <span className="ml-2 bg-gradient-to-r text-white from-primary via-cta to-primary">
                 {content?.informal_title_plural.toLowerCase()}?
               </span>
             </h2>

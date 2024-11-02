@@ -10,7 +10,7 @@ import HireButton from "@/components/HireButton/HireButton";
 import { IoLocationOutline } from "react-icons/io5";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 import { getPageContent } from "@/lib/getPageContent";
-import JobOfferCard from "@/components/JobOffer/JobOfferCard";
+import JobOfferCard from "@/components/Dashboard/JobOfferCard";
 
 export default async function Page({
   params,
@@ -58,21 +58,41 @@ export default async function Page({
             <div className="mt-6">
               <div className="flex flex-col">
                 <div className="flex">
-                  <div className="flex w-max">
+                  <div className="flex w-max flex-col items-center">
                     {slug?.photoURL && (
-                      <div className="relative w-24 aspect-square h-24">
-                        <Image
-                          src={slug?.photoURL}
-                          width={256}
-                          height={256}
-                          alt=""
-                          className="rounded-full mb-0 absolute inset-0 object-cover w-full h-full"
-                        />
+                      <div className="">
+                        <div className="relative w-24 aspect-square h-24">
+                          <Image
+                            src={slug?.photoURL}
+                            width={256}
+                            height={256}
+                            alt=""
+                            className="rounded-full mb-0 absolute inset-0 object-cover w-full h-full"
+                          />
+                        </div>
+                        <div className="mt-3 w-max text-sm text-black font-light font-gotham flex flex-col">
+                          <div className="font-bold">Dołączył/a</div>
+                          <div className="">
+                            {moment(slug?.history[0]?.creationTime)?.format(
+                              "DD-MM-yyyy"
+                            )}
+                          </div>
+                        </div>
                       </div>
                     )}
                     {!slug?.photoURL && (
-                      <div className="bg-[#126b91]  aspect-square text-white flex items-center justify-center w-24">
-                        <FaUser className="text-5xl" />
+                      <div className="flex flex-col items-center">
+                        <div className="bg-[#126b91] aspect-square text-white flex items-center justify-center w-24">
+                          <FaUser className="text-5xl" />
+                        </div>
+                        <div className="w-max text-sm text-black font-gotham flex flex-col">
+                          <div className="font-bold">Dołączył/a</div>
+                          <div className="">
+                            {moment(slug?.history[0]?.creationTime)?.format(
+                              "DD-MM-yyyy"
+                            )}
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -83,39 +103,31 @@ export default async function Page({
                           {slug?.name ? slug?.name : "Nie podano"}
                         </h2>
                       </div>
-                      <div className="my-1 text-black text-xs sm:text-sm flex items-center">
+                      <div className="mt-1 text-black text-xs sm:text-sm flex items-center">
                         <IoLocationOutline className="-ml-px text-xl mr-1" />{" "}
                         <h3>{slug?.city}, Polska</h3>
+                      </div>
+                      <div className="mt-3">
+                        <h3 className="text-white bg-gradient-to-r from-primary to-cta rounded-xl px-2 font-bold">
+                          {slug?.title && slug?.title}
+                        </h3>
+                        {slug?.hourRate && (
+                          <div className="text-black font-bold w-full flex items-center justify-between">
+                            <div className="text-black flex flex-col">
+                              <h3 className="font-bold">Stawka godzinowa</h3>
+                              <div className="font-normal">
+                                {slug?.hourRate} zł/h
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      <div className="w-full flex space-y-2 justify-between">
+                        <HireButton talentSlugData={slug} />
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="w-full flex justify-between mt-3">
-                <div className="w-full flex flex-col-reverse space-y-2 justify-between">
-                  <div className="mt-3">
-                    <h3 className=" font-gotham text-black font-bold text-xl lg:text-2xl">
-                      {slug?.title && slug?.title}
-                    </h3>
-                    {slug?.hourRate && (
-                      <div className="text-black text-xl font-gotham font-bold w-full flex items-center justify-between">
-                        <div className="text-sm text-black font-light font-gotham flex flex-col">
-                          <h3 className="font-bold">Stawka godzinowa</h3>
-                          <div className="">{slug?.hourRate} zł/h</div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  <HireButton talentSlugData={slug} />
-                </div>
-                <div className="w-max text-sm text-black font-light font-gotham flex flex-col">
-                  <div className="font-bold">Dołączył/a</div>
-                  <div className="">
-                    {moment(slug?.history[0]?.creationTime)?.format(
-                      "DD-MM-yyyy"
-                    )}
-                  </div>
-                </div>{" "}
               </div>
 
               <div
@@ -213,7 +225,11 @@ export default async function Page({
                       key={offer.id}
                       className={`${!offer?.isPaid ? "hidden" : "block"}`}
                     >
-                      <JobOfferCard key={i} jobOfferData={offer} />
+                      <JobOfferCard
+                        href={`/job-offer/${offer.title}-${offer.creationTime}`}
+                        key={i}
+                        offer={offer}
+                      />
                     </div>
                   ))}
                 </div>
@@ -257,7 +273,7 @@ export async function generateMetadata({ params }: { params: any }) {
     new Set(slug?.tags?.map((item: any) => item?.slugTitle))
   );
   const content = await getPageContent(
-    polishToEnglish(slug?.tags[0].slugTitle)
+    polishToEnglish(slug?.tags[0]?.slugTitle)
   );
   const title = `${slug?.pseudo} | Ekspert ${content?.genitive} ${slug?.city}`;
   const description = `Sprawdź projekty ${params.slug} ${talentTags.join(

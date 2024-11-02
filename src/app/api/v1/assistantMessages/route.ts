@@ -10,7 +10,6 @@ export async function GET(req: NextRequest) {
   const chat = createChat({
     apiKey: "sk-proj-m5F97TxvGplJe3a2yfloT3BlbkFJG1TEpMpZ3ms6QfONLsMT",
     model: "gpt-3.5-turbo",
-    
   });
   if (mode === "lawyer") {
     await chat.sendMessage("Ping");
@@ -77,27 +76,21 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ status: "success" });
   } else if (mode === "assistant") {
     await chat.sendMessage("Ping");
-    const response = await chat.sendMessage(
-      `Jesteś asystentem firmy HEXON zajmujemy się dofinansowaniem na termomodernizacje. Na podstawie tych danych (CO ZAPEWNIAMY?
-Audyt wstępny, Projekt, Montaż, Umowa, Audyt techniczny, Finansowanie Docieplenie dachu i elewacji,
-Wymiana pieca,Wymiana drzwi,Fotowoltaika, Pompa ciepła lub pellet, Rekuperacja, dofinansowanie do
-136 200 zł). Proszę odpowiedziec na pytanie:(${msg}). Postaraj się pomóc na każdy możliwy sposób. Odpowiadasz po polsku. Serdecznie zaproś do wypełnienia formularza, lub jeśli ktoś ma wiecej pytań niech wyśle je na email: "biuro@hexon.pl"`,
-      {
-        expect: {
-          // Examples of what the response should look like.
-          examples: [],
-          // Schema that the response should satisfy.
-          schema: {
-            additionalProperties: false,
-            type: "object",
-            properties: {
-              response: { type: "string" },
-            },
-            required: [],
+    const response = await chat.sendMessage(``, {
+      expect: {
+        // Examples of what the response should look like.
+        examples: [],
+        // Schema that the response should satisfy.
+        schema: {
+          additionalProperties: false,
+          type: "object",
+          properties: {
+            response: { type: "string" },
           },
+          required: [],
         },
-      }
-    );
+      },
+    });
     await pushAssistantMessage({
       content: response.content.response,
       role: "assistant",

@@ -114,8 +114,8 @@ const ChooseAccountType = (props: any) => {
             Rodzaj konta
           </label>
           <p className="font-gotham font-light text-black">
-            Twoje konto nie jest jeszcze w pełni skonfigurowane. Wybierz jaki
-            rodzaj konta chcesz prowadzić.
+            Twoje konto nie jest jeszcze w pełni skonfigurowane. Wybierz rodzaj
+            profilu
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-7 my-6">
             <button

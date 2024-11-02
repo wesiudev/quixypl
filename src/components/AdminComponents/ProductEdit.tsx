@@ -15,14 +15,15 @@ import {
   updateDraft,
   updateProduct,
 } from "@/firebase";
+
 import ImagePicker from "@/components/AdminComponents/ImagePicker";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { EditorState } from "draft-js";
 import { useRouter } from "next/navigation";
 import ExtraSettings from "@/components/AdminComponents/ExtraSettings";
 import { toast } from "react-toastify";
 import { toastUpdate } from "../Toast/ToastUpdate";
 import { polishToEnglish } from "../../../utils/polishToEnglish";
+import { EditorContentChanged } from "../AddJobOffer/Editor";
 async function requestPostGeneration(topic: string) {
   const answer = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/generateBlogPost?topic=${topic}`,
@@ -38,9 +39,7 @@ export default function ProductEdit({
   place: "products" | "drafts" | "new";
 }) {
   const router = useRouter();
-  const [htmlContent, setHtmlContent] = useState(() =>
-    EditorState.createEmpty()
-  );
+
   const initialInput = {
     type: "",
     title: "",
@@ -52,32 +51,42 @@ export default function ProductEdit({
       position: "bottom-right",
       theme: "dark",
     });
+
     if (!topic) {
       toastUpdate("Podaj temat", id, "error");
       return;
     }
+
     (async () => {
       try {
         const data = await requestPostGeneration(topic).then((data) => {
           toastUpdate("Sukces!", id, "success");
           return data.json();
         });
+
         setProduct({
           ...product,
-          title: data.title,
-          shortDesc: data.shortDesc,
-          text1Title: data.text1Title,
-          text1Desc: data.text1Desc,
-          text2Title: data.text2Title,
-          text2Desc: data.text2Desc,
-          text3Title: data.text3Title,
-          text3Desc: data.text3Desc,
-          text4Title: data.text4Title,
-          text4Desc: data.text4Desc,
-          googleTitle: data.googleTitle,
-          googleDescription: data.googleDescription,
-          googleKeywords: data.googleKeywords,
-          url: data.url,
+          title: data?.title || "",
+          shortDesc: data?.shortDesc || "",
+          text1Title: data?.text1Title || "",
+          text1Desc: data?.text1Desc || "",
+          text2Title: data?.text2Title || "",
+          text2Desc: data?.text2Desc || "",
+          text3Title: data?.text3Title || "",
+          text3Desc: data?.text3Desc || "",
+          text4Title: data?.text4Title || "",
+          text4Desc: data?.text4Desc || "",
+          text5Title: data?.text5Title || "",
+          text5Desc: data?.text5Desc || "",
+          text6Title: data?.text6Title || "",
+          text6Desc: data?.text6Desc || "",
+          text7Title: data?.text7Title || "",
+          text7Desc: data?.text7Desc || "",
+          googleTitle: data?.googleTitle || "",
+          googleDescription: data?.googleDescription || "",
+          googleKeywords: data?.googleKeywords || "",
+          url: data?.url || "",
+          tags: data?.tags || "",
         });
       } catch (err: any) {
         toastUpdate("error", id, "error");
@@ -93,7 +102,6 @@ export default function ProductEdit({
   const [sourceOfImagePicker, setSourceOfImagePicker] = useState("");
   const [currentInput, setCurrentInput] = useState(initialInput);
   const [loading, setLoading] = useState(false);
-  const [draftCreated, setDraftCreated] = useState(false);
   function closeImagePicker() {
     setImagePickerOpen(false);
     setSourceOfImagePicker("");
@@ -112,6 +120,21 @@ export default function ProductEdit({
   function closeInput() {
     setCurrentInput(initialInput);
   }
+  const [editorHtmlValue, setEditorHtmlValue] = useState<string>("");
+  const [editorMarkdownValue, setEditorMarkdownValue] = useState<string>("");
+
+  const onEditorContentChanged = (
+    content: EditorContentChanged,
+    title: string
+  ) => {
+    setEditorHtmlValue(content.html);
+    setEditorMarkdownValue(content.markdown);
+    // Update the product with the new markdown value
+    setProduct((prevProduct: any) => ({
+      ...prevProduct,
+      [title]: content.markdown, // Use content.markdown directly
+    }));
+  };
   const [isUploading, setUploading] = useState(false);
   const [uploadCount, setUploadCount] = useState();
   async function upload(files: any) {
@@ -201,14 +224,14 @@ export default function ProductEdit({
       )}
       {imagePickerOpen && (
         <ImagePicker
+          product={product}
+          setProduct={setProduct}
           setSelectedImage={setSelectedImage}
           selectedImage={selectedImage}
           handler={upload}
           imagePickerOpen={imagePickerOpen}
           closeImagePicker={closeImagePicker}
           images={product.images}
-          setProduct={setProduct}
-          product={product}
           sourceOfImagePicker={sourceOfImagePicker}
         />
       )}
@@ -221,14 +244,11 @@ export default function ProductEdit({
         closeInput={closeInput}
       />
       <HtmlInput
-        setProduct={setProduct}
-        product={product}
         label={currentInput.label}
         type={currentInput.type}
-        title={currentInput.title}
-        htmlContent={htmlContent}
-        setHtmlContent={setHtmlContent}
         closeInput={closeInput}
+        onEditorContentChanged={onEditorContentChanged}
+        editorMarkdownValue={editorMarkdownValue}
       />
       <div className={`relative w-full bg-white min-h-screen`}>
         <div
@@ -254,10 +274,10 @@ export default function ProductEdit({
           </p>
 
           <ExtraSettings
+            product={product}
             extraSettingsOpen={extraSettingsOpen}
             setExtraSettingsOpen={setExtraSettingsOpen}
             handleChange={handleChange}
-            product={product}
             dbUpdate={updateProduct}
             error={SEOError}
           />
@@ -391,7 +411,6 @@ export default function ProductEdit({
                 title="shortDesc"
                 setInput={setCurrentInput}
                 optional={false}
-                setHtmlContent={setHtmlContent}
               />
               <ContentButton
                 label="Tytuł tekstu 1"
@@ -408,7 +427,6 @@ export default function ProductEdit({
                 title="text1Desc"
                 setInput={setCurrentInput}
                 optional={true}
-                setHtmlContent={setHtmlContent}
               />
               <ContentButton
                 label="Tytuł tekstu 2"
@@ -425,7 +443,6 @@ export default function ProductEdit({
                 title="text2Desc"
                 setInput={setCurrentInput}
                 optional={true}
-                setHtmlContent={setHtmlContent}
               />
             </div>
             {/* image input */}
@@ -481,13 +498,11 @@ export default function ProductEdit({
                   title="text3Desc"
                   setInput={setCurrentInput}
                   optional={true}
-                  setHtmlContent={setHtmlContent}
                 />
               </div>
             </div>
           </div>
         </div>
-
         <div className="p-12 grid grid-cols-2 w-full mt-24">
           <div className="w-full mt-4">
             <button
@@ -537,10 +552,133 @@ export default function ProductEdit({
               title="text4Desc"
               setInput={setCurrentInput}
               optional={true}
-              setHtmlContent={setHtmlContent}
             />
           </div>
         </div>
+        <div className="p-12 grid grid-cols-2 w-full mt-24">
+          {/* Konfiguracja text5 */}
+
+          <div className="flex flex-col pl-4">
+            <ContentButton
+              label="Tytuł tekstu 5"
+              value={product.text5Title}
+              type="text"
+              title="text5Title"
+              setInput={setCurrentInput}
+              optional={true}
+            />
+            <ContentButton
+              label="Opis tekstu 5"
+              value={product.text5Desc}
+              type="html"
+              title="text5Desc"
+              setInput={setCurrentInput}
+              optional={true}
+            />
+          </div>
+        </div>
+        <div className="p-12 grid grid-cols-2 w-full mt-24">
+          <div className="flex flex-col pl-4">
+            <ContentButton
+              label="Tytuł tekstu 6"
+              value={product.text6Title}
+              type="text"
+              title="text6Title"
+              setInput={setCurrentInput}
+              optional={true}
+            />
+            <ContentButton
+              label="Opis tekstu 6"
+              value={product.text6Desc}
+              type="html"
+              title="text6Desc"
+              setInput={setCurrentInput}
+              optional={true}
+            />
+          </div>
+        </div>
+        <div className="p-12 grid grid-cols-2 w-full mt-24">
+          <div className="flex flex-col pl-4">
+            <ContentButton
+              label="Tytuł tekstu 7"
+              value={product.text7Title}
+              type="text"
+              title="text7Title"
+              setInput={setCurrentInput}
+              optional={true}
+            />
+            <ContentButton
+              label="Opis tekstu 7"
+              value={product.text7Desc}
+              type="html"
+              title="text7Desc"
+              setInput={setCurrentInput}
+              optional={true}
+            />
+            <div className="text-xl mt-24">tagi:</div>
+            {product?.tags}
+          </div>
+        </div>
+        <div className="w-full">
+          <button
+            className={`${
+              !product.tertiaryImage &&
+              "add_image_btn flex flex-col items-center justify-center text-zinc-800"
+            }`}
+            onClick={() => {
+              setImagePickerOpen(true);
+              setSourceOfImagePicker("tertiaryImage");
+            }}
+          >
+            {!product.tertiaryImage && (
+              <div className="flex items-center justify-center flex-col">
+                <FaImage className="text-7xl mb-4" /> Dodaj obraz
+              </div>
+            )}
+            {product.tertiaryImage !== "" && (
+              <div className="min-w-full">
+                <Image
+                  src={product?.tertiaryImage}
+                  width={1024}
+                  height={1024}
+                  alt=""
+                  className="min-w-full object-cover"
+                  style={{ boxShadow: "0px 0px 5px #000000" }}
+                />
+              </div>
+            )}
+          </button>
+        </div>{" "}
+        <div className="w-full">
+          <button
+            className={`${
+              !product.quaternaryImage &&
+              "add_image_btn flex flex-col items-center justify-center text-zinc-800"
+            }`}
+            onClick={() => {
+              setImagePickerOpen(true);
+              setSourceOfImagePicker("quaternaryImage");
+            }}
+          >
+            {!product.quaternaryImage && (
+              <div className="flex items-center justify-center flex-col">
+                <FaImage className="text-7xl mb-4" /> Dodaj obraz
+              </div>
+            )}
+            {product.quaternaryImage !== "" && (
+              <div className="min-w-full">
+                <Image
+                  src={product?.quaternaryImage}
+                  width={1024}
+                  height={1024}
+                  alt=""
+                  className="min-w-full object-cover"
+                  style={{ boxShadow: "0px 0px 5px #000000" }}
+                />
+              </div>
+            )}
+          </button>
+        </div>{" "}
       </div>
     </div>
   );

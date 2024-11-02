@@ -53,6 +53,7 @@ export default function StepOne({
   const [editorMarkdownValue, setEditorMarkdownValue] = useState<string>("");
 
   const onEditorContentChanged = (content: EditorContentChanged) => {
+    setFormData((prev: any) => ({ ...prev, description: content.html }));
     setEditorHtmlValue(content.html);
     setEditorMarkdownValue(content.markdown);
   };
@@ -67,7 +68,7 @@ export default function StepOne({
     >
       <InputField
         id="title"
-        label="Kogo szukacie do pracy?"
+        label="Tytuł"
         value={formData.title}
         onChange={handleChange}
         placeholder="Wpisz tytuł ogłoszenia o pracę..."

@@ -28,246 +28,38 @@ export default function TagsHandler() {
   const [tagsOpenLevel, setTagsOpenLevel] = useState(0);
   const { user } = useSelector((state: any) => state.user);
   return (
-    <div className="flex flex-col w-full px-4 sm:px-6">
-      {user?.tags?.length > 0 && (
-        <>
-          {" "}
-          <h1 className="text-base font-bold text-black">
-            {user?.seek && user?.seek !== "ask" && "Stanowiska"}
-            {!user?.seek &&
-              user?.seek !== "ask" &&
-              "Specjalizacje działalności"}
-          </h1>
-          <p className="text-black font-coco">
-            Oferta twojej działalności trafi do poszczególnych widoków naszej
-            aplikacji
-          </p>
-          <div className="mt-2 w-full grid grid-cols-2 sm:grid-cols-3 gap-2 text-white font-bold text-sm md:text-lg">
-            <button
-              onClick={() => setTagsOpenLevel(0)}
-              className={`bg-[#126b91] ${
-                tagsOpenLevel === 0
-                  ? "bg-opacity-100 hover:bg-opacity-90"
-                  : "bg-opacity-80 hover:bg-opacity-100"
-              } px-2 py-1.5 `}
-            >
-              Prosty
-            </button>
-            <button
-              onClick={() => setTagsOpenLevel(1)}
-              className={`bg-[#126b91] ${
-                tagsOpenLevel === 1
-                  ? "bg-opacity-100 hover:bg-opacity-90"
-                  : "bg-opacity-80 hover:bg-opacity-100"
-              } px-2 py-1.5 `}
-            >
-              Rozszerzony
-            </button>
-            <button
-              onClick={() => setTagsOpenLevel(2)}
-              className={`bg-[#126b91] ${
-                tagsOpenLevel === 2
-                  ? "bg-opacity-100 hover:bg-opacity-90"
-                  : "bg-opacity-80 hover:bg-opacity-100"
-              } px-2 py-1.5 `}
-            >
-              Całość
-            </button>
+    <div className="flex flex-col w-full px-4 sm:px-6 mt-2">
+      <div className="my-2">
+        {!configurationOpen && (
+          <div className="font-gotham font-bold text-black">
+            Dodaj specjalizacje
           </div>
-        </>
-      )}
-      <div className="mt-2 font-bold text-sm text-black ">
-        {user?.tags?.length === 0 && "Czym się zajmujesz?"}{" "}
-        {user?.tags?.length > 0 && tagsOpenLevel === 0 && "Wybrane Stanowiska"}
-        {user?.tags?.length > 0 && tagsOpenLevel === 1 && "Kategorie Stanowisk"}
-        {user?.tags?.length > 0 &&
-          user?.seek &&
-          user?.seek !== "ask" &&
-          tagsOpenLevel === 2 &&
-          "Twoja obecność w strukturze strony"}
-        {user?.tags?.length > 0 &&
-          !user?.seek &&
-          user?.seek !== "ask" &&
-          tagsOpenLevel === 2 &&
-          "Profil firmy w strukturze strony"}
-        <div
-          className={`${
-            tagsOpenLevel === 0 ? "flex flex-row flex-wrap -ml-2" : ""
-          }`}
-        >
-          {user?.tags && tagsOpenLevel === 1
-            ? user?.tags?.map((item: any, i: any) => (
-                <div className="text-sm mt-2 bg-slate-300  p-2" key={i}>
-                  <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
-                    <div className="bg-[#126b91]  p-1 text-white mt-2">
-                      {item.slugTitle}
-                    </div>
-                    <div className="flex items-center">
-                      <FaChevronRight className="mx-1 mt-2" />
-                      <div className="bg-[#126b91]  p-1 text-white mt-2">
-                        {item.title}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))
-            : tagsOpenLevel === 2
-            ? user?.tags?.map((item: any, i: any) => (
-                <div className="text-sm mt-2 bg-slate-300  p-2" key={i}>
-                  <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
-                    <div className="flex items-center">
-                      <div className="bg-[#126b91]  p-1 text-white mt-2">
-                        {item.slugTitle}
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <FaChevronRight className="mx-1 mt-2" />
-                      <div className="bg-[#126b91]  p-1 text-white mt-2">
-                        {item.categoryTitle}
-                      </div>
-                    </div>
-                    <div className="flex items-center font-bold">
-                      <FaChevronRight className="mx-1 mt-2" />
-                      <div className="bg-[#126b91]  p-1 text-white mt-2">
-                        {item.title}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))
-            : user?.tags?.map((item: any, i: any) => (
-                <div
-                  key={i}
-                  className="w-max max-w-[100%] ml-2 mt-2 flex flex-wrap items-center font-gotham font-light text-white"
-                >
-                  <div
-                    className={`${
-                      selectedTag.title === item.title ? "flex-col" : ""
-                    } bg-[#126b91]  flex items-center p-1`}
-                  >
-                    <div className="flex flex-row items-center">
-                      {item.title}
-                      <button
-                        onClick={() => {
-                          setTagDeletion(true);
-                          setSelectedTag(item);
-                        }}
-                        className=""
-                      >
-                        <FaMinusCircle className="ml-2 text-white" />
-                      </button>
-                    </div>
-                    {tagDeletion && selectedTag.title === item.title && (
-                      <div className="flex flex-col w-[90%] my-2 sticky left-0 top-0 bg-black bg-opacity-60 p-3 ">
-                        <h2>Usunąć {selectedTag?.title}?</h2>
-                        <div className="grid grid-cols-2 gap-3 mt-3">
-                          <button
-                            onClick={() => {
-                              const newTags = user?.tags?.filter(
-                                (tag: any) => tag.title !== selectedTag.title
-                              );
-                              const history = user?.history;
-                              updateUser(user?.uid, {
-                                tags: newTags,
-                                history: [
-                                  ...history,
-                                  {
-                                    action: `Usunięto specjalizację "${selectedTag.title}"`,
-                                    creationTime: Date.now(),
-                                  },
-                                ],
-                              });
-                              dispatch(
-                                setUser({
-                                  ...user,
-                                  tags: newTags,
-                                  history: [
-                                    ...history,
-                                    {
-                                      action: `Usunięto specjalizację "${selectedTag.title}"`,
-                                      creationTime: Date.now(),
-                                    },
-                                  ],
-                                })
-                              );
-                              setTagDeletion(false);
-                              setSelectedTag({});
-                              toast.success(`Pomyślnie usunięto kategorię.`, {
-                                position: "top-right",
-                                autoClose: 5000,
-                                hideProgressBar: false,
-                                closeOnClick: true,
-                                pauseOnHover: true,
-                                draggable: true,
-                                progress: undefined,
-                              });
-                            }}
-                            className="bg-red-500 text-white px-3 py-1 "
-                          >
-                            Usuń
-                          </button>
-                          <button
-                            onClick={() => {
-                              setTagDeletion(false);
-                              setSelectedTag({});
-                            }}
-                            className="bg-green-500 text-white px-3 py-1 "
-                          >
-                            Nie
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-        </div>
+        )}
+        {configurationOpen && !slug?.title && (
+          <div className="font-gotham font-bold text-black">
+            Wybierz kategorię
+          </div>
+        )}
+        {slug?.title !== "" && category?.title === "" && (
+          <div className="text-black font-gotham flex flex-col">
+            <div className="font-bold">Wybierz podkategorię</div>
+          </div>
+        )}
+        {slug?.title !== "" && category?.title !== "" && (
+          <div className="text-black font-gotham flex flex-col">
+            {!user?.seek && user?.seek !== "ask" && (
+              <div className="font-gotham font-bold text-black">
+                Dodaj specjalizacje
+              </div>
+            )}
+            {user?.seek && user?.seek !== "ask" && (
+              <div className="font-gotham font-bold text-black">
+                Wybierz stanowisko
+              </div>
+            )}
+          </div>
+        )}
       </div>
-      <p className="text-sm text-[green] mb-2"></p>
-      {!configurationOpen && (
-        <>
-          {user?.seek && user?.seek !== "ask" && (
-            <div className="font-gotham font-bold text-black">Umiejętności</div>
-          )}
-          {!user?.seek && user?.seek !== "ask" && (
-            <div className="font-gotham font-bold text-black">
-              Specjalizacje firmy
-            </div>
-          )}
-        </>
-      )}
-      {configurationOpen && !slug?.title && (
-        <div className="font-gotham font-bold text-black">
-          Wybierz kategorię
-        </div>
-      )}
-      {slug?.title !== "" && category?.title === "" && (
-        <div className="text-black font-gotham flex flex-col">
-          <div className="font-bold mb-1 bg-[#126b91] p-1  px-2 text-white w-max max-w-[100%]">
-            {slug.title}
-          </div>
-          <div className="font-bold">Wybierz podkategorię</div>
-        </div>
-      )}
-      {slug?.title !== "" && category?.title !== "" && (
-        <div className="text-black font-gotham flex flex-col">
-          <div className="font-bold mb-1 bg-[#126b91] p-1  px-2 text-white w-max max-w-[100%]">
-            {category.title}
-          </div>
-          <div className="font-bold"></div>
-
-          {!user?.seek && user?.seek !== "ask" && (
-            <div className="font-gotham font-bold text-black">
-              Dodaj specjalizacje
-            </div>
-          )}
-          {user?.seek && user?.seek !== "ask" && (
-            <div className="font-gotham font-bold text-black">
-              Wybierz stanowisko
-            </div>
-          )}
-        </div>
-      )}
       <div className="-ml-0.5 flex flex-row items-start w-full">
         {!configurationOpen && slug.title === "" && (
           <button
@@ -472,6 +264,205 @@ export default function TagsHandler() {
           </div>
         )}
       </div>
+      {user?.tags?.length > 0 && (
+        <>
+          {" "}
+          <h1 className="font-bold text-black mt-2 font-coco text-lg">
+            {user?.seek && user?.seek !== "ask" && "Twoje specjalizacje"}
+            {!user?.seek && user?.seek !== "ask" && "Twoje specjalizacje"}
+          </h1>
+          <p className="text-black">
+            Twoja oferta trafi do poszczególnych widoków naszej aplikacji
+          </p>
+          <div className="mt-2 w-full grid grid-cols-2 sm:grid-cols-3 gap-2 text-white font-bold text-sm md:text-lg">
+            <button
+              onClick={() => setTagsOpenLevel(0)}
+              className={`bg-[#126b91] ${
+                tagsOpenLevel === 0
+                  ? "bg-opacity-100 hover:bg-opacity-90"
+                  : "bg-opacity-80 hover:bg-opacity-100"
+              } px-2 py-1.5 font-coco`}
+            >
+              Prosty
+            </button>
+            <button
+              onClick={() => setTagsOpenLevel(1)}
+              className={`bg-[#126b91] ${
+                tagsOpenLevel === 1
+                  ? "bg-opacity-100 hover:bg-opacity-90"
+                  : "bg-opacity-80 hover:bg-opacity-100"
+              } px-2 py-1.5 font-coco`}
+            >
+              Rozszerzony
+            </button>
+            <button
+              onClick={() => setTagsOpenLevel(2)}
+              className={`bg-[#126b91] ${
+                tagsOpenLevel === 2
+                  ? "bg-opacity-100 hover:bg-opacity-90"
+                  : "bg-opacity-80 hover:bg-opacity-100"
+              } px-2 py-1.5 font-coco`}
+            >
+              Całość
+            </button>
+          </div>
+          <div className="mt-2 font-bold text-black ">
+            {user?.tags?.length === 0 && "Czym się zajmujesz?"}{" "}
+            {user?.tags?.length > 0 &&
+              tagsOpenLevel === 0 &&
+              "Wybrane Stanowiska"}
+            {user?.tags?.length > 0 &&
+              tagsOpenLevel === 1 &&
+              "Kategorie Stanowisk"}
+            {user?.tags?.length > 0 &&
+              user?.seek &&
+              user?.seek !== "ask" &&
+              tagsOpenLevel === 2 &&
+              "Twoja obecność w strukturze strony"}
+            {user?.tags?.length > 0 &&
+              !user?.seek &&
+              user?.seek !== "ask" &&
+              tagsOpenLevel === 2 &&
+              "Profil firmy w strukturze strony"}
+            <div
+              className={`${
+                tagsOpenLevel === 0 ? "flex flex-row flex-wrap -ml-2" : ""
+              }`}
+            >
+              {user?.tags && tagsOpenLevel === 1
+                ? user?.tags?.map((item: any, i: any) => (
+                    <div className="text-sm mt-2 bg-slate-300  p-2" key={i}>
+                      <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
+                        <div className="bg-[#126b91]  p-1 text-white mt-2">
+                          {item.slugTitle}
+                        </div>
+                        <div className="flex items-center">
+                          <FaChevronRight className="mx-1 mt-2" />
+                          <div className="bg-[#126b91]  p-1 text-white mt-2">
+                            {item.title}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                : tagsOpenLevel === 2
+                ? user?.tags?.map((item: any, i: any) => (
+                    <div className="text-sm mt-2 bg-slate-300  p-2" key={i}>
+                      <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
+                        <div className="flex items-center">
+                          <div className="bg-[#126b91]  p-1 text-white mt-2">
+                            {item.slugTitle}
+                          </div>
+                        </div>
+                        <div className="flex items-center">
+                          <FaChevronRight className="mx-1 mt-2" />
+                          <div className="bg-[#126b91]  p-1 text-white mt-2">
+                            {item.categoryTitle}
+                          </div>
+                        </div>
+                        <div className="flex items-center font-bold">
+                          <FaChevronRight className="mx-1 mt-2" />
+                          <div className="bg-[#126b91]  p-1 text-white mt-2">
+                            {item.title}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                : user?.tags?.map((item: any, i: any) => (
+                    <div
+                      key={i}
+                      className="w-max max-w-[100%] ml-2 mt-2 flex flex-wrap items-center font-gotham font-light text-white"
+                    >
+                      <div
+                        className={`${
+                          selectedTag.title === item.title ? "flex-col" : ""
+                        } bg-[#126b91]  flex items-center p-1`}
+                      >
+                        <div className="flex flex-row items-center">
+                          {item.title}
+                          <button
+                            onClick={() => {
+                              setTagDeletion(true);
+                              setSelectedTag(item);
+                            }}
+                            className=""
+                          >
+                            <FaMinusCircle className="ml-2 text-white" />
+                          </button>
+                        </div>
+                        {tagDeletion && selectedTag.title === item.title && (
+                          <div className="flex flex-col w-[90%] my-2 sticky left-0 top-0 bg-black bg-opacity-60 p-3 ">
+                            <h2>Usunąć {selectedTag?.title}?</h2>
+                            <div className="grid grid-cols-2 gap-3 mt-3">
+                              <button
+                                onClick={() => {
+                                  const newTags = user?.tags?.filter(
+                                    (tag: any) =>
+                                      tag.title !== selectedTag.title
+                                  );
+                                  const history = user?.history;
+                                  updateUser(user?.uid, {
+                                    tags: newTags,
+                                    history: [
+                                      ...history,
+                                      {
+                                        action: `Usunięto specjalizację "${selectedTag.title}"`,
+                                        creationTime: Date.now(),
+                                      },
+                                    ],
+                                  });
+                                  dispatch(
+                                    setUser({
+                                      ...user,
+                                      tags: newTags,
+                                      history: [
+                                        ...history,
+                                        {
+                                          action: `Usunięto specjalizację "${selectedTag.title}"`,
+                                          creationTime: Date.now(),
+                                        },
+                                      ],
+                                    })
+                                  );
+                                  setTagDeletion(false);
+                                  setSelectedTag({});
+                                  toast.success(
+                                    `Pomyślnie usunięto kategorię.`,
+                                    {
+                                      position: "top-right",
+                                      autoClose: 5000,
+                                      hideProgressBar: false,
+                                      closeOnClick: true,
+                                      pauseOnHover: true,
+                                      draggable: true,
+                                      progress: undefined,
+                                    }
+                                  );
+                                }}
+                                className="bg-red-500 text-white px-3 py-1 "
+                              >
+                                Usuń
+                              </button>
+                              <button
+                                onClick={() => {
+                                  setTagDeletion(false);
+                                  setSelectedTag({});
+                                }}
+                                className="bg-green-500 text-white px-3 py-1 "
+                              >
+                                Nie
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

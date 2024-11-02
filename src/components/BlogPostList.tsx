@@ -24,7 +24,7 @@ const BlogPostList = ({ posts }: { posts: any }) => {
       <h3 className="text-black font-coco text-xl font-bold">
         Interesujesz się pracą zdalną, biznesem lub AI? Sprawdź naszego bloga!
       </h3>
-      <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4">
+      <div className="mt-6 grid sm:grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4">
         {currentIdeas?.map((post: any, i: number) => (
           <Link
             href={`/news/${post.url}`}

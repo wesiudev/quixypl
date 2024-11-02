@@ -2,7 +2,7 @@ import moment from "moment";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { FaCheck, FaImage, FaTimes } from "react-icons/fa";
+import { FaImage } from "react-icons/fa";
 import { BiSelectMultiple } from "react-icons/bi";
 import Link from "next/link";
 import { FaUpload } from "react-icons/fa6";

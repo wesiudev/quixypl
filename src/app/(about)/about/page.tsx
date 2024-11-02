@@ -27,8 +27,11 @@ export default function Page() {
         >
           <h1 className="text-5xl font-bold text-cta">Czym jest Quixy.pl?</h1>
           <p className="text-xl italic mt-4 max-w-xl mx-auto">
-            Quixy to platforma z pracą zdalną i nie tylko - na bieżąco rozwijamy
-            nasz serwis i dbamy o doświadczenie użytkownika.
+            <Link href="/praca-zdalna" target="_blank">
+              Quixy to platforma z pracą zdalną
+            </Link>{" "}
+            i nie tylko - na bieżąco rozwijamy nasz serwis i dbamy o
+            doświadczenie użytkownika.
           </p>
           <button className="bg-white text-primary font-bold relative z-50 py-3 px-8 mt-6 hover:bg-gray-100 transition">
             Dołącz teraz
@@ -54,8 +57,9 @@ export default function Page() {
                 </Link>
               </h3>
               <p className="mt-2 text-black font-coco">
-                Zatrudnij ekspertów od aplikacji mobilnych, web developmentu,
-                frameworków i nowych technologii.
+                Zatrudnij ekspertów od aplikacji mobilnych, marketingu, usług
+                biznesowych, web developmentu, frameworków czy programistów
+                nowych technologii w kategorii rozwoju oprogramowania.
               </p>
             </div>
             <div
@@ -70,8 +74,8 @@ export default function Page() {
                 </Link>
               </h3>
               <p className="mt-2 text-black font-coco">
-                Oferujemy pełne wsparcie w tworzeniu sklepów internetowych,
-                rozwiązań Magento, Shopify i innych.
+                Freelancerzy oferujący pełne wsparcie w tworzeniu sklepów
+                internetowych, rozwiązań Magento, Shopify i innych.
               </p>
             </div>
             <div
@@ -86,8 +90,8 @@ export default function Page() {
                 </Link>
               </h3>
               <p className="mt-2 text-black font-coco">
-                Skorzystaj z doradztwa IT, wsparcia technicznego oraz rozwiązań
-                z zakresu bezpieczeństwa IT.
+                Skorzystaj z usług freelancerów i firm doradztwa IT, wsparcia
+                technicznego oraz rozwiązań z zakresu bezpieczeństwa IT.
               </p>
             </div>
           </div>

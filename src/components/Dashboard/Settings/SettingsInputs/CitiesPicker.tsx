@@ -30,7 +30,7 @@ export default function CitiesPicker({
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:mt-3">
       <div className="flex flex-col mt-3 sm:mt-0">
-        <label className="text-lg text-black">Województwo</label>
+        <label className="font-bold text-black">Województwo</label>
         <select
           value={source?.region}
           onChange={(e) => {
@@ -67,7 +67,7 @@ export default function CitiesPicker({
       </div>
       {source?.region && (
         <div className="flex flex-col">
-          <label className="text-black text-lg" htmlFor="cities">
+          <label className="text-black font-bold" htmlFor="cities">
             Miasto
           </label>
           <input
@@ -82,12 +82,16 @@ export default function CitiesPicker({
               }
             }}
             onChange={(e) => {
-              if (cities.find((city: any) => city.Name === e.target.value)) {
-                handleReduxUserState(e.target.value, "city");
-                setInputCity(e.target.value);
+              const value = e.target.value;
+              if (value === "") {
+                handleReduxUserState("", "city");
+                setInputCity("");
+              } else if (cities.find((city: any) => city.Name === value)) {
+                handleReduxUserState(value, "city");
+                setInputCity(value);
                 setChangesWereMade(true);
               } else {
-                setInputCity(e.target.value);
+                setInputCity(value);
               }
             }}
             placeholder={`${loading ? "Wczytywanie..." : "Wpisz miasto..."}`}

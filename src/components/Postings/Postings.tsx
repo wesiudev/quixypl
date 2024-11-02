@@ -95,13 +95,7 @@ const JobOfferList = () => {
       </h2>
       <div className="bg-gray-200 min-h-screen grid grid-cols-1 2xl:grid-cols-2 gap-6 p-6">
         {user?.job_offers?.map((jobOffer: JobPosting, i: number) => (
-          <Posting
-            key={i}
-            jobOffer={jobOffer}
-            pay={pay}
-            loading={loading}
-            setLoading={setLoading}
-          />
+          <Posting key={i} jobOffer={jobOffer} pay={pay} loading={loading} />
         ))}
       </div>
     </div>
