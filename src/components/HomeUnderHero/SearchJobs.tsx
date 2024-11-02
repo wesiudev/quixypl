@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function SearchJobs() {
   return (
     <div className="flex flex-col">
-      <h2 className="text-white bg-gradient-to-r from-primary to-cta mb-6 w-max px-3.5 py-2 text-4xl font-coco font-extrabold">
+      <h2 className="text-white bg-gradient-to-r from-primary to-cta mb-6 w-max px-3.5 py-2 text-2xl font-coco font-extrabold">
         <Link title="Szukaj pracy zdalnej" href="/praca-zdalna">
           Praca Zdalna
         </Link>

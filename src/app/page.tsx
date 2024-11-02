@@ -11,56 +11,9 @@ import { sendGenerateIdeaRequest } from "../../utils/sendGenerateIdeaRequest";
 import Header from "@/components/Header";
 import FAQ from "@/components/Faq";
 import AboutQuixyTalent from "./(about)/AboutQuixyTalent";
+import Regions from "@/components/Regions";
 
-export const metadata: Metadata = {
-  icons: [
-    {
-      url: "/favicons/favicon-32x32.png",
-      sizes: "32x32",
-      type: "image/png",
-    },
-    {
-      url: "/favicon.ico",
-      sizes: "48x48",
-      type: "image/x-icon",
-    },
-    {
-      url: "/favicons/android-chrome-192x192.png",
-      sizes: "192x192",
-      type: "image/png",
-    },
-    {
-      url: "/favicons/android-chrome-512x512.png",
-      sizes: "512x512",
-      type: "image/png",
-    },
-  ],
-  publisher: "wesiu.dev",
-  manifest: "/manifest.json",
-  authors: [
-    {
-      name: "wesiudev",
-      url: "https://wesiudev.com",
-    },
-  ],
-
-  verification: {
-    google: "google85185d3abec28326.html",
-  },
-  title: "Oferty Pracy Zdalnej | Praca Zdalna dla Freelancerów | Quixy.pl",
-  description:
-    "Nasi freelancerzy czekają na Ciebie! Prowadzisz rekrutację lub szukasz pracy? Quixy to idealne połączenie tych dwóch rzeczy.",
-  openGraph: {
-    type: "website",
-    url: "https://quixy.pl",
-    title: "Oferty Pracy Zdalnej | Praca Zdalna dla Freelancerów | Quixy.pl",
-    description:
-      "Nasi freelancerzy czekają na Ciebie! Prowadzisz rekrutację lub szukasz pracy? Quixy to idealne połączenie tych dwóch rzeczy.",
-    siteName: "quixy.pl",
-  },
-};
-
-export default async function Page() {
+export default function Page() {
   const itCategories = jobs.flatMap((job) => [
     { title: job.title, data: job.data.map((subItem) => subItem) },
   ]);
@@ -97,30 +50,7 @@ export default async function Page() {
                 <h2 className="w-max mx-auto">Jestem freelancerem</h2>
               </Link>
             </div>
-            <span className="mt-12 text-black">Zaufało nam 97% klientów</span>
-            <div className="flex items-center flex-wrap w-full">
-              <Image
-                src="/assets/google.png"
-                width={224}
-                height={224}
-                alt="google nam zaufało"
-                className="max-h-[38px] w-auto mt-3"
-              />
-              <Image
-                src="/assets/deviant.png"
-                width={224}
-                height={224}
-                alt="deviant nam zaufał"
-                className="max-h-[38px] w-auto ml-6 mt-3 bg-white px-1 "
-              />
-              <Image
-                src="/assets/pinterest.png"
-                width={224}
-                height={224}
-                alt="pinterest nam zaufał"
-                className="max-h-[38px] w-auto ml-6 mt-3"
-              />
-            </div>
+            <Regions />
           </div>
           <div className="flex flex-col items-center justify-center w-full h-full mx-auto mt-12 lg:mt-0 overflow-hidden relative">
             <div
@@ -172,8 +102,8 @@ export default async function Page() {
           </div>
         </div>
       </div>
-      <div className="mx-auto mt-16 mb-4 w-max max-w-full px-4">
-        <div className="flex flex-col-reverse md:flex-row md:items-center mx-auto text-black text-xl">
+      <div className="mt-16 mb-4 container mx-auto px-4">
+        <div className="flex flex-col-reverse md:flex-row text-black text-xl">
           <Image
             src="/assets/gif/gihome.webp"
             width={512}
@@ -184,12 +114,12 @@ export default async function Page() {
             className="mt-4 md:mt-0  w-full md:max-w-[300px]"
           />
           <div className="flex flex-col md:pl-6 md:py-4">
-            <h2 className="font-gotham mb-3 text-3xl lg:text-5xl font-bold flex items-center">
-              Darmowy dostęp!
+            <h2 className="mb-3 text-2xl font-bold flex items-center">
+              Korzystaj za darmo!
             </h2>
-            <p className="font-gotham font-light flex text-left max-w-[40rem] mb-3">
-              Dołączenie do naszej platformy pracy jest w pełni darmowe!
-              Zapraszamy do dodawania ofert pracy oraz zatrudnienia talentów.
+            <p className="text-base font-gotham flex text-left max-w-[40rem] mb-3">
+              Dołączenie do Quixy jest w pełni darmowe! Zapraszamy do dodawania
+              ofert pracy oraz zatrudnienia freelancerów za darmo!
             </p>
             <Link
               href="/register"
@@ -200,7 +130,7 @@ export default async function Page() {
           </div>
         </div>
       </div>
-      <div className="mx-4 sm:mx-8 lg:mx-12 2xl:mx-[15vw] py-12 h-max">
+      <div className="px-4 container mx-auto py-12 h-max">
         <SearchJobs />
         <div className="grid grid-cols-1 lg:grid-cols-2 mt-5 gap-4 font-coco">
           {jobs.map((opportunity: any, i: any) => (
@@ -208,23 +138,24 @@ export default async function Page() {
           ))}
         </div>
       </div>
-      <div className="mx-auto px-4 sm:px-8 lg:px-12 2xl:px-[15vw]">
+      <div className="mx-auto px-4 container">
         <AboutQuixyTalent />
       </div>
-      <div
-        id="generator"
-        className="mb-12 py-12 px-4 sm:px-8 lg:px-12 2xl:px-[15vw] bg-[#2E3C56]"
-      >
-        <div className="flex flex-col mb-6">
-          <h2 className="font-gotham text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-md shadow-black">
-            Wygeneruj nowy pomysł
-          </h2>
-          <p className="max-w-[40rem] text-white mt-6 mb-3">
-            Burza mózgów, dzięki której stworzysz pomysły na biznes internetowy
-            lub in-person. Stworzone z myślą o Twoich potrzebach.
-          </p>
+      <div className="w-full bg-[#2E3C56] py-12 mb-12">
+        <div id="generator" className="px-4 mx-auto container">
+          <div className="flex flex-col mb-6">
+            <h2 className="font-gotham text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-md shadow-black">
+              Wygeneruj nowy pomysł
+            </h2>
+            <p className="max-w-[40rem] text-white mt-6 mb-3">
+              Burza mózgów, dzięki której stworzysz pomysły na biznes
+              internetowy lub in-person. Stworzone z myślą o Twoich potrzebach.
+            </p>
+          </div>
+          <HomePageGenerator
+            sendGenerateIdeaRequest={sendGenerateIdeaRequest}
+          />
         </div>
-        <HomePageGenerator sendGenerateIdeaRequest={sendGenerateIdeaRequest} />
       </div>
       <div className="mx-4 sm:mx-8 lg:mx-12 2xl:mx-[15vw] h-max">
         <div className="grid grid-cols-1 md:grid-cols-2">
@@ -551,3 +482,51 @@ const faqItems = [
       "Opinie naszych klientów znajdziesz w sekcji 'Praca zdalna'. Z dumą prezentujemy oceny i recenzje, które świadczą o wysokiej jakości naszych usług oraz zaufaniu, jakim obdarzyli nas użytkownicy.",
   },
 ];
+
+export const metadata: Metadata = {
+  icons: [
+    {
+      url: "/favicons/favicon-32x32.png",
+      sizes: "32x32",
+      type: "image/png",
+    },
+    {
+      url: "/favicon.ico",
+      sizes: "48x48",
+      type: "image/x-icon",
+    },
+    {
+      url: "/favicons/android-chrome-192x192.png",
+      sizes: "192x192",
+      type: "image/png",
+    },
+    {
+      url: "/favicons/android-chrome-512x512.png",
+      sizes: "512x512",
+      type: "image/png",
+    },
+  ],
+  publisher: "wesiu.dev",
+  manifest: "/manifest.json",
+  authors: [
+    {
+      name: "wesiudev",
+      url: "https://wesiudev.com",
+    },
+  ],
+
+  verification: {
+    google: "google85185d3abec28326.html",
+  },
+  title: "Oferty Pracy Zdalnej | Praca Zdalna dla Freelancerów | Quixy.pl",
+  description:
+    "Nasi freelancerzy czekają na Ciebie! Prowadzisz rekrutację lub szukasz pracy? Quixy to idealne połączenie tych dwóch rzeczy.",
+  openGraph: {
+    type: "website",
+    url: "https://quixy.pl",
+    title: "Oferty Pracy Zdalnej | Praca Zdalna dla Freelancerów | Quixy.pl",
+    description:
+      "Nasi freelancerzy czekają na Ciebie! Prowadzisz rekrutację lub szukasz pracy? Quixy to idealne połączenie tych dwóch rzeczy.",
+    siteName: "quixy.pl",
+  },
+};
