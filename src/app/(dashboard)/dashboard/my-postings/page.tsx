@@ -1,7 +1,7 @@
 import Postings from "@/components/Postings/Postings";
 import { Metadata } from "next";
 
-export default async function Page() {
+export default function Page() {
   return (
     <div>
       <Postings />

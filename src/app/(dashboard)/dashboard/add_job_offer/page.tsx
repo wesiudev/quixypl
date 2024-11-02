@@ -1,7 +1,7 @@
 import AddJobOffer from "@/components/AddJobOffer/AddJobOffer";
 import { Metadata } from "next";
 
-export default async function Page() {
+export default function Page() {
   return (
     <div>
       <AddJobOffer />

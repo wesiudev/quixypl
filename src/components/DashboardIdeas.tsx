@@ -1,7 +1,6 @@
 "use client";
 import GenerateIdea from "@/components/Dashboard/GenerateIdea";
 import OpenedIdea from "@/components/Dashboard/OpenedIdea";
-import { addJobOffer } from "@/firebase";
 import moment from "moment";
 import { useState } from "react";
 import { useSelector } from "react-redux";

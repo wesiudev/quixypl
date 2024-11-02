@@ -26,12 +26,12 @@ const UserPanel = ({ userData }: { userData: any }) => {
     },
     {
       text: "Znajdź pracę",
-      href: "/search?type=job_offers",
+      href: "/job_offers",
       icon: <FaRocket className="text-5xl" />,
     },
     {
       text: "Generator Obrazów",
-      href: "/dashboard/image_generator",
+      href: "/dashboard/image-generator",
       icon: <FaImages className="text-5xl" />,
     },
     // {
@@ -61,7 +61,7 @@ const UserPanel = ({ userData }: { userData: any }) => {
     },
     {
       text: "Generator Biznesu",
-      href: "/dashboard/idea_generator",
+      href: "/dashboard/idea-generator",
       icon: <FaLightbulb className="text-5xl" />,
     },
   ];
