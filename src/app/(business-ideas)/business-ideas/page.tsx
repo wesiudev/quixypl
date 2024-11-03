@@ -9,10 +9,10 @@ import { Metadata } from "next";
 import IdeaList from "@/components/IdeaList";
 import Toast from "@/components/Toast";
 export default async function Page() {
-  const ideas = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/getIdeas?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    { next: { revalidate: 300 } }
-  ).then((res) => res.json());
+  // const ideas = await fetch(
+  //   `${process.env.NEXT_PUBLIC_URL}/api/getIdeas?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+  //   { next: { revalidate: 300 } }
+  // ).then((res) => res.json());
 
   return (
     <div>
