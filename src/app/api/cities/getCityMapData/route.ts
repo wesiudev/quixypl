@@ -2,7 +2,7 @@ import data from "polskie-miejscowosci";
 import { NextRequest, NextResponse } from "next/server";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const cityMapData = data?.reduce((acc, curr) => {
     const city = polishToEnglish(curr.Name);
     acc.set(city, {

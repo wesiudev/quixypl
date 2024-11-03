@@ -1,7 +1,7 @@
 import { fetchTalents } from "@/firebase";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
   if (tubylytylkofigi !== process.env.API_SECRET_KEY) {
     return new NextResponse("not found", { status: 404 });

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { fetchJobOffers } from "@/firebase";
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
   const category = req.nextUrl.searchParams.get("category");
 

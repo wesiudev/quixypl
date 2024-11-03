@@ -1,7 +1,7 @@
 import { getDocuments } from "@/firebase";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const secret = req.nextUrl.searchParams.get("secret");
   const uid = req.nextUrl.searchParams.get("uid");
 
