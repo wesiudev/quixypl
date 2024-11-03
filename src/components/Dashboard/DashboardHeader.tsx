@@ -196,7 +196,7 @@ export default function DashboardHeader() {
             )}{" "}
           </div>
         </div>
-        <UserPanel userData={user} />
+        <UserPanel />
         <div className={`pt-12 p-6 font-coco flex items-center`}>
           <button
             className="mt-2 text-black drop-shadow-xl"

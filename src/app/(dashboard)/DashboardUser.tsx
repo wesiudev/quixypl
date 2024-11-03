@@ -30,11 +30,10 @@ export default function DashboardUser() {
       fetchUsers();
     }
   }, [loading]);
-  const { userData } = useSelector((state: any) => state.user);
   useEffect(() => {
     if (!user && !loading) {
       router.push(`${process.env.NEXT_PUBLIC_URL}/login`);
     }
   }, [loading, user, router]);
-  return <div>{(!userData || loading) && <Loading />}</div>;
+  return <div></div>;
 }

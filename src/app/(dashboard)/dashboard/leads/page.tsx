@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import LeadsList from "./LeadsList";
 
-export default async function Page() {
+export default function Page() {
   return (
     <div>
       <LeadsList />

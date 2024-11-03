@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Dashboard from "../../../components/Dashboard/Dashboard";
 
-export default async function Page() {
+export default function Page() {
   return <Dashboard />;
 }
 

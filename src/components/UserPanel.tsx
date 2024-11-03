@@ -1,21 +1,19 @@
+"use client";
 import {
-  FaBriefcase,
   FaRocket,
   FaUserNinja,
   FaLightbulb,
   FaImages,
-  FaDollarSign,
   FaUsers,
   FaHome,
   FaCog,
 } from "react-icons/fa";
 import Link from "next/link";
 import { FaList, FaPlus } from "react-icons/fa6";
-import { useState } from "react";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { useDispatch, useSelector } from "react-redux";
 
-const UserPanel = ({ userData }: { userData: any }) => {
+export default function UserPanel() {
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
   const linksData = [
@@ -69,9 +67,8 @@ const UserPanel = ({ userData }: { userData: any }) => {
     <div>
       <div className={`w-full grid grid-cols-1 gap-1.5 z-50 px-6 pt-6`}>
         {linksData.map((link, index) => (
-          <>
+          <div key={index}>
             <Link
-              key={index}
               className={`pl-2 relative w-full font-gotham bg-gradient-to-br from-primary to-cta text-white hover:from-cta hover:to-cta rounded-xl`}
               href={link.href}
               rel="noopener noreferrer"
@@ -100,11 +97,9 @@ const UserPanel = ({ userData }: { userData: any }) => {
                 </div>
               </button>
             )}
-          </>
+          </div>
         ))}
       </div>
     </div>
   );
-};
-
-export default UserPanel;
+}

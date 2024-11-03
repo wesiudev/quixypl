@@ -138,7 +138,7 @@ export default function Dashboard() {
                     }`}
                   >
                     <h2 className="w-full px-3 lg:px-6 py-3 text-3xl font-bold text-white drop-shadow-lg">
-                      Informacje
+                      Szczegóły
                     </h2>
                     {!user?.configured && (
                       <div className="text-black text-lg mt-3">
@@ -204,12 +204,14 @@ export default function Dashboard() {
                                 <div className="p-2  bg-cta mr-2">
                                   <FaClipboard className="text-white w-5 h-5" />
                                 </div>
-                                {user?.pseudo &&
-                                  `https://quixy.pl/${
-                                    user?.seek && user?.seek !== "ask"
-                                      ? "talent"
-                                      : "company"
-                                  }/${user?.pseudo}`}
+                                <div className="text-left text-xs">
+                                  {user?.pseudo &&
+                                    `https://quixy.pl/${
+                                      user?.seek && user?.seek !== "ask"
+                                        ? "talent"
+                                        : "company"
+                                    }/${user?.pseudo}`}
+                                </div>
                               </button>
                             </div>
                           )}
