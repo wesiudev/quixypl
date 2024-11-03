@@ -29,12 +29,13 @@ export default function HeaderComponent({
   const { modals } = useSelector((state: any) => state.modals);
   return (
     <div
+      style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
       className={`${
         modals.isProjectOpen && "hidden"
-      } sticky left-0 top-0 rounded-xl z-[10000] px-4 mx-auto bg-white flex flex-row items-center justify-center w-full ${
+      } sticky left-0 top-0 z-[10000] px-4 bg-white flex flex-row items-center justify-center w-full ${
         showHeader || menuShow || hovered || productsOpen
           ? "-translate-y-0"
-          : "-translate-y-[155%]"
+          : "-translate-y-[100%]"
       } duration-300 font-coco`}
     >
       {/* Header Content */}
@@ -81,8 +82,8 @@ export default function HeaderComponent({
               src="/assets/quixy-logo.png"
               width={224}
               height={224}
-              alt="Strona Główna Job Boards"
-              title="Strona Główna Job Boards"
+              alt="Poszukujesz pracy zdalnej?"
+              title="Zajmij się pracą zdalną!"
               className="w-full"
             />
           </Link>

@@ -9,7 +9,6 @@ import React from "react";
 import Header from "@/components/Header";
 import MainFooter from "@/components/MainFooter";
 import jobs from "../../../../public/14.09.2024.json";
-
 import Link from "next/link";
 import { Metadata } from "next";
 import Image from "next/image";
