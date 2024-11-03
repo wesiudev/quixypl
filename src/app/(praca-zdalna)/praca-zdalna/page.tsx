@@ -260,28 +260,28 @@ function CallToActionSection() {
 
 // Główna strona
 export default async function Page() {
-  const talents = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/talents?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 60 },
-    }
-  ).then((res: any) => res.json());
-  const categoryTalents = talents
-    ?.map((item: any) => {
-      const { email, ...talent } = item;
-      return talent;
-    })
-    .filter(
-      (item: any) =>
-        item?.pseudo &&
-        item?.seek &&
-        item?.emailVerified &&
-        item?.seek !== "ask" &&
-        item?.tags?.length > 0
-    );
-  const categoryCompanies = talents?.filter(
-    (item: any) => item?.pseudo && !item?.seek && item?.seek !== "ask"
-  );
+  // const talents = await fetch(
+  //   `${process.env.NEXT_PUBLIC_URL}/api/talents?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+  //   {
+  //     next: { revalidate: 60 },
+  //   }
+  // ).then((res: any) => res.json());
+  // const categoryTalents = talents
+  //   ?.map((item: any) => {
+  //     const { email, ...talent } = item;
+  //     return talent;
+  //   })
+  //   .filter(
+  //     (item: any) =>
+  //       item?.pseudo &&
+  //       item?.seek &&
+  //       item?.emailVerified &&
+  //       item?.seek !== "ask" &&
+  //       item?.tags?.length > 0
+  //   );
+  // const categoryCompanies = talents?.filter(
+  //   (item: any) => item?.pseudo && !item?.seek && item?.seek !== "ask"
+  // );
   return (
     <div className="w-full h-full bg-white">
       <Header jobsList={jobs} />
@@ -294,7 +294,7 @@ export default async function Page() {
             Przeglądaj profile talentów
           </h2>
           <div className="mt-6"></div>
-          <TalentList categoryTalents={categoryTalents} />
+          {/* <TalentList categoryTalents={categoryTalents} /> */}
           <SpecialistsCategoriesSection />
         </div>
 
