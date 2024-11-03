@@ -5,7 +5,7 @@ import { auth } from "@/firebase";
 import { toast } from "react-toastify";
 import { toastUpdate } from "@/components/Toast/ToastUpdate";
 import { useRouter } from "next/navigation";
-import { errorCatcher } from "../../utils/errorCatcher";
+import { errorCatcher } from "../../../../utils/errorCatcher";
 import Link from "next/link";
 import GoogleAuthButton from "@/components/Auth/GoogleButton";
 import { FaKey } from "react-icons/fa";

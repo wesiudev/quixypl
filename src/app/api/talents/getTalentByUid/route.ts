@@ -1,7 +1,7 @@
 import { fetchTalents } from "@/firebase";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
+export async function GET(req: NextRequest) {
   const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
   const uid = req.nextUrl.searchParams.get("uid");
 

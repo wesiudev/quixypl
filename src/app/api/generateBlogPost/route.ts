@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createChat } from "completions";
 
-export async function POST(req: NextRequest) {
+export async function GET(req: NextRequest) {
   const topic = req.nextUrl.searchParams.get("topic");
 
   const chat = createChat({

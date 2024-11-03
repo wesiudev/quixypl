@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-export async function POST(req: NextRequest) {
+export async function GET(req: NextRequest) {
   const email = req.nextUrl.searchParams.get("email");
   const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
   if (!tubylytylkofigi || tubylytylkofigi !== process.env.API_SECRET_KEY) {

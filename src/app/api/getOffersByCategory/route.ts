@@ -1,21 +1,17 @@
+import { fetchOffers } from "@/firebase";
 import { NextRequest, NextResponse } from "next/server";
-import { fetchJobOffers } from "@/firebase";
 
 export async function GET(req: NextRequest) {
   const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
-  const category = req.nextUrl.searchParams.get("category");
-
-  // Validate API secret key
+  const cat = req.nextUrl.searchParams.get("cat");
   if (tubylytylkofigi !== process.env.API_SECRET_KEY) {
     return new NextResponse("not found", { status: 404 });
   }
-
   try {
-    const jobOffers = await fetchJobOffers();
+    const offers = await fetchOffers();
 
-    return NextResponse.json(jobOffers);
+    return NextResponse.json(offers);
   } catch (error) {
-    // Handle any potential errors during the process
-    return new NextResponse("-", { status: 500 });
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }

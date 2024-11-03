@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import jobs from "../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
+import Chat from "@/components/Dashboard/Chat/Chat";
 export default async function Layout({
   children,
 }: {
@@ -10,7 +11,8 @@ export default async function Layout({
     <div className="bg-gray-200">
       <Header jobsList={jobs} />
       {children}
-      <MainFooter jobsList={jobs} heading={`Praca Zdalna Quixy Talent™`} />
+      <Chat />
+      <MainFooter jobsList={jobs} heading={`Dodaj ofertę pracy`} />
     </div>
   );
 }

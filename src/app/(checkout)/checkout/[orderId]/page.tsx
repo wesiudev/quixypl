@@ -1,17 +1,24 @@
 import Link from "next/link";
 import { FaArrowLeft, FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import VerifyPayment from "../../../../components/VerifyPayment";
+import VerifyPayment from "./VerifyPayment";
 import { getDocument } from "@/firebase";
 import { Metadata } from "next";
 import Image from "next/image";
 
-export default async function Page(props: {
-  params: Promise<{ orderId: string }>;
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ orderId: string }>;
+  }
+) {
   const params = await props.params;
   const orders = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/stripe/orders?secret=${process.env.API_SECRET_KEY}`,
     {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
       cache: "no-store",
     }
   ).then((res) => res.json());

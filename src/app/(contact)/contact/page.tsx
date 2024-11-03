@@ -1,5 +1,5 @@
-import Contact from "@/components/Contact";
 import { Metadata } from "next";
+import Contact from "../Contact";
 
 export default async function Page() {
   return <Contact />;

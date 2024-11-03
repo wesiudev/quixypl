@@ -10,7 +10,7 @@ import { Metadata } from "next";
 import { sendGenerateIdeaRequest } from "../../utils/sendGenerateIdeaRequest";
 import Header from "@/components/Header";
 import FAQ from "@/components/Faq";
-import AboutQuixyTalent from "../components/AboutQuixyTalent";
+import AboutQuixyTalent from "./(about)/AboutQuixyTalent";
 import Regions from "@/components/Regions";
 
 export default function Page() {

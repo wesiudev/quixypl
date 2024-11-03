@@ -4,7 +4,7 @@ import jobs from "../../../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Header from "@/components/Header";
 import { FaBriefcase } from "react-icons/fa";
-import AboutQuixyTalent from "@/components/AboutQuixyTalent";
+import AboutQuixyTalent from "@/app/(about)/AboutQuixyTalent";
 import { TfiFlagAlt } from "react-icons/tfi";
 import { getPageContent } from "@/lib/getPageContent";
 import Image from "next/image";

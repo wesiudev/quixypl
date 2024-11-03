@@ -7,7 +7,7 @@ import Link from "next/link";
 import jobs from "../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import { FaChevronRight } from "react-icons/fa";
-import AboutQuixyTalent from "../../components/AboutQuixyTalent";
+import AboutQuixyTalent from "../(about)/AboutQuixyTalent";
 export const revalidate = 30;
 export default async function Page() {
   const posts = await getProducts();
