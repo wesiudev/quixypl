@@ -52,7 +52,7 @@ export default async function Page() {
         <HomePageGenerator sendGenerateIdeaRequest={sendGenerateIdeaRequest} />
       </div>
       <div className="my-12 container mx-auto ">
-        <IdeaList ideas={ideas} />
+        {/* <IdeaList ideas={ideas} /> */}
       </div>
 
       <MainFooter jobsList={jobs} />
