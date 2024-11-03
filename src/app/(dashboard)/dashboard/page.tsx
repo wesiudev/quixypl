@@ -1,9 +1,7 @@
-"use client";
-export const dynamic = "force-dynamic";
 import { Metadata } from "next";
 import Dashboard from "../../../components/Dashboard/Dashboard";
 
-export default function Page() {
+export default async function Page() {
   return <Dashboard />;
 }
 

@@ -1,208 +1,26 @@
+import { Metadata } from "next";
+import LeadsList from "./LeadsList";
 
-import {  updateApplication } from "@/firebase";
-import moment from "moment";
-import {  useState } from "react";
-import "moment/locale/pl";
-import Link from "next/link";
-import { FaChevronLeft} from "react-icons/fa";
-import Confetti from "react-confetti";
-import { ReactSketchCanvas } from "react-sketch-canvas";
-import { useSelector } from "react-redux";
-import LeadApplication from "@/components/LeadApplication";
-export default function Leads() {
-  const { user } = useSelector((state: any) => state.user);
-  const [isSigning, setIsSigning] = useState(false);
-  const [signingLead, setSigningLead] = useState<any>({});
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [noteOpen, setNoteOpen] = useState<any>();
-  const [filter, setFilter] = useState("new");
-
-  moment.locale("pl");
+export default async function Page() {
   return (
-    <>
-      <div className="bg-gray-600 h-max w-full font-sans">
-        <div className="w-full justify-between bg-gradient-to-r from-primary to-cta py-3 px-6 text-white font-bold text-lg flex items-center">
-          <Link href="/dashboard" className="flex items-center">
-            <FaChevronLeft className="mr-2 text-xl" />
-            Powrót
-          </Link>
-          <div className="flex flex-col text-white pl-12">
-            <h2 className="text-sm sm:text-base">Sekcja Leadów</h2>
-            <p className="text-xs sm:text-base ">
-              Tu znajdą się wszystkie twoje leady oraz zlecenia.
-            </p>
-          </div>
-        </div>
-        <div className="font-gotham font-light grid grid-cols-2 sm:grid-cols-3 gap-2 p-6 !text-white">
-          <button
-            onClick={() => setFilter("new")}
-            className={` p-1 border-2 border-transparent border-dashed ${
-              filter === "new"
-                ? "bg-gradient-to-r text-white from-primary to-cta"
-                : "bg-gradient-to-r text-white from-primary/50 to-cta/50"
-            }`}
-          >
-            Nowe
-          </button>
-          <button
-            onClick={() => setFilter("old")}
-            className={`bg-gradient-to-r from-primary to-cta text-white p-1 border-2 border-transparent border-dashed ${
-              filter === "old"
-                ? "bg-gradient-to-r text-white from-primary to-cta"
-                : "bg-gradient-to-r text-white from-primary/50 to-cta/50"
-            }`}
-          >
-            Sprawdzone
-          </button>{" "}
-        </div>
-        <div className="px-6 py-3 grid grid-cols-1 xl:grid-cols-3 2xl:grid-cols-4 font-sans gap-6 min-h-screen text-white">
-          {user?.leads?.map((lead: any, i: any) => (
-            <>
-              {filter === "new" && !lead.signed && lead.status !== "trash" && (
-                <LeadApplication
-                  key={i}
-                  lead={lead}
-                  setNoteOpen={setNoteOpen}
-                  filter={filter}
-                />
-              )}
-            </>
-          ))}
-          {user?.leads?.map((lead: any, i: any) => (
-            <>
-              {filter === "trashcan" &&
-                lead.isTrash &&
-                lead.status === "trash" && (
-                  <LeadApplication
-                    key={i}
-                    lead={lead}
-                    setNoteOpen={setNoteOpen}
-                    filter={filter}
-                  />
-                )}
-            </>
-          ))}
-          {user?.leads?.map((lead: any, i: any) => (
-            <>
-              {filter === "old" &&
-                lead.isFinished &&
-                lead.status !== "rejected" &&
-                !lead.signed &&
-                lead.status !== "trash" && (
-                  <LeadApplication
-                    key={i}
-                    lead={lead}
-                    setNoteOpen={setNoteOpen}
-                    filter={filter}
-                  />
-                )}
-            </>
-          ))}
-          {user?.leads?.map((lead: any, i: any) => (
-            <>
-              {filter === "signed" &&
-                lead.isFinished &&
-                lead.status === "accepted" &&
-                lead.signed &&
-                lead.status !== "trash" && (
-                  <LeadApplication
-                    key={i}
-                    lead={lead}
-                    setNoteOpen={setNoteOpen}
-                    filter={filter}
-                  />
-                )}
-            </>
-          ))}
-        </div>
-      </div>
-      {noteOpen !== undefined && (
-        <div
-          onClick={() => {
-            setNoteOpen(undefined);
-          }}
-          className="z-[120] fixed left-0 top-0 w-full h-full bg-black bg-opacity-80 flex flex-col items-center justify-center"
-        >
-          <div
-            className="bg-slate-700 border-black border-2 p-6 sm:p-12"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <textarea
-              onChange={(e) =>
-                setNoteOpen({ ...noteOpen, note: e.target.value })
-              }
-              name="note"
-              id="note"
-              rows={10}
-              autoFocus
-              placeholder="Wpisz tekst"
-              className="font-bold text-base font-sans p-3 w-full text-zinc-800 drop-shadow-xl shadow-black"
-            >
-              {noteOpen.note}
-            </textarea>
-            <button
-              onClick={() => {
-                updateApplication(noteOpen.id, {
-                  ...noteOpen,
-                  note: noteOpen.note,
-                });
-                setNoteOpen(undefined);
-              }}
-              className="w-full bg-green-500 hover:bg-green-400 font-gotham p-3 text-white font-bold"
-            >
-              Zapisz
-            </button>
-          </div>
-        </div>
-      )}
-      {isSigning && (
-        <div
-          onClick={() => {
-            setIsSigning(false);
-            setSigningLead({});
-          }}
-          className="z-[120] fixed left-0 top-0 w-full h-full bg-black bg-opacity-50 flex flex-col items-center justify-center"
-        >
-          <div onClick={(e) => e.stopPropagation()} className="w-[300px] h-max">
-            <h2 className="text-xl font-bold bg-black w-full font-gotham p-3">
-              Podpis (parafka)
-            </h2>
-            <ReactSketchCanvas
-              width="300px"
-              height="150px"
-              canvasColor="white"
-              strokeColor="black"
-            />
-            <button
-              onClick={() => {
-                updateApplication(signingLead.id, {
-                  ...signingLead,
-                  signed: true,
-                });
-                setIsAnimating(true);
-                setTimeout(() => {
-                  setIsAnimating(false);
-                }, 7500);
-                setSigningLead({});
-                setIsSigning(false);
-              }}
-              className="w-full text-center bg-green-500 hover:bg-green-400 font-bold text-white py-2 text-base font-gotham"
-            >
-              Zatwierdź
-            </button>
-          </div>
-        </div>
-      )}{" "}
-      {isAnimating && (
-        <div className="fixed w-full h-full top-0 -left-1/2 translate-x-1/2 z-[100]">
-          <Confetti width={1920} height={1019} />
-        </div>
-      )}
-      {isAnimating && (
-        <div className="fixed w-full h-full top-0 -left-1/2 translate-x-1/2 z-[100]">
-          <Confetti width={1920} height={1019} />
-        </div>
-      )}{" "}
-    </>
+    <div>
+      <LeadsList />
+    </div>
   );
 }
+
+export const metadata: Metadata = {
+  publisher: "wesiu.dev",
+  manifest: "/manifest.json",
+  authors: [
+    {
+      name: "wesiudev",
+      url: "https://wesiudev.com",
+    },
+  ],
+  verification: {
+    google: "google85185d3abec28326.html",
+  },
+  title: `Zlecenia i aplikacje - Panel Użytkownika`,
+  description: "Przeglądaj swoje zlecenia i aplikacje na twoje oferty pracy",
+};
