@@ -21,7 +21,7 @@ export default function Page() {
     <div className="flex flex-col bg-white">
       <Header jobsList={itCategories} />
       <div className="">
-        <div className="mx-auto px-4 container w-full flex flex-col lg:grid lg:grid-cols-2 relative z-50 pt-24 pb-12 lg:pt-32 lg:pb-32">
+        <div className="mx-auto px-4 container w-full flex flex-col lg:grid lg:grid-cols-2 relative z-50 py-12">
           <div className="group relative flex flex-col">
             <h2 className="lg:max-w-lg font-extrabold text-3xl lg:text-5xl text-zinc-800">
               Twoja platforma z pracą zdalną
@@ -102,7 +102,7 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="mt-16 mb-4 container mx-auto px-4">
+      <div className="mt-12 mb-4 container mx-auto px-4">
         <div className="flex flex-col-reverse md:flex-row text-black text-xl">
           <Image
             src="/assets/gif/gihome.webp"
@@ -111,9 +111,9 @@ export default function Page() {
             alt="Praca zdalna za darmo"
             title="Praca zdalna za darmo"
             style={{ boxShadow: "0px 0px 5px black" }}
-            className="mt-4 md:mt-0  w-full md:max-w-[300px]"
+            className="mt-4 md:mt-0 md:mr-12 w-full md:max-w-[300px]"
           />
-          <div className="flex flex-col md:pl-6 md:py-4">
+          <div className="flex flex-col md:py-4">
             <h2 className="mb-3 text-2xl font-bold flex items-center">
               Korzystaj za darmo!
             </h2>

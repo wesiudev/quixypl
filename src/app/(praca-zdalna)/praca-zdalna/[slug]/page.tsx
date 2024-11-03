@@ -23,7 +23,12 @@ export default async function Page(props: {
   const slug: any = jobs.find(
     (page: any) => polishToEnglish(page.title) === params.slug
   );
-  const content = await getPageContent(polishToEnglish(slug.title));
+  const content = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.slug}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
   const products: any = await getProducts();
   const isTalent = searchParams?.talent === "" ? true : false;
   const talents = await fetch(

@@ -114,7 +114,7 @@ const secondMenuItems = [
     icon: FaList,
   },
   {
-    urlLabel: "Kup projekt",
+    urlLabel: "Gotowe projekty",
     url: "/marketplace",
     color: "#468CA9",
     icon: FaFileSignature,

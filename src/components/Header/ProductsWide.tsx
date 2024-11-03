@@ -34,7 +34,7 @@ export default function ProductsWide({
       } hidden lg:grid shadow-sm`}
     >
       <div className="relative mt-12 pb-36">
-        <div className="sticky top-0 left-0 flex flex-col z-[500] container pl-4">
+        <div className="sticky top-0 left-0 flex flex-col z-[500] pl-4">
           <div className="flex flex-wrap pb-8 pt-4 mx-auto justify-center">
             {jobs.map((job: any, i: any) => (
               <div className={`w-[300px] flex flex-col font-coco`} key={i}>
@@ -103,8 +103,8 @@ export default function ProductsWide({
           </div>
         </div>
       </div>
-      <div className="sticky top-0 right-0 flex flex-col">
-        <div className="grid grid-cols-2 h-max">
+      <div className="relative flex flex-col">
+        <div className="sticky top-0 right-0 grid grid-cols-2 2xl:grid-cols-3 h-max">
           {secondMenuItems.map((item: any, i: number) => (
             <article key={i} className="w-full">
               {item && (

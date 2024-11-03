@@ -226,8 +226,7 @@ html {
   padding: 12px 10px 12px 20px;
   background: white;
   border-left: 10px solid #14a800;
-  border-right: 10px solid #14a800;
-  border-radius: 8px;
+  /* border-right: 10px solid #14a800; */
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
   max-width: 100%;
   width: max-content;
@@ -235,7 +234,18 @@ html {
 .vibrate-screen {
   animation: vibrate 0.5s infinite linear;
 }
+@keyframes move-from-right-to-left {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
 
+.move-from-right-to-left {
+  animation: move-from-right-to-left 30s linear infinite;
+}
 @keyframes vibrate {
   0% {
     transform: translate(0px, 0px);

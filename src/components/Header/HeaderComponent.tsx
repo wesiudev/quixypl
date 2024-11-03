@@ -39,7 +39,7 @@ export default function HeaderComponent({
       } duration-300 font-coco`}
     >
       {/* Header Content */}
-      <div className="flex w-full items-center justify-between container">
+      <div className="flex w-full items-center justify-between">
         <div className="flex items-center">
           <div className={`mr-1 w-max group lg:hidden`}>
             <button

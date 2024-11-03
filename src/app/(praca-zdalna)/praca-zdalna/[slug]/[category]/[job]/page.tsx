@@ -34,7 +34,12 @@ export default async function Page(props: { params: Promise<any> }) {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
-  const content = await getPageContent(polishToEnglish(params.job));
+  const content = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.job}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
   const products: any = await getProducts();
   const categoryTalents = talents
     ?.map((item: any) => {
@@ -49,10 +54,6 @@ export default async function Page(props: { params: Promise<any> }) {
         item?.seek !== "ask" &&
         item?.tags?.filter((tag: Tag) => tag.url === params.job).length > 0
     );
-  console.log(
-    categoryTalents[2]?.tags?.filter((tag: Tag) => tag.url === params.job)
-      .length > 0
-  );
   return (
     <>
       <Header jobsList={jobs} />
@@ -142,7 +143,9 @@ export default async function Page(props: { params: Promise<any> }) {
               {offers.map((offer: JobPosting, i: any) => (
                 <div className="h-[40vh] w-full overflow-hidden" key={i}>
                   <JobOfferCard
-                    href={`/job-offers/${polishToEnglish(offer.title)}-${offer.creationTime}`}
+                    href={`/job-offers/${polishToEnglish(offer.title)}-${
+                      offer.creationTime
+                    }`}
                     offer={offer}
                   />
                 </div>

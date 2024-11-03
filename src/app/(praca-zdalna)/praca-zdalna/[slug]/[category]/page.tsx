@@ -27,7 +27,12 @@ export default async function Page(props: { params: Promise<any> }) {
   const slug = cat?.data.find(
     (item: any) => polishToEnglish(item.title) === params.category
   );
-  const content = await getPageContent(polishToEnglish(slug?.title));
+  const content = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.category}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
     {
@@ -54,7 +59,7 @@ export default async function Page(props: { params: Promise<any> }) {
       {/* Hero Section */}
       <div className="px-4 relative flex flex-col items-center justify-center text-center text-white bg-gradient-to-r from-zinc-900 via-gray-900 to-zinc-950 py-12 font-gotham">
         <div className="p-3 sm:p-6 lg:p-12 !py-0 relative z-50">
-          <h1 className="text-2xl sm:text-3xl lg:text-5xl mb-4">
+          <h1 className="text-2xl mb-4">
             Praca zdalna{" "}
             <b className="bg-gradient-to-r from-primary via-cta to-primary p-1  !leading-snug">
               {slug?.title}
@@ -85,9 +90,8 @@ export default async function Page(props: { params: Promise<any> }) {
         </div>
         <p className="max-w-2xl mx-auto text-lg text-white px-3 mt-3 font-light z-50">
           Zatrudnij najlepszych specjalistów od{" "}
-          <b className="text-cta">{content?.genitive}</b> na polskim rynku
-          pracy. Zrealizuj swój projekt z ich wsparciem! Odkryj naszą platformę
-          pracy zdalnej.
+          <b className="text-cta">{content?.genitive}</b> na polskim rynku pracy
+          i zrealizuj swój projekt z ich wsparciem! Odkryj możliwości Quixy.
         </p>
         <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 justify-center mt-4 w-full z-50">
           <Link
@@ -95,14 +99,14 @@ export default async function Page(props: { params: Promise<any> }) {
             title="Rekrutuj do pracy zdalnej na panelu Quixy"
             className="font-gotham  bg-primary hover:bg-opacity-90 duration-100 text-white font-bold text-sm lg:text-base p-2 py-1.5 text-center"
           >
-            <h2 className="w-max mx-auto">Zatrudnij talent</h2>
+            <h2 className="w-max mx-auto">Jestem klientem</h2>
           </Link>
           <Link
             href="/register"
             title="Szukaj pracy zdalnej na panelu Quixy"
             className="font-gotham  bg-cta hover:bg-opacity-90 duration-100 text-white font-bold text-sm lg:text-base p-2 py-1.5 text-center"
           >
-            <h2 className="w-max mx-auto">Pracuj zdalnie</h2>
+            <h2 className="w-max mx-auto">Jestem freelancerem</h2>
           </Link>
         </div>
       </div>
@@ -150,23 +154,19 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
         )}
       </div>
-      <JobOffers categoryUrl={params.category} content={content} />
 
-      <div className="bg-white w-full px-4">
+      <div className="bg-white w-full px-4 mt-12">
         <div className="flex flex-col lg:flex-row gap-6  container mx-auto">
           <section className="text-left w-full lg:pr-24">
             <h2
               style={{ lineHeight: 1.5 }}
-              className="text-3xl mb-6 text-black font-gotham"
+              className="text-3xl mb-3 text-black font-bold"
             >
-              Czym zajmują się
-              <span className="ml-2 bg-gradient-to-r text-white from-primary via-cta to-primary">
-                {content?.informal_title_plural.toLowerCase()}?
-              </span>
+              Czym zajmują się {content?.informal_title_plural?.toLowerCase()}?
             </h2>
 
             <div
-              className="text-black max-w-3xl markdownSlug font-light font-gotham"
+              className="text-black max-w-3xl markdownSlug font-gotham"
               dangerouslySetInnerHTML={{
                 __html: content?.description,
               }}
