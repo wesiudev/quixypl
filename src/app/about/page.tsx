@@ -8,11 +8,11 @@ import {
 import React from "react";
 import Header from "@/components/Header";
 import MainFooter from "@/components/MainFooter";
-import jobs from "../../../../public/14.09.2024.json";
+import jobs from "../../../public/14.09.2024.json";
 import Link from "next/link";
 import { Metadata } from "next";
 import Image from "next/image";
-import AboutQuixyTalent from "../../../components/AboutQuixyTalent";
+import AboutQuixyTalent from "../../components/AboutQuixyTalent";
 export default function Page() {
   return (
     <div className="min-h-screen flex flex-col font-gotham">

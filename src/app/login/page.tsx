@@ -1,6 +1,5 @@
 import { Metadata } from "next";
-import Login from "./Login";
-import Register from "./Login";
+import Login from "../../components/Login";
 
 export default async function Page() {
   return <Login />;

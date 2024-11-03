@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
-import VerifyEmail from "./VerifyEmail";
+import VerifyEmail from "../../../components/VerifyEmail";
 import { Metadata } from "next";
 import Loading from "@/app/loading";
 
-export default async function Page(props: { params: Promise<{ uid: string }> }) {
+export default async function Page(props: {
+  params: Promise<{ uid: string }>;
+}) {
   const params = await props.params;
   return (
     <div className="text-center">

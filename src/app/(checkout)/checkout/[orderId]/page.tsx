@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FaArrowLeft, FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import VerifyPayment from "./VerifyPayment";
+import VerifyPayment from "../../../../components/VerifyPayment";
 import { getDocument } from "@/firebase";
 import { Metadata } from "next";
 import Image from "next/image";
