@@ -10,6 +10,7 @@ import { Providers } from "@/redux/Provider";
 import DashboardHeader from "@/components/Dashboard/DashboardHeader";
 import Loading from "@/app/loading";
 import Chat from "@/components/Dashboard/Chat/Chat";
+export const dynamic = "force-dynamic";
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [user, loading] = useAuthState(auth);
   const dispatch = useDispatch();

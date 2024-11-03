@@ -1,11 +1,10 @@
-"use client";
-import { app, updateApplication } from "@/firebase";
+
+import {  updateApplication } from "@/firebase";
 import moment from "moment";
-import { useEffect, useState } from "react";
-import { collection, onSnapshot, getFirestore } from "firebase/firestore";
+import {  useState } from "react";
 import "moment/locale/pl";
 import Link from "next/link";
-import { FaChevronLeft, FaLongArrowAltLeft } from "react-icons/fa";
+import { FaChevronLeft} from "react-icons/fa";
 import Confetti from "react-confetti";
 import { ReactSketchCanvas } from "react-sketch-canvas";
 import { useSelector } from "react-redux";
