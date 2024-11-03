@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import jobs from "../../../public/14.09.2024.json";
+import jobs from "../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 export default async function Layout({
   children,
