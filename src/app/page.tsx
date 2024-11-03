@@ -10,8 +10,8 @@ import { Metadata } from "next";
 import { sendGenerateIdeaRequest } from "../../utils/sendGenerateIdeaRequest";
 import Header from "@/components/Header";
 import FAQ from "@/components/Faq";
-import AboutQuixyTalent from "./(about)/AboutQuixyTalent";
 import Regions from "@/components/Regions";
+import AboutQuixyTalent from "@/components/AboutQuixyTalent";
 
 export default function Page() {
   const itCategories = jobs.flatMap((job) => [
