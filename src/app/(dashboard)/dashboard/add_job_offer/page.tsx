@@ -1,3 +1,4 @@
+"use client";
 import AddJobOffer from "@/components/AddJobOffer/AddJobOffer";
 import { Metadata } from "next";
 

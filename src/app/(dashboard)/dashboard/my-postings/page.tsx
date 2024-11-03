@@ -1,3 +1,4 @@
+"use client";
 import Postings from "@/components/Postings/Postings";
 import { Metadata } from "next";
 
