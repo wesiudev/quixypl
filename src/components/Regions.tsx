@@ -41,4 +41,6 @@ const items = [
   { name: "google", image: "/assets/google.png" },
   { name: "deviant", image: "/assets/deviant.png" },
   { name: "pinterest", image: "/assets/pinterest.png" },
+  { name: "react", image: "/assets/react.png" },
+  { name: "openai", image: "/assets/openai.png" },
 ];

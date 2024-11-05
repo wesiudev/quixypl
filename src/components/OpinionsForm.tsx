@@ -58,14 +58,14 @@ const OpinionsForm: React.FC = () => {
   };
 
   return (
-    <div className="my-16  font-gotham bg-gradient-to-r from-primary/50 to-cta/50 p-6">
+    <div className="my-16  font-gotham bg-gradient-to-r from-primary to-cta p-6">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col md:flex-row justify-start items-start space-y-12"
       >
         <div className="h-full w-full">
-          <h2 className="w-full text-3xl text-white drop-shadow-md shadow-black text-left mb-2 italic">
-            Napisz opinię lub coś od siebie
+          <h2 className="w-full text-3xl text-white drop-shadow-md shadow-black text-left mb-2">
+            Podziel się przemyśleniami
           </h2>
           <div className="flex flex-col justify-between w-full h-full">
             <div className="">
@@ -80,7 +80,7 @@ const OpinionsForm: React.FC = () => {
                   value={name}
                   maxLength={30}
                   onChange={(e) => setName(e.target.value)}
-                  className="bg-gray-700 placeholder:text-white placeholder:font-light input input-bordered w-full py-3 px-4  shadow-sm mb-2 text-white border border-gray-300"
+                  className="bg-gray-700 placeholder:text-white w-full py-3 px-4  shadow-sm mb-2 text-white border border-gray-300"
                 />
               </div>
               <div className="">
@@ -95,7 +95,7 @@ const OpinionsForm: React.FC = () => {
                   placeholder="Wpisz opinię"
                   value={feedback}
                   onChange={(e) => setFeedback(e.target.value)}
-                  className="bg-gray-700 h-full placeholder:text-white placeholder:font-light input input-bordered w-full py-3 px-4  shadow-sm mb-2 text-white border border-gray-300"
+                  className="bg-gray-700 h-full placeholder:text-white w-full py-3 px-4  shadow-sm mb-2 text-white border border-gray-300"
                 />
               </div>
             </div>
@@ -120,25 +120,20 @@ const OpinionsForm: React.FC = () => {
           </div>
         </div>
 
-        <div
-          className="bg-white md:ml-3  overflow-hidden w-full"
-          style={{ boxShadow: "0px 0px 5px black" }}
-        >
-          <h3 className="bg-gradient-to-r from-primary to-cta text-2xl font-bold py-4 text-white flex items-center justify-center text-center italic drop-shadow-md">
-            Wpisy
+        <div className="md:ml-3 overflow-hidden w-full">
+          <h3 className="text-2xl font-bold py-4 text-white px-3">
+            CO O NAS PISZĄ
           </h3>
           <ul className="space-y-6 h-[50vh] overflow-y-scroll p-3">
             {opinions?.map((opinion, index) => (
               <li
                 key={index}
-                className="flex flex-col items-start text-lg border-b border-cta pb-2 font-light"
+                className="flex flex-col items-start text-lg border-b border-white pb-2 font-light"
               >
-                <span className="flex items-center font-semibold text-black">
+                <span className="flex items-center font-bold text-white">
                   {opinion.name}
                 </span>
-                <p className="text-black font-gotham font-light">
-                  {opinion.feedback}
-                </p>
+                <p className="text-white">{opinion.feedback}</p>
               </li>
             ))}
           </ul>

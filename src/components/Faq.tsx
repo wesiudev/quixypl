@@ -29,13 +29,11 @@ const FAQ: React.FC<FAQProps> = ({ faqItems }) => {
   };
 
   return (
-    <div className="font-gotham">
-      <h2 className="z-50 py-3 text-xl sm:text-3xl w-full">
-        <span className="p-3 text-white bg-gradient-to-r from-primary to-cta ">
-          Często zadawane pytania
-        </span>
+    <div className="">
+      <h2 className="font-extrabold z-50 py-3 text-2xl text-black w-full">
+        Masz jakieś pytania?
       </h2>
-      <ul className="-mt-[2px] p-3  rounded-tl-none rounded-bl-none cursor-default select-none lg:hover:bg-gradient-to-r lg:hover:from-primary/20 lg:hover:to-cta/20 bg-gradient-to-r from-primary/20 to-cta/20 text-lg text-black">
+      <ul className="-mt-[2px] cursor-default select-none lg:hover:bg-gradient-to-r lg:hover:from-primary/20 lg:hover:to-cta/20 bg-gradient-to-r text-lg text-black">
         {faqItems.slice(0, visibleItems).map((faq, index) => (
           <li
             key={index}
@@ -43,8 +41,8 @@ const FAQ: React.FC<FAQProps> = ({ faqItems }) => {
               index + 1 !== visibleItems && "border-primary/50 border-b-2"
             }`}
           >
-            <h4 className="">{faq.question}</h4>
-            <p className="font-light">{faq.answer}</p>
+            <h4 className="font-extrabold">{faq.question}</h4>
+            <p className="font-coco">{faq.answer}</p>
           </li>
         ))}
       </ul>

@@ -10,29 +10,35 @@ export default function OpenableOpportunity({
   i: any;
 }) {
   return (
-    <div key={i} className={`p-3 flex flex-col shadow-black !text-black`}>
-      <div
-        className={`
-         ease-in-out w-full text-left`}
-      >
-        <div className="font-bold flex items-center">
-          {" "}
-          <FaStar className="text-cta mr-1" />
-          <h2 className="text-lg">{opportunity.title}</h2>
+    <div
+      key={i}
+      className={`bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out`}
+    >
+      <div className="flex items-center justify-between">
+        <div className="flex items-center">
+          <h2 className="text-2xl font-extrabold text-black">
+            {opportunity.title}
+          </h2>
         </div>
-        <div className={`flex flex-row flex-wrap items-center mt-1 -ml-3 `}>
-          {opportunity.data.map((subcategory: any, i: any) => (
-            <Link
-              href={`/praca-zdalna/${polishToEnglish(
-                opportunity.title
-              )}/${polishToEnglish(subcategory.title)}`}
-              key={i}
-              className={`${i !== 0 && "ml-3"} ml-3 hover:underline font-light`}
-            >
-              {subcategory.title}
-            </Link>
-          ))}
-        </div>
+        <Link
+          href={`/praca-zdalna/${polishToEnglish(opportunity.title)}`}
+          className="text-cta text-sm font-bold hover:underline"
+        >
+          Zobacz więcej
+        </Link>
+      </div>
+      <div className="mt-4 grid grid-cols-2 gap-4">
+        {opportunity.data.map((subcategory: any, i: any) => (
+          <Link
+            key={i}
+            href={`/praca-zdalna/${polishToEnglish(
+              opportunity.title
+            )}/${polishToEnglish(subcategory.title)}`}
+            className="text-black hover:underline"
+          >
+            {subcategory.title}
+          </Link>
+        ))}
       </div>
     </div>
   );

@@ -34,10 +34,7 @@ export default function CompanyStickyTop({ slugData }: { slugData: any }) {
           : "translate-y-[30vh] opacity-0 duration-500"
       }`}
     >
-      <div
-        style={{ boxShadow: "0px 0px 5px black" }}
-        className={`container  bg-white h-max text-black duration-500`}
-      >
+      <div className={`container  bg-white h-max text-black duration-500`}>
         <div className="flex w-full justify-between h-full relative">
           <div className="flex">
             {slugData?.photoURL && (

@@ -21,31 +21,30 @@ export default function Page() {
     <div className="flex flex-col bg-white">
       <Header jobsList={itCategories} />
       <div className="">
-        <div className="mx-auto px-4 container w-full flex flex-col lg:grid lg:grid-cols-2 relative z-50 py-12">
+        <div className="mx-auto px-4 w-full max-w-[1366px] flex flex-col lg:items-center lg:grid lg:grid-cols-2 relative z-50 py-12">
           <div className="group relative flex flex-col">
             <h2 className="lg:max-w-lg font-extrabold text-3xl lg:text-5xl text-zinc-800">
               Twoja platforma z pracą zdalną
             </h2>
             <p className="max-w-[100%] sm:max-w-sm lg:max-w-lg text-black mt-3">
-              Pierwsza platforma łącząca{" "}
-              <b className="text-black">freelancerów</b> {" z "}
-              <b className="text-black">klientami</b> napędzana technologią{" "}
-              <Link href="/about#ccrm">
-                <b>CCRM!</b>
+              Pierwsza platforma napędzana technologią{" "}
+              <Link href="/about#ccrm" className="italic">
+                CCRM
               </Link>
+              , która łączy freelancerów z klientami!
             </p>
             <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 w-full mt-2">
               <Link
                 href="/praca-zdalna"
                 title="Rekrutuj do pracy zdalnej na panelu Quixy"
-                className="font-gotham font-light  bg-primary hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
+                className="font-gotham font-light bg-primary hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
               >
                 <h2 className="w-max mx-auto">Jestem klientem</h2>
               </Link>
               <Link
                 href="/praca-zdalna?talent"
                 title="Szukaj pracy zdalnej na panelu Quixy"
-                className="font-gotham font-light  bg-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
+                className="font-gotham font-light bg-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
               >
                 <h2 className="w-max mx-auto">Jestem freelancerem</h2>
               </Link>
@@ -53,12 +52,8 @@ export default function Page() {
             <Regions />
           </div>
           <div className="flex flex-col items-center justify-center w-full h-full mx-auto mt-12 lg:mt-0 overflow-hidden relative">
-            <div
-              style={{ boxShadow: "0px 0px 3px black" }}
-              className=" absolute left-3 top-3 flex items-center z-50"
-            >
+            <div className="absolute left-3 top-3 flex items-center z-50">
               <Link href="/register">
-                {" "}
                 <h2 className="font-bold font-coco text-white bg-gradient-to-r from-primary to-cta p-2 flex items-center">
                   Wygeneruj obraz za darmo!
                   <FaChevronRight className="text-lg ml-2" />
@@ -73,17 +68,16 @@ export default function Page() {
               className="w-full h-full"
             />
             <Link
-              style={{ boxShadow: "0px 0px 3px black" }}
               href="/register"
-              className=" p-2 absolute bottom-3 left-3 w-[90%] container z-50 text-white bg-gradient-to-r from-primary to-cta"
+              className="p-2 absolute bottom-3 left-3 w-[90%] container z-50 text-white bg-gradient-to-r from-primary to-cta"
             >
               <h2 className="text-2xl font-bold mb-2">
                 Promuj swój biznes w Quixy!
               </h2>
               <p className="font-coco text-sm">
-                Quixy to nie tylko rozwiązanie dla talentów pracujących zdalnie,
-                to także rozwiązanie dla firm - zarejestruj u nas swoją firmę i
-                wyświetlaj swoje usługi!
+                Quixy to nie tylko rozwiązanie dla freelancerów pracujących
+                zdalnie, to także rozwiązanie dla firm - zarejestruj u nas swoją
+                firmę i wyświetlaj swoje usługi!
               </p>
             </Link>
           </div>
@@ -102,40 +96,42 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="mt-12 mb-4 container mx-auto px-4">
-        <div className="flex flex-col-reverse md:flex-row text-black text-xl">
+      <div className="my-12 container mx-auto px-4">
+        <div className="flex flex-col-reverse md:flex-row text-black">
           <Image
             src="/assets/gif/gihome.webp"
             width={512}
             height={512}
             alt="Praca zdalna za darmo"
             title="Praca zdalna za darmo"
-            style={{ boxShadow: "0px 0px 5px black" }}
             className="mt-4 md:mt-0 md:mr-12 w-full md:max-w-[300px]"
           />
           <div className="flex flex-col md:py-4">
-            <h2 className="mb-3 text-2xl font-bold flex items-center">
+            <h2 className="text-2xl font-extrabold flex items-center">
               Korzystaj za darmo!
             </h2>
-            <p className="text-base font-gotham flex text-left max-w-[40rem] mb-3">
-              Dołączenie do Quixy jest w pełni darmowe! Zapraszamy do dodawania
-              ofert pracy oraz zatrudnienia freelancerów za darmo!
+            <p className="text-left max-w-[40rem] mb-3">
+              Dołącz do naszych tablic ofert dla klientów i freelancerów!
+              Zapraszamy do dodawania ofert pracy i pozyskiwania talentów –
+              wszystko to zupełnie za darmo!
             </p>
             <Link
               href="/register"
-              className="w-max font-gotham font-light  bg-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
+              className="w-max font-gotham bg-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
             >
-              Rejestracja
+              Zarejestruj się!
             </Link>
           </div>
         </div>
       </div>
-      <div className="px-4 container mx-auto py-12 h-max">
-        <SearchJobs />
-        <div className="grid grid-cols-1 lg:grid-cols-2 mt-5 gap-4 font-coco">
-          {jobs.map((opportunity: any, i: any) => (
-            <OpenableOpportunity key={i} opportunity={opportunity} i={i} />
-          ))}
+      <div className="py-12 h-max bg-gradient-to-r from-primary to-cta">
+        <div className="container mx-auto px-4">
+          <SearchJobs />
+          <div className="grid grid-cols-1 lg:grid-cols-2 mt-5 gap-4 ">
+            {jobs.map((opportunity: any, i: any) => (
+              <OpenableOpportunity key={i} opportunity={opportunity} i={i} />
+            ))}
+          </div>
         </div>
       </div>
       <div className="mx-auto px-4 container">
@@ -145,7 +141,7 @@ export default function Page() {
         <div id="generator" className="px-4 mx-auto container">
           <div className="flex flex-col mb-6">
             <h2 className="font-gotham text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-md shadow-black">
-              Wygeneruj nowy pomysł
+              Wygeneruj pomysł na biznes
             </h2>
             <p className="max-w-[40rem] text-white mt-6 mb-3">
               Burza mózgów, dzięki której stworzysz pomysły na biznes
@@ -157,64 +153,65 @@ export default function Page() {
           />
         </div>
       </div>
-      <div className="mx-4 sm:mx-8 lg:mx-12 2xl:mx-[15vw] h-max">
-        <div className="grid grid-cols-1 md:grid-cols-2">
+      <div className="container mx-auto h-max">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
           <div className="h-full w-full md:p-3 lg:p-0 lg:bg-white md:bg-[#f7faf7]  ">
             <Image
               src="/assets/happy-woman.webp"
               width={1024}
               height={1024}
               alt="Praca zdalna Quixy Talent"
-              style={{ boxShadow: "0px 0px 5px black" }}
-              className="  "
+              className=""
             />
           </div>
-          <div className="flex flex-col px-3 md:pl-3 lg:pl-12 font-coco text-black">
+          <div className="flex flex-col justify-center px-3 md:pl-3 lg:pl-12 text-black">
             <h2
               style={{ lineHeight: 1.325 }}
-              className="font-gotham text-3xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold  drop-shadow-md shadow-black mb-6 mt-6 md:mt-0"
+              className="text-4xl font-extrabold drop-shadow-md shadow-black"
             >
-              Realizuj projekty z ekspertami.
+              Realizuj projekty z freelancerami
             </h2>
-            <div className="flex">
-              <span className="text-2xl mt-1">🤝</span>
-              <div className="ml-1.5 flex flex-col">
-                <h3 className="font-bold text-lg lg:text-xl">
-                  Wstęp jest darmowy
-                </h3>
-                <p className="text-black text-sm ">
-                  Zanurz się w świecie biznesu! Zarejestruj się, odkrywaj
-                  projekty i planuj koncepty.{" "}
-                </p>
+            <div className="my-3">
+              <div className="flex items-start">
+                <span className="text-2xl mt-1">🤝</span>
+                <div className="ml-1.5 flex flex-col">
+                  <h3 className="font-bold text-lg lg:text-xl">
+                    Zatrudniaj za darmo!
+                  </h3>
+                  <p className="text-black text-sm ">
+                    Zanurz się w świecie biznesu! Zarejestruj się, odkrywaj
+                    projekty i planuj koncepty.{" "}
+                  </p>
+                </div>
+              </div>
+              <div className="flex mt-3 items-start">
+                <span className="text-2xl mt-1">🌍</span>
+                <div className="ml-1.5 flex flex-col">
+                  <h3 className="font-bold text-lg lg:text-xl text-black">
+                    Dodaj ofertę i zatrudnij eksperta{" "}
+                  </h3>
+                  <p className="text-black text-sm ">
+                    Znajdź utalentowane osoby, skontaktuj się i rozpocznijcie
+                    współpracę.
+                  </p>
+                </div>
+              </div>
+              <div className="flex mt-3 items-start">
+                <span className="text-2xl mt-1">🚀</span>
+                <div className="ml-1.5 flex flex-col">
+                  <h3 className="font-bold text-lg lg:text-xl">
+                    Pracuj z najlepszymi
+                  </h3>
+                  <p className="text-black text-sm">
+                    Z <b className="italic">Quixy Talent&trade;</b> znajdziesz
+                    najlepszych zawodowców, którzy ci pomogą.
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="flex mt-3">
-              <span className="text-2xl mt-1">🌍</span>
-              <div className="ml-1.5 flex flex-col">
-                <h3 className="font-bold text-lg lg:text-xl text-black">
-                  Dodaj ofertę i zatrudnij eksperta{" "}
-                </h3>
-                <p className="text-black text-sm ">
-                  Znajdź utalentowane osoby, skontaktuj się i rozpocznijcie
-                  współpracę.
-                </p>
-              </div>
-            </div>
-            <div className="flex mt-3">
-              <span className="text-2xl mt-1">🚀</span>
-              <div className="ml-1.5 flex flex-col">
-                <h3 className="font-bold text-lg lg:text-xl">
-                  Pracuj z najlepszymi
-                </h3>
-                <p className="text-black text-sm">
-                  Z <b className="italic">Quixy Talent&trade;</b> znajdziesz
-                  najlepszych zawodowców, którzy ci pomogą.
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-row">
+            <div className="flex flex-row mt-6">
               <Link
-                className=" p-1.5 px-12 bg-gradient-to-r from-primary to-cta mt-6 text-white"
+                className=" p-1.5 px-12 bg-gradient-to-r from-primary to-cta text-white"
                 href={`${process.env.NEXT_PUBLIC_URL}/register`}
               >
                 Rejestracja
@@ -224,21 +221,21 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="relative mx-4 sm:mx-8 lg:mx-12 2xl:mx-[15vw] mt-12 bg-cover bg-center lg:bg-right-bottom p-4 lg:p-8 h-max bg-woman-pc ">
+      <div className="relative container mx-auto mt-12 bg-cover bg-center lg:bg-right-bottom p-4 h-screen bg-woman-pc">
         <div className="absolute left-0 top-0  bg-black bg-opacity-50 w-full h-full z-0"></div>
-        <div className="absolute left-4 lg:left-6 top-4 lg:top-6 font-coco text-lg lg:text-xl text-white">
+        <div className="absolute left-4 lg:left-6 top-4 lg:top-6 font-extrabold text-2xl text-white">
           Dla klientów
         </div>
-        <div className="flex flex-col justify-end relative z-10 h-full w-full mt-[40vh]">
-          <h2 className="text-2xl lg:text-3xl text-white font-bold font-gotham">
+        <div className="flex flex-col justify-end relative z-10 h-full w-full">
+          <h2 className="text-4xl lg:text-5xl font-extrabold text-white font-gotham">
             Poszukujesz specjalisty do współpracy?
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 font-gotham gap-2 md:gap-4 mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 font-coco gap-2 md:gap-4 mt-4">
             <Link
               href={`${process.env.NEXT_PUBLIC_URL}/praca-zdalna`}
               className="group flex flex-col  bg-black/50 text-white p-3"
             >
-              <h3 className="group-hover:underline md:mb-3 text-xl sm:text-xl md:text-2xl lg:text-3xl">
+              <h3 className="group-hover:underline md:mb-3 text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold">
                 Zatrudnij talent
               </h3>
               <div className="flex flex-row items-center font-light">
@@ -249,7 +246,7 @@ export default function Page() {
               href={`${process.env.NEXT_PUBLIC_URL}/register`}
               className="group flex flex-col  text-white bg-black/50 group p-3"
             >
-              <h3 className="group-hover:underline md:mb-3 text-xl sm:text-xl md:text-2xl lg:text-3xl">
+              <h3 className="group-hover:underline md:mb-3 text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold">
                 Generator pomysłów
               </h3>
               <div className="flex flex-row items-center font-light">
@@ -260,7 +257,7 @@ export default function Page() {
               href={`${process.env.NEXT_PUBLIC_URL}/praca-zdalna/rozwoj-oprogramowania/web-development`}
               className="group flex flex-col  bg-black/50 text-white group p-3"
             >
-              <h3 className="group-hover:underline md:mb-3 text-xl sm:text-xl md:text-2xl lg:text-3xl font-bold">
+              <h3 className="group-hover:underline md:mb-3 text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold">
                 Zamów stronę internetową
               </h3>
               <div className="flex flex-row items-center font-light">
@@ -270,92 +267,90 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="mx-4 md:mx-8 lg:mx-12 2xl:mx-[15vw] mt-12 flex-col flex md:flex-row md:space-x-6 ">
-        <div className=" md:w-[45%] h-full w-full relative md:flex-col flex flex-row ">
-          <div className="flex w-full">
-            <div className="sm:w-full h-full flex flex-col">
-              <h3 className="text-2xl md:text-xl lg:text-3xl font-gotham mb-6 text-black">
-                Lider branży HR i AI
-              </h3>
-              <div className="flex  px-3">
-                <span className="text-2xl">🏆</span>
-                <div className="ml-3 flex flex-col ">
-                  <h3 className="text-lg lg:text-2xl text-black font-bold">
-                    4.95/5
-                  </h3>
-                  <p className="text-black text-xs sm:text-sm md:text-base">
-                    Według opinii naszych klientów
-                  </p>
-                </div>
+      <div className="container mx-auto px-4 mt-12 flex flex-col md:flex-row md:space-x-6 ">
+        <div className="md:w-[45%] w-full h-full relative md:flex-col flex flex-row">
+          <div className="flex flex-col w-full">
+            <h3 className="text-2xl md:text-xl lg:text-3xl font-extrabold -mt-1 text-black">
+              Lider branży HR i AI
+            </h3>
+            <div className="flex items-center mt-3 px-3">
+              <span className="text-2xl">🏆</span>
+              <div className="ml-3 flex flex-col">
+                <h3 className="text-lg lg:text-2xl font-bold text-black">
+                  4.95/5
+                </h3>
+                <p className="text-black text-xs sm:text-sm md:text-base font-coco">
+                  Według opinii naszych klientów
+                </p>
               </div>
-              <div className="flex mt-3  px-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className=" h-7 w-7"
-                  viewBox="0 0 48 48"
-                >
-                  <defs>
-                    <path
-                      id="a"
-                      d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"
-                    />
-                  </defs>
-                  <clipPath id="b">
-                    <use href="#a" overflow="visible" />
-                  </clipPath>
-                  <path clipPath="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z" />
-                  <path
-                    clipPath="url(#b)"
-                    fill="#EA4335"
-                    d="M0 11l17 13 7-6.1L48 14V0H0z"
-                  />
-                  <path
-                    clipPath="url(#b)"
-                    fill="#34A853"
-                    d="M0 37l30-23 7.9 1L48 0v48H0z"
-                  />
-                  <path
-                    clipPath="url(#b)"
-                    fill="#4285F4"
-                    d="M48 48L17 24l-4-3 35-10z"
-                  />
-                </svg>
-                <div className="ml-3 flex flex-col">
-                  <h3 className="text-lg lg:text-2xl text-black font-bold -mt-1">
-                    5/5
-                  </h3>
-                  <p className="text-black text-xs sm:text-sm md:text-base">
-                    Korzystamy z niezawodnej technologii
-                  </p>
-                </div>
-              </div>
-              <Link
-                href="/register"
-                className="w-max mt-3 px-2 py-1.5 bg-gradient-to-r from-primary to-cta  font-gotham font-light text-white"
+            </div>
+            <div className="flex items-center mt-3 px-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-7 w-7"
+                viewBox="0 0 48 48"
               >
-                Zarejestruj się
-              </Link>
+                <defs>
+                  <path
+                    id="a"
+                    d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"
+                  />
+                </defs>
+                <clipPath id="b">
+                  <use href="#a" overflow="visible" />
+                </clipPath>
+                <path clipPath="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z" />
+                <path
+                  clipPath="url(#b)"
+                  fill="#EA4335"
+                  d="M0 11l17 13 7-6.1L48 14V0H0z"
+                />
+                <path
+                  clipPath="url(#b)"
+                  fill="#34A853"
+                  d="M0 37l30-23 7.9 1L48 0v48H0z"
+                />
+                <path
+                  clipPath="url(#b)"
+                  fill="#4285F4"
+                  d="M48 48L17 24l-4-3 35-10z"
+                />
+              </svg>
+              <div className="ml-3 flex flex-col">
+                <h3 className="text-lg lg:text-2xl font-bold text-black -mt-1">
+                  5/5
+                </h3>
+                <p className="text-black text-xs sm:text-sm md:text-base font-coco">
+                  Korzystamy z niezawodnej technologii
+                </p>
+              </div>
             </div>
-            <div className="w-[33%] sm:w-full h-auto flex sm:items-center justify-center relative md:hidden">
-              <Image
-                src={"/assets/ninja.png"}
-                width={224}
-                height={224}
-                alt="Pracuj zdalnie jak samuraj programowania!"
-                className="mx-auto absolute inset-0 w-full h-auto"
-              />
-            </div>
+            <Link
+              href="/register"
+              className="w-max mt-3 px-2 py-1.5 bg-gradient-to-r from-primary to-cta  font-gotham font-light text-white"
+            >
+              Zarejestruj się
+            </Link>
+          </div>
+          <div className="w-[33%] sm:w-full h-auto flex justify-center relative md:hidden">
+            <Image
+              src={"/assets/ninja.png"}
+              width={224}
+              height={224}
+              alt="Pracuj zdalnie jak samuraj programowania!"
+              className="mx-auto absolute inset-0 w-full h-auto"
+            />
           </div>
         </div>
         <div className="mt-3 md:mt-0 md:w-[55%] w-full text-black">
-          <div className="flex flex-col xl:grid xl:grid-cols-2 xl:gap-3 xl:space-y-0 space-y-3 mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mx-auto">
             <div className="flex flex-row">
               <span className="text-2xl">💎</span>
               <div className="ml-3 flex flex-col">
-                <h3 className="font-bold text-lg lg:text-2xl -mt-1">
+                <h3 className="font-bold text-lg lg:text-2xl -mt-1 font-gotham">
                   Darmowe Quixies na start
                 </h3>
-                <p className=" text-sm md:text-lg w-3/4">
+                <p className=" text-sm md:text-lg w-3/4 font-coco">
                   Na początku przygody otrzymasz od nas bonus.
                 </p>
               </div>
@@ -363,21 +358,21 @@ export default function Page() {
             <div className="flex flex-row">
               <span className="text-2xl">⭐</span>
               <div className="ml-3 flex flex-col">
-                <h3 className="font-bold text-lg lg:text-2xl -mt-1">
-                  Gwarancja jakości
+                <h3 className="font-bold text-lg lg:text-2xl -mt-1 font-gotham">
+                  Wyświetlaj swoje usługi
                 </h3>
-                <p className=" text-sm md:text-lg w-3/4">
-                  Korzystamy z własnych rozwiązań
+                <p className=" text-sm md:text-lg w-3/4 font-coco">
+                  Zdobywaj zlecenia jako freelancer lub firma.
                 </p>
               </div>
             </div>
             <div className="flex flex-row">
               <span className="text-2xl">✔️</span>
               <div className="ml-3 flex flex-col">
-                <h3 className="font-bold text-lg lg:text-2xl -mt-1">
+                <h3 className="font-bold text-lg lg:text-2xl -mt-1 font-gotham">
                   Zapewnimy bezpieczeństwo
                 </h3>
-                <p className=" text-sm md:text-lg w-3/4">
+                <p className=" text-sm md:text-lg w-3/4 font-coco">
                   Jesteśmy dostępni 24/7 by ci pomóc.
                 </p>
               </div>
@@ -386,13 +381,13 @@ export default function Page() {
         </div>
       </div>
       {/* just a component for the future 🤷‍♀️ */}
-      <div className=" relative mx-4 md:mx-8 lg:mx-12 2xl:mx-[15vw] mt-12 h-max bg-gradient-to-r from-primary/20 to-cta/20 md:from-white md:to-white">
+      <div className=" relative container mx-auto mt-12 h-max bg-gradient-to-r from-primary/20 to-cta/20">
         <div className="grid grid-cols-1 md:grid-cols-2 w-full h-full relative">
-          <div className=" bg-guitar-man bg-center rounded-b-none md: md: h-[50vh] md:h-full"></div>
+          <div className="bg-guitar-man bg-center rounded-b-none h-[80vh]"></div>
           <div className="p-4 lg:p-6 text-black w-full md:h-full grid grid-cols-1">
             <div>
-              <span className="text-lg font-coco">Dla ekspertów</span>
-              <h2 className="text-zinc-800 text-4xl lg:text-6xl font-bold font-gotham mt-6">
+              <span className="text-lg font-extrabold">Dla freelancerów</span>
+              <h2 className="text-black text-2xl lg:text-4xl font-extrabold mt-6">
                 Szukaj zleceń lub pracy zdalnej
               </h2>
               <p className="text-base lg:text-lg my-3 lg:my-6 lg:mb-3 font-coco">
@@ -419,7 +414,7 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="mt-12 mx-4 bg-white relative md:mx-8 lg:mx-12 2xl:mx-[15vw] h-max  mb-12">
+      <div className="mt-12 container mx-auto bg-white relative h-max pb-12">
         <FAQ faqItems={faqItems} />
       </div>
       <div className="relative">

@@ -12,56 +12,64 @@ import {
 } from "react-icons/fa";
 
 export default function AboutQuixyTalent() {
-  const [content, setContent] = useState("client");
+  const [content, setContent] = useState("talent");
 
   return (
-    <div className="font-coco pb-12">
+    <div className="pb-12">
       <div className="relative  mx-auto">
         <div className="grid grid-cols-2 gap-3 mt-6 font-gotham">
           <button
             onClick={() => setContent("client")}
-            className={`lg:text-xl border-[2px]  flex items-center justify-center py-2  ${
+            className={`lg:text-xl border-[2px] font-bold flex items-center justify-center py-2 rounded-l-lg ${
               content === "talent"
                 ? "border-primary text-white bg-primary"
                 : "border-cta text-white bg-gradient-to-r from-primary to-cta"
             }`}
+            style={{
+              boxShadow: content === "talent" ? "-5px 0 0 0 #F4F4F4" : "none",
+            }}
           >
             KLIENT
           </button>
           <button
             onClick={() => setContent("talent")}
-            className={`lg:text-xl border-[2px]  flex items-center justify-center py-2  ${
+            className={`lg:text-xl border-[2px] font-bold flex items-center justify-center py-2 rounded-r-lg ${
               content === "client"
                 ? "border-primary text-white bg-primary"
                 : "border-cta text-white bg-gradient-to-r from-primary to-cta"
             }`}
+            style={{
+              boxShadow: content === "client" ? "5px 0 0 0 #F4F4F4" : "none",
+            }}
           >
-            TALENT
+            FREELANCER
           </button>
         </div>
 
         {content === "client" && (
-          <div className="mt-4 ">
-            <div className="mb-6 grid grid-cols-1 lg:grid-cols-2">
+          <div className="mt-8">
+            <div className="mb-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="lg:pr-6">
-                <h2 className="text-3xl font-bold text-zinc-800 flex items-center">
+                <h2 className="text-4xl font-extrabold flex items-center text-black">
                   Jak Quixy pomaga klientom?
                 </h2>
-                <p className="text-lg my-4 text-black">
-                  Korzystając z naszych usług otrzymujesz{" "}
-                  <strong>łatwy dostęp</strong> do najlepszych ekspertów z
-                  różnych dziedzin. Zatrudnij <strong>specjalistów</strong> IT,
-                  marketingu, web developmentu, bezpieczeństwa IT, czy
-                  projektowania graficznego. Współpracuj z talentami, które
-                  pomogą Ci zrealizować twoje cele.
+                <p className="mt-6 text-xl text-black">
+                  Korzystając z naszej platformy otrzymujesz łatwy dostęp do
+                  najlepszych funkcji i narzędzi, które pomogą Ci zoptymalizować
+                  proces rekrutacji, wyświetlać swoje usługi oraz pozyskiwać
+                  nowe zlecenia – zatrudnij specjalistów IT, marketingu, web
+                  developmentu, bezpieczeństwa IT, czy projektowania
+                  graficznego. Współpracuj z freelancerami, którzy pomogą Ci
+                  zrealizować twoje cele.
                 </p>
+                <div className="mt-6"></div>
                 <Link
                   href="/register"
-                  className="text-white bg-gradient-to-r from-primary to-cta font-gotham py-2 px-3  w-max hover:bg-opacity-90 h-max"
+                  className="text-white bg-gradient-to-r from-primary to-cta font-gotham py-3 px-6 mt-8 w-max hover:bg-opacity-90 h-max"
                 >
                   Otwórz konto klienta
                 </Link>
-                <ul className="list-none my-12 space-y-3 text-black">
+                <ul className="list-none mt-12 space-y-5 text-black">
                   <li className="relative">
                     <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 opacity-80 z-0 text-green-500 mr-2" />{" "}
                     <div className="pl-[52px] max-w-lg">
@@ -93,7 +101,7 @@ export default function AboutQuixyTalent() {
                 </ul>
               </div>
               <div className="w-full lg:flex lg:justify-end">
-                <div className=" p-1 bg-gradient-to-r from-primary to-cta w-full h-auto lg:w-max lg:max-w-full lg:h-max lg:max-h-full">
+                <div className="p-1 bg-gradient-to-r from-primary to-cta w-full h-auto lg:w-max lg:max-w-full lg:h-max lg:max-h-full">
                   <Image
                     src="/assets/client-banner.png"
                     width={1024}
@@ -111,26 +119,28 @@ export default function AboutQuixyTalent() {
         )}
 
         {content === "talent" && (
-          <div className="mt-4 ">
-            <div className="mb-6 grid grid-cols-1 lg:grid-cols-2">
+          <div className="mt-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="lg:pr-6">
-                <h2 className="text-3xl font-bold text-zinc-800 flex items-center">
-                  Chcesz zostać talentem w Quixy?
+                <h2 className="text-4xl font-extrabold flex items-center text-black">
+                  Zostań talentem w Quixy!
                 </h2>
-                <p className="text-lg my-4 text-black">
-                  Jako talent w Quixy, możesz pracować nad projektami, które{" "}
-                  <strong>pasują do twoich umiejętności</strong>. Współpracuj z
-                  klientami, rozwijaj swoje <strong>portfolio</strong> i
-                  zdobywaj <strong>nowe doświadczenia</strong> w dynamicznie
-                  rosnących branżach.
+                <p className="mt-6 text-xl text-black">
+                  Jako talent w Quixy, możesz pracować nad projektami,{" "}
+                  <strong>wyświetlać swoje usługi</strong> i pozyskiwać
+                  klientów. Współpracuj z firmami – rozwiń swoje{" "}
+                  <strong>portfolio</strong> i zdobywaj{" "}
+                  <strong>nowe doświadczenia</strong> w dynamicznie rosnących
+                  branżach.
                 </p>
+                <div className="mt-6"></div>
                 <Link
                   href="/register"
-                  className="text-white bg-gradient-to-r from-primary to-cta font-gotham py-2 px-3  w-max hover:bg-opacity-90 h-max"
+                  className="text-white bg-gradient-to-r from-primary to-cta font-gotham py-3 px-6 mt-8 w-max hover:bg-opacity-90 h-max"
                 >
                   Otwórz konto talentu
                 </Link>
-                <ul className="list-none mt-12 space-y-3 text-black mb-7">
+                <ul className="list-none mt-8 space-y-5 text-black mb-7">
                   <li className="relative mt-3">
                     <FaCogs className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 opacity-80 z-0 text-cta mr-2" />
 
@@ -180,11 +190,11 @@ export default function AboutQuixyTalent() {
                 </div>
               </div>
             </div>
-            <p className="text-lg mt-3 text-black">
+            <p className="text-xl text-black">
               Z nami możesz rozwijać swoją karierę, pracować nad niesamowitymi
               projektami, i współpracować z najlepszymi klientami.
               <span className="font-bold ml-1">
-                Otwórz drzwi do nowych możliwości!
+                Nie bój się zmian i otwórz drzwi do nowych możliwości!
               </span>
             </p>
           </div>
@@ -196,33 +206,6 @@ export default function AboutQuixyTalent() {
           rozwój zarówno naszych klientów, jak i całego ekosystemu biznesowego,
           w którym operują.
         </p>
-        <p className="text-lg mt-6 text-black mb-3">
-          Zaufaj nam, tak jak to zrobiło 97% naszych klientów, w tym takie marki
-          jak
-        </p>
-        <div className="mt-3 flex items-center flex-wrap w-full -ml-6 justify-center sm:justify-start">
-          <Image
-            src="/assets/google.png"
-            width={224}
-            height={224}
-            alt="google nam zaufało"
-            className="max-h-[32px] w-auto ml-6 mt-6"
-          />
-          <Image
-            src="/assets/deviant.png"
-            width={224}
-            height={224}
-            alt="deviant nam zaufał"
-            className="max-h-[32px] w-auto ml-6 mt-6"
-          />
-          <Image
-            src="/assets/pinterest.png"
-            width={224}
-            height={224}
-            alt="pinterest nam zaufał"
-            className="max-h-[32px] w-auto ml-6 mt-6"
-          />
-        </div>
       </div>
     </div>
   );
