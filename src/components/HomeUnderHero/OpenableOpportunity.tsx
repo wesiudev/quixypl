@@ -22,9 +22,9 @@ export default function OpenableOpportunity({
         </div>
         <Link
           href={`/praca-zdalna/${polishToEnglish(opportunity.title)}`}
-          className="bg-primary/70 hover:bg-primary p-3 rounded-xl text-white text-sm font-bold duration-300"
+          className=" bg-primary/70 hover:bg-primary p-1.5 rounded-xl text-white text-sm font-bold duration-300"
         >
-          Zobacz więcej
+          <div className="w-max">Zobacz więcej</div>
         </Link>
       </div>
       <div className="mt-4 grid grid-cols-2 gap-4 bg-gradient-to-r from-transparent to-black/10 p-4 rounded-3xl">

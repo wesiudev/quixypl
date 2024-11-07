@@ -1,4 +1,4 @@
-import { fetchTalents } from "@/firebase";
+import { fetchUsers } from "@/firebase";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
   if (tubylytylkofigi !== process.env.API_SECRET_KEY) {
     return new NextResponse("not found", { status: 404 });
   }
-  const talents = await fetchTalents();
+  const talents = await fetchUsers();
   const talent = talents.find((t) => t.uid === uid);
   return NextResponse.json(talent);
 }

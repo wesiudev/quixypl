@@ -151,10 +151,14 @@ export default async function Page(props: {
               <div className="">
                 <h2
                   style={{ lineHeight: 1.5 }}
-                  className="text-zinc-800 drop-shadow-xl shadow-black font-extrabold text-xl lg:text-3xl mb-6"
+                  className="text-black font-extrabold text-xl lg:text-3xl mb-6"
                 >
+                  {/* Specjaliści od tego i tego... */}
                   {content?.informal_title_plural}{" "}
                 </h2>{" "}
+                <p className="mb-4 text-black font-extrabold">
+                  Czego szukasz tym razem?
+                </p>
                 <TalentList categoryTalents={categoryTalents} />
               </div>
             </div>
@@ -162,7 +166,7 @@ export default async function Page(props: {
           {/* Content */}
           <div className="flex flex-col lg:flex-row my-12">
             <section className="text-left lg:pr-12">
-              <h2 className="text-xl lg:text-3xl mb-3 lg:mb-12 text-zinc-800 font-bold drop-shadow-xl shadow-black font-gotham">
+              <h2 className="text-white text-xl lg:text-3xl mb-3 lg:mb-12 font-bold drop-shadow-xl shadow-black font-gotham">
                 Czym zajmują się {content?.informal_title_plural.toLowerCase()}?
               </h2>
 

@@ -1,4 +1,4 @@
-import { fetchTalents } from "@/firebase";
+import { fetchUsers } from "@/firebase";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
     return new NextResponse("not found", { status: 404 });
   }
   try {
-    const talents = await fetchTalents();
+    const talents = await fetchUsers();
     const allIdeas = talents.flatMap((talent) => talent.ideas || []);
     return NextResponse.json(allIdeas);
   } catch (error) {

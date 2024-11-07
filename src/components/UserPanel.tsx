@@ -6,15 +6,15 @@ import {
   FaImages,
   FaUsers,
   FaHome,
-  FaCog,
 } from "react-icons/fa";
-import Link from "next/link";
 import { FaList, FaPlus } from "react-icons/fa6";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 export default function UserPanel() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const { modals } = useSelector((state: any) => state.modals);
   const linksData = [
     {
@@ -68,35 +68,39 @@ export default function UserPanel() {
       <div className={`w-full grid grid-cols-1 gap-1.5 z-50 px-6 pt-6`}>
         {linksData.map((link, index) => (
           <div key={index}>
-            <Link
+            {index === 0 && (
+              <div className="mb-12 pl-2 relative w-full bg-gradient-to-br from-zinc-800 via-purple-800 to-zinc-600 text-white hover:from-cta hover:to-cta rounded-xl">
+                <button
+                  onClick={() =>
+                    dispatch(set_modals({ ...modals, config: true }))
+                  }
+                  className="w-full"
+                >
+                  <div className="flex items-center justify-center relative py-3">
+                    <div className="text-white mr-3">
+                      <FaUserNinja className="text-3xl" />
+                    </div>
+                    <div className="italic py-2 z-50 relative text-center text-3xl font-extrabold">
+                      MÓJ PROFIL
+                    </div>
+                  </div>
+                </button>
+              </div>
+            )}
+            <button
               className={`pl-2 relative w-full font-gotham bg-gradient-to-br from-primary to-cta text-white hover:from-cta hover:to-cta rounded-xl`}
-              href={link.href}
+              onClick={() => {
+                router.push(link.href);
+              }}
               rel="noopener noreferrer"
             >
               <div className="flex items-center justify-center relative py-3">
-                <div className="text-white opacity-50 mr-3">{link.icon}</div>
-                <div className="py-2 z-50 relative text-center">
+                <div className="text-white mr-3 ">{link.icon}</div>
+                <div className="italic py-2 z-50 relative text-center text-lg font-extrabold">
                   {link.text.toUpperCase()}
                 </div>
               </div>
-            </Link>
-            {index === 0 && (
-              <button
-                onClick={() =>
-                  dispatch(set_modals({ ...modals, config: true }))
-                }
-                className="pl-2 relative w-full font-gotham bg-gradient-to-br from-primary to-cta text-white hover:from-cta hover:to-cta rounded-xl"
-              >
-                <div className="flex items-center justify-center relative py-3">
-                  <div className="text-white opacity-50 mr-3">
-                    <FaCog className="text-5xl" />
-                  </div>
-                  <div className="py-2 z-50 relative text-center">
-                    MÓJ PROFIL
-                  </div>
-                </div>
-              </button>
-            )}
+            </button>
           </div>
         ))}
       </div>

@@ -71,7 +71,7 @@ export default function Page() {
               href="/register"
               className="pb-2 px-2 py-1.5 absolute bottom-3 left-3 w-[90%] container z-50 text-white bg-gradient-to-r from-primary to-cta"
             >
-              <h2 className="text-2xl font-extrabold">
+              <h2 className="text-xl font-extrabold">
                 Promuj swoje usługi z Quixy!
               </h2>
               <p className="font-coco text-sm">

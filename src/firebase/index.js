@@ -295,11 +295,11 @@ async function getDocument(collectionName, key) {
 
   return docSnapshot.data();
 }
-export async function fetchTalents() {
+export async function fetchUsers() {
   const ref = collection(db, "users");
   const response = await getDocs(ref);
-  const talents = response.docs.map((doc) => doc.data());
-  return talents;
+  const users = response.docs.map((doc) => doc.data());
+  return users;
 }
 export async function fetchOffers() {
   const ref = collection(db, "offers");
