@@ -43,9 +43,8 @@ export default function DashboardHeader() {
       <div className="">
         <div
           className={`${
-            (modals.quixies || modals.config || modals.currentChat !== "") &&
-            "hidden"
-          } py-2 w-full mx-auto bg-gradient-to-r shadow-sm bg-slate-800 shadow-black relative z-[999999999999999999999999] lg:hidden ${
+            (modals.quixies || modals.currentChat !== "") && "hidden"
+          } py-2 w-full mx-auto bg-gradient-to-r shadow-sm bg-slate-800 shadow-black relative z-[99999999999999999999999999999999999] lg:hidden ${
             showHeader || menuShow ? "translate-y-0" : "-translate-y-24"
           } duration-100`}
         >
