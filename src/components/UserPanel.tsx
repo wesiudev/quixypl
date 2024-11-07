@@ -91,6 +91,7 @@ export default function UserPanel() {
               className={`pl-2 relative w-full font-gotham bg-gradient-to-br from-primary to-cta text-white hover:from-cta hover:to-cta rounded-xl`}
               onClick={() => {
                 router.push(link.href);
+                dispatch(set_modals({ ...modals, config: false }));
               }}
               rel="noopener noreferrer"
             >
