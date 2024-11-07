@@ -115,26 +115,21 @@ export default function ProductsWide({
                   className={`aspect-square group w-full h-max text-white font-bold text-sm sm:text-lg text-center relative overflow-hidden flex flex-col items-center justify-center`}
                   style={{
                     backgroundColor: item.color,
-                    boxShadow: "0px 0px 3px rgb(0, 0, 0)",
                   }}
                 >
                   <div className="bg-black bg-opacity-50 duration-500 absolute top-0 left-0 w-full h-full z-[200]"></div>
                   <div className="absolute w-full h-full left-0 top-0 z-[50] opacity-100 hover:opacity-0 duration-300" />
                   <div className="mx-auto my-auto h-full w-full flex items-center justify-center relative z-[201]">
                     <div
-                      className="group-hover:scale-90 duration-300 flex items-center justify-center w-[40%] p-[10%] rounded-full bg-opacity-50"
+                      className={`group-hover:scale-90 duration-300 flex items-center justify-center w-[40%] bg-opacity-50 p-6`}
                       style={{
                         backgroundColor: item.color,
-                        boxShadow: "0px 0px 5px black",
                       }}
                     >
                       <item.icon className="text-white drop-shadow-sm shadow-black w-full h-auto" />
                     </div>
                   </div>
-                  <h4
-                    style={{ textShadow: "0px 4px 6px rgb(0, 0, 0)" }}
-                    className="text-center absolute bg-opacity-50 font-gotham text-white font-bold bottom-[10%] left-1/2 -translate-x-1/2 h-max w-full drop-shadow-xl shadow-black z-[202] py-2 text-lg sm:text-xl"
-                  >
+                  <h4 className="text-center absolute bg-opacity-50 text-white font-extrabold bottom-[10%] left-1/2 -translate-x-1/2 h-max w-full drop-shadow-xl shadow-black z-[202] py-2 text-lg sm:text-xl">
                     {item.urlLabel}
                   </h4>
                 </Link>

@@ -54,7 +54,7 @@ export default function Page() {
           <div className="flex flex-col items-center justify-center w-full h-full mx-auto mt-12 lg:mt-0 overflow-hidden relative">
             <div className="absolute left-3 top-3 flex items-center z-50">
               <Link href="/register">
-                <h2 className="font-bold font-coco text-white bg-gradient-to-r from-primary to-cta p-2 flex items-center">
+                <h2 className="font-extrabold text-white bg-gradient-to-r from-primary to-cta p-2 flex items-center">
                   Wygeneruj obraz za darmo!
                   <FaChevronRight className="text-lg ml-2" />
                 </h2>
@@ -69,15 +69,15 @@ export default function Page() {
             />
             <Link
               href="/register"
-              className="p-2 absolute bottom-3 left-3 w-[90%] container z-50 text-white bg-gradient-to-r from-primary to-cta"
+              className="pb-2 px-2 py-1.5 absolute bottom-3 left-3 w-[90%] container z-50 text-white bg-gradient-to-r from-primary to-cta"
             >
-              <h2 className="text-2xl font-bold mb-2">
-                Promuj swój biznes w Quixy!
+              <h2 className="text-2xl font-extrabold">
+                Promuj swoje usługi z Quixy!
               </h2>
               <p className="font-coco text-sm">
-                Quixy to nie tylko rozwiązanie dla freelancerów pracujących
-                zdalnie, to także rozwiązanie dla firm - zarejestruj u nas swoją
-                firmę i wyświetlaj swoje usługi!
+                Quixy.pl to rozwiązanie dla wszystkich – zarówno dla
+                freelancerów pracujących zdalnie, jak i dla firm. Zarejestruj
+                się, aby pokazać swoje usługi nowym klientom!
               </p>
             </Link>
           </div>
@@ -106,18 +106,18 @@ export default function Page() {
             title="Praca zdalna za darmo"
             className="mt-4 md:mt-0 md:mr-12 w-full md:max-w-[300px]"
           />
-          <div className="flex flex-col md:py-4">
+          <div className="flex flex-col">
             <h2 className="text-2xl font-extrabold flex items-center">
-              Korzystaj za darmo!
+              Dołącz do nas za darmo!
             </h2>
-            <p className="text-left max-w-[40rem] mb-3">
-              Dołącz do naszych tablic ofert dla klientów i freelancerów!
-              Zapraszamy do dodawania ofert pracy i pozyskiwania talentów –
+            <p className="text-left max-w-[40rem] mb-3 mt-2">
+              Zapoznaj się z naszymi tablicami ofert dla klientów oraz
+              freelancerów! Wyświetlaj swoje usługi jako talent lub firma –
               wszystko to zupełnie za darmo!
             </p>
             <Link
               href="/register"
-              className="w-max font-gotham bg-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
+              className="w-max font-gotham bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
             >
               Zarejestruj się!
             </Link>
@@ -127,7 +127,7 @@ export default function Page() {
       <div className="py-12 h-max bg-gradient-to-r from-primary to-cta">
         <div className="container mx-auto px-4">
           <SearchJobs />
-          <div className="grid grid-cols-1 lg:grid-cols-2 mt-5 gap-4 ">
+          <div className="grid grid-cols-1 lg:grid-cols-2 mt-6 gap-4">
             {jobs.map((opportunity: any, i: any) => (
               <OpenableOpportunity key={i} opportunity={opportunity} i={i} />
             ))}
@@ -137,10 +137,10 @@ export default function Page() {
       <div className="mx-auto px-4 container">
         <AboutQuixyTalent />
       </div>
-      <div className="w-full bg-[#2E3C56] py-12 mb-12">
+      <div className="w-full bg-[#2E3C56] py-12 my-12">
         <div id="generator" className="px-4 mx-auto container">
           <div className="flex flex-col mb-6">
-            <h2 className="font-gotham text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-md shadow-black">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white drop-shadow-md shadow-black">
               Wygeneruj pomysł na biznes
             </h2>
             <p className="max-w-[40rem] text-white mt-6 mb-3">

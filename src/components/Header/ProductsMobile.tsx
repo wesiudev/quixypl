@@ -24,94 +24,120 @@ export default function ProductsMobile({
     setProductsOpen(false);
   }
   return (
-    <div className="font-gotham">
+    <div className="">
       <div
         className={`fixed w-screen h-full overflow-y-scroll left-0 bg-white xl:space-x-3 xl:-ml-3 font-semibold shadow-black ${
           productsOpen ? "pt-[65px] opacity-100 z-[500]" : "z-[-10] opacity-0"
         } scrollbar lg:hidden`}
       >
-        <div className="px-6 py-3 bg-gradient-to-r from-primary/20 to-cta/20 flex items-center justify-start mx-auto flex-wrap">
+        <div className="bg-primary grid grid-cols-3 mx-auto">
           <Link
             onClick={resetHeader}
             href="/praca-zdalna"
-            style={{ boxShadow: "1px 0px 4px black" }}
-            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 text-white p-2 w-max font-coco"
+            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 text-white p-2 text-center text-sm"
           >
-            Klient
+            Strona główna
           </Link>
           <Link
             onClick={resetHeader}
-            href="/praca-zdalna?talent"
-            style={{ boxShadow: "1px 0px 4px black" }}
-            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 text-white p-2 w-max font-coco"
+            href="/marketplace"
+            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 text-white p-2 text-center text-sm"
           >
-            Freelancer
+            Rynek
+          </Link>
+          <Link
+            onClick={resetHeader}
+            href="/contact"
+            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 text-white p-2 text-center text-sm"
+          >
+            Skontaktuj się
+          </Link>
+          <Link
+            onClick={resetHeader}
+            href="/praca-zdalna"
+            className=" duration-75 text-white p-2 text-center text-sm"
+          >
+            Firma
           </Link>
           <Link
             onClick={resetHeader}
             href="/register"
-            style={{ boxShadow: "1px 0px 4px black" }}
-            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 text-white p-2 w-max font-coco"
+            className="bg-cta duration-75 text-white p-2 text-center text-sm"
           >
             Dołącz za darmo
           </Link>
           <Link
             onClick={resetHeader}
-            href="/about"
-            style={{ boxShadow: "1px 0px 4px black" }}
-            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 text-white p-2 w-max font-coco"
+            href="/praca-zdalna?talent"
+            className=" duration-75 text-white p-2 text-center text-sm"
           >
-            O nas
-          </Link>
-          <Link
-            onClick={resetHeader}
-            href="/contact"
-            style={{ boxShadow: "1px 0px 4px black" }}
-            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 text-white p-2 w-max font-coco"
-          >
-            Kontakt
-          </Link>
-          <Link
-            onClick={resetHeader}
-            href="/news"
-            style={{ boxShadow: "1px 0px 4px black" }}
-            className="bg-[#126b91] hover:bg-[#468CA9] duration-75 text-white p-2 w-max font-coco"
-          >
-            Blog
+            Freelancer
           </Link>
         </div>
-        <div className="w-full py-4 px-3 sm:px-5 flex items-center justify-between z-[200] sticky top-0 left-0 bg-white drop-shadow-lg shadow-zinc-800">
-          <h2 className="text-black drop-shadow-md shadow-black sm:text-lg lg:text-xl font-bold">
-            Dodaj ofertę o pracę lub szukaj pracy zdalnej jako freelancer
+        <div className="bg-white p-6 sm:p-12">
+          <h2 className="text-2xl font-extrabold text-black pb-6">
+            Chcesz wyświetlić swoje usługi w naszej aplikacji?
           </h2>
+          <p className="text-black pb-6">
+            Zarejestruj się i skonfiguruj wygodnie konto oraz usługi aby
+            rozpocząć pozyskiwanie zleceń.
+          </p>
+          <div className="flex items-center">
+            <Link
+              onClick={resetHeader}
+              href="/register"
+              className="text-black font-coco py-3 mr-3"
+            >
+              Przeglądaj usługi
+            </Link>
+            <Link
+              onClick={resetHeader}
+              href="/register"
+              className="font-coco text-white px-6 py-3 bg-gradient-to-r from-primary to-cta"
+            >
+              Skonfiguruj konto
+            </Link>
+          </div>
+        </div>
+        <div className="w-full py-4 px-3 sm:px-5 flex items-center justify-between z-[200] sticky top-0 left-0 bg-gradient-to-r from-primary to-cta drop-shadow-lg shadow-zinc-800">
+          <div className="flex flex-col">
+            <p className="font-extralight text-white">
+              Szukasz pracy lub zleceń?
+            </p>
+            <h2 className="text-white sm:text-lg font-extrabold">
+              Przeglądaj tablice pracy zdalnej
+            </h2>
+          </div>
           <button
             onClick={() => {
               setMenuShow(true);
               setProductsOpen(false);
             }}
-            className="text-white px-2 py-1.5 bg-gradient-to-r from-primary to-cta text-sm"
+            className="text-black px-2 py-1.5 bg-white text-sm"
           >
-            Więcej
+            WIĘCEJ
           </button>
         </div>
         <div className="grid grid-cols-1 w-full">
           {jobs.map((job: any, i: any) => (
-            <div className="flex flex-col font-gotham" key={i}>
+            <div className="flex flex-col" key={i}>
               <Image
                 src={`/slug/${polishToEnglish(job.title)}1.webp`}
                 width={1024}
                 height={1024}
                 alt={`${polishToEnglish(job.title)} - Pracuj Zdalnie`}
-                style={{ boxShadow: "inset 0px 0px 6px black" }}
               />
               <div className="flex flex-col bg-gradient-to-r from-primary/20 to-cta/20">
                 {job.data.map((item: any, i: any) => (
                   <div key={i} className="relative">
                     <div
                       title={`Pracuj zdalnie w ${item.title}`}
-                      className="py-3 text-white font-bold bg-gradient-to-r from-primary to-cta w-full text-xl"
+                      className="flex flex-col py-3 text-white font-bold bg-gradient-to-r from-primary to-cta w-full text-xl"
                     >
-                      <div className="w-[90%] mx-auto">{item.title}</div>
+                      <p className="px-6 font-extralight font-coco text-sm">
+                        {job.title}
+                      </p>
+                      <h4 className="px-6 font-extrabold">{item.title}</h4>
                     </div>
 
                     {/* Hover dropdown */}
@@ -120,7 +146,6 @@ export default function ProductsMobile({
                         <Link
                           title={`Pracuj zdalnie w ${subcategory.title}`}
                           key={i}
-                          style={{ boxShadow: "1px 0px 4px black" }}
                           onClick={resetHeader}
                           className="max-w-[300px] bg-white hover:bg-gray-200 duration-75 text-black p-2 w-max"
                           href={`/praca-zdalna/${polishToEnglish(
@@ -141,58 +166,52 @@ export default function ProductsMobile({
         </div>
       </div>
       <div
-        className={`fixed w-screen h-screen overflow-y-scroll pb-20 top-[0px] left-0 bg-gray-300 xl:space-x-3 xl:-ml-3 font-semibold shadow-black ${
+        className={`fixed w-screen h-screen overflow-y-scroll top-[0px] left-0 bg-gray-300 xl:space-x-3 xl:-ml-3 font-semibold shadow-black ${
           menuShow ? "pt-[65px] opacity-100 z-[500]" : "z-[-10] opacity-0"
         }  pb-7 scrollbar xl:hidden`}
       >
-        <div className="w-full sticky top-0 left-0 py-4 px-3 sm:px-5 flex items-center justify-between z-[203] bg-white border-b-[4px] border-primary">
-          <h2 className="text-black drop-shadow-md shadow-black sm:text-lg lg:text-xl font-bold">
-            Wypróbuj Quixy Talent&trade;
-          </h2>
+        <div className="w-full sticky top-0 left-0 py-4 px-3 sm:px-5 flex items-center justify-between z-[203] bg-gradient-to-r from-primary to-cta border-b-[4px] border-primary">
+          <div className="flex flex-col">
+            <p className="font-extralight text-white">
+              Chcesz wypróbować Quixy?
+            </p>
+            <h2 className="text-white font-extrabold">
+              Sprawdź nasze usługi i funkcje
+            </h2>
+          </div>
           <button
             onClick={() => {
               setMenuShow(false);
               setProductsOpen(false);
             }}
-            className="text-white px-2 py-1.5 bg-gradient-to-r from-primary to-cta text-sm"
+            className="text-black px-2 py-1.5 bg-white"
           >
-            Zamknij
+            WYJŚCIE
           </button>
         </div>
-        <div className="sticky top-0 grid grid-cols-2 md:grid-cols-3 h-max">
+        <div className="h-max">
           {secondMenuItems.map((item: any, i: any) => (
             <div key={i} className="w-full">
               {item && (
                 <Link
-                  title="Wypróbuj Quixy Talent&trade;"
+                  title={`Wypróbuj Quixy Talent™: ${item.urlLabel}`}
+                  aria-label={`Link to ${item.urlLabel}`}
+                  href={item.url}
+                  className={`aspect-square group w-full h-max text-white font-bold text-sm sm:text-lg text-center relative overflow-hidden flex flex-col items-center justify-center`}
                   style={{
                     backgroundColor: item.color,
-                    boxShadow: "0px 0px 3px rgb(0, 0, 0)",
-                  }}
-                  className={`relative aspect-square group w-full h-max text-white font-bold text-sm sm:text-lg text-center overflow-hidden flex flex-col items-center justify-center`}
-                  href={item.url}
-                  key={i}
-                  onClick={() => {
-                    setMenuShow(false);
-                    setProductsOpen(false);
                   }}
                 >
-                  <div className="bg-black bg-opacity-10 absolute top-0 left-0 w-full h-full z-[200]" />
-                  <div
-                    className="absolute w-full h-full left-0 top-0 z-[50] opacity-100 hover:opacity-0 "
-                    style={{ background: item.color }}
-                  />
+                  <div className="bg-black bg-opacity-50 duration-500 absolute top-0 left-0 w-full h-full z-[200]"></div>
+                  <div className="absolute w-full h-full left-0 top-0 z-[50] opacity-100 hover:opacity-0 duration-300" />
                   <div className="mx-auto my-auto h-full w-full flex items-center justify-center relative z-[201]">
-                    <div className="flex items-center justify-center w-[50%] rounded-full bg-black bg-opacity-50 aspect-square">
-                      {item.icon && (
-                        <item.icon className="text-white xl:text-black text-4xl sm:text-4xl" />
-                      )}
+                    <div
+                      className={`group-hover:scale-90 duration-300 flex items-center justify-center w-[40%] bg-opacity-50 p-6`}
+                    >
+                      <item.icon className="bg-clip-text bg-gradient-to-r from-primary to-cta drop-shadow-sm shadow-black w-full h-auto" />
                     </div>
                   </div>
-                  <h4
-                    style={{ textShadow: "1px 1px 1px black" }}
-                    className="text-center absolute bg-opacity-50 font-coco italic text-white font-light bottom-[10%] left-1/2 -translate-x-1/2 h-max w-full drop-shadow-xl shadow-black z-[202] py-2 text-sm sm:text-lg lg:text-xl"
-                  >
+                  <h4 className="text-center absolute bg-opacity-50 text-white font-extrabold bottom-[10%] left-1/2 -translate-x-1/2 h-max w-full drop-shadow-xl shadow-black z-[202] py-2 text-lg sm:text-xl">
                     {item.urlLabel}
                   </h4>
                 </Link>

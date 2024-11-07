@@ -58,13 +58,13 @@ const OpinionsForm: React.FC = () => {
   };
 
   return (
-    <div className="my-16  font-gotham bg-gradient-to-r from-primary to-cta p-6">
+    <div className="mt-12 bg-gradient-to-r from-primary to-cta p-6">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col md:flex-row justify-start items-start space-y-12"
+        className="container mx-auto flex flex-col md:flex-row justify-start items-start space-y-12"
       >
-        <div className="h-full w-full">
-          <h2 className="w-full text-3xl text-white drop-shadow-md shadow-black text-left mb-2">
+        <div className="lg:px-6 h-full w-full">
+          <h2 className="w-full text-3xl text-white drop-shadow-md shadow-black text-left mb-2 font-extrabold">
             Podziel się przemyśleniami
           </h2>
           <div className="flex flex-col justify-between w-full h-full">
@@ -103,7 +103,7 @@ const OpinionsForm: React.FC = () => {
             <button
               type="submit"
               disabled={sent}
-              className={`w-full sm:w-full mx-auto py-3 px-6  font-light font-gotham text-white transition-colors duration-300 ${
+              className={`w-full sm:w-full mx-auto py-3 px-6 text-white transition-colors duration-300 ${
                 sent
                   ? "bg-zinc-500 cursor-not-allowed"
                   : "bg-cta hover:bg-cta/80"
@@ -121,8 +121,8 @@ const OpinionsForm: React.FC = () => {
         </div>
 
         <div className="md:ml-3 overflow-hidden w-full">
-          <h3 className="text-2xl font-bold py-4 text-white px-3">
-            CO O NAS PISZĄ
+          <h3 className="text-2xl font-extrabold py-4 text-white px-3">
+            Co piszą inni
           </h3>
           <ul className="space-y-6 h-[50vh] overflow-y-scroll p-3">
             {opinions?.map((opinion, index) => (

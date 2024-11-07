@@ -51,7 +51,7 @@ const FAQ: React.FC<FAQProps> = ({ faqItems }) => {
         <div className="w-full flex items-start justify-start">
           <button
             onClick={handleShowMore}
-            className="bg-primary hover:bg-primaryHover text-white py-2 px-4 "
+            className="bg-gradient-to-r from-primary to-cta text-white py-2 px-4  transition"
           >
             Pokaż więcej
           </button>

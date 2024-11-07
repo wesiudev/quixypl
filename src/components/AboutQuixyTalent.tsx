@@ -15,9 +15,9 @@ export default function AboutQuixyTalent() {
   const [content, setContent] = useState("talent");
 
   return (
-    <div className="pb-12">
+    <div className="mt-12">
       <div className="relative  mx-auto">
-        <div className="grid grid-cols-2 gap-3 mt-6 font-gotham">
+        <div className="grid grid-cols-2 gap-3 font-gotham">
           <button
             onClick={() => setContent("client")}
             className={`lg:text-xl border-[2px] font-bold flex items-center justify-center py-2 rounded-l-lg ${

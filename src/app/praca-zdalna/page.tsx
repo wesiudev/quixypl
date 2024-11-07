@@ -17,23 +17,17 @@ import TalentList from "@/components/TalentList";
 
 function HeroSection() {
   return (
-    <header className="px-4 text-center py-12 overflow-hidden text-white relative bg-gradient-to-r from-zinc-900 via-gray-900 to-zinc-950">
-      <div className="py-3 relative z-50 bg-black/50 text-white font-coco font-light italic  mx-auto w-max max-w-[90%]">
-        <h1 className="p-2  lg:p-3 text-white bg-gradient-to-r from-primary to-cta text-xl lg:text-2xl sm:max-w-sm font-bold mb-4 leading-snug w-full text-center mx-auto z-50 relative">
-          Praca zdalna - Znajdź pracę lub zatrudnij freelancera
+    <header className="px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-16 text-center overflow-hidden relative bg-gradient-to-r from-primary to-cta">
+      <div className="py-6 relative z-50 bg-white mx-auto w-full max-w-[95%] sm:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]">
+        <h1 className="px-4 pt-6 lg:pt-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 leading-snug w-full text-center mx-auto bg-gradient-to-r from-primary to-cta text-transparent bg-clip-text">
+          Znajdź pracę lub pozyskuj zlecenia
         </h1>
-        <p className="w-full px-3 sm:max-w-lg mx-auto">
-          Opublikuj ofertę pracy, lub swoje usługi i koniecznie wypróbuj nasze
-          usługi AI oraz naszych{" "}
-          <Link href="/praca-zdalna/rozwoj-oprogramowania/nowe-technologie/programista-sztucznej-inteligencji">
-            programistów sztucznej inteligencji
-          </Link>
-          !
+        <p className="sm:text-lg lg:text-xl text-black px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+          Opublikuj swoje usługi, przeprowadź rekrutację lub pozyskuj zlecenia.
+          Dołącz do platformy Quixy i wypróbuj nasze funkcje.
         </p>
-        <Breadcrumbs />
-        <div className="mt-2"></div>
+        <div className="mt-5"></div>
         <JoinButton />
-        <div className="pb-4"></div>
       </div>
     </header>
   );
@@ -73,10 +67,10 @@ function JoinButton() {
 
 function WhyChooseQuixySection() {
   return (
-    <section className="text-left flex lg:items-start  flex-col-reverse lg:flex-row">
-      <h3 className="text-left lg:text-center font-bold">
+    <section className="text-left flex flex-col-reverse lg:flex-row lg:items-center">
+      <h3 className="pl-6 text-left lg:text-center font-bold">
         <Link
-          className="w-max max-w-[100%] lg:mx-auto text-center p-3 flex lg:flex-col items-center justify-center bg-gradient-to-r from-primary to-cta hover:from-primary/80 hover:to-cta/80 text-white  lg: lg:h-max relative z-50 mt-6 lg:mt-0 lg:mb-0"
+          className="rounded-xl w-max max-w-[100%] lg:mx-auto text-center p-3 flex lg:flex-col items-center justify-center bg-gradient-to-r from-primary to-cta hover:from-primary/80 hover:to-cta/80 text-white  lg: lg:h-max relative z-50 mt-6 lg:mt-0 lg:mb-0"
           href="/register"
         >
           <div className="mb-0 lg:mb-3 mr-3 lg:mr-0">
@@ -87,8 +81,8 @@ function WhyChooseQuixySection() {
           </div>
         </Link>
       </h3>
-      <div className="flex flex-col lg:px-6 w-full lg:mx-8">
-        <h2 className="mb-3 text-xl lg:text-3xl text-black font-bold drop-shadow-xl shadow-black font-gotham">
+      <div className="flex flex-col px-6 w-full lg:mx-8">
+        <h2 className="font-extrabold text-3xl mb-2 text-black mt-6 lg:mt-0">
           Dlaczego warto wybrać Quixy?
         </h2>
         <p className="text-lg text-black font-gotham font-light lg:max-w-3xl">
@@ -106,40 +100,42 @@ function WhyChooseQuixySection() {
 // Sekcja kategorii specjalistów
 function SpecialistsCategoriesSection() {
   return (
-    <section className="lg:mt-8 mb-16 w-full">
-      <div className="flex flex-col mt-3 lg:mt-0">
+    <section className="py-12 mb-12 w-full bg-gradient-to-r from-primary to-cta">
+      <div className="flex flex-col mt-3 lg:mt-0 px-6 container mx-auto">
         {links.map((link, index) => (
           <Link
             key={index}
             href={link.href}
             className={`${
               index > 0 && "mt-6"
-            } group overflow-hidden flex flex-col lg:flex-row w-full items-center justify-start`}
+            } group overflow-hidden flex flex-col lg:flex-row w-full items-center justify-start sm:hover:bg-gradient-to-r sm:hover:from-transparent sm:hover:to-white/10 rounded-xl`}
           >
-            <div className="relative w-full lg:w-max h-full px-3">
+            <div className="relative w-full lg:w-max h-full">
               <Image
                 src={link.imageSrc}
-                width={500}
-                height={500}
+                width={1024}
+                height={1024}
                 loading="lazy"
                 quality={75}
                 alt={link.imageAlt}
-                className="w-full lg:w-[250px] h-auto"
+                className="w-full lg:w-[250px] h-auto rounded-xl"
               />
             </div>
             <div className="w-full">
-              <div className="group-hover:bg-white">
-                <h2 className="text-2xl font-bold text-black !font-gotham">
+              <div className="lg:pl-12 py-3 pr-3">
+                <h2 className="mt-6 lg:mt-0 text-2xl font-extrabold text-white">
                   {link.title}
                 </h2>
-                <p className="mb-3 font-light text-black">{link.description}</p>
+                <p className="mb-3 font-coco text-white mt-2">
+                  {link.description}
+                </p>
                 <div
                   className="w-full text-white group-hover:underline font-light"
                   aria-label={link.goTo}
                 >
-                  <span className="justify-center w-max bg-gradient-to-r from-primary to-cta p-2  flex items-center">
+                  <span className="justify-center w-max bg-cta p-2 flex items-center rounded-xl">
                     {link.goTo}
-                    <FaArrowRightLong className="group-hover:translate-x-[-2px] scale-100 group-hover:scale-125 ml-2 duration-150" />
+                    <FaArrowRightLong className="scale-100 group-hover:scale-110 ml-2 duration-150" />
                   </span>
                 </div>
               </div>
@@ -153,34 +149,34 @@ function SpecialistsCategoriesSection() {
 
 function WhatMakesUsUniqueSection() {
   return (
-    <section className="my-16">
-      <h2 className="text-3xl mb-6 text-black font-gotham font-bold">
+    <section className="my-12 px-6">
+      <h2 className="text-3xl mb-6 text-black font-extrabold">
         Co nas wyróżnia?
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-8 text-center">
         <HighlightCard
           icon={<FaRocket className="text-white text-5xl" />}
-          title="Szybka rekrutacja"
+          title="Oferty pracy"
           description="Proces rekrutacji jest szybki i efektywny, pozwalając Ci skupić się na rozwoju projektu."
           linkTitle="Dodaj ofertę"
         />
         <HighlightCard
-          icon={<FaCogs className="text-white text-5xl" />}
-          title="Nasze Usługi AI"
-          description="Sprawdź za darmo generator obrazów oraz pomysłów na biznes"
-          linkTitle="Sprawdź za darmo"
-        />
-        <HighlightCard
           icon={<FaUsers className="text-white text-5xl" />}
-          title="Najlepsze firmy"
-          description="Współpracujemy z doświadczonymi firmami, aby zapewnić najwyższą jakość ogłoszeń."
+          title="Dostępni freelancerzy"
+          description="Współpracujemy z doświadczonymi firmami oraz freelancerami, aby zapewnić najwyższą jakość usług."
           linkTitle="Szukaj pracy"
         />
         <HighlightCard
           icon={<FaRegLightbulb className="text-white text-5xl" />}
           title="Innowacyjne pomysły"
-          description="Nasze narzędzia i pomogą Ci stworzyć unikalne i skuteczne strategie biznesowe."
+          description="Nasze narzędzia pomogą Ci stworzyć unikalne i skuteczne strategie biznesowe."
           linkTitle="Zarejestruj"
+        />
+        <HighlightCard
+          icon={<FaCogs className="text-white text-5xl" />}
+          title="Usługi AI"
+          description="Sprawdź za darmo generator obrazów oraz pomysłów na biznes"
+          linkTitle="Sprawdź za darmo"
         />
       </div>
     </section>
@@ -200,15 +196,15 @@ function HighlightCard({
   linkTitle: string;
 }) {
   return (
-    <div className="font-gotham p-3  relative bg-gradient-to-r from-primary/10 to-cta/10">
-      <div className="bg-primary/75 rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
+    <div className="p-3 relative bg-gradient-to-r from-primary to-cta rounded-xl">
+      <div className="shadow-lg bg-primary rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
         {icon}
       </div>
-      <h3 className="text-xl font-bold text-black mb-2 mt-4">{title}</h3>
-      <p className="text-black text-sm font-coco">{description}</p>
+      <h3 className="text-xl font-extrabold text-white mb-2 mt-4">{title}</h3>
+      <p className="text-white">{description}</p>
       <div className="mt-6" />
       <Link
-        className=" font-light bg-gradient-to-r from-primary to-cta duration-100 text-white px-3 py-2 "
+        className="rounded-xl shadow-md bg-cta duration-100 text-white px-3 py-2 "
         href="/register"
         title={linkTitle}
       >
@@ -234,11 +230,11 @@ function CallToActionSection() {
           className="w-full h-auto"
         />
       </div>
-      <div className="lg:px-12">
-        <h2 className="font-bold text-3xl mb-2 text-black mt-6 lg:mt-0">
+      <div className="px-6 lg:px-12">
+        <h2 className="font-extrabold text-3xl mb-2 text-black mt-6 lg:mt-0">
           Znajdziesz wolne stanowisko pracy zdalnej!
         </h2>
-        <p className="mb-3 text-black max-w-2xl font-coco">
+        <p className="mb-3 text-black max-w-2xl font-coco sm:text-lg">
           Quixy.pl to najlepsza platforma z pracą zdalną w Polsce. Technologia z
           której korzystamy jest szybka i niezawodna. Zapraszamy do
           przeprowadzania rekrutacji, tworzenia wspólnych projektów i poszukiwań
@@ -284,18 +280,25 @@ export default async function Page() {
     <div className="w-full h-full bg-white">
       <Header jobsList={jobs} />
       <HeroSection />
-      <main className="container mx-auto px-6 py-12">
-        <CallToActionSection />
-        <WhyChooseQuixySection />
+      <main className="">
+        <div className="container mx-auto">
+          <CallToActionSection />
+        </div>
+        <div className="container mx-auto">
+          <WhyChooseQuixySection />
+        </div>
         <div className="mt-12">
           <SpecialistsCategoriesSection />
         </div>
-
-        <WhatMakesUsUniqueSection />
-        <FAQ faqItems={faqItems} />
+        <div className="container mx-auto">
+          <WhatMakesUsUniqueSection />
+        </div>
+        <div className="container mx-auto px-6">
+          <FAQ faqItems={faqItems} />
+        </div>
         <OpinionsForm />
       </main>
-      {/* <FunnyComponent /> */}
+      <FunnyComponent />
       <MainFooter jobsList={jobs} />
     </div>
   );
@@ -304,18 +307,21 @@ export default async function Page() {
 // Zabawny komponent
 function FunnyComponent() {
   return (
-    <div className="mx-auto w-full bg-gradient-to-r from-primary/20 to-cta/20 p-3 lg:p-6">
-      <div className="flex flex-col-reverse md:flex-row md:items-center mx-auto text-black text-xl max-w-xl">
+    <div className="relative mx-auto w-full bg-white p-12">
+      <div className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%] text-[20vw] text-primary/10 italic font-extrabold">
+        QUIXY
+      </div>
+      <div className="flex flex-col md:flex-row md:items-start text-black text-xl max-w-xl">
         <Image
           src="/assets/gif/giremotework.webp"
           width={512}
           height={512}
           alt="Praca zdalna w biurze"
           title="Praca zdalna w biurze"
-          className=" w-auto h-full mt-4 lg:mt-0"
+          className="w-auto h-full mt-4 lg:mt-0"
         />
-        <div className="md:pl-6">
-          <h2 className="max-w-lg text-3xl lg:text-5xl font-bold text-black mb-4">
+        <div className="md:px-6 mt-4 lg:mt-0">
+          <h2 className="text-3xl font-extrabold text-black mb-4">
             Potrzebujesz chwili wytchnienia?
           </h2>
           <p className="text-black mb-4">
@@ -323,13 +329,12 @@ function FunnyComponent() {
             być zabawnie?
           </p>
 
-          <p className="bg-gradient-to-r from-primary to-cta  p-2 text-xl text-white italic w-max max-w-[100%]">
+          <p className="bg-gradient-to-r from-primary to-cta p-2 text-xl text-white italic w-max">
             „Zatrudnij mnie, zanim zrobi to ktoś inny! 🤖” – Najnowsza AI
           </p>
           <p className="mt-4 text-sm text-black">
             *Tylko żart, obiecujemy, że nie zatrudniamy robotów... jeszcze.*
           </p>
-          <div className="my-3" />
         </div>
       </div>
     </div>
@@ -371,9 +376,10 @@ export const metadata: Metadata = {
   verification: {
     google: "google85185d3abec28326.html",
   },
-  title: "Pracy Zdalna - Znajdź pracę lub zatrudnij Talent",
+  title:
+    "Quixy.pl: Praca Zdalna i Oferty dla Freelancerów | IT, Marketing, E-commerce",
   description:
-    "Zatrudnij ekspertów z branży IT, marketingu, designu i innych dziedzin. Znajdź specjalistów w Quixy Talent™ i rozwijaj swój biznes już dziś!",
+    "Znajdź klientów i realizuj projekty zdalnie na Quixy.pl. Oferty w IT, e-commerce, marketingu, animacji i więcej! Zarejestruj się i zacznij już dziś.",
 };
 
 const faqItems = [
@@ -412,47 +418,22 @@ const faqItems = [
       "Generator pomysłów na biznes tworzy unikalne koncepty w oparciu o wybrane kryteria, takie jak lokalizacja, budżet i dostępne zasoby. Możesz rozwijać swój pomysł, korzystając z dodatkowych funkcji, odblokowanych za pomocą Quixies.",
   },
   {
-    question: "Jak mogę stworzyć biznesplan przy pomocy Quixy?",
-    answer:
-      "Po wygenerowaniu pomysłu możesz rozszerzyć go o szczegółowy biznesplan, korzystając z opcji rozwijania planu za pomocą Quixies. Funkcje te pozwalają na analizę rynku, oszacowanie kosztów i prognozy zysków.",
-  },
-  {
-    question: "Czy mogę uzyskać porady marketingowe?",
-    answer:
-      "Tak, możesz odblokować specjalistyczne porady marketingowe przy pomocy Quixies, które pomogą Ci w tworzeniu skutecznych kampanii reklamowych i strategii sprzedażowych. Im więcej Quixies wykorzystasz, tym bardziej zaawansowane porady otrzymasz.",
-  },
-  {
     question: "Jakie błędy najczęściej popełniają początkujący przedsiębiorcy?",
     answer:
       "Najczęściej popełniane błędy to zbyt optymistyczne prognozy sprzedaży, niedoszacowanie kosztów oraz brak elastyczności w modelu biznesowym. Quixy oferuje rozwijane poradniki, które pomogą Ci uniknąć tych błędów, dostępne po odblokowaniu za pomocą Quixies.",
   },
   {
-    question: "Czy mogę uzyskać indywidualne porady od ekspertów?",
-    answer:
-      "Tak, korzystając z Quixies, możesz odblokować dostęp do konsultacji z ekspertami, którzy pomogą Ci dostosować Twój pomysł do realiów rynkowych. Eksperci mogą doradzić w kwestiach związanych z zarządzaniem, finansami oraz marketingiem.",
-  },
-  {
     question:
-      "Jak mogę zainwestować w rozwój mojego biznesu poprzez platformę?",
+      "Czy pomysł wygenerowany w Quixy można później zlecić komuś do realizacji?",
     answer:
-      "Quixy umożliwia rozwijanie biznesu poprzez zakup dodatkowych zasobów za pomocą Quixies. Możesz zainwestować w takie elementy jak marketing, doradztwo, a także zlecić wykonanie stron internetowych i aplikacji mobilnych.",
+      "Tak, pomysł wygenerowany w Quixy można zlecić do realizacji innym osobom lub zespołom, przypisując go jako zadanie lub projekt do wykonania.",
   },
-  {
-    question:
-      "Czy Quixies można wykorzystać do uzyskania pomocy w tworzeniu kampanii reklamowej?",
-    answer:
-      "Tak, za pomocą Quixies możesz odblokować narzędzia i poradniki, które pomogą Ci zaplanować skuteczną kampanię reklamową, uwzględniającą takie elementy jak SEO, social media i kampanie płatne.",
-  },
-  {
-    question: "Jak mogę monitorować postępy mojego biznesplanu?",
-    answer:
-      "Korzystając z Quixy, możesz regularnie aktualizować i rozwijać swój biznesplan. Quixies umożliwiają Ci dostęp do dodatkowych funkcji monitorowania, takich jak prognozy finansowe, analiza rynku oraz porównanie z konkurencją.",
-  },
+
   {
     question:
       "Czy mogę zapisać i wrócić do mojego pomysłu na biznes w późniejszym czasie?",
     answer:
-      "Tak, każdy wygenerowany pomysł jest zapisywany na Twoim profilu. Możesz powrócić do niego w dowolnym momencie i rozwijać go, korzystając z dodatkowych zasobów dostępnych za Quixies.",
+      "Tak, każdy wygenerowany pomysł jest zapisywany na Twoim profilu. Możesz powrócić do niego w dowolnym momencie.",
   },
   {
     question: "Jak mogę zdobyć więcej Quixies?",
@@ -467,7 +448,7 @@ const links = [
     imageAlt: "Zatrudnij ekspertów od Rozwoju Oprogramowania",
     title: "Specjaliści rozwoju oprogramowania",
     description:
-      "Poszukujesz doświadczonych programistów? Nasza platforma łączy Cię z profesjonalistami, którzy dostosują i stworzą oprogramowanie idealnie odpowiadające Twoim potrzebom biznesowym. Skorzystaj z naszej sieci talentów, by przyspieszyć rozwój swojego projektu IT.",
+      "Poszukujesz doświadczonych programistów? Nasza platforma łączy Cię z profesjonalistami, którzy dostosują i stworzą oprogramowanie idealnie odpowiadające Twoim potrzebom biznesowym. Skorzystaj z naszej sieci freelancerów, by przyspieszyć rozwój swojego projektu IT.",
     goTo: "Rozwój oprogramowania",
   },
   {

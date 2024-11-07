@@ -6,7 +6,7 @@ import ProductsMobile from "./ProductsMobile";
 import HeaderComponent from "./HeaderComponent";
 import { FaFileSignature, FaImages, FaList, FaUsers } from "react-icons/fa";
 import { IoSparkles } from "react-icons/io5";
-import { FaFileArrowUp } from "react-icons/fa6";
+import { FaFileArrowUp, FaLightbulb } from "react-icons/fa6";
 
 export const destinations = [
   {
@@ -93,7 +93,7 @@ const secondMenuItems = [
     urlLabel: "Wygeneruj pomysł",
     url: "/business-ideas",
     color: "#A6BFFD",
-    icon: IoSparkles,
+    icon: FaLightbulb,
   },
   {
     urlLabel: "Wygeneruj obraz",
@@ -114,13 +114,13 @@ const secondMenuItems = [
     icon: FaList,
   },
   {
-    urlLabel: "Gotowe projekty",
+    urlLabel: "Usługi w Quixy",
     url: "/marketplace",
     color: "#468CA9",
     icon: FaFileSignature,
   },
   {
-    urlLabel: "Sprzedaj projekt",
+    urlLabel: "Dodaj usługę",
     url: "/marketplace",
     color: "red",
     icon: FaFileArrowUp,
