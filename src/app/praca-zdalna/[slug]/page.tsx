@@ -228,23 +228,23 @@ export default async function Page(props: {
           Najlepsi specjaliści {slug.title}
         </h2> */}
           {/* display users with seek:true and user?.categories includes slug.title, else display "no users, want to be first? man with black glasses italic" */}
-          <div className="bg-white px-6 lg:px-12 py-12 flex flex-col w-full sm:max-w-sm lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl text-black">
-            <h4 className="text-lg w-max font-extrabold">Tagi</h4>
-            <ul className="font-coco flex items-center flex-wrap">
-              {content?.synonyms.map((item: any, i: any) => (
-                <li key={i} className={`ml-2 mt-2`}>
-                  #{item.toLowerCase()}
-                </li>
-              ))}
+        </div>
+        <div className="bg-white px-6 lg:px-12 py-12 flex flex-col w-full text-black">
+          <h4 className="text-lg w-max font-extrabold">Tagi</h4>
+          <ul className="font-coco flex items-center flex-wrap">
+            {content?.synonyms.map((item: any, i: any) => (
+              <li key={i} className={`ml-2 mt-2`}>
+                #{item.toLowerCase()}
+              </li>
+            ))}
 
-              {isTalent && <li className="mt-2 ml-2">#znajdz-prace</li>}
-              {!isTalent && <li className="mt-2 ml-2">#rekrutacja</li>}
-              <li className="mt-2 ml-2">#praca-zdalna</li>
-              <li className="mt-2 ml-2">#job-boards</li>
-              <li className="mt-2 ml-2">#job-offers</li>
-              <li className="mt-2 ml-2">#{slug.title.toLowerCase()}</li>
-            </ul>
-          </div>
+            {isTalent && <li className="mt-2 ml-2">#znajdz-prace</li>}
+            {!isTalent && <li className="mt-2 ml-2">#rekrutacja</li>}
+            <li className="mt-2 ml-2">#praca-zdalna</li>
+            <li className="mt-2 ml-2">#job-boards</li>
+            <li className="mt-2 ml-2">#job-offers</li>
+            <li className="mt-2 ml-2">#{slug.title.toLowerCase()}</li>
+          </ul>
         </div>
       </div>
 
