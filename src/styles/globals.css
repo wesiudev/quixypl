@@ -207,7 +207,6 @@ html {
   padding-left: 1rem;
   padding-right: 1rem;
   font-weight: bold;
-  color: white;
 }
 
 .markdownSlug {
@@ -220,6 +219,7 @@ html {
 .markdownSlug > ul {
   display: flex;
   flex-direction: column;
+  color: black;
 }
 .markdownSlug > ul > li {
   margin-top: 24px;

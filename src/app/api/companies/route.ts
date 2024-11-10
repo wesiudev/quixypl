@@ -1,4 +1,4 @@
-import { fetchUsers } from "@/firebase";
+import { getDocuments } from "@/firebase";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -6,15 +6,16 @@ export async function GET(req: NextRequest) {
   if (tubylytylkofigi !== process.env.API_SECRET_KEY) {
     return new NextResponse("not found", { status: 404 });
   }
-  const users = await fetchUsers();
-  const talents = users.filter(
+  const users = await getDocuments("users");
+  const companies = users.filter(
     (user) =>
-      user?.seek &&
+      !user?.seek &&
       user?.seek !== "ask" &&
       user?.emailVerified &&
       user?.pseudo &&
       user?.configured &&
-      user?.name
+      user?.name &&
+      user?.access
   );
-  return NextResponse.json(talents);
+  return NextResponse.json(companies);
 }

@@ -71,29 +71,29 @@ export default function AboutQuixyTalent() {
                 </Link>
                 <ul className="list-none mt-12 space-y-5 text-black">
                   <li className="relative">
-                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 opacity-80 z-0 text-green-500 mr-2" />{" "}
-                    <div className="pl-[52px] max-w-lg">
+                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-green-500 mr-2" />{" "}
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
                       Łatwo przeglądaj profile ekspertów i znajdź specjalistów
                       odpowiadających Twoim potrzebom.
                     </div>
                   </li>
                   <li className="relative mt-3">
-                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 opacity-80 z-0 text-green-500 mr-2" />{" "}
-                    <div className="pl-[52px] max-w-lg">
+                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-green-500 mr-2" />{" "}
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
                       Zlecaj projekty w branżach takich jak IT, marketing,
                       animacja, i wiele więcej.
                     </div>
                   </li>
                   <li className="relative mt-3">
-                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 opacity-80 z-0 text-green-500 mr-2" />{" "}
-                    <div className="pl-[52px] max-w-lg">
+                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-green-500 mr-2" />{" "}
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
                       Korzystamy z technologii <b>CCRM</b>, by maksymalizować
                       współpracę między klientami.
                     </div>
                   </li>
                   <li className="relative mt-3">
-                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 opacity-80 z-0 text-green-500 mr-2" />{" "}
-                    <div className="pl-[52px] max-w-lg">
+                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-green-500 mr-2" />{" "}
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
                       Skoncentruj się na swoim biznesie, podczas gdy eksperci
                       dostarczą <b> jakość</b>, którą gwarantujemy.
                     </div>
@@ -142,33 +142,33 @@ export default function AboutQuixyTalent() {
                 </Link>
                 <ul className="list-none mt-8 space-y-5 text-black mb-7">
                   <li className="relative mt-3">
-                    <FaCogs className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 opacity-80 z-0 text-cta mr-2" />
+                    <FaCogs className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
 
-                    <div className="pl-[52px] max-w-lg">
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
                       Zarejestruj się, aby znaleźć klientów i zacząć pracować
                       nad ekscytującymi projektami.
                     </div>
                   </li>
                   <li className="relative mt-3">
-                    <FaCogs className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 opacity-80 z-0 text-cta mr-2" />
+                    <FaCogs className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
 
-                    <div className="pl-[52px] max-w-lg">
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
                       Otrzymuj oferty pracy w IT, e-commerce, marketingu,
                       animacji, i wielu innych branżach.
                     </div>
                   </li>
                   <li className="relative mt-3">
-                    <FaCogs className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 opacity-80 z-0 text-cta mr-2" />
+                    <FaCogs className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
 
-                    <div className="pl-[52px] max-w-lg">
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
                       Korzystaj z <b>Quixy AI™</b>, by generować unikalne
                       pomysły na biznes i projekty.
                     </div>
                   </li>
                   <li className="relative mt-3">
-                    <FaCogs className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 opacity-80 z-0 text-cta mr-2" />
+                    <FaCogs className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
 
-                    <div className="pl-[52px] max-w-lg">
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
                       Zarabiaj, sprzedając gotowe prace, aplikacje, strony
                       internetowe i wiele więcej.
                     </div>
@@ -190,21 +190,20 @@ export default function AboutQuixyTalent() {
                 </div>
               </div>
             </div>
-            <p className="text-xl text-black">
-              Z nami możesz rozwijać swoją karierę, pracować nad niesamowitymi
-              projektami, i współpracować z najlepszymi klientami.
+            <p className="text-xl text-black mt-2 font-coco">
+              W Quixy.pl możesz rozwijać swoją karierę, pracować nad
+              niesamowitymi projektami, i współpracować z najlepszymi klientami.
               <span className="font-bold ml-1">
                 Nie bój się zmian i otwórz drzwi do nowych możliwości!
               </span>
             </p>
           </div>
         )}
-        <p className="mt-3 text-lg bg-primary bg-opacity-80  p-3 text-white font-light max-w-3xl">
-          Nasz system CCRM umożliwia firmom nawiązywanie współpracy, dzielenie
-          się zasobami i wspólne tworzenie innowacyjnych rozwiązań. To podejście
-          oparte na partnerstwie oraz wzajemnym wsparciu pozwala na dynamiczny
-          rozwój zarówno naszych klientów, jak i całego ekosystemu biznesowego,
-          w którym operują.
+        <p className="mt-3 bg-gradient-to-r from-primary to-cta bg  p-3 text-white max-w-3xl font-coco">
+          Nasz system CCRM umożliwia nawiązywanie współpracy i wspólne tworzenie
+          innowacyjnych rozwiązań. To podejście oparte na partnerstwie oraz
+          wzajemnym wsparciu pozwala na dynamiczny rozwój zarówno naszych
+          klientów, jak i całego ekosystemu biznesowego, w którym operują.
         </p>
       </div>
     </div>

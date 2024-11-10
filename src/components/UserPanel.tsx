@@ -69,7 +69,7 @@ export default function UserPanel() {
         {linksData.map((link, index) => (
           <div key={index}>
             {index === 0 && (
-              <div className="mb-12 pl-2 relative w-full bg-gradient-to-br from-zinc-800 via-purple-800 to-zinc-600 text-white hover:from-cta hover:to-cta rounded-xl">
+              <div className="mb-12 pl-2 relative w-full bg-gradient-to-r from-primary to-cta text-white hover:from-cta hover:to-cta rounded-xl">
                 <button
                   onClick={() =>
                     dispatch(set_modals({ ...modals, config: true }))
@@ -87,8 +87,14 @@ export default function UserPanel() {
                 </button>
               </div>
             )}
+
+            {index === 0 && (
+              <div className="font-extrabold font-coco mb-3 text-zinc-800 text-3xl">
+                Nawigacja
+              </div>
+            )}
             <button
-              className={`pl-2 relative w-full font-gotham bg-gradient-to-br from-primary to-cta text-white hover:from-cta hover:to-cta rounded-xl`}
+              className={`pl-2 relative w-full font-gotham bg-primary text-white hover:from-cta hover:to-cta rounded-xl`}
               onClick={() => {
                 router.push(link.href);
                 dispatch(set_modals({ ...modals, config: false }));

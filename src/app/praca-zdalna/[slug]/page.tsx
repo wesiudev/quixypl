@@ -8,7 +8,7 @@ import { getPageContent } from "@/lib/getPageContent";
 import Image from "next/image";
 import BlogPostList from "@/components/BlogPostList";
 import { getProducts } from "@/firebase";
-import TalentList from "@/components/TalentList";
+import TalentList from "@/components/JobBoardList";
 export async function generateStaticParams() {
   return jobs.flatMap((service: any) => ({
     slug: polishToEnglish(service.title),
@@ -37,6 +37,12 @@ export default async function Page(props: {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
+  const companies = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/companies?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
   const categoryTalents = talents
     ?.map((item: any) => {
       const { email, ...talent } = item;
@@ -55,11 +61,13 @@ export default async function Page(props: {
       <Header jobsList={jobs} />
       <div>
         {/* Hero Section */}
-        <div className="px-3 lg:px-12 relative flex flex-col items-center justify-center text-center bg-gradient-to-r from-primary to-cta">
-          <div className="container py-6 lg:py-12 text-center overflow-hidden relative mt-6 lg:mt-12 bg-white">
-            <p className="pb-4 lg:pb-8 px-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 leading-snug w-full text-center mx-auto bg-gradient-to-r from-primary to-cta text-transparent bg-clip-text">
-              Freelancer Job Boards – {slug.title}
-            </p>
+        <div className="px-6 lg:px-12 relative flex flex-col items-center justify-center text-center bg-gradient-to-r from-primary to-cta">
+          <div className="w-full py-6 lg:py-12 text-center overflow-hidden relative mt-6 lg:mt-12 bg-white">
+            <div className="container mx-auto">
+              <p className="pb-4 lg:pb-8 px-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 leading-snug w-full text-center mx-auto bg-gradient-to-r from-primary to-cta text-transparent bg-clip-text">
+                Freelancer Job Boards – {slug.title}
+              </p>
+            </div>
             {/* <h2 className="text-2xl font-semibold mb-6">{slug.h2}</h2> */}
             {isTalent && (
               <p className="-mt-6 font-coco text-black w-full sm:text-lg lg:max-w-xl mx-auto">
@@ -83,8 +91,8 @@ export default async function Page(props: {
         </div>
         {/* Subcategories */}
 
-        <div className="px-3 lg:px-12 bg-gradient-to-r from-primary to-cta w-full h-full mx-auto pt-6 lg:pt-12">
-          <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
+        <div className="bg-gradient-to-r from-primary to-cta w-full h-full mx-auto pt-6 lg:pt-12">
+          <div className="px-6 lg:px-12 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
             <Image
               src={`/slug/${polishToEnglish(slug.title)}.webp`}
               width={1024}
@@ -105,7 +113,7 @@ export default async function Page(props: {
                 } flex mt-3`}
               >
                 <div className="p-6 text-black bg-white">
-                  <h2 className="text-cta w-max font-extrabold">
+                  <h2 className="text-primary w-max font-extrabold">
                     QUIXY DLA FIRM
                   </h2>
                   <p className="sm:text-lg 2xl:text-xl pb-3 text-black">
@@ -125,7 +133,7 @@ export default async function Page(props: {
                   </div>
                 </div>
                 <div className="p-6 mt-6 text-black bg-white">
-                  <h2 className="text-cta w-max font-extrabold">
+                  <h2 className="text-primary w-max font-extrabold">
                     FREELANCERZY
                   </h2>
                   <p className="sm:text-lg 2xl:text-xl pb-3 text-black">
@@ -146,27 +154,21 @@ export default async function Page(props: {
               </div>
             </div>
           </div>
-          <div className="bg-white w-full my-12 p-6">
-            <div className="flex flex-col container mx-auto">
+          <div className="bg-white w-full pb-12 mt-12 p-6 lg:p-12">
+            <div className="flex flex-col mx-auto">
               <div className="">
-                <h2
-                  style={{ lineHeight: 1.5 }}
-                  className="text-black font-extrabold text-xl lg:text-3xl mb-6"
-                >
-                  {/* Specjaliści od tego i tego... */}
-                  {content?.informal_title_plural}{" "}
-                </h2>{" "}
-                <p className="mb-4 text-black font-extrabold">
-                  Czego szukasz tym razem?
-                </p>
-                <TalentList categoryTalents={categoryTalents} />
+                <TalentList
+                  talents={categoryTalents}
+                  companies={companies}
+                  content={content}
+                />
               </div>
             </div>
           </div>
           {/* Content */}
-          <div className="flex flex-col lg:flex-row my-12">
-            <section className="text-left lg:pr-12">
-              <h2 className="text-white text-xl lg:text-3xl mb-3 lg:mb-12 font-bold drop-shadow-xl shadow-black font-gotham">
+          <div className="px-6 lg:px-12 bg-white mx-auto flex flex-col lg:flex-row">
+            <section className="">
+              <h2 className="py-3 text-black text-xl lg:text-3xl mb-3 font-extrabold">
                 Czym zajmują się {content?.informal_title_plural.toLowerCase()}?
               </h2>
 
@@ -182,27 +184,18 @@ export default async function Page(props: {
               {jobs.map((job: any, i: any) => (
                 <div key={i}>
                   {polishToEnglish(job.title) === params.slug && (
-                    <div className="flex flex-col font-gotham" key={i}>
-                      <div className="w-full h-max">
-                        <Image
-                          src={`/slug/${polishToEnglish(job.title)}1.webp`}
-                          width={1024}
-                          height={1024}
-                          className="w-full h-auto bg-white  lg:rounded-t-none"
-                          alt={`${polishToEnglish(job.title)} - Pracuj Zdalnie`}
-                        />
-                      </div>
-                      <div className="flex flex-col bg-gradient-to-r from-primary/50 to-cta/50">
+                    <div className="flex flex-col" key={i}>
+                      <div className="flex flex-col bg-white rounded-xl">
                         {job.data.map((item: any, j: any) => (
                           <div key={j} className="relative">
-                            <div
+                            <h2
                               title={`Pracuj zdalnie w ${item.title}`}
-                              className="py-3 text-white font-light bg-gradient-to-r from-primary to-cta w-full font-coco italic text-xl"
+                              className="py-3 text-black font-extrabold w-full text-xl"
                             >
                               <div className="w-[90%] mx-auto">
                                 {item.title}
                               </div>
-                            </div>
+                            </h2>
 
                             {/* Hover dropdown */}
                             <div className="flex w-[90%] mx-auto flex-wrap my-3">
@@ -235,9 +228,9 @@ export default async function Page(props: {
           Najlepsi specjaliści {slug.title}
         </h2> */}
           {/* display users with seek:true and user?.categories includes slug.title, else display "no users, want to be first? man with black glasses italic" */}
-          <div className="mb-12 flex flex-col w-full sm:max-w-sm lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl font-coco text-black">
-            <h4 className="text-lg px-2 w-max font-light italic">Tagi</h4>
-            <ul className="text-sm font-light flex items-center flex-wrap">
+          <div className="bg-white px-6 lg:px-12 py-12 flex flex-col w-full sm:max-w-sm lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl text-black">
+            <h4 className="text-lg w-max font-extrabold">Tagi</h4>
+            <ul className="font-coco flex items-center flex-wrap">
               {content?.synonyms.map((item: any, i: any) => (
                 <li key={i} className={`ml-2 mt-2`}>
                   #{item.toLowerCase()}
@@ -246,7 +239,9 @@ export default async function Page(props: {
 
               {isTalent && <li className="mt-2 ml-2">#znajdz-prace</li>}
               {!isTalent && <li className="mt-2 ml-2">#rekrutacja</li>}
-              <li className="mt-2 ml-2">#praca zdalna</li>
+              <li className="mt-2 ml-2">#praca-zdalna</li>
+              <li className="mt-2 ml-2">#job-boards</li>
+              <li className="mt-2 ml-2">#job-offers</li>
               <li className="mt-2 ml-2">#{slug.title.toLowerCase()}</li>
             </ul>
           </div>

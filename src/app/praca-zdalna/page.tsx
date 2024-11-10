@@ -13,7 +13,7 @@ import {
   FaChevronLeft,
   FaArrowRightLong,
 } from "react-icons/fa6";
-import TalentList from "@/components/TalentList";
+import TalentList from "@/components/JobBoardList";
 
 function HeroSection() {
   return (

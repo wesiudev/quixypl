@@ -5,7 +5,7 @@ import { polishToEnglish } from "../../utils/polishToEnglish";
 
 export default function MainFooter({ jobsList }: { jobsList: any }) {
   return (
-    <div className="flex flex-col px-6 lg:px-12 p-6 py-12 bg-gradient-to-r from-primary to-cta relative z-50 overflow-hidden font-gotham">
+    <div className="flex flex-col px-6 lg:px-12 p-6 py-12 bg-gradient-to-r from-primary to-cta relative z-50 overflow-hidden">
       <div className="flex flex-col relative z-50">
         <div className="mb-12">
           <h2 className="text-4xl text-white font-bold">
@@ -14,8 +14,8 @@ export default function MainFooter({ jobsList }: { jobsList: any }) {
           <div className="bg-black/50 p-3 lg:p-6 mt-12  grid grid-cols-1 md:grid-cols-2 md:gap-4 xl:grid-cols-3 2xl:grid-cols-4 w-full">
             {jobsList.map((item: any, i: any) => (
               <div key={i} className="flex flex-col w-full">
-                <h2 className="pt-[9px] text-white w-max max-w-full font-bold text-xl lg:text-2xl 2xl:text-xl">
-                  <span className="p-[9px] bg-gradient-to-r from-primary to-cta ">
+                <h2 className="pt-[9px] text-white w-max max-w-full text-xl lg:text-2xl 2xl:text-xl font-extrabold">
+                  <span className="p-[9px] bg-gradient-to-r from-primary to-cta">
                     {item.title}
                   </span>
                 </h2>
@@ -26,7 +26,7 @@ export default function MainFooter({ jobsList }: { jobsList: any }) {
                         href={`/praca-zdalna/${polishToEnglish(
                           item.title
                         )}/${polishToEnglish(cat.title)}`}
-                        className="hover:underline w-full lg:w-max max-w-full font-light text-white text-sm sm:text-base p-2"
+                        className="hover:underline w-full lg:w-max max-w-full text-white p-2 font-coco font-extralight text-lg"
                       >
                         {cat.title}
                       </Link>
@@ -37,8 +37,8 @@ export default function MainFooter({ jobsList }: { jobsList: any }) {
             ))}
           </div>
         </div>
-        <div className="p-3 lg:p-6 bg-zinc-600/50 ">
-          <div className="text-white text-lg drop-shadow-lg shadow-black font-extralight mb-3">
+        <div className="p-3 lg:p-6 bg-black/50 ">
+          <div className="text-white drop-shadow-lg shadow-black font-extralight my-3 font-coco">
             Powered by
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -74,7 +74,7 @@ export default function MainFooter({ jobsList }: { jobsList: any }) {
                   />
                 </Link>
               </div>
-              <div className="text-white drop-shadow-lg shadow-black font-extralight my-3">
+              <div className="text-white drop-shadow-lg shadow-black font-extralight my-3 font-coco">
                 Developer
               </div>
               <div className="w-full grid grid-cols-2 justify-center space-x-6 items-center h-max bg-gradient-to-r from-blue-300 to-[#5865F2] p-4 rounded-xl">

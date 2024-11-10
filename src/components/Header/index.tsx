@@ -6,7 +6,7 @@ import ProductsMobile from "./ProductsMobile";
 import HeaderComponent from "./HeaderComponent";
 import { FaFileSignature, FaImages, FaList, FaUsers } from "react-icons/fa";
 import { IoSparkles } from "react-icons/io5";
-import { FaFileArrowUp, FaLightbulb } from "react-icons/fa6";
+import { FaFileArrowUp, FaLightbulb, FaUserNinja } from "react-icons/fa6";
 
 export const destinations = [
   {
@@ -90,39 +90,39 @@ export default function Header({ jobsList }: { jobsList: any[] }) {
 }
 const secondMenuItems = [
   {
-    urlLabel: "Wygeneruj pomysł",
+    urlLabel: "Zarejestruj się",
+    url: "/register",
+    color: "#14A800",
+    icon: FaUserNinja,
+  },
+  {
+    urlLabel: "Pomysły na biznes",
     url: "/business-ideas",
-    color: "#A6BFFD",
+    color: "#126b91",
     icon: FaLightbulb,
   },
   {
-    urlLabel: "Wygeneruj obraz",
-    url: "/register",
-    color: "#F97316",
-    icon: FaImages,
-  },
-  {
-    urlLabel: "Szukaj pracy",
-    url: "/register",
-    color: "#74B901",
+    urlLabel: "Szukaj freelancera",
+    url: "/praca-zdalna",
+    color: "blue",
     icon: FaUsers,
   },
   {
-    urlLabel: "Przeglądaj zlecenia",
-    url: "/register",
+    urlLabel: "Szukaj zleceń",
+    url: "/praca-zdalna?talent",
     color: "#F59BBB",
     icon: FaList,
   },
   {
-    urlLabel: "Usługi w Quixy",
+    urlLabel: "Szukaj usług",
     url: "/marketplace",
     color: "#468CA9",
     icon: FaFileSignature,
   },
   {
     urlLabel: "Dodaj usługę",
-    url: "/marketplace",
-    color: "red",
+    url: "/register",
+    color: "blue",
     icon: FaFileArrowUp,
   },
 ];

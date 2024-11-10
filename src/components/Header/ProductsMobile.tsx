@@ -189,35 +189,59 @@ export default function ProductsMobile({
             WYJŚCIE
           </button>
         </div>
-        <div className="h-max">
-          {secondMenuItems.map((item: any, i: any) => (
-            <div key={i} className="w-full">
-              {item && (
-                <Link
-                  title={`Wypróbuj Quixy Talent™: ${item.urlLabel}`}
-                  aria-label={`Link to ${item.urlLabel}`}
-                  href={item.url}
-                  className={`aspect-square group w-full h-max text-white font-bold text-sm sm:text-lg text-center relative overflow-hidden flex flex-col items-center justify-center`}
-                  style={{
-                    backgroundColor: item.color,
-                  }}
-                >
-                  <div className="bg-black bg-opacity-50 duration-500 absolute top-0 left-0 w-full h-full z-[200]"></div>
-                  <div className="absolute w-full h-full left-0 top-0 z-[50] opacity-100 hover:opacity-0 duration-300" />
-                  <div className="mx-auto my-auto h-full w-full flex items-center justify-center relative z-[201]">
-                    <div
-                      className={`group-hover:scale-90 duration-300 flex items-center justify-center w-[40%] bg-opacity-50 p-6`}
-                    >
-                      <item.icon className="bg-clip-text bg-gradient-to-r from-primary to-cta drop-shadow-sm shadow-black w-full h-auto" />
+        <div className="relative flex flex-col justify-center">
+          <div className="sticky top-0 right-0 grid lg:grid-cols-2 gap-1.5 h-max py-12 px-6">
+            {secondMenuItems.map((item: any, i: number) => (
+              <article key={i} className="w-full justify-between">
+                {item && (
+                  <Link
+                    title={`Wypróbuj Quixy Talent™: ${item.urlLabel}`}
+                    aria-label={`Link to ${item.urlLabel}`}
+                    href={item.url}
+                    className={`p-4 rounded-xl bg-gradient-to-r  from-primary to-cta hover:from-primary hover:to-cta min-h-[100px] group w-full font-bold text-sm sm:text-lg relative overflow-hidden flex items-center justify-between`}
+                  >
+                    <h4 className="text-white bg-opacity-50 px-2 font-extrabold w-full drop-shadow-xl shadow-black z-[202] py-2 text-lg sm:text-xl">
+                      {item.urlLabel}
+                    </h4>
+                    <div className="flex relative z-[201]">
+                      <item.icon className="text-white group-hover:text-white drop-shadow-sm shadow-black text-4xl" />
                     </div>
-                  </div>
-                  <h4 className="text-center absolute bg-opacity-50 text-white font-extrabold bottom-[10%] left-1/2 -translate-x-1/2 h-max w-full drop-shadow-xl shadow-black z-[202] py-2 text-lg sm:text-xl">
-                    {item.urlLabel}
-                  </h4>
-                </Link>
-              )}
-            </div>
-          ))}
+                  </Link>
+                )}
+              </article>
+            ))}
+          </div>
+          {/* <div className="flex flex-col py-4">
+          <h3 className="text-2xl text-black ">Sprawdź nasze Social Media</h3>
+          <div className="flex items-center flex-wrap -ml-3 mt-3">
+            <Link
+              title="Zobacz TikTok Quixy - Biznes, Pomysły, Rady"
+              href="#tiktok"
+              className="flex items-center mt-3 ml-3"
+            >
+              <div
+                style={{ boxShadow: "2px 2px 3px black" }}
+                className="p-3 rounded-full bg-[#126b91]"
+              >
+                <FaTiktok className="text-xl text-white" />
+              </div>
+              <p className="text-xl ml-1 text-black">TikTok</p>
+            </Link>
+            <Link
+              title="Zobacz Facebook Quixy - Biznes, Pomysły, Rady"
+              href="#facebook"
+              className="flex items-center mt-3 ml-3"
+            >
+              <div
+                style={{ boxShadow: "2px 2px 3px black" }}
+                className="p-3 rounded-full bg-[#126b91]"
+              >
+                <FaFacebook className="text-xl text-white" />
+              </div>
+              <p className="text-xl ml-1 text-black">Facebook</p>
+            </Link>
+          </div>
+        </div> */}
         </div>
       </div>
     </div>

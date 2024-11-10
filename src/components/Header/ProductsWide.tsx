@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { polishToEnglish } from "../../../utils/polishToEnglish";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 export default function ProductsWide({
   width,
@@ -104,34 +105,22 @@ export default function ProductsWide({
         </div>
       </div>
       <div className="relative flex flex-col">
-        <div className="sticky top-0 right-0 grid grid-cols-2 2xl:grid-cols-3 h-max">
+        <div className="sticky top-0 right-0 grid lg:grid-cols-2 gap-1.5 h-max py-12 pr-6">
           {secondMenuItems.map((item: any, i: number) => (
-            <article key={i} className="w-full">
+            <article key={i} className="w-full justify-between">
               {item && (
                 <Link
                   title={`Wypróbuj Quixy Talent™: ${item.urlLabel}`}
                   aria-label={`Link to ${item.urlLabel}`}
                   href={item.url}
-                  className={`aspect-square group w-full h-max text-white font-bold text-sm sm:text-lg text-center relative overflow-hidden flex flex-col items-center justify-center`}
-                  style={{
-                    backgroundColor: item.color,
-                  }}
+                  className={`p-4 rounded-xl bg-gradient-to-r from-primary/20 to-cta/20 hover:from-primary hover:to-cta min-h-[100px] group w-full text-black font-bold text-sm sm:text-lg relative overflow-hidden flex items-center justify-between`}
                 >
-                  <div className="bg-black bg-opacity-50 duration-500 absolute top-0 left-0 w-full h-full z-[200]"></div>
-                  <div className="absolute w-full h-full left-0 top-0 z-[50] opacity-100 hover:opacity-0 duration-300" />
-                  <div className="mx-auto my-auto h-full w-full flex items-center justify-center relative z-[201]">
-                    <div
-                      className={`group-hover:scale-90 duration-300 flex items-center justify-center w-[40%] bg-opacity-50 p-6`}
-                      style={{
-                        backgroundColor: item.color,
-                      }}
-                    >
-                      <item.icon className="text-white drop-shadow-sm shadow-black w-full h-auto" />
-                    </div>
-                  </div>
-                  <h4 className="text-center absolute bg-opacity-50 text-white font-extrabold bottom-[10%] left-1/2 -translate-x-1/2 h-max w-full drop-shadow-xl shadow-black z-[202] py-2 text-lg sm:text-xl">
+                  <h4 className="group-hover:text-white bg-opacity-50 px-2 font-extrabold w-full drop-shadow-xl shadow-black z-[202] py-2 text-lg sm:text-xl">
                     {item.urlLabel}
                   </h4>
+                  <div className="flex relative z-[201]">
+                    <item.icon className="text-black group-hover:text-white drop-shadow-sm shadow-black text-4xl" />
+                  </div>
                 </Link>
               )}
             </article>

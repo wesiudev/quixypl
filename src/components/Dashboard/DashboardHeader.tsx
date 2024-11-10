@@ -1,5 +1,5 @@
 "use client";
-import { FaCog, FaCogs, FaUser } from "react-icons/fa";
+import { FaCog, FaCogs, FaUser, FaUserNinja } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -81,7 +81,7 @@ export default function DashboardHeader() {
             >
               <div className="flex items-center justify-center relative">
                 <div className="text-white opacity-50 mr-2">
-                  <FaCog className="text-2xl" />
+                  <FaUserNinja className="text-2xl" />
                 </div>
                 <div className="mt-px z-50 relative text-center font-bold">
                   MÓJ PROFIL

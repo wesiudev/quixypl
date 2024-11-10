@@ -1,32 +1,6 @@
 import { cutSentence } from "@/lib/cutSentence";
-import Image from "next/image";
-import Link from "next/link";
 import { IoIosClose } from "react-icons/io";
 
-/**
- * @function GeneratedIdeaHeroPopup
- * @description A popup that displays a generated idea with an image and a text.
- * The popup is triggered when the user clicks on the "Wygeneruj pomysł" button.
- * The popup is closed when the user clicks on the "X" button or outside of the popup.
- * If the user is not logged in, the popup will also display a button to log in.
- * @param {Function} setRegisterPopupOpen - A function to set the registerPopupOpen state to true or false.
- * @param {Function} setGeneratorPopup - A function to set the generatorPopup state to true or false.
- * @param {boolean} registerPopupOpen - A boolean indicating if the register popup is open or not.
- * @param {boolean} generatorPopup - A boolean indicating if the generator popup is open or not.
- * @param {Object} generatedIdea - An object containing the generated idea with an image and a text.
- * @returns {JSX.Element} The component to be rendered.
- * @example
- * <GeneratedIdeaHeroPopup
- *  setRegisterPopupOpen={() => {}}
- *  setGeneratorPopup={() => {}}
- *  registerPopupOpen={true}
- *  generatorPopup={true}
- *  generatedIdea={{
- *    image: "",
- *    content: ""
- *  }}
- * />
- */
 export default function GeneratedIdeaHeroPopup({
   setRegisterPopupOpen,
   setGeneratorPopup,

@@ -213,7 +213,7 @@ export default function HomePageGenerator({
 
   return (
     <div className="w-full flex flex-col md:flex-row">
-      <div className=" text-black h-full bg-white w-full p-6">
+      <div className=" text-black h-full bg-white rounded-xl w-full p-6">
         <div className="flex flex-row w-full">
           <div className="flex flex-col md:flex-row w-full">
             <div className="flex flex-col w-full md:w-3/5">
@@ -234,14 +234,14 @@ export default function HomePageGenerator({
 
             <div
               style={{ boxShadow: "0px 0px 5px black" }}
-              className="md:w-2/5 "
+              className="md:w-2/5 rounded-xl"
             >
-              <div className=" p-6 bg-gray-200 w-full h-full flex flex-col justify-between">
+              <div className="p-6 bg-primary rounded-xl w-full h-full flex flex-col justify-between">
                 <div className="h-full flex flex-col">
-                  <h2 className="font-gotham text-2xl text-black font-bold drop-shadow-xl shadow-black">
+                  <h2 className="text-2xl text-white font-extrabold drop-shadow-xl shadow-black">
                     Generator pomysłów na biznes
                   </h2>
-                  <p className="mt-3 font-gotham text-lg font-light text-black">
+                  <p className="mt-3 font-gotham text-white">
                     Nasz generator to rozwiązanie AI, które wygeneruje pomysł i
                     przedstawi biznesplan, a eksperci z Quixy Talent&trade;
                     zrealizują go od A do Z!
@@ -249,13 +249,13 @@ export default function HomePageGenerator({
                 </div>
                 <button
                   disabled={isThinking ? true : false}
-                  className="disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-80 group  p-3 w-full h-max bg-cta hover:bg-opacity-90 duration-150 text-white font-bold mt-3 relative"
+                  className="disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-80 group p-3 w-full h-max bg-cta hover:bg-opacity-80 duration-150 text-white font-bold mt-3 relative"
                   onClick={handleGenerateIdea}
                 >
-                  <div className="w-[250px] cursor-default absolute left-1/2 -translate-x-1/2 -top-[170%] p-2  text-white bg-blue-500 font-bold -translate-y-[50px] group-hover:-translate-y-[0px] z-[-10] group-hover:z-[25] select-none opacity-0 group-hover:opacity-100 duration-150 ease-in-out">
+                  <div className="rounded-xl shadow-lg border-t-2 border-l-2 border-r-2 border-cta w-[250px] cursor-default absolute left-1/2 -translate-x-1/2 -top-[170%] p-2  text-white bg-gradient-to-b from-primary to-cta font-bold -translate-y-[50px] group-hover:-translate-y-[0px] z-[-10] group-hover:z-[25] select-none opacity-0 group-hover:opacity-100 duration-150 ease-in-out">
                     Wygeneruj pomysł na biznes, utwórz konto i odbierz 💎3
                   </div>
-                  <div className="absolute left-1/2 -translate-x-1/2 w-5 h-5 rotate-45 bg-blue-500 -top-[57%] cursor-default -translate-y-[50px] group-hover:-translate-y-[0px] z-[-10] group-hover:z-[24] select-none opacity-0 group-hover:opacity-100 duration-150 ease-in-out" />
+                  <div className="absolute left-1/2 -translate-x-1/2 w-5 h-5 rotate-45 bg-cta -top-[57%] cursor-default -translate-y-[50px] group-hover:-translate-y-[0px] z-[-10] group-hover:z-[24] select-none opacity-0 group-hover:opacity-100 duration-150 ease-in-out" />
                   {isThinking ? "Proszę czekać..." : "Wypróbuj za darmo"}
                 </button>
               </div>

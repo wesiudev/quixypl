@@ -77,7 +77,7 @@ export default function MultiStepVerification({
           <StepItem
             step={3}
             title="Przedstaw się"
-            isCompleted={!!name}
+            isCompleted={name}
             completedText="Pomyślnie ukończono"
             incompleteText={`Imię/nazwisko lub nazwa firmy`}
           />
