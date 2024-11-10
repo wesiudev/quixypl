@@ -8,7 +8,7 @@ import { getPageContent } from "@/lib/getPageContent";
 import Image from "next/image";
 import BlogPostList from "@/components/BlogPostList";
 import { getProducts } from "@/firebase";
-import TalentList from "@/components/JobBoardList";
+import JobBoardList from "@/components/JobBoardList";
 export async function generateStaticParams() {
   return jobs.flatMap((service: any) => ({
     slug: polishToEnglish(service.title),
@@ -161,7 +161,7 @@ export default async function Page(props: {
           <div className="bg-white w-full pb-12 mt-12 p-6 lg:p-12">
             <div className="flex flex-col mx-auto">
               <div className="">
-                <TalentList
+                <JobBoardList
                   talents={categoryTalents}
                   companies={companies}
                   content={content}

@@ -9,15 +9,22 @@ export async function GET(req: NextRequest) {
     return new NextResponse("not found", { status: 404 });
   }
   const users = await getDocuments("users");
-  const companies = users
-    .filter(
-      (user) =>
-        user?.access && user?.tags?.some((tag: any) => tag.slugUrl === category)
-    )
-    .map((user) => ({
-      ...user,
-      email: "hidden",
-    }));
+  const companies = users.filter(
+    (user) =>
+      !user?.seek &&
+      user?.seek !== "ask" &&
+      user?.emailVerified &&
+      user?.pseudo &&
+      user?.configured &&
+      user?.name &&
+      user?.access &&
+      (!category || user.tags.some((tag: any) => tag.slugUrl === category)).map(
+        (user: any) => ({
+          ...user,
+          email: "hidden",
+        })
+      )
+  );
 
   return NextResponse.json(companies);
 }
