@@ -29,10 +29,10 @@ export default function Unsaved({
         changesWereMade
           ? "sticky z-[70] scale-x-100"
           : "fixed z-[-70] scale-x-0"
-      } left-0 bottom-6 flex items-center justify-center`}
+      } left-0 bottom-0 flex items-center justify-center`}
     >
       <div
-        className={`flex space-x-3 lg:space-x-6 p-3 px-5 items-center justify-between max-w-[90%] ${
+        className={`flex space-x-3 lg:space-x-6 p-3 px-5 items-center justify-between w-full ${
           error ? "bg-red-500" : "bg-gray-600"
         } ${
           changesWereMade
@@ -40,7 +40,7 @@ export default function Unsaved({
             : "translate-y-[200px] duration-300"
         } `}
       >
-        <div className="text-white text-sm pr-3 font-coco">
+        <div className="text-white font-extralight pr-3 font-coco">
           <b>Uwaga!</b> - Masz niezapisane zmiany{" "}
           <button
             onClick={() => {

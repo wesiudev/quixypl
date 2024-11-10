@@ -1,9 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 import Pagination from "./pagination/Pagination";
-import Image from "next/image";
-import { TfiFlagAlt } from "react-icons/tfi";
 import DisplayTalentsOrInviter from "./DisplayTalentsOrInviter";
 import DisplayCompaniesOrInviter from "./DisplayCompaniesOrInviter";
 

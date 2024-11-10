@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { polishToEnglish } from "../../../utils/polishToEnglish";
-import { FaArrowRightLong } from "react-icons/fa6";
+import { FaArrowRightLong, FaFacebook, FaTiktok } from "react-icons/fa6";
 
 export default function ProductsWide({
   width,
@@ -110,23 +110,23 @@ export default function ProductsWide({
             <article key={i} className="w-full justify-between">
               {item && (
                 <Link
-                  title={`Wypróbuj Quixy Talent™: ${item.urlLabel}`}
-                  aria-label={`Link to ${item.urlLabel}`}
+                  title={`Wypróbuj ${item.urlLabel}`}
+                  aria-label={item.urlLabel}
                   href={item.url}
-                  className={`p-4 rounded-xl bg-gradient-to-r from-primary/20 to-cta/20 hover:from-primary hover:to-cta min-h-[100px] group w-full text-black font-bold text-sm sm:text-lg relative overflow-hidden flex items-center justify-between`}
+                  className={`p-4 rounded-xl bg-gradient-to-r from-primary to-cta min-h-[100px] group w-full text-white font-bold text-sm sm:text-lg relative overflow-hidden flex items-center justify-between`}
                 >
-                  <h4 className="group-hover:text-white bg-opacity-50 px-2 font-extrabold w-full drop-shadow-xl shadow-black z-[202] py-2 text-lg sm:text-xl">
+                  <h4 className="text-white bg-opacity-50 px-2 font-extrabold w-full drop-shadow-xl shadow-black z-[202] py-2 text-lg sm:text-xl">
                     {item.urlLabel}
                   </h4>
                   <div className="flex relative z-[201]">
-                    <item.icon className="text-black group-hover:text-white drop-shadow-sm shadow-black text-4xl" />
+                    <item.icon className=" group-hover:text-white drop-shadow-sm shadow-black text-4xl" />
                   </div>
                 </Link>
               )}
             </article>
           ))}
         </div>
-        {/* <div className="flex flex-col py-4">
+        <div className="flex flex-col py-4">
           <h3 className="text-2xl text-black ">Sprawdź nasze Social Media</h3>
           <div className="flex items-center flex-wrap -ml-3 mt-3">
             <Link
@@ -156,7 +156,7 @@ export default function ProductsWide({
               <p className="text-xl ml-1 text-black">Facebook</p>
             </Link>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );

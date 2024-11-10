@@ -52,7 +52,7 @@ export default function MultiStepVerification({
   };
   const { modals } = useSelector((state: any) => state.modals);
   return (
-    <div className="p-3 lg:p-6 bg-gray-200">
+    <div className={` p-3 lg:p-6 bg-gray-200`}>
       {isAnimating && <Confetti />}
       <div
         className={`${
@@ -123,7 +123,7 @@ export default function MultiStepVerification({
             onClick={handleAccessClick}
             className="mt-6 bg-gradient-to-r from-primary to-cta text-white py-2 px-4 rounded-lg font-coco font-bold"
           >
-            Wpisz się!
+            Wpisz się! (Zamiast 15.00💎, Zapłacisz dziś 0.00💎)
           </button>
         )}
       </div>

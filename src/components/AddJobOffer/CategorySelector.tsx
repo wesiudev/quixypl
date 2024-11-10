@@ -59,12 +59,8 @@ export default function CategorySelector({
               ogłoszenia)
             </p>
           )}
-        {formData?.tags?.length > 0 &&
-          tagsOpenLevel === 0 &&
-          "Wybrane Stanowiska"}
-        {formData?.tags?.length > 0 &&
-          tagsOpenLevel === 1 &&
-          "Kategorie Stanowisk"}
+        {formData?.tags?.length > 0 && tagsOpenLevel === 0 && "Wybrane"}
+        {formData?.tags?.length > 0 && tagsOpenLevel === 1 && "Kategorie"}
         {formData?.tags?.length > 0 &&
           tagsOpenLevel === 2 &&
           "Twoja oferta w strukturze strony"}

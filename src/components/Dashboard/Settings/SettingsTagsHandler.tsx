@@ -308,12 +308,8 @@ export default function TagsHandler() {
           </div>
           <div className="mt-2 font-bold text-black ">
             {user?.tags?.length === 0 && "Czym się zajmujesz?"}{" "}
-            {user?.tags?.length > 0 &&
-              tagsOpenLevel === 0 &&
-              "Wybrane Stanowiska"}
-            {user?.tags?.length > 0 &&
-              tagsOpenLevel === 1 &&
-              "Kategorie Stanowisk"}
+            {user?.tags?.length > 0 && tagsOpenLevel === 0 && "Wybrane "}
+            {user?.tags?.length > 0 && tagsOpenLevel === 1 && "Kategorie"}
             {user?.tags?.length > 0 &&
               user?.seek &&
               user?.seek !== "ask" &&

@@ -21,27 +21,26 @@ const BlogPostList = ({ posts }: { posts: any }) => {
 
   return (
     <div className="mt-12">
-      <h3 className="text-black font-coco text-xl font-bold">
-        Interesujesz się pracą zdalną, biznesem lub AI? Sprawdź naszego bloga!
-      </h3>
-      <div className="mt-6 grid sm:grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4">
+      <h3 className="text-black font-coco text-xl font-bold">Aktualności</h3>
+      <div className="mt-6 grid sm:grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4">
         {currentIdeas?.map((post: any, i: number) => (
           <Link
             href={`/news/${post.url}`}
             key={i}
             title={`Przejdź do artykułu ${post.title}`}
-            className=" group relative aspect-square h-max flex flex-col duration-300 ease-in-out"
+            className="group relative aspect-square h-max flex flex-col duration-300 ease-in-out"
           >
             <div className="w-full overflow-hidden flex items-start ">
               <Image
+                style={{ boxShadow: "0px 0px 4px #077777" }}
                 src={post.primaryImage}
                 width={512}
                 height={512}
                 alt={`Obrazek ${post.title}`}
-                className="absolute inset-0 object-cover w-full h-full "
+                className=" absolute inset-0 object-cover w-full h-full "
               />
             </div>
-            <h2 className=" hover:shadow-sm group-hover:shadow-primary group-hover:scale-x-105 group-hover:bg-primary/100 bg-black/50 duration-300 absolute bottom-3 left-3 right-3 text-sm mt-3 text-white font-light text-left px-3 py-1 font-coco">
+            <h2 className="bg-primary group-hover:bg-cta border-black duration-300 absolute bottom-0 left-0 right-0 text-sm mt-3 text-white font-extralight text-left p-1 font-coco">
               {post.title}
             </h2>
           </Link>

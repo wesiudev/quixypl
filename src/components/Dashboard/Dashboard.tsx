@@ -110,11 +110,12 @@ export default function Dashboard() {
                       </div>
                       <AccountHistory />
                     </div>
-                    {(!user?.seek ||
+                    {(user?.seek === "ask" ||
                       !user?.pseudo ||
                       !user?.name ||
                       !user?.emailVerified ||
-                      !user?.configured) && (
+                      !user?.configured ||
+                      !user?.access) && (
                       <MultiStepVerification
                         seek={user?.seek}
                         pseudo={user?.pseudo}
@@ -290,7 +291,7 @@ export default function Dashboard() {
                               user?.preferences?.map((item: any, i: any) => (
                                 <h3
                                   key={i}
-                                  className={`ml-1 mt-1  badge badge-neutral badge-outline flex items-center px-2 py-0.5`}
+                                  className={`ml-1 mt-1 bg-white  badge badge-neutral badge-outline flex items-center px-2 py-0.5`}
                                 >
                                   {item}
                                 </h3>
@@ -342,48 +343,7 @@ export default function Dashboard() {
             </div>
             <div className={`bg-white h-max w-full`}>
               <ProjectList projects={user?.projects} />
-
               <JobOfferList job_offers={user?.job_offers} />
-              {user?.job_offers?.length === 0 &&
-                (user?.seek === "ask" || !user?.seek) &&
-                user?.seek && (
-                  <div className="text-lg text-black px-3 lg:px-6 pb-3 lg:pb-6 lg:pt-3">
-                    Nie dodano żadnych usług. Możesz tego dokonać{" "}
-                    <button
-                      onClick={() =>
-                        dispatch(set_modals({ ...modals, config: true }))
-                      }
-                      className="text-primary hover:no-underline underline"
-                    >
-                      klikając tutaj
-                    </button>{" "}
-                  </div>
-                )}
-              {!user?.job_offers?.length &&
-                (user?.seek === "ask" || !user?.seek) && (
-                  <div className="text-black px-3 lg:px-6 pt-3">
-                    Nie dodano żadnych ogłoszeń o pracę - przeprowadź{" "}
-                    <strong>Szybką Rekrutację</strong>⚡
-                    <Link
-                      href="/dashboard/add_job_offer"
-                      className="w-max text-white bg-gradient-to-r from-primary to-cta hover:no-underline underline flex items-center px-2 py-1 rounded-lg mt-1"
-                    >
-                      <FaPlusCircle className="text-lg mr-2" />
-                      Dodaj ofertę pracy
-                    </Link>{" "}
-                  </div>
-                )}
-              {user?.job_offers?.length > 0 && (
-                <div className="px-3 lg:px-6 mt-3 lg:mt-6">
-                  <Link
-                    href="/dashboard/my-postings"
-                    className="text-2xl text-center justify-center font-bold text-white bg-gradient-to-r from-primary to-cta flex items-center px-2 py-1 rounded-lg"
-                  >
-                    <FaBriefcase className="text-3xl lg:text-5xl mr-3" /> Zobacz
-                    oferty pracy
-                  </Link>
-                </div>
-              )}
             </div>
           </div>
         </div>

@@ -32,13 +32,17 @@ export default async function Page(props: {
   const products: any = await getProducts();
   const isTalent = searchParams?.talent === "" ? true : false;
   const talents = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/talents?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    `${process.env.NEXT_PUBLIC_URL}/api/talents?tubylytylkofigi=${
+      process.env.API_SECRET_KEY
+    }&category=${polishToEnglish(params.slug)}`,
     {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
   const companies = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/companies?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    `${process.env.NEXT_PUBLIC_URL}/api/companies?tubylytylkofigi=${
+      process.env.API_SECRET_KEY
+    }&category=${polishToEnglish(params.slug)}`,
     {
       next: { revalidate: 60 },
     }
@@ -180,14 +184,20 @@ export default async function Page(props: {
               />
               <BlogPostList posts={products} />
             </section>
-            <div className="w-full lg:w-[40%] mt-12 lg:mt-0">
+            <div className="w-full lg:w-[40%] mt-12 lg:mt-3">
+              <h2 className="px-6 lg:px-12 text-black font-extrabold text-4xl mb-6">
+                Freelancer Job Boards - Szukaj zleceń i ofert pracy
+              </h2>
               {jobs.map((job: any, i: any) => (
                 <div key={i}>
                   {polishToEnglish(job.title) === params.slug && (
                     <div className="flex flex-col" key={i}>
-                      <div className="flex flex-col bg-white rounded-xl">
+                      <div className="flex flex-col bg-white rounded-xl gap-3">
                         {job.data.map((item: any, j: any) => (
-                          <div key={j} className="relative">
+                          <div
+                            key={j}
+                            className="relative bg-gradient-to-r from-transparent to-primary/30 p-3 rounded-xl"
+                          >
                             <h2
                               title={`Pracuj zdalnie w ${item.title}`}
                               className="py-3 text-black font-extrabold w-full text-xl"
@@ -198,13 +208,13 @@ export default async function Page(props: {
                             </h2>
 
                             {/* Hover dropdown */}
-                            <div className="flex w-[90%] mx-auto flex-wrap my-3">
+                            <div className="flex w-[90%] mx-auto flex-wrap mb-3">
                               {item.data.map((subcategory: any, k: any) => (
                                 <Link
                                   title={`Pracuj zdalnie w ${subcategory.title}`}
                                   key={k}
                                   style={{ boxShadow: "1px 0px 4px black" }}
-                                  className="max-w-[300px] bg-[#126b91] hover:bg-[#468CA9] duration-75 font-light text-white text-sm p-2 w-max"
+                                  className="max-w-[300px] bg-[#126b91] hover:bg-[#468CA9] duration-75 font-extralight font-coco text-lg text-white p-2 w-max"
                                   href={`/praca-zdalna/${polishToEnglish(
                                     job.title
                                   )}/${polishToEnglish(
@@ -238,11 +248,17 @@ export default async function Page(props: {
               </li>
             ))}
 
-            {isTalent && <li className="mt-2 ml-2">#znajdz-prace</li>}
+            {isTalent && <li className="mt-2 ml-2">#znajdz prace</li>}
             {!isTalent && <li className="mt-2 ml-2">#rekrutacja</li>}
-            <li className="mt-2 ml-2">#praca-zdalna</li>
-            <li className="mt-2 ml-2">#job-boards</li>
-            <li className="mt-2 ml-2">#job-offers</li>
+            <li className="mt-2 ml-2">#praca zdalna</li>
+
+            <li className="mt-2 ml-2">#firmy {content?.genitive}</li>
+            <li className="mt-2 ml-2">#freelancer</li>
+            <li className="mt-2 ml-2">#job boards</li>
+            <li className="mt-2 ml-2">#job offers</li>
+            <li className="mt-2 ml-2">#oferty pracy</li>
+            <li className="mt-2 ml-2">#ogloszenia o prace</li>
+            <li className="mt-2 ml-2">#ogloszenia pracy</li>
             <li className="mt-2 ml-2">#{slug.title.toLowerCase()}</li>
           </ul>
         </div>

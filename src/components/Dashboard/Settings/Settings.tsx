@@ -44,11 +44,11 @@ export default function Settings({
       />
       <div
         ref={wrapperRef}
-        className={`fixed bg-white w-screen lg:w-full h-screen overflow-y-scroll scrollbarChat left-0 top-0 ${
+        className={`h-[80vh] w-[95vw] lg:w-[80vw] fixed overflow-y-scroll scrollbarChat ${
           modals.config
-            ? "z-[99999999999999999] opacity-100 -translate-y-1/2 top-1/2"
-            : "z-[-1000] opacity-0 -translate-y-[150vh] top-0"
-        } `}
+            ? "z-[99999999999999999] opacity-100 left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
+            : "z-[-1000] opacity-0 -translate-y-[150vh]"
+        } mb-12`}
       >
         <div className={`${error && "vibrate-screen"}`}>
           <UserEditDashboard

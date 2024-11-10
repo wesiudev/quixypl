@@ -15,7 +15,7 @@ export default function SettingsHeader({
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
   return (
-    <div className="bg-gradient-to-r from-primary to-cta text-base text-white font-bold p-3 z-[5000] flex items-center justify-between w-full">
+    <div className="sticky top-[-1px] left-0 bg-gradient-to-r from-primary to-cta text-base text-white font-bold p-3 z-[5000] flex items-center justify-between w-full">
       <div className="ml-3">MÓJ PROFIL</div>
       <div className="flex">
         <button

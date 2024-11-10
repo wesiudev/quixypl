@@ -8,12 +8,7 @@ import OpinionsForm from "@/components/OpinionsForm";
 import { FaRocket, FaUsers, FaRegLightbulb, FaCogs } from "react-icons/fa";
 import MainFooter from "@/components/MainFooter";
 import Image from "next/image";
-import {
-  FaChevronRight,
-  FaChevronLeft,
-  FaArrowRightLong,
-} from "react-icons/fa6";
-import TalentList from "@/components/JobBoardList";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 function HeroSection() {
   return (

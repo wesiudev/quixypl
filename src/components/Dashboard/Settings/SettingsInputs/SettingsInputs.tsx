@@ -58,7 +58,7 @@ export default function UserEditDashboard({
           Dodawanie {uploadCount} obrazów...
         </div>
       )}
-      <div className="relative">
+      <div className="relative bg-white pb-24">
         <SettingsHeader
           setError={setError}
           changesWereMade={changesWereMade}
