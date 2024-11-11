@@ -158,9 +158,61 @@ export default async function Page(props: {
             </div>
           </div>
           {/* Content */}
-          <div className="px-6 lg:px-12 bg-white mx-auto flex flex-col 2xl:flex-row">
-            <section className="">
-              <h2 className="py-3 text-black text-xl lg:text-3xl mb-3 font-extrabold">
+          <div className="px-6 lg:px-12 bg-white mx-auto flex flex-col lg:flex-row gap-12">
+            <div className="w-full lg:w-[50%] mt-12">
+              <h2
+                style={{ lineHeight: 1.2 }}
+                className="max-w-lg font-extrabold text-4xl mb-6"
+              >
+                <span className="rounded-xl px-3 bg-gradient-to-r from-primary to-cta text-white w-max max-w-full">
+                  Freelancer Job Boards - Szukaj zleceń i ofert pracy
+                </span>
+              </h2>
+              {jobs.map((job: any, i: any) => (
+                <div key={i}>
+                  {polishToEnglish(job.title) === params.slug && (
+                    <div className="flex flex-col" key={i}>
+                      <div className="flex flex-col bg-white rounded-xl gap-3">
+                        {job.data.map((item: any, j: any) => (
+                          <div
+                            key={j}
+                            className="relative bg-gradient-to-r from-transparent to-primary/10 p-3 rounded-xl"
+                          >
+                            <h2
+                              title={`Pracuj zdalnie w ${item.title}`}
+                              className="pb-3 text-black font-extrabold w-full text-xl"
+                            >
+                              <div className="w-[90%]">{item.title}</div>
+                            </h2>
+
+                            {/* Hover dropdown */}
+                            <div className="flex w-[90%] flex-wrap">
+                              {item.data.map((subcategory: any, k: any) => (
+                                <Link
+                                  title={`Pracuj zdalnie w ${subcategory.title}`}
+                                  key={k}
+                                  style={{ boxShadow: "1px 0px 4px black" }}
+                                  className="max-w-[300px] bg-[#126b91] hover:bg-[#468CA9] duration-75 font-extralight font-coco text-lg text-white p-2 w-max"
+                                  href={`/praca-zdalna/${polishToEnglish(
+                                    job.title
+                                  )}/${polishToEnglish(
+                                    item.title
+                                  )}/${polishToEnglish(subcategory.title)}`}
+                                >
+                                  {subcategory.title}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            <section className="w-full lg:w-[50%]">
+              <h2 className="pb-3 text-black text-2xl font-extrabold">
                 Czym zajmują się {content?.informal_title_plural.toLowerCase()}?
               </h2>
 
@@ -170,60 +222,7 @@ export default async function Page(props: {
                   __html: content?.description,
                 }}
               />
-              <div className="w-full mt-12">
-                <h2
-                  style={{ lineHeight: 1.2 }}
-                  className="max-w-lg font-extrabold text-4xl mb-6"
-                >
-                  <span className="rounded-xl px-3 bg-gradient-to-r from-primary to-cta text-white w-max max-w-full">
-                    Freelancer Job Boards - Szukaj zleceń i ofert pracy
-                  </span>
-                </h2>
-                {jobs.map((job: any, i: any) => (
-                  <div key={i}>
-                    {polishToEnglish(job.title) === params.slug && (
-                      <div className="flex flex-col" key={i}>
-                        <div className="flex flex-col bg-white rounded-xl gap-3">
-                          {job.data.map((item: any, j: any) => (
-                            <div
-                              key={j}
-                              className="relative bg-gradient-to-r from-transparent to-primary/30 p-3 rounded-xl"
-                            >
-                              <h2
-                                title={`Pracuj zdalnie w ${item.title}`}
-                                className="py-3 text-black font-extrabold w-full text-xl"
-                              >
-                                <div className="w-[90%] mx-auto">
-                                  {item.title}
-                                </div>
-                              </h2>
 
-                              {/* Hover dropdown */}
-                              <div className="flex w-[90%] mx-auto flex-wrap mb-3">
-                                {item.data.map((subcategory: any, k: any) => (
-                                  <Link
-                                    title={`Pracuj zdalnie w ${subcategory.title}`}
-                                    key={k}
-                                    style={{ boxShadow: "1px 0px 4px black" }}
-                                    className="max-w-[300px] bg-[#126b91] hover:bg-[#468CA9] duration-75 font-extralight font-coco text-lg text-white p-2 w-max"
-                                    href={`/praca-zdalna/${polishToEnglish(
-                                      job.title
-                                    )}/${polishToEnglish(
-                                      item.title
-                                    )}/${polishToEnglish(subcategory.title)}`}
-                                  >
-                                    {subcategory.title}
-                                  </Link>
-                                ))}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
               <BlogPostList posts={products} />
             </section>
           </div>

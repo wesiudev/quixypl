@@ -334,7 +334,7 @@ export default function EssentialUserInfo({
             <label className="font-bold text-black mb-2">Twój opis</label>
             <div className="mt-2"></div>
             <Editor
-              value={initialMarkdownContent}
+              value={source?.description}
               onChange={onEditorContentChanged}
             />
             {/* <textarea

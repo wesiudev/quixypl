@@ -76,7 +76,7 @@ export default function UserPanel() {
                   }
                   className="w-full"
                 >
-                  <div className="flex items-center justify-center relative py-3">
+                  <div className="flex items-center relative py-3">
                     <div className="text-white mr-3">
                       <FaUserNinja className="text-3xl" />
                     </div>
@@ -101,7 +101,7 @@ export default function UserPanel() {
               }}
               rel="noopener noreferrer"
             >
-              <div className="flex items-center justify-center relative py-3">
+              <div className="flex items-center relative py-3">
                 <div className="text-white mr-3 ">{link.icon}</div>
                 <div className="italic py-2 z-50 relative text-center text-lg font-extrabold">
                   {link.text.toUpperCase()}

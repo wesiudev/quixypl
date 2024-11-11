@@ -11,7 +11,7 @@ export interface EditorContentChanged {
 }
 
 export interface EditorProps {
-  value?: string;
+  value?: any;
   onChange?: (changes: EditorContentChanged) => void;
 }
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
@@ -25,7 +25,7 @@ const TOOLBAR_OPTIONS = [
 ];
 
 export default function Editor(props: EditorProps) {
-  const [value, setValue] = useState<string>(markdownToHtml(props.value || ""));
+  const [value, setValue] = useState<string>(props.value);
 
   const onChange = (content: string) => {
     setValue(content);
