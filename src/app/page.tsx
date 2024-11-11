@@ -12,7 +12,7 @@ import Header from "@/components/Header";
 import FAQ from "@/components/Faq";
 import Regions from "@/components/Regions";
 import AboutQuixyTalent from "@/components/AboutQuixyTalent";
-
+import heroImg from "/assets/heroImg.png";
 export default function Page() {
   const itCategories = jobs.flatMap((job) => [
     { title: job.title, data: job.data.map((subItem) => subItem) },
@@ -61,7 +61,7 @@ export default function Page() {
               </Link>
             </div>
             <Image
-              src="/assets/heroImg.png"
+              src={heroImg}
               width={1024}
               height={1024}
               alt="Quixy Praca Zdalna"
