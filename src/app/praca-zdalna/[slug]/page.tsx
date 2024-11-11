@@ -47,19 +47,7 @@ export default async function Page(props: {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
-  const categoryTalents = talents
-    ?.map((item: any) => {
-      const { email, ...talent } = item;
-      return talent;
-    })
-    .filter(
-      (item: any) =>
-        item?.emailVerified &&
-        item?.pseudo &&
-        item?.seek &&
-        item?.seek !== "ask" &&
-        item?.tags?.filter((tag: any) => tag.slugUrl === params.slug).length > 0
-    );
+
   return (
     <>
       <Header jobsList={jobs} />
@@ -162,7 +150,7 @@ export default async function Page(props: {
             <div className="flex flex-col mx-auto">
               <div className="">
                 <JobBoardList
-                  talents={categoryTalents}
+                  talents={talents}
                   companies={companies}
                   content={content}
                 />

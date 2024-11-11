@@ -2,20 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { TfiFlagAlt } from "react-icons/tfi";
 
-export default function DisplayTalentsOrInviter(data: any) {
+export default function DisplayTalentsOrInviter({ data }: { data: any }) {
   return (
     <div
-      className={` ${
+      className={`${
         data.length > 0 &&
-        "w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3"
+        "w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mt-6"
       }`}
     >
       {data.length > 0 ? (
         data?.map((talent: any) => (
           <Link
-            key={talent?.uid}
-            href={`/${!talent?.seek ? "company" : "talent"}/${talent.pseudo}`}
-            className=" flex p-3 border-2 border-gray-500/30 hover:shadow-md duration-200 hover:scale-[1.03] hover:shadow-cta bg-white"
+            key={talent?.pseudo}
+            href={`/talent/${talent.pseudo}`}
+            className="rounded-xl flex p-3 border-2 border-gray-500/30 hover:shadow-md duration-200 hover:scale-[1.03] hover:shadow-cta bg-white"
           >
             {talent?.photoURL ? (
               <div className="w-12 md:w-24 aspect-square rounded-full">
@@ -37,10 +37,10 @@ export default function DisplayTalentsOrInviter(data: any) {
             )}
             <div className="px-3 flex flex-col font-coco">
               <h2 className="text-lg font-bold text-black">{talent?.name}</h2>
-              <h3 className="badge badge-primary badge-outline text-base text-gray-700">
-                {talent?.title}
+              <h3 className="text-white bg-gradient-to-r from-primary to-cta badge badge-outline">
+                {talent?.city}
               </h3>
-              <p className="text-black text-sm">{talent?.city}</p>
+              <p className="text-black">{talent?.title}</p>
             </div>
           </Link>
         ))

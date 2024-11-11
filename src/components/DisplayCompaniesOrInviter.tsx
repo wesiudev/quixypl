@@ -5,7 +5,7 @@ import { TfiFlagAlt } from "react-icons/tfi";
 export default function DisplayCompaniesOrInviter({ data }: { data: any }) {
   return (
     <div
-      className={` ${
+      className={`${
         data.length > 0 &&
         "w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mt-6"
       }`}
@@ -14,7 +14,7 @@ export default function DisplayCompaniesOrInviter({ data }: { data: any }) {
         data?.map((talent: any) => (
           <Link
             key={talent?.pseudo}
-            href={`/${!talent?.seek ? "company" : "talent"}/${talent.pseudo}`}
+            href={`/company/${talent.pseudo}`}
             className="rounded-xl flex p-3 border-2 border-gray-500/30 hover:shadow-md duration-200 hover:scale-[1.03] hover:shadow-cta bg-white"
           >
             {talent?.photoURL ? (

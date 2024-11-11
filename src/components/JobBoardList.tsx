@@ -60,16 +60,6 @@ export default function JobBoardList({
           >
             Firmy
           </button>
-          <button
-            onClick={() => setSearchType("job_offers")}
-            className={`${
-              searchType === "job_offers"
-                ? "shadow-cta shadow-md"
-                : "hover:shadow-cta hover:shadow-md"
-            } text-black flex items-center gap-2 p-2 rounded-md border border-gray-500/30 duration-200 hover:scale-[1.03] bg-white`}
-          >
-            Oferty pracy
-          </button>
         </div>
         {searchType === "talents" && <DisplayTalentsOrInviter data={talents} />}
         {searchType === "companies" && (
