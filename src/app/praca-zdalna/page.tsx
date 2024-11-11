@@ -10,6 +10,36 @@ import MainFooter from "@/components/MainFooter";
 import Image from "next/image";
 import { FaArrowRightLong } from "react-icons/fa6";
 
+// Główna strona
+export default async function Page() {
+  return (
+    <div className="w-full h-full bg-white">
+      <Header jobsList={jobs} />
+      <HeroSection />
+      <main className="">
+        <div className="container mx-auto">
+          <CallToActionSection />
+        </div>
+        <div className="container mx-auto">
+          <WhyChooseQuixySection />
+        </div>
+        <div className="mt-12">
+          <SpecialistsCategoriesSection />
+        </div>
+        <div className="container mx-auto">
+          <WhatMakesUsUniqueSection />
+        </div>
+        <div className="container mx-auto px-6">
+          <FAQ faqItems={faqItems} />
+        </div>
+        <OpinionsForm />
+      </main>
+      <FunnyComponent />
+      <MainFooter jobsList={jobs} />
+    </div>
+  );
+}
+
 function HeroSection() {
   return (
     <header className="px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-16 text-center overflow-hidden relative bg-gradient-to-r from-primary to-cta">
@@ -191,7 +221,7 @@ function HighlightCard({
   linkTitle: string;
 }) {
   return (
-    <div className="p-3 relative bg-gradient-to-r from-primary to-cta rounded-xl">
+    <div className="p-3 relative bg-gradient-to-r from-primary via-cta to-primary rounded-xl">
       <div className="shadow-lg bg-primary rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
         {icon}
       </div>
@@ -199,7 +229,7 @@ function HighlightCard({
       <p className="text-white">{description}</p>
       <div className="mt-6" />
       <Link
-        className="rounded-xl shadow-md bg-cta duration-100 text-white px-3 py-2 "
+        className="rounded-xl shadow-md bg-primary duration-100 text-white px-3 py-2 "
         href="/register"
         title={linkTitle}
       >
@@ -244,58 +274,6 @@ function CallToActionSection() {
         </Link>
       </div>
     </section>
-  );
-}
-
-// Główna strona
-export default async function Page() {
-  const talents = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/talents?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 60 },
-    }
-  ).then((res: any) => res.json());
-  const categoryTalents = talents
-    ?.map((item: any) => {
-      const { email, ...talent } = item;
-      return talent;
-    })
-    .filter(
-      (item: any) =>
-        item?.pseudo &&
-        item?.seek &&
-        item?.emailVerified &&
-        item?.seek !== "ask" &&
-        item?.tags?.length > 0
-    );
-  const categoryCompanies = talents?.filter(
-    (item: any) => item?.pseudo && !item?.seek && item?.seek !== "ask"
-  );
-  return (
-    <div className="w-full h-full bg-white">
-      <Header jobsList={jobs} />
-      <HeroSection />
-      <main className="">
-        <div className="container mx-auto">
-          <CallToActionSection />
-        </div>
-        <div className="container mx-auto">
-          <WhyChooseQuixySection />
-        </div>
-        <div className="mt-12">
-          <SpecialistsCategoriesSection />
-        </div>
-        <div className="container mx-auto">
-          <WhatMakesUsUniqueSection />
-        </div>
-        <div className="container mx-auto px-6">
-          <FAQ faqItems={faqItems} />
-        </div>
-        <OpinionsForm />
-      </main>
-      <FunnyComponent />
-      <MainFooter jobsList={jobs} />
-    </div>
   );
 }
 
