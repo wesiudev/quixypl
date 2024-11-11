@@ -92,8 +92,8 @@ function JoinButton() {
 
 function WhyChooseQuixySection() {
   return (
-    <section className="text-left flex flex-col-reverse lg:flex-row lg:items-center">
-      <h3 className="pl-6 text-left lg:text-center font-bold">
+    <section className="px-6 lg:px-12 text-left flex flex-col-reverse lg:flex-row lg:items-center">
+      <h3 className="text-left lg:text-center font-bold">
         <Link
           className="rounded-xl w-max max-w-[100%] lg:mx-auto text-center p-3 flex lg:flex-col items-center justify-center bg-gradient-to-r from-primary to-cta hover:from-primary/80 hover:to-cta/80 text-white  lg: lg:h-max relative z-50 mt-6 lg:mt-0 lg:mb-0"
           href="/register"
@@ -106,11 +106,11 @@ function WhyChooseQuixySection() {
           </div>
         </Link>
       </h3>
-      <div className="flex flex-col px-6 w-full lg:mx-8">
+      <div className="flex flex-col w-full lg:pl-12">
         <h2 className="font-extrabold text-3xl mb-2 text-black mt-6 lg:mt-0">
           Dlaczego warto wybrać Quixy?
         </h2>
-        <p className="text-lg text-black font-gotham font-light lg:max-w-3xl">
+        <p className="text-lg text-black font-gotham lg:max-w-3xl">
           Oferujemy połączenie z najlepszymi specjalistami w rozwoju
           oprogramowania, usługach IT, marketingu, designu, i nie tylko. Nasza
           platforma łączy firmy z doświadczonymi profesjonalistami, którzy
@@ -241,8 +241,8 @@ function HighlightCard({
 }
 function CallToActionSection() {
   return (
-    <section className="flex flex-col lg:flex-row my-12 text-left">
-      <div className="overflow-hidden h-full  ">
+    <section className="flex flex-col-reverse lg:flex-row lg:my-12 text-left mx-auto">
+      <div className="px-6 lg:pl-12 overflow-hidden h-full mt-12 lg:mt-0">
         <Image
           src="/happy.webp"
           width={500}

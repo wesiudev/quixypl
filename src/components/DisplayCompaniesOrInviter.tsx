@@ -13,7 +13,7 @@ export default function DisplayCompaniesOrInviter({ data }: { data: any }) {
       {data.length > 0 ? (
         data?.map((talent: any) => (
           <Link
-            key={talent?.uid}
+            key={talent?.pseudo}
             href={`/${!talent?.seek ? "company" : "talent"}/${talent.pseudo}`}
             className="rounded-xl flex p-3 border-2 border-gray-500/30 hover:shadow-md duration-200 hover:scale-[1.03] hover:shadow-cta bg-white"
           >
