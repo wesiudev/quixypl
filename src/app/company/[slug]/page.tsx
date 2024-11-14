@@ -37,12 +37,12 @@ export default async function Page(props: {
             <div className="flex flex-col breadcrumbs">
               <ul className="flex items-center flex-wrap">
                 <li className="">
-                  <Link href={`/talent`} title="praca zdalna talent">
-                    talent
+                  <Link href={`/company`} title="praca zdalna company">
+                    company
                   </Link>
                 </li>
                 <li className="">
-                  <Link href={`/talent/${params.slug}`} title={params.slug}>
+                  <Link href={`/company/${params.slug}`} title={params.slug}>
                     {params.slug}
                   </Link>
                 </li>
@@ -195,7 +195,7 @@ export default async function Page(props: {
                 <h2
                   className={`text-xl text-black drop-shadow-lg font-gotham mb-3`}
                 >
-                  Aktywne oferty pracy
+                  Oferty pracy
                 </h2>
                 <div>
                   {talent?.job_offers?.map((offer: JobPosting, i: any) => (

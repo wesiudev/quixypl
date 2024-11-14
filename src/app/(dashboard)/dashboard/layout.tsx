@@ -41,19 +41,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }, [loading, user, router]);
   return (
     <>
-      {!user ? (
-        <Loading />
-      ) : (
-        <div className="bg-[#126b91]">
-          <Providers>
-            <Chat />
-            <div className="sticky top-0 left-0 z-[999999]">
-              <DashboardHeader />
-            </div>
-            <div className="lg:pl-[30rem]">{children}</div>
-          </Providers>
-        </div>
-      )}
+      <div className="bg-[#126b91]">
+        <Providers>
+          {!user ? (
+            <Loading />
+          ) : (
+            <>
+              <Chat />
+              <div className="sticky top-0 left-0 z-[999999]">
+                <DashboardHeader />
+              </div>
+              <div className="lg:pl-[30rem]">{children}</div>
+            </>
+          )}
+        </Providers>
+      </div>
     </>
   );
 }
