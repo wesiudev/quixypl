@@ -17,7 +17,8 @@ export const metadata: Metadata = {
   verification: {
     google: "google85185d3abec28326.html",
   },
-  title: "Quixy™ skontaktuj się z nami",
+  title:
+    "Quixy | Praca Zdalna | Zatrudnij freelancerów | Skontaktuj się z nami",
   description:
     "Zatrudnij ekspertów z branży IT, marketingu, designu i innych dziedzin. Znajdź specjalistów w Quixy Talent™ i rozwijaj swój biznes już dziś!",
 };

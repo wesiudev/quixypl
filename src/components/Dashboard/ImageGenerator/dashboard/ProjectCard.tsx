@@ -1,7 +1,6 @@
 "use client";
-import { addJobOffer, updateJobOffer, updateUser } from "@/firebase";
+import { addJobOffer, updateUser } from "@/firebase";
 import { set_modals } from "@/redux/slices/modalsopen";
-import { setUser } from "@/redux/slices/user";
 import { IProject, IProjectImage } from "@/types";
 import moment from "moment";
 import Image from "next/image";
@@ -9,8 +8,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import ProjectImages from "./ProjectImages";
-import { copyToClipboard } from "@/lib/copyToClipboard";
-import Link from "next/link";
+
 import { useRouter } from "next/navigation";
 
 export default function ProjectCard({
@@ -54,7 +52,7 @@ export default function ProjectCard({
   }
 
   return (
-    <div className="pb-3 z-[99999999999]">
+    <div className={`pb-3 z-[99999999999] ${project?.isPaid ? "" : "hidden"}`}>
       <ProjectImages
         project={project}
         currentIndex={currentIndex}

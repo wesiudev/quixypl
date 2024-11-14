@@ -172,15 +172,13 @@ export default async function Page(props: {
               )}
             </div>
           </div>
-          {talent?.projects?.length > 0 && (
-            <div className={` h-max w-full mt-3`}>
+          {talent?.projects?.filter((project: IProject) => project?.isPaid)
+            .length > 0 && (
+            <div className={`h-max w-full mt-3`}>
               <h2
-                className={`text-3xl text-black drop-shadow-lg font-gotham mb-3`}
+                className={`text-3xl text-black drop-shadow-lg font-extrabold mb-3`}
               >
-                {talent?.seek && talent?.seek !== "ask" && "Portfolio"}
-                {!talent?.seek &&
-                  talent?.seek !== "ask" &&
-                  "Aktywne oferty pracy"}
+                Oferowane usługi
               </h2>
               <div>
                 {talent?.projects?.map((project: IProject, i: any) => (
