@@ -1,6 +1,6 @@
 "use client";
 import Header from "@/components/Header";
-import jobs from "../../../public/14.09.2024.json";
+import jobs from "../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Link from "next/link";
 import Image from "next/image";
