@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import CategorySelector from "@/components/AddJobOffer/CategorySelector";
 import Postings from "@/components/Postings/Postings";
