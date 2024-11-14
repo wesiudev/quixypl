@@ -1,20 +1,16 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { addJobOffer, updateUser } from "@/firebase";
-import { toast } from "react-toastify";
 import { FaChevronLeft } from "react-icons/fa";
 import jobs from "../../../public/14.09.2024.json";
 import StepThree from "./Step3";
 import StepTwo from "./Step2";
 import StepOne from "./Step";
 import { JobListing } from "@/types";
-import { useRouter } from "next/navigation";
 import ReactConfetti from "react-confetti";
-import { v4 as uuid } from "uuid";
-import moment from "moment";
-import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "@/redux/slices/user";
+
+import { useSelector } from "react-redux";
+
 export default function AddJobOffer() {
   const InitialData = {
     days: 1,
@@ -51,50 +47,6 @@ export default function AddJobOffer() {
   const [selectedTag, setSelectedTag] = useState<any>({});
   const [isAnimating, setIsAnimating] = useState(false);
   const [isSent, setIsSent] = useState(false);
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      await addJobOffer({
-        ...formData,
-        expirationTime: moment().add(formData?.days, "days").valueOf(),
-        authorId: user?.uid,
-        id: uuid(),
-        isPaid: user?.tokens >= formData?.price,
-      });
-      await updateUser(user?.uid, {
-        job_offers: user?.job_offers
-          ? [
-              ...user.job_offers,
-              {
-                ...formData,
-                expirationTime: moment().add(formData?.days, "days").valueOf(),
-                authorId: user?.uid,
-                id: uuid(),
-                isPaid: user?.tokens >= formData?.price,
-              },
-            ]
-          : [
-              {
-                ...formData,
-                expirationTime: moment().add(formData?.days, "days").valueOf(),
-                authorId: user?.uid,
-                id: uuid(),
-                isPaid: user?.tokens >= formData?.price,
-              },
-            ],
-      });
-      dispatch(
-        setUser({ ...user, job_offers: [...user.job_offers, formData] })
-      );
-      toast.success("Oferta pracy dodana pomyślnie!");
-      router.push("/dashboard/my-postings");
-    } catch (error: any) {
-      toast.error("Wystąpił błąd podczas dodawania oferty.");
-    }
-  };
 
   const nextStep = () => setCurrentStep((prev) => prev + 1);
   const prevStep = () => setCurrentStep((prev) => prev - 1);
@@ -154,7 +106,6 @@ export default function AddJobOffer() {
             setFormData={setFormData}
             user={user}
             InitialData={InitialData}
-            handleSubmit={handleSubmit}
             setIsAnimating={setIsAnimating}
             isAnimating={isAnimating}
             isSent={isSent}

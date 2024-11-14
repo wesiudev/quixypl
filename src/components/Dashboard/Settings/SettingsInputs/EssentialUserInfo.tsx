@@ -12,22 +12,22 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/firebase";
 import Editor, { EditorContentChanged } from "@/components/AddJobOffer/Editor";
 export default function EssentialUserInfo({
+  setSource,
   source,
   setChangesWereMade,
 }: {
+  setSource: any;
   source: any;
   setChangesWereMade: any;
 }) {
   const dispatch = useDispatch();
   function handleReduxUserState(value: any, key: string) {
     dispatch(setUser({ ...source, [key]: value }));
+    setChangesWereMade(true);
   }
   const [isLoading, setIsLoading] = useState(false);
-  const initialMarkdownContent = "";
-
   const onEditorContentChanged = (content: EditorContentChanged) => {
     handleReduxUserState(content.html, "description");
-    setChangesWereMade(true);
   };
   const [triesCount, setTriesCount] = useState(0);
   const [localPseudo, setLocalPseudo] = useState(source?.pseudo);
@@ -50,10 +50,8 @@ export default function EssentialUserInfo({
   const [loading, setLoading] = useState(false);
   async function upload(file: any) {
     setLoading(true);
-
     const randId = uuid();
     const imageRef = ref(storage, randId);
-
     await uploadBytes(imageRef, file);
     const url = await getDownloadURL(imageRef);
     dispatch(
@@ -62,10 +60,8 @@ export default function EssentialUserInfo({
         photoURL: url,
       })
     );
-
     setLoading(false);
   }
-
   return (
     <div className="relative">
       <div className="flex flex-col lg:flex-row pt-4 sm:pt-6">
@@ -305,7 +301,6 @@ export default function EssentialUserInfo({
                 <div className="grid grid-cols-2">
                   <div className="relative w-full">
                     <input
-                      onClick={() => console.log(source?.hourRate)}
                       id="hourRate"
                       className="w-full border border-primary  p-2 text-black font-light"
                       placeholder={`np. ${source?.seek ? "100" : ""}`}
@@ -336,6 +331,9 @@ export default function EssentialUserInfo({
             <Editor
               value={source?.description}
               onChange={onEditorContentChanged}
+              setChangesWereMade={setChangesWereMade}
+              setSource={setSource}
+              source={source}
             />
             {/* <textarea
               value={source?.bio}

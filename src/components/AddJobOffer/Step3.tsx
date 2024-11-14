@@ -24,7 +24,6 @@ export default function StepThree({
   InitialData,
   isAnimating,
   setIsAnimating,
-  handleSubmit,
   isSent,
   setIsSent,
 }: {
@@ -38,7 +37,6 @@ export default function StepThree({
   InitialData: any;
   isAnimating: any;
   setIsAnimating: any;
-  handleSubmit: any;
   isSent: any;
   setIsSent: any;
 }) {
@@ -46,16 +44,10 @@ export default function StepThree({
   const dispatch = useDispatch();
 
   const handleRecruitmentStart = async () => {
-    const hasEnoughTokens = user.tokens >= formData.price;
-    if (!hasEnoughTokens) {
+    await updateJobOffers().then(() => {
       showToastSuccess("Pomyślnie zapisano ofertę pracy!");
-      await updateJobOffers();
-
-      setIsAnimating(true);
-      setTimeout(() => {
-        router.push("/dashboard/my-postings");
-      }, 5000);
-    }
+    });
+    setIsAnimating(true);
   };
   const router = useRouter();
   const updateJobOffers = async () => {
@@ -71,7 +63,6 @@ export default function StepThree({
         ...formData,
         isPaid: hasEnoughTokens,
         id: jobOfferId,
-        expirationTime: moment().add(formData.days, "days").valueOf(),
         creationTime: Date.now(),
       };
 
@@ -89,10 +80,6 @@ export default function StepThree({
       await updateUser(user.uid, {
         job_offers: updatedJobOffers,
         // tokens: updatedTokens,
-      }).then(() => {
-        setTimeout(() => {
-          router.push("/dashboard/my-postings");
-        }, 5000);
       });
       await addJobOffer(newJobOffer);
       // Dispatch updated user state to Redux
@@ -104,11 +91,12 @@ export default function StepThree({
         })
       );
 
-      setIsAnimating(true);
+      setIsAnimating(false);
     } catch (error) {
       showToastError("Failed to add job offer.");
     } finally {
       setIsLoading(false);
+      router.push("/dashboard/my-postings");
     }
   };
 

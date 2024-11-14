@@ -59,9 +59,15 @@ export default async function Page(props: {
     <div className="text-center">
       <div className="bg-white w-full h-screen flex items-center justify-center flex-col left-0 top-0">
         {order.payment_status === "paid" && orderToCompare?.realized && (
-          <div className="bg-[#126b91] text-white font-bold text-center p-12 ">
+          <div className="flex items-center justify-center bg-[#126b91] text-white font-bold text-center p-12 ">
             Dziękujemy za zakupy, {order.metadata.quantity}💎 Quixies zostało
             dodane do twojego konta.
+            <Link
+              href="/dashboard"
+              className="mt-3 bg-cta font-extrabold text-xl text-white p-2"
+            >
+              Przejdź do panelu
+            </Link>
           </div>
         )}
         {order.payment_status === "paid" && !orderToCompare?.realized && (

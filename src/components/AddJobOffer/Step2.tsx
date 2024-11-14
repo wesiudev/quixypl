@@ -103,7 +103,6 @@ export default function StepTwo({
                 ) {
                   nextStep();
                 } else {
-                  console.log(formData);
                   toast.error("Uzupełnij dane!", {
                     position: "top-right",
                     autoClose: 5000,

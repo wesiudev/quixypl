@@ -4,11 +4,6 @@ import jobs from "../../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Header from "@/components/Header";
 import { FaBriefcase } from "react-icons/fa";
-import { TfiFlagAlt } from "react-icons/tfi";
-import { getPageContent } from "@/lib/getPageContent";
-import Image from "next/image";
-import JobOffers from "@/components/JobOffers";
-import { getDocuments } from "@/firebase";
 import AboutQuixyTalent from "@/components/AboutQuixyTalent";
 
 // Generowanie parametrów statycznych
@@ -42,63 +37,41 @@ export default async function Page(props: { params: Promise<any> }) {
     }
   ).then((res: any) => res.json());
   return (
-    <div className="bg-gradient-to-b !font-gotham relative bg-white">
+    <div className="bg-gradient-to-b relative bg-white">
       <Header jobsList={jobs} />
 
       {/* Hero Section */}
-      <div className="px-4 relative flex flex-col items-center justify-center text-center text-white bg-gradient-to-r from-zinc-900 via-gray-900 to-zinc-950 py-12 font-gotham">
-        <div className="p-3 sm:p-6 lg:p-12 !py-0 relative z-50">
-          <h1 className="text-2xl mb-4">
-            Praca zdalna{" "}
-            <b className="bg-gradient-to-r from-primary via-cta to-primary p-1  !leading-snug">
-              {slug?.title}
-            </b>
-          </h1>
-        </div>
-        <div className=" breadcrumbs text-sm bg-transparent mx-auto flex items-center justify-center relative z-50">
-          <ul className="flex-wrap flex items-center justify-center px-3 font-light text-white">
-            <li>
-              <Link title="praca zdalna" href={`/praca-zdalna`}>
-                praca-zdalna
-              </Link>
-            </li>
-            <li>
-              <Link title={params.slug} href={`/praca-zdalna/${params.slug}`}>
-                {params.slug}
-              </Link>
-            </li>
-            <li>
-              <Link
-                title={params.category}
-                href={`/praca-zdalna/${params.slug}/${params.category}`}
-              >
-                {params.category}
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <p className="max-w-2xl mx-auto text-lg text-white px-3 mt-3 font-light z-50">
-          Zatrudnij najlepszych specjalistów od{" "}
-          <b className="text-cta">{content?.genitive}</b> na polskim rynku pracy
-          i zrealizuj swój projekt z ich wsparciem! Odkryj możliwości Quixy.
-        </p>
-        <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 justify-center mt-4 w-full z-50">
-          <Link
-            href="/register"
-            title="Rekrutuj do pracy zdalnej na panelu Quixy"
-            className="font-gotham  bg-primary hover:bg-opacity-90 duration-100 text-white font-bold text-sm lg:text-base p-2 py-1.5 text-center"
-          >
-            <h2 className="w-max mx-auto">Jestem klientem</h2>
-          </Link>
-          <Link
-            href="/register"
-            title="Szukaj pracy zdalnej na panelu Quixy"
-            className="font-gotham  bg-cta hover:bg-opacity-90 duration-100 text-white font-bold text-sm lg:text-base p-2 py-1.5 text-center"
-          >
-            <h2 className="w-max mx-auto">Jestem freelancerem</h2>
-          </Link>
+      <div className="px-6 lg:px-12 relative flex flex-col items-center justify-center text-center bg-gradient-to-r from-primary to-cta">
+        <div className="mb-6 lg:mb-12 w-full py-8 lg:py-12 text-center overflow-hidden relative mt-8 lg:mt-12 bg-white">
+          <div className="container mx-auto">
+            <h1 className="pb-4 lg:pb-8 px-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-3 leading-snug w-full mx-auto bg-gradient-to-r from-primary to-cta text-transparent bg-clip-text">
+              {slug?.title} - Zlecenia, Usługi, Oferty Pracy
+            </h1>
+          </div>
+          <p className="max-w-2xl mx-auto text-lg sm:text-xl text-gray-700 px-4 z-50">
+            Zatrudnij najlepszych specjalistów od{" "}
+            <b className="text-cta">{content?.genitive}</b> na polskim rynku
+            pracy i zrealizuj swój projekt z ich wsparciem!
+          </p>
+          <div className="flex items-center gap-3 sm:gap-4 lg:gap-5 justify-center mt-6 w-full z-50">
+            <Link
+              href="/register"
+              title="Rekrutuj do pracy zdalnej na panelu Quixy"
+              className="font-gotham bg-primary hover:bg-opacity-90 duration-150 text-white font-bold text-sm lg:text-base px-3 py-2 text-center rounded-md"
+            >
+              Jestem klientem
+            </Link>
+            <Link
+              href="/register"
+              title="Szukaj pracy zdalnej na panelu Quixy"
+              className="font-gotham bg-cta hover:bg-opacity-90 duration-150 text-white font-bold text-sm lg:text-base px-3 py-2 text-center rounded-md"
+            >
+              Jestem freelancerem
+            </Link>
+          </div>
         </div>
       </div>
+
       {/* <div className="px-4 bg-white w-full mb-6 mt-12">
         <div className="flex flex-col container mx-auto">
           <div className="">
@@ -116,14 +89,14 @@ export default async function Page(props: { params: Promise<any> }) {
         </div>
       </div> */}
       {/* Subcategories Section */}
-      <div className="bg-white px-4 container mx-auto">
+      <div className="bg-white px-6 lg:px-12 mx-auto">
         {slug?.data?.length > 0 && (
           <div className="">
-            <h1 className="!leading-normal text-black bg-white text-xl lg:text-3xl mt-6">
+            <h1 className="!leading-normal text-black bg-white text-xl lg:text-3xl mt-6 font-extrabold">
               {slug.title}
-              <b className="bg-gradient-to-r from-primary via-cta to-primary p-1  ml-1 text-white">
+              <span className="bg-gradient-to-r from-primary to-cta p-1 ml-1 text-white">
                 oferty pracy zdalnej
-              </b>
+              </span>
             </h1>
             <div className="bg-white mt-6 relative z-50 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3">
               {slug.data.map((item: any, index: number) => (
@@ -144,12 +117,12 @@ export default async function Page(props: { params: Promise<any> }) {
         )}
       </div>
 
-      <div className="bg-white w-full px-4 mt-12">
-        <div className="flex flex-col lg:flex-row gap-6  container mx-auto">
+      <div className="bg-white w-full px-3 lg:px-12 mt-12">
+        <div className="flex flex-col lg:flex-row gap-6 mx-auto">
           <section className="text-left w-full lg:pr-24">
             <h2
               style={{ lineHeight: 1.5 }}
-              className="text-3xl mb-3 text-black font-bold"
+              className="text-3xl mb-3 text-black font-extrabold"
             >
               Czym zajmują się {content?.informal_title_plural?.toLowerCase()}?
             </h2>
@@ -162,7 +135,7 @@ export default async function Page(props: { params: Promise<any> }) {
             />
           </section>
         </div>
-        <div className="container mx-auto mt-6">
+        <div className="my-6">
           <AboutQuixyTalent />
         </div>
       </div>
@@ -184,7 +157,7 @@ export async function generateMetadata(props: { params: Promise<any> }) {
       (item: any) => polishToEnglish(item.category) === params.category
     ).category;
 
-  const title = `Quixy Talent™ | Oferty pracy zdalnej - ${category}`;
+  const title = `Oferty Pracy Zdalnej Zlecenia Freelancerzy | ${category}`;
   const description = `Przeglądaj nasze oferty pracy w kategorii ${category}. Zrealizuj swój projekt z Quixy!`;
 
   return {

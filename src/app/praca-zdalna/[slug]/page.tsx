@@ -162,11 +162,9 @@ export default async function Page(props: {
             <div className="w-full lg:w-[50%] mt-12">
               <h2
                 style={{ lineHeight: 1.2 }}
-                className="max-w-lg font-extrabold text-4xl mb-6"
+                className="rounded-xl text-black w-max max-w-full font-extrabold text-4xl mb-6"
               >
-                <span className="rounded-xl px-3 bg-gradient-to-r from-primary to-cta text-white w-max max-w-full">
-                  Freelancer Job Boards - Szukaj zleceń i ofert pracy
-                </span>
+                Zlecenia i oferty pracy zdalnej dla freelancerów oraz firm
               </h2>
               {jobs.map((job: any, i: any) => (
                 <div key={i}>

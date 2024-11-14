@@ -53,7 +53,7 @@ export default function SlugFooter({
           </div>
         </div>
         <div className="p-3 lg:p-6 bg-black/50 ">
-          <div className="text-white drop-shadow-lg shadow-black font-extralight my-3 font-coco">
+          <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 font-coco">
             Powered by
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

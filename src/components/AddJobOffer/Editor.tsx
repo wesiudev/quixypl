@@ -1,8 +1,7 @@
 "use client";
-import { useMemo, useRef, useState } from "react";
+import { useState } from "react";
 import "react-quill-new/dist/quill.snow.css";
 import "quill-emoji/dist/quill-emoji.css";
-import { htmlToMarkdown, markdownToHtml } from "./Parser";
 import dynamic from "next/dynamic";
 
 export interface EditorContentChanged {
@@ -13,6 +12,9 @@ export interface EditorContentChanged {
 export interface EditorProps {
   value?: any;
   onChange?: (changes: EditorContentChanged) => void;
+  setSource?: any;
+  source?: any;
+  setChangesWereMade: any;
 }
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
@@ -27,14 +29,11 @@ const TOOLBAR_OPTIONS = [
 export default function Editor(props: EditorProps) {
   const [value, setValue] = useState<string>(props.value);
 
-  const onChange = (content: string) => {
-    setValue(content);
-
-    if (props.onChange) {
-      props.onChange({
-        html: content,
-        markdown: htmlToMarkdown(content),
-      });
+  const onChange = (value: string) => {
+    props.setChangesWereMade(true);
+    setValue(value);
+    if (props.source) {
+      props.setSource({ ...props.source, description: value });
     }
   };
 

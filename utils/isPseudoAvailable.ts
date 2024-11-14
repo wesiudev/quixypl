@@ -11,7 +11,6 @@ export async function isPseudoAvailable(localPseudo: string) {
       cache: "no-store",
     }
   );
-  console.log(response);
   const data = response.json();
   return data;
 }

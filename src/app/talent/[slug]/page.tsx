@@ -30,19 +30,19 @@ export default async function Page(props: {
       <div className="fixed top-0 left-0 z-[100] w-full">
         <UserStickyTop slugData={talent} />
       </div>
-      <div className="container relative mx-auto px-3 lg:px-12 bg-white">
+      <div className="relative mx-auto bg-white">
         {/* Breadcrumbs with Icons */}
         <div className="bg-white py-6 grid grid-cols-1 h-max w-full mx-auto relative z-50">
-          <div className="items-end flex justify-between w-full text-sm bg-white !text-black relative z-50">
+          <div className="px-3 lg:px-12 items-end flex justify-between w-full text-sm bg-white !text-black relative z-50">
             <div className="flex flex-col breadcrumbs">
               <ul className="flex items-center flex-wrap">
                 <li className="">
-                  <Link href={`/talent`} title="praca zdalna talent">
-                    talent
+                  <Link href={`/company`} title="praca zdalna company">
+                    company
                   </Link>
                 </li>
                 <li className="">
-                  <Link href={`/talent/${params.slug}`} title={params.slug}>
+                  <Link href={`/company/${params.slug}`} title={params.slug}>
                     {params.slug}
                   </Link>
                 </li>
@@ -53,7 +53,7 @@ export default async function Page(props: {
             </div>
           </div>
           <div>
-            <div className="mt-6 w-full">
+            <div className="px-3 lg:px-12 mt-6 w-full">
               <div className="flex justify-between w-full">
                 <div className="flex flex-col w-full">
                   <div className="flex w-full">
@@ -161,78 +161,59 @@ export default async function Page(props: {
                 </div>
               </div>
               {talent?.description && (
-                <div className="mt-12 bg-gradient-to-r from-primary/10 to-cta/10 p-3">
-                  <h2 className="text-2xl text-black drop-shadow-lg font-extrabold">
-                    Opis użytkownika
+                <>
+                  <h2 className="mt-3 text-2xl text-black font-extrabold">
+                    Opis
                   </h2>
-                  <div className={`text-black my-3`}>
-                    <Viewer value={talent?.description} />
+                  <div className="mt-2 bg-gradient-to-r from-primary/10 to-cta/10 p-3">
+                    <div className={`text-black my-3`}>
+                      <Viewer value={talent?.description} />
+                    </div>
                   </div>
-                </div>
+                </>
               )}
             </div>
           </div>
-          {talent?.projects?.length > 0 && (
-            <div className={` h-max w-full mt-3`}>
+          {talent?.projects?.filter((project: IProject) => project?.isPaid)
+            .length > 0 && (
+            <div
+              className={`py-12 bg-gradient-to-r from-primary to-cta h-max w-full mt-12 px-3 lg:px-12`}
+            >
               <h2
-                className={`text-3xl text-black drop-shadow-lg font-gotham mb-3`}
+                className={`text-3xl text-white drop-shadow-lg font-extrabold mb-6`}
               >
-                {talent?.seek && talent?.seek !== "ask" && "Portfolio"}
-                {!talent?.seek &&
-                  talent?.seek !== "ask" &&
-                  "Aktywne oferty pracy"}
+                Usługi użytkownika {talent?.name}
               </h2>
-              <div>
+              <div className="gap-3">
                 {talent?.projects?.map((project: IProject, i: any) => (
-                  <ProjectCard key={i} project={project} isSlug={true} />
+                  <ProjectCard
+                    key={i}
+                    project={project}
+                    isSlug={true}
+                    slug={talent}
+                  />
                 ))}
               </div>
             </div>
           )}
-          {talent?.job_offers?.length > 0 &&
-            talent?.job_offers?.filter(
-              (jobOffer: JobPosting, i: number) => jobOffer.isPaid
-            )?.length > 0 && (
-              <div className={` h-max w-full mt-3`}>
-                <h2
-                  className={`text-xl text-black drop-shadow-lg font-gotham mb-3`}
-                >
-                  Aktywne oferty pracy
-                </h2>
-                <div>
-                  {talent?.job_offers?.map((offer: JobPosting, i: any) => (
-                    <div
-                      key={offer.id}
-                      className={`${!offer?.isPaid ? "hidden" : "block"}`}
-                    >
-                      <JobOfferCard
-                        href={`/job-offer/${offer.title}-${offer.creationTime}`}
-                        key={i}
-                        offer={offer}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
         </div>
       </div>
       {/* <div className="container mx-auto py-12 bg-white px-4">
-        <div className="bg-white relative overflow-hidden">
-          <div className="bg-gradient-to-r from-primary/40 to-cta/40 text-xl lg:text-3xl mx-auto ">
-            <h2 className="text-white font-gotham w-full text-center px-2 py-1  bg-gradient-to-r from-primary to-cta">
-              Zobacz podobne profile
-            </h2>
-            <div className="p-2">
-              <JobBoardList
-                talents={talents}
-                companies={companies}
-                content={content}
-              />
-            </div>
+      <div className="bg-white relative overflow-hidden">
+        <div className="bg-gradient-to-r from-primary/40 to-cta/40 text-xl lg:text-3xl mx-auto ">
+          <h2 className="text-white font-gotham w-full text-center px-2 py-1  bg-gradient-to-r from-primary to-cta">
+            Zobacz podobne profile
+          </h2>
+          <div className="p-2">
+            <JobBoardList
+              talents={talents}
+              companies={companies}
+              content={content}
+            />
           </div>
         </div>
-      </div> */}
+      </div>
+    </div> */}
     </div>
   );
 }
@@ -249,8 +230,8 @@ export async function generateMetadata(props: {
     }
   ).then((res: any) => res.json());
 
-  const title = `${slug?.title} w ${slug?.city} - ${slug?.name}`;
-  const description = `Sprawdź projekty ${params.slug}`;
+  const title = `${slug?.title} - ${slug?.name} | ${slug?.city}`;
+  const description = `Profile z ofertami usług - Dodaj ofertę pracy - ${slug.name} | ${slug?.tags[0]?.title} ${slug?.tags[1]?.title} ${slug?.tags[2]?.title} ${slug?.tags[3]?.title} ${slug?.tags[4]?.title} ${slug?.tags[5]?.title} ${slug?.tags[6]?.title} ${slug?.tags[7]?.title}`;
   return {
     title,
     description,

@@ -24,7 +24,7 @@ export default function HireButton({
           }
         }}
       >
-        Napisz wiadomość
+        Wyślij zapytanie
       </button>
     </div>
   );

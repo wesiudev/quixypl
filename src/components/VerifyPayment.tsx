@@ -32,9 +32,7 @@ export default function VerifyPayment({
   useEffect(() => {
     if (!isMounted && !orderToCompare.realized) {
       setIsMounted(true);
-      addCoins().then((res) => {
-        router.push("/dashboard");
-      });
+      addCoins();
     }
   }, [isMounted]);
 

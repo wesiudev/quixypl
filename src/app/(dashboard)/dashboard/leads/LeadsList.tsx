@@ -20,16 +20,16 @@ export default function LeadsList() {
   moment.locale("pl");
   return (
     <>
-      <div className="bg-gray-600 h-max w-full font-sans">
+      <div className="bg-gray-600 h-max w-full">
         <div className="w-full justify-between bg-gradient-to-r from-primary to-cta py-3 px-6 text-white font-bold text-lg flex items-center">
           <Link href="/dashboard" className="flex items-center">
             <FaChevronLeft className="mr-2 text-xl" />
             Powrót
           </Link>
           <div className="flex flex-col text-white pl-12">
-            <h2 className="text-sm sm:text-base">Sekcja Leadów</h2>
-            <p className="text-xs sm:text-base ">
-              Tu znajdą się wszystkie twoje leady oraz zlecenia.
+            <h2 className="font-extrabold">Sekcja Leadów</h2>
+            <p className="text-xs font-coco">
+              Znajdziesz tutaj wszystkie swoje leady, zlecenia oraz kandydatów.
             </p>
           </div>
         </div>

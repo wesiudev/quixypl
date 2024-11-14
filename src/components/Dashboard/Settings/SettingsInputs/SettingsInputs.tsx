@@ -75,6 +75,7 @@ export default function UserEditDashboard({
             <EssentialUserInfo
               source={source}
               setChangesWereMade={setChangesWereMade}
+              setSource={setSource}
             />
             {source?.seek !== "ask" && (
               <>

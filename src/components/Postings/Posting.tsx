@@ -16,10 +16,6 @@ export default function Posting({
   loading: any;
   pay: any;
 }) {
-  const getExpirationColor = (expirationTime: number, extraDays: number) => {
-    const expirationDate = moment(expirationTime).add(extraDays, "days");
-    return expirationDate.isBefore(moment()) ? "text-red-500" : "text-cta";
-  };
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [applicationsOpen, setApplicationsOpen] = useState(false);
@@ -54,7 +50,6 @@ export default function Posting({
       toast.error("Przepraszamy! Wystąpił błąd.");
     }
   };
-
   return (
     <div className="h-[50vh] overflow-y-scroll bg-white shadow-md">
       <div className="p-4 relative">
@@ -75,8 +70,8 @@ export default function Posting({
           loading={loading}
           jobOffer={jobOffer}
         />
-        <div className="viewer mt-6">
-          <Viewer value={jobOffer.description} />
+        <div className="mt-6">
+          <Viewer value={jobOffer?.description} />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 text-black">

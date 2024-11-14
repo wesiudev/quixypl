@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function OfferOptionsOpened({
@@ -20,14 +21,14 @@ export default function OfferOptionsOpened({
   setDeleteMenu: any;
 }) {
   const [loading, setLoading] = useState(false);
-
+  const router = useRouter();
   return (
     <div
       className={`px-2 z-10 absolute top-7 right-12 w-max h-max py-6 bg-zinc-800 flex flex-col items-start space-y-1 duration-500 ease-in-out ${
         !optionsOpen ? "-translate-y-[80px] scale-x-0" : "-translate-y-0"
       }`}
     >
-      <button
+      {/* <button
         onClick={() => {
           setEditOpen(true);
           setOptionsOpen(false);
@@ -35,10 +36,10 @@ export default function OfferOptionsOpened({
         className="w-full px-4 py-1 text-white bg-white bg-opacity-10 duration-150 hover:bg-opacity-20"
       >
         Edytuj
-      </button>
+      </button> */}
       <button
         onClick={() => {
-          setApplicationsOpen(true);
+          router.push("/dashboard/leads");
           setOptionsOpen(false);
         }}
         className="w-full px-4 py-1 text-white bg-white bg-opacity-10 duration-150 hover:bg-opacity-20"

@@ -794,7 +794,6 @@ export default function PortfolioItems({
 
               <button
                 onClick={() => {
-                  console.log(project);
                   if (project.name && project.time && project.desc) {
                     updateUser(source.uid, {
                       ...source,

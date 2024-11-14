@@ -17,12 +17,12 @@ export default function AboutQuixyTalent() {
   return (
     <div className="mt-12">
       <div className="relative  mx-auto">
-        <div className="grid grid-cols-2 gap-3 font-gotham">
+        <div className="grid grid-cols-2 font-gotham">
           <button
             onClick={() => setContent("client")}
             className={`lg:text-xl border-[2px] font-bold flex items-center justify-center py-2 rounded-l-lg ${
               content === "talent"
-                ? "border-primary text-white bg-primary"
+                ? "border-primary text-white bg-primary/75"
                 : "border-cta text-white bg-gradient-to-r from-primary to-cta"
             }`}
             style={{
@@ -35,7 +35,7 @@ export default function AboutQuixyTalent() {
             onClick={() => setContent("talent")}
             className={`lg:text-xl border-[2px] font-bold flex items-center justify-center py-2 rounded-r-lg ${
               content === "client"
-                ? "border-primary text-white bg-primary"
+                ? "border-primary text-white bg-primary/75"
                 : "border-cta text-white bg-gradient-to-r from-primary to-cta"
             }`}
             style={{

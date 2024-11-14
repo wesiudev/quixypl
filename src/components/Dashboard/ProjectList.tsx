@@ -12,7 +12,7 @@ const ServiceList = ({ projects }: { projects: any }) => {
   return (
     <div className="bg-white h-max w-full py-3">
       <h2 className="w-full px-3 lg:px-6 text-2xl text-black font-bold drop-shadow-lg">
-        Usługi
+        Twoje usługi
       </h2>
       {projects?.length === 0 ? (
         <div className="text-lg text-black px-3 lg:px-6 pb-3 lg:pt-3">
@@ -25,7 +25,7 @@ const ServiceList = ({ projects }: { projects: any }) => {
           </button>
         </div>
       ) : (
-        <div className="px-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1">
+        <div className="px-3 grid grid-cols-1">
           {projects?.map((project: any, i: any) => (
             <ServiceCard key={i} project={project} user={user} />
           ))}

@@ -27,9 +27,9 @@ export default function Unsaved({
     <div
       className={`${
         changesWereMade
-          ? "sticky z-[70] scale-x-100"
-          : "fixed z-[-70] scale-x-0"
-      } left-0 bottom-0 flex items-center justify-center`}
+          ? "left-0 bottom-0 sticky z-[6000] scale-x-100"
+          : "left-0 bottom-0 fixed z-[-70] scale-x-0"
+      } flex items-center justify-center`}
     >
       <div
         className={`flex space-x-3 lg:space-x-6 p-3 px-5 items-center justify-center w-full ${

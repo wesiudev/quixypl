@@ -48,60 +48,64 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
           : "opacity-100 translate-y-0 duration-500 "
       } w-full flex justify-center z-[999999999]`}
     >
-      <div
-        style={{ boxShadow: "0px 0px 5px black" }}
-        className={`container  bg-white h-max text-black duration-500`}
-      >
-        <div className="flex w-full justify-between h-full relative">
-          <div className="flex">
-            {slugData?.photoURL && (
-              <Image
-                src={slugData?.photoURL}
-                width={256}
-                height={256}
-                alt={`Zdjęcie profilowe ${slugData.pseudo}`}
-                className=" w-24 mb-0 hidden sm:block"
-              />
-            )}
+      <div className="px-3 lg:px-12 w-full">
+        <div
+          style={{ boxShadow: "0px 0px 5px black" }}
+          className={`bg-white h-max text-black duration-500 w-full`}
+        >
+          <div className="flex w-full justify-between h-full relative">
+            <div className="flex flex-row">
+              {slugData?.photoURL && (
+                <div className="w-auto h-24 relative overflow-hidden hidden sm:block">
+                  <Image
+                    src={slugData?.photoURL}
+                    width={256}
+                    height={256}
+                    alt={`Zdjęcie profilowe ${slugData.pseudo}`}
+                    className="absolute inset-0 object-cover w-auto h-full group-hover:scale-110 duration-500 mb-0"
+                  />
+                </div>
+              )}
 
-            {!slugData?.photoURL && (
-              <div className="hidden sm:flex bg-[#126b91]  aspect-square w-24 text-white items-center justify-center">
-                <FaUser className="text-3xl lg:text-4xl" />
-              </div>
-            )}
-            <div className="px-4 ">
-              <div className="flex flex-col py-2">
-                <h1 className="flex items-center font-coco text-base sm:text-xl">
-                  Zatrudnij {slugData?.name}!
-                </h1>
-                <p className="font-bold mb-1 text-sm sm:text-base">
-                  {slugData?.title && slugData?.title}
-                </p>
-                {slugData?.hourRate && (
-                  <div className="w-max relative text-white px-1.5 py-0.5  bg-gradient-to-r from-primary to-cta">
-                    {slugData?.hourRate} zł/h
-                  </div>
-                )}
+              {!slugData?.photoURL && (
+                <div className="hidden sm:flex bg-[#126b91]  aspect-square w-24 text-white items-center justify-center">
+                  <FaUser className="text-3xl lg:text-4xl" />
+                </div>
+              )}
+              <div className="px-4 ">
+                <div className="flex flex-col py-2">
+                  <h1 className="flex items-center font-coco text-base sm:text-xl">
+                    Zatrudnij {slugData?.name}!
+                  </h1>
+                  <p className="font-bold mb-1 text-sm sm:text-base">
+                    {slugData?.title && slugData?.title}
+                  </p>
+                  {slugData?.hourRate && (
+                    <div className="w-max relative text-white px-1.5 py-0.5  bg-gradient-to-r from-primary to-cta">
+                      {slugData?.hourRate} zł/h
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
 
-          <button
-            onClick={() => {
-              if (slugData?.uid === user?.uid) {
-                return toast.error("Nie możesz aplikować do samego siebie", {
-                  position: "top-right",
-                  autoClose: 5000,
-                });
-              } else {
-                dispatch(set_modals({ ...modals, currentChat: slugData }));
-              }
-            }}
-            className={`flex text-white font-bold font-coco px-3 py-2 min-h-full max-w-[150px] text-sm sm:text-base  bg-gradient-to-r from-primary to-cta items-center text-center`}
-          >
-            Kontakt
-            <FaArrowRightLong className="ml-2" />
-          </button>
+            <button
+              onClick={() => {
+                if (slugData?.uid === user?.uid) {
+                  return toast.error("Nie możesz aplikować do samego siebie", {
+                    position: "top-right",
+                    autoClose: 5000,
+                  });
+                } else {
+                  dispatch(set_modals({ ...modals, currentChat: slugData }));
+                }
+              }}
+              className={`flex text-white font-bold font-coco px-3 py-2 min-h-full max-w-[150px] text-sm sm:text-base  bg-gradient-to-r from-primary to-cta items-center text-center`}
+            >
+              Kontakt
+              <FaArrowRightLong className="ml-2" />
+            </button>
+          </div>
         </div>
       </div>
     </div>

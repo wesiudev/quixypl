@@ -23,7 +23,7 @@ export default function UserPanel() {
       icon: <FaHome />,
     },
     {
-      text: "Moje leady",
+      text: "Zlecenia i aplikacje",
       href: "/dashboard/leads",
       icon: <FaUsers />,
     },
@@ -43,7 +43,7 @@ export default function UserPanel() {
       icon: <FaPlus />,
     },
     {
-      text: "Moje oferty pracy",
+      text: "Twoje oferty pracy",
       href: "/dashboard/my-postings",
       icon: <FaList />,
     },
@@ -60,7 +60,7 @@ export default function UserPanel() {
   ];
   return (
     <div className="px-6 pt-6">
-      <div className="mb-12 pl-2 relative w-full bg-gradient-to-r from-primary to-cta text-white hover:from-cta hover:to-cta rounded-xl">
+      <div className="mb-3 pl-2 relative w-full bg-gradient-to-r from-primary to-cta text-white hover:from-cta hover:to-cta rounded-xl">
         <button
           onClick={() => dispatch(set_modals({ ...modals, config: true }))}
           className="w-full"
@@ -80,7 +80,7 @@ export default function UserPanel() {
         {linksData.map((link, index) => (
           <button
             key={index}
-            className="bg-cta relative aspect-square font-coco text-white text-center rounded-xl"
+            className="bg-cta relative aspect-square text-white text-center rounded-xl"
             onClick={() => {
               router.push(link.href);
               dispatch(set_modals({ ...modals, config: false }));
@@ -88,29 +88,29 @@ export default function UserPanel() {
             rel="noopener noreferrer"
           >
             {index === 1 && (
-              <div className="absolute top-3 left-3 text-white font-bold text-sm">
-                Zlecenia i aplikacje
+              <div className="absolute top-3 left-3 text-white font-extralight text-xl font-coco">
+                Leads
               </div>
             )}
             {index === 2 && (
-              <div className="absolute top-3 left-3 text-white font-bold text-lg">
-                Zdalnie
+              <div className="absolute top-3 left-3 text-white font-extralight text-xl font-coco">
+                Remote
               </div>
             )}
             {index === 6 && (
-              <div className="absolute top-3 left-3 text-white font-bold text-3xl">
+              <div className="absolute top-3 left-3 text-white font-extralight text-xl font-coco">
                 AI
               </div>
             )}
             {index === 7 && (
-              <div className="absolute top-3 left-3 text-white font-bold text-3xl">
+              <div className="absolute top-3 left-3 text-white font-extralight text-xl font-coco">
                 AI
               </div>
             )}
             <div className="flex-col flex items-center justify-center relative px-3">
               <div className="text-5xl">{link.icon}</div>
-              <div className="py-2 z-50 relative text-center font-extralight italic">
-                {link.text.toUpperCase()}
+              <div className="py-2 z-50 relative text-center font-extrabold">
+                {link.text}
               </div>
             </div>
           </button>

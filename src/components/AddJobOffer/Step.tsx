@@ -3,11 +3,8 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { InputField } from "./InputField";
 import CategorySelector from "./CategorySelector";
-
 import Editor, { EditorContentChanged } from "./Editor";
-import Viewer from "./Viewer";
-
-const initialMarkdownContent = "";
+import JobPreferencesHandler from "../JobOfferPreferencesHandler";
 export default function StepOne({
   formData,
   handleChange,
@@ -49,13 +46,23 @@ export default function StepOne({
   setFormData: any;
   setTagsOpenLevel: any;
 }) {
-  const [editorMarkdownValue, setEditorMarkdownValue] = useState<string>("");
-
   const onEditorContentChanged = (content: EditorContentChanged) => {
     setFormData((prev: any) => ({ ...prev, description: content.html }));
-    setEditorMarkdownValue(content.markdown);
   };
+  function addPreference(preference: any) {
+    if (!formData.preferences) {
+      formData.preferences = [];
+    }
+    formData.preferences.push(preference);
+    setFormData({ ...formData });
+  }
 
+  function removePreference(preference: any) {
+    formData.preferences = formData.preferences.filter(
+      (p: any) => p !== preference
+    );
+    setFormData({ ...formData });
+  }
   return (
     <div
       className={`${
@@ -93,14 +100,24 @@ export default function StepOne({
         <div className="mt-2"></div>
         <p className="text-black text-lg mb-2">Treść oferty pracy:</p>
         <Editor
-          value={initialMarkdownContent}
+          value={formData.description}
           onChange={onEditorContentChanged}
+          setFormData={setFormData}
+          formData={formData}
+        />
+        <JobPreferencesHandler
+          addPreference={addPreference}
+          removePreference={removePreference}
+          source={user}
         />
         <button
           type="button"
           onClick={() => {
-            if (formData?.tags?.length > 0 && editorMarkdownValue) {
-              setFormData({ ...formData, description: editorMarkdownValue });
+            if (
+              formData?.tags?.length > 0 &&
+              formData?.description &&
+              formData?.title
+            ) {
               nextStep();
             } else {
               return toast.error("Uzupełnij dane!", {
