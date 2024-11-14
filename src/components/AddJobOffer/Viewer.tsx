@@ -1,7 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
-import { remark } from "remark";
-import html from "remark-html";
 
 export interface ViewerProps {
   value: string;

@@ -15,6 +15,7 @@ export interface IProject {
   creationTime: number;
   isPaid: boolean;
   extraDays: number;
+  salaryValue: string;
 }
 
 export type GenerateIdeaParams = {

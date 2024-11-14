@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import Viewer from "../AddJobOffer/Viewer";
 
 export default function ServiceCard({
   project,
@@ -24,9 +25,7 @@ export default function ServiceCard({
     }
     const updatedTokens = user?.tokens - 10;
     const updatedProjects = user?.projects.map((p: IProject) =>
-      p.id === project.id
-        ? { ...p, isPaid: true, FextraDays: (p.extraDays || 0) + 1 }
-        : p
+      p.id === project.id ? { ...p, isPaid: true } : p
     );
     await updateUser(user?.uid, {
       tokens: updatedTokens,
@@ -51,16 +50,26 @@ export default function ServiceCard({
       <h5 className="mb-3 text-3xl font-extrabold tracking-tight text-blue-500 dark:text-blue-400">
         {project.name}
       </h5>
-
-      {/* Description with adjusted size and spacing */}
-      <p className="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-300">
-        {project.desc}
+      <p className="mb-2 text-md font-medium text-gray-900 dark:text-gray-100">
+        <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
+          Typ wynagrodzenia:
+        </span>{" "}
+        {project.time}
       </p>
+      <p className="mb-2 text-md font-medium text-gray-900 dark:text-gray-100">
+        <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
+          Wynagrodzenie:
+        </span>{" "}
+        {project.salaryValue}
+      </p>
+      <div className="bg-white p-3 rounded-xl">
+        <Viewer value={project?.desc} />
+      </div>
 
       {/* Cost section with distinct styling */}
-      <div className="flex flex-col mb-2 text-md font-medium text-gray-900 dark:text-gray-100">
+      <div className="flex flex-col my-2 text-md font-medium text-gray-900 dark:text-gray-100">
         {project?.isPaid ? (
-          "Opłacono"
+          <div className="text-green-500">Opłacono</div>
         ) : (
           <button
             onClick={() => bid()}

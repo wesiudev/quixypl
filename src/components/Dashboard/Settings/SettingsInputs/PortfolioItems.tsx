@@ -623,17 +623,6 @@ export default function PortfolioItems({
                     value={project?.desc}
                     onChange={onEditorContentChanged}
                   />
-                  <textarea
-                    cols={4}
-                    rows={4}
-                    maxLength={2000}
-                    value={project.desc}
-                    onChange={(e) =>
-                      setProject({ ...project, desc: e.target.value })
-                    }
-                    placeholder="Co otrzyma od Ciebie klient?"
-                    className="border border-primary  p-2 text-black font-coco w-full"
-                  />
                 </div>
                 <div>
                   <h3 className="font-coco text-black mt-1">
@@ -648,7 +637,7 @@ export default function PortfolioItems({
                         link: e.target.value,
                       });
                     }}
-                    placeholder="Link projektu (opcjonalnie)"
+                    placeholder="Umieść link"
                     className="border border-primary p-2 text-black font-coco w-full duration-300 ease-in-out"
                     aria-label="Link to project"
                   />
@@ -805,6 +794,7 @@ export default function PortfolioItems({
 
               <button
                 onClick={() => {
+                  console.log(project);
                   if (project.name && project.time && project.desc) {
                     updateUser(source.uid, {
                       ...source,
