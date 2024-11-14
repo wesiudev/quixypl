@@ -37,8 +37,8 @@ export default function CategorySelector({
   setSlug: any;
   category: any;
   setCategory: any;
-  jobs: any;
-  user: any;
+  jobs?: any;
+  user?: any;
   formData: any;
   setFormData: any;
   setTagsOpenLevel: any;

@@ -32,8 +32,8 @@ export default function Unsaved({
       } left-0 bottom-0 flex items-center justify-center`}
     >
       <div
-        className={`flex space-x-3 lg:space-x-6 p-3 px-5 items-center justify-between w-full ${
-          error ? "bg-red-500" : "bg-gray-600"
+        className={`flex space-x-3 lg:space-x-6 p-3 px-5 items-center justify-center w-full ${
+          error ? "bg-red-500" : "bg-primary"
         } ${
           changesWereMade
             ? "duration-300 translate-y-0"

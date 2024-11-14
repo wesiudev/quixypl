@@ -13,6 +13,8 @@ export interface IProject {
   days: number;
   id: string;
   creationTime: number;
+  isPaid: boolean;
+  extraDays: number;
 }
 
 export type GenerateIdeaParams = {

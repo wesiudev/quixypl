@@ -49,12 +49,10 @@ export default function StepOne({
   setFormData: any;
   setTagsOpenLevel: any;
 }) {
-  const [editorHtmlValue, setEditorHtmlValue] = useState<string>("");
   const [editorMarkdownValue, setEditorMarkdownValue] = useState<string>("");
 
   const onEditorContentChanged = (content: EditorContentChanged) => {
     setFormData((prev: any) => ({ ...prev, description: content.html }));
-    setEditorHtmlValue(content.html);
     setEditorMarkdownValue(content.markdown);
   };
 

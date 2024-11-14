@@ -159,10 +159,10 @@ export default function DashboardHeader() {
             </button>
             {!user?.configured && (user?.seek === "ask" || !user?.seek) && (
               <div className="pl-4 pt-4">
-                <h2 className="text-white bg-gradient-to-r from-primary to-cta w-max rounded-xl px-2 font-gotham font-bold">
+                <h2 className="text-white bg-gradient-to-r from-zinc-800 via-gray-700 to-zinc-950 w-max rounded-xl px-2 font-extrabold">
                   Nie skonfigurowano profilu
                 </h2>
-                <p className="text-black font-light max-w-lg font-coco my-1 text-sm">
+                <p className="text-black max-w-lg font-coco my-1 text-sm">
                   Określ typ profilu w zakładce{" "}
                   <b className="italic">MÓJ PROFIL</b>, by rozpocząć swoją
                   przygodę w Quixy
@@ -188,7 +188,7 @@ export default function DashboardHeader() {
                 <h3 className="text-black text-sm sm:text-lg font-coco font-bold">
                   {user?.title && user?.title}
                 </h3>
-                <h3 className="text-black text-sm sm:text-lg font-light font-coco">
+                <h3 className="text-black text-sm sm:text-lg font-coco">
                   {user?.pseudo && user?.pseudo}
                 </h3>
               </div>

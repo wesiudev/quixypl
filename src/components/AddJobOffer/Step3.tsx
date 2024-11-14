@@ -153,9 +153,9 @@ export default function StepThree({
             {isSent && (
               <Link
                 className="p-2 bg-gradient-to-r from-primary via-cta to-primary py-0.5 text-white  flex items-center"
-                href="/dashboard/applications"
+                href="/dashboard/my-postings"
               >
-                Już dodano, przejdź do aplikacji <FaChevronRight />
+                Już dodano, przeglądaj oferty <FaChevronRight />
               </Link>
             )}
             {!isSent && (

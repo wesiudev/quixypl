@@ -7,6 +7,7 @@ import ServiceCard from "./ServiceCard";
 
 const ServiceList = ({ projects }: { projects: any }) => {
   const { modals } = useSelector((state: any) => state.modals);
+  const { user } = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
   return (
     <div className="bg-white h-max w-full py-3">
@@ -24,9 +25,9 @@ const ServiceList = ({ projects }: { projects: any }) => {
           </button>
         </div>
       ) : (
-        <div className="px-3">
+        <div className="px-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1">
           {projects?.map((project: any, i: any) => (
-            <ServiceCard key={i} project={project} />
+            <ServiceCard key={i} project={project} user={user} />
           ))}
         </div>
       )}

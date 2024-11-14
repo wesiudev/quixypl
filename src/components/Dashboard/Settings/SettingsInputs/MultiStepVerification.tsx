@@ -52,16 +52,19 @@ export default function MultiStepVerification({
   };
   const { modals } = useSelector((state: any) => state.modals);
   return (
-    <div className={` p-3 lg:p-6 bg-gray-200`}>
+    <div className={`bg-gradient-to-r from-primary to-cta py-12`}>
       {isAnimating && <Confetti />}
+      <h2 className="mx-auto font-extrabold mb-3 text-2xl text-white w-[90%] max-w-full">
+        Weryfikacja przed wyświetleniem na stronie
+      </h2>
       <div
         className={`${
           user?.access === true && "hidden"
-        } w-full mx-auto font-coco`}
+        } mx-auto bg-white w-[90%] p-3 rounded-xl`}
       >
         <button
           onClick={() => dispatch(set_modals({ ...modals, config: true }))}
-          className="font-bold w-full text-center text-xl text-white bg-gradient-to-r from-primary to-cta rounded-lg px-2 py-1 mb-3"
+          className="w-full text-center text-xl text-white bg-cta px-2 py-1 mb-3 rounded-xl"
         >
           Uruchom ustawienia
         </button>
@@ -123,7 +126,7 @@ export default function MultiStepVerification({
             onClick={handleAccessClick}
             className="mt-6 bg-gradient-to-r from-primary to-cta text-white py-2 px-4 rounded-lg font-coco font-bold"
           >
-            Wpisz się! (Zamiast 15.00💎, Zapłacisz dziś 0.00💎)
+            Wpisz się! (0.00💎)
           </button>
         )}
       </div>

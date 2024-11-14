@@ -20,10 +20,10 @@ export default function Posting({
     const expirationDate = moment(expirationTime).add(extraDays, "days");
     return expirationDate.isBefore(moment()) ? "text-red-500" : "text-cta";
   };
-  const [deleteMenu, setDeleteMenu] = useState(false);
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [applicationsOpen, setApplicationsOpen] = useState(false);
+  const [deleteMenu, setDeleteMenu] = useState(false);
   const { user } = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
   const handleDeleteJobOffer = async (jobOfferId: string) => {
@@ -48,40 +48,43 @@ export default function Posting({
       );
 
       toast.success("Pomyślnie usunięto ofertę.");
+      setOptionsOpen(false);
+      setDeleteMenu(false);
     } catch (error) {
       toast.error("Przepraszamy! Wystąpił błąd.");
     }
   };
 
   return (
-    <div className="bg-white  shadow-md p-4 h-max font-coco relative overflow-hidden">
-      {(optionsOpen || editOpen || applicationsOpen) && (
-        <div className="w-full h-full absolute left-0 top-0 bg-black bg-opacity-50" />
-      )}
-      <OfferOptionsOpened
-        optionsOpen={optionsOpen}
-        setEditOpen={setEditOpen}
-        setOptionsOpen={setOptionsOpen}
-        setApplicationsOpen={setApplicationsOpen}
-        handleDeleteJobOffer={handleDeleteJobOffer}
-        jobOffer={jobOffer}
-      />
-      <JobOfferDetails
-        setOptionsOpen={setOptionsOpen}
-        pay={pay}
-        optionsOpen={optionsOpen}
-        loading={loading}
-        jobOffer={jobOffer}
-      />
-      <div className="viewer mt-6">
-        <Viewer value={jobOffer.description} />
-      </div>
+    <div className="h-[50vh] overflow-y-scroll bg-white shadow-md">
+      <div className="p-4 relative">
+        <OfferOptionsOpened
+          setDeleteMenu={setDeleteMenu}
+          deleteMenu={deleteMenu}
+          optionsOpen={optionsOpen}
+          setEditOpen={setEditOpen}
+          setOptionsOpen={setOptionsOpen}
+          setApplicationsOpen={setApplicationsOpen}
+          handleDeleteJobOffer={handleDeleteJobOffer}
+          jobOffer={jobOffer}
+        />
+        <JobOfferDetails
+          setOptionsOpen={setOptionsOpen}
+          pay={pay}
+          optionsOpen={optionsOpen}
+          loading={loading}
+          jobOffer={jobOffer}
+        />
+        <div className="viewer mt-6">
+          <Viewer value={jobOffer.description} />
+        </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 text-black">
-        <p className="col-span-1">
-          <strong>Wynagrodzenie:</strong> <br /> {jobOffer.salary} (
-          {jobOffer.salaryValue})
-        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 text-black">
+          <p className="col-span-1">
+            <strong>Wynagrodzenie:</strong> <br /> {jobOffer.salary} (
+            {jobOffer.salaryValue})
+          </p>
+        </div>
       </div>
     </div>
   );

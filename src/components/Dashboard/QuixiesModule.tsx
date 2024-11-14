@@ -28,15 +28,17 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
           onClick={(e: any) => e.stopPropagation()}
           className="flex flex-wrap w-full my-auto mx-auto bg-white sm: p-3 lg:p-6 relative"
         >
-          <div className="flex flex-row sm:justify-between w-full font-gotham text-3xl">
+          <div className="flex flex-row sm:justify-between w-full">
             <div className="flex flex-col">
-              <h2 className="text-zinc-800">Doładuj Quixies</h2>
-              <p className="text-sm font-normal text-gray-700">
+              <h2 className="font-extrabold text-black text-3xl">
+                Doładuj Quixies
+              </h2>
+              <p className="font-normal text-gray-700">
                 Wybierz odpowiedni pakiet Quixies dla swoich potrzeb
               </p>
             </div>
 
-            <div className="h-max text-zinc-800 font-gotham w-max flex flex-row items-center">
+            <div className="h-max text-white text-3xl bg-gradient-to-r from-primary to-cta p-2 font-gotham font-extrabold w-max flex flex-row items-center">
               💎
               <div>{userCoins?.toFixed(2)}</div>
             </div>

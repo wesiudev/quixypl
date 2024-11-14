@@ -20,6 +20,7 @@ import { v4 as uuid } from "uuid";
 import { addJobOffer, storage, updateUser } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { InputField } from "@/components/AddJobOffer/InputField";
+import { FaStar } from "react-icons/fa6";
 export default function PortfolioItems({
   source,
   isNewProject,
@@ -197,30 +198,42 @@ export default function PortfolioItems({
     }
   }
   return (
-    <div className={`px-6 font-coco mt-3`}>
-      <div className="font-bold text-lg text-black font-gotham">Usługi</div>
-      <p className="text-sm text-black mb-2">
-        Dodaj nową usługę do swojego profilu
+    <div className={`px-6 mt-3`}>
+      <div className="font-extrabold text-lg flex items-center text-black">
+        <div className="bg-primary w-8 h-8 flex items-center justify-center mr-2">
+          <FaStar className="text-white text-xl" />
+        </div>
+        Usługi
+      </div>
+      <p className="text-sm text-black my-2">
+        Dodaj nową usługę do naszego rynku z usługami.
       </p>
       {!isNewProject && (
         <>
           <button
             onClick={() => {
-              if (!source?.seek) {
+              if (!source?.access) {
                 toast.error("Podaj informację o profilu aby rozpocząć");
-                if (!source?.pseudo) {
-                  toast.error("Podaj unikalną nazwę profilu aby rozpocząć");
-                } else if (!source?.name) {
-                  toast.error("Przedstaw się aby rozpocząć");
-                } else if (!source?.emailVerified) {
-                  toast.error("Zweryfikuj swój adres e-mail aby rozpocząć");
-                } else if (!source?.configured) {
-                  toast.error("Ukończ konfigurację profilu aby rozpocząć");
-                } else {
-                  setIsNewProject(true);
-                  scrollIntoView();
-                }
+                return;
               }
+              if (!source?.pseudo) {
+                toast.error("Podaj unikalną nazwę profilu aby rozpocząć");
+                return;
+              }
+              if (!source?.name) {
+                toast.error("Przedstaw się aby rozpocząć");
+                return;
+              }
+              if (!source?.emailVerified) {
+                toast.error("Zweryfikuj swój adres e-mail aby rozpocząć");
+                return;
+              }
+              if (!source?.configured) {
+                toast.error("Ukończ konfigurację profilu aby rozpocząć");
+                return;
+              }
+              setIsNewProject(true);
+              scrollIntoView();
             }}
             className="bg-cta text-white font-gotham p-2  mb-4 sm:mb-6"
           >
@@ -240,313 +253,309 @@ export default function PortfolioItems({
       )}
       {isNewProject && (
         <>
-          <div className="p-3 lg:p-6 2xl:p-12 bg-gray-200  mt-3 font-coco">
-            <span className="text-xl text-black font-gotham font-light mb-4">
+          <div className="rounded-xl p-3 bg-gradient-to-r from-primary to-cta mt-3">
+            <span className="text-xl text-white font-extrabold">
               Dodajesz nową usługę
             </span>
 
-            {project?.tags?.length > 0 && (
-              <>
-                {" "}
-                <h1 className="text-base font-bold text-black font-coco">
-                  Kategorie
-                </h1>
-                <p className=" text-black font-coco sm:text-base">
-                  Twoje usługi trafią do poszczególnych widoków naszej aplikacji
-                </p>
-                <div className="mt-2 w-full grid grid-cols-2 sm:grid-cols-3 gap-2 text-white font-bold text-sm md:text-lg">
-                  <button
-                    onClick={() => {
-                      setTagsOpenLevel(0);
-                      console.log(project);
-                    }}
-                    className={`bg-[#126b91] ${
-                      tagsOpenLevel === 0
-                        ? "bg-[#126b91]"
-                        : "bg-opacity-80 hover:bg-opacity-95"
-                    } px-2 py-1.5 `}
-                  >
-                    Prosty
-                  </button>
-                  <button
-                    onClick={() => setTagsOpenLevel(1)}
-                    className={`bg-[#126b91] ${
-                      tagsOpenLevel === 1
-                        ? "bg-[#126b91]"
-                        : "bg-opacity-80 hover:bg-opacity-95"
-                    } px-2 py-1.5 `}
-                  >
-                    Rozszerzony
-                  </button>
-                  <button
-                    onClick={() => setTagsOpenLevel(2)}
-                    className={`bg-[#126b91] ${
-                      tagsOpenLevel === 2
-                        ? "bg-[#126b91]"
-                        : "bg-opacity-80 hover:bg-opacity-95"
-                    } px-2 py-1.5 `}
-                  >
-                    Całość
-                  </button>
-                </div>
-              </>
-            )}
-            <div className="mt-2 font-bold text-sm text-black ">
-              {project?.tags?.length === 0 && "Wybierz kategorie"}{" "}
-              {project?.tags?.length > 0 && "Wybrane kategorie"}
-              {project?.tags?.length > 0 &&
-                tagsOpenLevel === 1 &&
-                "Twoja oferta w strukturze strony"}
-              {project?.tags?.length > 0 &&
-                tagsOpenLevel === 2 &&
-                "Twoja oferta w strukturze strony"}
-              <div
-                className={`${
-                  tagsOpenLevel === 0 ? "flex flex-row flex-wrap -ml-2" : ""
-                }`}
-              >
-                {project?.tags && tagsOpenLevel === 1
-                  ? project?.tags?.map((item: any, i: any) => (
-                      <div className="text-sm mt-4 bg-slate-300  p-2" key={i}>
-                        <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
-                          <div className="bg-[#126b91]  p-1 text-white mt-2">
-                            {item.slugTitle}
-                          </div>
-                          <div className="flex items-center">
-                            <FaChevronRight className="mx-1 mt-2" />
-                            <div className="bg-[#126b91]  p-1 text-white mt-2">
-                              {item.title}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                  : tagsOpenLevel === 2
-                  ? project?.tags?.map((item: any, i: any) => (
-                      <div className="text-sm mt-4 bg-slate-300  p-2" key={i}>
-                        <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
-                          <div className="flex items-center">
+            <div className="bg-white rounded-xl p-3 mt-3">
+              <h1 className="text-base font-bold text-black font-coco">
+                Kategorie
+              </h1>
+              <p className=" text-black font-coco sm:text-base">
+                Twoje usługi trafią do poszczególnych widoków naszej aplikacji
+              </p>
+
+              <div className="mt-2 font-bold text-sm text-black ">
+                {project?.tags?.length === 0 && "Wybierz kategorie"}{" "}
+                {project?.tags?.length > 0 && "Wybrane kategorie"}
+                <div
+                  className={`${
+                    tagsOpenLevel === 0 ? "flex flex-row flex-wrap -ml-2" : ""
+                  }`}
+                >
+                  {project?.tags && tagsOpenLevel === 1
+                    ? project?.tags?.map((item: any, i: any) => (
+                        <div className="text-sm mt-4 bg-slate-300  p-2" key={i}>
+                          <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
                             <div className="bg-[#126b91]  p-1 text-white mt-2">
                               {item.slugTitle}
                             </div>
-                          </div>
-                          <div className="flex items-center">
-                            <FaChevronRight className="mx-1 mt-2" />
-                            <div className="bg-[#126b91]  p-1 text-white mt-2">
-                              {item.categoryTitle}
-                            </div>
-                          </div>
-                          <div className="flex items-center font-bold">
-                            <FaChevronRight className="mx-1 mt-2" />
-                            <div className="bg-[#126b91]  p-1 text-white mt-2">
-                              {item.title}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                  : project?.tags?.map((item: any, i: any) => (
-                      <div
-                        key={i}
-                        className="w-max max-w-[100%] ml-2 mt-2 flex flex-wrap items-center font-gotham font-light text-white"
-                      >
-                        <div
-                          className={`${
-                            selectedTag.title === item.title ? "flex-col" : ""
-                          } bg-[#126b91]  flex items-center p-1`}
-                        >
-                          <div className="flex flex-row items-center">
-                            {item.title}
-                            <button
-                              onClick={() => {
-                                setTagDeletion(true);
-                                setSelectedTag(item);
-                              }}
-                              className=""
-                            >
-                              <FaMinusCircle className="ml-2 text-white" />
-                            </button>
-                          </div>
-                          {tagDeletion && selectedTag.title === item.title && (
-                            <div className="flex flex-col w-[90%] my-2 sticky left-0 top-0 bg-black bg-opacity-60 p-3 ">
-                              <h2>Usunąć {selectedTag?.title}?</h2>
-                              <div className="grid grid-cols-2 gap-3 mt-3">
-                                <button
-                                  onClick={() => {
-                                    const newTags = project?.tags?.filter(
-                                      (tag: any) =>
-                                        tag.title !== selectedTag.title
-                                    );
-                                    setProject({
-                                      ...project,
-                                      tags: newTags,
-                                    });
-                                    toast.success(
-                                      `Usunięto widok oferty w "${selectedTag.title}"`,
-                                      {
-                                        position: "top-right",
-                                        autoClose: 5000,
-                                        hideProgressBar: false,
-                                        closeOnClick: true,
-                                        pauseOnHover: true,
-                                        draggable: true,
-                                        progress: undefined,
-                                      }
-                                    );
-                                    setTagDeletion(false);
-                                    setSelectedTag({});
-                                  }}
-                                  className="bg-red-500 text-white px-3 py-1 "
-                                >
-                                  Usuń
-                                </button>
-                                <button
-                                  onClick={() => {
-                                    setTagDeletion(false);
-                                    setSelectedTag({});
-                                  }}
-                                  className="bg-green-500 text-white px-3 py-1 "
-                                >
-                                  Nie
-                                </button>
+                            <div className="flex items-center">
+                              <FaChevronRight className="mx-1 mt-2" />
+                              <div className="bg-[#126b91]  p-1 text-white mt-2">
+                                {item.title}
                               </div>
                             </div>
-                          )}
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))
+                    : tagsOpenLevel === 2
+                    ? project?.tags?.map((item: any, i: any) => (
+                        <div className="text-sm mt-4 bg-slate-300  p-2" key={i}>
+                          <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
+                            <div className="flex items-center">
+                              <div className="bg-[#126b91]  p-1 text-white mt-2">
+                                {item.slugTitle}
+                              </div>
+                            </div>
+                            <div className="flex items-center">
+                              <FaChevronRight className="mx-1 mt-2" />
+                              <div className="bg-[#126b91]  p-1 text-white mt-2">
+                                {item.categoryTitle}
+                              </div>
+                            </div>
+                            <div className="flex items-center font-bold">
+                              <FaChevronRight className="mx-1 mt-2" />
+                              <div className="bg-[#126b91]  p-1 text-white mt-2">
+                                {item.title}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    : project?.tags?.map((item: any, i: any) => (
+                        <div
+                          key={i}
+                          className="w-max max-w-[100%] ml-2 mt-2 flex flex-wrap items-center font-gotham font-light text-white"
+                        >
+                          <div
+                            className={`${
+                              selectedTag.title === item.title ? "flex-col" : ""
+                            } bg-[#126b91]  flex items-center p-1`}
+                          >
+                            <div className="flex flex-row items-center">
+                              {item.title}
+                              <button
+                                onClick={() => {
+                                  setTagDeletion(true);
+                                  setSelectedTag(item);
+                                }}
+                                className=""
+                              >
+                                <FaMinusCircle className="ml-2 text-white" />
+                              </button>
+                            </div>
+                            {tagDeletion &&
+                              selectedTag.title === item.title && (
+                                <div className="flex flex-col w-[90%] my-2 sticky left-0 top-0 bg-black bg-opacity-60 p-3 ">
+                                  <h2>Usunąć {selectedTag?.title}?</h2>
+                                  <div className="grid grid-cols-2 gap-3 mt-3">
+                                    <button
+                                      onClick={() => {
+                                        const newTags = project?.tags?.filter(
+                                          (tag: any) =>
+                                            tag.title !== selectedTag.title
+                                        );
+                                        setProject({
+                                          ...project,
+                                          tags: newTags,
+                                        });
+                                        toast.success(
+                                          `Usunięto widok oferty w "${selectedTag.title}"`,
+                                          {
+                                            position: "top-right",
+                                            autoClose: 5000,
+                                            hideProgressBar: false,
+                                            closeOnClick: true,
+                                            pauseOnHover: true,
+                                            draggable: true,
+                                            progress: undefined,
+                                          }
+                                        );
+                                        setTagDeletion(false);
+                                        setSelectedTag({});
+                                      }}
+                                      className="bg-red-500 text-white px-3 py-1 "
+                                    >
+                                      Usuń
+                                    </button>
+                                    <button
+                                      onClick={() => {
+                                        setTagDeletion(false);
+                                        setSelectedTag({});
+                                      }}
+                                      className="bg-green-500 text-white px-3 py-1 "
+                                    >
+                                      Nie
+                                    </button>
+                                  </div>
+                                </div>
+                              )}
+                          </div>
+                        </div>
+                      ))}
+                </div>
               </div>
-            </div>
 
-            <div className="gap-3">
-              <p className="text-sm text-[green] mb-2"></p>
-              {!configurationOpen && (
-                <>
+              <div className="gap-3">
+                <p className="text-sm text-[green] mb-2"></p>
+
+                {configurationOpen && !slug?.title && (
                   <div className="font-gotham font-bold text-black">
                     Wybierz kategorię
                   </div>
-                </>
-              )}
-              {configurationOpen && !slug?.title && (
-                <div className="font-gotham font-bold text-black">
-                  Wybierz kategorię
-                </div>
-              )}
-              {slug?.title !== "" && category?.title === "" && (
-                <div className="text-black font-gotham flex flex-col">
-                  <div className="font-bold mb-1 bg-[#126b91] p-1  text-white w-max max-w-[100%]">
-                    {slug.title}
-                  </div>
-                  <div className="font-bold">Wybierz podkategorię</div>
-                </div>
-              )}
-              {slug?.title !== "" && category?.title !== "" && (
-                <div className="text-black font-coco flex flex-col">
-                  <div className="font-bold mb-1 bg-[#126b91] p-1 text-white w-max max-w-[100%]">
-                    {category.title}
-                  </div>
-                  <div className="font-bold">Dodaj usługę do</div>
-                </div>
-              )}
-              <div className="-ml-0.5 flex flex-row items-start w-full">
-                {!configurationOpen && slug.title === "" && (
-                  <button
-                    onClick={() => setConfigurationOpen(true)}
-                    className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80  duration-100 text-white flex flex-row items-center justify-center outline-none h-[28px] sm:h-[32px] aspect-square"
-                  >
-                    <FaPlus />
-                  </button>
                 )}
-                {configurationOpen &&
-                  slug.title !== "" &&
-                  category.title !== "" && (
+                {slug?.title !== "" && category?.title === "" && (
+                  <div className="text-black font-gotham flex flex-col">
+                    <div className="font-bold mb-1 bg-[#126b91] p-1  text-white w-max max-w-[100%]">
+                      {slug.title}
+                    </div>
+                    <div className="font-bold">Wybierz podkategorię</div>
+                  </div>
+                )}
+                {slug?.title !== "" && category?.title !== "" && (
+                  <div className="text-black font-coco flex flex-col">
+                    <div className="font-bold mb-1 bg-[#126b91] p-1 text-white w-max max-w-[100%]">
+                      {category.title}
+                    </div>
+                    <div className="font-bold">Dodaj usługę do</div>
+                  </div>
+                )}
+                <div className="-ml-0.5 flex flex-row items-start w-full">
+                  {!configurationOpen && slug.title === "" && (
                     <button
-                      onClick={() => setCategory({ title: "", url: "" })}
+                      onClick={() => setConfigurationOpen(true)}
                       className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80  duration-100 text-white flex flex-row items-center justify-center outline-none h-[28px] sm:h-[32px] aspect-square"
                     >
-                      <FaChevronLeft />
+                      <FaPlus />
                     </button>
                   )}
-                {configurationOpen &&
-                  slug.title !== "" &&
-                  category.title === "" && (
-                    <button
-                      onClick={() => {
-                        setSlug({ title: "", url: "" }),
-                          setConfigurationOpen(false);
-                      }}
-                      className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80  duration-100 text-white flex flex-row items-center justify-center outline-none h-[28px] sm:h-[32px] aspect-square"
-                    >
-                      <FaChevronLeft />
-                    </button>
-                  )}
-                {configurationOpen && slug.title === "" && (
-                  <div>
-                    {jobs.map((item: any, i: any) => (
+                  {configurationOpen &&
+                    slug.title !== "" &&
+                    category.title !== "" && (
                       <button
-                        onClick={() =>
-                          setSlug({
-                            title: item.title,
-                            url: polishToEnglish(item.title),
-                          })
-                        }
-                        className="hover:bg-opacity-80 duration-100 text-sm sm:text-base m-0.5 bg-[#126b91]  text-white font-light p-1"
-                        key={i}
+                        onClick={() => setCategory({ title: "", url: "" })}
+                        className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80  duration-100 text-white flex flex-row items-center justify-center outline-none h-[28px] sm:h-[32px] aspect-square"
                       >
-                        {item.title}
+                        <FaChevronLeft />
                       </button>
-                    ))}
-                  </div>
-                )}
-                {configurationOpen && category.title === "" && (
-                  <div>
-                    {jobs.map((item: any, i: any) => (
-                      <>
-                        {item.title === slug.title && (
-                          <>
-                            {item.data.map((cat: any, i: any) => (
-                              <button
-                                onClick={() =>
-                                  setCategory({
-                                    title: cat.title,
-                                    url: polishToEnglish(cat.title),
-                                  })
-                                }
-                                className="hover:bg-opacity-80 duration-100 text-sm sm:text-base m-0.5 bg-[#126b91]  text-white font-light p-1"
-                                key={i}
-                              >
-                                {cat.title}
-                              </button>
-                            ))}
-                          </>
-                        )}
-                      </>
-                    ))}
-                  </div>
-                )}
-                {configurationOpen && category.title !== "" && (
-                  <div>
-                    {jobs.map((item: any, i: any) => (
-                      <>
-                        {item.title === slug.title && (
-                          <>
-                            {item.data.map((cat: any, i: any) => (
-                              <>
-                                {cat.title === category.title && (
-                                  <>
-                                    {cat.data.map((job: any, i: any) => (
-                                      <button
-                                        onClick={() => {
-                                          if (
-                                            project?.tags?.find(
-                                              (tag: any) =>
-                                                tag.url ===
-                                                polishToEnglish(job.title)
-                                            )
-                                          ) {
-                                            return (
-                                              toast.error(
-                                                `Oferta w ${category.title} i ${job.title} już się wyświetla.`,
+                    )}
+                  {configurationOpen &&
+                    slug.title !== "" &&
+                    category.title === "" && (
+                      <button
+                        onClick={() => {
+                          setSlug({ title: "", url: "" }),
+                            setConfigurationOpen(false);
+                        }}
+                        className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80  duration-100 text-white flex flex-row items-center justify-center outline-none h-[28px] sm:h-[32px] aspect-square"
+                      >
+                        <FaChevronLeft />
+                      </button>
+                    )}
+                  {configurationOpen && slug.title === "" && (
+                    <div>
+                      {jobs.map((item: any, i: any) => (
+                        <button
+                          onClick={() =>
+                            setSlug({
+                              title: item.title,
+                              url: polishToEnglish(item.title),
+                            })
+                          }
+                          className="hover:bg-opacity-80 duration-100 text-sm sm:text-base m-0.5 bg-[#126b91]  text-white font-light p-1"
+                          key={i}
+                        >
+                          {item.title}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                  {configurationOpen && category.title === "" && (
+                    <div>
+                      {jobs.map((item: any, i: any) => (
+                        <>
+                          {item.title === slug.title && (
+                            <>
+                              {item.data.map((cat: any, i: any) => (
+                                <button
+                                  onClick={() =>
+                                    setCategory({
+                                      title: cat.title,
+                                      url: polishToEnglish(cat.title),
+                                    })
+                                  }
+                                  className="hover:bg-opacity-80 duration-100 text-sm sm:text-base m-0.5 bg-[#126b91]  text-white font-light p-1"
+                                  key={i}
+                                >
+                                  {cat.title}
+                                </button>
+                              ))}
+                            </>
+                          )}
+                        </>
+                      ))}
+                    </div>
+                  )}
+                  {configurationOpen && category.title !== "" && (
+                    <div>
+                      {jobs.map((item: any, i: any) => (
+                        <>
+                          {item.title === slug.title && (
+                            <>
+                              {item.data.map((cat: any, i: any) => (
+                                <>
+                                  {cat.title === category.title && (
+                                    <>
+                                      {cat.data.map((job: any, i: any) => (
+                                        <button
+                                          onClick={() => {
+                                            if (
+                                              project?.tags?.find(
+                                                (tag: any) =>
+                                                  tag.url ===
+                                                  polishToEnglish(job.title)
+                                              )
+                                            ) {
+                                              return (
+                                                toast.error(
+                                                  `Oferta w ${category.title} i ${job.title} już się wyświetla.`,
+                                                  {
+                                                    position: "top-right",
+                                                    autoClose: 5000,
+                                                    hideProgressBar: false,
+                                                    closeOnClick: true,
+                                                    pauseOnHover: true,
+                                                    draggable: true,
+                                                    progress: undefined,
+                                                  }
+                                                ),
+                                                setConfigurationOpen(false),
+                                                setCategory({
+                                                  title: "",
+                                                  url: "",
+                                                }),
+                                                setSlug({
+                                                  title: "",
+                                                  url: "",
+                                                })
+                                              );
+                                            } else {
+                                              setProject({
+                                                ...project,
+                                                tags: [
+                                                  ...(project?.tags || []),
+                                                  {
+                                                    url: polishToEnglish(
+                                                      job.title
+                                                    ),
+                                                    categoryUrl:
+                                                      polishToEnglish(
+                                                        category.title
+                                                      ),
+                                                    categoryTitle:
+                                                      category.title,
+                                                    slugUrl: polishToEnglish(
+                                                      slug.title
+                                                    ),
+                                                    slugTitle: slug.title,
+                                                    title: job.title,
+                                                  },
+                                                ],
+                                              });
+                                              toast.success(
+                                                `Oferta wyświetli się w ${category.title} oraz ${job.title}.`,
                                                 {
                                                   position: "top-right",
                                                   autoClose: 5000,
@@ -556,429 +565,293 @@ export default function PortfolioItems({
                                                   draggable: true,
                                                   progress: undefined,
                                                 }
-                                              ),
-                                              setConfigurationOpen(false),
+                                              );
+
+                                              setConfigurationOpen(false);
                                               setCategory({
                                                 title: "",
                                                 url: "",
-                                              }),
+                                              });
                                               setSlug({
                                                 title: "",
                                                 url: "",
-                                              })
-                                            );
-                                          } else {
-                                            setProject({
-                                              ...project,
-                                              tags: [
-                                                ...(project?.tags || []),
-                                                {
-                                                  url: polishToEnglish(
-                                                    job.title
-                                                  ),
-                                                  categoryUrl: polishToEnglish(
-                                                    category.title
-                                                  ),
-                                                  categoryTitle: category.title,
-                                                  slugUrl: polishToEnglish(
-                                                    slug.title
-                                                  ),
-                                                  slugTitle: slug.title,
-                                                  title: job.title,
-                                                },
-                                              ],
-                                            });
-                                            toast.success(
-                                              `Oferta wyświetli się w ${category.title} oraz ${job.title}.`,
-                                              {
-                                                position: "top-right",
-                                                autoClose: 5000,
-                                                hideProgressBar: false,
-                                                closeOnClick: true,
-                                                pauseOnHover: true,
-                                                draggable: true,
-                                                progress: undefined,
-                                              }
-                                            );
-
-                                            setConfigurationOpen(false);
-                                            setCategory({
-                                              title: "",
-                                              url: "",
-                                            });
-                                            setSlug({
-                                              title: "",
-                                              url: "",
-                                            });
-                                          }
-                                        }}
-                                        className="hover:bg-opacity-80 duration-100 text-sm sm:text-base m-0.5 bg-[#126b91]  text-white font-light p-1"
-                                        key={i}
-                                      >
-                                        {job.title}
-                                      </button>
-                                    ))}
-                                  </>
-                                )}
-                              </>
-                            ))}
-                          </>
-                        )}
-                      </>
-                    ))}
-                  </div>
-                )}
-              </div>
-              {!source?.seek && source?.seek !== "ask" && (
+                                              });
+                                            }
+                                          }}
+                                          className="hover:bg-opacity-80 duration-100 text-sm sm:text-base m-0.5 bg-[#126b91]  text-white font-light p-1"
+                                          key={i}
+                                        >
+                                          {job.title}
+                                        </button>
+                                      ))}
+                                    </>
+                                  )}
+                                </>
+                              ))}
+                            </>
+                          )}
+                        </>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <div>
-                  <h3 className="font-gotham font-light text-black drop-shadow-lg mt-1.5">
-                    Nazwa Firmy/Działalności/Imię rekrutera
-                  </h3>
+                  <h3 className="font-coco text-black mt-3">Nazwa usługi</h3>
                   <input
-                    className="border border-primary  p-2 text-black font-light w-full"
-                    value={project?.name}
-                    onChange={(e) => {
+                    type="text"
+                    value={project.name}
+                    onChange={(e) =>
                       setProject({
                         ...project,
                         name: e.target.value,
-                      });
-                    }}
-                    placeholder="Kto dodaje ofertę?"
+                      })
+                    }
+                    placeholder="Podaj nazwę projektu"
+                    className="border border-primary p-2 text-black font-coco w-full"
                   />
                 </div>
-              )}
-              {!source?.seek && source?.seek !== "ask" && (
                 <div>
-                  <h3 className="font-coco text-black drop-shadow-lg mt-1.5">
-                    Formularz zewnętrzny (opcjonalnie)
+                  <h3 className="font-coco   text-black mt-1">Opis usługi</h3>
+                  <textarea
+                    cols={4}
+                    rows={4}
+                    maxLength={2000}
+                    value={project.desc}
+                    onChange={(e) =>
+                      setProject({ ...project, desc: e.target.value })
+                    }
+                    placeholder="Co otrzyma od Ciebie klient?"
+                    className="border border-primary  p-2 text-black font-coco w-full"
+                  />
+                </div>
+                <div>
+                  <h3 className="font-coco text-black mt-1">
+                    Link do podglądu (opcjonalnie)
                   </h3>
                   <input
                     type="text"
                     value={project.link}
-                    onChange={(e) =>
+                    onChange={(e) => {
                       setProject({
                         ...project,
                         link: e.target.value,
-                      })
-                    }
-                    placeholder="Wpisz link do formularza"
-                    className="border border-primary  p-2 text-black font-coco w-full"
+                      });
+                    }}
+                    placeholder="Link projektu (opcjonalnie)"
+                    className="border border-primary p-2 text-black font-coco w-full duration-300 ease-in-out"
+                    aria-label="Link to project"
                   />
                 </div>
-              )}
-              {!source?.seek && source?.seek !== "ask" && (
-                <div className="">
-                  <div>
-                    <h3 className="font-gotham font-light text-black drop-shadow-lg mt-1.5">
-                      Wynagrodzenie
-                    </h3>
-                    <select
-                      value={project.time}
+                {!source?.seek && source?.seek !== "ask" && (
+                  <div className="">
+                    <div>
+                      <h3 className="font-gotham text-black drop-shadow-lg mt-1">
+                        Wynagrodzenie
+                      </h3>
+                      <select
+                        value={project.time}
+                        onChange={(e) =>
+                          setProject({
+                            ...project,
+                            time: e.target.value,
+                          })
+                        }
+                        className="border border-primary  p-2 text-black font-light w-full"
+                      >
+                        <option value="Nie podano">Rodzaj wynagrodzenia</option>
+                        <option value="Stawka godzinowa">
+                          Stawka godzinowa
+                        </option>
+                        <option value="Stawka miesięczna">
+                          Stawka miesięczna
+                        </option>
+                        <option value="Per Milestone">Per Milestone</option>
+                        <option value="Prowizja">Prowizja</option>
+                        <option value="Akcje i udziały">Akcje i udziały</option>
+                        <option value="Inne">Inne</option>
+                      </select>
+                    </div>
+                    <InputField
+                      id="salaryValue"
+                      label="Wynagrodzenie"
+                      value={project.salaryValue}
                       onChange={(e) =>
                         setProject({
                           ...project,
-                          time: e.target.value,
+                          salaryValue: e.target.value,
                         })
                       }
-                      className="border border-primary  p-2 text-black font-light w-full"
-                    >
-                      <option value="Nie podano">Rodzaj wynagrodzenia</option>
-                      <option value="Stawka godzinowa">Stawka godzinowa</option>
-                      <option value="Stawka miesięczna">
-                        Stawka miesięczna
-                      </option>
-                      <option value="Per Milestone">Per Milestone</option>
-                      <option value="Prowizja">Prowizja</option>
-                      <option value="Akcje i udziały">Akcje i udziały</option>
-                      <option value="Inne">Inne</option>
-                    </select>
+                      placeholder="Wpisz wynagrodzenie"
+                    />
                   </div>
-                  <InputField
-                    id="salaryValue"
-                    label="Wynagrodzenie"
-                    value={project.salaryValue}
-                    onChange={(e) =>
-                      setProject({
-                        ...project,
-                        salaryValue: e.target.value,
-                      })
-                    }
-                    placeholder="Wpisz wynagrodzenie"
-                  />
+                )}
+              </div>
+
+              <div>
+                <InputField
+                  id="duration"
+                  label="Czas wykonania"
+                  value={project.duration}
+                  onChange={(e) =>
+                    setProject({
+                      ...project,
+                      duration: e.target.value,
+                    })
+                  }
+                  placeholder="Czas wykonania usługi"
+                />
+              </div>
+
+              <h3 className="font-coco text-black drop-shadow-lg mt-1.5 mb-3">
+                Możesz uwzględnić kilka obrazów usługi (np. logo, stronę
+                główną...)
+              </h3>
+              {project?.images?.length > 0 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  {project?.images?.map((item: any, i: any) => (
+                    <div key={i}>
+                      <div className="relative flex flex-col">
+                        <Image
+                          src={item?.src}
+                          width={1920}
+                          height={1920}
+                          alt="image"
+                          className=" w-full h-auto border-[2px] border-primary"
+                        />
+                        {isImageDescriptionOpen === i && (
+                          <>
+                            <input
+                              type="text"
+                              value={project?.images[i]?.desc}
+                              placeholder="Co przedstawia obraz?"
+                              onChange={(e) => {
+                                setProject({
+                                  ...project,
+                                  images: project.images.map(
+                                    (item: any, index: any) =>
+                                      index === i
+                                        ? {
+                                            ...item,
+                                            desc: e.target.value,
+                                          }
+                                        : item
+                                  ),
+                                });
+                              }}
+                              className="w-full border-x-[2px] border-primary text-black"
+                            />
+                            <button
+                              className="w-full py-2  bg-[#126b91] text-white"
+                              onClick={() => {
+                                setImageDescriptionOpen(-1);
+                                toast.success("Pomyślnie dodano opis!", {
+                                  position: "top-right",
+                                  autoClose: 5000,
+                                  hideProgressBar: false,
+                                  closeOnClick: true,
+                                  pauseOnHover: true,
+                                });
+                              }}
+                            >
+                              Ok
+                            </button>
+                          </>
+                        )}
+                        <button
+                          className="absolute top-1 right-1 bg-[#126b91] rounded-full p-2 text-white"
+                          onClick={() => {
+                            setProject({
+                              ...project,
+                              images: project.images.filter(
+                                (item: any, index: any) => index !== i
+                              ),
+                            });
+                            toast.success("Pomyślnie usunięto obraz!", {
+                              position: "top-right",
+                              autoClose: 5000,
+                              hideProgressBar: false,
+                              closeOnClick: true,
+                              pauseOnHover: true,
+                            });
+                          }}
+                        >
+                          <FaTimes />
+                        </button>
+                      </div>
+
+                      {isImageDescriptionOpen !== i && (
+                        <button
+                          onClick={() => setImageDescriptionOpen(i)}
+                          className="w-full bg-[#126b91]  text-white"
+                        >
+                          Opisz obraz
+                        </button>
+                      )}
+                    </div>
+                  ))}
                 </div>
               )}
-            </div>
 
-            <div>
-              <h3 className="font-coco text-black drop-shadow-lg mt-1.5">
-                Czas wykonania
-              </h3>
-              <select
-                value={project.time}
-                onChange={(e) =>
-                  setProject({
-                    ...project,
-                    time: e.target.value,
-                  })
-                }
-                className="border border-primary  p-2 text-black font-coco w-full"
-              >
-                <option value="Nie podano">Ile trwa wykonanie usługi?</option>
-                <option value="1-3 mies.">1-3 mies.</option>
-                <option value="3-6 mies.">3-6 mies.</option>
-                <option value="6-12 mies.">6-12 mies.</option>
-                <option value="1-2 lata">1-2 lata</option>
-                <option value="2-4 lata">2-4 lata</option>
-                <option value="powyżej 4 lat">powyżej 4 lat</option>
-              </select>
-            </div>
-
-            <div>
-              <h3 className="font-coco text-black drop-shadow-lg mt-1.5">
-                Nazwa
-              </h3>
-              <input
-                type="text"
-                value={project.name}
-                onChange={(e) =>
-                  setProject({
-                    ...project,
-                    name: e.target.value,
-                  })
-                }
-                placeholder="Podaj nazwę projektu"
-                className="border border-primary  p-2 text-black font-coco w-full"
-              />
-            </div>
-
-            <div>
-              <h3 className="font-coco text-black drop-shadow-lg mt-1.5">
-                Link do projektu (opcjonalnie)
-              </h3>
-              <input
-                type="text"
-                value={project.link}
-                onChange={(e) => {
-                  setProject({
-                    ...project,
-                    link: e.target.value,
-                  });
-                }}
-                placeholder="Link projektu (opcjonalnie)"
-                className="border border-primary  p-2 text-black font-coco w-full duration-300 ease-in-out"
-                aria-label="Link to project"
-              />
-            </div>
-
-            <div>
-              <h3 className="font-coco text-black drop-shadow-lg mt-1.5">
-                Stanowisko
-              </h3>
-              <textarea
-                cols={4}
-                rows={4}
-                maxLength={2000}
-                value={project.desc}
-                onChange={(e) =>
-                  setProject({ ...project, desc: e.target.value })
-                }
-                placeholder={`${
-                  source?.seek && source?.seek !== "ask"
-                    ? "Jaka była twoja rola w projekcie?"
-                    : "Opisz obowiązki stanowisk na które rekrutujesz..."
-                }`}
-                className="border border-primary  p-2 text-black font-coco w-full"
-              />
-            </div>
-            <h3 className="font-coco text-black drop-shadow-lg mt-1.5 mb-3">
-              Możesz uwzględnić kilka obrazów projektu (np. logo, stronę
-              główną...)
-            </h3>
-            {project?.images?.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                {project?.images?.map((item: any, i: any) => (
-                  <div key={i}>
-                    <div className="relative flex flex-col">
-                      <Image
-                        src={item?.src}
-                        width={1920}
-                        height={1920}
-                        alt="image"
-                        className=" w-full h-auto border-[2px] border-primary"
-                      />
-                      {isImageDescriptionOpen === i && (
-                        <>
-                          <input
-                            type="text"
-                            value={project?.images[i]?.desc}
-                            placeholder="Co przedstawia obraz?"
-                            onChange={(e) => {
-                              setProject({
-                                ...project,
-                                images: project.images.map(
-                                  (item: any, index: any) =>
-                                    index === i
-                                      ? {
-                                          ...item,
-                                          desc: e.target.value,
-                                        }
-                                      : item
-                                ),
-                              });
-                            }}
-                            className="w-full border-x-[2px] border-primary text-black"
-                          />
-                          <button
-                            className="w-full py-2  bg-[#126b91] text-white"
-                            onClick={() => {
-                              setImageDescriptionOpen(-1);
-                              toast.success("Pomyślnie dodano opis!", {
-                                position: "top-right",
-                                autoClose: 5000,
-                                hideProgressBar: false,
-                                closeOnClick: true,
-                                pauseOnHover: true,
-                              });
-                            }}
-                          >
-                            Ok
-                          </button>
-                        </>
-                      )}
-                      <button
-                        className="absolute top-1 right-1 bg-[#126b91] rounded-full p-2 text-white"
-                        onClick={() => {
-                          setProject({
-                            ...project,
-                            images: project.images.filter(
-                              (item: any, index: any) => index !== i
-                            ),
-                          });
-                          toast.success("Pomyślnie usunięto obraz!", {
-                            position: "top-right",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                          });
-                        }}
-                      >
-                        <FaTimes />
-                      </button>
-                    </div>
-
-                    {isImageDescriptionOpen !== i && (
-                      <button
-                        onClick={() => setImageDescriptionOpen(i)}
-                        className="w-full bg-[#126b91]  text-white"
-                      >
-                        Opisz obraz
-                      </button>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-
-            <button
-              onClick={() => {
-                if (project.name && project.time && project.desc) {
-                  updateUser(source.uid, {
-                    ...source,
-                    projects: source?.projects
-                      ? [...source.projects, project]
-                      : [project],
-                  });
-                  dispatch(
-                    setUser({
+              <button
+                onClick={() => {
+                  if (project.name && project.time && project.desc) {
+                    updateUser(source.uid, {
                       ...source,
                       projects: source?.projects
-                        ? [...source.projects, project]
-                        : [project],
-                    })
-                  );
-                  setIsNewProject(false);
-                  setProject({
-                    images: [],
-                    desc: "",
-                    name: "",
-                    time: "",
-                  });
-                } else {
-                  toast.error("Uzupełnij wszystkie pola!", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                  });
-                }
-              }}
-              className="mt-3 w-full mx-auto  left-0 bg-gradient-to-r from-primary via-cta to-primary text-white font-gotham text-lg px-2 py-1.5"
-            >
-              ZATWIERDŹ PROJEKT
-            </button>
+                        ? [
+                            ...source.projects,
+                            { ...project, isPaid: source?.tokens >= 10 },
+                          ]
+                        : [{ ...project, isPaid: source?.tokens >= 10 }],
+                    });
+                    dispatch(
+                      setUser({
+                        ...source,
+                        projects: source?.projects
+                          ? [
+                              ...source.projects,
+                              { ...project, isPaid: source?.tokens >= 10 },
+                            ]
+                          : [{ ...project, isPaid: source?.tokens >= 10 }],
+                      })
+                    );
+                    setIsNewProject(false);
+                    setProject({
+                      images: [],
+                      desc: "",
+                      name: "",
+                      time: "",
+                    });
+                  } else {
+                    toast.error("Uzupełnij wszystkie pola!", {
+                      position: "top-right",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                    });
+                  }
+                  async () => {
+                    await handleRecruitmentStart().then(() =>
+                      setProject({
+                        images: [],
+                        name: "",
+                        time: "",
+                        desc: "",
+                      })
+                    );
+                  };
+                }}
+                className="mt-3 w-full mx-auto text-3xl italic left-0 bg-gradient-to-r from-primary via-cta to-primary text-white font-gotham px-2 py-1.5"
+              >
+                Dodaj usługę (10,00💎)
+              </button>
 
-            <ImagePicker handler={uploadImages} user={source} />
+              <ImagePicker handler={uploadImages} user={source} />
+            </div>
           </div>
-
-          <>
-            {project?.name &&
-              !source?.seek &&
-              project?.time &&
-              project?.desc && (
-                <div className="w-full sticky bottom-0 flex flex-col bg-white p-4 ">
-                  <div
-                    className="w-full mb-4 bg-primary text-white  p-4 lg:p-6"
-                    style={{ textShadow: "2px 2px 2px black" }}
-                  >
-                    <label htmlFor="days-range" className="font-bold">
-                      Na ile dni chcesz dodać ofertę pracy? ({project?.days}{" "}
-                      dni)
-                    </label>
-                    <div className="px-4">
-                      <input
-                        id="days-range"
-                        type="range"
-                        min={1}
-                        max={30}
-                        value={project?.days || 1}
-                        onChange={(e: any) =>
-                          setProject({
-                            ...project,
-                            days: e.target.value,
-                            price: 15.99 + e.target.value * 8.42,
-                          })
-                        }
-                        className="w-full mt-2"
-                      />
-                    </div>
-                    <div className="text-lg font-semibold mt-2">
-                      Cena: 💎{project?.price?.toFixed(2)}
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={async () => {
-                      await handleRecruitmentStart().then(() =>
-                        setProject({
-                          images: [],
-                          name: "",
-                          time: "",
-                          desc: "",
-                        })
-                      );
-                    }}
-                    style={{ textShadow: "2px 2px 2px black" }}
-                    className="w-full sticky bottom-3  left-0 bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 text-white font-gotham text-lg px-2 py-1.5"
-                  >
-                    ROZPOCZNIJ REKRUTACJĘ
-                  </button>
-                </div>
-              )}
-          </>
         </>
       )}
     </div>

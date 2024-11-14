@@ -12,7 +12,7 @@ import Header from "@/components/Header";
 import FAQ from "@/components/Faq";
 import Regions from "@/components/Regions";
 import AboutQuixyTalent from "@/components/AboutQuixyTalent";
-import heroImg from "/assets/heroImg.png";
+import heroImg from "../../public/assets/heroimg.png";
 export default function Page() {
   const itCategories = jobs.flatMap((job) => [
     { title: job.title, data: job.data.map((subItem) => subItem) },
@@ -62,10 +62,10 @@ export default function Page() {
             </div>
             <Image
               src={heroImg}
-              width={1024}
-              height={1024}
               alt="Quixy Praca Zdalna"
               className="w-full h-full"
+              blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
+              placeholder="blur"
             />
             <Link
               href="/register"
@@ -75,9 +75,8 @@ export default function Page() {
                 Promuj swoje usługi z Quixy!
               </h2>
               <p className="font-coco text-sm">
-                Quixy.pl to rozwiązanie dla wszystkich – zarówno dla
-                freelancerów pracujących zdalnie, jak i dla firm. Zarejestruj
-                się, aby pokazać swoje usługi nowym klientom!
+                Quixy.pl to rozwiązanie zarówno dla freelancerów jak i dla firm.
+                Pokaż swoje usługi nowym klientom!
               </p>
             </Link>
           </div>
@@ -111,9 +110,8 @@ export default function Page() {
               Dołącz do nas za darmo!
             </h2>
             <p className="text-left max-w-[40rem] mb-3 mt-2">
-              Zapoznaj się z naszymi tablicami ofert dla klientów oraz
-              freelancerów! Wyświetlaj swoje usługi jako talent lub firma –
-              wszystko to zupełnie za darmo!
+              Zapoznaj się z naszymi tablicami ofert dla klientów! Wyświetlaj
+              swoje usługi jako freelancer lub firma.
             </p>
             <Link
               href="/register"
@@ -426,35 +424,24 @@ export default function Page() {
 
 const faqItems = [
   {
-    question: "Czym jest Quixy Talent™?",
+    question: "Czym jest Quixy?",
     answer:
-      "Quixy Talent™ to funkcjonalność na bazie CCRM (patrz o nas), która łączy pracodawców z talentami, umożliwiając realizację projektów zdalnych. Dzięki naszym narzędziom możesz łatwo znaleźć odpowiednich specjalistów lub zaoferować swoje usługi.",
+      "Quixy to funkcjonalność, która łączy klientów z firmami i freelancerami, umożliwiając realizację projektów zdalnych.",
   },
   {
-    question: "Jak mogę zarejestrować się na platformie Quixy?",
-    answer:
-      "Rejestracja na Quixy jest całkowicie darmowa. Wystarczy kliknąć przycisk 'Rejestracja' na stronie głównej, wypełnić formularz rejestracyjny i zweryfikować swój adres e-mail.",
-  },
-  {
-    question: "Czy korzystanie z Quixy jest darmowe?",
+    question: "Czy dołączenie do Quixy jest darmowe?",
     answer:
       "Tak, dołączenie do naszej platformy jest w pełni darmowe. Możesz dodawać oferty pracy, zatrudniać talenty oraz korzystać z generatora pomysłów używając Quixies.",
   },
   {
-    question:
-      "Jak działa generator pomysłów na biznes i w jaki sposób łączy pracodawcę z talentem?",
-    answer:
-      "Generator pomysłów Quixy pomaga w burzy mózgów, umożliwiając tworzenie koncepcji biznesowych zarówno dla działalności online, jak i offline. Nasi klienci korzystający z Generatora pomysłów często zamawiają strony internetowe, aplikacje, marketing i księgowość zdalną.",
-  },
-  {
     question: "Jak mogę znaleźć pracę zdalną na Quixy?",
     answer:
-      "Aby znaleźć pracę zdalną, przejdź do sekcji 'Pracuj zdalnie' na naszej stronie. Możesz przeglądać dostępne oferty pracy, filtrować je według kategorii oraz aplikować bezpośrednio przez platformę.",
+      "Aby znaleźć pracę zdalną, przejdź do sekcji 'Kategorie' na naszej stronie. Możesz przeglądać dostępne oferty pracy, filtrować je według kategorii oraz aplikować bezpośrednio przez platformę.",
   },
   {
     question: "Jak mogę zatrudnić talent na Quixy?",
     answer:
-      "Jeśli szukasz ekspertów do swojego projektu, przejdź do sekcji 'Zatrudnij talent'. Możesz przeglądać profile specjalistów, sprawdzać ich doświadczenie i umiejętności oraz nawiązywać współpracę bezpośrednio przez platformę.",
+      "Jeśli szukasz ekspertów do swojego projektu, przejdź do sekcji 'Szukaj'. Możesz przeglądać profile specjalistów, sprawdzać ich doświadczenie i umiejętności oraz nawiązywać współpracę bezpośrednio przez platformę.",
   },
   {
     question: "Czy Quixy zapewnia bezpieczeństwo moich danych?",

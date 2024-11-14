@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useState } from "react";
 
 export default function OfferOptionsOpened({
@@ -8,6 +7,8 @@ export default function OfferOptionsOpened({
   setApplicationsOpen,
   handleDeleteJobOffer,
   jobOffer,
+  deleteMenu,
+  setDeleteMenu,
 }: {
   optionsOpen: any;
   setEditOpen: (value: boolean) => void;
@@ -15,8 +16,9 @@ export default function OfferOptionsOpened({
   setApplicationsOpen: (value: boolean) => void;
   handleDeleteJobOffer: (id: string) => Promise<void>;
   jobOffer: { id: string };
+  deleteMenu: any;
+  setDeleteMenu: any;
 }) {
-  const [deleteMenu, setDeleteMenu] = useState(false);
   const [loading, setLoading] = useState(false);
 
   return (

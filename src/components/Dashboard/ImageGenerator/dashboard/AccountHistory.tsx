@@ -9,9 +9,6 @@ export default function AccountHistory() {
   return (
     <div className="flex flex-col relative">
       <div className="h-full bg-white w-full">
-        <h1 className="text-3xl text-zinc-800 mt-3 lg:mt-0 font-bold">
-          Historia konta
-        </h1>
         {user?.history?.length && (
           <div className="max-h-[30vh] overflow-y-scroll">
             {user?.history

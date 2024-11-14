@@ -3,17 +3,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Pagination from "./pagination/Pagination";
 import { polishToEnglish } from "../../utils/polishToEnglish";
+import { JobPosting } from "@/types";
 
-interface Idea {
-  name: string;
-  creationTime: string;
-}
-
-interface IdeasProps {
-  ideas: Idea[];
-}
-
-const JobOfferList: React.FC<IdeasProps> = ({ ideas }) => {
+export default function JobOfferList({
+  job_offers,
+}: {
+  job_offers: JobPosting[];
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6); // Initially, 6 items per page
 
@@ -26,7 +22,8 @@ const JobOfferList: React.FC<IdeasProps> = ({ ideas }) => {
   };
 
   const indexOfLastIdea = currentPage * itemsPerPage;
-  const currentIdeas = ideas?.slice(0, indexOfLastIdea);
+
+  const offers = job_offers?.slice(0, indexOfLastIdea);
 
   return (
     <div className="bg-white p-4 sm:p-8 mx-auto font-gotham sm: sm:my-12">
@@ -38,27 +35,25 @@ const JobOfferList: React.FC<IdeasProps> = ({ ideas }) => {
         niech inni dołączą do Ciebie!
       </p>
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {currentIdeas.map((idea: Idea, i: number) => (
+        {offers?.map((offer: JobPosting, i: number) => (
           <Link
             key={i}
-            href={`/business-ideas/${polishToEnglish(
-              idea?.name
-            )}${idea?.creationTime?.toString()}`}
+            href={`/job_offers/${polishToEnglish(
+              offer?.name
+            )}${offer?.creationTime?.toString()}`}
             className="bg-gradient-to-r from-primary to-cta text-white flex flex-col justify-between p-6 border  shadow-sm hover:shadow-lg hover:border-primary hover:shadow-primary hover:scale-105 duration-300"
           >
-            {idea?.name}
+            {offer?.name}
           </Link>
         ))}
       </div>
       <Pagination
         onShowMore={handleShowMore}
-        totalItems={ideas.length}
+        totalItems={job_offers?.length}
         itemsPerPage={itemsPerPage}
         currentPage={currentPage}
         onPageChange={handlePageChange}
       />
     </div>
   );
-};
-
-export default JobOfferList;
+}

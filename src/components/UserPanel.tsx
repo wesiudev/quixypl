@@ -20,95 +20,100 @@ export default function UserPanel() {
     {
       text: "Panel użytkownika",
       href: "/dashboard",
-      icon: <FaHome className="text-5xl" />,
+      icon: <FaHome />,
     },
-    {
-      text: "Znajdź pracę",
-      href: "/job_offers",
-      icon: <FaRocket className="text-5xl" />,
-    },
-    {
-      text: "Generator Obrazów",
-      href: "/dashboard/image-generator",
-      icon: <FaImages className="text-5xl" />,
-    },
-    // {
-    //   text: "Rynek",
-    //   href: "/marketplace",
-    //   icon: <FaDollarSign className="text-5xl" />,
-    // },
     {
       text: "Moje leady",
       href: "/dashboard/leads",
-      icon: <FaUsers className="text-5xl" />,
+      icon: <FaUsers />,
+    },
+    {
+      text: "Znajdź pracę",
+      href: "/dashboard/search?type=job",
+      icon: <FaRocket />,
+    },
+    {
+      text: "Znajdź Freelancera",
+      href: "/dashboard/search?type=talent",
+      icon: <FaUserNinja />,
     },
     {
       text: "Dodaj ofertę pracy",
       href: "/dashboard/add_job_offer",
-      icon: <FaPlus className="text-5xl" />,
+      icon: <FaPlus />,
     },
     {
       text: "Moje oferty pracy",
       href: "/dashboard/my-postings",
-      icon: <FaList className="text-5xl" />,
+      icon: <FaList />,
     },
     {
-      text: "Szukaj Freelancerów",
-      href: "/search?type=talent",
-      icon: <FaUserNinja className="text-5xl" />,
+      text: "Generator Obrazów",
+      href: "/dashboard/image-generator",
+      icon: <FaImages />,
     },
     {
       text: "Generator Biznesu",
       href: "/dashboard/idea-generator",
-      icon: <FaLightbulb className="text-5xl" />,
+      icon: <FaLightbulb />,
     },
   ];
   return (
-    <div>
-      <div className={`w-full grid grid-cols-1 gap-1.5 z-50 px-6 pt-6`}>
-        {linksData.map((link, index) => (
-          <div key={index}>
-            {index === 0 && (
-              <div className="mb-12 pl-2 relative w-full bg-gradient-to-r from-primary to-cta text-white hover:from-cta hover:to-cta rounded-xl">
-                <button
-                  onClick={() =>
-                    dispatch(set_modals({ ...modals, config: true }))
-                  }
-                  className="w-full"
-                >
-                  <div className="flex items-center relative py-3">
-                    <div className="text-white mr-3">
-                      <FaUserNinja className="text-3xl" />
-                    </div>
-                    <div className="italic py-2 z-50 relative text-center text-3xl font-extrabold">
-                      MÓJ PROFIL
-                    </div>
-                  </div>
-                </button>
-              </div>
-            )}
-
-            {index === 0 && (
-              <div className="font-extrabold font-coco mb-3 text-zinc-800 text-3xl">
-                Nawigacja
-              </div>
-            )}
-            <button
-              className={`pl-2 relative w-full font-gotham bg-primary text-white hover:from-cta hover:to-cta rounded-xl`}
-              onClick={() => {
-                router.push(link.href);
-                dispatch(set_modals({ ...modals, config: false }));
-              }}
-              rel="noopener noreferrer"
-            >
-              <div className="flex items-center relative py-3">
-                <div className="text-white mr-3 ">{link.icon}</div>
-                <div className="italic py-2 z-50 relative text-center text-lg font-extrabold">
-                  {link.text.toUpperCase()}
-                </div>
-              </div>
-            </button>
+    <div className="px-6 pt-6">
+      <div className="mb-12 pl-2 relative w-full bg-gradient-to-r from-primary to-cta text-white hover:from-cta hover:to-cta rounded-xl">
+        <button
+          onClick={() => dispatch(set_modals({ ...modals, config: true }))}
+          className="w-full"
+        >
+          <div className="flex items-center relative py-3">
+            <div className="text-white mr-3">
+              <FaUserNinja className="text-3xl" />
+            </div>
+            <div className="italic py-2 z-50 relative text-center text-3xl font-extrabold">
+              MÓJ PROFIL
+            </div>
           </div>
+        </button>
+      </div>
+
+      <div className="gap-3 grid grid-cols-2">
+        {linksData.map((link, index) => (
+          <button
+            key={index}
+            className="bg-cta relative aspect-square font-coco text-white text-center rounded-xl"
+            onClick={() => {
+              router.push(link.href);
+              dispatch(set_modals({ ...modals, config: false }));
+            }}
+            rel="noopener noreferrer"
+          >
+            {index === 1 && (
+              <div className="absolute top-3 left-3 text-white font-bold text-sm">
+                Zlecenia i aplikacje
+              </div>
+            )}
+            {index === 2 && (
+              <div className="absolute top-3 left-3 text-white font-bold text-lg">
+                Zdalnie
+              </div>
+            )}
+            {index === 6 && (
+              <div className="absolute top-3 left-3 text-white font-bold text-3xl">
+                AI
+              </div>
+            )}
+            {index === 7 && (
+              <div className="absolute top-3 left-3 text-white font-bold text-3xl">
+                AI
+              </div>
+            )}
+            <div className="flex-col flex items-center justify-center relative px-3">
+              <div className="text-5xl">{link.icon}</div>
+              <div className="py-2 z-50 relative text-center font-extralight italic">
+                {link.text.toUpperCase()}
+              </div>
+            </div>
+          </button>
         ))}
       </div>
     </div>

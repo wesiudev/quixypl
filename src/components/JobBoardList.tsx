@@ -32,8 +32,8 @@ export default function JobBoardList({
         className="text-black font-extrabold text-xl lg:text-3xl"
       >
         {/* Specjaliści od tego i tego... */}
-        {searchType === "talents" && "Najlepsi specjaliści"}
-        {searchType === "companies" && "Najlepsze firmy"}
+        {searchType === "talents" && "Najlepsi specjaliści w"}
+        {searchType === "companies" && "Najlepsze firmy w"}
         {searchType === "job_offers" && "Oferty pracy zdalnej w"}{" "}
         {content?.genitive}{" "}
       </h2>{" "}

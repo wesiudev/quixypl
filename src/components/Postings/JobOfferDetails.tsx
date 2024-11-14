@@ -21,7 +21,21 @@ export default function JobOfferDetails({
   optionsOpen,
 }: JobOfferDetailsProps) {
   return (
-    <div className="flex w-full justify-between font-gotham mb-4 text-black">
+    <div className="h-full flex flex-row-reverse w-full justify-between mb-4 text-black">
+      <div className="flex flex-col">
+        <div className="flex items-end justify-end">
+          <button
+            onClick={() => setOptionsOpen(!optionsOpen)}
+            className={`w-max text-3xl text-white h-full px-2 bg-gradient-to-r from-primary to-cta hover:bg-opacity-20 relative z-10 duration-200 `}
+          >
+            <HiOutlineDotsHorizontal
+              className={`${
+                optionsOpen ? "scale-125 hover:scale-110" : "hover:scale-90"
+              }`}
+            />
+          </button>
+        </div>
+      </div>
       <div className="flex flex-col">
         <h3 className="font-coco text-lg sm:text-xl font-bold text-black mb-2 pr-6">
           {jobOffer.title}
@@ -60,21 +74,6 @@ export default function JobOfferDetails({
               Przeglądaj aplikacje
             </Link>
           )}
-        </div>
-      </div>
-
-      <div className="flex flex-col">
-        <div className="flex items-end justify-end">
-          <button
-            onClick={() => setOptionsOpen(!optionsOpen)}
-            className={`w-max text-3xl text-white h-full px-2 bg-gradient-to-r from-primary to-cta hover:bg-opacity-20 relative z-10 duration-200 `}
-          >
-            <HiOutlineDotsHorizontal
-              className={`${
-                optionsOpen ? "scale-125 hover:scale-110" : "hover:scale-90"
-              }`}
-            />
-          </button>
         </div>
       </div>
     </div>

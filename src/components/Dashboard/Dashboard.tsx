@@ -4,17 +4,16 @@ import moment from "moment";
 import Loading from "../../app/loading";
 import { useDispatch, useSelector } from "react-redux";
 import AccountHistory from "./ImageGenerator/dashboard/AccountHistory";
-import { FaBriefcase, FaClipboard, FaPlusCircle } from "react-icons/fa";
+import { FaClipboard } from "react-icons/fa";
 import { set_modals } from "@/redux/slices/modalsopen";
-import ProjectCard from "./ImageGenerator/dashboard/ProjectCard";
-import { IProject } from "@/types";
 import { toast } from "react-toastify";
 import MultiStepVerification from "./Settings/SettingsInputs/MultiStepVerification";
 import { useState } from "react";
 import ReactConfetti from "react-confetti";
 import Link from "next/link";
-import ProjectList from "./ProjectsList";
-import JobOfferList from "./JobOfferList";
+import ProjectList from "./ProjectList";
+import JobOfferList from "../JobOfferList";
+import ServiceList from "./ProjectList";
 async function sendVerificationEmail(email: string, verificationCode: string) {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`,
@@ -54,7 +53,7 @@ export default function Dashboard() {
                     }`}
                   >
                     {!user?.emailVerified && (
-                      <div className="bg-gradient-to-r from-primary to-cta text-white p-3 w-full">
+                      <div className="bg-primary text-white p-3 w-full">
                         <b>Witaj w Quixy!</b>🔥 Wysłaliśmy wiadomość aktywującą
                         konto na podany adres e-mail - {user?.email}{" "}
                         <button
@@ -70,7 +69,7 @@ export default function Dashboard() {
                     )}
                     <div className="grid grid-cols-1 2xl:grid-cols-2 bg-white p-3 lg:p-6">
                       <div className="pr-6 h-full w-full">
-                        <h2 className="font-bold text-3xl text-zinc-800 flex items-center">
+                        <h2 className="font-extrabold text-3xl text-black flex items-center">
                           Twoje konto{" "}
                         </h2>
                         <div className=" text-black">
@@ -80,7 +79,7 @@ export default function Dashboard() {
                             : `${user?.email} - Skonfiguruj swoje konto!`}
                         </div>
 
-                        <h2 className="text-3xl font-bold text-zinc-800 mt-3">
+                        <h2 className="mt-12 font-extrabold text-3xl text-black flex items-center">
                           Twoje zlecenia
                         </h2>
                         <div className="py-2">
@@ -103,7 +102,7 @@ export default function Dashboard() {
                         <Link
                           title="Zobacz wszystkie zlecenia"
                           href="/dashboard/leads"
-                          className="font-bold w-max text-white bg-gradient-to-r from-primary to-cta text-lg flex items-center px-2 py-1.5 rounded-lg mt-1"
+                          className="font-bold w-max text-white bg-primary text-lg flex items-center px-2 py-1.5 rounded-lg mt-1"
                         >
                           Zobacz wszystkie
                         </Link>
@@ -342,8 +341,7 @@ export default function Dashboard() {
               </div>
             </div>
             <div className={`bg-white h-max w-full`}>
-              <ProjectList projects={user?.projects} />
-              <JobOfferList job_offers={user?.job_offers} />
+              <ServiceList projects={user?.projects} />
             </div>
           </div>
         </div>
