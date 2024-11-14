@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaArrowLeft, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import VerifyPayment from "../../../components/VerifyPayment";
 import { getDocument } from "@/firebase";
 import { Metadata } from "next";

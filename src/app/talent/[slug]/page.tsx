@@ -249,7 +249,7 @@ export async function generateMetadata(props: {
     }
   ).then((res: any) => res.json());
 
-  const title = `${slug?.name} ${slug?.title}, ${slug?.city}`;
+  const title = `${slug?.title} w ${slug?.city} - ${slug?.name}`;
   const description = `Sprawdź projekty ${params.slug}`;
   return {
     title,
@@ -284,7 +284,7 @@ export async function generateMetadata(props: {
       site: "@quixy",
       title,
       description,
-      image: "/assets/woman-pc.webp",
+      image: slug?.photoURL,
     },
   };
 }

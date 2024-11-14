@@ -126,7 +126,7 @@ export default function ProductsWide({
             </article>
           ))}
         </div>
-        <div className="flex flex-col py-4">
+        {/* <div className="flex flex-col py-4">
           <h3 className="text-2xl text-black ">Sprawdź nasze Social Media</h3>
           <div className="flex items-center flex-wrap -ml-3 mt-3">
             <Link
@@ -156,7 +156,7 @@ export default function ProductsWide({
               <p className="text-xl ml-1 text-black">Facebook</p>
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

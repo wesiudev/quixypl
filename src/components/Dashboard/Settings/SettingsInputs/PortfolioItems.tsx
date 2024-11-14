@@ -21,6 +21,7 @@ import { addJobOffer, storage, updateUser } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { InputField } from "@/components/AddJobOffer/InputField";
 import { FaStar } from "react-icons/fa6";
+import Editor, { EditorContentChanged } from "@/components/AddJobOffer/Editor";
 export default function PortfolioItems({
   source,
   isNewProject,
@@ -197,6 +198,12 @@ export default function PortfolioItems({
       return;
     }
   }
+  const [editorMarkdownValue, setEditorMarkdownValue] = useState<string>("");
+
+  const onEditorContentChanged = (content: EditorContentChanged) => {
+    setProject((prev: any) => ({ ...prev, desc: content.html }));
+    setEditorMarkdownValue(content.markdown);
+  };
   return (
     <div className={`px-6 mt-3`}>
       <div className="font-extrabold text-lg flex items-center text-black">
@@ -611,7 +618,11 @@ export default function PortfolioItems({
                   />
                 </div>
                 <div>
-                  <h3 className="font-coco   text-black mt-1">Opis usługi</h3>
+                  <h3 className="font-coco text-black mt-1">Opis usługi</h3>
+                  <Editor
+                    value={project?.desc}
+                    onChange={onEditorContentChanged}
+                  />
                   <textarea
                     cols={4}
                     rows={4}

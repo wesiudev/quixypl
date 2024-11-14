@@ -24,7 +24,9 @@ export default function ServiceCard({
     }
     const updatedTokens = user?.tokens - 10;
     const updatedProjects = user?.projects.map((p: IProject) =>
-      p.id === project.id ? { ...p, extraDays: (p.extraDays || 0) + 1 } : p
+      p.id === project.id
+        ? { ...p, isPaid: true, FextraDays: (p.extraDays || 0) + 1 }
+        : p
     );
     await updateUser(user?.uid, {
       tokens: updatedTokens,
