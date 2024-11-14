@@ -249,7 +249,7 @@ export async function generateMetadata(props: {
     }
   ).then((res: any) => res.json());
 
-  const title = `${slug?.pseudo} | Ekspert ${slug?.city}`;
+  const title = `${slug?.name} ${slug?.title}, ${slug?.city}`;
   const description = `Sprawdź projekty ${params.slug}`;
   return {
     title,
