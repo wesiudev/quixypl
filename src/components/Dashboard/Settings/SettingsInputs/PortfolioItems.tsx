@@ -14,10 +14,9 @@ import ImagePicker from "./ImagePicker";
 import { useDispatch, useSelector } from "react-redux";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { IProject } from "@/types";
-import moment from "moment";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
-import { addJobOffer, storage, updateUser } from "@/firebase";
+import { addDocument, storage, updateUser } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { InputField } from "@/components/AddJobOffer/InputField";
 import { FaStar } from "react-icons/fa6";
@@ -50,44 +49,32 @@ export default function PortfolioItems({
   const [isImageDescriptionOpen, setImageDescriptionOpen] = useState(-1);
   const { modals } = useSelector((state: any) => state.modals);
   const dispatch = useDispatch();
-
-  // Helper function to proceed with the project update
   const proceedWithProjectUpdate = async (isPaid: boolean) => {
-    const jobOfferId = uuid();
+    const uniqId = uuid();
     const updatedProjects = updateProjectsList(source.projects, project, {
       ...project,
       isPaid: isPaid,
-      isRecruitment: true,
-      expirationTime: moment().add(project.days, "days").valueOf(),
-      type: "quick",
       creationTime: Date.now(),
-      id: jobOfferId,
+      id: uniqId,
     });
 
     const updatedTokens = isPaid
       ? source.tokens - project?.price
       : source.tokens;
-    await addJobOffer({
+    await addDocument("services", uniqId, {
       ...project,
-      expirationTime: getExpirationTime(project.days),
-      type: "quick",
-      companySize: getCompanySize(),
-      id: jobOfferId,
+      id: uniqId,
     });
 
     await updateUser(source.uid, {
       tokens: updatedTokens,
       projects: updatedProjects,
     });
-
     dispatch(
       setUser({ ...source, tokens: updatedTokens, projects: updatedProjects })
     );
-
-    showToastSuccess("Pomyślnie zaktualizowano projekt!");
+    showToastSuccess("Pomyślnie dodano projekt!");
   };
-
-  // Helper function to handle project list update
   const updateProjectsList = (
     existingProjects: any,
     project: IProject,
@@ -95,28 +82,12 @@ export default function PortfolioItems({
   ) => {
     const newProject = {
       ...project,
-      expirationTime: moment().add(project?.days, "days").valueOf(),
       creationTime: Date.now(),
-      companySize: getCompanySize(),
       ...additionalProps,
     };
 
     return existingProjects ? [...existingProjects, newProject] : [newProject];
   };
-
-  // Helper function to calculate the expiration time based on project days
-  const getExpirationTime = (days: number) => {
-    return Date.now() + days * 24 * 60 * 60 * 1000;
-  };
-
-  // Helper function to get the company size or fallback
-  const getCompanySize = () => {
-    return source?.preferences?.length > 0
-      ? source?.preferences[0]
-      : "Brak danych...";
-  };
-
-  // Helper function to show success toast
   const showToastSuccess = (message: string) => {
     toast.success(message, {
       position: "top-right",
@@ -127,8 +98,6 @@ export default function PortfolioItems({
       draggable: true,
     });
   };
-
-  // Helper function to show error toast
   const showToastError = (message: string) => {
     toast.error(message, {
       position: "top-right",
@@ -139,8 +108,6 @@ export default function PortfolioItems({
       draggable: true,
     });
   };
-
-  // Main function to handle the project submission
   const handleRecruitmentStart = async () => {
     const hasEnoughTokens = source?.tokens >= project?.price;
     const isProjectValid = isProjectDataValid(project);
@@ -148,8 +115,6 @@ export default function PortfolioItems({
     if (!isProjectValid) {
       return showToastError("Uzupełnij dane!");
     }
-
-    // Update projects array with isPaid true/false based on token quantity
     await proceedWithProjectUpdate(hasEnoughTokens);
 
     if (!hasEnoughTokens) {
@@ -157,13 +122,9 @@ export default function PortfolioItems({
       openTokenModal();
     }
   };
-
-  // Helper function to check if the project is valid
   const isProjectDataValid = (project: IProject) => {
     return project.name && project.time && project.desc;
   };
-
-  // Helper function to open the token modal
   const openTokenModal = () => {
     dispatch(set_modals({ ...modals, quixies: true }));
   };
@@ -201,7 +162,7 @@ export default function PortfolioItems({
   const [editorMarkdownValue, setEditorMarkdownValue] = useState<string>("");
 
   const onEditorContentChanged = (content: EditorContentChanged) => {
-    setProject((prev: any) => ({ ...prev, desc: content.html }));
+    setProject({ ...project, desc: content.html });
     setEditorMarkdownValue(content.markdown);
   };
   return (

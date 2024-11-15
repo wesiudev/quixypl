@@ -3,6 +3,7 @@ import CategorySelector from "@/components/AddJobOffer/CategorySelector";
 import { IProject } from "@/types";
 import MarketCategorySelector from "./MarketCategorySelector";
 import { useState } from "react";
+import Viewer from "@/components/AddJobOffer/Viewer";
 
 export default function Market({ leads }: { leads: IProject[] }) {
   const [tagsOpenLevel, setTagsOpenLevel] = useState(false);
@@ -33,7 +34,7 @@ export default function Market({ leads }: { leads: IProject[] }) {
         />
       </div>
       <div className="grid gap-3 grid-cols-2 lg:grid-cols-3 p-6 lg:p-12 bg-white">
-        {leads.map((lead: any, i: any) => (
+        {leads.map((lead: IProject, i: any) => (
           <div
             key={i}
             className={`p-4 bg-zinc-800 rounded-xl border-zinc-800 hover:bg-gray-800 ${
@@ -43,7 +44,31 @@ export default function Market({ leads }: { leads: IProject[] }) {
                 : "hidden"
             }`}
           >
-            <h2 className="text-white font-extrabold">{lead?.name}</h2>
+            <h2 className="text-white text-3xl font-extrabold">{lead?.name}</h2>
+            <div className="max-h-[25vh] overflow-hidden my-3 p-3 bg-white rounded-bl-xl rounded-tr-xl">
+              <Viewer value={lead?.desc} />
+            </div>
+            <div className="flex flex-wrap">
+              <h3 className="text-white">Czas wykonania: </h3>
+              <p className="ml-1 text-purple-500 font-extrabold">
+                {" "}
+                {lead?.duration}
+              </p>
+            </div>
+            <div className="flex flex-wrap">
+              <h3 className="text-white">Rodzaj wynagrodzenia: </h3>
+              <p className="ml-1 text-green-500 font-extrabold">
+                {" "}
+                {lead?.time}
+              </p>
+            </div>
+            <div className="flex flex-wrap">
+              <h3 className="text-white">Wynagrodzenie: </h3>
+              <p className="ml-1 text-green-500 font-extrabold">
+                {" "}
+                {lead?.salaryValue}
+              </p>
+            </div>
           </div>
         ))}
       </div>

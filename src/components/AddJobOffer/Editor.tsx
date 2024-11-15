@@ -14,7 +14,7 @@ export interface EditorProps {
   onChange?: (changes: EditorContentChanged) => void;
   setSource?: any;
   source?: any;
-  setChangesWereMade: any;
+  setChangesWereMade?: any;
 }
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
@@ -48,7 +48,7 @@ export default function Editor(props: EditorProps) {
         },
       }}
       value={value}
-      onChange={onChange}
+      onChange={() => (props.onChange ? props.onChange : onChange)}
     />
   );
 }
