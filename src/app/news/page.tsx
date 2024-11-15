@@ -1,5 +1,4 @@
 import Header from "@/components/Header";
-
 import { getProducts } from "@/firebase";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -7,7 +6,7 @@ import Link from "next/link";
 import jobs from "../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import { FaChevronRight } from "react-icons/fa";
-import AboutQuixyTalent from "../(about)/AboutQuixyTalent";
+import AboutQuixyTalent from "@/components/AboutQuixyTalent";
 export const revalidate = 30;
 export default async function Page() {
   const posts = await getProducts();
