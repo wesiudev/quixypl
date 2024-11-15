@@ -102,8 +102,6 @@ export default function StepOne({
         <Editor
           value={formData.description}
           onChange={onEditorContentChanged}
-          setFormData={setFormData}
-          formData={formData}
         />
         <JobPreferencesHandler
           addPreference={addPreference}

@@ -16,6 +16,7 @@ export interface EditorProps {
   source?: any;
   setChangesWereMade?: any;
 }
+
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 const TOOLBAR_OPTIONS = [
@@ -29,11 +30,14 @@ const TOOLBAR_OPTIONS = [
 export default function Editor(props: EditorProps) {
   const [value, setValue] = useState<string>(props.value);
 
-  const onChange = (value: string) => {
+  const handleChange = (value: string) => {
     props.setChangesWereMade(true);
     setValue(value);
     if (props.source) {
       props.setSource({ ...props.source, description: value });
+    }
+    if (props.onChange) {
+      props.onChange({ html: value, markdown: "" }); // Assuming markdown conversion is handled elsewhere
     }
   };
 
@@ -48,7 +52,7 @@ export default function Editor(props: EditorProps) {
         },
       }}
       value={value}
-      onChange={() => (props.onChange ? props.onChange : onChange)}
+      onChange={handleChange}
     />
   );
 }
