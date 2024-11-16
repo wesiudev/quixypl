@@ -4,8 +4,8 @@ import useWindowDimensions from "../useWidth";
 import ProductsWide from "./ProductsWide";
 import ProductsMobile from "./ProductsMobile";
 import HeaderComponent from "./HeaderComponent";
-import { FaFileSignature, FaImages, FaList, FaUsers } from "react-icons/fa";
-import { IoSparkles } from "react-icons/io5";
+import { FaFileSignature, FaList, FaUsers } from "react-icons/fa";
+
 import { FaFileArrowUp, FaLightbulb, FaUserNinja } from "react-icons/fa6";
 
 export const destinations = [

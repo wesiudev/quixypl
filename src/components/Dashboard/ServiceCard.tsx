@@ -46,7 +46,7 @@ export default function ServiceCard({
     });
   }
   return (
-    <div className="mt-4 block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-zinc-800 dark:hover:bg-zinc-800">
+    <div className="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-zinc-800 dark:hover:bg-zinc-800">
       {/* Title with prominent visual hierarchy */}
       <div className="flex flex-col sm:flex-row gap-3">
         {project?.images?.length > 0 && (

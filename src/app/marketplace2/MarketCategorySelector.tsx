@@ -1,5 +1,5 @@
 import jobs from "../../../public/14.09.2024.json";
-import { FaChevronLeft } from "react-icons/fa";
+import { FaChevronCircleLeft, FaChevronLeft } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { v4 as uuidv4 } from "uuid";
 export default function MarketCategorySelector({
@@ -9,6 +9,9 @@ export default function MarketCategorySelector({
   category,
   setCategory,
   setJob,
+  job,
+  setShowResults,
+  leads,
 }: {
   setConfigurationOpen: any;
   slug: any;
@@ -16,12 +19,13 @@ export default function MarketCategorySelector({
   category: any;
   setCategory: any;
   setJob: any;
+  job: any;
+  setShowResults: any;
+  leads: any;
 }) {
   return (
-    <div className="bg-white rounded-xl p-3 lg:p-6">
-      <h1 className="text-2xl font-extrabold text-black">
-        Przeglądaj usługi naszych freelancerów oraz firm
-      </h1>
+    <div className="bg-white p-3 lg:p-6">
+      <h1 className="text-2xl font-extrabold text-black">Wyszukiwarka usług</h1>
       {!slug && (
         <div className="my-1.5 font-bold text-black">Wybierz kategorię</div>
       )}
@@ -52,23 +56,34 @@ export default function MarketCategorySelector({
           <div className="font-bold text-black">Wybierz kategorię</div>
         </div>
       )}
+
       <div className=" flex flex-row items-start w-full">
         {slug === "" && (
           <button
             onClick={() => setConfigurationOpen(true)}
-            className="ml-0.5 mr-0.5 text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+            className="text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
           >
-            <FaMagnifyingGlass />
+            <FaMagnifyingGlass className="hover:scale-110" />
           </button>
         )}
-        {slug !== "" && category !== "" && (
+        {slug !== "" && category !== "" && job === "" && (
           <button
             onClick={() => {
-              setCategory(""), setJob("");
+              setCategory("");
             }}
-            className="mr-0.5 text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+            className="text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
           >
-            <FaChevronLeft />
+            <FaChevronLeft className="hover:scale-110" />
+          </button>
+        )}
+        {slug !== "" && category !== "" && job !== "" && (
+          <button
+            onClick={() => {
+              setJob("");
+            }}
+            className="text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+          >
+            <FaChevronCircleLeft className="hover:scale-110" />
           </button>
         )}
         {slug !== "" && category === "" && (
@@ -76,17 +91,17 @@ export default function MarketCategorySelector({
             onClick={() => {
               setSlug(""), setConfigurationOpen(false);
             }}
-            className="ml-0.5 mr-0.5 text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+            className=" text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
           >
-            <FaChevronLeft />
+            <FaChevronLeft className="hover:scale-110" />
           </button>
         )}
         {slug === "" && (
-          <div className="-ml-0.5">
+          <div className="">
             {jobs.map((item: any, k: any) => (
               <button
                 onClick={() => setSlug(item.title)}
-                className="ml-0.5 bg-[#126b91]  text-white font-light p-2"
+                className=" bg-[#126b91] hover:bg-opacity-90 duration-100  text-white font-light p-2"
                 key={uuidv4()}
               >
                 {item.title}
@@ -95,7 +110,7 @@ export default function MarketCategorySelector({
           </div>
         )}
         {category === "" && (
-          <div className="-ml-0.5">
+          <div className="">
             {jobs.map((item: any, i: any) => (
               <div key={uuidv4()}>
                 {item.title === slug && (
@@ -103,7 +118,7 @@ export default function MarketCategorySelector({
                     {item.data.map((cat: any, j: any) => (
                       <button
                         onClick={() => setCategory(cat.title)}
-                        className="ml-0.5 bg-[#126b91]  text-white font-light p-2"
+                        className="bg-[#126b91] hover:bg-opacity-90 duration-100  text-white font-light p-2"
                         key={uuidv4()}
                       >
                         {cat.title}
@@ -116,7 +131,7 @@ export default function MarketCategorySelector({
           </div>
         )}
         {category !== "" && (
-          <div className="-ml-0.5">
+          <div className="">
             {jobs.map((item: any, i: any) => (
               <div key={uuidv4()}>
                 {item.title === slug && (
@@ -125,15 +140,21 @@ export default function MarketCategorySelector({
                       <div key={uuidv4()}>
                         {cat.title === category && (
                           <div>
-                            {cat.data.map((job: any, i: any) => (
+                            {cat.data.map((j: any, i: any) => (
                               <button
                                 onClick={() => {
-                                  setJob(job.title);
+                                  setJob(j.title);
                                 }}
-                                className="ml-0.5 bg-[#126b91]  text-white font-light p-2"
+                                className={`${
+                                  slug !== "" &&
+                                  category !== "" &&
+                                  job === j.title
+                                    ? "bg-gradient-to-r from-primary to-cta"
+                                    : "bg-[#126b91]"
+                                }  hover:bg-opacity-90 duration-100  text-white font-light p-2`}
                                 key={uuidv4()}
                               >
-                                {job.title}
+                                {j.title}
                               </button>
                             ))}
                           </div>
@@ -147,6 +168,14 @@ export default function MarketCategorySelector({
           </div>
         )}
       </div>
+      {leads > 0 && slug !== " " && (
+        <button
+          onClick={() => setShowResults(true)}
+          className="p-3 mt-3 bg-gradient-to-r from-primary to-cta text-white font-extralight font-coco text-xl flex items-center gap-2"
+        >
+          <FaMagnifyingGlass /> Znalezione usługi: {leads}
+        </button>
+      )}
     </div>
   );
 }
