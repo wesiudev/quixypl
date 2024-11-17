@@ -7,6 +7,7 @@ import {
   FaChevronRight,
   FaDiamondTurnRight,
   FaFileArrowUp,
+  FaStar,
 } from "react-icons/fa6";
 import { Metadata } from "next";
 import { IoSparkles } from "react-icons/io5";
@@ -14,30 +15,30 @@ import Image from "next/image";
 import Regions from "@/components/Regions";
 import heroImg from "../../../public/assets/AI-Image.png";
 import { getDocuments } from "@/firebase";
-import Market from "../marketplace2/Market";
+import Market from "@/components/marketplace/Market";
 export const revalidate = 60;
 export default async function Page() {
   const leads: any = await getDocuments("services");
 
   return (
-    <div className="min-h-screen w-full flex flex-col font-coco">
+    <div className="min-h-screen w-full flex flex-col">
       {/* Header */}
       <Header jobsList={jobs} />
 
-      <main className="bg-gray-100 ">
+      <main className="">
         {/* Hero Section */}
         <div className="">
           <div className="mx-auto px-4 w-full max-w-[1366px] flex flex-col lg:items-center lg:grid lg:grid-cols-2 relative z-50 py-12">
             <div className="group relative flex flex-col">
               <h1 className="lg:max-w-lg font-extrabold text-3xl lg:text-5xl text-zinc-800">
-                Szukaj usług zdalnych lub utwórz portfolio
+                Szukaj usług zdalnych lub dodaj nowe na rynek
               </h1>
               <p className="max-w-[100%] sm:max-w-sm lg:max-w-lg text-black mt-3">
                 Pierwsza platforma napędzana technologią{" "}
                 <Link href="/about#ccrm" className="italic">
                   CCRM
                 </Link>
-                , która łączy freelancerów z klientami!
+                , która łączy freelancerów i firmy z klientami!
               </p>
               <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 w-full mt-2">
                 <Link
@@ -81,33 +82,79 @@ export default async function Page() {
                   Promuj swoje usługi z Quixy!
                 </h2>
                 <p className="font-coco text-sm">
-                  Quixy.pl to rozwiązanie zarówno dla freelancerów jak i dla
-                  firm. Pokaż swoje usługi nowym klientom!
+                  Quixy to rozwiązanie dla freelancerów i dla firm.
                 </p>
               </Link>
             </div>
           </div>
         </div>
         {/* Services Section */}
-        <div className="container px-6 lg:px-12 mx-auto rounded-xl" id="search">
+        <div className="container px-0 lg:px-12 mx-auto rounded-xl" id="search">
           <Market leads={leads} />
         </div>
-        <div className="flex flex-col items-center justify-center mx-auto">
-          <section className="services-section bg-gray-100 py-16 text-black flex justify-center items-center flex-col">
-            {/* Service Cards */}
-            <div className="px-6 w-full grid gap-3 grid-cols-6">
-              {secondMenuItems.map((item, i) => (
-                <div
-                  style={{ backgroundColor: item.color }}
-                  key={i}
-                  className="mx-auto mt-12 w-8 h-2"
-                ></div>
-              ))}
-            </div>
-          </section>
-        </div>
       </main>
-      <div className="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-3 h-max w-full p-6 lg:p-12">
+      <div className="mt-12 bg-gradient-to-r from-primary to-cta text-black">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-extrabold text-white">
+            Nasze kategorie pracy zdalnej
+          </h2>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              className="bg-white p-6 relative z-50 "
+              style={{ boxShadow: "0px 0px 4px black" }}
+            >
+              <h3 className="text-xl text-black flex">
+                <FaStar className="mr-2 text-cta mt-1" />
+                <Link
+                  href="/praca-zdalna/rozwoj-oprogramowania"
+                  className="flex flex-col"
+                >
+                  Rozwój Oprogramowania
+                  <span className="ml-1 text-sm font-light">Sprawdź</span>
+                </Link>
+              </h3>
+              <p className="mt-2 text-black font-coco">
+                Zatrudnij ekspertów od aplikacji mobilnych, marketingu, usług
+                biznesowych, web developmentu, frameworków czy programistów
+                nowych technologii w kategorii rozwoju oprogramowania.
+              </p>
+            </div>
+            <div
+              className="bg-white p-6 relative z-50 "
+              style={{ boxShadow: "0px 0px 4px black" }}
+            >
+              <h3 className="text-xl text-black flex">
+                <FaStar className="mr-2 text-cta mt-1" />
+                <Link href="/praca-zdalna/e-commerce" className="flex flex-col">
+                  E-Commerce{" "}
+                  <span className="ml-1 text-sm font-light">Sprawdź</span>
+                </Link>
+              </h3>
+              <p className="mt-2 text-black font-coco">
+                Freelancerzy oferujący pełne wsparcie w tworzeniu sklepów
+                internetowych, rozwiązań Magento, Shopify i innych.
+              </p>
+            </div>
+            <div
+              className="bg-white p-6 relative z-50 "
+              style={{ boxShadow: "0px 0px 4px black" }}
+            >
+              <h3 className="text-xl text-black flex">
+                <FaStar className="mr-2 text-cta mt-1" />
+                <Link href="/praca-zdalna/uslugi-it" className="flex flex-col">
+                  Usługi IT{" "}
+                  <span className="ml-1 text-sm font-light">Sprawdź</span>
+                </Link>
+              </h3>
+              <p className="mt-2 text-black font-coco">
+                Skorzystaj z usług freelancerów i firm doradztwa IT, wsparcia
+                technicznego oraz rozwiązań z zakresu bezpieczeństwa IT.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="bg-gray-100  grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-3 h-max w-full p-6 lg:p-12">
         {secondMenuItems.map((item: any, i: number) => (
           <article key={i} className="w-full">
             {item && (

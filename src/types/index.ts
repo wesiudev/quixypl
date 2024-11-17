@@ -83,6 +83,9 @@ export type JobPosting = {
   title: string;
   url: string;
   website: string;
+  slug: string;
+  category: string;
+  job: string;
 };
 export type Candidate = {
   id: string;

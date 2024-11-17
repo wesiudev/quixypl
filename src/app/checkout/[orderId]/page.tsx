@@ -25,7 +25,8 @@ export default async function Page(props: {
   );
   const orderToCompare = await getDocument("orders", params.orderId);
   const user = await getDocument("users", order?.metadata?.uid);
-  if (order.payment_status !== "paid") {
+
+  if (order?.payment_status !== "paid") {
     return (
       <div className="bg-white flex flex-col items-center justify-center text-black font-gotham h-screen left-0 top-0 w-screen">
         <Image

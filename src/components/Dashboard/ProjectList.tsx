@@ -25,7 +25,7 @@ const ServiceList = ({ projects }: { projects: any }) => {
           </button>
         </div>
       ) : (
-        <div className="px-3 grid grid-cols-1">
+        <div className="pt-3 px-3 grid grid-cols-1 gap-3">
           {projects?.map((project: any, i: any) => (
             <ServiceCard key={i} project={project} user={user} />
           ))}

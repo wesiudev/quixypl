@@ -10,7 +10,8 @@ import { FaUser } from "react-icons/fa6";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/firebase";
-import Editor, { EditorContentChanged } from "@/components/AddJobOffer/Editor";
+import ReactQuill from "react-quill-new";
+import { TOOLBAR_OPTIONS } from "@/components/AddJobOffer/Step";
 export default function EssentialUserInfo({
   setSource,
   source,
@@ -26,9 +27,6 @@ export default function EssentialUserInfo({
     setChangesWereMade(true);
   }
   const [isLoading, setIsLoading] = useState(false);
-  const onEditorContentChanged = (content: EditorContentChanged) => {
-    handleReduxUserState(content.html, "description");
-  };
   const [triesCount, setTriesCount] = useState(0);
   const [localPseudo, setLocalPseudo] = useState(source?.pseudo);
   const [pseudoWasChanged, setPseudoWasChanged] = useState(false);
@@ -328,12 +326,22 @@ export default function EssentialUserInfo({
           <div className="relative w-full lg:w-1/2 mt-3">
             <label className="font-bold text-black mb-2">Twój opis</label>
             <div className="mt-2"></div>
-            <Editor
-              value={source?.description}
-              onChange={onEditorContentChanged}
-              setChangesWereMade={setChangesWereMade}
-              setSource={setSource}
-              source={source}
+            <ReactQuill
+              theme="snow"
+              placeholder="Wpisz tekst"
+              className="text-black"
+              modules={{
+                toolbar: {
+                  container: TOOLBAR_OPTIONS,
+                },
+              }}
+              value={source.description}
+              onChange={(e) => {
+                setSource({
+                  ...source,
+                  description: e,
+                });
+              }}
             />
             {/* <textarea
               value={source?.bio}
@@ -343,7 +351,7 @@ export default function EssentialUserInfo({
               }}
               rows={4}
               maxLength={2000}
-              className="border border-primary  p-2 w-full text-black"
+              className="border border-primary p-2 w-full text-black"
               placeholder={
                 source?.seek
                   ? "Jakie usługi wykonujesz? Opisz szczegółowo to, co możesz zeoferować w zespole lub dla klienta."

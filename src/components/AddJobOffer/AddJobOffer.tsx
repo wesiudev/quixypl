@@ -40,8 +40,9 @@ export default function AddJobOffer() {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
   const [configurationOpen, setConfigurationOpen] = useState(false);
-  const [slug, setSlug] = useState({ title: "", url: "" });
-  const [category, setCategory] = useState({ title: "", url: "" });
+  const [slug, setSlug] = useState("");
+  const [category, setCategory] = useState("");
+  const [job, setJob] = useState("");
   const [tagsOpenLevel, setTagsOpenLevel] = useState(0);
   const [tagDeletion, setTagDeletion] = useState(false);
   const [selectedTag, setSelectedTag] = useState<any>({});
@@ -53,14 +54,13 @@ export default function AddJobOffer() {
 
   return (
     <div className="relative overflow-hidden min-h-screen w-full flex flex-col bg-gradient-to-r from-primary to-cta items-center">
-      {isAnimating && <ReactConfetti />}
-
       <div
         style={{ boxShadow: "0px 0px 5px black" }}
-        className="w-[100%] max-w-[55rem] h-max bg-white z-50 relative p-6 lg:p-10 my-12 "
+        className="w-[100%] max-w-[55rem] h-max bg-white z-50 relative p-6 lg:p-10 overflow-hidden"
       >
+        {isAnimating && <ReactConfetti />}
         <h1 className="text-xl md:text-3xl font-gotham text-zinc-800">
-          Dodaj darmową ofertę pracy zdalnej
+          Dodaj darmową ofertę pracy
         </h1>
         <p className="mt-2 text-sm font-coco text-black">
           Podaj najważniejsze informacje dotyczące rekrutacji.
@@ -80,13 +80,15 @@ export default function AddJobOffer() {
             tagDeletion={tagDeletion}
             configurationOpen={configurationOpen}
             setConfigurationOpen={setConfigurationOpen}
-            slug={slug}
             setSlug={setSlug}
+            slug={slug}
             category={category}
+            job={job}
             setCategory={setCategory}
             jobs={jobs}
             user={user}
             setFormData={setFormData}
+            setJob={setJob}
           />
           <StepTwo
             setFormData={setFormData}
@@ -110,6 +112,9 @@ export default function AddJobOffer() {
             isAnimating={isAnimating}
             isSent={isSent}
             setIsSent={setIsSent}
+            slug={slug}
+            category={category}
+            job={job}
           />
         </div>
         <Link

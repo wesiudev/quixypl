@@ -1,10 +1,34 @@
 "use client";
 import { toast } from "react-toastify";
-import { useState } from "react";
 import { InputField } from "./InputField";
 import CategorySelector from "./CategorySelector";
-import Editor, { EditorContentChanged } from "./Editor";
 import JobPreferencesHandler from "../JobOfferPreferencesHandler";
+import "react-quill-new/dist/quill.snow.css";
+import dynamic from "next/dynamic";
+export interface EditorContentChanged {
+  html: string;
+  markdown: string;
+}
+
+export interface EditorProps {
+  value?: any;
+  setSource?: any;
+  source?: any;
+  setChangesWereMade?: any;
+}
+
+export const ReactQuill = dynamic(() => import("react-quill-new"), {
+  ssr: false,
+});
+
+export const TOOLBAR_OPTIONS = [
+  [{ header: [1, 2, 3, false] }],
+  ["bold", "italic", "underline", "strike", "blockquote", "link"],
+  [{ list: "ordered" }, { list: "bullet" }],
+  [{ indent: "-1" }, { indent: "+1" }],
+  ["clean"],
+];
+
 export default function StepOne({
   formData,
   handleChange,
@@ -25,6 +49,8 @@ export default function StepOne({
   user,
   setFormData,
   setTagsOpenLevel,
+  job,
+  setJob,
 }: {
   formData: any;
   handleChange: any;
@@ -45,10 +71,9 @@ export default function StepOne({
   user: any;
   setFormData: any;
   setTagsOpenLevel: any;
+  job: any;
+  setJob: any;
 }) {
-  const onEditorContentChanged = (content: EditorContentChanged) => {
-    setFormData((prev: any) => ({ ...prev, description: content.html }));
-  };
   function addPreference(preference: any) {
     if (!formData.preferences) {
       formData.preferences = [];
@@ -96,12 +121,33 @@ export default function StepOne({
           user={user}
           formData={formData}
           setFormData={setFormData}
+          job={job}
+          setJob={setJob}
         />
         <div className="mt-2"></div>
-        <p className="text-black text-lg mb-2">Treść oferty pracy:</p>
-        <Editor
+        <p
+          onClick={() => console.log(formData.description)}
+          className="text-black text-lg mb-2"
+        >
+          Treść oferty pracy:
+        </p>
+
+        <ReactQuill
+          theme="snow"
+          placeholder="Wpisz tekst"
+          className="text-black"
+          modules={{
+            toolbar: {
+              container: TOOLBAR_OPTIONS,
+            },
+          }}
           value={formData.description}
-          onChange={onEditorContentChanged}
+          onChange={(e) => {
+            setFormData({
+              ...formData,
+              description: e,
+            });
+          }}
         />
         <JobPreferencesHandler
           addPreference={addPreference}
@@ -112,9 +158,12 @@ export default function StepOne({
           type="button"
           onClick={() => {
             if (
-              formData?.tags?.length > 0 &&
+              category &&
+              slug &&
+              job &&
               formData?.description &&
-              formData?.title
+              formData?.title &&
+              formData?.preferences.length
             ) {
               nextStep();
             } else {

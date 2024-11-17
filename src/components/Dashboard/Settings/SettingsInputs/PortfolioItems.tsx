@@ -20,7 +20,9 @@ import { addDocument, storage, updateUser } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { InputField } from "@/components/AddJobOffer/InputField";
 import { FaStar } from "react-icons/fa6";
-import Editor, { EditorContentChanged } from "@/components/AddJobOffer/Editor";
+import ReactQuill from "react-quill-new";
+import { TOOLBAR_OPTIONS } from "@/components/AddJobOffer/Step";
+
 export default function PortfolioItems({
   source,
   isNewProject,
@@ -159,12 +161,6 @@ export default function PortfolioItems({
       return;
     }
   }
-  const [editorMarkdownValue, setEditorMarkdownValue] = useState<string>("");
-
-  const onEditorContentChanged = (content: EditorContentChanged) => {
-    setProject({ ...project, desc: content.html });
-    setEditorMarkdownValue(content.markdown);
-  };
   return (
     <div className={`px-6 mt-3`}>
       <div className="font-extrabold text-lg flex items-center text-black">
@@ -580,9 +576,22 @@ export default function PortfolioItems({
                 </div>
                 <div>
                   <h3 className="font-coco text-black mt-1">Opis usługi</h3>
-                  <Editor
-                    value={project?.desc}
-                    onChange={onEditorContentChanged}
+                  <ReactQuill
+                    theme="snow"
+                    placeholder="Wpisz tekst"
+                    className="text-black"
+                    modules={{
+                      toolbar: {
+                        container: TOOLBAR_OPTIONS,
+                      },
+                    }}
+                    value={project.desc}
+                    onChange={(e) => {
+                      setProject({
+                        ...project,
+                        description: e,
+                      });
+                    }}
                   />
                 </div>
                 <div>

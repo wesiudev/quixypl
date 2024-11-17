@@ -2,12 +2,13 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import { polishToEnglish } from "../../../utils/polishToEnglish";
 import {
+  FaChevronCircleLeft,
   FaChevronLeft,
   FaChevronRight,
   FaMinusCircle,
   FaPlus,
 } from "react-icons/fa";
-
+import { v4 as uuidv4 } from "uuid";
 export default function CategorySelector({
   tagsOpenLevel,
   setTagDeletion,
@@ -25,6 +26,8 @@ export default function CategorySelector({
   formData,
   setFormData,
   setTagsOpenLevel,
+  job,
+  setJob,
 }: {
   tagsOpenLevel: any;
   setTagDeletion: any;
@@ -42,40 +45,151 @@ export default function CategorySelector({
   formData: any;
   setFormData: any;
   setTagsOpenLevel: any;
+  job: any;
+  setJob: any;
 }) {
   return (
     <>
-      {formData?.tags?.length === 0 && (
-        <h1 className="text-base font-bold text-black mt-2 font-coco">
-          Stanowiska
-        </h1>
+      <div className="my-1.5 font-bold text-black">Kategoria</div>
+      {slug !== "" && category === "" && (
+        <div className="text-black flex flex-col mt-1">
+          <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1 px-2 text-white w-max max-w-[100%]">
+            {slug}
+          </div>
+          <div className="font-bold">Wybierz podkategorię</div>
+        </div>
       )}
-      <div className="text-black mt-2 text-sm font-coco">
-        {formData?.tags?.length === 0 &&
-          !user?.seek &&
-          user?.seek !== "ask" && (
-            <p className="font-coco text-sm">
-              Dodaj układ stanowisk. (możesz wybrać ich wiele dla jednego
-              ogłoszenia)
-            </p>
-          )}
-        {formData?.tags?.length > 0 && tagsOpenLevel === 0 && "Wybrane"}
-        {formData?.tags?.length > 0 && tagsOpenLevel === 1 && "Kategorie"}
-        {formData?.tags?.length > 0 &&
-          tagsOpenLevel === 2 &&
-          "Twoja oferta w strukturze strony"}
+      {slug !== "" && category !== "" && (
+        <div className="text-black flex flex-col mt-1">
+          <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1 px-2 text-white w-max max-w-[100%]">
+            {slug}
+          </div>
+          <div className="font-bold">Podkategoria</div>
+        </div>
+      )}
+      {slug !== "" && category !== "" && (
+        <div className="flex flex-col mt-1">
+          <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1  px-2 text-white w-max max-w-[100%]">
+            {category}
+          </div>
+          <div className="font-bold text-black">Wybierz kategorię</div>
+        </div>
+      )}
+
+      <div className="flex flex-row items-start w-full gap-0.5">
+        {slug !== "" && category !== "" && job === "" && (
+          <button
+            onClick={() => {
+              setCategory("");
+            }}
+            className="text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+          >
+            <FaChevronLeft className="hover:scale-110" />
+          </button>
+        )}
+        {slug !== "" && category !== "" && job !== "" && (
+          <button
+            onClick={() => {
+              setJob("");
+            }}
+            className="text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+          >
+            <FaChevronCircleLeft className="hover:scale-110" />
+          </button>
+        )}
+        {slug !== "" && category === "" && (
+          <button
+            onClick={() => {
+              setSlug(""), setConfigurationOpen(false);
+            }}
+            className=" text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+          >
+            <FaChevronLeft className="hover:scale-110" />
+          </button>
+        )}
+        {slug === "" && (
+          <div className="gap-0.5 flex flex-wrap">
+            {jobs.map((item: any, k: any) => (
+              <button
+                onClick={() => setSlug(item.title)}
+                className=" bg-[#126b91] hover:bg-opacity-90 duration-100  text-white font-extralight p-2"
+                key={uuidv4()}
+              >
+                {item.title}
+              </button>
+            ))}
+          </div>
+        )}
+        {category === "" && (
+          <div>
+            {jobs.map((item: any, i: any) => (
+              <div key={uuidv4()}>
+                {item.title === slug && (
+                  <div className="gap-0.5 flex flex-wrap">
+                    {item.data.map((cat: any, j: any) => (
+                      <button
+                        onClick={() => setCategory(cat.title)}
+                        className="bg-[#126b91] hover:bg-opacity-90 duration-100  text-white font-extralight p-2"
+                        key={uuidv4()}
+                      >
+                        {cat.title}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+        {category !== "" && (
+          <div>
+            {jobs.map((item: any, i: any) => (
+              <div key={uuidv4()}>
+                {item.title === slug && (
+                  <div>
+                    {item.data.map((cat: any, i: any) => (
+                      <div key={uuidv4()}>
+                        {cat.title === category && (
+                          <div className="gap-0.5 flex flex-wrap">
+                            {cat.data.map((j: any, i: any) => (
+                              <button
+                                onClick={() => {
+                                  setJob(j.title);
+                                }}
+                                className={`${
+                                  slug !== "" &&
+                                  category !== "" &&
+                                  job === j.title
+                                    ? "bg-gradient-to-r from-primary to-cta"
+                                    : "bg-[#126b91]"
+                                }  hover:bg-opacity-90 duration-100  text-white font-extralight p-2`}
+                                key={uuidv4()}
+                              >
+                                {j.title}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {formData?.tags && tagsOpenLevel === 1
         ? formData?.tags?.map((item: any, i: any) => (
-            <div className="text-sm bg-slate-300  px-2 pb-2" key={i}>
+            <div className="text-sm bg-slate-300 px-2 pb-2" key={i}>
               <div className="mt-2 w-full flex flex-wrap items-center font-gotham font-light">
-                <div className="bg-[#126b91]  p-1 text-white mt-2">
+                <div className="bg-gradient-to-r from-primary to-cta p-1 text-white mt-2">
                   {item.slugTitle}
                 </div>
                 <div className="flex items-center">
                   <FaChevronRight className="mx-1 mt-2" />
-                  <div className="bg-[#126b91]  p-1 text-white mt-2">
+                  <div className="bg-gradient-to-r from-primary to-cta p-1 text-white mt-2">
                     {item.title}
                   </div>
                 </div>
@@ -84,7 +198,7 @@ export default function CategorySelector({
           ))
         : tagsOpenLevel === 2
         ? formData?.tags?.map((item: any, i: any) => (
-            <div className="text-sm bg-slate-300  px-2 pb-2" key={i}>
+            <div className="text-sm bg-slate-300 px-2 pb-2" key={i}>
               <div className="mt-2 w-full flex flex-wrap items-center font-gotham font-light">
                 <div className="flex items-center">
                   <div className="bg-[#126b91]  p-1 text-white mt-2">
@@ -175,198 +289,7 @@ export default function CategorySelector({
               </div>
             </div>
           ))}
-      {configurationOpen && !slug?.title && (
-        <div className="my-1.5 font-coco font-bold text-black">
-          Wybierz kategorię
-        </div>
-      )}
-      {slug?.title !== "" && category?.title === "" && (
-        <div className="text-black font-coco flex flex-col mt-1">
-          <div className="font-bold mb-1 bg-[#126b91] p-1  px-2 text-white w-max max-w-[100%]">
-            {slug.title}
-          </div>
-          <div className="font-bold">Wybierz podkategorię</div>
-        </div>
-      )}
-      {slug?.title !== "" && category?.title !== "" && (
-        <div className="text-black font-coco flex flex-col mt-1">
-          <div className="font-bold mb-1 bg-[#126b91] p-1  px-2 text-white w-max max-w-[100%]">
-            {category.title}
-          </div>
-          <div className="font-bold">Wybierz stanowisko</div>
-        </div>
-      )}
-      <div className=" flex flex-row items-start w-full">
-        {!configurationOpen && slug.title === "" && (
-          <button
-            onClick={() => setConfigurationOpen(true)}
-            className="ml-0.5 mr-0.5 my-2 text-lg w-max bg-[#126b91]  hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
-          >
-            <FaPlus />
-          </button>
-        )}
-        {configurationOpen && slug.title !== "" && category.title !== "" && (
-          <button
-            onClick={() => setCategory({ title: "", url: "" })}
-            className="mr-0.5 mt-0.5 text-lg w-max bg-[#126b91]  hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
-          >
-            <FaChevronLeft />
-          </button>
-        )}
-        {configurationOpen && slug.title !== "" && category.title === "" && (
-          <button
-            onClick={() => {
-              setSlug({ title: "", url: "" }), setConfigurationOpen(false);
-            }}
-            className="ml-0.5 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91]  hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
-          >
-            <FaChevronLeft />
-          </button>
-        )}
-        {configurationOpen && slug.title === "" && (
-          <div className="-ml-0.5 -mt-0.5 space-y-0.5">
-            {jobs.map((item: any, i: any) => (
-              <button
-                onClick={() =>
-                  setSlug({
-                    title: item.title,
-                    url: polishToEnglish(item.title),
-                  })
-                }
-                className="ml-0.5 bg-[#126b91]  text-white font-light p-2"
-                key={i}
-              >
-                {item.title}
-              </button>
-            ))}
-          </div>
-        )}
-        {configurationOpen && category.title === "" && (
-          <div className="-ml-0.5 space-y-0.5">
-            {jobs.map((item: any, i: any) => (
-              <>
-                {item.title === slug.title && (
-                  <>
-                    {item.data.map((cat: any, i: any) => (
-                      <button
-                        onClick={() =>
-                          setCategory({
-                            title: cat.title,
-                            url: polishToEnglish(cat.title),
-                          })
-                        }
-                        className="ml-0.5 bg-[#126b91]  text-white font-light p-2"
-                        key={i}
-                      >
-                        {cat.title}
-                      </button>
-                    ))}
-                  </>
-                )}
-              </>
-            ))}
-          </div>
-        )}
-        {configurationOpen && category.title !== "" && (
-          <div className="-ml-0.5 space-y-0.5">
-            {jobs.map((item: any, i: any) => (
-              <>
-                {item.title === slug.title && (
-                  <>
-                    {item.data.map((cat: any, i: any) => (
-                      <>
-                        {cat.title === category.title && (
-                          <>
-                            {cat.data.map((job: any, i: any) => (
-                              <button
-                                onClick={() => {
-                                  if (
-                                    formData?.tags?.find(
-                                      (tag: any) =>
-                                        tag.url === polishToEnglish(job.title)
-                                    )
-                                  ) {
-                                    return (
-                                      toast.error(
-                                        `Oferta w ${category.title} i ${job.title} już się wyświetla.`,
-                                        {
-                                          position: "top-right",
-                                          autoClose: 5000,
-                                          hideProgressBar: false,
-                                          closeOnClick: true,
-                                          pauseOnHover: true,
-                                          draggable: true,
-                                          progress: undefined,
-                                        }
-                                      ),
-                                      setConfigurationOpen(false),
-                                      setCategory({
-                                        title: "",
-                                        url: "",
-                                      }),
-                                      setSlug({
-                                        title: "",
-                                        url: "",
-                                      })
-                                    );
-                                  } else {
-                                    setFormData({
-                                      ...formData,
-                                      tags: [
-                                        ...(formData?.tags || []),
-                                        {
-                                          url: polishToEnglish(job.title),
-                                          categoryUrl: polishToEnglish(
-                                            category.title
-                                          ),
-                                          categoryTitle: category.title,
-                                          slugUrl: polishToEnglish(slug.title),
-                                          slugTitle: slug.title,
-                                          title: job.title,
-                                        },
-                                      ],
-                                    });
-                                    toast.success(
-                                      `Oferta wyświetli się w ${category.title} oraz ${job.title}.`,
-                                      {
-                                        position: "top-right",
-                                        autoClose: 5000,
-                                        hideProgressBar: false,
-                                        closeOnClick: true,
-                                        pauseOnHover: true,
-                                        draggable: true,
-                                        progress: undefined,
-                                      }
-                                    );
 
-                                    setConfigurationOpen(false);
-                                    setCategory({
-                                      title: "",
-                                      url: "",
-                                    });
-                                    setSlug({
-                                      title: "",
-                                      url: "",
-                                    });
-                                  }
-                                }}
-                                className="ml-0.5 bg-[#126b91]  text-white font-light p-2"
-                                key={i}
-                              >
-                                {job.title}
-                              </button>
-                            ))}
-                          </>
-                        )}
-                      </>
-                    ))}
-                  </>
-                )}
-              </>
-            ))}
-          </div>
-        )}
-      </div>
       {formData?.tags?.length > 0 && (
         <div className="">
           <h2 className="mt-2 text-black">Widok oferty</h2>

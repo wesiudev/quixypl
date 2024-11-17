@@ -50,7 +50,7 @@ export default function DisplayTalentsOrInviter({ data }: { data: any }) {
             <div className="bg-gradient-to-r from-primary to-cta rounded-full aspect-square mx-auto w-32 flex items-center justify-center">
               <TfiFlagAlt className="text-white text-4xl" />
             </div>
-            <p className="max-w-sm  text-black p-3">
+            <p className="max-w-sm  text-white p-3">
               Brak freelancerów - skonfiguruj profil i wyświetl się jako
               pierwszy/a{" "}
             </p>

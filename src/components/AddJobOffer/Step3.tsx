@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 import { useRouter } from "next/navigation";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import { IProject } from "@/types";
+import { IProject, JobPosting } from "@/types";
 import { setUser } from "@/redux/slices/user";
 import { set_modals } from "@/redux/slices/modalsopen";
 import Link from "next/link";
@@ -26,6 +26,9 @@ export default function StepThree({
   setIsAnimating,
   isSent,
   setIsSent,
+  slug,
+  category,
+  job,
 }: {
   formData: any;
   handleChange: any;
@@ -39,6 +42,9 @@ export default function StepThree({
   setIsAnimating: any;
   isSent: any;
   setIsSent: any;
+  slug: any;
+  category: any;
+  job: any;
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -59,11 +65,15 @@ export default function StepThree({
 
       // Create new job offer
       const jobOfferId = uuid();
-      const newJobOffer = {
+      const newJobOffer: JobPosting = {
         ...formData,
         isPaid: hasEnoughTokens,
         id: jobOfferId,
         creationTime: Date.now(),
+        authorId: user.uid,
+        slug: slug,
+        category: category,
+        job: job,
       };
 
       // Update job offers list for the user
