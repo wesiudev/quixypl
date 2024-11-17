@@ -1,7 +1,4 @@
-
 import { renderMarkdown } from "@/lib/parseMarkdown";
-import { ContentState, EditorState } from "draft-js";
-import htmlToDraft from "html-to-draftjs";
 export default function ContentButton({
   value,
   label,
@@ -9,7 +6,6 @@ export default function ContentButton({
   optional,
   title,
   type,
-  setHtmlContent,
 }: {
   value: any;
   label: string;
@@ -17,7 +13,6 @@ export default function ContentButton({
   optional: boolean;
   title: string;
   type: string;
-  setHtmlContent?: Function;
 }) {
   return (
     <button
@@ -26,19 +21,6 @@ export default function ContentButton({
       }`}
       onClick={() => {
         setInput({ type: type, title: title, label: label });
-        if (type === "html" && setHtmlContent)
-          setHtmlContent(() => {
-            let contentBlock;
-            if (typeof value === "string") {
-              contentBlock = htmlToDraft(value);
-              const contentState = ContentState.createFromBlockArray(
-                contentBlock.contentBlocks
-              );
-              setHtmlContent(EditorState.createWithContent(contentState));
-            } else {
-              setHtmlContent("");
-            }
-          });
       }}
     >
       {!value && !optional && label}
