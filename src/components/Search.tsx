@@ -12,7 +12,7 @@ export default function Search() {
   const [formData, setFormData] = useState({});
   return (
     <div>
-      <CategorySelector
+      {/* <CategorySelector
         setTagsOpenLevel={setTagsOpenLevel}
         tagsOpenLevel={tagsOpenLevel}
         setTagDeletion={setTagDeletion}
@@ -27,7 +27,7 @@ export default function Search() {
         setCategory={setCategory}
         formData={formData}
         setFormData={setFormData}
-      />
+      /> */}
     </div>
   );
 }
