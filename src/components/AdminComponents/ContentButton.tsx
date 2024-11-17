@@ -1,4 +1,5 @@
 import { renderMarkdown } from "@/lib/parseMarkdown";
+import Viewer from "../AddJobOffer/Viewer";
 export default function ContentButton({
   value,
   label,
@@ -42,9 +43,7 @@ export default function ContentButton({
           {value}
         </div>
       )}
-      {value && type === "html" && (
-        <div dangerouslySetInnerHTML={renderMarkdown(value)} />
-      )}
+      {value && type === "html" && <Viewer value={value} />}
       {!value && optional && (
         <>
           {label}

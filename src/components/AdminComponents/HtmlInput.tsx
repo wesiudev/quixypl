@@ -1,15 +1,23 @@
 "use client";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useState } from "react";
+import ReactQuill from "react-quill-new";
+import { TOOLBAR_OPTIONS } from "../AddJobOffer/Step";
 
 export default function HtmlInput({
   label,
   type,
   closeInput,
+  product,
+  setProduct,
+  currentInput,
 }: {
   label: any;
   type: any;
   closeInput: any;
+  product: any;
+  setProduct: any;
+  currentInput: any;
 }) {
   return (
     <>
@@ -25,7 +33,23 @@ export default function HtmlInput({
               <FaSignOutAlt className="ml-2" />
             </div>
           </button>
-
+          <ReactQuill
+            theme="snow"
+            placeholder="Wpisz tekst"
+            className="text-black"
+            modules={{
+              toolbar: {
+                container: TOOLBAR_OPTIONS,
+              },
+            }}
+            value={product[currentInput.title]}
+            onChange={(e) => {
+              setProduct({
+                ...product,
+                [currentInput.title]: e,
+              });
+            }}
+          />
           {/* Pass the correct value */}
           <button
             onClick={closeInput}

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { FaImage } from "react-icons/fa";
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from "react-icons/ai";
 import ContentButton from "@/components/AdminComponents/ContentButton";
+import HtmlInput from "@/components/AdminComponents/HtmlInput";
 import { v4 as uuid } from "uuid";
 import {
   createProduct,
@@ -14,6 +15,7 @@ import {
   updateDraft,
   updateProduct,
 } from "@/firebase";
+
 import ImagePicker from "@/components/AdminComponents/ImagePicker";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useRouter } from "next/navigation";
@@ -21,8 +23,6 @@ import ExtraSettings from "@/components/AdminComponents/ExtraSettings";
 import { toast } from "react-toastify";
 import { toastUpdate } from "../Toast/ToastUpdate";
 import { polishToEnglish } from "../../../utils/polishToEnglish";
-import ReactQuill from "react-quill-new";
-import { TOOLBAR_OPTIONS } from "../AddJobOffer/Step";
 async function requestPostGeneration(topic: string) {
   const answer = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/generateBlogPost?topic=${topic}`,
@@ -38,6 +38,7 @@ export default function ProductEdit({
   place: "products" | "drafts" | "new";
 }) {
   const router = useRouter();
+
   const initialInput = {
     type: "",
     title: "",
@@ -49,10 +50,12 @@ export default function ProductEdit({
       position: "bottom-right",
       theme: "dark",
     });
+
     if (!topic) {
       toastUpdate("Podaj temat", id, "error");
       return;
     }
+
     (async () => {
       try {
         const data = await requestPostGeneration(topic).then((data) => {
@@ -102,6 +105,7 @@ export default function ProductEdit({
     setImagePickerOpen(false);
     setSourceOfImagePicker("");
   }
+
   function handleChange(e: any) {
     if (e.target.name !== "url") {
       setProduct({ ...product, [e.target.name]: e.target.value });
@@ -115,6 +119,7 @@ export default function ProductEdit({
   function closeInput() {
     setCurrentInput(initialInput);
   }
+
   const [isUploading, setUploading] = useState(false);
   const [uploadCount, setUploadCount] = useState();
   async function upload(files: any) {
@@ -124,6 +129,7 @@ export default function ProductEdit({
     const uploadFile = async (file: any) => {
       const randId = uuid();
       const imageRef = ref(storage, randId);
+
       try {
         await uploadBytes(imageRef, file);
         const url = await getDownloadURL(imageRef);
@@ -147,6 +153,7 @@ export default function ProductEdit({
         ...product,
         images: [...product.images, ...localImagesArray],
       });
+
       setLoading(false);
       setUploading(false);
     } catch (error) {
@@ -221,22 +228,13 @@ export default function ProductEdit({
         label={currentInput.label}
         closeInput={closeInput}
       />
-      <ReactQuill
-        theme="snow"
-        placeholder="Wpisz tekst"
-        className="text-black"
-        modules={{
-          toolbar: {
-            container: TOOLBAR_OPTIONS,
-          },
-        }}
-        value={product[currentInput.title]}
-        onChange={(e) => {
-          setProduct({
-            ...product,
-            [currentInput.title]: e,
-          });
-        }}
+      <HtmlInput
+        label={currentInput.label}
+        type={currentInput.type}
+        closeInput={closeInput}
+        setProduct={setProduct}
+        product={product}
+        currentInput={currentInput}
       />
       <div className={`relative w-full bg-white min-h-screen`}>
         <div
