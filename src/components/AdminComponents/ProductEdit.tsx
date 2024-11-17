@@ -23,7 +23,6 @@ import ExtraSettings from "@/components/AdminComponents/ExtraSettings";
 import { toast } from "react-toastify";
 import { toastUpdate } from "../Toast/ToastUpdate";
 import { polishToEnglish } from "../../../utils/polishToEnglish";
-import { EditorContentChanged } from "../AddJobOffer/Editor";
 async function requestPostGeneration(topic: string) {
   const answer = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/generateBlogPost?topic=${topic}`,
@@ -120,21 +119,7 @@ export default function ProductEdit({
   function closeInput() {
     setCurrentInput(initialInput);
   }
-  const [editorHtmlValue, setEditorHtmlValue] = useState<string>("");
-  const [editorMarkdownValue, setEditorMarkdownValue] = useState<string>("");
 
-  const onEditorContentChanged = (
-    content: EditorContentChanged,
-    title: string
-  ) => {
-    setEditorHtmlValue(content.html);
-    setEditorMarkdownValue(content.markdown);
-    // Update the product with the new markdown value
-    setProduct((prevProduct: any) => ({
-      ...prevProduct,
-      [title]: content.markdown, // Use content.markdown directly
-    }));
-  };
   const [isUploading, setUploading] = useState(false);
   const [uploadCount, setUploadCount] = useState();
   async function upload(files: any) {
@@ -247,8 +232,6 @@ export default function ProductEdit({
         label={currentInput.label}
         type={currentInput.type}
         closeInput={closeInput}
-        onEditorContentChanged={onEditorContentChanged}
-        editorMarkdownValue={editorMarkdownValue}
       />
       <div className={`relative w-full bg-white min-h-screen`}>
         <div

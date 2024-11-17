@@ -1,20 +1,15 @@
 "use client";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useState } from "react";
-import Editor, { EditorContentChanged } from "../AddJobOffer/Editor";
 
 export default function HtmlInput({
   label,
   type,
   closeInput,
-  editorMarkdownValue,
-  onEditorContentChanged,
 }: {
   label: any;
   type: any;
   closeInput: any;
-  editorMarkdownValue: any;
-  onEditorContentChanged: any;
 }) {
   return (
     <>
@@ -30,10 +25,7 @@ export default function HtmlInput({
               <FaSignOutAlt className="ml-2" />
             </div>
           </button>
-          <Editor
-            value={editorMarkdownValue}
-            onChange={onEditorContentChanged}
-          />{" "}
+
           {/* Pass the correct value */}
           <button
             onClick={closeInput}
