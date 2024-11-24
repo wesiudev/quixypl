@@ -45,7 +45,18 @@ const provider = new GoogleAuthProvider();
 const storage = getStorage(app);
 
 const analytics = isSupported().then((yes) => (yes ? getAnalytics(app) : null));
-
+export async function getUserById(userId) {
+  try {
+    const userDocRef = doc(db, "users", userId);
+    const userDoc = await getDoc(userDocRef);
+    if (!userDoc.exists()) {
+      throw Error(`User with ID ${userId} does not exist`);
+    }
+    return userDoc.data();
+  } catch (error) {
+    throw error;
+  }
+}
 export async function addMessageToConversation(
   message,
   authorId,

@@ -1,3 +1,4 @@
+"use client";
 import { Metadata } from "next";
 import Dashboard from "../../../components/Dashboard/Dashboard";
 
