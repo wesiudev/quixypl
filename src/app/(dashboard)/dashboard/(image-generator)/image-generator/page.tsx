@@ -1,8 +1,13 @@
-import ImageGenerator from "@/components/ImageGenerator";
+import dynamic from "next/dynamic";
 
-export default async function Page() {
+const ImageGenerator = dynamic(() => import("@/components/ImageGenerator"), {
+  ssr: false,
+});
+
+export default function Page() {
   return <ImageGenerator />;
 }
+
 export const metadata = {
   title: "Generator Obrazów - Panel użytkownika Quixy",
 };

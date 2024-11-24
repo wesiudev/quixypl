@@ -1,7 +1,14 @@
-import AddJobOffer from "@/components/AddJobOffer/AddJobOffer";
+import dynamic from "next/dynamic";
 import { Metadata } from "next";
 
-export default async function Page() {
+const AddJobOffer = dynamic(
+  () => import("@/components/AddJobOffer/AddJobOffer"),
+  {
+    ssr: false,
+  }
+);
+
+export default function Page() {
   return (
     <div>
       <AddJobOffer />
