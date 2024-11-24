@@ -80,9 +80,13 @@ export default function ContentItem({ data }: { data: any }) {
               const content = draftToHtml(
                 convertToRaw(description.getCurrentContent())
               );
+              const salaryContent = draftToHtml(
+                convertToRaw(salary.getCurrentContent())
+              );
               updateContent(polishToEnglish(lead.title), {
                 ...lead,
                 description: content,
+                salary: salaryContent,
               }).then(() => {
                 toast.update(id, {
                   render: "Sukces",

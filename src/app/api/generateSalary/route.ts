@@ -15,22 +15,27 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Error" }, { status: 500 });
   }
   try {
-    const prompt = `You are helping to create more content for the website. You should create description for the questiion: Czym zajmują się specjaliści na stanowisku ${position}. You should return a list of objects with 3 properties: minimum, average, and high. EXAMPLE: {content:"Ile zarabia specjalista w Agencji Kreatywnej? Poznaj potencjał zarobkowy w branży mobilnych gier!
-Tworzenie gier mobilnych to dynamiczny sektor rynku technologicznego, który przyciąga zarówno młodych pasjonatów, jak i doświadczonych profesjonalistów. Specjalista na stanowisku Agencji Kreatywnej odgrywa kluczową rolę w procesie powstawania gier, obejmując szeroki zakres zadań:
-Projektowanie mechaniki gry – od innowacyjnych koncepcji po szczegóły rozgrywki, specjaliści kreują wyjątkowe doświadczenia dla graczy.
-Tworzenie grafiki i animacji – wizualna strona gier mobilnych wymaga artystycznego wyczucia i znajomości narzędzi takich jak Blender czy Photoshop.
-Programowanie gier – silniki jak Unity, Unreal Engine czy Godot to podstawowe narzędzia w arsenale profesjonalisty.
-Optymalizacja i testowanie – specjalista dba o płynność działania gry na różnych urządzeniach oraz eliminuje błędy.
-Integracja systemów monetyzacji – współczesne gry często korzystają z modelu freemium, co oznacza wbudowanie systemów reklam i zakupów w aplikacji.
-Jakie są zarobki na stanowiskach w Agencjach Kreatywnych?
-Wynagrodzenie zależy od doświadczenia, lokalizacji i zakresu obowiązków. Średnie zarobki wahają się:
-Junior: od 5 000 do 8 000 PLN brutto miesięcznie,
-Mid-level: od 8 000 do 15 000 PLN,
-Senior: nawet do 25 000 PLN lub więcej w większych firmach lub przy projektach AAA.
-Warto pamiętać, że zarobki w branży gier mobilnych mogą również obejmować bonusy za sukcesy projektu oraz udział w zyskach.
-Dlaczego warto rozwijać się w tej dziedzinie?
-Rynek gier mobilnych rozwija się w zawrotnym tempie – według raportów w 2024 roku sektor ten osiągnie wartość ponad 100 miliardów dolarów. Specjaliści w tej branży mają okazję nie tylko dobrze zarabiać, ale też realizować projekty, które trafiają do milionów użytkowników na całym świecie.
-Chcesz zacząć swoją przygodę w branży gier mobilnych? Rozwijaj swoje umiejętności programistyczne, graficzne i kreatywne, a droga do sukcesu stoi otworem! "}
+    const prompt = `You are helping to create more content for the website. In the example response instead of "{{give value}}" you should put the satysfying value. You should create description for the questiion: Ile zarabiają specjaliści na stanowisku ${position}. Use Polish language and return html like in the example responses:{
+      "content": "<div>
+  <h2>Jakie są główne zadania i wynagrodzenie specjalistów ds. tworzenia gier mobilnych?</h2>
+  <p>Specjaliści zajmujący się tworzeniem gier mobilnych odgrywają kluczową rolę w projektowaniu, rozwijaniu i wdrażaniu gier na urządzenia mobilne. Ich obowiązki obejmują:</p>
+  <ul>
+    <li>Projektowanie mechaniki gry, grafiki, animacji i dźwięków, aby zapewnić graczom wyjątkowe wrażenia,</li>
+    <li>Programowanie gier w silnikach takich jak Unity, Unreal Engine czy Godot,</li>
+    <li>Optymalizację gier pod kątem wydajności i łatwości użytkowania na różnych platformach,</li>
+    <li>Testowanie gier w celu zapewnienia płynności rozgrywki oraz eliminacji błędów,</li>
+    <li>Integrację systemów zakupów w aplikacji oraz reklam, co wspiera modele monetyzacji gier.</li>
+  </ul>
+  <h3>Zarobki na stanowisku specjalisty ds. tworzenia gier mobilnych</h3>
+  <p>Wynagrodzenie specjalistów zależy od ich doświadczenia oraz wielkości firmy. Poniżej przedstawiono przykładowe przedziały zarobków:</p>
+  <ul>
+    <li><strong>Junior:</strong> od {{give value}} do {{give value}} PLN brutto miesięcznie,</li>
+    <li><strong>Medior (Mid-level):</strong> od {{give value}} do {{give value}} PLN brutto miesięcznie,</li>
+    <li><strong>Senior:</strong> od {{give value}} do {{give value}} PLN brutto miesięcznie lub więcej przy projektach dużej skali (AAA).</li>
+  </ul>
+  <p>Warto również zauważyć, że w branży gier mobilnych często oferowane są bonusy zależne od sukcesu projektu lub udziału w zyskach firmy, co dodatkowo zwiększa atrakcyjność tej ścieżki zawodowej.</p>
+</div>"
+    }
     `;
     const response = await openai.completions.create({
       model: "gpt-3.5-turbo-instruct",
