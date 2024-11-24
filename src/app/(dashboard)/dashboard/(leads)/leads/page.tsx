@@ -1,5 +1,5 @@
+import LeadsList from "@/components/LeadsList";
 import { Metadata } from "next";
-import LeadsList from "./LeadsList";
 
 export default async function Page() {
   return (
