@@ -1,10 +1,5 @@
-"use client";
-import dynamic from "next/dynamic";
+import Postings from "@/components/Postings/Postings";
 import { Metadata } from "next";
-
-const Postings = dynamic(() => import("@/components/Postings/Postings"), {
-  ssr: false,
-});
 
 export default function Page() {
   return (

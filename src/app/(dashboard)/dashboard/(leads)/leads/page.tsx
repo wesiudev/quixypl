@@ -1,10 +1,5 @@
-"use client";
-import dynamic from "next/dynamic";
+import LeadsList from "@/components/LeadsList";
 import { Metadata } from "next";
-
-const LeadsList = dynamic(() => import("@/components/LeadsList"), {
-  ssr: false,
-});
 
 export default function Page() {
   return (

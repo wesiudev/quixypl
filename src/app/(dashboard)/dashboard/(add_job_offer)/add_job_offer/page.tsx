@@ -1,13 +1,5 @@
-"use client";
-import dynamic from "next/dynamic";
+import AddJobOffer from "@/components/AddJobOffer/AddJobOffer";
 import { Metadata } from "next";
-
-const AddJobOffer = dynamic(
-  () => import("@/components/AddJobOffer/AddJobOffer"),
-  {
-    ssr: false,
-  }
-);
 
 export default function Page() {
   return (
