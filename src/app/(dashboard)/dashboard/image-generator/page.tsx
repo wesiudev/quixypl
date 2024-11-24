@@ -1,6 +1,6 @@
 import ImageGenerator from "@/components/ImageGenerator";
 
-export default function Page() {
+export default async function Page() {
   return <ImageGenerator />;
 }
 export const metadata = {
