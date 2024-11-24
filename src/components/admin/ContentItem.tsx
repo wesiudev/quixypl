@@ -6,10 +6,11 @@ import dynamic from "next/dynamic";
 import { EditorState, convertToRaw, ContentState } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import { toast } from "react-toastify";
-import { updateContent, updateDocument } from "@/firebase";
+import { updateContent } from "@/firebase";
 import { polishToEnglish } from "../../../utils/polishToEnglish";
 import { generateDescription } from "../../../utils/generateDescription";
 import { EditorProps } from "react-draft-wysiwyg";
+import { generateSalary } from "../../../utils/generateSalary";
 
 const Editor = dynamic<EditorProps>(
   () => import("react-draft-wysiwyg").then((mod) => mod.Editor),
@@ -19,6 +20,7 @@ const Editor = dynamic<EditorProps>(
 export default function ContentItem({ data }: { data: any }) {
   const [lead, setLead] = useState<any>(data);
   const [description, setDescription] = useState<any>();
+  const [salary, setSalary] = useState<any>();
   useEffect(() => {
     let contentBlock;
     if (typeof lead?.description === "string") {
@@ -31,33 +33,36 @@ export default function ContentItem({ data }: { data: any }) {
       setDescription("");
     }
   }, [lead]);
+  useEffect(() => {
+    let contentBlock;
+    if (typeof lead?.salary === "string") {
+      contentBlock = htmlToDraft(lead?.salary);
+      const contentState = ContentState.createFromBlockArray(
+        contentBlock.contentBlocks
+      );
+      setSalary(EditorState.createWithContent(contentState));
+    } else {
+      setSalary("");
+    }
+  }, [lead]);
   return (
     <li className="bg-[#126b91] p-3  !text-white font-gotham font-light">
       <h2 className="text-2xl font-semibold mb-2">{lead?.title}</h2>
-      <p>
-        <b>Mianownik:</b> {lead?.nominative}
-      </p>
-      <p>
-        <b>Celownik:</b> {lead?.dative}
-      </p>
-      <p>
-        <b>Narzędnik:</b> {lead?.instrumental}
-      </p>
-      <p>
-        <b>Synonimy:</b> {lead?.synonyms.join(", ")}
-      </p>
-      <p>
-        <b>Tytuł nieformalny (l. pojedyncza):</b>{" "}
-        {lead?.informal_title_singular}
-      </p>
-      <p>
-        <b>Tytuł nieformalny (l. mnoga):</b> {lead?.informal_title_plural}
-      </p>
-      <p>
-        <b>Dopełniacz:</b> {lead?.genitive}
-      </p>
       <div className="flex flex-col w-full">
-        <b>Opis stanowiska</b>
+        <div className="hidden">
+          <b>Opis stanowiska</b>
+          <Editor
+            editorStyle={{
+              backgroundColor: "rgb(148 163 184)",
+              color: "black",
+              height: "300px",
+              padding: "3px 15px",
+            }}
+            editorState={description}
+            onEditorStateChange={setDescription}
+          />
+        </div>
+        <b>Zarobki</b>
         <Editor
           editorStyle={{
             backgroundColor: "rgb(148 163 184)",
@@ -65,8 +70,8 @@ export default function ContentItem({ data }: { data: any }) {
             height: "300px",
             padding: "3px 15px",
           }}
-          editorState={description}
-          onEditorStateChange={setDescription}
+          editorState={salary}
+          onEditorStateChange={setSalary}
         />
         <div className="grid grid-cols-2 gap-3">
           <button
@@ -111,9 +116,33 @@ export default function ContentItem({ data }: { data: any }) {
                 });
               });
             }}
-            className="bg-purple-600 hover:bg-purple-700 mt-3  py-3 w-full"
+            className="hidden bg-purple-600 hover:bg-purple-700 mt-3  py-3 w-full"
           >
             Generuj opis
+          </button>
+          <button
+            onClick={() => {
+              const id = toast.loading("Generowanie...");
+              generateSalary(lead).then((res) => {
+                let contentBlock;
+
+                contentBlock = htmlToDraft(res.choices[0].text);
+                const contentState = ContentState.createFromBlockArray(
+                  contentBlock.contentBlocks
+                );
+                setSalary(EditorState.createWithContent(contentState));
+
+                toast.update(id, {
+                  render: "Sukces",
+                  type: "success",
+                  isLoading: false,
+                  autoClose: 2000,
+                });
+              });
+            }}
+            className="bg-purple-600 hover:bg-purple-700 mt-3  py-3 w-full"
+          >
+            Generuj zarobki
           </button>
         </div>
       </div>
