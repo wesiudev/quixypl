@@ -96,12 +96,6 @@ const secondMenuItems = [
     icon: FaUserNinja,
   },
   {
-    urlLabel: "Pomysły na biznes",
-    url: "/business-ideas",
-    color: "#126b91",
-    icon: FaLightbulb,
-  },
-  {
     urlLabel: "Szukaj freelancera",
     url: "/praca-zdalna",
     color: "blue",

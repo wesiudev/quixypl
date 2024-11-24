@@ -44,12 +44,15 @@ function HeroSection() {
   return (
     <header className="px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-16 text-center overflow-hidden relative bg-gradient-to-r from-primary to-cta">
       <div className="py-6 relative z-50 bg-white mx-auto w-full max-w-[95%] sm:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]">
-        <h1 className="px-4 pt-6 lg:pt-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 leading-snug w-full text-center mx-auto bg-gradient-to-r from-primary to-cta text-transparent bg-clip-text">
-          Znajdź pracę lub pozyskuj zlecenia
+        <h1
+          style={{ lineHeight: 1.3 }}
+          className="px-4 pt-6 lg:pt-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 leading-snug w-full text-center mx-auto bg-gradient-to-r from-primary to-cta text-transparent bg-clip-text"
+        >
+          Przeglądaj oferty pracy lub utwórz portfolio
         </h1>
-        <p className="sm:text-lg lg:text-xl text-black px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
-          Opublikuj swoje usługi, przeprowadź rekrutację lub pozyskuj zlecenia.
-          Dołącz do platformy Quixy i wypróbuj nasze funkcje.
+        <p className="lg:text-lg font-coco text-black px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+          Wystarczy opublikować swoje usługi na naszej platformie by rozpocząć
+          pozyskiwanie klientów już dziś! Dołącz do nas za darmo!
         </p>
         <div className="mt-5"></div>
         <JoinButton />
@@ -181,6 +184,12 @@ function WhatMakesUsUniqueSection() {
       <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-8 text-center">
         <HighlightCard
           icon={<FaRocket className="text-white text-5xl" />}
+          title="Portfolio usług"
+          description="Zaprezentuj swoje usługi na platformie Quixy i pozyskuj zlecenia."
+          linkTitle="Dodaj ofertę"
+        />
+        <HighlightCard
+          icon={<FaRocket className="text-white text-5xl" />}
           title="Oferty pracy"
           description="Proces rekrutacji jest szybki i efektywny, pozwalając Ci skupić się na rozwoju projektu."
           linkTitle="Dodaj ofertę"
@@ -192,16 +201,10 @@ function WhatMakesUsUniqueSection() {
           linkTitle="Szukaj pracy"
         />
         <HighlightCard
-          icon={<FaRegLightbulb className="text-white text-5xl" />}
-          title="Innowacyjne pomysły"
-          description="Nasze narzędzia pomogą Ci stworzyć unikalne i skuteczne strategie biznesowe."
-          linkTitle="Zarejestruj"
-        />
-        <HighlightCard
           icon={<FaCogs className="text-white text-5xl" />}
           title="Usługi AI"
-          description="Sprawdź za darmo generator obrazów oraz pomysłów na biznes"
-          linkTitle="Sprawdź za darmo"
+          description="Sprawdź za darmo generator obrazów"
+          linkTitle="Wypróbuj"
         />
       </div>
     </section>
@@ -261,9 +264,8 @@ function CallToActionSection() {
         </h2>
         <p className="mb-3 text-black max-w-2xl font-coco sm:text-lg">
           Quixy.pl to najlepsza platforma z pracą zdalną w Polsce. Technologia z
-          której korzystamy jest szybka i niezawodna. Zapraszamy do
-          przeprowadzania rekrutacji, tworzenia wspólnych projektów i poszukiwań
-          pracy na naszej platformie.
+          której korzystamy jest szybka i niezawodna, stwórz portfolio w którym
+          zaprezentujesz swoje usługi.
         </p>
         <Link
           href="/register"
@@ -350,9 +352,9 @@ export const metadata: Metadata = {
     google: "google85185d3abec28326.html",
   },
   title:
-    "Quixy.pl: Praca Zdalna i Oferty dla Freelancerów | IT, Marketing, E-commerce",
+    "Praca, Oferty dla Freelancerów | Portfolio | IT, Marketing, E-commerce",
   description:
-    "Znajdź klientów i realizuj projekty zdalnie na Quixy.pl. Oferty w IT, e-commerce, marketingu, animacji i więcej! Zarejestruj się i zacznij już dziś.",
+    "Znajdź klientów i realizuj projekty zdalnie na naszej platformie. Oferty w IT, e-commerce, marketingu, animacji i więcej! Zarejestruj się i zacznij już dziś.",
 };
 
 const faqItems = [
@@ -363,8 +365,7 @@ const faqItems = [
   },
   {
     question: "Jakie są koszty zatrudnienia?",
-    answer:
-      "Koszty oraz zyski na naszej stronie klienci oraz eksperci ustalają między sobą poprzez Quixy Talent™",
+    answer: "Możesz dodać ofertę pracy za darmo.",
   },
   {
     question: "Czy oferujecie gwarancję jakości?",

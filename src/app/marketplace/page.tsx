@@ -51,7 +51,7 @@ export default async function Page() {
                 <Link
                   href="/register"
                   title="Szukaj pracy zdalnej na panelu Quixy"
-                  className="font-gotham font-light bg-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
+                  className="font-gotham bg-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
                 >
                   <h2 className="w-max mx-auto">Dodaj usługi</h2>
                 </Link>
@@ -89,45 +89,42 @@ export default async function Page() {
           </div>
         </div>
         {/* Services Section */}
-        <div className="container px-0 lg:px-12 mx-auto rounded-xl" id="search">
+        <div className="container mx-auto rounded-xl" id="search">
           <Market leads={leads} />
         </div>
       </main>
-      <div className="mt-12 bg-gradient-to-r from-primary to-cta text-black">
-        <div className="container mx-auto">
+      <div className="mt-12 py-12 bg-gradient-to-r from-primary to-cta text-black">
+        <div className="container mx-auto px-4">
           <h2 className="text-3xl font-extrabold text-white">
             Nasze kategorie pracy zdalnej
           </h2>
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div
               className="bg-white p-6 relative z-50 "
               style={{ boxShadow: "0px 0px 4px black" }}
             >
-              <h3 className="text-xl text-black flex">
+              <h3 className="font-extrabold text-xl text-black flex">
                 <FaStar className="mr-2 text-cta mt-1" />
                 <Link
                   href="/praca-zdalna/rozwoj-oprogramowania"
                   className="flex flex-col"
                 >
                   Rozwój Oprogramowania
-                  <span className="ml-1 text-sm font-light">Sprawdź</span>
                 </Link>
               </h3>
               <p className="mt-2 text-black font-coco">
-                Zatrudnij ekspertów od aplikacji mobilnych, marketingu, usług
-                biznesowych, web developmentu, frameworków czy programistów
-                nowych technologii w kategorii rozwoju oprogramowania.
+                Ekspertów od aplikacji mobilnych znajdziesz w kategorii rozwoju
+                oprogramowania.
               </p>
             </div>
             <div
               className="bg-white p-6 relative z-50 "
               style={{ boxShadow: "0px 0px 4px black" }}
             >
-              <h3 className="text-xl text-black flex">
+              <h3 className="font-extrabold text-xl text-black flex">
                 <FaStar className="mr-2 text-cta mt-1" />
                 <Link href="/praca-zdalna/e-commerce" className="flex flex-col">
                   E-Commerce{" "}
-                  <span className="ml-1 text-sm font-light">Sprawdź</span>
                 </Link>
               </h3>
               <p className="mt-2 text-black font-coco">
@@ -139,11 +136,10 @@ export default async function Page() {
               className="bg-white p-6 relative z-50 "
               style={{ boxShadow: "0px 0px 4px black" }}
             >
-              <h3 className="text-xl text-black flex">
+              <h3 className="font-extrabold text-xl text-black flex">
                 <FaStar className="mr-2 text-cta mt-1" />
                 <Link href="/praca-zdalna/uslugi-it" className="flex flex-col">
                   Usługi IT{" "}
-                  <span className="ml-1 text-sm font-light">Sprawdź</span>
                 </Link>
               </h3>
               <p className="mt-2 text-black font-coco">
@@ -151,10 +147,59 @@ export default async function Page() {
                 technicznego oraz rozwiązań z zakresu bezpieczeństwa IT.
               </p>
             </div>
+            <div
+              className="bg-white p-6 relative z-50 "
+              style={{ boxShadow: "0px 0px 4px black" }}
+            >
+              <h3 className="font-extrabold text-xl text-black flex">
+                <FaStar className="mr-2 text-cta mt-1" />
+                <Link href="/praca-zdalna/marketing" className="flex flex-col">
+                  Marketing
+                </Link>
+              </h3>
+              <p className="mt-2 text-black font-coco">
+                Przeglądaj portfolia marketingowe naszych użytkowników.
+              </p>
+            </div>
+            <div
+              className="bg-white p-6 relative z-50 "
+              style={{ boxShadow: "0px 0px 4px black" }}
+            >
+              <h3 className="font-extrabold text-xl text-black flex">
+                <FaStar className="mr-2 text-cta mt-1" />
+                <Link
+                  href="/praca-zdalna/projektowanie"
+                  className="flex flex-col"
+                >
+                  Projektowanie
+                </Link>
+              </h3>
+              <p className="mt-2 text-black font-coco">
+                Skorzystaj z usług freelancerów i firm doradztwa IT, wsparcia
+                technicznego oraz rozwiązań z zakresu bezpieczeństwa IT.
+              </p>
+            </div>
+            <div
+              className="bg-white p-6 relative z-50 "
+              style={{ boxShadow: "0px 0px 4px black" }}
+            >
+              <h3 className="font-extrabold text-xl text-black flex">
+                <FaStar className="mr-2 text-cta mt-1" />
+                <Link
+                  href="/praca-zdalna/uslugi-biznesowe"
+                  className="flex flex-col"
+                >
+                  Usługi biznesowe{" "}
+                </Link>
+              </h3>
+              <p className="mt-2 text-black font-coco">
+                Skorzystaj z usług doradztwa biznesowego.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <div className="bg-gray-100  grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-3 h-max w-full p-6 lg:p-12">
+      <div className="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-3 h-max container mx-auto px-4 py-12">
         {secondMenuItems.map((item: any, i: number) => (
           <article key={i} className="w-full">
             {item && (
@@ -198,12 +243,6 @@ export default async function Page() {
 
 const secondMenuItems = [
   {
-    urlLabel: "Pomysły na biznes",
-    url: "/business-ideas",
-    color: "#A6BFFD",
-    icon: IoSparkles,
-  },
-  {
     urlLabel: "Generator obrazów",
     url: "/register",
     color: "#F97316",
@@ -216,22 +255,22 @@ const secondMenuItems = [
     icon: FaUsers,
   },
   {
-    urlLabel: "Reklamuj się",
+    urlLabel: "Stwórz portfolio",
     url: "/register",
     color: "#F59BBB",
-    icon: FaDiamondTurnRight,
+    icon: FaFileArrowUp,
   },
   {
-    urlLabel: "Kup projekt",
+    urlLabel: "Przeglądaj usługi",
     url: "/marketplace",
     color: "#468CA9",
     icon: FaFileSignature,
   },
   {
-    urlLabel: "Sprzedaj projekt",
+    urlLabel: "Rynek usług",
     url: "/marketplace",
     color: "red",
-    icon: FaFileArrowUp,
+    icon: FaDiamondTurnRight,
   },
 ];
 export const metadata: Metadata = {

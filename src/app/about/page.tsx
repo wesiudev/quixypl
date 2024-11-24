@@ -125,21 +125,6 @@ export default function Page() {
                 Nasze rozwiązania są w pełni bezpieczne i niezawodne.
               </p>
             </div>
-
-            <div
-              className="p-6 bg-white "
-              style={{ boxShadow: "0px 0px 5px black" }}
-            >
-              <div className="bg-[#126b91] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <FaLightbulb className="text-white text-3xl" />{" "}
-                {/* Ikona kreatywności */}
-              </div>
-              <h3 className="text-xl font-bold text-black">Kreatywność</h3>
-              <p className="mt-2 text-black font-coco">
-                Twórz nowe pomysły na biznes za pomocą naszego generatora.
-              </p>
-            </div>
-
             <div
               className="p-6 bg-white "
               style={{ boxShadow: "0px 0px 5px black" }}

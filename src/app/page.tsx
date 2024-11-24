@@ -90,7 +90,7 @@ export default function Page() {
               className="font-coco w-full md:max-w-[50rem] xl:max-w-[1024px] text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white text-center"
             >
               Wyobraź sobie wymarzony biznes, pomnożony przez maksymalizację
-              efektywności💎
+              efektywności
             </h2>
           </div>
         </div>
@@ -132,25 +132,10 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="mx-auto px-4 container">
+      <div className="mx-auto px-4 sm:px-0 mb-12 container">
         <AboutQuixyTalent />
       </div>
-      <div className="w-full bg-[#2E3C56] py-12 my-12">
-        <div id="generator" className="px-4 mx-auto container">
-          <div className="flex flex-col mb-6">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white drop-shadow-md shadow-black">
-              Wygeneruj pomysł na biznes
-            </h2>
-            <p className="max-w-[40rem] text-white mt-6 mb-3">
-              Burza mózgów, dzięki której stworzysz pomysły na biznes
-              internetowy lub in-person. Stworzone z myślą o Twoich potrzebach.
-            </p>
-          </div>
-          <HomePageGenerator
-            sendGenerateIdeaRequest={sendGenerateIdeaRequest}
-          />
-        </div>
-      </div>
+
       <div className="container mx-auto h-max">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
           <div className="h-full w-full md:p-3 lg:p-0 lg:bg-white md:bg-[#f7faf7]  ">
@@ -238,17 +223,6 @@ export default function Page() {
               </h3>
               <div className="flex flex-row items-center font-light">
                 Chcesz znaleźć pomoc eksperta?
-              </div>
-            </Link>
-            <Link
-              href={`${process.env.NEXT_PUBLIC_URL}/register`}
-              className="group flex flex-col  text-white bg-black/50 group p-3"
-            >
-              <h3 className="group-hover:underline md:mb-3 text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold">
-                Generator pomysłów
-              </h3>
-              <div className="flex flex-row items-center font-light">
-                Wygeneruj pomysł i zleć wykonanie ekspertowi
               </div>
             </Link>
             <Link

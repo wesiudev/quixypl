@@ -121,16 +121,6 @@ export default function HeaderComponent({
               />
             </Link>
           </div>
-
-          <Link
-            href="/business-ideas"
-            className="group text-base drop-shadow-sm shadow-black text-black px-2 py-1  hover:bg-cta hover:text-white relative pr-6"
-          >
-            <span className="relative z-50">Pomysły</span>
-            <div className="group-hover:text-white absolute right-[4px] -top-[1px] px-1 rounded-full text-black text-[12px] font-extrabold">
-              AI
-            </div>
-          </Link>
           <Link
             href="/register"
             className="group text-base drop-shadow-sm shadow-black text-black px-2 py-1  hover:bg-cta hover:text-white relative pr-6"

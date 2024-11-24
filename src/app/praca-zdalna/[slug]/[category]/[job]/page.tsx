@@ -3,17 +3,14 @@ import { polishToEnglish } from "../../../../../../utils/polishToEnglish";
 import jobs from "../../../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Header from "@/components/Header";
-import Image from "next/image";
 import { getPageContent } from "@/lib/getPageContent";
 import { JobPosting, Tag } from "@/types";
 import { TfiFlagAlt } from "react-icons/tfi";
 import BlogPostList from "@/components/BlogPostList";
-import { getProducts } from "@/firebase";
+import { getDocuments, getProducts } from "@/firebase";
 import JobOfferCard from "@/components/Dashboard/JobOfferCard";
-import DisplayTalentsOrInviter from "@/components/DisplayTalentsOrInviter";
 import JobBoardList from "@/components/JobBoardList";
-import moment from "moment";
-
+import Market from "@/components/marketplace/Market";
 export async function generateStaticParams() {
   return jobs
     .flatMap((service: any) =>
@@ -21,7 +18,6 @@ export async function generateStaticParams() {
     )
     .map((item: any) => ({ job: polishToEnglish(item.title) }));
 }
-
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
   const offers = await fetch(
@@ -48,7 +44,7 @@ export default async function Page(props: { params: Promise<any> }) {
   ).then((res: any) => res.json());
   const content = await getPageContent(polishToEnglish(params.job));
   const products: any = await getProducts();
-
+  const leads: any = await getDocuments("services");
   return (
     <>
       <Header jobsList={jobs} />
@@ -88,13 +84,15 @@ export default async function Page(props: { params: Promise<any> }) {
             Oferty pracy zdalnej{" "}
             <span className="">{content?.title.toLowerCase()}</span>{" "}
           </h2>
+          <p className="text-black">
+            Szukasz pracy jako {content?.informal_title_singular}?
+          </p>
           {offers?.length === 0 && (
             <div className="">
               <div className="p-6 bg-gradient-to-r from-primary/40 to-cta/40 bg-left-to-right  mx-auto my-6">
                 <div className="bg-gradient-to-r from-primary to-cta rounded-full aspect-square mx-auto w-32 flex items-center justify-center">
                   <TfiFlagAlt className="text-white text-4xl animate-bounce" />
                 </div>
-
                 <p className="bg-white font-coco font-light text-black text-base p-3 my-3 text-center max-w-xl mx-auto">
                   Brak aktywnych ofert pracy zdalnej dla specjalistów w branży{" "}
                   {content?.genitive}
@@ -134,6 +132,10 @@ export default async function Page(props: { params: Promise<any> }) {
         {/* <div className="bg-white px-6 sm:px-12 py-6 text-gray-800">
         <JobOfferList jobOffers={offers} />
       </div> */}
+        {/* Services Section */}
+        <div className="container mx-auto rounded-xl" id="search">
+          <Market leads={leads} />
+        </div>
         {/* Content */}
         <div className="flex flex-col lg:flex-row container p-6 mx-auto">
           <section className="text-left">
@@ -167,12 +169,12 @@ export default async function Page(props: { params: Promise<any> }) {
               {content?.informal_title_plural.toLowerCase()}?
             </span>
           </h2>
-          <div
+          {/* <div
             className="text-black max-w-3xl markdownSlug font-light font-coco"
             dangerouslySetInnerHTML={{
               __html: content?.salary,
             }}
-          />
+          /> */}
         </div>
         <MainFooter jobsList={jobs} />
       </div>
@@ -196,9 +198,7 @@ export async function generateMetadata(props: { params: Promise<any> }) {
     .map((item: any) => ({ title: item.title }))
     .find((item) => polishToEnglish(item.title) === params.job);
   const content = await getPageContent(params.job);
-  const title = `Praca Zdalna Oferty ${job?.title} - ${
-    content?.synonyms[0] || ""
-  }`;
+  const title = `Freelancer Job Boards ${job?.title} - Co robią, ile zarabiają? Zlecenia, Praca Zdalna`;
   const description = `Przeglądaj nasze oferty pracy zdalnej jako ${job?.title} w kategorii ${category}. Zrealizuj swój projekt z Quixy!`;
 
   return {

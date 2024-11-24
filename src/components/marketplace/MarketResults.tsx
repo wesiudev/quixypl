@@ -17,9 +17,9 @@ export default function MarketResults({
       <div
         className={`${
           leads?.length > 0 && slug !== "" ? "block" : "hidden"
-        } p-2 lg:p-4 bg-white`}
+        } p-4 lg:p-6 bg-gradient-to-r from-primary/40 to-cta/40 w-full`}
       >
-        <div className={`text-black font-bold mb-2 text-xl`}>
+        <div className={`text-black font-extrabold mb-2 text-xl`}>
           {" "}
           {/* Reduced font size */}
           Znalezione usługi {`(${leads?.length})`}
@@ -29,7 +29,9 @@ export default function MarketResults({
         >
           {slug} {category && "->"} {category} {job && "->"} {job}
         </div>
-        <div className={`flex flex-col gap-2`}>
+        <div
+          className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-2`}
+        >
           {" "}
           {/* Changed grid to column flex */}
           {leads.map((lead: IProject, index: number) => (

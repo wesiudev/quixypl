@@ -54,7 +54,7 @@ export default function Dashboard() {
                   >
                     {!user?.emailVerified && (
                       <div className="bg-primary text-white p-3 w-full">
-                        <b>Witaj w Quixy!</b>🔥 Wysłaliśmy wiadomość aktywującą
+                        <b>Witaj w Quixy!</b>Wysłaliśmy wiadomość aktywującą
                         konto na podany adres e-mail - {user?.email}{" "}
                         <button
                           disabled={sent}
@@ -67,47 +67,38 @@ export default function Dashboard() {
                         </button>
                       </div>
                     )}
-                    <div className="grid grid-cols-1 2xl:grid-cols-2 bg-white p-3 lg:p-6">
-                      <div className="pr-6 h-full w-full">
-                        <h2 className="font-extrabold text-3xl text-black flex items-center">
-                          Twoje konto{" "}
-                        </h2>
-                        <div className=" text-black">
-                          Witaj{", "}
-                          {user?.name
-                            ? `${user?.name} - Co chcesz dziś zrobić?`
-                            : `${user?.email} - Skonfiguruj swoje konto!`}
+                    <div className="grid grid-cols-1 bg-white p-3 lg:p-6">
+                      <div className="h-full w-full">
+                        <div>
+                          <h2 className="font-extrabold text-3xl text-black flex items-center">
+                            Twoje zlecenia
+                          </h2>
+                          <div className="py-2">
+                            {!user?.conversations?.length && (
+                              <div className="text-black">
+                                Wszystkie ({user?.conversations?.length || 0})
+                              </div>
+                            )}
+                            {!user?.conversations?.length && (
+                              <div className="text-black">
+                                Nowe ({user?.conversations?.length || 0})
+                              </div>
+                            )}
+                            {!user?.conversations?.length && (
+                              <div className="text-black">
+                                Sprawdzone ({user?.conversations?.length || 0})
+                              </div>
+                            )}
+                          </div>
+                          <Link
+                            title="Zobacz wszystkie zlecenia"
+                            href="/dashboard/leads"
+                            className="font-bold w-max text-white bg-primary text-lg flex items-center px-2 py-1.5 rounded-lg mt-1"
+                          >
+                            Zobacz wszystkie
+                          </Link>
                         </div>
-
-                        <h2 className="mt-12 font-extrabold text-3xl text-black flex items-center">
-                          Twoje zlecenia
-                        </h2>
-                        <div className="py-2">
-                          {!user?.conversations?.length && (
-                            <div className="text-black">
-                              Wszystkie ({user?.conversations?.length || 0})
-                            </div>
-                          )}
-                          {!user?.conversations?.length && (
-                            <div className="text-black">
-                              Nowe ({user?.conversations?.length || 0})
-                            </div>
-                          )}
-                          {!user?.conversations?.length && (
-                            <div className="text-black">
-                              Sprawdzone ({user?.conversations?.length || 0})
-                            </div>
-                          )}
-                        </div>
-                        <Link
-                          title="Zobacz wszystkie zlecenia"
-                          href="/dashboard/leads"
-                          className="font-bold w-max text-white bg-primary text-lg flex items-center px-2 py-1.5 rounded-lg mt-1"
-                        >
-                          Zobacz wszystkie
-                        </Link>
                       </div>
-                      <AccountHistory />
                     </div>
                     {(user?.seek === "ask" ||
                       !user?.pseudo ||
@@ -131,13 +122,13 @@ export default function Dashboard() {
 
                 {user?.seek !== "ask" && (
                   <div
-                    className={`bg-gradient-to-r from-primary to-cta ${
+                    className={`${
                       !user?.configured && (user?.seek === "ask" || !user?.seek)
                         ? "hidden"
                         : ""
                     }`}
                   >
-                    <h2 className="w-full px-3 lg:px-6 py-3 text-3xl font-bold text-white drop-shadow-lg">
+                    <h2 className="w-full px-3 lg:px-6 py-3 text-3xl font-extrabold text-black">
                       Szczegóły
                     </h2>
                     {!user?.configured && (
@@ -150,33 +141,33 @@ export default function Dashboard() {
                         {!user?.title && (
                           <div>
                             {user?.seek && user?.seek !== "ask" && (
-                              <h2 className="font-bold text-xl text-white drop-shadow-lg ">
+                              <h2 className="font-bold text-xl text-black ">
                                 Tytuł
                               </h2>
                             )}
                             {(!user?.seek || user?.seek === "ask") && (
-                              <h2 className="font-bold text-xl text-white drop-shadow-lg ">
+                              <h2 className="font-bold text-xl text-black ">
                                 Nazwa firmy lub działalności
                               </h2>
                             )}
-                            <h3 className={`text-white`}>
+                            <h3 className={`text-black`}>
                               {user?.title ? user?.title : "Brak..."}
                             </h3>
                           </div>
                         )}
 
                         <div>
-                          <h2 className="font-bold text-xl text-white drop-shadow-lg mt-3">
+                          <h2 className="font-bold text-xl text-black mt-3">
                             Unikalny link
                           </h2>
                           {!user?.pseudo && (
-                            <h3 className={`text-white`}>
+                            <h3 className={`text-black`}>
                               Nie skonfigurowano...
                             </h3>
                           )}
                         </div>
 
-                        <div className="text-white font-bold">
+                        <div className="text-black font-bold">
                           {user?.pseudo && (
                             <div className="flex flex-col">
                               <button
@@ -201,7 +192,7 @@ export default function Dashboard() {
                                 className="relative flex items-center"
                                 title="Skopiuj"
                               >
-                                <div className="p-2  bg-cta mr-2">
+                                <div className="p-2 bg-gradient-to-r from-primary to-cta mr-2 rounded-xl">
                                   <FaClipboard className="text-white w-5 h-5" />
                                 </div>
                                 <div className="text-left text-xs">
@@ -218,7 +209,7 @@ export default function Dashboard() {
                           {!user?.pseudo && user?.seek && (
                             <div>
                               <button
-                                className="text-white underline font-bold"
+                                className="text-black underline font-bold"
                                 onClick={() =>
                                   dispatch(
                                     set_modals({ ...modals, config: true })
@@ -233,7 +224,7 @@ export default function Dashboard() {
                             (!user?.seek || user?.seek === "ask") && (
                               <div>
                                 <button
-                                  className="text-white underline font-bold"
+                                  className="text-black underline font-bold"
                                   onClick={() =>
                                     dispatch(
                                       set_modals({ ...modals, config: true })
@@ -246,12 +237,12 @@ export default function Dashboard() {
                             )}
                         </div>
                         {user?.seek && user?.seek !== "ask" && (
-                          <h2 className="text-xl text-white font-bold mt-3">
+                          <h2 className="text-xl text-black font-bold mt-3">
                             Specjalizacje
                           </h2>
                         )}
                         {!user?.seek && user?.seek !== "ask" && (
-                          <h2 className="text-xl text-white font-bold mt-3">
+                          <h2 className="text-xl text-black font-bold mt-3">
                             Specjalizacje
                           </h2>
                         )}
@@ -270,19 +261,19 @@ export default function Dashboard() {
                           )}
                         </div>
                         {user?.seek && user?.seek !== "ask" && (
-                          <h2 className="text-xl font-bold text-white drop-shadow-lg mt-3">
+                          <h2 className="text-xl font-bold text-black mt-3">
                             Dostępność
                           </h2>
                         )}
                         {!user?.seek && user?.seek !== "ask" && (
-                          <h2 className="font-bold text-lg text-white drop-shadow-lg mt-3">
-                            Ilość współpracowników
+                          <h2 className="font-bold text-lg text-black mt-3">
+                            Ilość pracowników
                           </h2>
                         )}
                         {user?.seek && user?.seek !== "ask" && (
                           <div className="-ml-1 flex items-center flex-wrap">
                             {user?.preferences?.length === 0 && (
-                              <div className="ml-1 text-lg text-white">
+                              <div className="ml-1 text-lg text-black">
                                 Brak danych...
                               </div>
                             )}
@@ -290,13 +281,13 @@ export default function Dashboard() {
                               user?.preferences?.map((item: any, i: any) => (
                                 <h3
                                   key={i}
-                                  className={`ml-1 mt-1 bg-white  badge badge-neutral badge-outline flex items-center px-2 py-0.5`}
+                                  className={`ml-1 mt-1 bg-white badge badge-neutral badge-outline flex items-center px-2 py-0.5`}
                                 >
                                   {item}
                                 </h3>
                               ))
                             ) : (
-                              <h3 className="text-white ml-1">
+                              <h3 className="text-black ml-1">
                                 Brak danych o dostępności...
                               </h3>
                             )}
@@ -308,7 +299,7 @@ export default function Dashboard() {
                               user?.preferences?.map((item: any, i: any) => (
                                 <h3
                                   key={i}
-                                  className={`ml-1 mt-1  badge badge-neutral bg-white badge-outline flex items-center px-2 py-0.5 text-white`}
+                                  className={`ml-1 mt-1 badge badge-neutral bg-white badge-outline flex items-center px-2 py-0.5 text-white`}
                                 >
                                   {item}
                                 </h3>
@@ -322,16 +313,16 @@ export default function Dashboard() {
                         )}
 
                         {(user?.seek || user?.seek === "ask") && (
-                          <h2 className="font-bold text-xl text-white drop-shadow-lg mt-3">
+                          <h2 className="font-bold text-xl text-black mt-3">
                             Opis użytkownika
                           </h2>
                         )}
                         {!user?.seek && user?.seek !== "ask" && (
-                          <h2 className="font-bold text-xl text-white drop-shadow-lg mt-3">
+                          <h2 className="font-bold text-xl text-black mt-3">
                             Opis firmy
                           </h2>
                         )}
-                        <h3 className={`text-white`}>
+                        <h3 className={`text-black`}>
                           {user?.bio ? user?.bio : "Brak..."}
                         </h3>
                       </div>
@@ -343,6 +334,7 @@ export default function Dashboard() {
             <div className={`bg-white h-max w-full`}>
               <ServiceList projects={user?.projects} />
             </div>
+            <AccountHistory />
           </div>
         </div>
       ) : (

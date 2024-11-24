@@ -128,7 +128,7 @@ export default async function Page(props: {
                           href={`/praca-zdalna/${item?.slugUrl}/${
                             item?.categoryUrl
                           }/${item?.url}/${polishToEnglish(talent?.city)}`}
-                          className="badge bg-white badge-outline ml-1 mt-1 duration-100 flex items-center px-2 py-0.5"
+                          className="bg-gradient-to-r from-primary to-cta p-2 text-xl font-extralight text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5"
                         >
                           {item.title}
                         </Link>
@@ -142,12 +142,12 @@ export default async function Page(props: {
                   <h2 className="w-max text-2xl text-black font-extrabold mt-3">
                     Dostępność
                   </h2>
-                  <div className="w-full -ml-1 mt-1 flex flex-wrap items-center text-black">
+                  <div className="w-full -ml-1 mt-1 flex flex-wrap items-center text-white">
                     {talent?.preferences ? (
                       talent?.preferences?.map((item: any, i: any) => (
                         <h3
                           key={i}
-                          className={`badge bg-white badge-outline ml-1 mt-1 duration-100 flex items-center px-2 py-0.5`}
+                          className={`bg-gradient-to-r from-primary to-cta text-xl font-extralight ml-1 mt-1 duration-100 flex items-center px-2 py-0.5`}
                         >
                           {item}
                         </h3>

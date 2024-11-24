@@ -47,7 +47,12 @@ export default async function Page(props: {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
-
+  const removePolishSignsAndSpaces = (str: string) => {
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s/g, "");
+  };
   return (
     <>
       <Header jobsList={jobs} />
@@ -81,8 +86,6 @@ export default async function Page(props: {
             </Link>
           </div>
         </div>
-        {/* Subcategories */}
-
         <div className="bg-gradient-to-r from-primary to-cta w-full h-full mx-auto pt-6 lg:pt-12">
           <div className="px-6 lg:px-12 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
             <Image
@@ -105,8 +108,8 @@ export default async function Page(props: {
                 } flex mt-3`}
               >
                 <div className="p-6 text-black bg-white">
-                  <h2 className="text-primary w-max font-extrabold">
-                    QUIXY DLA FIRM
+                  <h2 className="text-black w-max font-extrabold">
+                    Dla klientów
                   </h2>
                   <p className="sm:text-lg 2xl:text-xl pb-3 text-black">
                     Zatrudnij najlepszych specjalistów — opublikuj ofertę pracy
@@ -125,8 +128,8 @@ export default async function Page(props: {
                   </div>
                 </div>
                 <div className="p-6 mt-6 text-black bg-white">
-                  <h2 className="text-primary w-max font-extrabold">
-                    FREELANCERZY
+                  <h2 className="text-black w-max font-extrabold">
+                    Dla freelancerów i firm
                   </h2>
                   <p className="sm:text-lg 2xl:text-xl pb-3 text-black">
                     Znajdź pracę zdalną lub jednorazowe zlecenia i rozwijaj
@@ -146,7 +149,7 @@ export default async function Page(props: {
               </div>
             </div>
           </div>
-          <div className="bg-white w-full pb-12 mt-12 p-6 lg:p-12">
+          <div className="bg-white w-full pb-12 px-6 lg:px-12 mt-12">
             <div className="flex flex-col mx-auto">
               <div className="">
                 <JobBoardList
@@ -234,22 +237,23 @@ export default async function Page(props: {
           <ul className="font-coco flex items-center flex-wrap">
             {content?.synonyms.map((item: any, i: any) => (
               <li key={i} className={`ml-2 mt-2`}>
-                #{item.toLowerCase()}
+                #{removePolishSignsAndSpaces(item.toLowerCase())}
               </li>
             ))}
 
-            {isTalent && <li className="mt-2 ml-2">#znajdz prace</li>}
+            {isTalent && <li className="mt-2 ml-2">#znajdzprace</li>}
             {!isTalent && <li className="mt-2 ml-2">#rekrutacja</li>}
-            <li className="mt-2 ml-2">#praca zdalna</li>
-
-            <li className="mt-2 ml-2">#firmy {content?.genitive}</li>
+            <li className="mt-2 ml-2">#pracazdalna</li>
+            <li className="mt-2 ml-2">#firmy{content?.genitive}</li>
             <li className="mt-2 ml-2">#freelancer</li>
-            <li className="mt-2 ml-2">#job boards</li>
-            <li className="mt-2 ml-2">#job offers</li>
-            <li className="mt-2 ml-2">#oferty pracy</li>
-            <li className="mt-2 ml-2">#ogloszenia o prace</li>
-            <li className="mt-2 ml-2">#ogloszenia pracy</li>
-            <li className="mt-2 ml-2">#{slug.title.toLowerCase()}</li>
+            <li className="mt-2 ml-2">#jobboards</li>
+            <li className="mt-2 ml-2">#joboffers</li>
+            <li className="mt-2 ml-2">#ofertypracy</li>
+            <li className="mt-2 ml-2">#ogloszeniaoprace</li>
+            <li className="mt-2 ml-2">#ogloszeniapracy</li>
+            <li className="mt-2 ml-2">
+              #{removePolishSignsAndSpaces(slug.title.toLowerCase())}
+            </li>
           </ul>
         </div>
       </div>

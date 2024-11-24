@@ -56,11 +56,8 @@ export default function AboutQuixyTalent() {
                 <p className="mt-6 text-xl text-black">
                   Korzystając z naszej platformy otrzymujesz łatwy dostęp do
                   najlepszych funkcji i narzędzi, które pomogą Ci zoptymalizować
-                  proces rekrutacji, wyświetlać swoje usługi oraz pozyskiwać
-                  nowe zlecenia – zatrudnij specjalistów IT, marketingu, web
-                  developmentu, bezpieczeństwa IT, czy projektowania
-                  graficznego. Współpracuj z freelancerami, którzy pomogą Ci
-                  zrealizować twoje cele.
+                  proces rekrutacji. Opublikuj swoje usługi i pozyskuj nowe
+                  zlecenia.
                 </p>
                 <div className="mt-6"></div>
                 <Link

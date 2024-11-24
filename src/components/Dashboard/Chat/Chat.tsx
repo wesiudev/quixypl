@@ -1,17 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { app, auth } from "@/firebase";
-import { collection, getFirestore, onSnapshot } from "firebase/firestore";
+import { auth } from "@/firebase";
 import { useRouter } from "next/navigation";
 import ChatRoom from "./ChatRoom";
 import { useDispatch, useSelector } from "react-redux";
 import { set_modals } from "@/redux/slices/modalsopen";
 export default function Chat() {
-  const [chat, setChat] = useState<any>();
   const [user, loading] = useAuthState(auth);
-  const router = useRouter();
-
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
   const { source } = useSelector((state: any) => state.user);
@@ -35,12 +31,7 @@ export default function Chat() {
             } lg:w-[50vw] z-[10002] fixed left-1/2 -translate-x-1/2 w-[90%] bottom-0`}
           >
             {modals.currentChat !== "" && modals.currentChat !== null && (
-              <ChatRoom
-                chat={chat}
-                authorId={user?.uid}
-                clickedUserData={modals.currentChat}
-                source={source}
-              />
+              <ChatRoom clickedUserData={modals.currentChat} source={source} />
             )}
           </div>
         </div>

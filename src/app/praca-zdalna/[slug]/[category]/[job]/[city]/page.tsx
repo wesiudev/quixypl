@@ -23,6 +23,7 @@ export async function generateStaticParams() {
 
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
+
   const offers = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/offers/?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`,
     {
@@ -30,13 +31,17 @@ export default async function Page(props: { params: Promise<any> }) {
     }
   ).then((res) => res.json());
   const talents = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/talents?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
+      process.env.API_SECRET_KEY
+    }&slug=${polishToEnglish(params.slug)}`,
     {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
   const companies = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/companies?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    `${process.env.NEXT_PUBLIC_URL}/api/companies/slug?tubylytylkofigi=${
+      process.env.API_SECRET_KEY
+    }&slug=${polishToEnglish(params.slug)}`,
     {
       next: { revalidate: 60 },
     }

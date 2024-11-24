@@ -52,11 +52,6 @@ export default function UserPanel() {
       href: "/dashboard/image-generator",
       icon: <FaImages />,
     },
-    {
-      text: "Generator Biznesu",
-      href: "/dashboard/idea-generator",
-      icon: <FaLightbulb />,
-    },
   ];
   return (
     <div className="px-6 pt-6">
