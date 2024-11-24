@@ -8,9 +8,7 @@ import StepTwo from "./Step2";
 import StepOne from "./Step";
 import { JobListing } from "@/types";
 import ReactConfetti from "react-confetti";
-
 import { useSelector } from "react-redux";
-
 export default function AddJobOffer() {
   const InitialData = {
     days: 1,
