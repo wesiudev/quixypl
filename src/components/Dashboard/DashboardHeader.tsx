@@ -1,5 +1,5 @@
 "use client";
-import { FaCog, FaCogs, FaUser, FaUserNinja } from "react-icons/fa";
+import { FaUser, FaUserNinja } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -11,9 +11,12 @@ import { setUser } from "@/redux/slices/user";
 import Settings from "./Settings/Settings";
 import { set_modals } from "@/redux/slices/modalsopen";
 import UserPanel from "../UserPanel";
-export default function DashboardHeader() {
-  const { user } = useSelector((state: any) => state.user);
-  const [userData, setUserData] = useState<any>(user);
+import { useAuthState } from "react-firebase-hooks/auth";
+export default function DashboardHeader({ users }: { users: any }) {
+  const [user, loading] = useAuthState(auth);
+  const [userData, setUserData] = useState<any>(
+    users?.find((x: any) => x.id === user?.uid)
+  );
   const [menuShow, setMenuShow] = useState(false);
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
@@ -39,7 +42,7 @@ export default function DashboardHeader() {
   return (
     <div>
       <Settings source={user} setSource={setUserData} data={userData} />
-      <QuixiesModule userCoins={user?.tokens} />
+      <QuixiesModule userCoins={userData?.tokens} />
       <div className="">
         <div
           className={`${
@@ -123,7 +126,7 @@ export default function DashboardHeader() {
                     Panel Użytkownika
                   </div>
                   <div className="mt-3 lg:mt-0 text-black font-gotham text-2xl sm:text-3xl">
-                    💎{user?.tokens?.toFixed(2)}
+                    💎{userData?.tokens?.toFixed(2)}
                   </div>
                 </div>
               </h2>
@@ -136,11 +139,11 @@ export default function DashboardHeader() {
               onClick={() => dispatch(set_modals({ ...modals, config: true }))}
               className=""
             >
-              {user?.photoURL && (
+              {userData?.photoURL && (
                 <div className="rounded-full w-24 aspect-square overflow-hidden relative">
                   <Image
                     style={{ boxShadow: "inset 0px 0px 8px black" }}
-                    src={user?.photoURL}
+                    src={userData?.photoURL}
                     width={256}
                     height={256}
                     alt=""
@@ -148,7 +151,7 @@ export default function DashboardHeader() {
                   />
                 </div>
               )}
-              {!user?.photoURL && (
+              {!userData?.photoURL && (
                 <div
                   style={{ boxShadow: "inset 0px 0px 8px black" }}
                   className="rounded-full bg-gradient-to-r from-primary to-cta w-24 aspect-square text-white flex items-center justify-center"
@@ -157,39 +160,40 @@ export default function DashboardHeader() {
                 </div>
               )}
             </button>
-            {!user?.configured && (user?.seek === "ask" || !user?.seek) && (
-              <div className="pl-4 pt-4">
-                <h2 className="text-white bg-gradient-to-r from-zinc-800 via-gray-700 to-zinc-950 w-max rounded-xl px-2 font-extrabold">
-                  Nie skonfigurowano profilu
-                </h2>
-                <p className="text-black max-w-lg font-coco my-1 text-sm">
-                  Określ typ profilu w zakładce{" "}
-                  <b className="italic">MÓJ PROFIL</b>, by rozpocząć swoją
-                  przygodę w Quixy
-                </p>
-              </div>
-            )}
-            {user?.configured && user?.seek !== "ask" && (
+            {!userData?.configured &&
+              (userData?.seek === "ask" || !userData?.seek) && (
+                <div className="pl-4 pt-4">
+                  <h2 className="text-white bg-gradient-to-r from-zinc-800 via-gray-700 to-zinc-950 w-max rounded-xl px-2 font-extrabold">
+                    Nie skonfigurowano profilu
+                  </h2>
+                  <p className="text-black max-w-lg font-coco my-1 text-sm">
+                    Określ typ profilu w zakładce{" "}
+                    <b className="italic">MÓJ PROFIL</b>, by rozpocząć swoją
+                    przygodę w Quixy
+                  </p>
+                </div>
+              )}
+            {userData?.configured && userData?.seek !== "ask" && (
               <div className="flex flex-col h-max px-3">
-                {!user?.name && (
+                {!userData?.name && (
                   <h2 className="text-sm text-black drop-shadow-lg font-bold font-coco italic">
-                    {user?.seek && "Imię (lub imię i nazwisko)"}
-                    {(!user?.seek || user?.seek === "ask") &&
+                    {userData?.seek && "Imię (lub imię i nazwisko)"}
+                    {(!userData?.seek || userData?.seek === "ask") &&
                       "Nazwa firmy/dane rekrutera"}
                   </h2>
                 )}
                 <h3
                   className={`text-lg sm:text-xl font-coco font-bold ${
-                    user?.name ? "text-black" : "text-primary"
+                    userData?.name ? "text-black" : "text-primary"
                   }`}
                 >
-                  {user?.name ? user?.name : "Nie podano"}
+                  {userData?.name ? userData?.name : "Nie podano"}
                 </h3>
                 <h3 className="text-black text-sm sm:text-lg font-coco font-bold">
-                  {user?.title && user?.title}
+                  {userData?.title && userData?.title}
                 </h3>
                 <h3 className="text-black text-sm sm:text-lg font-coco">
-                  {user?.pseudo && user?.pseudo}
+                  {userData?.pseudo && userData?.pseudo}
                 </h3>
               </div>
             )}{" "}

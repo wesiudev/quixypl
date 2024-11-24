@@ -8,10 +8,7 @@ export async function POST(req: NextRequest) {
     return new NextResponse("not found", { status: 404 });
   }
   const users = await fetchUsers();
-
-  const slugData = users?.find((user) => user?.uid === id) || {};
-
   return NextResponse.json({
-    ...slugData,
+    users,
   });
 }
