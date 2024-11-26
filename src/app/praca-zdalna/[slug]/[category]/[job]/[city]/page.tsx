@@ -4,13 +4,13 @@ import jobs from "../../../../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Header from "@/components/Header";
 import { getPageContent } from "@/lib/getPageContent";
-import { JobPosting, Tag } from "@/types";
+import { JobPosting } from "@/types";
 import { TfiFlagAlt } from "react-icons/tfi";
 import BlogPostList from "@/components/BlogPostList";
 import { getDocuments, getProducts } from "@/firebase";
-import JobOfferCard from "@/components/user/JobOfferCard";
 import CityBreadcrumbs from "@/components/CitySlugComponents/CityBreadcrumbs";
 import JobBoardList from "@/components/JobBoardList";
+import JobOfferCard from "@/components/user/JobOfferCard";
 
 export async function generateStaticParams() {
   return jobs
