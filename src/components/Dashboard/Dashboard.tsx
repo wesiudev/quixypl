@@ -13,7 +13,7 @@ import Link from "next/link";
 import ProjectList from "./ProjectList";
 import JobOfferList from "../JobOfferList";
 import ServiceList from "./ProjectList";
-import AccountHistory from "./ImageGenerator/user/AccountHistory";
+import AccountHistory from "./ImageGenerator/dashboard/AccountHistory";
 async function sendVerificationEmail(email: string, verificationCode: string) {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`,

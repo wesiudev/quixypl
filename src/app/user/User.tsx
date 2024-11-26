@@ -9,9 +9,9 @@ import { FaClipboard } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Loading from "../loading";
-import MultiStepVerification from "@/components/user/Settings/SettingsInputs/MultiStepVerification";
-import ServiceList from "@/components/user/ProjectList";
-import AccountHistory from "@/components/user/ImageGenerator/user/AccountHistory";
+import AccountHistory from "@/components/Dashboard/ImageGenerator/dashboard/AccountHistory";
+import ServiceList from "@/components/Dashboard/ProjectList";
+import MultiStepVerification from "@/components/Dashboard/Settings/SettingsInputs/MultiStepVerification";
 async function sendVerificationEmail(email: string, verificationCode: string) {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`,
