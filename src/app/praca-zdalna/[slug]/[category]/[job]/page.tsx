@@ -8,7 +8,7 @@ import { JobPosting, Tag } from "@/types";
 import { TfiFlagAlt } from "react-icons/tfi";
 import BlogPostList from "@/components/BlogPostList";
 import { getDocuments, getProducts } from "@/firebase";
-import JobOfferCard from "@/components/Dashboard/JobOfferCard";
+import JobOfferCard from "@/components/user/JobOfferCard";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
 export async function generateStaticParams() {
@@ -158,24 +158,7 @@ export default async function Page(props: { params: Promise<any> }) {
             <BlogPostList posts={products} />
           </section>
         </div>
-        <div className="container p-6 mx-auto">
-          {" "}
-          <h2
-            style={{ lineHeight: 1.5 }}
-            className="font-extrabold text-black text-xl lg:text-3xl"
-          >
-            Ile zarabiają
-            <span className="ml-2 text-black">
-              {content?.informal_title_plural.toLowerCase()}?
-            </span>
-          </h2>
-          {/* <div
-            className="text-black max-w-3xl markdownSlug font-light font-coco"
-            dangerouslySetInnerHTML={{
-              __html: content?.salary,
-            }}
-          /> */}
-        </div>
+
         <MainFooter jobsList={jobs} />
       </div>
     </>

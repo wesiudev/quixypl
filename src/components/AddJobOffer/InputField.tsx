@@ -25,10 +25,7 @@ export const InputField: React.FC<InputFieldProps> = ({
 }) => {
   return (
     <div>
-      <label
-        className="font-extrabold text-black drop-shadow-lg mt-2"
-        htmlFor={id}
-      >
+      <label className="font-extrabold text-black" htmlFor={id}>
         {label}
       </label>
       {isTextArea ? (
@@ -37,14 +34,14 @@ export const InputField: React.FC<InputFieldProps> = ({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="p-2 border-2 border-primary text-black  w-full"
+          className="p-2 border-2 border-primary text-black w-full"
         />
       ) : options ? (
         <select
           id={id}
           value={value}
           onChange={onChange}
-          className="p-2 border-2 border-primary text-black  w-full"
+          className="p-2 border-2 border-primary text-black w-full"
         >
           <option value="">Wybierz</option>
           {options.map((option) => (
@@ -60,7 +57,7 @@ export const InputField: React.FC<InputFieldProps> = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          className="p-2 border-2 border-primary text-black  w-full font-gotham font-light"
+          className="p-2 border-2 border-primary text-black w-full font-gotham"
         />
       )}
     </div>

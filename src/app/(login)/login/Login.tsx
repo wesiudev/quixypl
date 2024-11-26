@@ -35,7 +35,7 @@ export default function Login() {
         ).then((userCredential) => {
           toastUpdate("Zalogowano pomyślnie!", id, "success");
           setThinking(false);
-          router.push("/dashboard");
+          router.push("/user");
         });
       } catch (err: any) {
         const errorMsg = errorCatcher(err);
@@ -46,7 +46,7 @@ export default function Login() {
   }
   useEffect(() => {
     if (user && !loading) {
-      router.push("/dashboard");
+      router.push("/user");
     }
   }, [loading, user]);
   return (

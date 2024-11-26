@@ -74,13 +74,11 @@ export default function StepOne({
   job: any;
   setJob: any;
 }) {
-  function addPreference(preference: any) {
-    if (!formData.preferences) {
-      formData.preferences = [];
-    }
-    formData.preferences.push(preference);
-    setFormData({ ...formData });
-  }
+  const addPreference = (preference: any) =>
+    setFormData((prev: any) => ({
+      ...prev,
+      preferences: (prev.preferences || []).concat(preference),
+    }));
 
   function removePreference(preference: any) {
     formData.preferences = formData.preferences.filter(
@@ -92,18 +90,18 @@ export default function StepOne({
     <div
       className={`${
         currentStep === 1
-          ? "-translate-y-[0] duration-500"
-          : "translate-y-[-500vh] duration-500 h-px overflow-hidden"
-      }`}
+          ? "-translate-y-[0] duration-300"
+          : "translate-y-[-100vh] duration-300 h-px overflow-hidden"
+      } w-full relative z-50`}
     >
       <InputField
         id="title"
         label="Tytuł"
         value={formData.title}
         onChange={handleChange}
-        placeholder="Wpisz tytuł ogłoszenia o pracę..."
+        placeholder="Tytuł ogłoszenia"
       />
-      <div>
+      <div className="w-full">
         <CategorySelector
           setTagsOpenLevel={setTagsOpenLevel}
           tagsOpenLevel={tagsOpenLevel}
@@ -127,9 +125,9 @@ export default function StepOne({
         <div className="mt-2"></div>
         <p
           onClick={() => console.log(formData.description)}
-          className="text-black text-lg mb-2"
+          className="text-black font-extrabold mb-2"
         >
-          Treść oferty pracy:
+          Treść oferty
         </p>
 
         <ReactQuill
@@ -154,32 +152,34 @@ export default function StepOne({
           removePreference={removePreference}
           source={user}
         />
-        <button
-          type="button"
-          onClick={() => {
-            if (
-              category &&
-              slug &&
-              job &&
-              formData?.description &&
-              formData?.title &&
-              formData?.preferences.length
-            ) {
-              nextStep();
-            } else {
-              return toast.error("Uzupełnij dane!", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-              });
-            }
-          }}
-          className="mt-3 p-2 bg-gradient-to-r from-primary to-cta py-0.5 text-white "
-        >
-          Następny krok
-        </button>
+        <div className="w-full flex items-end justify-end">
+          <button
+            type="button"
+            onClick={() => {
+              if (
+                category &&
+                slug &&
+                job &&
+                formData?.description &&
+                formData?.title &&
+                formData?.preferences?.length
+              ) {
+                nextStep();
+              } else {
+                return toast.error("Uzupełnij dane!", {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                });
+              }
+            }}
+            className="font-bold p-3 bg-gradient-to-r from-primary to-cta py-1.5 text-white "
+          >
+            Następny krok
+          </button>
+        </div>
       </div>
     </div>
   );

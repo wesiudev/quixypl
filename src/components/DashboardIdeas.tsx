@@ -1,6 +1,6 @@
 "use client";
-import GenerateIdea from "@/components/Dashboard/GenerateIdea";
-import OpenedIdea from "@/components/Dashboard/OpenedIdea";
+import GenerateIdea from "@/components/user/GenerateIdea";
+import OpenedIdea from "@/components/user/OpenedIdea";
 import moment from "moment";
 import { useState } from "react";
 import { useSelector } from "react-redux";

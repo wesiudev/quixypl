@@ -1,7 +1,7 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import { FaPlus } from "react-icons/fa6";
+import { FaChevronLeft, FaPlus } from "react-icons/fa6";
 import { IoCloseCircle } from "react-icons/io5";
 import { JobPosting } from "@/types";
 import { updateJobOffer, updateUser } from "@/firebase";
@@ -12,6 +12,7 @@ import "moment/locale/pl";
 import { toast } from "react-toastify";
 import Posting from "./Posting";
 import { set_modals } from "@/redux/slices/modalsopen";
+import { useRouter } from "next/navigation";
 interface IProjectImage {
   src: string;
   desc: string;
@@ -70,7 +71,7 @@ const JobOfferList = () => {
       })
     );
   };
-
+  const router = useRouter();
   if (!user?.job_offers || user?.job_offers?.length === 0) {
     return (
       <div className="h-screen flex items-center justify-center bg-gradient-to-r from-primary to-cta flex-col">
@@ -79,21 +80,36 @@ const JobOfferList = () => {
           Nie znaleziono aktywnych ofert pracy. Dodaj nową ofertę,
           <br /> aby rozpocząć!
         </p>
-        <Link href="/dashboard/add_job_offer" className="mt-2">
-          <div className="flex items-center justify-center bg-gradient-to-r from-cta to-primary text-white font-bold py-2 px-4 rounded">
-            <FaPlus className="mr-2" />
-            Dodaj ofertę pracy
+        <button
+          onClick={() => router.push("/user/add_job_offer")}
+          className="mt-2"
+        >
+          <div className="flex items-center justify-center bg-primary hover:bg-primary/80 duration-150 text-white font-bold py-2 px-4 rounded">
+            <FaPlus className="mr-2 text-xl" />
+            Darmowe ogłoszenie
           </div>
-        </Link>
+        </button>
       </div>
     );
   }
   return (
-    <div className="flex flex-col w-full">
-      <h2 className="z-50 shadow-sm sticky top-0 text-black p-3 px-6 lg:p-6 bg-white font-bold font-coco text-lg sm:text-3xl">
+    <div className="flex flex-col w-full relative">
+      <div className="w-full justify-between bg-gradient-to-r from-primary to-cta py-3 px-6 text-white font-bold text-lg flex items-center">
+        <Link href="/user" className="flex items-center">
+          <FaChevronLeft className="mr-2 text-xl" />
+          Powrót
+        </Link>
+        <div className="flex flex-col text-white pl-12">
+          <h2 className="font-extrabold">Ogłoszenia</h2>
+          <p className="text-xs font-coco">
+            Tutaj znajdziesz wszystkie swoje oferty pracy
+          </p>
+        </div>
+      </div>
+      <h2 className="z-50 shadow-sm sticky top-0 text-white p-3 px-6 lg:p-6 bg-[#222430] font-bold font-coco text-lg sm:text-3xl">
         Twoje Oferty Pracy
       </h2>
-      <div className="bg-gray-200 min-h-screen grid grid-cols-1 2xl:grid-cols-2 gap-6 p-6">
+      <div className="bg-[#222430] min-h-screen grid grid-cols-1 2xl:grid-cols-2 gap-6 p-6">
         {user?.job_offers?.map((jobOffer: JobPosting, i: number) => (
           <Posting key={i} jobOffer={jobOffer} pay={pay} loading={loading} />
         ))}

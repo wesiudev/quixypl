@@ -50,29 +50,29 @@ export default function CategorySelector({
 }) {
   return (
     <>
-      <div className="my-1.5 font-bold text-black">Kategoria</div>
+      <div className="mt-2 font-extrabold text-black">Kategoria</div>
       {slug !== "" && category === "" && (
         <div className="text-black flex flex-col mt-1">
-          <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1 px-2 text-white w-max max-w-[100%]">
+          <div className="font-coco font-bold bg-gradient-to-r from-primary to-cta p-1 px-2 text-white w-max max-w-[100%]">
             {slug}
           </div>
-          <div className="font-bold">Wybierz podkategorię</div>
+          <div className="font-extrabold mt-2">Wybierz podkategorię</div>
         </div>
       )}
       {slug !== "" && category !== "" && (
         <div className="text-black flex flex-col mt-1">
-          <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1 px-2 text-white w-max max-w-[100%]">
+          <div className="font-coco font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1 px-2 text-white w-max max-w-[100%]">
             {slug}
           </div>
-          <div className="font-bold">Podkategoria</div>
+          <div className="font-extrabold">Podkategoria</div>
         </div>
       )}
       {slug !== "" && category !== "" && (
         <div className="flex flex-col mt-1">
-          <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1  px-2 text-white w-max max-w-[100%]">
+          <div className="font-coco font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1  px-2 text-white w-max max-w-[100%]">
             {category}
           </div>
-          <div className="font-bold text-black">Wybierz kategorię</div>
+          <div className="font-extrabold text-black">Wybierz kategorię</div>
         </div>
       )}
 
@@ -112,7 +112,7 @@ export default function CategorySelector({
             {jobs.map((item: any, k: any) => (
               <button
                 onClick={() => setSlug(item.title)}
-                className=" bg-[#126b91] hover:bg-opacity-90 duration-100  text-white font-extralight p-2"
+                className="font-coco bg-[#126b91] hover:bg-opacity-90 duration-100  text-white p-2"
                 key={uuidv4()}
               >
                 {item.title}
@@ -125,11 +125,11 @@ export default function CategorySelector({
             {jobs.map((item: any, i: any) => (
               <div key={uuidv4()}>
                 {item.title === slug && (
-                  <div className="gap-0.5 flex flex-wrap">
+                  <div className="gap-0.5 grid grid-cols-1">
                     {item.data.map((cat: any, j: any) => (
                       <button
                         onClick={() => setCategory(cat.title)}
-                        className="bg-[#126b91] hover:bg-opacity-90 duration-100  text-white font-extralight p-2"
+                        className="font-coco bg-[#126b91] hover:bg-opacity-90 duration-100  text-white p-2"
                         key={uuidv4()}
                       >
                         {cat.title}
@@ -150,19 +150,21 @@ export default function CategorySelector({
                     {item.data.map((cat: any, i: any) => (
                       <div key={uuidv4()}>
                         {cat.title === category && (
-                          <div className="gap-0.5 flex flex-wrap">
+                          <div className="gap-0.5 grid grid-cols-1">
                             {cat.data.map((j: any, i: any) => (
                               <button
                                 onClick={() => {
                                   setJob(j.title);
                                 }}
-                                className={`${
+                                className={`font-coco ${
                                   slug !== "" &&
                                   category !== "" &&
                                   job === j.title
-                                    ? "bg-gradient-to-r from-primary to-cta"
-                                    : "bg-[#126b91]"
-                                }  hover:bg-opacity-90 duration-100  text-white font-extralight p-2`}
+                                    ? "font-extrabold bg-gradient-to-r from-primary to-cta"
+                                    : "bg-[#126b91] "
+                                } ${
+                                  job && job !== j.title ? "hidden" : ""
+                                } hover:bg-opacity-90 duration-100 text-white p-2`}
                                 key={uuidv4()}
                               >
                                 {j.title}

@@ -3,7 +3,6 @@ import "moment/locale/pl";
 import moment from "moment";
 import Loading from "../../app/loading";
 import { useDispatch, useSelector } from "react-redux";
-import AccountHistory from "./ImageGenerator/dashboard/AccountHistory";
 import { FaClipboard } from "react-icons/fa";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { toast } from "react-toastify";
@@ -14,6 +13,7 @@ import Link from "next/link";
 import ProjectList from "./ProjectList";
 import JobOfferList from "../JobOfferList";
 import ServiceList from "./ProjectList";
+import AccountHistory from "./ImageGenerator/user/AccountHistory";
 async function sendVerificationEmail(email: string, verificationCode: string) {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`,
@@ -27,6 +27,7 @@ export default function Dashboard() {
   const { user } = useSelector((state: any) => state.user);
   const { modals } = useSelector((state: any) => state.modals);
   const [sent, setSent] = useState(false);
+
   function copyToClipboard(text: string) {
     navigator.clipboard.writeText(text);
   }
@@ -92,7 +93,7 @@ export default function Dashboard() {
                           </div>
                           <Link
                             title="Zobacz wszystkie zlecenia"
-                            href="/dashboard/leads"
+                            href="/user/leads"
                             className="font-bold w-max text-white bg-primary text-lg flex items-center px-2 py-1.5 rounded-lg mt-1"
                           >
                             Zobacz wszystkie

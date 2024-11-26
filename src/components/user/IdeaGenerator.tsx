@@ -1,4 +1,4 @@
-import GenerateIdea from "@/components/Dashboard/GenerateIdea";
+import GenerateIdea from "@/components/user/GenerateIdea";
 import moment from "moment";
 import Image from "next/image";
 import { FaDivide } from "react-icons/fa";

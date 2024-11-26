@@ -102,11 +102,13 @@ export default function StepThree({
       );
 
       setIsAnimating(false);
-    } catch (error) {
-      showToastError("Failed to add job offer.");
+    } catch (error: any) {
+      showToastError(error.toString());
     } finally {
       setIsLoading(false);
-      router.push("/dashboard/my-postings");
+      setTimeout(() => {
+        router.push("/user/my_postings");
+      }, 5000);
     }
   };
 
@@ -127,52 +129,59 @@ export default function StepThree({
   };
 
   return (
-    <div>
-      {isAnimating && <ReactConfetti />}
-      {currentStep === 3 && (
-        <div>
-          <InputField
-            id="website"
-            label="Strona internetowa"
-            value={formData.website}
-            onChange={handleChange}
-            placeholder="Dodaj stronę internetową (opcjonalnie)"
-          />
+    <>
+      <div className="relative z-50">
+        {currentStep === 3 && (
+          <div>
+            <InputField
+              id="website"
+              label="Strona internetowa"
+              value={formData.website}
+              onChange={handleChange}
+              placeholder="Dodaj stronę internetową (opcjonalnie)"
+            />
 
-          <div className="flex justify-between mt-4">
-            <button
-              type="button"
-              onClick={prevStep}
-              className="p-2 bg-black text-white  hover:bg-cta"
-            >
-              Powrót
-            </button>
-
-            {isSent && (
-              <Link
-                className="p-2 bg-gradient-to-r from-primary via-cta to-primary py-0.5 text-white  flex items-center"
-                href="/dashboard/my-postings"
-              >
-                Już dodano, przeglądaj oferty <FaChevronRight />
-              </Link>
-            )}
-            {!isSent && (
+            <div className="flex justify-between mt-4">
               <button
-                disabled={isSent}
-                onClick={async () => {
-                  setIsAnimating(true);
-                  setIsSent(true);
-                  await handleRecruitmentStart();
-                }}
-                className="font-bold font-coco animate-pulse text-xl flex items-center px-2 py-1 rounded-lg bg-gradient-to-r from-primary via-cta to-primary text-white "
+                type="button"
+                onClick={prevStep}
+                className="p-2 bg-black text-white  hover:bg-cta"
               >
-                <FaSave className="text-3xl mr-2" />{" "}
-                {isLoading ? "Wczytywanie..." : "Zapisz zmiany"}
+                Powrót
               </button>
-            )}
+
+              {isSent && (
+                <Link
+                  className="p-2 bg-gradient-to-r from-primary via-cta to-primary py-0.5 text-white  flex items-center"
+                  href="/user/my_postings"
+                >
+                  Już dodano, przeglądaj oferty <FaChevronRight />
+                </Link>
+              )}
+              {!isSent && (
+                <button
+                  disabled={isSent}
+                  onClick={async () => {
+                    setIsAnimating(true);
+                    setIsSent(true);
+                    await handleRecruitmentStart();
+                  }}
+                  className="font-bold font-coco animate-pulse text-xl flex items-center px-2 py-1 rounded-lg bg-gradient-to-r from-primary via-cta to-primary text-white "
+                >
+                  <FaSave className="text-3xl mr-2" />{" "}
+                  {isLoading ? "Wczytywanie..." : "Zapisz zmiany"}
+                </button>
+              )}
+            </div>
           </div>
+        )}
+      </div>
+
+      {isAnimating && (
+        <div className="fixed left-0 top-0 w-full h-screen z-0">
+          <ReactConfetti />
         </div>
       )}
-    </div>
+    </>
   );
 }

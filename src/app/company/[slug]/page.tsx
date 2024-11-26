@@ -3,11 +3,11 @@ import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import moment from "moment";
 import { IProject, JobPosting } from "@/types";
-import ProjectCard from "@/components/Dashboard/ImageGenerator/dashboard/ProjectCard";
+import ProjectCard from "@/components/user/ImageGenerator/user/ProjectCard";
 import UserStickyTop from "@/components/UserStickyTop";
 import HireButton from "@/components/HireButton/HireButton";
 import { IoLocationOutline } from "react-icons/io5";
-import JobOfferCard from "@/components/Dashboard/JobOfferCard";
+import JobOfferCard from "@/components/user/JobOfferCard";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
 import Viewer from "@/components/AddJobOffer/Viewer";
 

@@ -13,8 +13,8 @@ export default async function Page() {
   return (
     <>
       <Header jobsList={jobs} />
-      <div className="py-48 bg-gradient-to-r from-zinc-800 via-gray-800 to-zinc-950 overflow-hidden">
-        <div className="container p-6 lg:p-12 bg-white  relative z-50 mx-auto mb-24">
+      <div className=" bg-white overflow-hidden">
+        <div className="p-6 lg:p-12 bg-white  relative z-50 mx-auto mb-24">
           <div className="w-full relative mx-auto">
             <ul className="breadcrumbs font-gotham font-light flex items-center flex-wrap text-black">
               <li className="mr-2">
@@ -38,10 +38,9 @@ export default async function Page() {
               </li>
             </ul>
           </div>
-          <AboutQuixyTalent />
 
           <div className="min-h-[20vh]">
-            <h1 className="text-black text-lg mb-6 font-coco">
+            <h1 className="text-black text-2xl font-extrabold mt-12 mb-6">
               Quixy Czytaj - Znajdź pracę zdalną, biznes, AI
             </h1>
             {posts && (
@@ -80,8 +79,11 @@ export default async function Page() {
               </div>
             )}
           </div>
-          <div>
-            <Link href="/">
+          <div className="mx-auto w-max mt-12">
+            <Link
+              href="/"
+              className="flex flex-col items-center justify-center text-xl gap-6"
+            >
               <Image
                 src="/assets/quixy-logo.png"
                 width={420}
@@ -89,10 +91,15 @@ export default async function Page() {
                 alt=""
                 className="w-[300px]"
               />
+              <span className="font-bold text-2xl text-black">
+                Quixy.pl - Przejdź na stronę główną
+              </span>
             </Link>
           </div>
+          <AboutQuixyTalent />
         </div>{" "}
       </div>
+
       <MainFooter jobsList={jobs} />
     </>
   );

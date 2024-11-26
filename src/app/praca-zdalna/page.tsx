@@ -105,7 +105,7 @@ function WhyChooseQuixySection() {
             <FaRocket className="lg:text-6xl text-xl" />
           </div>
           <div className="lg:w-[200px] lg:text-center">
-            Zarejestruj się by dodać ofertę pracy
+            Dodaj ofertę pracy za darmo
           </div>
         </Link>
       </h3>
@@ -224,15 +224,15 @@ function HighlightCard({
   linkTitle: string;
 }) {
   return (
-    <div className="p-3 relative bg-gradient-to-r from-primary via-cta to-primary rounded-xl">
-      <div className="shadow-lg bg-primary rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
+    <div className="p-3 relative bg-gradient-to-r from-primary/30 to-cta/30 rounded-xl">
+      <div className="shadow-lg bg-gradient-to-r from-primary to-cta rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
         {icon}
       </div>
-      <h3 className="text-xl font-extrabold text-white mb-2 mt-4">{title}</h3>
-      <p className="text-white">{description}</p>
+      <h3 className="text-xl font-extrabold text-black mb-2 mt-4">{title}</h3>
+      <p className="text-black">{description}</p>
       <div className="mt-6" />
       <Link
-        className="rounded-xl shadow-md bg-primary duration-100 text-white px-3 py-2 "
+        className="rounded-xl shadow-md bg-cta duration-100 text-white px-3 py-2 "
         href="/register"
         title={linkTitle}
       >
@@ -304,7 +304,7 @@ function FunnyComponent() {
             być zabawnie?
           </p>
 
-          <p className="bg-gradient-to-r from-primary to-cta p-2 text-xl text-white italic w-max">
+          <p className="bg-gradient-to-r from-primary to-cta p-2 text-xl text-white italic w-max max-w-full">
             „Zatrudnij mnie, zanim zrobi to ktoś inny! 🤖” – Najnowsza AI
           </p>
           <p className="mt-4 text-sm text-black">
@@ -385,11 +385,6 @@ const faqItems = [
     question: "Jak mogę się skontaktować z zespołem wsparcia?",
     answer:
       "Możesz skontaktować się z nami poprzez formularz, email lub telefon, dostępny na naszej stronie kontaktowej.",
-  },
-  {
-    question: "Jak działa generator pomysłów na biznes?",
-    answer:
-      "Generator pomysłów na biznes tworzy unikalne koncepty w oparciu o wybrane kryteria, takie jak lokalizacja, budżet i dostępne zasoby. Możesz rozwijać swój pomysł, korzystając z dodatkowych funkcji, odblokowanych za pomocą Quixies.",
   },
   {
     question: "Jakie błędy najczęściej popełniają początkujący przedsiębiorcy?",

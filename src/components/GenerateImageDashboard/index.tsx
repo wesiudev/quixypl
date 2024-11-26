@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import GenerateButton from "../Dashboard/ImageGenerator/backpack/empty/GenerateButton";
-import FirstGenerationPopup from "../Dashboard/ImageGenerator/backpack/empty/FirstGenerationPopup";
+import GenerateButton from "../user/ImageGenerator/backpack/empty/GenerateButton";
+import FirstGenerationPopup from "../user/ImageGenerator/backpack/empty/FirstGenerationPopup";
 import Image from "next/image";
 export default function GenerateImageDashboard() {
   const [isGenerationPending, setIsGenerationPending] =

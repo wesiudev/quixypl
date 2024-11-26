@@ -10,7 +10,7 @@ export default function Page() {
   useEffect(() => {
     if (!loading) {
       if (user) {
-        router.push("/dashboard/add_job_offer");
+        router.push("/user/add_job_offer");
       }
       if (!user) {
         router.push("/register");

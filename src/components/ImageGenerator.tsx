@@ -1,6 +1,6 @@
 "use client";
 import { useSelector } from "react-redux";
-import Backpack from "./Dashboard/ImageGenerator/backpack/Backpack";
+import Backpack from "./user/ImageGenerator/backpack/Backpack";
 import Loading from "@/app/loading";
 
 export default function ImageGenerator() {
