@@ -1,0 +1,122 @@
+"use client";
+import { useEffect, useState } from "react";
+import useWindowDimensions from "../useWidth";
+import ProductsWide from "./ProductsWide";
+import ProductsMobile from "./ProductsMobile";
+import HeaderComponent from "./HeaderComponent";
+import { FaFileSignature, FaList, FaUsers } from "react-icons/fa";
+
+import { FaFileArrowUp, FaLightbulb, FaUserNinja } from "react-icons/fa6";
+
+export const destinations = [
+  {
+    title: "FIRMA",
+    href: "/o-firmie",
+  },
+  {
+    title: "KONTAKT",
+    href: "/kontakt",
+  },
+];
+
+export default function Header({ jobsList }: { jobsList: any[] }) {
+  const { width } = useWindowDimensions();
+  const [hovered, setHovered] = useState("");
+  const [productsOpen, setProductsOpen] = useState(false);
+  const handleMouseEnter = (target: string) => {
+    setHovered(target);
+  };
+  const handleMouseLeave = () => {
+    setHovered("");
+  };
+
+  const [menuShow, setMenuShow] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
+
+  useEffect(() => {
+    let previousScrollPosition = window.scrollY;
+
+    const scrollListener = () => {
+      const currentScrollPosition = window.scrollY;
+      const isScrolledDown = previousScrollPosition < currentScrollPosition;
+      previousScrollPosition = currentScrollPosition;
+
+      setShowHeader(
+        isScrolledDown && currentScrollPosition > 100 ? false : true
+      );
+    };
+
+    window.addEventListener("scroll", scrollListener);
+
+    return () => window.removeEventListener("scroll", scrollListener);
+  }, []);
+  return (
+    <>
+      {/* PRODUCTS TAB ON SHOWN HOVER -> xl devices */}
+
+      <ProductsWide
+        width={width}
+        setHovered={setHovered}
+        jobs={jobsList}
+        hovered={hovered}
+        handleMouseLeave={handleMouseLeave}
+        handleMouseEnter={handleMouseEnter}
+        secondMenuItems={secondMenuItems}
+      />
+      {/* PRODUCTS TAB OPENED MOBILE */}
+      <ProductsMobile
+        jobs={jobsList}
+        menuShow={menuShow}
+        setProductsOpen={setProductsOpen}
+        setMenuShow={setMenuShow}
+        productsOpen={productsOpen}
+        setHovered={setHovered}
+        secondMenuItems={secondMenuItems}
+      />
+      {/* HEADER */}
+      <HeaderComponent
+        showHeader={showHeader}
+        menuShow={menuShow}
+        hovered={hovered}
+        productsOpen={productsOpen}
+        setProductsOpen={setProductsOpen}
+        handleMouseEnter={handleMouseEnter}
+        handleMouseLeave={handleMouseLeave}
+        width={width}
+        setMenuShow={setMenuShow}
+      />
+    </>
+  );
+}
+const secondMenuItems = [
+  {
+    urlLabel: "Zarejestruj się",
+    url: "/register",
+    color: "#14A800",
+    icon: FaUserNinja,
+  },
+  {
+    urlLabel: "Szukaj freelancera",
+    url: "/praca-zdalna",
+    color: "blue",
+    icon: FaUsers,
+  },
+  {
+    urlLabel: "Szukaj zleceń",
+    url: "/praca-zdalna?talent",
+    color: "#F59BBB",
+    icon: FaList,
+  },
+  {
+    urlLabel: "Szukaj usług",
+    url: "/marketplace",
+    color: "#468CA9",
+    icon: FaFileSignature,
+  },
+  {
+    urlLabel: "Dodaj usługę",
+    url: "/register",
+    color: "blue",
+    icon: FaFileArrowUp,
+  },
+];
