@@ -1,4 +1,4 @@
-import { fetchUsers, getDocuments } from "@/firebase";
+import { fetchUsers } from "@/firebase";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {

@@ -8,9 +8,9 @@ import { JobPosting, Tag } from "@/types";
 import { TfiFlagAlt } from "react-icons/tfi";
 import BlogPostList from "@/components/BlogPostList";
 import { getDocuments, getProducts } from "@/firebase";
-import JobOfferCard from "@/components/user/JobOfferCard";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
+import JobOfferCard from "@/components/user/JobOfferCard";
 export async function generateStaticParams() {
   return jobs
     .flatMap((service: any) =>
@@ -136,6 +136,9 @@ export default async function Page(props: { params: Promise<any> }) {
         <div className="container mx-auto rounded-xl" id="search">
           <Market leads={leads} />
         </div>
+        {/* <div className="container mx-auto rounded-xl" id="addoffer">
+          <QuickOffer generateOffer={generateOffer(job.slug, user.input)} />
+        </div> */}
         {/* Content */}
         <div className="flex flex-col lg:flex-row container p-6 mx-auto">
           <section className="text-left">
