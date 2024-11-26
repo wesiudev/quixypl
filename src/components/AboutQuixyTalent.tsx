@@ -2,14 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import {
-  FaUserTie,
-  FaBriefcase,
-  FaCheckCircle,
-  FaHandsHelping,
-  FaRocket,
-  FaCogs,
-} from "react-icons/fa";
+import { FaCheckCircle, FaCogs } from "react-icons/fa";
 
 export default function AboutQuixyTalent() {
   const [content, setContent] = useState("talent");
