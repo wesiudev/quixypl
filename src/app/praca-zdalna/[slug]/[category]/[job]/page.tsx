@@ -10,7 +10,7 @@ import BlogPostList from "@/components/BlogPostList";
 import { getDocuments, getProducts } from "@/firebase";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
-import JobOfferCard from "@/components/user/JobOfferCard";
+import JobOfferCard from "@/components/Dashboard/JobOfferCard";
 export async function generateStaticParams() {
   return jobs
     .flatMap((service: any) =>
