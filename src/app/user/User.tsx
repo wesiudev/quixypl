@@ -94,16 +94,13 @@ export default function User() {
                         : ""
                     }`}
                   >
-                    <h2 className="w-full px-3 lg:px-6 py-3 text-3xl font-extrabold text-black">
-                      Szczegóły
-                    </h2>
                     {!user?.configured && (
                       <div className="text-black text-lg mt-3">
                         Skonfiguruj typ konta w ustawieniach
                       </div>
                     )}
                     {(user?.seek || !user?.seek) && user?.seek !== "ask" && (
-                      <div className="px-3 lg:px-6 !pt-0 pb-3 lg:pb-3">
+                      <div className="px-4 lg:px-12 pb-3 lg:pb-3">
                         {!user?.title && (
                           <div>
                             {user?.seek && user?.seek !== "ask" && (
@@ -122,18 +119,18 @@ export default function User() {
                           </div>
                         )}
 
-                        <div>
-                          <h2 className="font-bold text-xl text-black mt-3">
+                        <div className="mt-3">
+                          <h2 className="font-bold text-xl text-black">
                             Unikalny link
                           </h2>
                           {!user?.pseudo && (
-                            <h3 className={`text-black`}>
+                            <h3 className={`text-black mt-1`}>
                               Nie skonfigurowano...
                             </h3>
                           )}
                         </div>
 
-                        <div className="text-black font-bold">
+                        <div className="text-black font-bold mt-2">
                           {user?.pseudo && (
                             <div className="flex flex-col">
                               <button
@@ -215,7 +212,7 @@ export default function User() {
                         <div className="w-full -ml-1 flex flex-wrap items-center">
                           {user?.tags?.map((item: any, i: any) => (
                             <div className="text-sm" key={i}>
-                              <div className="ml-1 mt-1 badge badge-neutral bg-white badge-outline flex items-center px-2 py-0.5">
+                              <div className="text-white ml-1 mt-1 bg-gradient-to-r from-primary to-cta flex items-center px-3 py-1.5">
                                 {item.title}
                               </div>
                             </div>
@@ -247,7 +244,7 @@ export default function User() {
                               user?.preferences?.map((item: any, i: any) => (
                                 <h3
                                   key={i}
-                                  className={`ml-1 mt-1 bg-white badge badge-neutral badge-outline flex items-center px-2 py-0.5`}
+                                  className={`text-white ml-1 mt-1 bg-gradient-to-r from-primary to-cta flex items-center px-3 py-1.5`}
                                 >
                                   {item}
                                 </h3>
@@ -265,7 +262,7 @@ export default function User() {
                               user?.preferences?.map((item: any, i: any) => (
                                 <h3
                                   key={i}
-                                  className={`ml-1 mt-1 badge badge-neutral bg-white badge-outline flex items-center px-2 py-0.5 text-white`}
+                                  className={`text-white ml-1 mt-1 bg-gradient-to-r from-primary to-cta flex items-center px-3 py-1.5`}
                                 >
                                   {item}
                                 </h3>

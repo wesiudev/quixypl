@@ -68,7 +68,7 @@ export default function LeadApplication({
       <table className="w-full mt-3">
         <tbody>
           <tr className="bg-gray-700">
-            <td>Email:</td>
+            <td>Numer Telefonu:</td>
             <td>{lead.email}</td>
           </tr>
           <tr className="bg-gray-700">
@@ -113,17 +113,6 @@ export default function LeadApplication({
               Akceptuj
             </button>
           </div>
-        )}
-
-        {lead.isFinished && !lead?.status && (
-          <button
-            className="w-full text-center bg-blue-500 text-white py-2 font-light text-base mt-2 rounded"
-            onClick={() => {
-              dispatch(set_modals({ ...modals, currentChat: lead?.pseudo }));
-            }}
-          >
-            Odpisz
-          </button>
         )}
       </div>
     </div>
