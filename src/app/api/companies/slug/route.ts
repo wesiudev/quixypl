@@ -18,7 +18,12 @@ export async function GET(req: NextRequest) {
         user?.configured &&
         user?.name &&
         user?.access &&
-        user?.tags?.filter((tag: any) => tag?.slugUrl === slug).length > 0
+        user?.tags?.filter(
+          (tag: any) =>
+            tag?.slugUrl === slug ||
+            tag?.url === slug ||
+            tag?.categoryUrl === slug
+        ).length > 0
     )
     .map((user: any) => ({
       seek: user?.seek,
