@@ -204,83 +204,12 @@ export default function HomePageGenerator({
         config.investment
       ).then((res: any) => {
         toastUpdate("Sukces!", id, "success");
-        setGeneratedIdea(JSON.parse(res.choices[0].text));
+        // setGeneratedIdea(JSON.parse(res?.choices[0]?.text));
         setGeneratorPopup(true);
         setThinking(false);
       });
     }
   }
 
-  return (
-    <div className="w-full flex flex-col md:flex-row">
-      <button
-        onClick={() => {
-          setRegisterPopupOpen(false);
-          setGeneratorPopup(false);
-        }}
-        className={`bg-[#202020] ${
-          registerPopupOpen || generatorPopup
-            ? "z-[30] w-full h-full fixed left-0 top-0 duration-500 bg-opacity-80 hover:bg-opacity-50 cursor-pointer"
-            : "fixed -z-[25] bg-opacity-0"
-        }`}
-      ></button>
-      <div
-        onClick={() => {
-          setRegisterPopupOpen(false);
-          setGeneratorPopup(false);
-        }}
-        className={`w-max max-w-[90%] fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex justify-center items-center z-[999999999999999] ${
-          generatorPopup ? "flex" : "hidden"
-        } ease-in-out duration-500`}
-      >
-        <div
-          onClick={(e: any) => {
-            e.stopPropagation();
-          }}
-          className="bg-white  flex flex-col w-full sm:max-w-[40rem] max-h-[90vh] relative"
-        >
-          <h2 className="bg-gradient-to-r from-primary to-cta  p-4 md:p-6 font-gotham text-2xl text-white font-bold drop-shadow-xl shadow-black sticky top-0">
-            Twój nowy pomysł jest gotowy!
-          </h2>
-          <div className="w-full p-4 md:p-6 flex flex-col h-full overflow-y-scroll">
-            <div className="text-black text-xl font-bold font-coco">
-              Wygenerowany pomysł:
-            </div>
-            <div className="text-white text-justify mt-3">
-              <span className="w-max max-w-full bg-gradient-to-r from-primary to-cta p-[2px]">
-                {cutSentence(generatedIdea?.content)}
-              </span>
-            </div>
-            <div className="text-sm text-gray-700 mt-24">
-              Zaloguj się by odebrać{" "}
-              <b className="text-primary">nowy pomysł na biznes</b> oraz 💎3 na
-              start
-            </div>
-          </div>
-          <button
-            onClick={(e: any) => {
-              setRegisterPopupOpen(true);
-              setGeneratorPopup(false);
-              e.stopPropagation();
-            }}
-            className="py-3 mx-auto  bg-primary font-bold text-white w-full"
-          >
-            Dołącz teraz
-          </button>
-        </div>
-      </div>
-      <RegisterPopup
-        view={view}
-        registerPopupOpen={registerPopupOpen}
-        setView={setView}
-        userData={userData}
-        setUserData={setUserData}
-        isThinking={isThinking}
-        config={config}
-        setConfig={setConfig}
-        createAccount={createAccount}
-        signIn={signIn}
-      />
-    </div>
-  );
+  return <div className="w-full flex flex-col md:flex-row"></div>;
 }
