@@ -46,7 +46,7 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
         modals.isProjectOpen || modals.currentChat || !isScrollingDown
           ? "-translate-y-[30vh] opacity-0 duration-500 "
           : "opacity-100 translate-y-0 duration-500 "
-      } w-full flex justify-center z-[999999999]`}
+      } w-full flex justify-center z-[999999999] gap-3`}
     >
       <div className="px-3 lg:px-12 w-full">
         <div
