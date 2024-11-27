@@ -18,35 +18,38 @@ export default async function Page(props: {
   params: Promise<any>;
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const searchParams = await props.searchParams;
-  const params = await props.params;
-  const slug: any = jobs.find(
-    (page: any) => polishToEnglish(page.title) === params.slug
+  const searchParams = await props?.searchParams;
+  const params = await props?.params;
+  const slug: any = jobs?.find(
+    (page: any) => polishToEnglish(page?.title) === params?.slug
   );
-  const content = await fetch(
+  const contentReq = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.slug}`,
     {
       next: { revalidate: 60 },
     }
-  ).then((res: any) => res.json());
+  );
+  const content = await contentReq.json();
   // const products: any = await getProducts();
   const isTalent = searchParams?.talent === "" ? true : false;
-  const talents = await fetch(
+  const talentsReq = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.slug)}`,
     {
       next: { revalidate: 60 },
     }
-  ).then((res: any) => res.json());
-  const companies = await fetch(
+  );
+  const talents = await talentsReq.json();
+  const companiesReq = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/companies/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.slug)}`,
     {
       next: { revalidate: 60 },
     }
-  ).then((res: any) => res.json());
+  );
+  const companies = await companiesReq.json();
   const removePolishSignsAndSpaces = (str: string) => {
     return str
       .normalize("NFD")
@@ -235,7 +238,7 @@ export default async function Page(props: {
         <div className="bg-white px-6 lg:px-12 py-12 flex flex-col w-full text-black">
           <h4 className="text-lg w-max font-extrabold">Tagi</h4>
           <ul className="font-coco flex items-center flex-wrap">
-            {content?.synonyms.map((item: any, i: any) => (
+            {content?.synonyms?.map((item: any, i: any) => (
               <li key={i} className={`ml-2 mt-2`}>
                 #{removePolishSignsAndSpaces(item.toLowerCase())}
               </li>
