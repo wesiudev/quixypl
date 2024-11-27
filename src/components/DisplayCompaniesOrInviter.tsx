@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaPlusCircle } from "react-icons/fa";
 import { TfiFlagAlt } from "react-icons/tfi";
 
 export default function DisplayCompaniesOrInviter({ data }: { data: any }) {
@@ -62,6 +63,26 @@ export default function DisplayCompaniesOrInviter({ data }: { data: any }) {
             Przejdź do panelu
           </Link>
         </div>
+      )}{" "}
+      {data.length > 0 && (
+        <Link
+          href={`/register`}
+          className="flex p-3 border-2 border-gray-500/30 hover:shadow-md duration-200 hover:scale-[1.03] hover:shadow-cta bg-gradient-to-r from-primary to-cta "
+        >
+          <span className="mr-2 flex text-2xl text-white">
+            <FaPlusCircle className="w-16 h-16" />
+          </span>
+
+          <div className="px-3 flex flex-col font-coco text-white">
+            <h2 className="text-lg font-bold">Wolne miejsce</h2>
+            <h3 className="">
+              Skonfiguruj profil na naszej platformie i wyświetlaj swoje usługi
+            </h3>
+            <p className="text-white bg-cta px-3 py-1.5 w-max max-w-full mt-1">
+              Do rejestracji!
+            </p>
+          </div>
+        </Link>
       )}
     </div>
   );

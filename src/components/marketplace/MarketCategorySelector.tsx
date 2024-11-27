@@ -29,7 +29,7 @@ export default function MarketCategorySelector({
   showResults: any;
 }) {
   return (
-    <div className="bg-white p-3 lg:p-6">
+    <div className="bg-white">
       <h1 className="text-2xl font-extrabold text-black">Wyszukiwarka usług</h1>
 
       {!slug && <div className="my-1.5 font-bold text-black">Kategoria</div>}
@@ -192,9 +192,9 @@ export default function MarketCategorySelector({
         </button>
       )}
       {slug && !leads && (
-        <div className="p-3 mt-3 bg-gradient-to-r from-primary to-cta text-white font-extralight font-coco text-xl flex items-center gap-2">
-          Brak usług w przeglądanej kategorii - dodaj swoje usługi i rozpocznij
-          pozyskiwanie klientów!
+        <div className="p-3 mt-3 bg-gradient-to-r from-primary to-cta text-white flex items-center gap-2">
+          Brak aktywnych usług w przeglądanej kategorii - dodaj swoje usługi i
+          rozpocznij pozyskiwanie klientów!
         </div>
       )}
     </div>

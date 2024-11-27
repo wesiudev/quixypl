@@ -12,12 +12,13 @@ export default function MarketResults({
   category: any;
   job: any;
 }) {
+  console.log(leads);
   return (
     <div className="flex items-center justify-center z-[99999999] overflow-auto h-full">
       <div
         className={`${
           leads?.length > 0 && slug !== "" ? "block" : "hidden"
-        } p-4 lg:p-6 bg-gradient-to-r from-primary/40 to-cta/40 w-full`}
+        } p-4 lg:p-6 bg-gradient-to-r from-primary/30 to-cta/30 w-full mt-3`}
       >
         <div className={`text-black font-extrabold mb-2 text-xl`}>
           {" "}
@@ -48,7 +49,7 @@ export default function MarketResults({
                 {" "}
                 {/* Smaller font size */}
                 <span className="font-bold text-indigo-600 dark:text-indigo-400">
-                  Typ wynagrodzenia:
+                  Płatność:
                 </span>{" "}
                 {lead.time}
               </p>
@@ -56,7 +57,7 @@ export default function MarketResults({
                 {" "}
                 {/* Smaller font size */}
                 <span className="font-bold text-indigo-600 dark:text-indigo-400">
-                  Wynagrodzenie:
+                  Cena:
                 </span>{" "}
                 {lead.salaryValue}
               </p>
@@ -68,11 +69,6 @@ export default function MarketResults({
                 </span>{" "}
                 {lead.duration}
               </p>
-              <div className="max-h-[15vh] overflow-hidden my-2 p-2 bg-white rounded-lg">
-                {" "}
-                {/* Reduced size */}
-                <Viewer value={lead?.desc} />
-              </div>
             </div>
           ))}
         </div>

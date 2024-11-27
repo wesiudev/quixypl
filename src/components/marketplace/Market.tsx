@@ -16,7 +16,7 @@ export default function Market({ leads }: { leads: IProject[] }) {
   const [job, setJob] = useState<any>("");
   const [showResults, setShowResults] = useState(false);
   return (
-    <div className="">
+    <div className="pb-12">
       <div className="">
         <MarketCategorySelector
           slug={slug}
@@ -61,23 +61,23 @@ export default function Market({ leads }: { leads: IProject[] }) {
           />
         )}
         {slug === "" && (
-          <div className="bg-white px-6 pb-6 text-black text-center items-center justify-center h-full w-full">
+          <div className="mt-3 py-6 bg-gradient-to-r from-primary/30 to-cta/30 px-6 pb-6 text-black text-center items-center justify-center h-full w-full">
             {" "}
             <div className="mb-3 mx-auto justify-center items-center flex w-20 h-20 bg-gradient-to-r from-primary to-cta rounded-full">
               <BiCategory className="w-[60%] h-[60%] text-white" />
             </div>
-            {/* Reduced padding */}
-            <h3 className="text-xl font-bold">
-              {" "}
-              {/* Smaller font size */}
-              Wybierz kategorię i wyświetlaj usługi
-            </h3>
-            <p className="text-sm max-w-sm mx-auto">
-              {" "}
-              {/* Smaller font size */}
-              Wybierz kategorię by rozpocząć wyszukiwanie usług naszych
-              użytkowników.
-            </p>
+            <div className="bg-white p-3 text-center max-w-sm mx-auto">
+              {/* Reduced padding */}
+              <h3 className="text-xl font-bold">
+                {" "}
+                {/* Smaller font size */}
+                Wybierz kategorię i wyświetlaj usługi
+              </h3>
+              <p className="text-sm max-w-sm mx-auto">
+                Wybierz kategorię by rozpocząć wyszukiwanie usług naszych
+                użytkowników.
+              </p>
+            </div>
           </div>
         )}
       </div>

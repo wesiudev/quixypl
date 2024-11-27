@@ -48,7 +48,7 @@ export default async function Page(props: {
                 </li>
               </ul>
             </div>
-            <div className="lg:block hidden w-max bg-gradient-to-r from-primary to-cta text-white italic rounded-xl text-lg font-coco font-extralight px-3 ">
+            <div className="lg:block hidden w-max bg-gradient-to-r from-primary to-cta text-white italic text-lg font-coco font-extralight px-3 ">
               Quixy Talent&trade;
             </div>
           </div>
@@ -128,7 +128,7 @@ export default async function Page(props: {
                           href={`/praca-zdalna/${item?.slugUrl}/${
                             item?.categoryUrl
                           }/${item?.url}/${polishToEnglish(talent?.city)}`}
-                          className="badge bg-white badge-outline ml-1 mt-1 duration-100 flex items-center px-2 py-0.5"
+                          className="bg-gradient-to-r from-primary to-cta p-2 text-xl font-extralight text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5"
                         >
                           {item.title}
                         </Link>
@@ -147,7 +147,7 @@ export default async function Page(props: {
                       talent?.preferences?.map((item: any, i: any) => (
                         <h3
                           key={i}
-                          className={`badge bg-white badge-outline ml-1 mt-1 duration-100 flex items-center px-2 py-0.5`}
+                          className={`bg-gradient-to-r from-primary to-cta text-xl font-extralight ml-1 mt-1 duration-100 flex items-center px-2 py-0.5 text-white`}
                         >
                           {item}
                         </h3>

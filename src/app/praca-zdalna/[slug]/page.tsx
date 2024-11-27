@@ -7,8 +7,9 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { getPageContent } from "@/lib/getPageContent";
 import Image from "next/image";
 import BlogPostList from "@/components/BlogPostList";
-import { getProducts } from "@/firebase";
+import { getDocuments, getProducts } from "@/firebase";
 import JobBoardList from "@/components/JobBoardList";
+import Market from "@/components/marketplace/Market";
 export async function generateStaticParams() {
   return jobs.flatMap((service: any) => ({
     slug: polishToEnglish(service.title),
@@ -53,6 +54,7 @@ export default async function Page(props: {
       .replace(/[\u0300-\u036f]/g, "")
       .replace(/\s/g, "");
   };
+  const leads: any = await getDocuments("services");
   return (
     <>
       <Header jobsList={jobs} />
@@ -61,7 +63,7 @@ export default async function Page(props: {
         <div className="px-6 lg:px-12 relative flex flex-col items-center justify-center text-center bg-gradient-to-r from-primary to-cta">
           <div className="w-full py-6 lg:py-12 text-center overflow-hidden relative mt-6 lg:mt-12 bg-white">
             <div className="container mx-auto">
-              <p className="pb-4 lg:pb-8 px-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 leading-snug w-full text-center mx-auto bg-gradient-to-r from-primary to-cta text-transparent bg-clip-text">
+              <p className="pb-4 lg:pb-6 px-6 text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-extrabold mb-6 leading-snug w-full text-center mx-auto bg-gradient-to-r from-primary to-cta text-transparent bg-clip-text">
                 Freelancer Job Boards – {slug.title}
               </p>
             </div>
@@ -75,7 +77,8 @@ export default async function Page(props: {
             {!isTalent && (
               <p className="-mt-6 font-coco text-black w-full sm:text-lg lg:max-w-xl mx-auto">
                 Stwórz najskuteczniejsze oferty pracy w {content?.genitive}!
-                Zajmij się swoim biznesem, a my znajdziemy idealnych ekspertów.
+                Poszukujesz klientów? Dodaj swoje usługi do profilu i rozpocznij
+                współpracę!
               </p>
             )}
             <div className="mt-2"></div>
@@ -159,6 +162,9 @@ export default async function Page(props: {
                 />
               </div>
             </div>
+          </div>
+          <div className="px-4 lg:px-12 bg-white" id="search">
+            <Market leads={leads} />
           </div>
           {/* Content */}
           <div className="px-6 lg:px-12 bg-white mx-auto flex flex-col lg:flex-row gap-12">

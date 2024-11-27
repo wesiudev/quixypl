@@ -48,7 +48,40 @@ export default async function Page(props: { params: Promise<any> }) {
   return (
     <>
       <Header jobsList={jobs} />
-      <div className=" min-h-screen flex flex-col w-full p-4 lg:p-12">
+      <div className=" min-h-screen flex flex-col w-full px-4 lg:px-12">
+        <div className="breadcrumbs py-4 text-sm">
+          <ul className="space-x-2 font-coco text-black flex flex-wrap w-full">
+            <li>
+              <Link href={`/praca-zdalna`} className="text-black">
+                praca-zdalna
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/praca-zdalna/${params.slug}`}
+                className="text-black"
+              >
+                {params.slug}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/praca-zdalna/${params.slug}/${params.category}`}
+                className="text-black"
+              >
+                {params.category}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/praca-zdalna/${params.slug}/${params.category}/${params.job}`}
+                className="text-black"
+              >
+                {params.job}
+              </Link>
+            </li>
+          </ul>
+        </div>
         {/* Header */}
         {/* Job Title Section */}
         <div className="w-full mb-6 mx-auto">
@@ -79,7 +112,7 @@ export default async function Page(props: { params: Promise<any> }) {
             </div>
           </div>
         </div>
-        <div className="px-6 ">
+        <div className=" ">
           <h2 className="font-extrabold text-black text-xl lg:text-3xl">
             Oferty pracy zdalnej{" "}
             <span className="">{content?.title.toLowerCase()}</span>{" "}
@@ -89,11 +122,11 @@ export default async function Page(props: { params: Promise<any> }) {
           </p>
           {offers?.length === 0 && (
             <div className="">
-              <div className=" bg-gradient-to-r from-primary/40 to-cta/40 bg-left-to-right  mx-auto my-6">
+              <div className="py-3 bg-gradient-to-r from-primary/30 to-cta/30 mx-auto my-6">
                 <div className="bg-gradient-to-r from-primary to-cta rounded-full aspect-square mx-auto w-32 flex items-center justify-center">
                   <TfiFlagAlt className="text-white text-4xl animate-bounce" />
                 </div>
-                <p className="bg-white font-coco font-light text-black text-base p-3 my-3 text-center max-w-xl mx-auto">
+                <p className="bg-white font-coco font-light text-black text-base p-3 mt-3 text-center max-w-xl mx-auto">
                   Brak aktywnych ofert pracy zdalnej dla specjalistów w branży{" "}
                   {content?.genitive}
                 </p>
@@ -102,11 +135,11 @@ export default async function Page(props: { params: Promise<any> }) {
                     href="/register"
                     className=" bg-[#14a800] p-2 duration-100 group-hover:bg-opacity-80"
                   >
-                    Bądź szybszy/a i dodaj ogłoszenie
+                    Dodaj darmowe ogłoszenie
                   </Link>
                   <Link
                     href="/register"
-                    className=" bg-[#14a800] w-max max-w-[100%] mx-auto p-2  duration-100 group-hover:bg-opacity-80"
+                    className=" bg-[#14a800] w-max max-w-[100%] mx-auto p-2 duration-100 group-hover:bg-opacity-80"
                   >
                     o pracę już dziś!
                   </Link>
@@ -129,11 +162,11 @@ export default async function Page(props: { params: Promise<any> }) {
             </section>
           )}
         </div>
-        {/* <div className="bg-white px-6 sm:px-12 py-6 text-gray-800">
+        {/* <div className="bg-white  sm:px-12 py-6 text-gray-800">
         <JobOfferList jobOffers={offers} />
       </div> */}
         {/* Services Section */}
-        <div className=" rounded-xl" id="search">
+        <div className="" id="search">
           <Market leads={leads} />
         </div>
         {/* Content */}

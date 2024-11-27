@@ -37,18 +37,18 @@ export default async function Page(props: {
             <div className="flex flex-col breadcrumbs">
               <ul className="flex items-center flex-wrap">
                 <li className="">
-                  <Link href={`/company`} title="praca zdalna company">
-                    company
+                  <Link href={`/talent`} title="praca zdalna talent">
+                    talent
                   </Link>
                 </li>
                 <li className="">
-                  <Link href={`/company/${params.slug}`} title={params.slug}>
+                  <Link href={`/talent/${params.slug}`} title={params.slug}>
                     {params.slug}
                   </Link>
                 </li>
               </ul>
             </div>
-            <div className="lg:block hidden w-max bg-gradient-to-r from-primary to-cta text-white italic rounded-xl text-lg font-coco font-extralight px-3 ">
+            <div className="lg:block hidden w-max bg-gradient-to-r from-primary to-cta text-white italic text-lg font-coco font-extralight px-3 ">
               Quixy Talent&trade;
             </div>
           </div>

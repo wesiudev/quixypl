@@ -58,12 +58,12 @@ const OpinionsForm: React.FC = () => {
   };
 
   return (
-    <div className="mt-12 bg-gradient-to-r from-primary to-cta p-6">
+    <div className="mt-12 bg-gradient-to-r from-primary to-cta py-6">
       <form
         onSubmit={handleSubmit}
         className="container mx-auto flex flex-col md:flex-row justify-start items-start space-y-12"
       >
-        <div className="lg:px-6 h-full w-full">
+        <div className="px-4 lg:px-12 h-full w-full">
           <h2 className="w-full text-3xl text-white drop-shadow-md shadow-black text-left mb-2 font-extrabold">
             Podziel się przemyśleniami
           </h2>

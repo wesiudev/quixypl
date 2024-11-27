@@ -6,6 +6,8 @@ import Header from "@/components/Header";
 import { FaBriefcase } from "react-icons/fa";
 import AboutQuixyTalent from "@/components/AboutQuixyTalent";
 import JobBoardList from "@/components/JobBoardList";
+import Market from "@/components/marketplace/Market";
+import { getDocuments } from "@/firebase";
 
 // Generowanie parametrów statycznych
 export async function generateStaticParams() {
@@ -45,15 +47,15 @@ export default async function Page(props: { params: Promise<any> }) {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
+  const leads: any = await getDocuments("services");
   return (
     <div className="bg-gradient-to-b relative bg-white">
       <Header jobsList={jobs} />
-
       {/* Hero Section */}
       <div className="px-6 lg:px-12 relative flex flex-col items-center justify-center text-center bg-gradient-to-r from-primary to-cta">
         <div className="mb-6 lg:mb-12 w-full py-8 lg:py-12 text-center overflow-hidden relative mt-8 lg:mt-12 bg-white">
           <div className="container mx-auto">
-            <h1 className="pb-4 lg:pb-8 px-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-3 leading-snug w-full mx-auto bg-gradient-to-r from-primary to-cta text-transparent bg-clip-text">
+            <h1 className="pb-4 px-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-3 leading-snug w-full mx-auto bg-gradient-to-r from-primary to-cta text-transparent bg-clip-text">
               {slug?.title} - Zlecenia, Usługi, Oferty Pracy
             </h1>
           </div>
@@ -62,18 +64,18 @@ export default async function Page(props: { params: Promise<any> }) {
             <b className="text-cta">{content?.genitive}</b> na polskim rynku
             pracy i zrealizuj swój projekt z ich wsparciem!
           </p>
-          <div className="flex items-center gap-3 sm:gap-4 lg:gap-5 justify-center mt-6 w-full z-50">
+          <div className="flex items-center gap-3 sm:gap-4 lg:gap-5 justify-center mt-3 w-full z-50">
             <Link
               href="/register"
               title="Rekrutuj do pracy zdalnej na panelu Quixy"
-              className="font-gotham bg-primary hover:bg-opacity-90 duration-150 text-white font-bold text-sm lg:text-base px-3 py-2 text-center rounded-md"
+              className="font-gotham bg-primary hover:bg-opacity-90 duration-150 text-white font-bold text-sm lg:text-base px-3 py-2 text-center"
             >
               Jestem klientem
             </Link>
             <Link
               href="/register"
               title="Szukaj pracy zdalnej na panelu Quixy"
-              className="font-gotham bg-cta hover:bg-opacity-90 duration-150 text-white font-bold text-sm lg:text-base px-3 py-2 text-center rounded-md"
+              className="font-gotham bg-cta hover:bg-opacity-90 duration-150 text-white font-bold text-sm lg:text-base px-3 py-2 text-center"
             >
               Jestem freelancerem
             </Link>
@@ -81,7 +83,7 @@ export default async function Page(props: { params: Promise<any> }) {
         </div>
       </div>
       <div className="bg-white w-full pb-12">
-        <div className="flex flex-col mx-auto">
+        <div className="flex flex-col mx-auto px-4 lg:px-12">
           <div className="">
             <JobBoardList
               talents={talents}
@@ -90,9 +92,12 @@ export default async function Page(props: { params: Promise<any> }) {
             />
           </div>
         </div>
+      </div>{" "}
+      <div className="px-4 lg:px-12" id="search">
+        <Market leads={leads} />
       </div>
       {/* Subcategories Section */}
-      <div className="bg-white mx-auto">
+      <div className="bg-white mx-auto px-4 lg:px-12">
         {slug?.data?.length > 0 && (
           <div className="">
             <h1 className="!leading-normal text-black bg-white text-xl lg:text-3xl mt-6 font-extrabold">
@@ -119,7 +124,6 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
         )}
       </div>
-
       <div className="bg-white w-full px-3 lg:px-12 mt-12">
         <div className="flex flex-col lg:flex-row gap-6 mx-auto">
           <section className="text-left w-full lg:pr-24">
@@ -142,7 +146,6 @@ export default async function Page(props: { params: Promise<any> }) {
           <AboutQuixyTalent />
         </div>
       </div>
-
       {/* Footer Section */}
       <MainFooter jobsList={cat.data} />
     </div>

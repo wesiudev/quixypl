@@ -29,7 +29,7 @@ export default function JobBoardList({
     <div className="">
       <h2
         style={{ lineHeight: 1.5 }}
-        className="text-black font-extrabold text-xl lg:text-3xl mt-12"
+        className="text-black font-extrabold text-2xl mt-12"
       >
         {content?.informal_title_plural}{" "}
       </h2>{" "}

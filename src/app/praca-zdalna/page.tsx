@@ -5,17 +5,22 @@ import { Metadata } from "next";
 import Header from "@/components/Header";
 import FAQ from "@/components/Faq";
 import OpinionsForm from "@/components/OpinionsForm";
-import { FaRocket, FaUsers, FaRegLightbulb, FaCogs } from "react-icons/fa";
+import { FaRocket, FaUsers, FaCogs } from "react-icons/fa";
 import MainFooter from "@/components/MainFooter";
 import Image from "next/image";
 import { FaArrowRightLong } from "react-icons/fa6";
+import Market from "@/components/marketplace/Market";
+import { getDocuments } from "@/firebase";
 
 // Główna strona
 export default async function Page() {
+  const leads: any = await getDocuments("services");
   return (
     <div className="w-full h-full bg-white">
       <Header jobsList={jobs} />
-      <HeroSection />
+      <div className="container mx-auto px-4 lg:px-12 pt-4 lg:pt-12">
+        <HeroSection />
+      </div>
       <main className="">
         <div className="container mx-auto">
           <CallToActionSection />
@@ -29,7 +34,10 @@ export default async function Page() {
         <div className="container mx-auto">
           <WhatMakesUsUniqueSection />
         </div>
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 lg:px-12" id="search">
+          <Market leads={leads} />
+        </div>
+        <div className="container mx-auto px-4 lg:px-12">
           <FAQ faqItems={faqItems} />
         </div>
         <OpinionsForm />
@@ -42,8 +50,8 @@ export default async function Page() {
 
 function HeroSection() {
   return (
-    <header className="px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-16 text-center overflow-hidden relative bg-gradient-to-r from-primary to-cta">
-      <div className="py-6 relative z-50 bg-white mx-auto w-full max-w-[95%] sm:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]">
+    <header className="p-4 lg:p-12 text-center overflow-hidden relative bg-gradient-to-r from-primary to-cta">
+      <div className="py-6 relative z-50 bg-white mx-auto">
         <h1
           style={{ lineHeight: 1.3 }}
           className="px-4 pt-6 lg:pt-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 leading-snug w-full text-center mx-auto bg-gradient-to-r from-primary to-cta text-transparent bg-clip-text"
@@ -105,7 +113,7 @@ function WhyChooseQuixySection() {
             <FaRocket className="lg:text-6xl text-xl" />
           </div>
           <div className="lg:w-[200px] lg:text-center">
-            Zarejestruj się by dodać ofertę pracy
+            Dodaj ogłoszenie o pracę za darmo
           </div>
         </Link>
       </h3>
@@ -129,7 +137,16 @@ function WhyChooseQuixySection() {
 function SpecialistsCategoriesSection() {
   return (
     <section className="py-12 mb-12 w-full bg-gradient-to-r from-primary to-cta">
-      <div className="flex flex-col mt-3 lg:mt-0 px-6 container mx-auto">
+      <div className="mb-12 px-4 lg:px-12 container mx-auto">
+        <h2 className="text-3xl font-extrabold text-white">
+          Kategorie pracy zdalnej
+        </h2>
+        <p className="text-white max-w-lg">
+          Poszukujesz specjalistów do wykonania zlecenia? Wybierz kategorię i
+          znajdź odpowiednich kandydatów!
+        </p>
+      </div>
+      <div className="flex flex-col mt-3 lg:mt-0 px-4 lg:px-12 container mx-auto">
         {links.map((link, index) => (
           <Link
             key={index}
@@ -177,7 +194,7 @@ function SpecialistsCategoriesSection() {
 
 function WhatMakesUsUniqueSection() {
   return (
-    <section className="my-12 px-6">
+    <section className="my-12 px-4 lg:px-12">
       <h2 className="text-3xl mb-6 text-black font-extrabold">
         Co nas wyróżnia?
       </h2>
@@ -224,15 +241,15 @@ function HighlightCard({
   linkTitle: string;
 }) {
   return (
-    <div className="p-3 relative bg-gradient-to-r from-primary via-cta to-primary rounded-xl">
-      <div className="shadow-lg bg-primary rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
+    <div className="p-3 relative bg-gradient-to-r from-primary/30 to-cta/30 rounded-xl">
+      <div className="shadow-lg bg-gradient-to-r from-primary to-cta text-white rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
         {icon}
       </div>
-      <h3 className="text-xl font-extrabold text-white mb-2 mt-4">{title}</h3>
-      <p className="text-white">{description}</p>
+      <h3 className="text-xl font-extrabold text-black mb-2 mt-4">{title}</h3>
+      <p className="text-black">{description}</p>
       <div className="mt-6" />
       <Link
-        className="rounded-xl shadow-md bg-primary duration-100 text-white px-3 py-2 "
+        className="rounded-xl shadow-md bg-cta duration-100 text-white px-3 py-2 "
         href="/register"
         title={linkTitle}
       >
@@ -282,7 +299,7 @@ function CallToActionSection() {
 // Zabawny komponent
 function FunnyComponent() {
   return (
-    <div className="relative mx-auto w-full bg-white p-12">
+    <div className="relative mx-auto w-full bg-white container px-4 lg:px-12 my-24">
       <div className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%] text-[20vw] text-primary/10 italic font-extrabold">
         QUIXY
       </div>
@@ -304,7 +321,7 @@ function FunnyComponent() {
             być zabawnie?
           </p>
 
-          <p className="bg-gradient-to-r from-primary to-cta p-2 text-xl text-white italic w-max">
+          <p className="bg-gradient-to-r from-primary to-cta p-2 text-xl text-white italic w-max max-w-full">
             „Zatrudnij mnie, zanim zrobi to ktoś inny! 🤖” – Najnowsza AI
           </p>
           <p className="mt-4 text-sm text-black">
