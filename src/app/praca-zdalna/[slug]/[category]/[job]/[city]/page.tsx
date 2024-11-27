@@ -73,7 +73,7 @@ export default async function Page(props: { params: Promise<any> }) {
               </h2>{" "}
               <p className="text-black">
                 Zatrudnij najlepszych freelancerów lub firmę. Przeglądaj usługi
-                lub twórz portfolio.
+                lub utwórz portfolio.
               </p>
               <JobBoardList
                 talents={categoryTalents}
@@ -170,6 +170,29 @@ export default async function Page(props: { params: Promise<any> }) {
 
 export async function generateMetadata(props: { params: Promise<any> }) {
   const params = await props.params;
+  const talents = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
+      process.env.API_SECRET_KEY
+    }&slug=${polishToEnglish(params.slug)}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
+  const companies = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/companies/slug?tubylytylkofigi=${
+      process.env.API_SECRET_KEY
+    }&slug=${polishToEnglish(params.slug)}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
+  const categoryTalents = talents.filter(
+    (item: any) => polishToEnglish(item?.city) === params.city
+  );
+  const categoryCompanies = companies.filter(
+    (item: any) => polishToEnglish(item?.city) === params.city
+  );
+  const city = categoryTalents[0]?.city || categoryCompanies[0]?.city;
   const category = jobs
     .flatMap((service: any) =>
       service.data.flatMap((subItem: any) => ({ category: subItem.title }))
@@ -184,11 +207,8 @@ export async function generateMetadata(props: { params: Promise<any> }) {
     .map((item: any) => ({ title: item.title }))
     .find((item: any) => polishToEnglish(item.title) === params.job);
   const content = await getPageContent(params.job);
-  const title = `Praca Zdalna Oferty ${job?.title} - ${
-    content?.synonyms[0] || ""
-  }`;
+  const title = `${job?.title} ${city} Praca Zlecenia Usługi`;
   const description = `Przeglądaj nasze oferty pracy zdalnej jako ${job?.title} w kategorii ${category}. Zrealizuj swój projekt z Quixy!`;
-
   return {
     title,
     description,
