@@ -29,7 +29,7 @@ export default async function Page(props: {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
-  const products: any = await getProducts();
+  // const products: any = await getProducts();
   const isTalent = searchParams?.talent === "" ? true : false;
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
@@ -224,7 +224,7 @@ export default async function Page(props: {
                 }}
               />
 
-              <BlogPostList posts={products} />
+              {/* <BlogPostList posts={products} /> */}
             </section>
           </div>
           {/* <h2 className="text-xl font-semibold text-primary mb-4">
