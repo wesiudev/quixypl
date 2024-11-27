@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaChevronRight } from "react-icons/fa";
+import HomePageGenerator from "@/components/HomePageGenerator";
 import SearchJobs from "@/components/HomeUnderHero/SearchJobs";
 import OpenableOpportunity from "@/components/HomeUnderHero/OpenableOpportunity";
 import jobs from "../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import { Metadata } from "next";
+import { sendGenerateIdeaRequest } from "../../utils/sendGenerateIdeaRequest";
 import Header from "@/components/Header";
 import FAQ from "@/components/Faq";
 import Regions from "@/components/Regions";

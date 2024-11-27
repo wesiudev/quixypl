@@ -134,7 +134,73 @@ export default function DashboardHeader() {
             </div>
           </div>
         </div>
-
+        <div className="flex flex-col px-6 group mt-3">
+          <div className="flex items-start bg-white h-max relative w-full">
+            <button
+              onClick={() => dispatch(set_modals({ ...modals, config: true }))}
+              className=""
+            >
+              {userData?.photoURL && (
+                <div className="rounded-full w-24 aspect-square overflow-hidden relative">
+                  <Image
+                    style={{ boxShadow: "inset 0px 0px 8px black" }}
+                    src={userData?.photoURL}
+                    width={256}
+                    height={256}
+                    alt=""
+                    className="shadow-sm shadow-black rounded-full bg-white absolute inset-0 object-cover w-full h-full"
+                  />
+                </div>
+              )}
+              {!userData?.photoURL && (
+                <div
+                  style={{ boxShadow: "inset 0px 0px 8px black" }}
+                  className="rounded-full bg-gradient-to-r from-primary to-cta w-24 aspect-square text-white flex items-center justify-center"
+                >
+                  <FaUser className="text-3xl lg:text-5xl" />
+                </div>
+              )}
+            </button>
+            {!userData?.configured &&
+              (userData?.seek === "ask" || !userData?.seek) && (
+                <div className="pl-4 pt-4">
+                  <h2 className="text-white bg-gradient-to-r from-zinc-800 via-gray-700 to-zinc-950 w-max rounded-xl px-2 font-extrabold">
+                    Nie skonfigurowano profilu
+                  </h2>
+                  <p className="text-black max-w-lg font-coco my-1 text-sm">
+                    Określ typ profilu w zakładce{" "}
+                    <b className="italic">MÓJ PROFIL</b>, by rozpocząć swoją
+                    przygodę w Quixy
+                  </p>
+                </div>
+              )}
+            {userData?.configured && userData?.seek !== "ask" && (
+              <div className="flex flex-col h-max px-3">
+                {!userData?.name && (
+                  <h2 className="text-sm text-black drop-shadow-lg font-bold font-coco italic">
+                    {userData?.seek && "Imię (lub imię i nazwisko)"}
+                    {(!userData?.seek || userData?.seek === "ask") &&
+                      "Nazwa firmy/dane rekrutera"}
+                  </h2>
+                )}
+                <h3
+                  className={`text-lg sm:text-xl font-coco font-bold ${
+                    userData?.name ? "text-black" : "text-primary"
+                  }`}
+                >
+                  {userData?.name ? userData?.name : "Nie podano"}
+                </h3>
+                <h3 className="text-black text-sm sm:text-lg font-coco font-bold">
+                  {userData?.title && userData?.title}
+                </h3>
+                <h3 className="text-black text-sm sm:text-lg font-coco">
+                  {userData?.pseudo && userData?.pseudo}
+                </h3>
+              </div>
+            )}{" "}
+          </div>
+        </div>
+        <UserPanel />
         <div className={`pt-12 p-6 font-coco flex items-center`}>
           <button
             className="mt-2 text-black drop-shadow-xl"

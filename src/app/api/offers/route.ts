@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
 
   // Validate API secret key
   if (tubylytylkofigi !== process.env.API_SECRET_KEY) {
-    return NextResponse.json("not found", { status: 404 });
+    return new NextResponse("not found", { status: 404 });
   }
 
   try {
@@ -16,6 +16,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(jobOffers);
   } catch (error) {
     // Handle any potential errors during the process
-    return NextResponse.json("-", { status: 500 });
+    return new NextResponse("-", { status: 500 });
   }
 }
