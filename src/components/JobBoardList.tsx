@@ -42,7 +42,7 @@ export default function JobBoardList({
               searchType === "talents"
                 ? "shadow-cta shadow-md"
                 : "hover:shadow-cta hover:shadow-md"
-            } text-black flex items-center gap-2 p-2 rounded-md border border-gray-500/30 duration-200 hover:scale-[1.03] bg-white`}
+            } text-black flex items-center gap-2 p-2 border border-gray-500/30 duration-200 hover:scale-[1.03] bg-white`}
           >
             Freelancerzy
           </button>
@@ -52,15 +52,19 @@ export default function JobBoardList({
               searchType === "companies"
                 ? "shadow-cta shadow-md"
                 : "hover:shadow-cta hover:shadow-md"
-            } text-black flex items-center gap-2 p-2 rounded-md border border-gray-500/30 duration-200 hover:scale-[1.03] bg-white`}
+            } text-black flex items-center gap-2 p-2 border border-gray-500/30 duration-200 hover:scale-[1.03] bg-white`}
           >
             Firmy
           </button>
         </div>
-        {searchType === "talents" && <DisplayTalentsOrInviter data={talents} />}
-        {searchType === "companies" && (
-          <DisplayCompaniesOrInviter data={companies} />
-        )}
+        <div className="p-3 bg-gradient-to-r from-primary/30 to-cta/30  mt-6">
+          {searchType === "talents" && (
+            <DisplayTalentsOrInviter data={talents} />
+          )}
+          {searchType === "companies" && (
+            <DisplayCompaniesOrInviter data={companies} />
+          )}
+        </div>
 
         {/* Render Pagination Component */}
         {talents.length > 0 && (

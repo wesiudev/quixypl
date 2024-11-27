@@ -48,13 +48,13 @@ export default async function Page(props: { params: Promise<any> }) {
   return (
     <>
       <Header jobsList={jobs} />
-      <div className=" min-h-screen flex flex-col w-full">
+      <div className=" min-h-screen flex flex-col w-full p-4 lg:p-12">
         {/* Header */}
         {/* Job Title Section */}
         <div className="w-full mb-6 mx-auto">
           <div className="flex flex-col mx-auto">
             <div className="">
-              <div className="p-6 container mx-auto">
+              <div className="">
                 <p className="text-3xl text-black font-extrabold">
                   Freelancer Job Boards
                 </p>
@@ -65,8 +65,8 @@ export default async function Page(props: { params: Promise<any> }) {
               </div>
               <div className="w-full pb-6">
                 <div className="flex flex-col mx-auto">
-                  <div className="bg-gradient-to-r from-primary to-cta">
-                    <div className="mx-auto container p-6">
+                  <div className="">
+                    <div className=" ">
                       <JobBoardList
                         talents={talents}
                         companies={companies}
@@ -79,7 +79,7 @@ export default async function Page(props: { params: Promise<any> }) {
             </div>
           </div>
         </div>
-        <div className="px-6 container mx-auto">
+        <div className="px-6 ">
           <h2 className="font-extrabold text-black text-xl lg:text-3xl">
             Oferty pracy zdalnej{" "}
             <span className="">{content?.title.toLowerCase()}</span>{" "}
@@ -89,7 +89,7 @@ export default async function Page(props: { params: Promise<any> }) {
           </p>
           {offers?.length === 0 && (
             <div className="">
-              <div className="p-6 bg-gradient-to-r from-primary/40 to-cta/40 bg-left-to-right  mx-auto my-6">
+              <div className=" bg-gradient-to-r from-primary/40 to-cta/40 bg-left-to-right  mx-auto my-6">
                 <div className="bg-gradient-to-r from-primary to-cta rounded-full aspect-square mx-auto w-32 flex items-center justify-center">
                   <TfiFlagAlt className="text-white text-4xl animate-bounce" />
                 </div>
@@ -133,11 +133,11 @@ export default async function Page(props: { params: Promise<any> }) {
         <JobOfferList jobOffers={offers} />
       </div> */}
         {/* Services Section */}
-        <div className="container mx-auto rounded-xl" id="search">
+        <div className=" rounded-xl" id="search">
           <Market leads={leads} />
         </div>
         {/* Content */}
-        <div className="flex flex-col lg:flex-row container p-6 mx-auto">
+        <div className="flex flex-col lg:flex-row">
           <section className="text-left">
             <h2
               style={{ lineHeight: 1.5 }}
@@ -158,7 +158,7 @@ export default async function Page(props: { params: Promise<any> }) {
             <BlogPostList posts={products} />
           </section>
         </div>
-        <div className="container p-6 mx-auto">
+        <div className="  mx-auto">
           {" "}
           <h2
             style={{ lineHeight: 1.5 }}

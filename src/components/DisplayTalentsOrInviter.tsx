@@ -7,7 +7,7 @@ export default function DisplayTalentsOrInviter({ data }: { data: any }) {
     <div
       className={`${
         data.length > 0 &&
-        "w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mt-6"
+        "w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3"
       }`}
     >
       {data.length > 0 ? (
@@ -15,16 +15,16 @@ export default function DisplayTalentsOrInviter({ data }: { data: any }) {
           <Link
             key={talent?.pseudo}
             href={`/talent/${talent.pseudo}`}
-            className="rounded-xl flex p-3 border-2 border-gray-500/30 hover:shadow-md duration-200 hover:scale-[1.03] hover:shadow-cta bg-white"
+            className="flex p-3 border-2 border-gray-500/30 hover:shadow-md duration-200 hover:scale-[1.03] hover:shadow-cta bg-white"
           >
             {talent?.photoURL ? (
-              <div className="w-12 md:w-24 aspect-square rounded-full">
+              <div className="relative min-w-16 h-16 aspect-square rounded-full overflow-hidden">
                 <Image
                   src={talent?.photoURL}
                   width={224}
                   height={224}
                   alt={`Zdjęcie talentu ${talent?.name || talent?.pseudo}`}
-                  className="rounded-full"
+                  className="absolute inset-0 object-cover h-full duration-500"
                 />
               </div>
             ) : (

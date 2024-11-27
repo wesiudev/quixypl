@@ -80,7 +80,7 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
         </div>
       </div>
-      <div className="bg-white w-full pb-12 px-6 lg:px-12">
+      <div className="bg-white w-full pb-12">
         <div className="flex flex-col mx-auto">
           <div className="">
             <JobBoardList
@@ -92,7 +92,7 @@ export default async function Page(props: { params: Promise<any> }) {
         </div>
       </div>
       {/* Subcategories Section */}
-      <div className="bg-white px-6 lg:px-12 mx-auto">
+      <div className="bg-white mx-auto">
         {slug?.data?.length > 0 && (
           <div className="">
             <h1 className="!leading-normal text-black bg-white text-xl lg:text-3xl mt-6 font-extrabold">
