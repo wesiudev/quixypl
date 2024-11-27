@@ -80,7 +80,7 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
         </div>
       </div>
-      <div className="bg-white w-full pb-12 px-6 lg:px-12 mt-12">
+      <div className="bg-white w-full pb-12 px-6 lg:px-12">
         <div className="flex flex-col mx-auto">
           <div className="">
             <JobBoardList
