@@ -12,17 +12,16 @@ import Settings from "./Settings/Settings";
 import { set_modals } from "@/redux/slices/modalsopen";
 import UserPanel from "../UserPanel";
 import { useAuthState } from "react-firebase-hooks/auth";
-export default function DashboardHeader() {
+export default function DashboardHeader({ users }: { users: any }) {
   const [user, loading] = useAuthState(auth);
-  const [userData, setUserData] = useState<any>();
+  const [userData, setUserData] = useState<any>(
+    users?.find((x: any) => x.id === user?.uid)
+  );
   const [menuShow, setMenuShow] = useState(false);
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
   const [showHeader, setShowHeader] = useState(true);
-  useEffect(() => {
-    if (user) {
-    }
-  }, [user, loading]);
+
   useEffect(() => {
     let previousScrollPosition = window.scrollY;
 

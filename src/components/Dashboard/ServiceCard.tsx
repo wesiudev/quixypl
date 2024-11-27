@@ -132,7 +132,7 @@ export default function ServiceCard({
           .format("DD MMM YYYY")}
       </p>
       <Link
-        href={`/user/leads`}
+        href={`/dashboard/leads`}
         className="flex items-center gap-2 text-white font-extrabold bg-gradient-to-r from-primary to-cta w-max max-w-full p-1.5 mt-2 rounded-bl-xl rounded-tr-xl"
       >
         do sekcji leadów <FaArrowRightLong />

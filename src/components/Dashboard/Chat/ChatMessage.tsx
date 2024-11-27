@@ -1,4 +1,4 @@
-// components/user/chat/ChatMessage.tsx
+// components/dashboard/chat/ChatMessage.tsx
 import Image from "next/image";
 import React from "react";
 

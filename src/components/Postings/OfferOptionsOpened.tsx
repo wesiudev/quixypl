@@ -1,10 +1,9 @@
-import { JobPosting } from "@/types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function OfferOptionsOpened({
   optionsOpen,
-  setCurrentlyEditing,
+  setEditOpen,
   setOptionsOpen,
   setApplicationsOpen,
   handleDeleteJobOffer,
@@ -13,11 +12,11 @@ export default function OfferOptionsOpened({
   setDeleteMenu,
 }: {
   optionsOpen: any;
-  setCurrentlyEditing: (value: JobPosting) => void;
+  setEditOpen: (value: boolean) => void;
   setOptionsOpen: (value: boolean) => void;
   setApplicationsOpen: (value: boolean) => void;
   handleDeleteJobOffer: (id: string) => Promise<void>;
-  jobOffer: JobPosting;
+  jobOffer: { id: string };
   deleteMenu: any;
   setDeleteMenu: any;
 }) {
@@ -29,18 +28,18 @@ export default function OfferOptionsOpened({
         !optionsOpen ? "-translate-y-[80px] scale-x-0" : "-translate-y-0"
       }`}
     >
-      <button
+      {/* <button
         onClick={() => {
-          setCurrentlyEditing(jobOffer);
+          setEditOpen(true);
           setOptionsOpen(false);
         }}
         className="w-full px-4 py-1 text-white bg-white bg-opacity-10 duration-150 hover:bg-opacity-20"
       >
         Edytuj
-      </button>
+      </button> */}
       <button
         onClick={() => {
-          router.push("/user/leads");
+          router.push("/dashboard/leads");
           setOptionsOpen(false);
         }}
         className="w-full px-4 py-1 text-white bg-white bg-opacity-10 duration-150 hover:bg-opacity-20"

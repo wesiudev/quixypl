@@ -196,13 +196,20 @@ export default function Page() {
           >
             Zarejestruj się już teraz i zyskaj darmowe Quixies 💎 na start!
           </p>
-          <div className="flex items-center space-x-3 justify-center">
+          <div className="flex items-center space-x-3">
             <Link
-              href="/register"
+              href="/talent"
               style={{ textShadow: "1px 1px 1px black" }}
               className="bg-cta text-white font-bold relative z-50 py-1.5 px-2 mt-6 hover:bg-opacity-90 transition"
             >
-              Zarejestruj się
+              Talent
+            </Link>
+            <Link
+              href="/company"
+              style={{ textShadow: "1px 1px 1px black" }}
+              className="bg-cta text-white font-bold relative z-50 py-1.5 px-2 mt-6 hover:bg-opacity-90 transition"
+            >
+              Firma
             </Link>
           </div>
         </div>

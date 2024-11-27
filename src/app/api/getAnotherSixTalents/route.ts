@@ -1,11 +1,11 @@
-import { fetchUsers } from "@/firebase";
+import { fetchUsers, getDocuments } from "@/firebase";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
   const page = req.nextUrl.searchParams.get("page");
   if (tubylytylkofigi !== process.env.API_SECRET_KEY) {
-    return NextResponse.json("not found", { status: 404 });
+    return new NextResponse("not found", { status: 404 });
   }
   if (!page) {
     return NextResponse.json([]);

@@ -41,7 +41,7 @@ export default async function Page(props: {
           Płatność nie powiodła się. Nie pobraliśmy środków z twojego konta.
         </p>
         <Link
-          href="/user"
+          href="/dashboard"
           className="text-black font-bold text-xl flex flex-row items-center relative z-50"
         >
           <FaChevronLeft className="mr-2" />
@@ -64,7 +64,7 @@ export default async function Page(props: {
             Dziękujemy za zakupy, {order.metadata.quantity}💎 Quixies zostało
             dodane do twojego konta.
             <Link
-              href="/user"
+              href="/dashboard"
               className="mt-3 bg-cta font-extrabold text-xl text-white p-2"
             >
               Przejdź do panelu

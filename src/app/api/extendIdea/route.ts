@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const prompt = `Pisz po polsku. Generujesz ofertę pracy dla użytkownika. To są jego podane dane: (${businessInformation.toString()}), wiedząc to, wygeneruj dla użytkownika oferte pracy (${userRequestedData}). example response:{
+    const prompt = `Pisz po polsku. Rozwijasz pomysł na biznes użytkownika Quixy.pl, który później może być wystawiony jako oferta "pracy" na naszej stronie przez użytkownika. Jeśli pomysł opiewa o www, daj mu dwie propozycje linka .pl, jeśli w informacjach o biznesie informacji jeszcze nie zaproponowałeś w dotychczas wygenerowanym pomyśle: (${businessInformation.toString()}), wiedząc to, wygeneruj dla użytkownika (${userRequestedData}). example response:{
     "name": string,
     "content": string,
 }`;

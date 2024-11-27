@@ -79,7 +79,7 @@ export default function Register() {
             configured: configured,
           });
           toastUpdate("Konto utworzone pomyślnie!", id, "success");
-          router.push("/user");
+          router.push("/dashboard");
           setLoading(false);
         });
       } catch (err: any) {

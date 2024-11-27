@@ -47,9 +47,7 @@ export default function JobPreferencesHandler({
       <button
         key={item}
         className={`font-coco duration-200 text-white px-1.5 py-1 ml-1 mt-1 text-sm  ${
-          source?.preferences?.includes(item)
-            ? "bg-gradient-to-r from-primary to-cta"
-            : "bg-gradient-to-r from-gray-500 to-gray-500"
+          source?.preferences?.includes(item) ? "bg-cta" : "bg-gray-400"
         }`}
         onClick={() => {
           handlePreferenceToggle(item);
@@ -86,15 +84,17 @@ export default function JobPreferencesHandler({
 
   return (
     <div className="flex flex-col w-full mb-6">
-      <div className="mt-2 text-black font-extrabold">Rodzaj współpracy</div>
-      <p className="text-sm text-black">
+      <div className="mt-3 text-lg text-black font-extrabold">
+        Rodzaj współpracy
+      </div>
+      <p className="font-coco text-black mb-2">
         Jaki rodzaj współpracy oferujesz? Możesz wybrać więcej niż jedną opcję.
       </p>
-      <div className="-ml-1 flex flex-wrap items-center w-full">
+      <div className="-ml-1 -mt-1 flex flex-wrap items-center w-full">
         {renderPreferences(itemsForTalent, 6)}
         {itemsForTalent.length > 6 && (
           <button
-            className="bg-[#126b91] text-white text-sm p-1 px-2 ml-1 mt-1 font-coco"
+            className="bg-[#126b91] text-white text-sm p-1 px-2 ml-1 mt-1 "
             onClick={() => setExpand(!expand)}
           >
             {expand ? "Pokaż mniej" : "Pokaż więcej"}

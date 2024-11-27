@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import GenerateButton from "../Dashboard/ImageGenerator/backpack/empty/GenerateButton";
+import FirstGenerationPopup from "../Dashboard/ImageGenerator/backpack/empty/FirstGenerationPopup";
 import Image from "next/image";
 export default function GenerateImageDashboard() {
   const [isGenerationPending, setIsGenerationPending] =
@@ -64,9 +66,37 @@ export default function GenerateImageDashboard() {
                 </button>
               ))}
             </div>
+            <GenerateButton
+              setIsGenerationPending={setIsGenerationPending}
+              setImageLoaded={setImageLoaded}
+              setImageResponse={setImageResponse}
+              setHasImage={setHasImage}
+              setIsError={setIsError}
+              prompt={`${userPrompt} + styles = ${styles.join(", ")}}`}
+              hasImage={hasImage}
+              isGenerationPending={isGenerationPending}
+              imageResponse={imageResponse}
+              setIsGenerationTriggered={setIsGenerationTriggered}
+              displayError={displayError}
+              isError={isError}
+              styles={styles}
+            />
           </div>
           {!isError && hasImage && (
-            <div className="fixed left-0 top-0 bg-black bg-opacity-50 w-full h-full z-[500]"></div>
+            <div className="fixed left-0 top-0 bg-black bg-opacity-50 w-full h-full z-[500]">
+              <FirstGenerationPopup
+                isGenerationTriggered={isGenerationTriggered}
+                setIsGenerationTriggered={setIsGenerationTriggered}
+                isLoading={isGenerationPending}
+                hasImage={hasImage}
+                imageResponse={imageResponse}
+                userPrompt={userPrompt}
+                imageLoaded={imageLoaded}
+                setImageLoaded={setImageLoaded}
+                displayError={displayError}
+                setHasImage={setHasImage}
+              />
+            </div>
           )}
         </div>
 

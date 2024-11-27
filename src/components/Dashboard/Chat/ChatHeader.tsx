@@ -1,4 +1,4 @@
-// components/user/chat/ChatHeader.tsx
+// components/dashboard/chat/ChatHeader.tsx
 import { set_modals } from "@/redux/slices/modalsopen";
 import moment from "moment";
 import Image from "next/image";

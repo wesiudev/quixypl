@@ -9,11 +9,9 @@ import { FaRocket, FaUsers, FaRegLightbulb, FaCogs } from "react-icons/fa";
 import MainFooter from "@/components/MainFooter";
 import Image from "next/image";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { getDocuments } from "@/firebase";
 
 // Główna strona
 export default async function Page() {
-  const opinions = await getDocuments("opinions");
   return (
     <div className="w-full h-full bg-white">
       <Header jobsList={jobs} />
@@ -34,7 +32,7 @@ export default async function Page() {
         <div className="container mx-auto px-6">
           <FAQ faqItems={faqItems} />
         </div>
-        <OpinionsForm data={opinions} />
+        <OpinionsForm />
       </main>
       <FunnyComponent />
       <MainFooter jobsList={jobs} />
@@ -107,7 +105,7 @@ function WhyChooseQuixySection() {
             <FaRocket className="lg:text-6xl text-xl" />
           </div>
           <div className="lg:w-[200px] lg:text-center">
-            Dodaj ofertę pracy za darmo
+            Zarejestruj się by dodać ofertę pracy
           </div>
         </Link>
       </h3>
@@ -226,15 +224,15 @@ function HighlightCard({
   linkTitle: string;
 }) {
   return (
-    <div className="p-3 relative bg-gradient-to-r from-primary/30 to-cta/30 rounded-xl">
-      <div className="shadow-lg bg-gradient-to-r from-primary to-cta rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
+    <div className="p-3 relative bg-gradient-to-r from-primary via-cta to-primary rounded-xl">
+      <div className="shadow-lg bg-primary rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
         {icon}
       </div>
-      <h3 className="text-xl font-extrabold text-black mb-2 mt-4">{title}</h3>
-      <p className="text-black">{description}</p>
+      <h3 className="text-xl font-extrabold text-white mb-2 mt-4">{title}</h3>
+      <p className="text-white">{description}</p>
       <div className="mt-6" />
       <Link
-        className="rounded-xl shadow-md bg-cta duration-100 text-white px-3 py-2 "
+        className="rounded-xl shadow-md bg-primary duration-100 text-white px-3 py-2 "
         href="/register"
         title={linkTitle}
       >
@@ -306,7 +304,7 @@ function FunnyComponent() {
             być zabawnie?
           </p>
 
-          <p className="bg-gradient-to-r from-primary to-cta p-2 text-xl text-white italic w-max max-w-full">
+          <p className="bg-gradient-to-r from-primary to-cta p-2 text-xl text-white italic w-max">
             „Zatrudnij mnie, zanim zrobi to ktoś inny! 🤖” – Najnowsza AI
           </p>
           <p className="mt-4 text-sm text-black">
@@ -387,6 +385,11 @@ const faqItems = [
     question: "Jak mogę się skontaktować z zespołem wsparcia?",
     answer:
       "Możesz skontaktować się z nami poprzez formularz, email lub telefon, dostępny na naszej stronie kontaktowej.",
+  },
+  {
+    question: "Jak działa generator pomysłów na biznes?",
+    answer:
+      "Generator pomysłów na biznes tworzy unikalne koncepty w oparciu o wybrane kryteria, takie jak lokalizacja, budżet i dostępne zasoby. Możesz rozwijać swój pomysł, korzystając z dodatkowych funkcji, odblokowanych za pomocą Quixies.",
   },
   {
     question: "Jakie błędy najczęściej popełniają początkujący przedsiębiorcy?",

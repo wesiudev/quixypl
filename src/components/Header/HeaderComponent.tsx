@@ -135,7 +135,7 @@ export default function HeaderComponent({
             href="/marketplace"
             className="group text-base drop-shadow-sm shadow-black text-black px-2 py-1  hover:bg-cta hover:text-white relative pr-6"
           >
-            <span className="relative z-50">Rynek usług</span>
+            <span className="relative z-50">Rynek projektów</span>
             <div className="group-hover:text-white absolute right-[4px] -top-[1px] px-1 rounded-full text-black text-[10px] font-extrabold">
               TM
             </div>

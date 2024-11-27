@@ -19,37 +19,37 @@ export default function UserPanel() {
   const linksData = [
     {
       text: "Panel użytkownika",
-      href: "/user",
+      href: "/dashboard",
       icon: <FaHome />,
     },
     {
       text: "Zlecenia i aplikacje",
-      href: "/user/leads",
+      href: "/dashboard/leads",
       icon: <FaUsers />,
     },
     {
       text: "Znajdź pracę",
-      href: "/user/search?type=job",
+      href: "/dashboard/search?type=job",
       icon: <FaRocket />,
     },
     {
       text: "Znajdź Freelancera",
-      href: "/user/search?type=talent",
+      href: "/dashboard/search?type=talent",
       icon: <FaUserNinja />,
     },
     {
       text: "Dodaj ofertę pracy",
-      href: "/user/add_job_offer",
+      href: "/dashboard/add_job_offer",
       icon: <FaPlus />,
     },
     {
       text: "Twoje oferty pracy",
-      href: "/user/my_postings",
+      href: "/dashboard/my-postings",
       icon: <FaList />,
     },
     {
       text: "Generator Obrazów",
-      href: "/user/image-generator",
+      href: "/dashboard/image-generator",
       icon: <FaImages />,
     },
   ];

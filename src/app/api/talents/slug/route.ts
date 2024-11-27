@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
   const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
   const slug = req.nextUrl.searchParams.get("slug");
   if (tubylytylkofigi !== process.env.API_SECRET_KEY) {
-    return NextResponse.json("not found", { status: 404 });
+    return new NextResponse("not found", { status: 404 });
   }
   const users = await fetchUsers();
   const talents = users

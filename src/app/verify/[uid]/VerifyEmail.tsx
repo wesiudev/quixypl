@@ -8,14 +8,12 @@ export default function VerifyEmail({ userId }: { userId: any }) {
   const router = useRouter();
   const sendMail = async () => {
     try {
-      await updateDocument(["emailVerified"], [true], "users", userId)
-        .then(() => {
+      await updateDocument(["emailVerified"], [true], "users", userId).then(
+        () => {
           window.close();
           setIsMounted(true);
-        })
-        .then(() => {
-          router.push("/");
-        });
+        }
+      );
     } catch (error) {
       return;
     }

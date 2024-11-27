@@ -20,9 +20,9 @@ export default function LeadsList() {
   moment.locale("pl");
   return (
     <>
-      <div className="bg-[#222430] h-max w-full">
+      <div className="bg-gray-600 h-max w-full">
         <div className="w-full justify-between bg-gradient-to-r from-primary to-cta py-3 px-6 text-white font-bold text-lg flex items-center">
-          <Link href="/user" className="flex items-center">
+          <Link href="/dashboard" className="flex items-center">
             <FaChevronLeft className="mr-2 text-xl" />
             Powrót
           </Link>

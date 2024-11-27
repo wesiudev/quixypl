@@ -1,5 +1,6 @@
 // ProjectList.js
 import React from "react";
+import ProjectCard from "./ProjectCard";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { useDispatch, useSelector } from "react-redux";
 import ServiceCard from "./ServiceCard";

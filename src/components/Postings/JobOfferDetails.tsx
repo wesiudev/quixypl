@@ -68,7 +68,7 @@ export default function JobOfferDetails({
           )}
           {jobOffer.isPaid && (
             <Link
-              href="/user/applications"
+              href="/dashboard/applications"
               className="bg-gradient-to-r from-primary to-cta px-2 py-0.5  text-white"
             >
               Przeglądaj aplikacje

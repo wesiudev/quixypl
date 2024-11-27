@@ -50,7 +50,7 @@ export default function ProjectCard({
       creationTime: Date.now(),
       companySize: user?.preferences[0] ?? "Brak danych...",
     }).then(() => {
-      router.push("/user/my_listings");
+      router.push("/dashboard/my_listings");
     });
   }
 
