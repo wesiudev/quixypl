@@ -29,11 +29,11 @@ export default function JobBoardList({
     <div className="">
       <h2
         style={{ lineHeight: 1.5 }}
-        className="text-white font-extrabold text-xl lg:text-3xl"
+        className="text-black font-extrabold text-xl lg:text-3xl mt-12"
       >
         {content?.informal_title_plural}{" "}
       </h2>{" "}
-      <p className="mb-4 text-white">Czego szukasz tym razem?</p>
+      <p className="mb-4 text-black">Czego szukasz tym razem?</p>
       <div className="mx-auto font-gotham rounded-xl">
         <div className="flex items-center flex-wrap gap-3">
           <button

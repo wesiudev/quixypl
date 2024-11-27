@@ -37,7 +37,7 @@ export default function DisplayTalentsOrInviter({ data }: { data: any }) {
             )}
             <div className="px-3 flex flex-col font-coco">
               <h2 className="text-lg font-bold text-black">{talent?.name}</h2>
-              <h3 className="text-white bg-gradient-to-r from-primary to-cta badge badge-outline">
+              <h3 className="text-white bg-gradient-to-r from-primary to-cta px-2 w-max max-w-full">
                 {talent?.city}
               </h3>
               <p className="text-black">{talent?.title}</p>
@@ -50,7 +50,7 @@ export default function DisplayTalentsOrInviter({ data }: { data: any }) {
             <div className="bg-gradient-to-r from-primary to-cta rounded-full aspect-square mx-auto w-32 flex items-center justify-center">
               <TfiFlagAlt className="text-white text-4xl" />
             </div>
-            <p className="max-w-sm  text-white p-3">
+            <p className="max-w-sm  text-black p-3">
               Brak freelancerów - skonfiguruj profil i wyświetl się jako
               pierwszy/a{" "}
             </p>

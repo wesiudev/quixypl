@@ -234,26 +234,24 @@ export default async function Page(props: {
         </div>
         <div className="bg-white px-6 lg:px-12 py-12 flex flex-col w-full text-black">
           <h4 className="text-lg w-max font-extrabold">Tagi</h4>
-          <ul className="font-coco flex items-center flex-wrap">
+          <ul className="font-coco flex items-center flex-wrap gap-2">
             {content?.synonyms.map((item: any, i: any) => (
-              <li key={i} className={`ml-2 mt-2`}>
+              <li key={i} className={``}>
                 #{removePolishSignsAndSpaces(item.toLowerCase())}
               </li>
             ))}
 
-            {isTalent && <li className="mt-2 ml-2">#znajdzprace</li>}
-            {!isTalent && <li className="mt-2 ml-2">#rekrutacja</li>}
-            <li className="mt-2 ml-2">#pracazdalna</li>
-            <li className="mt-2 ml-2">#firmy{content?.genitive}</li>
-            <li className="mt-2 ml-2">#freelancer</li>
-            <li className="mt-2 ml-2">#jobboards</li>
-            <li className="mt-2 ml-2">#joboffers</li>
-            <li className="mt-2 ml-2">#ofertypracy</li>
-            <li className="mt-2 ml-2">#ogloszeniaoprace</li>
-            <li className="mt-2 ml-2">#ogloszeniapracy</li>
-            <li className="mt-2 ml-2">
-              #{removePolishSignsAndSpaces(slug.title.toLowerCase())}
-            </li>
+            {isTalent && <li>#znajdzprace</li>}
+            {!isTalent && <li>#rekrutacja</li>}
+            <li>#pracazdalna</li>
+            <li>#firmy{removePolishSignsAndSpaces(content?.genitive)}</li>
+            <li>#freelancer</li>
+            <li>#jobboards</li>
+            <li>#joboffers</li>
+            <li>#ofertypracy</li>
+            <li>#ogloszeniaoprace</li>
+            <li>#ogloszeniapracy</li>
+            <li>#{removePolishSignsAndSpaces(slug.title.toLowerCase())}</li>
           </ul>
         </div>
       </div>
