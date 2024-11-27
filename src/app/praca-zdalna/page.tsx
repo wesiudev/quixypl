@@ -9,9 +9,11 @@ import { FaRocket, FaUsers, FaRegLightbulb, FaCogs } from "react-icons/fa";
 import MainFooter from "@/components/MainFooter";
 import Image from "next/image";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { getDocuments } from "@/firebase";
 
 // Główna strona
 export default async function Page() {
+  const opinions = await getDocuments("opinions");
   return (
     <div className="w-full h-full bg-white">
       <Header jobsList={jobs} />
@@ -32,7 +34,7 @@ export default async function Page() {
         <div className="container mx-auto px-6">
           <FAQ faqItems={faqItems} />
         </div>
-        <OpinionsForm />
+        <OpinionsForm data={opinions} />
       </main>
       <FunnyComponent />
       <MainFooter jobsList={jobs} />

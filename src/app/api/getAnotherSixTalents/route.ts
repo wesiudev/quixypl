@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
   const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
   const page = req.nextUrl.searchParams.get("page");
   if (tubylytylkofigi !== process.env.API_SECRET_KEY) {
-    return new NextResponse("not found", { status: 404 });
+    return NextResponse.json("not found", { status: 404 });
   }
   if (!page) {
     return NextResponse.json([]);

@@ -1,48 +1,17 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { addOpinion, app, getOpinions } from "@/firebase/";
-import { collection, getFirestore, onSnapshot } from "firebase/firestore";
+import React, { useState } from "react";
+import { addOpinion } from "@/firebase/";
 import { toast } from "react-toastify";
-import { FaChevronRight, FaStar, FaUser } from "react-icons/fa";
 
 interface Opinion {
   name: string;
   feedback: string;
 }
-
-/**
- * Form for collecting opinions from customers.
- *
- * This component displays a form for customers to submit their opinions.
- * The form consists of two input fields: one for the customer's name and one
- * for the customer's feedback. The opinions are stored in the Firestore database
- * and can be displayed in the component.
- *
- * @example
- * <OpinionsForm />
- */
-const OpinionsForm: React.FC = () => {
+export default function OpinionsForm({ data }: { data: any }) {
   const [name, setName] = useState<string>("");
-  const [opinions, setOpinions] = useState<Opinion[]>([]);
+  const [opinions, setOpinions] = useState<any[]>(data);
   const [feedback, setFeedback] = useState<string>("");
   const [sent, setSent] = useState<boolean>(false);
-
-  useEffect(() => {
-    const opinionsData = getOpinions();
-  }, []);
-
-  useEffect(() => {
-    const ref = collection(getFirestore(app), "opinions");
-    const unsub = onSnapshot(ref, (querySnapshot: any) => {
-      const snapshotData: any[] = [];
-      querySnapshot.forEach((doc: any) => {
-        snapshotData.push(doc.data());
-      });
-      setOpinions(
-        snapshotData.sort((a, b) => (b.createdAt > a.createdAt ? 1 : -1))
-      );
-    });
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -143,6 +112,4 @@ const OpinionsForm: React.FC = () => {
       {/* Display the list of opinions */}
     </div>
   );
-};
-
-export default OpinionsForm;
+}
