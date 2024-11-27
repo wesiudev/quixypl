@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
 import { getPageContent } from "@/lib/getPageContent";
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
   const job = req.nextUrl.searchParams.get("job");
 

@@ -27,7 +27,7 @@ export default async function Page(props: { params: Promise<any> }) {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      method: "GET",
+      method: "POST",
     }
   );
   const content = await contentReq.json();
@@ -42,7 +42,7 @@ export default async function Page(props: { params: Promise<any> }) {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      method: "GET",
+      method: "POST",
     }
   );
   const talents = await talentsReq.json();
@@ -56,7 +56,7 @@ export default async function Page(props: { params: Promise<any> }) {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      method: "GET",
+      method: "POST",
     }
   );
   const companies = await companiesReq.json();
