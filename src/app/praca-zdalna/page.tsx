@@ -217,12 +217,12 @@ function WhatMakesUsUniqueSection() {
           description="Współpracujemy z doświadczonymi firmami oraz freelancerami, aby zapewnić najwyższą jakość usług."
           linkTitle="Szukaj pracy"
         />
-        <HighlightCard
+        {/* <HighlightCard
           icon={<FaCogs className="text-white text-5xl" />}
           title="Usługi AI"
           description="Sprawdź za darmo generator obrazów"
           linkTitle="Wypróbuj"
-        />
+        /> */}
       </div>
     </section>
   );

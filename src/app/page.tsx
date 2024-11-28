@@ -50,14 +50,6 @@ export default function Page() {
             <Regions />
           </div>
           <div className="flex flex-col items-center justify-center w-full h-full mx-auto mt-12 lg:mt-0 overflow-hidden relative">
-            <div className="absolute left-3 top-3 flex items-center z-50">
-              <Link href="/register">
-                <h2 className="font-extrabold text-white bg-gradient-to-r from-primary to-cta p-2 flex items-center">
-                  Wygeneruj obraz za darmo!
-                  <FaChevronRight className="text-lg ml-2" />
-                </h2>
-              </Link>
-            </div>
             <Image
               src={heroImg}
               alt="Quixy Praca Zdalna"
@@ -115,7 +107,7 @@ export default function Page() {
               href="/register"
               className="w-max font-gotham bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
             >
-              Zarejestruj się!
+              Skonfiguruj konto!
             </Link>
           </div>
         </div>
@@ -213,17 +205,6 @@ export default function Page() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 font-coco gap-2 md:gap-4 mt-4">
             <Link
-              href={`${process.env.NEXT_PUBLIC_URL}/praca-zdalna`}
-              className="group flex flex-col  bg-black/50 text-white p-3"
-            >
-              <h3 className="group-hover:underline md:mb-3 text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold">
-                Zatrudnij talent
-              </h3>
-              <div className="flex flex-row items-center font-light">
-                Chcesz znaleźć pomoc eksperta?
-              </div>
-            </Link>
-            <Link
               href={`${process.env.NEXT_PUBLIC_URL}/praca-zdalna/rozwoj-oprogramowania/web-development`}
               className="group flex flex-col  bg-black/50 text-white group p-3"
             >
@@ -234,14 +215,47 @@ export default function Page() {
                 Przeglądaj specjalistów Web Developmentu
               </div>
             </Link>
+            <Link
+              href={`${process.env.NEXT_PUBLIC_URL}/praca-zdalna/marketing/marketing-cyfrowy/seo`}
+              className="group flex flex-col  bg-black/50 text-white group p-3"
+            >
+              <h3 className="group-hover:underline md:mb-3 text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold">
+                Zamów SEO
+              </h3>
+              <div className="flex flex-row items-center font-light">
+                Przeglądaj specjalistów marketingu
+              </div>
+            </Link>
+            <Link
+              href={`${process.env.NEXT_PUBLIC_URL}/praca-zdalna/projektowanie/web-design`}
+              className="group flex flex-col  bg-black/50 text-white group p-3"
+            >
+              <h3 className="group-hover:underline md:mb-3 text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold">
+                Zamów design
+              </h3>
+              <div className="flex flex-row items-center font-light">
+                Przeglądaj specjalistów designu
+              </div>
+            </Link>
+            <Link
+              href={`${process.env.NEXT_PUBLIC_URL}/praca-zdalna`}
+              className="group flex flex-col  bg-black/50 text-white p-3"
+            >
+              <h3 className="group-hover:underline md:mb-3 text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold">
+                Zobacz więcej...
+              </h3>
+              <div className="flex flex-row items-center font-light">
+                Chcesz znaleźć firmę lub freelancera?
+              </div>
+            </Link>
           </div>
         </div>
       </div>
       <div className="container mx-auto px-4 mt-12 flex flex-col md:flex-row md:space-x-6 ">
         <div className="md:w-[45%] w-full h-full relative md:flex-col flex flex-row">
           <div className="flex flex-col w-full">
-            <h3 className="text-2xl md:text-xl lg:text-3xl font-extrabold -mt-1 text-black">
-              Lider branży HR i AI
+            <h3 className="text-2xl font-extrabold text-black">
+              Lider platform z pracą zdalną
             </h3>
             <div className="flex items-center mt-3 px-3">
               <span className="text-2xl">🏆</span>
@@ -398,12 +412,12 @@ const faqItems = [
   {
     question: "Czym jest Quixy?",
     answer:
-      "Quixy to funkcjonalność, która łączy klientów z firmami i freelancerami, umożliwiając realizację projektów zdalnych.",
+      "Quixy to platforma, która łączy klientów z firmami i freelancerami.",
   },
   {
     question: "Czy dołączenie do Quixy jest darmowe?",
     answer:
-      "Tak, dołączenie do naszej platformy jest w pełni darmowe. Możesz dodawać oferty pracy, zatrudniać talenty oraz korzystać z generatora pomysłów używając Quixies.",
+      "Tak, dołączenie do naszej platformy jest w pełni darmowe. Możesz dodawać oferty pracy oraz zatrudniać freelancerów za darmo.",
   },
   {
     question: "Jak mogę znaleźć pracę zdalną na Quixy?",

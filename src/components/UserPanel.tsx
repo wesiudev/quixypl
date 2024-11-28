@@ -23,18 +23,18 @@ export default function UserPanel() {
       icon: <FaHome />,
     },
     {
-      text: "Zlecenia i aplikacje",
+      text: "Zlecenia",
       href: "/dashboard/leads",
       icon: <FaUsers />,
     },
     {
       text: "Znajdź pracę",
-      href: "/dashboard/search?type=job",
+      href: "/praca-zdalna",
       icon: <FaRocket />,
     },
     {
       text: "Znajdź Freelancera",
-      href: "/dashboard/search?type=talent",
+      href: "/praca-zdalna",
       icon: <FaUserNinja />,
     },
     {
@@ -47,11 +47,11 @@ export default function UserPanel() {
       href: "/dashboard/my-postings",
       icon: <FaList />,
     },
-    {
-      text: "Generator Obrazów",
-      href: "/dashboard/image-generator",
-      icon: <FaImages />,
-    },
+    // {
+    //   text: "Generator Obrazów",
+    //   href: "/dashboard/image-generator",
+    //   icon: <FaImages />,
+    // },
   ];
   return (
     <div className="px-6 pt-6">
@@ -71,7 +71,7 @@ export default function UserPanel() {
         </button>
       </div>
 
-      <div className="gap-3 grid grid-cols-2">
+      <div className="gap-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {linksData.map((link, index) => (
           <button
             key={index}
@@ -82,26 +82,6 @@ export default function UserPanel() {
             }}
             rel="noopener noreferrer"
           >
-            {index === 1 && (
-              <div className="absolute top-3 left-3 text-white font-extralight text-xl font-coco">
-                Leads
-              </div>
-            )}
-            {index === 2 && (
-              <div className="absolute top-3 left-3 text-white font-extralight text-xl font-coco">
-                Remote
-              </div>
-            )}
-            {index === 6 && (
-              <div className="absolute top-3 left-3 text-white font-extralight text-xl font-coco">
-                AI
-              </div>
-            )}
-            {index === 7 && (
-              <div className="absolute top-3 left-3 text-white font-extralight text-xl font-coco">
-                AI
-              </div>
-            )}
             <div className="flex-col flex items-center justify-center relative px-3">
               <div className="text-5xl">{link.icon}</div>
               <div className="py-2 z-50 relative text-center font-extrabold">
