@@ -85,7 +85,7 @@ export default function UserEditDashboard({
                   removePreference={removePreference}
                   source={source}
                 />
-                <PortfolioItems
+                {/* <PortfolioItems
                   source={source}
                   isNewProject={isNewProject}
                   setIsNewProject={setIsNewProject}
@@ -94,7 +94,7 @@ export default function UserEditDashboard({
                   project={project}
                   setUploading={setUploading}
                   setUploadCount={setUploadCount}
-                />
+                /> */}
               </>
             )}
           </>

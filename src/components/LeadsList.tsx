@@ -22,7 +22,7 @@ export default function LeadsList() {
     <>
       <div className="bg-gray-600 h-max w-full">
         <div className="w-full justify-between bg-gradient-to-r from-primary to-cta py-3 px-6 text-white font-bold text-lg flex items-center">
-          <Link href="/dashboard" className="flex items-center">
+          <Link href="/user" className="flex items-center">
             <FaChevronLeft className="mr-2 text-xl" />
             Powrót
           </Link>
@@ -62,6 +62,7 @@ export default function LeadsList() {
                 <LeadApplication
                   key={i}
                   lead={lead}
+                  noteOpen={noteOpen}
                   setNoteOpen={setNoteOpen}
                   filter={filter}
                 />
@@ -76,6 +77,7 @@ export default function LeadsList() {
                   <LeadApplication
                     key={i}
                     lead={lead}
+                    noteOpen={noteOpen}
                     setNoteOpen={setNoteOpen}
                     filter={filter}
                   />
@@ -92,6 +94,7 @@ export default function LeadsList() {
                   <LeadApplication
                     key={i}
                     lead={lead}
+                    noteOpen={noteOpen}
                     setNoteOpen={setNoteOpen}
                     filter={filter}
                   />
@@ -108,6 +111,7 @@ export default function LeadsList() {
                   <LeadApplication
                     key={i}
                     lead={lead}
+                    noteOpen={noteOpen}
                     setNoteOpen={setNoteOpen}
                     filter={filter}
                   />
@@ -137,9 +141,8 @@ export default function LeadsList() {
               autoFocus
               placeholder="Wpisz tekst"
               className="font-bold text-base font-sans p-3 w-full text-zinc-800 drop-shadow-xl shadow-black"
-            >
-              {noteOpen.note}
-            </textarea>
+            />
+
             <button
               onClick={() => {
                 updateApplication(noteOpen.id, {

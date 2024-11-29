@@ -1,9 +1,6 @@
 "use client";
-
 import { set_modals } from "@/redux/slices/modalsopen";
 import moment from "moment";
-import { Metadata } from "next";
-import Link from "next/link";
 import { useState } from "react";
 import { FaClipboard } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +9,7 @@ import Loading from "../loading";
 import AccountHistory from "@/components/Dashboard/ImageGenerator/dashboard/AccountHistory";
 import ServiceList from "@/components/Dashboard/ProjectList";
 import MultiStepVerification from "@/components/Dashboard/Settings/SettingsInputs/MultiStepVerification";
+import Viewer from "@/components/AddJobOffer/Viewer";
 async function sendVerificationEmail(email: string, verificationCode: string) {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`,
@@ -100,27 +98,23 @@ export default function User() {
                       </div>
                     )}
                     {(user?.seek || !user?.seek) && user?.seek !== "ask" && (
-                      <div className="px-4 lg:px-12 pb-3 lg:pb-3">
+                      <div className="px-4 lg:px-6 pb-3 lg:pb-3">
                         {!user?.title && (
                           <div>
                             {user?.seek && user?.seek !== "ask" && (
-                              <h2 className="font-bold text-xl text-black ">
+                              <h2 className="font-extrabold text-lg text-black ">
                                 Tytuł
                               </h2>
                             )}
-                            {(!user?.seek || user?.seek === "ask") && (
-                              <h2 className="font-bold text-xl text-black ">
-                                Nazwa firmy lub działalności
-                              </h2>
-                            )}
+
                             <h3 className={`text-black`}>
-                              {user?.title ? user?.title : "Brak..."}
+                              {user?.title ? user?.title : "Twój tytuł..."}
                             </h3>
                           </div>
                         )}
 
                         <div className="mt-3">
-                          <h2 className="font-bold text-xl text-black">
+                          <h2 className="font-extrabold text-lg text-black">
                             Unikalny link
                           </h2>
                           {!user?.pseudo && (
@@ -130,7 +124,7 @@ export default function User() {
                           )}
                         </div>
 
-                        <div className="text-black font-bold mt-2">
+                        <div className="text-black font-bold mt-1">
                           {user?.pseudo && (
                             <div className="flex flex-col">
                               <button
@@ -199,20 +193,14 @@ export default function User() {
                               </div>
                             )}
                         </div>
-                        {user?.seek && user?.seek !== "ask" && (
-                          <h2 className="text-xl text-black font-bold mt-3">
-                            Specjalizacje
-                          </h2>
-                        )}
-                        {!user?.seek && user?.seek !== "ask" && (
-                          <h2 className="text-xl text-black font-bold mt-3">
-                            Specjalizacje
-                          </h2>
-                        )}
+
+                        <h2 className="text-lg text-black font-extrabold mt-3">
+                          Specjalizacje
+                        </h2>
                         <div className="w-full -ml-1 flex flex-wrap items-center">
                           {user?.tags?.map((item: any, i: any) => (
                             <div className="text-sm" key={i}>
-                              <div className="text-white ml-1 mt-1 bg-gradient-to-r from-primary to-cta flex items-center px-3 py-1.5">
+                              <div className="text-xs sm:text-sm lg:text-base bg-gradient-to-r from-primary to-cta p-2 text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5">
                                 {item.title}
                               </div>
                             </div>
@@ -223,16 +211,9 @@ export default function User() {
                             </h3>
                           )}
                         </div>
-                        {user?.seek && user?.seek !== "ask" && (
-                          <h2 className="text-xl font-bold text-black mt-3">
-                            Dostępność
-                          </h2>
-                        )}
-                        {!user?.seek && user?.seek !== "ask" && (
-                          <h2 className="font-bold text-lg text-black mt-3">
-                            Ilość pracowników
-                          </h2>
-                        )}
+                        <h2 className="text-lg font-extrabold text-black mt-3">
+                          Dostępność
+                        </h2>
                         {user?.seek && user?.seek !== "ask" && (
                           <div className="-ml-1 flex items-center flex-wrap">
                             {user?.preferences?.length === 0 && (
@@ -244,7 +225,7 @@ export default function User() {
                               user?.preferences?.map((item: any, i: any) => (
                                 <h3
                                   key={i}
-                                  className={`text-white ml-1 mt-1 bg-gradient-to-r from-primary to-cta flex items-center px-3 py-1.5`}
+                                  className={`text-xs sm:text-sm lg:text-base bg-gradient-to-r from-primary to-cta p-2 text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5`}
                                 >
                                   {item}
                                 </h3>
@@ -262,7 +243,7 @@ export default function User() {
                               user?.preferences?.map((item: any, i: any) => (
                                 <h3
                                   key={i}
-                                  className={`text-white ml-1 mt-1 bg-gradient-to-r from-primary to-cta flex items-center px-3 py-1.5`}
+                                  className={`text-xs sm:text-sm lg:text-base bg-gradient-to-r from-primary to-cta p-2 text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5`}
                                 >
                                   {item}
                                 </h3>
@@ -274,19 +255,17 @@ export default function User() {
                             )}
                           </div>
                         )}
-
-                        {(user?.seek || user?.seek === "ask") && (
-                          <h2 className="font-bold text-xl text-black mt-3">
-                            Opis użytkownika
-                          </h2>
-                        )}
-                        {!user?.seek && user?.seek !== "ask" && (
-                          <h2 className="font-bold text-xl text-black mt-3">
-                            Opis firmy
-                          </h2>
-                        )}
+                        <h2 className="font-extrabold text-lg text-black mt-3">
+                          Opis
+                        </h2>
                         <h3 className={`text-black`}>
-                          {user?.bio ? user?.bio : "Brak..."}
+                          {user?.description ? (
+                            <div className="mt-3">
+                              <Viewer value={user?.description} />
+                            </div>
+                          ) : (
+                            "Brak..."
+                          )}
                         </h3>
                       </div>
                     )}

@@ -106,7 +106,7 @@ export default function StepThree({
       showToastError("Failed to add job offer.");
     } finally {
       setIsLoading(false);
-      router.push("/dashboard/my-postings");
+      router.push("/user/job_offers");
     }
   };
 
@@ -151,7 +151,7 @@ export default function StepThree({
             {isSent && (
               <Link
                 className="p-2 bg-gradient-to-r from-primary via-cta to-primary py-0.5 text-white  flex items-center"
-                href="/dashboard/my-postings"
+                href="/user/job_offers"
               >
                 Już dodano, przeglądaj oferty <FaChevronRight />
               </Link>

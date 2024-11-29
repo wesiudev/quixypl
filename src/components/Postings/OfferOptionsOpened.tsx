@@ -39,7 +39,7 @@ export default function OfferOptionsOpened({
       </button> */}
       <button
         onClick={() => {
-          router.push("/dashboard/leads");
+          router.push("/user/leads");
           setOptionsOpen(false);
         }}
         className="w-full px-4 py-1 text-white bg-white bg-opacity-10 duration-150 hover:bg-opacity-20"

@@ -1,27 +1,59 @@
-import { updateUser } from "@/firebase";
+import { updateDocument, updateUser } from "@/firebase";
 import { set_modals } from "@/redux/slices/modalsopen";
+import { setUser } from "@/redux/slices/user";
 import moment from "moment";
 import { useState } from "react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 
+const updateUserLead = async (id: string, data: any) => {
+  await updateDocument(["realized"], data, "users", id);
+  await updateUser(id, {
+    leads: data.leads.map((lead: any) =>
+      lead.id === data.id ? { ...lead, status: data.status } : lead
+    ),
+  });
+};
+
 export default function LeadApplication({
   lead,
+  noteOpen,
   setNoteOpen,
   filter,
 }: {
   lead: any;
+  noteOpen: any;
   setNoteOpen: any;
   filter: string;
 }) {
   const [optionsOpen, setOptionsOpen] = useState(false);
+  const { user } = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
-  const handleUpdate = (status: string) =>
-    updateUser(lead.id, { ...lead, status });
+  const deleteUserLead = async (id: string, leadId: string) => {
+    await updateUser(id, {
+      leads: user?.leads?.filter((lead: any) => lead.id !== leadId),
+    });
+  };
+  const handleUpdate = (status: string) => {
+    setOptionsOpen(false);
+    const updatedLeads = user.leads.map((l: any) =>
+      l.id === lead.id ? { ...l, status: status } : l
+    );
+    dispatch(setUser({ ...user, leads: updatedLeads }));
+    updateUserLead(user?.id, { ...lead, status: status });
+  };
+
+  const handleDelete = () => {
+    setOptionsOpen(false);
+    const updatedLeads = user?.leads.filter((l: any) => l.id !== lead.id);
+    dispatch(setUser({ ...user, leads: updatedLeads }));
+    updateDocument(["leads"], [updatedLeads], "users", user?.id);
+  };
+
   const { modals } = useSelector((state: any) => state.modals);
   return (
     <div
-      key={lead.id}
+      key={lead?.id}
       className={`relative bg-zinc-800 p-3 h-max border-[3px] overflow-hidden ${
         lead.status === "trash"
           ? "border-orange-700"
@@ -40,9 +72,9 @@ export default function LeadApplication({
 
       <div className="flex w-full justify-between items-center">
         <div className="flex space-x-2">
-          <p>{moment(lead.createdAt).format("DD-MM-YYYY")}</p>
+          <p>{moment(lead?.creationTime).format("DD-MM-YYYY")}</p>
           <p className="text-blue-500 font-light font-gotham italic">
-            {moment(lead.createdAt).fromNow()}
+            {moment(lead?.creationTime).fromNow()}
           </p>
         </div>
         <button
@@ -61,6 +93,12 @@ export default function LeadApplication({
             className="w-full px-4 py-1 text-white bg-white bg-opacity-0 duration-150 hover:bg-opacity-20"
           >
             Resetuj
+          </button>
+          <button
+            onClick={handleDelete}
+            className="w-full px-4 py-1 text-white bg-red-500 bg-opacity-0 duration-150 hover:bg-opacity-20"
+          >
+            Usuń
           </button>
         </div>
       </div>
@@ -86,9 +124,7 @@ export default function LeadApplication({
           Edytuj
         </button>
       </div>
-      {lead?.note !== undefined && (
-        <p className="text-white font-light">{lead?.note}</p>
-      )}
+      {lead?.note && <p className="text-white font-light">{lead?.note}</p>}
       <div className="flex flex-col w-full mt-3">
         {!lead.isFinished && (
           <button
@@ -113,17 +149,6 @@ export default function LeadApplication({
               Akceptuj
             </button>
           </div>
-        )}
-
-        {lead.isFinished && !lead?.status && (
-          <button
-            className="w-full text-center bg-blue-500 text-white py-2 font-light text-base mt-2 rounded"
-            onClick={() => {
-              dispatch(set_modals({ ...modals, currentChat: lead?.pseudo }));
-            }}
-          >
-            Odpisz
-          </button>
         )}
       </div>
     </div>

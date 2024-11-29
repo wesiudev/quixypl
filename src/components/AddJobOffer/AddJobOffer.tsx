@@ -52,10 +52,7 @@ export default function AddJobOffer() {
 
   return (
     <div className="relative overflow-hidden min-h-screen w-full flex flex-col bg-gradient-to-r from-primary to-cta items-center">
-      <div
-        style={{ boxShadow: "0px 0px 5px black" }}
-        className="w-[100%] max-w-[55rem] h-max bg-white z-50 relative p-6 lg:p-10 overflow-hidden"
-      >
+      <div className="mt-12 w-[100%] max-w-[55rem] h-max bg-white z-50 relative p-6 lg:p-10 overflow-hidden rounded-xl">
         {isAnimating && <ReactConfetti />}
         <h1 className="text-xl md:text-3xl font-gotham text-zinc-800">
           Dodaj darmową ofertę pracy
@@ -116,7 +113,7 @@ export default function AddJobOffer() {
           />
         </div>
         <Link
-          href="/dashboard"
+          href="/user"
           className="mt-4 p-2 bg-primary text-white  hover:bg-primary-dark flex items-center justify-center"
         >
           <FaChevronLeft className="mr-2" />

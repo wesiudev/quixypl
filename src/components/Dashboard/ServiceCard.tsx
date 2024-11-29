@@ -111,32 +111,32 @@ export default function ServiceCard({
       </div>
 
       {/* Duration with icons for visual cues */}
-      <p className="mb-2 text-md font-medium text-gray-900 dark:text-gray-100">
+      {/* <p className="mb-2 text-md font-medium text-gray-900 dark:text-gray-100">
         <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
           Dodano na:
         </span>{" "}
         {project.days} msc.
-      </p>
+      </p> */}
 
       {/* Creation date */}
-      <p className="mb-1 text-sm text-gray-600 dark:text-gray-400">
+      {/* <p className="mb-1 text-sm text-gray-600 dark:text-gray-400">
         <span className="font-bold">Data utworzenia:</span>{" "}
         {moment(project.creationTime).format("DD MMM YYYY")}
-      </p>
+      </p> */}
 
       {/* Expiry date with subtle differentiation */}
-      <p className="text-sm text-red-600 dark:text-red-400 font-semibold">
+      {/* <p className="text-sm text-red-600 dark:text-red-400 font-semibold">
         Wygasa:{" "}
         {moment(project.creationTime)
           .add(project?.days, "months")
           .format("DD MMM YYYY")}
-      </p>
-      <Link
-        href={`/dashboard/leads`}
+      </p> */}
+      {/* <Link
+        href={`/user/leads`}
         className="flex items-center gap-2 text-white font-extrabold bg-gradient-to-r from-primary to-cta w-max max-w-full p-1.5 mt-2 rounded-bl-xl rounded-tr-xl"
       >
         do sekcji leadów <FaArrowRightLong />
-      </Link>
+      </Link> */}
     </div>
   );
 }

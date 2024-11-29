@@ -8,11 +8,9 @@ import { set_modals } from "@/redux/slices/modalsopen";
 export default function Settings({
   source,
   setSource,
-  data,
 }: {
   source: any;
   setSource: any;
-  data: any;
 }) {
   const wrapperRef = useRef<any>(null);
   const [error, setError] = useState(false);
@@ -66,7 +64,6 @@ export default function Settings({
             source={source}
             setSource={setSource}
             setChangesWereMade={setChangesWereMade}
-            data={data}
           />
         </div>
       </div>

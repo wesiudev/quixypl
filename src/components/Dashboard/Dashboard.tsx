@@ -92,7 +92,7 @@ export default function Dashboard() {
                           </div>
                           <Link
                             title="Zobacz wszystkie zlecenia"
-                            href="/dashboard/leads"
+                            href="/user/leads"
                             className="font-bold w-max text-white bg-primary text-lg flex items-center px-2 py-1.5 rounded-lg mt-1"
                           >
                             Zobacz wszystkie
