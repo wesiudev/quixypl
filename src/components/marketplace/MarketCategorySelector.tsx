@@ -30,7 +30,7 @@ export default function MarketCategorySelector({
 }) {
   return (
     <div className="bg-white">
-      <h1 className="text-2xl font-extrabold text-black">Wyszukiwarka usług</h1>
+      <h3 className="text-2xl font-extrabold text-black">Wyszukiwarka usług</h3>
 
       {!slug && <div className="my-1.5 font-bold text-black">Kategoria</div>}
       {slug !== "" && category === "" && (

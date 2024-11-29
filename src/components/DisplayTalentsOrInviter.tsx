@@ -16,7 +16,7 @@ export default function DisplayTalentsOrInviter({ data }: { data: any }) {
           <Link
             key={talent?.pseudo}
             href={`/talent/${talent.pseudo}`}
-            className="flex p-3 border-2 border-gray-500/30 hover:shadow-md duration-200 hover:scale-[1.03] hover:shadow-cta bg-white"
+            className="flex p-3 hover:shadow-md duration-200 hover:scale-[1.03] hover:shadow-cta bg-white"
           >
             {talent?.photoURL ? (
               <div className="relative min-w-16 h-16 aspect-square rounded-full overflow-hidden">
@@ -36,12 +36,16 @@ export default function DisplayTalentsOrInviter({ data }: { data: any }) {
                 {talent?.pseudo && talent?.pseudo[0]?.toUpperCase()}
               </span>
             )}
-            <div className="px-3 flex flex-col font-coco">
-              <h2 className="text-lg font-bold text-black">{talent?.name}</h2>
-              <h3 className="text-white bg-gradient-to-r from-primary to-cta px-2 w-max max-w-full">
-                {talent?.city}
+            <div className="px-3 flex flex-col">
+              <h2 className="text-lg font-extrabold text-black">
+                {talent?.name}
+              </h2>
+              <h3 style={{ lineHeight: 2.3 }}>
+                <span className="p-2 w-max max-w-full text-white bg-gradient-to-r from-primary to-cta">
+                  {talent?.title}
+                </span>
               </h3>
-              <p className="text-black">{talent?.title}</p>
+              <h3 className="text-black">{talent?.city}</h3>
             </div>
           </Link>
         ))
@@ -67,14 +71,14 @@ export default function DisplayTalentsOrInviter({ data }: { data: any }) {
       {data.length > 0 && (
         <Link
           href={`/register`}
-          className="flex p-3 border-2 border-gray-500/30 hover:shadow-md duration-200 hover:scale-[1.03] hover:shadow-cta bg-gradient-to-r from-primary to-cta "
+          className="flex p-3 hover:shadow-md duration-200 hover:scale-[1.03] hover:shadow-cta bg-gradient-to-r from-primary to-cta "
         >
           <span className="mr-2 flex text-2xl text-white">
             <FaPlusCircle className="w-16 h-16" />
           </span>
 
-          <div className="px-3 flex flex-col font-coco text-white">
-            <h2 className="text-lg font-bold">Wolne miejsce</h2>
+          <div className="px-3 flex flex-col text-white">
+            <h2 className="text-lg font-extrabold">Wolne miejsce</h2>
             <h3 className="">
               Skonfiguruj profil na naszej platformie i wyświetlaj swoje usługi
             </h3>

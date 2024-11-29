@@ -129,13 +129,11 @@ export default function ContentItem({ data }: { data: any }) {
               const id = toast.loading("Generowanie...");
               generateSalary(lead).then((res) => {
                 let contentBlock;
-
                 contentBlock = htmlToDraft(res.choices[0].text);
                 const contentState = ContentState.createFromBlockArray(
                   contentBlock.contentBlocks
                 );
                 setSalary(EditorState.createWithContent(contentState));
-
                 toast.update(id, {
                   render: "Sukces",
                   type: "success",
@@ -144,7 +142,7 @@ export default function ContentItem({ data }: { data: any }) {
                 });
               });
             }}
-            className="bg-purple-600 hover:bg-purple-700 mt-3  py-3 w-full"
+            className="bg-purple-600 hover:bg-purple-700 mt-3 py-3 w-full"
           >
             Generuj zarobki
           </button>

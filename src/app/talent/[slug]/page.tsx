@@ -27,7 +27,7 @@ export default async function Page(props: {
 
   return (
     <div>
-      <div className="fixed top-0 left-0 z-[100] w-full">
+      <div className="fixed bottom-0 left-0 z-[100] w-full">
         <UserStickyTop slugData={talent} />
       </div>
       <div className="relative mx-auto bg-white">
@@ -87,7 +87,7 @@ export default async function Page(props: {
                           </h2>
                           <div className="w-max text-black flex flex-col">
                             {talent?.hourRate && (
-                              <div className="w-max max-w-full font-coco rounded-3xl font-extrabold text-white bg-gradient-to-r from-primary to-cta px-2 py-1 text-center">
+                              <div className="w-max max-w-full font-coco font-extrabold text-white bg-gradient-to-r from-primary to-cta px-2 py-1 text-center">
                                 {talent?.hourRate} zł/h
                               </div>
                             )}
@@ -128,7 +128,7 @@ export default async function Page(props: {
                           href={`/praca-zdalna/${item?.slugUrl}/${
                             item?.categoryUrl
                           }/${item?.url}/${polishToEnglish(talent?.city)}`}
-                          className="bg-gradient-to-r from-primary to-cta p-2 text-xl font-extralight text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5"
+                          className="text-xs sm:text-sm lg:text-base bg-gradient-to-r from-primary to-cta p-2 text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5"
                         >
                           {item.title}
                         </Link>
@@ -147,7 +147,7 @@ export default async function Page(props: {
                       talent?.preferences?.map((item: any, i: any) => (
                         <h3
                           key={i}
-                          className={`bg-gradient-to-r from-primary to-cta text-xl font-extralight ml-1 mt-1 duration-100 flex items-center px-2 py-0.5`}
+                          className={`text-xs sm:text-sm lg:text-base bg-gradient-to-r from-primary to-cta p-2 text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5`}
                         >
                           {item}
                         </h3>

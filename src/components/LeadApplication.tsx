@@ -68,12 +68,12 @@ export default function LeadApplication({
       <table className="w-full mt-3">
         <tbody>
           <tr className="bg-gray-700">
-            <td>Email:</td>
-            <td>{lead.email}</td>
+            <td>Numer Telefonu:</td>
+            <td>{lead.phoneNumber}</td>
           </tr>
           <tr className="bg-gray-700">
-            <td>Imię i nazwisko:</td>
-            <td>{lead.name}</td>
+            <td>Wiadomość:</td>
+            <td>{lead.message}</td>
           </tr>
         </tbody>
       </table>

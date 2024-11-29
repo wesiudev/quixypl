@@ -1,13 +1,11 @@
 import Image from "next/image";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
-import moment from "moment";
-import { IProject, JobPosting } from "@/types";
+import { IProject } from "@/types";
 import ProjectCard from "@/components/Dashboard/ImageGenerator/dashboard/ProjectCard";
 import UserStickyTop from "@/components/UserStickyTop";
 import HireButton from "@/components/HireButton/HireButton";
 import { IoLocationOutline } from "react-icons/io5";
-import JobOfferCard from "@/components/Dashboard/JobOfferCard";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
 import Viewer from "@/components/AddJobOffer/Viewer";
 
@@ -27,11 +25,10 @@ export default async function Page(props: {
 
   return (
     <div>
-      <div className="fixed top-0 left-0 z-[100] w-full">
+      <div className="fixed bottom-0 left-0 z-[100] w-full">
         <UserStickyTop slugData={talent} />
       </div>
       <div className="relative mx-auto bg-white">
-        {/* Breadcrumbs with Icons */}
         <div className="bg-white py-6 grid grid-cols-1 h-max w-full mx-auto relative z-50">
           <div className="px-3 lg:px-12 items-end flex justify-between w-full text-sm bg-white !text-black relative z-50">
             <div className="flex flex-col breadcrumbs">
@@ -128,7 +125,7 @@ export default async function Page(props: {
                           href={`/praca-zdalna/${item?.slugUrl}/${
                             item?.categoryUrl
                           }/${item?.url}/${polishToEnglish(talent?.city)}`}
-                          className="bg-gradient-to-r from-primary to-cta p-2 text-xl font-extralight text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5"
+                          className="text-xs sm:text-sm lg:text-base bg-gradient-to-r from-primary to-cta p-2 text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5"
                         >
                           {item.title}
                         </Link>
@@ -147,7 +144,7 @@ export default async function Page(props: {
                       talent?.preferences?.map((item: any, i: any) => (
                         <h3
                           key={i}
-                          className={`bg-gradient-to-r from-primary to-cta text-xl font-extralight ml-1 mt-1 duration-100 flex items-center px-2 py-0.5 text-white`}
+                          className={`text-xs sm:text-sm lg:text-base bg-gradient-to-r from-primary to-cta p-2 text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5`}
                         >
                           {item}
                         </h3>

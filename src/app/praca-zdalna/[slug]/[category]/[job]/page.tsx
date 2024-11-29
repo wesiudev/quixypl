@@ -11,6 +11,7 @@ import { getDocuments, getProducts } from "@/firebase";
 import JobOfferCard from "@/components/Dashboard/JobOfferCard";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
+import Viewer from "@/components/AddJobOffer/Viewer";
 export async function generateStaticParams() {
   return jobs
     .flatMap((service: any) =>
@@ -49,65 +50,24 @@ export default async function Page(props: { params: Promise<any> }) {
     <>
       <Header jobsList={jobs} />
       <div className=" min-h-screen flex flex-col w-full px-4 lg:px-12">
-        <div className="breadcrumbs py-4 text-sm">
-          <ul className="space-x-2 font-coco text-black flex flex-wrap w-full">
-            <li>
-              <Link href={`/praca-zdalna`} className="text-black">
-                praca-zdalna
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`/praca-zdalna/${params.slug}`}
-                className="text-black"
-              >
-                {params.slug}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`/praca-zdalna/${params.slug}/${params.category}`}
-                className="text-black"
-              >
-                {params.category}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`/praca-zdalna/${params.slug}/${params.category}/${params.job}`}
-                className="text-black"
-              >
-                {params.job}
-              </Link>
-            </li>
-          </ul>
-        </div>
         {/* Header */}
         {/* Job Title Section */}
-        <div className="w-full mb-6 mx-auto">
+        <div className="w-full mt-6 mx-auto">
           <div className="flex flex-col mx-auto">
             <div className="">
-              <div className="">
-                <p className="text-3xl text-black font-extrabold">
-                  Freelancer Job Boards
-                </p>
-                <h1 className="text-black">
-                  Zlecenia, Usługi, Oferty Pracy Zdalnej oraz Najlepsi{" "}
-                  {content?.informal_title_plural}
-                </h1>{" "}
-              </div>
-              <div className="w-full pb-6">
-                <div className="flex flex-col mx-auto">
-                  <div className="">
-                    <div className=" ">
-                      <JobBoardList
-                        talents={talents}
-                        companies={companies}
-                        content={content}
-                      />
-                    </div>
-                  </div>
-                </div>
+              <p className="text-3xl text-black font-extrabold">
+                Freelancer Job Boards
+              </p>
+              <h1 className="text-black">
+                Zlecenia, usługi, oferty pracy zdalnej oraz najlepsi{" "}
+                {content?.informal_title_plural}
+              </h1>{" "}
+              <div className="w-full pb-6 flex flex-col mx-auto">
+                <JobBoardList
+                  talents={talents}
+                  companies={companies}
+                  content={content}
+                />
               </div>
             </div>
           </div>
@@ -191,26 +151,11 @@ export default async function Page(props: { params: Promise<any> }) {
             <BlogPostList posts={products} />
           </section>
         </div>
-        <div className="  mx-auto">
-          {" "}
-          <h2
-            style={{ lineHeight: 1.5 }}
-            className="font-extrabold text-black text-xl lg:text-3xl"
-          >
-            Ile zarabiają
-            <span className="ml-2 text-black">
-              {content?.informal_title_plural.toLowerCase()}?
-            </span>
-          </h2>
-          {/* <div
-            className="text-black max-w-3xl markdownSlug font-light font-coco"
-            dangerouslySetInnerHTML={{
-              __html: content?.salary,
-            }}
-          /> */}
+        <div className="my-12">
+          <Viewer value={content?.salary} />
         </div>
-        <MainFooter jobsList={jobs} />
       </div>
+      <MainFooter jobsList={jobs} />
     </>
   );
 }

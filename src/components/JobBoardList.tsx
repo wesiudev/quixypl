@@ -29,12 +29,12 @@ export default function JobBoardList({
     <div className="">
       <h2
         style={{ lineHeight: 1.5 }}
-        className="text-black font-extrabold text-2xl mt-12"
+        className="text-black font-extrabold text-2xl mt-6"
       >
         {content?.informal_title_plural}{" "}
       </h2>{" "}
-      <p className="mb-4 text-black">Czego szukasz tym razem?</p>
-      <div className="mx-auto font-gotham rounded-xl">
+      <p className="mb-2 text-black">Czego szukasz tym razem?</p>
+      <div className="mx-auto rounded-xl">
         <div className="flex items-center flex-wrap gap-3">
           <button
             onClick={() => setSearchType("talents")}

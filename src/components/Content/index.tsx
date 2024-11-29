@@ -19,7 +19,7 @@ export default function Content() {
   }, []);
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-4xl font-bold mb-4">Leads</h1>
+      <h1 className="text-4xl font-bold mb-4">Kontent na podstronach</h1>
       <ul className="list-none grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-6">
         {leads?.map((lead: any, index: number) => (
           <ContentItem key={index} data={lead} />

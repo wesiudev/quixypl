@@ -54,7 +54,7 @@ export default function UserPanel() {
     // },
   ];
   return (
-    <div className="px-6 pt-6">
+    <div className="p-4 lg:p-6">
       <div className="mb-3 pl-2 relative w-full bg-gradient-to-r from-primary to-cta text-white hover:from-cta hover:to-cta rounded-xl">
         <button
           onClick={() => dispatch(set_modals({ ...modals, config: true }))}
