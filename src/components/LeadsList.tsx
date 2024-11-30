@@ -16,7 +16,6 @@ export default function LeadsList() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [noteOpen, setNoteOpen] = useState<any>();
   const [filter, setFilter] = useState("new");
-
   moment.locale("pl");
   return (
     <>
