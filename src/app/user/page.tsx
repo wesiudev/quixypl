@@ -1,10 +1,10 @@
 import { Metadata } from "next";
-import User from "./User";
-import DashboardUnderMenu from "./DashboardUnderMenu";
+import User from "../../components/User";
+import DashboardUnderMenu from "../../components/DashboardUnderMenu";
 import UserPanel from "@/components/UserPanel";
 import Image from "next/image";
 import Link from "next/link";
-export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Panel administracyjny",
 };

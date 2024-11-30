@@ -1,9 +1,9 @@
 "use client";
 import { auth } from "@/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Nav from "./Nav";
+import Nav from "../../components/Nav";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import InitUser from "./InitUser";
+import InitUser from "../../components/InitUser";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import QuixiesModule from "@/components/Dashboard/QuixiesModule";

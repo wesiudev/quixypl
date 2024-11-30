@@ -5,7 +5,7 @@ import { useState } from "react";
 import { FaClipboard } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import Loading from "../loading";
+import Loading from "../app/loading";
 import AccountHistory from "@/components/Dashboard/ImageGenerator/dashboard/AccountHistory";
 import ServiceList from "@/components/Dashboard/ProjectList";
 import MultiStepVerification from "@/components/Dashboard/Settings/SettingsInputs/MultiStepVerification";

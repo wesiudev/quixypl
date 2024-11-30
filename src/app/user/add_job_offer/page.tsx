@@ -1,6 +1,6 @@
 import AddJobOffer from "@/components/AddJobOffer/AddJobOffer";
 import { Metadata } from "next";
-export const dynamic = "force-dynamic";
+
 export default function Page() {
   return (
     <div>

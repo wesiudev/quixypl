@@ -1,6 +1,6 @@
 import Postings from "@/components/Postings/Postings";
 import { Metadata } from "next";
-export const dynamic = "force-dynamic";
+
 export default function Page() {
   return (
     <div>
