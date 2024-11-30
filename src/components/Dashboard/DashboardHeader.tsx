@@ -41,7 +41,7 @@ export default function DashboardHeader({ users }: { users: any }) {
   }, []);
   return (
     <div>
-      <Settings source={user} setSource={setUserData} data={userData} />
+      <Settings source={user} setSource={setUserData} />
       <QuixiesModule />
       <div className="">
         <div
