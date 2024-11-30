@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 import { useSelector } from "react-redux";
-
+export const dynamic = "force-dynamic";
 export default function Page() {
   const [project, setProject] = useState<any>({
     images: [],
