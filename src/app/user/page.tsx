@@ -1,9 +1,14 @@
-import User from "../../../components/User";
-import DashboardUnderMenu from "../../../components/DashboardUnderMenu";
+import { Metadata } from "next";
+import User from "./User";
+import DashboardUnderMenu from "./DashboardUnderMenu";
 import UserPanel from "@/components/UserPanel";
 import Image from "next/image";
 import Link from "next/link";
-export default async function Page() {
+export const dynamic = "force-dynamic";
+export const metadata: Metadata = {
+  title: "Panel administracyjny",
+};
+export default function Page() {
   return (
     <div>
       <Link
