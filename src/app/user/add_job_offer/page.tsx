@@ -1,6 +1,6 @@
 import AddJobOffer from "@/components/AddJobOffer/AddJobOffer";
 
-export default function Page() {
+export default async function Page() {
   return (
     <div>
       <AddJobOffer />

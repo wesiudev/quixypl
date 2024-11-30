@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import Loading from "../loading";
+import Loading from "../app/loading";
 
 export default function UserClient({
   children,
