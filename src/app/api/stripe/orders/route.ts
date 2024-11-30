@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const stripe = require("stripe")(`${process.env.STRIPE_SECRET}`);
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest, res: NextResponse) {
   const secret = req.nextUrl.searchParams.get("secret");
   if (secret !== process.env.API_SECRET_KEY) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });

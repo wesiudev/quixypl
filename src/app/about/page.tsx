@@ -1,10 +1,4 @@
-import {
-  FaShieldAlt,
-  FaLightbulb,
-  FaCheckCircle,
-  FaHeadset,
-  FaStar,
-} from "react-icons/fa";
+import { FaShieldAlt, FaCheckCircle, FaHeadset, FaStar } from "react-icons/fa";
 import React from "react";
 import Header from "@/components/Header";
 import MainFooter from "@/components/MainFooter";
