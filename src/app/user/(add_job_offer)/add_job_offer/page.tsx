@@ -1,4 +1,9 @@
-import AddJobOffer from "@/components/AddJobOffer/AddJobOffer";
+import dynamic from "next/dynamic";
+
+const AddJobOffer = dynamic(
+  () => import("@/components/AddJobOffer/AddJobOffer"),
+  { ssr: false }
+);
 
 export default function Page() {
   return (
