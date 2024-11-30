@@ -1,9 +1,5 @@
-"use client";
-import dynamic from "next/dynamic";
-const NewService = dynamic(() => import("@/components/NewService"), {
-  ssr: false,
-});
-
+import NewService from "@/components/NewService";
+export const dynamic = "force-dynamic";
 export default function Page() {
   return <NewService />;
 }

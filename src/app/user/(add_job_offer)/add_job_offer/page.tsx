@@ -1,11 +1,5 @@
-"use client";
-import dynamic from "next/dynamic";
-
-const AddJobOffer = dynamic(
-  () => import("@/components/AddJobOffer/AddJobOffer"),
-  { ssr: false }
-);
-
+import AddJobOffer from "@/components/AddJobOffer/AddJobOffer";
+export const dynamic = "force-dynamic";
 export default function Page() {
   return (
     <div>

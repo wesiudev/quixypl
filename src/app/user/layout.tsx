@@ -10,6 +10,7 @@ import QuixiesModule from "@/components/Dashboard/QuixiesModule";
 import Loading from "../loading";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+export const dynamic = "force-dynamic";
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isNavOpen, setNavOpen] = useState(false);
   const [user, loading] = useAuthState(auth);

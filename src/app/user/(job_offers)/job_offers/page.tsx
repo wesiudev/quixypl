@@ -1,8 +1,5 @@
-"use client";
-import dynamic from "next/dynamic";
-const Postings = dynamic(() => import("@/components/Postings/Postings"), {
-  ssr: false,
-});
+import Postings from "@/components/Postings/Postings";
+export const dynamic = "force-dynamic";
 export default function Page() {
   return (
     <div>

@@ -1,8 +1,5 @@
-"use client";
-import dynamic from "next/dynamic";
-const LeadsList = dynamic(() => import("@/components/LeadsList"), {
-  ssr: false,
-});
+import LeadsList from "@/components/LeadsList";
+export const dynamic = "force-dynamic";
 export default function Page() {
   return (
     <div>
