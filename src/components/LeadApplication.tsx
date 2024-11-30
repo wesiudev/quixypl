@@ -73,9 +73,6 @@ export default function LeadApplication({
       <div className="flex w-full justify-between items-center">
         <div className="flex space-x-2">
           <p>{moment(lead?.creationTime).format("DD-MM-YYYY")}</p>
-          <p className="text-blue-500 font-light font-gotham italic">
-            {moment(lead?.creationTime).fromNow()}
-          </p>
         </div>
         <button
           onClick={() => setOptionsOpen(!optionsOpen)}
