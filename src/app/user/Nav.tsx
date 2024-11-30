@@ -4,6 +4,7 @@ import {
   FaChevronDown,
   FaEdit,
   FaHome,
+  FaPlusCircle,
   FaShoppingCart,
   FaSignOutAlt,
   FaTag,
@@ -47,9 +48,9 @@ export default function Nav({
       icon: <FaBriefcase />,
       subItems: [
         {
-          title: "Dodaj ogłoszenie",
+          title: "Dodaj ofertę",
           href: `/user/add_job_offer`,
-          icon: <FaPlus />,
+          icon: <FaPlusCircle />,
         },
         {
           title: "Moje ogłoszenia",
@@ -69,11 +70,11 @@ export default function Nav({
           href: `/user/new_service`,
           icon: <FaUpload />,
         },
-        {
-          title: "Wszystkie produkty",
-          href: `/admin/products`,
-          icon: <FaShoppingCart />,
-        },
+        // {
+        //   title: "Wszystkie produkty",
+        //   href: `/admin/products`,
+        //   icon: <FaShoppingCart />,
+        // },
       ],
     },
     {
@@ -100,25 +101,27 @@ export default function Nav({
         <div className="relative flex flex-col gap-12">
           <button
             onClick={() => setNavOpen(!isNavOpen)}
-            className="absolute -right-[50px] w-[50px] h-[50px] bottom-12 bg-blue-400 hover:bg-blue-500 duration-200 text-white flex items-center justify-center"
+            className="absolute -right-[50px] w-[50px] h-[50px] bottom-12 bg-blue-600 hover:bg-blue-400 duration-200 text-white flex items-center justify-center"
           >
             <FaArrowLeft
-              className={`${isNavOpen ? "rotate-0" : "rotate-180"}`}
+              className={`text-3xl ${isNavOpen ? "rotate-0" : "rotate-180"}`}
             />
           </button>
           <div className="flex flex-col justify-between h-screen w-[300px] border-r-[1px] border-[#303345] bg-[#222430]">
             <div>
-              <div className="text-white py-4 px-3">
-                <h1 className="text-base font-bold  flex flex-row items-center ">
-                  <Image
-                    src="/favicons/favicon-32x32.png"
-                    width={36}
-                    height={36}
-                    alt="Agencja Reklamowa W Grudziądzu Grudziądz"
-                    className="w-8 h-8 mr-2"
-                  />
-                  Panel administracyjny
-                </h1>
+              <div className="w-max mx-auto">
+                <Link href="/" className="text-white py-4 px-3">
+                  <h1 className="text-base font-bold  flex flex-row items-center ">
+                    <Image
+                      src="/favicons/favicon-32x32.png"
+                      width={36}
+                      height={36}
+                      alt="Agencja Reklamowa W Grudziądzu Grudziądz"
+                      className="w-8 h-8 mr-2"
+                    />
+                    Panel administracyjny
+                  </h1>
+                </Link>
               </div>
               <div className="mt-4 px-2">
                 <div className="mb-3 relative w-full bg-gradient-to-r from-primary to-cta text-white hover:from-cta hover:to-cta rounded-xl">

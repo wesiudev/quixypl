@@ -1,34 +1,23 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
 import { FaChevronLeft } from "react-icons/fa";
 import jobs from "../../../public/14.09.2024.json";
-import StepThree from "./Step3";
-import StepTwo from "./Step2";
-import StepOne from "./Step";
 import { JobListing } from "@/types";
 import ReactConfetti from "react-confetti";
 import { useSelector } from "react-redux";
-export default function AddJobOffer() {
-  const InitialData = {
-    days: 1,
-    description: "",
-    email: "",
-    isPaid: false,
-    location: "",
-    name: "",
-    phone: "",
-    price: 24.41,
-    requirements: "",
-    salary: "",
-    salaryValue: "",
-    tags: [],
-    title: "",
-    website: "",
-  };
+import StepOne from "../AddJobOffer/Step";
+import StepTwo from "../AddJobOffer/Step2";
+import StepThree from "../AddJobOffer/Step3";
+export default function EditJobOffer({
+  jobOffer,
+  setCurrentlyEditing,
+}: {
+  jobOffer: any;
+  setCurrentlyEditing?: any;
+}) {
   const { user } = useSelector((state: any) => state.user);
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<JobListing>(InitialData);
+  const [formData, setFormData] = useState<JobListing>(jobOffer);
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -53,25 +42,27 @@ export default function AddJobOffer() {
   return (
     <div className="relative overflow-hidden min-h-screen w-full flex flex-col bg-gray-600 items-center">
       <div className="w-full justify-between bg-gradient-to-r from-primary to-cta py-3 px-6 text-white font-bold text-lg flex items-center">
-        <Link href="/user" className="flex items-center">
+        <button
+          onClick={() => setCurrentlyEditing(false)}
+          className="flex items-center"
+        >
           <FaChevronLeft className="mr-2 text-xl" />
           Powrót
-        </Link>
+        </button>
         <div className="flex flex-col text-white pl-12">
-          <h2 className="font-extrabold">Nowe ogłoszenie</h2>
+          <h2 className="font-extrabold">Edytuj ofertę</h2>
           <p className="text-xs font-coco">
-            Zarządzaj ustawieniami oferty o pracę.
+            Podaj najważniejsze informacje dotyczące rekrutacji
           </p>
         </div>
       </div>
-      <div className="py-12"></div>
-      <div className="max-w-[40rem] rounded-xl bg-white z-50 relative p-6 lg:p-10 overflow-hidden">
+      <div className="w-[100%] bg-white z-50 relative p-6 lg:p-10 overflow-hidden">
         {isAnimating && <ReactConfetti />}
         <h1 className="text-xl md:text-3xl font-gotham text-zinc-800">
-          Dodaj darmową ofertę pracy
+          Edytuj ofertę
         </h1>
         <p className="mt-2 text-sm font-coco text-black">
-          Podaj najważniejsze informacje dotyczące rekrutacji.
+          Po wprowadzeniu danych, koniecznie zapisz zmiany!
         </p>
         <div className="mt-2"></div>
         <div className="flex flex-col w-full font-coco">
@@ -115,7 +106,7 @@ export default function AddJobOffer() {
             currentStep={currentStep}
             setFormData={setFormData}
             user={user}
-            InitialData={InitialData}
+            InitialData={jobOffer}
             setIsAnimating={setIsAnimating}
             isAnimating={isAnimating}
             isSent={isSent}

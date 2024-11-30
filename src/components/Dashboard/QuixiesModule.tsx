@@ -30,14 +30,11 @@ export default function QuixiesModule() {
           onClick={(e: any) => e.stopPropagation()}
           className="flex flex-wrap w-full my-auto mx-auto bg-white p-4 lg:p-6 relative"
         >
-          <div className="flex flex-row sm:justify-between w-full">
+          <div className="flex flex-row justify-between w-full">
             <div className="flex flex-col">
-              <h2 className="font-extrabold text-black text-3xl">
+              <h2 className="font-extrabold text-black text-xl">
                 Doładuj Quixies
               </h2>
-              <p className="font-normal text-gray-700">
-                Wybierz odpowiedni pakiet Quixies dla swoich potrzeb
-              </p>
             </div>
 
             <div className="gap-2 h-max text-white text-xl bg-gradient-to-r from-primary to-cta px-2 py-0.5 font-gotham font-extrabold w-max flex items-center">
@@ -45,6 +42,9 @@ export default function QuixiesModule() {
               <div>{user?.tokens}</div>
             </div>
           </div>
+          <p className="font-normal text-black mt-1">
+            Wybierz odpowiedni pakiet Quixies dla swoich potrzeb
+          </p>
           {/* <Image
             style={{ boxShadow: "0 0 16px 0 cyan" }}
             src="/assets/quixies5.png"

@@ -40,11 +40,8 @@ export default function JobOfferDetails({
         <h3 className="font-coco text-lg sm:text-xl font-bold text-black mb-2 pr-6">
           {jobOffer.title}
         </h3>
-        <div
-          className={`${
-            jobOffer.isPaid ? "hidden" : "block"
-          } col-span-1 font-coco`}
-        >
+        {/* Just a component for the future when offers will be updated and will be paid*/}
+        {/* <div className={` col-span-1 font-coco`}>
           <div className="flex flex-col">
             <div className="flex items-center font-bold">Do zapłaty</div> 💎
             {jobOffer.price}
@@ -66,15 +63,8 @@ export default function JobOfferDetails({
               {loading && <div className="loading-lg loading-infinity"></div>}
             </button>
           )}
-          {jobOffer.isPaid && (
-            <Link
-              href="/user/applications"
-              className="bg-gradient-to-r from-primary to-cta px-2 py-0.5  text-white"
-            >
-              Przeglądaj aplikacje
-            </Link>
-          )}
-        </div>
+         
+        </div> */}
       </div>
     </div>
   );

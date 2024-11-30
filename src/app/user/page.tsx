@@ -3,6 +3,7 @@ import User from "./User";
 import DashboardUnderMenu from "./DashboardUnderMenu";
 import UserPanel from "@/components/UserPanel";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Panel administracyjny",
@@ -11,7 +12,11 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div>
-      <div className="flex items-center gap-3 bg-white pt-12 text-xl lg:text-3xl px-4 lg:px-6 font-extrabold text-black">
+      <Link
+        href="/"
+        target="_blank"
+        className="flex items-center gap-3 bg-white pt-6 text-xl lg:text-3xl px-4 lg:px-6 font-extrabold text-black"
+      >
         <Image
           src="/favicons/android-chrome-192x192.png"
           width={124}
@@ -20,7 +25,7 @@ export default function Page() {
           className="w-12 h-12"
         />
         <h1 className="">Panel Administracyjny</h1>
-      </div>
+      </Link>
       <UserPanel />
       <DashboardUnderMenu />
       <User />

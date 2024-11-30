@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function OfferOptionsOpened({
   optionsOpen,
-  setEditOpen,
+  setCurrentlyEditing,
   setOptionsOpen,
   setApplicationsOpen,
   handleDeleteJobOffer,
@@ -12,7 +12,7 @@ export default function OfferOptionsOpened({
   setDeleteMenu,
 }: {
   optionsOpen: any;
-  setEditOpen: (value: boolean) => void;
+  setCurrentlyEditing: any;
   setOptionsOpen: (value: boolean) => void;
   setApplicationsOpen: (value: boolean) => void;
   handleDeleteJobOffer: (id: string) => Promise<void>;
@@ -28,15 +28,15 @@ export default function OfferOptionsOpened({
         !optionsOpen ? "-translate-y-[80px] scale-x-0" : "-translate-y-0"
       }`}
     >
-      {/* <button
+      <button
         onClick={() => {
-          setEditOpen(true);
+          setCurrentlyEditing(jobOffer);
           setOptionsOpen(false);
         }}
         className="w-full px-4 py-1 text-white bg-white bg-opacity-10 duration-150 hover:bg-opacity-20"
       >
         Edytuj
-      </button> */}
+      </button>
       <button
         onClick={() => {
           router.push("/user/leads");

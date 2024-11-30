@@ -6,11 +6,13 @@ import {
   FaImages,
   FaUsers,
   FaHome,
+  FaPlusCircle,
 } from "react-icons/fa";
 import { FaCoins, FaList, FaPlus } from "react-icons/fa6";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { AiFillThunderbolt } from "react-icons/ai";
 
 export default function UserPanel() {
   const dispatch = useDispatch();
@@ -28,26 +30,20 @@ export default function UserPanel() {
       icon: <FaUsers />,
     },
     {
-      text: "Praca zdalna",
-      href: "/praca-zdalna",
-      icon: <FaRocket />,
-    },
-    {
-      text: "Freelancerzy",
-      href: "/praca-zdalna",
-      icon: <FaUserNinja />,
+      text: "Dodaj usługę",
+      href: "/user/new_service",
+      icon: <AiFillThunderbolt />,
     },
     {
       text: "Dodaj ofertę",
       href: "/user/add_job_offer",
-      icon: <FaPlus />,
+      icon: <FaPlusCircle />,
     },
     {
       text: "Twoje oferty",
       href: "/user/job_offers/",
       icon: <FaList />,
     },
-
     // {
     //   text: "Generator Obrazów",
     //   href: "/user/image-generator",

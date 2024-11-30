@@ -5,7 +5,6 @@ import { addJobOffer, updateUser } from "@/firebase";
 import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 import { useRouter } from "next/navigation";
-import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { IProject, JobPosting } from "@/types";
 import { setUser } from "@/redux/slices/user";
@@ -50,63 +49,97 @@ export default function StepThree({
   const dispatch = useDispatch();
 
   const handleRecruitmentStart = async () => {
-    await updateJobOffers().then(() => {
+    try {
+      if (doesOfferExist()) {
+        // Update existing job offer
+        await updateJobOffers();
+      } else {
+        // Add new job offer
+        await addJobOfferToUser();
+      }
       showToastSuccess("Pomyślnie zapisano ofertę pracy!");
-    });
-    setIsAnimating(true);
+      setIsAnimating(true);
+    } catch (error) {
+      showToastError("Nie udało się zapisać oferty pracy.");
+    }
   };
-  const router = useRouter();
+
+  const doesOfferExist = () => {
+    return user?.job_offers?.some(
+      (offer: JobPosting) => offer.slug === formData.slug || offer.slug === slug
+    );
+  };
+
   const updateJobOffers = async () => {
     try {
       setIsLoading(true);
 
-      // Check if the user has enough tokens
-      const hasEnoughTokens = true;
-
-      // Create new job offer
-      const jobOfferId = uuid();
-      const newJobOffer: JobPosting = {
+      // Create the updated job offer
+      const updatedJobOffer: JobPosting = {
         ...formData,
-        isPaid: hasEnoughTokens,
-        id: jobOfferId,
+        id:
+          user.job_offers.find(
+            (offer: JobPosting) => offer.slug === formData.slug
+          )?.id || uuid(),
         creationTime: Date.now(),
         authorId: user.uid,
-        slug: slug,
-        category: category,
-        job: job,
+        slug: slug || formData.slug,
+        category: category || formData.slug,
+        job: job || formData.slug,
       };
 
-      // Update job offers list for the user
-      const updatedJobOffers = user.job_offers
-        ? [...user.job_offers, newJobOffer]
-        : [newJobOffer];
+      // Update the job offer in the user's job_offers
+      const updatedJobOffers = user.job_offers.map((offer: JobPosting) =>
+        offer.slug === formData.slug ? updatedJobOffer : offer
+      );
 
-      // Calculate updated tokens if user has enough
-      const updatedTokens = hasEnoughTokens
-        ? user.tokens - formData.price
-        : user.tokens;
+      // Update the user in the database
+      await updateUser(user.uid, { job_offers: updatedJobOffers });
 
-      // Update user in the database
-      await updateUser(user.uid, {
-        job_offers: updatedJobOffers,
-        // tokens: updatedTokens,
-      });
-      await addJobOffer(newJobOffer);
       // Dispatch updated user state to Redux
       dispatch(
         setUser({
           ...user,
           job_offers: updatedJobOffers,
-          // tokens: updatedTokens,
         })
       );
-
-      setIsAnimating(false);
-    } catch (error) {
-      showToastError("Failed to add job offer.");
     } finally {
       setIsLoading(false);
-      router.push("/user/job_offers");
+    }
+  };
+
+  const addJobOfferToUser = async () => {
+    try {
+      setIsLoading(true);
+
+      const jobOfferId = uuid();
+      const newJobOffer: JobPosting = {
+        ...formData,
+        id: jobOfferId,
+        creationTime: Date.now(),
+        authorId: user.uid,
+        slug: slug || formData.slug,
+        category: category || formData.slug,
+        job: job || formData.slug,
+      };
+
+      const updatedJobOffers = user.job_offers
+        ? [...user.job_offers, newJobOffer]
+        : [newJobOffer];
+
+      // Update the user in the database
+      await updateUser(user.uid, { job_offers: updatedJobOffers });
+      await addJobOffer(newJobOffer);
+
+      // Dispatch updated user state to Redux
+      dispatch(
+        setUser({
+          ...user,
+          job_offers: updatedJobOffers,
+        })
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 

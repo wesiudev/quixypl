@@ -157,10 +157,10 @@ export default function PortfolioItems({
   return (
     <div className={`px-6 mt-3`}>
       <div className="font-extrabold text-lg flex items-center text-black">
-        <div className="bg-gradient-to-r from-primary to-cta w-12 h-12 flex items-center justify-center mr-2">
+        <div className="bg-gradient-to-r from-primary to-cta w-24 rounded-xl h-12 flex items-center justify-center mr-2">
           <FaStar className="text-white text-3xl" />
         </div>
-        Rozwiń swoje portfolio usług... By zdobywać nowych klientów!
+        Rozwiń swoje portfolio usług aby zdobywać nowych klientów!
       </div>
       <p className="text-sm text-black my-2">
         Dodaj nową usługę do naszego rynku z usługami.
@@ -507,7 +507,7 @@ export default function PortfolioItems({
                 )}
               </div>
               <div className="mb-3">
-                <h3 className="font-extrabold text-xl text-black mt-3">
+                <h3 className="font-extrabold text-xl text-black my-2">
                   Nazwa usługi
                 </h3>
                 <input
@@ -524,7 +524,7 @@ export default function PortfolioItems({
                 />
               </div>
               <div className="mb-3">
-                <h3 className="font-extrabold text-xl text-black mt-1">
+                <h3 className="font-extrabold text-xl text-black my-2">
                   Opis usługi
                 </h3>
                 <ReactQuill
@@ -561,7 +561,7 @@ export default function PortfolioItems({
                   aria-label="Link to project"
                 />
               </div> */}
-              {!source?.seek && source?.seek !== "ask" && (
+              {/* {!source?.seek && source?.seek !== "ask" && (
                 <div className="">
                   <div className="my-3">
                     <h3 className="font-extrabold text-xl text-black">
@@ -601,10 +601,10 @@ export default function PortfolioItems({
                     placeholder="Wpisz wynagrodzenie..."
                   />
                 </div>
-              )}
+              )} */}
             </div>
 
-            <div className="mt-3">
+            {/* <div className="mt-3">
               <InputField
                 id="duration"
                 label="Czas wykonania"
@@ -617,12 +617,8 @@ export default function PortfolioItems({
                 }
                 placeholder="Czas wykonania usługi"
               />
-            </div>
+            </div> */}
 
-            <h3 className="font-coco text-black drop-shadow-lg mt-1.5 mb-3">
-              Możesz uwzględnić kilka obrazów usługi (np. logo, stronę
-              główną...)
-            </h3>
             {project?.images?.length > 0 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {project?.images?.map((item: any, i: any) => (
@@ -785,6 +781,10 @@ export default function PortfolioItems({
                 </button>
               </div>
             )}
+            <h3 className="font-coco text-black drop-shadow-lg mt-1.5 mb-3">
+              Możesz uwzględnić kilka obrazów usługi (np. logo, stronę
+              główną...)
+            </h3>
             <ImagePicker handler={uploadImages} user={source} />
           </div>
         </div>

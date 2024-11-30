@@ -1,7 +1,7 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import { FaPlus } from "react-icons/fa6";
+import { FaChevronLeft, FaPlus } from "react-icons/fa6";
 import { IoCloseCircle } from "react-icons/io5";
 import { JobPosting } from "@/types";
 import { updateJobOffer, updateUser } from "@/firebase";
@@ -90,6 +90,18 @@ const JobOfferList = () => {
   }
   return (
     <div className="flex flex-col w-full">
+      <div className="w-full justify-between bg-gradient-to-r from-primary to-cta py-3 px-6 text-white font-bold text-lg flex items-center">
+        <Link href="/user" className="flex items-center">
+          <FaChevronLeft className="mr-2 text-xl" />
+          Powrót
+        </Link>
+        <div className="flex flex-col text-white pl-12">
+          <h2 className="font-extrabold">Sekcja ogłoszeń</h2>
+          <p className="text-xs font-coco">
+            Wszystkie ogłoszenia, którymi możesz zarządzać.
+          </p>
+        </div>
+      </div>
       <h2 className="z-50 shadow-sm sticky top-0 text-black p-3 px-6 lg:p-6 bg-white font-bold font-coco text-lg sm:text-3xl">
         Twoje Oferty Pracy
       </h2>
