@@ -36,9 +36,9 @@ export default function AdminLayout({
   }, []);
   return (
     <div className="w-full relative z-[9999] bg-primary">
+      <InitUser user={user} />
       {user ? (
         <div>
-          <InitUser user={user} />
           {modals?.quixies && <QuixiesModule />}
           <Nav isNavOpen={isNavOpen} setNavOpen={setNavOpen} />
           <div
