@@ -6,10 +6,10 @@ import { toast } from "react-toastify";
 import { toastUpdate } from "@/components/Toast/ToastUpdate";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { errorCatcher } from "../../../../utils/errorCatcher";
 import CreateAccountForm from "./CreateAccountForm";
 import FirstStep from "./FirstStep";
 import FirstStepButtons from "./FirstStepButtons";
+import { errorCatcher } from "../../../utils/errorCatcher";
 export default function Register() {
   const router = useRouter();
   const [step, setStep] = useState(0);
