@@ -1,14 +1,6 @@
 "use client";
-import {
-  FaRocket,
-  FaUserNinja,
-  FaLightbulb,
-  FaImages,
-  FaUsers,
-  FaHome,
-  FaPlusCircle,
-} from "react-icons/fa";
-import { FaCoins, FaList, FaPlus } from "react-icons/fa6";
+import { FaUsers, FaHome, FaPlusCircle } from "react-icons/fa";
+import { FaCoins, FaList } from "react-icons/fa6";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";

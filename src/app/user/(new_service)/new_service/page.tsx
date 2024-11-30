@@ -1,4 +1,3 @@
-"use client";
 import NewService from "@/components/NewService";
 
 export default function Page() {

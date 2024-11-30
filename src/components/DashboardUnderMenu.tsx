@@ -1,7 +1,6 @@
 "use client";
 import { set_modals } from "@/redux/slices/modalsopen";
 import Image from "next/image";
-import Link from "next/link";
 import { FaCoins, FaUser } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 

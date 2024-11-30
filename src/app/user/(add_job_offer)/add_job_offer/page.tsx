@@ -1,4 +1,3 @@
-"use client";
 import AddJobOffer from "@/components/AddJobOffer/AddJobOffer";
 
 export default function Page() {
