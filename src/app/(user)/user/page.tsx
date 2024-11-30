@@ -1,5 +1,5 @@
-import User from "../../components/User";
-import DashboardUnderMenu from "../../components/DashboardUnderMenu";
+import User from "../../../components/User";
+import DashboardUnderMenu from "../../../components/DashboardUnderMenu";
 import UserPanel from "@/components/UserPanel";
 import Image from "next/image";
 import Link from "next/link";

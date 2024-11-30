@@ -1,5 +1,5 @@
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import UserClient from "../../components/UserClient";
+import UserClient from "../../../components/UserClient";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
