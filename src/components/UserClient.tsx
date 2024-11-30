@@ -10,11 +10,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Loading from "../app/loading";
 
-export default function UserClient({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function UserClient() {
   const [isNavOpen, setNavOpen] = useState(false);
   const [user, loading] = useAuthState(auth);
   const { modals } = useSelector((state: any) => state.modals);
@@ -35,24 +31,20 @@ export default function UserClient({
   }, []);
   return (
     <div>
-      {user ? (
-        <div>
-          <InitUser user={user} />
-          {modals?.quixies && <QuixiesModule />}
-          <Nav isNavOpen={isNavOpen} setNavOpen={setNavOpen} />
-          <div
-            className={`${
-              isNavOpen
-                ? "lg:pl-[300px] ml-[300px] lg:ml-0 duration-300 lg:scale-[0.9]"
-                : "lg:pl-0 ml-0 duration-300 scale-100"
-            } min-w-full min-h-screen bg-primary`}
-          >
-            {children}
-          </div>
-        </div>
-      ) : (
-        <Loading />
-      )}
+      <div>
+        <InitUser user={user} />
+        {modals?.quixies && <QuixiesModule />}
+        <Nav isNavOpen={isNavOpen} setNavOpen={setNavOpen} />
+        <div
+          className={`${
+            isNavOpen
+              ? "lg:pl-[300px] ml-[300px] lg:ml-0 duration-300 lg:scale-[0.9]"
+              : "lg:pl-0 ml-0 duration-300 scale-100"
+          } min-w-full min-h-screen bg-primary`}
+        ></div>
+      </div>
+
+      {loading && <Loading />}
     </div>
   );
 }

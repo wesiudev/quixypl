@@ -8,7 +8,8 @@ export default async function Layout({
 }) {
   return (
     <div className="w-full relative z-[9999] bg-primary">
-      <UserClient>{children}</UserClient>
+      <UserClient />
+      {children}
     </div>
   );
 }
