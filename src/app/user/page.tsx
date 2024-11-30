@@ -1,11 +1,9 @@
-import { Metadata } from "next";
 import User from "../../components/User";
 import DashboardUnderMenu from "../../components/DashboardUnderMenu";
 import UserPanel from "@/components/UserPanel";
 import Image from "next/image";
 import Link from "next/link";
-
-export default function Page() {
+export default async function Page() {
   return (
     <div>
       <Link

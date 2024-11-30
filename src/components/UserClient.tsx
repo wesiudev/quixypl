@@ -28,7 +28,7 @@ export default function UserClient() {
         progress: undefined,
       });
     }
-  }, []);
+  }, [user, loading]);
   return (
     <div>
       <div>
