@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaChevronRight } from "react-icons/fa";
 import SearchJobs from "@/components/HomeUnderHero/SearchJobs";
 import OpenableOpportunity from "@/components/HomeUnderHero/OpenableOpportunity";
 import jobs from "../../public/14.09.2024.json";

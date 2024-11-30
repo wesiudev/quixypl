@@ -1,4 +1,3 @@
-import react from "react";
 import localFont from "next/font/local";
 import { Cardo } from "next/font/google";
 import { Providers } from "@/redux/Provider";

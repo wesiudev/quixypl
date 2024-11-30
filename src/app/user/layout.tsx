@@ -10,12 +10,7 @@ import QuixiesModule from "@/components/Dashboard/QuixiesModule";
 import Loading from "../loading";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import Settings from "@/components/Dashboard/Settings/Settings";
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   const [isNavOpen, setNavOpen] = useState(false);
   const [user, loading] = useAuthState(auth);
   const { modals } = useSelector((state: any) => state.modals);
