@@ -5,9 +5,6 @@ import UserPanel from "@/components/UserPanel";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Panel administracyjny",
-};
 export default function Page() {
   return (
     <div>

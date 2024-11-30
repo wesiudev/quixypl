@@ -1,3 +1,4 @@
+"use client";
 import dynamic from "next/dynamic";
 const Postings = dynamic(() => import("@/components/Postings/Postings"), {
   ssr: false,
