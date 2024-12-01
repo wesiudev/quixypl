@@ -1,7 +1,6 @@
 import { getDocument } from "@/firebase";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { setUser } from "@/redux/slices/user";
-import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Unsaved({

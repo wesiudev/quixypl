@@ -165,10 +165,7 @@ export default function EssentialUserInfo({
           <div className="mt-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="flex flex-col">
-                <label className="font-bold text-black">
-                  {source?.seek && "Imię"}
-                  {!source?.seek && "Nazwa klienta"}
-                </label>
+                <label className="font-bold text-black">Nazwa</label>
                 <input
                   type="text"
                   value={source?.name}
@@ -177,7 +174,7 @@ export default function EssentialUserInfo({
                     setChangesWereMade(true);
                   }}
                   className="border border-primary  p-2 text-black font-light"
-                  placeholder="Imię lub imię i nazwisko"
+                  placeholder="imię/nazwisko/nazwa firmy"
                 />
               </div>
               <div className="flex flex-col">

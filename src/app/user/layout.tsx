@@ -20,6 +20,7 @@ export default function AdminLayout({
         <>
           <InitUser user={user} />
           <Nav setNavOpen={setNavOpen} isNavOpen={isNavOpen} />
+          <Settings />
           <div
             className={`${
               isNavOpen

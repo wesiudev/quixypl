@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div>
+    <div className="relative">
       <UserPanel />
       <DashboardUnderMenu />
       <User />
