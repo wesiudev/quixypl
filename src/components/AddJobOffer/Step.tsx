@@ -2,9 +2,9 @@
 import { toast } from "react-toastify";
 import { InputField } from "./InputField";
 import CategorySelector from "./CategorySelector";
-import JobPreferencesHandler from "../JobOfferPreferencesHandler";
 import "react-quill-new/dist/quill.snow.css";
 import dynamic from "next/dynamic";
+import JobPreferencesHandler from "../JobOfferPreferencesHandler";
 export interface EditorContentChanged {
   html: string;
   markdown: string;
@@ -173,9 +173,9 @@ export default function StepOne({
           type="button"
           onClick={() => {
             if (
-              formData?.category &&
-              formData?.slug &&
-              formData?.job &&
+              (formData?.category || category) &&
+              (formData?.slug || slug) &&
+              (formData?.job || job) &&
               formData?.description &&
               formData?.title &&
               formData?.preferences.length

@@ -1,16 +1,16 @@
-import { setUser } from "@/redux/slices/user";
+"use client";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 
 export default function JobPreferencesHandler({
   addPreference,
   removePreference,
-  source,
+  formData,
+  setFormData,
 }: {
-  addPreference: (item: string) => void;
-  removePreference: (item: string) => void;
-  source: { seek?: string; preferences: string[] };
+  addPreference: any;
+  removePreference: any;
+  formData: any;
+  setFormData: any;
 }) {
   const [expand, setExpand] = useState(false);
 
@@ -47,39 +47,26 @@ export default function JobPreferencesHandler({
       <button
         key={item}
         className={`font-coco duration-200 text-white px-1.5 py-1 ml-1 mt-1 text-sm  ${
-          source?.preferences?.includes(item) ? "bg-cta" : "bg-gray-400"
+          formData?.preferences?.includes(item) ? "bg-cta" : "bg-gray-400"
         }`}
         onClick={() => {
-          handlePreferenceToggle(item);
+          formData?.preferences?.includes(item)
+            ? removePreference(item)
+            : addPreference(item);
         }}
       >
         {item}
       </button>
     ));
 
-  const { user } = useSelector((state: any) => state.user);
-  const dispatch = useDispatch();
-
   // Toggle preferences depending on seek status
   const handlePreferenceToggle = (item: string) => {
     // If user already has the item selected, remove it
-    if (user?.preferences?.includes(item)) {
-      dispatch(
-        setUser({
-          ...user,
-          preferences: user?.preferences.filter((i: string) => i !== item),
-        })
-      );
+    if (formData?.preferences?.includes(item)) {
       removePreference(item);
-      return;
+    } else {
+      addPreference(item);
     }
-    addPreference(item);
-    dispatch(
-      setUser({
-        ...user,
-        preferences: [...(user?.preferences || []), item],
-      })
-    );
   };
 
   return (

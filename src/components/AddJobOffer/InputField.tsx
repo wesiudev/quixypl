@@ -26,7 +26,7 @@ export const InputField: React.FC<InputFieldProps> = ({
   return (
     <div>
       <label
-        className="font-extrabold text-xl text-black drop-shadow-lg mt-3"
+        className="font-extrabold text-black drop-shadow-lg mt-3"
         htmlFor={id}
       >
         {label}
@@ -60,7 +60,7 @@ export const InputField: React.FC<InputFieldProps> = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          className="p-2 border-2 border-primary text-black  w-full font-gotham font-light"
+          className="p-2 border-2 border-primary text-black  w-full"
         />
       )}
     </div>

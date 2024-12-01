@@ -22,17 +22,17 @@ export default function StepTwo({
   return (
     <div className="w-full">
       {currentStep === 2 && (
-        <div className="w-full mt-2">
-          <div className="font-bold text-sm text-black flex flex-col">
+        <div className="w-full">
+          <div className="text-black flex flex-col">
             <div className="flex flex-row items-center flex-wrap">
               <div className={"mb-2 flex items-center flex-wrap w-full"}>
                 <div className="w-full">
                   <div>
-                    <h3 className="font-gotham font-light text-black drop-shadow-lg mt-2">
+                    <h3 className="font-extrabold text-black drop-shadow-lg mt-2">
                       Nazwa Firmy/Działalności/Imię rekrutera
                     </h3>
                     <input
-                      className="border border-primary  p-2 text-black font-light w-full"
+                      className="border border-primary p-2 text-black w-full"
                       value={formData?.name}
                       onChange={(e) => {
                         setFormData({
@@ -47,7 +47,7 @@ export default function StepTwo({
                   <div className="mt-3"></div>
 
                   <div>
-                    <h3 className="font-gotham font-light text-black drop-shadow-lg">
+                    <h3 className="font-extrabold text-black drop-shadow-lg">
                       Rodzaj Wynagrodzenia
                     </h3>
                     <select
@@ -58,7 +58,7 @@ export default function StepTwo({
                           salary: e.target.value,
                         })
                       }
-                      className="border border-primary  p-2 text-black w-full !font-gotham font-light"
+                      className="border border-primary  p-2 text-black w-full"
                     >
                       <option value="Nie podano">Rodzaj wynagrodzenia</option>
                       <option value="Stawka godzinowa">Stawka godzinowa</option>
@@ -75,7 +75,7 @@ export default function StepTwo({
               </div>
             </div>
           </div>
-          <div className="!font-gotham font-light text-gray-800">
+          <div className="text-gray-800">
             <InputField
               id="salaryValue"
               label="Wynagrodzenie"
