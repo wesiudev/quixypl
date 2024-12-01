@@ -20,7 +20,7 @@ export default function Page() {
           alt="Logo Quixy"
           className="w-12 h-12"
         />
-        <h1 className="">Panel Administracyjny</h1>
+        <h1>Panel Administracyjny</h1>
       </Link>
       <DashboardProviders />
       <UserPanel />

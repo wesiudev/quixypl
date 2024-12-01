@@ -19,7 +19,6 @@ import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { addDocument, storage, updateUser } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { InputField } from "@/components/AddJobOffer/InputField";
 import { FaStar } from "react-icons/fa6";
 import ReactQuill from "react-quill-new";
 import { TOOLBAR_OPTIONS } from "@/components/AddJobOffer/Step";
@@ -191,7 +190,7 @@ export default function PortfolioItems({
               >
                 {project?.tags && tagsOpenLevel === 1
                   ? project?.tags?.map((item: any, i: any) => (
-                      <div className="text-sm mt-4 bg-slate-300  p-2" key={i}>
+                      <div className="text-sm mt-4 bg-slate-300 p-2" key={i}>
                         <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
                           <div className="bg-[#126b91]  p-1 text-white mt-2">
                             {item.slugTitle}
@@ -207,7 +206,7 @@ export default function PortfolioItems({
                     ))
                   : tagsOpenLevel === 2
                   ? project?.tags?.map((item: any, i: any) => (
-                      <div className="text-sm mt-4 bg-slate-300  p-2" key={i}>
+                      <div className="text-sm mt-4 bg-slate-300 p-2" key={i}>
                         <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
                           <div className="flex items-center">
                             <div className="bg-[#126b91]  p-1 text-white mt-2">
