@@ -8,13 +8,14 @@ import {
   FaTag,
   FaUpload,
 } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { FaArrowLeft, FaBriefcase, FaCoins, FaList } from "react-icons/fa6";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { usePathname, useRouter } from "next/navigation";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { useDispatch, useSelector } from "react-redux";
+import Settings from "@/components/Dashboard/Settings/Settings";
 export default function Nav({
   isNavOpen,
   setNavOpen,
@@ -78,6 +79,7 @@ export default function Nav({
   const { modals } = useSelector((state: any) => state.modals);
   return (
     <div>
+      <Settings />
       <div
         className={`!z-[999999999999999999] fixed scrollbar !text-white ${
           isNavOpen
