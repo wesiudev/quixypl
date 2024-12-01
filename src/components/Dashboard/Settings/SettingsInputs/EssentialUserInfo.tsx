@@ -174,7 +174,7 @@ export default function EssentialUserInfo({
                     setChangesWereMade(true);
                   }}
                   className="border border-primary  p-2 text-black font-light"
-                  placeholder="imię/nazwisko/nazwa firmy"
+                  placeholder="imię/nazwa firmy"
                 />
               </div>
               <div className="flex flex-col">

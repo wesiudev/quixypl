@@ -1,3 +1,4 @@
+"use client";
 import { setUser } from "@/redux/slices/user";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

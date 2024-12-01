@@ -1,3 +1,4 @@
+"use client";
 import { setUser } from "@/redux/slices/user";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
