@@ -13,6 +13,7 @@ import AccountHistory from "@/components/Dashboard/ImageGenerator/dashboard/Acco
 import ServiceList from "@/components/Dashboard/ProjectList";
 import MultiStepVerification from "@/components/Dashboard/Settings/SettingsInputs/MultiStepVerification";
 import Viewer from "@/components/AddJobOffer/Viewer";
+import Settings from "@/components/Dashboard/Settings/Settings";
 async function sendVerificationEmail(email: string, verificationCode: string) {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`,
@@ -32,8 +33,10 @@ export default function User() {
     navigator.clipboard.writeText(text);
   }
   const [isAnimating, setIsAnimating] = useState(false);
+  const [source, setSource] = useState<any>();
   return (
     <div className="">
+      <Settings source={source} setSource={setSource} />
       {user ? (
         <div className="relative pb-3 lg:pb-6 bg-white">
           <div className="grid grid-cols-1 h-max relative w-full mx-auto">
