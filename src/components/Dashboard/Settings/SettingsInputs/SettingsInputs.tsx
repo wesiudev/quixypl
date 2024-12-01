@@ -4,7 +4,6 @@ import TagsHandler from "../SettingsTagsHandler";
 import PreferencesHandler from "../SettingsPreferencesHandler";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/slices/user";
-import Image from "next/image";
 import EssentialUserInfo from "./EssentialUserInfo";
 import SettingsHeader from "./SettingsHeader";
 import ChooseAccountType from "./ChooseAccountType";
@@ -83,16 +82,6 @@ export default function UserEditDashboard({
                   removePreference={removePreference}
                   source={source}
                 />
-                {/* <PortfolioItems
-                  source={source}
-                  isNewProject={isNewProject}
-                  setIsNewProject={setIsNewProject}
-                  scrollIntoView={scrollIntoView}
-                  setProject={setProject}
-                  project={project}
-                  setUploading={setUploading}
-                  setUploadCount={setUploadCount}
-                /> */}
               </div>
             )}
           </div>

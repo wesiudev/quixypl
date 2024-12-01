@@ -40,13 +40,13 @@ export default function Settings() {
             } mb-12`}
           >
             <div className={`${error && "vibrate-screen"}`}>
-              {/* <SettingsInputs
-                source={user || source}
+              <SettingsInputs
+                source={source}
                 setSource={setSource}
                 changesWereMade={changesWereMade}
                 setChangesWereMade={setChangesWereMade}
                 setError={setError}
-              /> */}
+              />
               {/* <Unsaved
                 changesWereMade={changesWereMade}
                 error={error}
