@@ -86,11 +86,10 @@ export default function Nav({
       return;
     }
   }, [user]);
-  if (typeof window === "undefined") return null;
   return (
     <div>
       <Settings source={user} setSource={setSource} />
-      <div
+      {/* <div
         className={`!z-[999999999999999999] fixed scrollbar !text-white ${
           isNavOpen
             ? "translate-x-[0] duration-300"
@@ -227,9 +226,9 @@ export default function Nav({
 
                       {item.expandable &&
                         expandedItems.includes(index as never) && (
-                          <ul className={`bg-[#222430]  py-2 px-4 w-full`}>
+                          <div className={`bg-[#222430] py-2 px-4 w-full`}>
                             {item.subItems.map((subItem, subIndex) => (
-                              <li key={subIndex}>
+                              <div key={subIndex}>
                                 <button
                                   onClick={() => {
                                     router.push(subItem.href);
@@ -244,9 +243,9 @@ export default function Nav({
                                   {subItem.icon}
                                   <div className="ml-2">{subItem.title}</div>
                                 </button>
-                              </li>
+                              </div>
                             ))}
-                          </ul>
+                          </div>
                         )}
                     </div>
                   ))}
@@ -255,7 +254,7 @@ export default function Nav({
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
