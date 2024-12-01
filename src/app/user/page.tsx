@@ -25,9 +25,9 @@ export default function Page() {
         />
         <h1 className="">Panel Administracyjny</h1>
       </Link>
-      <UserPanel />
+      {/* <UserPanel />
       <DashboardUnderMenu />
-      <User />
+      <User /> */}
     </div>
   );
 }
