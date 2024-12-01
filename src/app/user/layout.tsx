@@ -19,7 +19,7 @@ export default function AdminLayout({
     return <Loading />;
   } else
     return (
-      <div className="w-full  relative z-[9999] bg-white">
+      <div className="w-full relative z-[9999] bg-white">
         {user ? (
           <>
             <InitUser user={user} />

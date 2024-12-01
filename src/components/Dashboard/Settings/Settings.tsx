@@ -17,11 +17,7 @@ export default function Settings({
   const [changesWereMade, setChangesWereMade] = useState(false);
   const { modals } = useSelector((state: any) => state.modals);
   const dispatch = useDispatch();
-  function scrollIntoView() {
-    setTimeout(() => {
-      wrapperRef.current.scrollTop += 400;
-    }, 50);
-  }
+
   return (
     <div className="overflow-x-hidden">
       <button
@@ -50,7 +46,6 @@ export default function Settings({
       >
         <div className={`${error && "vibrate-screen"}`}>
           <UserEditDashboard
-            scrollIntoView={scrollIntoView}
             source={source}
             setSource={setSource}
             changesWereMade={changesWereMade}

@@ -15,14 +15,12 @@ export default function UserEditDashboard({
   setChangesWereMade,
   setSource,
   setError,
-  scrollIntoView,
 }: {
   source: any;
   changesWereMade: any;
   setChangesWereMade: any;
   setSource: any;
   setError: any;
-  scrollIntoView: any;
 }) {
   const dispatch = useDispatch();
   const [isNewProject, setIsNewProject] = useState(false);
