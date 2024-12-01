@@ -12,15 +12,13 @@ export default function AdminLayout({
   const [user, loading] = useAuthState(auth);
   return (
     <div className="w-full relative z-[9999] bg-white">
-      {user ? (
-        <>
+      {user && (
+        <div>
           <InitUser user={user} />
           <div className="pl-[300px] min-w-full min-h-screen bg-[#222430]">
             {children}
           </div>
-        </>
-      ) : (
-        <LoginPage />
+        </div>
       )}
     </div>
   );

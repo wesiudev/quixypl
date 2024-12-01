@@ -16,8 +16,6 @@ export default function InitUser({ user }: { user: any }) {
     }
   }, []);
   return (
-    <div>
-      <Nav setNavOpen={setNavOpen} isNavOpen={isNavOpen} />
-    </div>
+    <div>{/* <Nav setNavOpen={setNavOpen} isNavOpen={isNavOpen} /> */}</div>
   );
 }
