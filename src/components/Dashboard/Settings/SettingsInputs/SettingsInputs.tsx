@@ -22,8 +22,6 @@ export default function UserEditDashboard({
   setError: any;
 }) {
   const dispatch = useDispatch();
-  const [isNewProject, setIsNewProject] = useState(false);
-
   const addPreference = (preference: any) => {
     const newPreferences = source?.preferences
       ? [...source?.preferences, preference]
