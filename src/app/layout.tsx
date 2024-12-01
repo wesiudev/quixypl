@@ -6,6 +6,7 @@ import "../styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import InitUser from "@/components/InitUser";
 export default async function RootLayout({
   children,
 }: {
@@ -17,6 +18,7 @@ export default async function RootLayout({
         className={`scrollbar bg-white overflow-x-hidden relative ${cocosharp.variable} ${cardo.variable} ${gotham.variable}`}
       >
         <Providers>
+          <InitUser />
           <div className="relative z-[9999999999]">
             <ToastContainer />
           </div>
