@@ -110,7 +110,7 @@ export default function Nav({
             <div>
               <div className="w-max mx-auto">
                 <Link href="/" className="text-white py-4 px-3">
-                  <h1 className="text-base font-bold  flex flex-row items-center ">
+                  <div className="text-base font-bold  flex flex-row items-center ">
                     <Image
                       src="/favicons/favicon-32x32.png"
                       width={36}
@@ -119,7 +119,7 @@ export default function Nav({
                       className="w-8 h-8 mr-2"
                     />
                     Panel administracyjny
-                  </h1>
+                  </div>
                 </Link>
               </div>
               <div className="mt-4 px-2">
@@ -140,9 +140,9 @@ export default function Nav({
                 </div>
               </div>
               <div className="mt-4">
-                <ul className="flex flex-col flex-wrap justify-between w-full px-2">
+                <div className="flex flex-col flex-wrap justify-between w-full px-2">
                   {navItems.map((item, index) => (
-                    <li
+                    <div
                       key={index}
                       className={`w-full ${
                         item.expandable ? "relative" : ""
@@ -248,9 +248,9 @@ export default function Nav({
                             ))}
                           </ul>
                         )}
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             </div>
           </div>
