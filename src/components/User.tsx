@@ -50,22 +50,6 @@ export default function User() {
                         : "xl:grid-cols-1"
                     }`}
                   >
-                    {!user?.emailVerified && (
-                      <div className="bg-primary text-white p-3 w-full">
-                        <b>Witaj w Quixy!</b>Wysłaliśmy wiadomość aktywującą
-                        konto na podany adres e-mail - {user?.email}{" "}
-                        <button
-                          disabled={sent}
-                          onClick={() => {
-                            sendVerificationEmail(user?.email, user?.uid);
-                            setSent(true);
-                          }}
-                        >
-                          E-mail nie dotarł?
-                        </button>
-                      </div>
-                    )}
-
                     {(user?.seek === "ask" ||
                       !user?.pseudo ||
                       !user?.name ||

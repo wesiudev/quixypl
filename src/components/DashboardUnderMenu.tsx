@@ -33,16 +33,13 @@ export default function DashboardUnderMenu() {
                   style={{ boxShadow: "inset 0px 0px 8px black" }}
                   className="rounded-full bg-gradient-to-r from-primary to-cta w-16 aspect-square text-white flex items-center justify-center"
                 >
-                  <FaUser className="text-3xl lg:text-5xl" />
+                  <FaUser className="text-2xl" />
                 </div>
               )}
             </button>
             {!user?.configured && (user?.seek === "ask" || !user?.seek) && (
               <div className="pl-4 pt-4">
-                <h2 className="text-white bg-gradient-to-r from-zinc-800 via-gray-700 to-zinc-950 w-max rounded-xl px-2 font-extrabold">
-                  Nie skonfigurowano profilu
-                </h2>
-                <p className="text-black max-w-lg font-coco my-1 text-sm">
+                <p className="text-black max-w-lg my-1 text-sm">
                   Określ typ profilu w zakładce{" "}
                   <b className="italic">MÓJ PROFIL</b>, by rozpocząć swoją
                   przygodę w Quixy
