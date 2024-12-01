@@ -21,7 +21,7 @@ export default function AdminLayout({
       {userData && (
         <div>
           <Nav setNavOpen={setNavOpen} isNavOpen={isNavOpen} />
-          {/* <Settings /> */}
+          <Settings />
           <div
             className={`${
               isNavOpen
