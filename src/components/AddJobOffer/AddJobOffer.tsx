@@ -9,7 +9,6 @@ import StepOne from "./Step";
 import { JobListing } from "@/types";
 import ReactConfetti from "react-confetti";
 import { useSelector } from "react-redux";
-import DashboardProviders from "../DashboardProviders";
 export default function AddJobOffer() {
   const InitialData = {
     days: 1,
@@ -53,7 +52,6 @@ export default function AddJobOffer() {
 
   return (
     <div className="relative overflow-hidden min-h-screen w-full flex flex-col bg-gray-600 items-center">
-      <DashboardProviders />
       <div className="w-full justify-between bg-gradient-to-r from-primary to-cta py-3 px-6 text-white font-bold text-lg flex items-center">
         <Link href="/user" className="flex items-center">
           <FaChevronLeft className="mr-2 text-xl" />
