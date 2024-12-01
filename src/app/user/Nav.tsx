@@ -88,7 +88,7 @@ export default function Nav({
   }, [user]);
   return (
     <div>
-      <Settings source={user} setSource={setSource} />
+      {/* <Settings source={user} setSource={setSource} /> */}
       {/* <div
         className={`!z-[999999999999999999] fixed scrollbar !text-white ${
           isNavOpen
