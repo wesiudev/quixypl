@@ -25,7 +25,7 @@ export default function Page() {
       <DashboardProviders />
       <UserPanel />
       <DashboardUnderMenu />
-      <User />
+      {/* <User /> */}
     </div>
   );
 }

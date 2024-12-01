@@ -18,7 +18,6 @@ export default function RootLayout({
         className={`scrollbar bg-white overflow-x-hidden relative ${cocosharp.variable} ${cardo.variable} ${gotham.variable}`}
       >
         <Providers>
-          <InitUser />
           <div className="relative z-[9999999999]">
             <ToastContainer />
           </div>
