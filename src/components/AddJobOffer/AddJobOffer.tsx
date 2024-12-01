@@ -26,17 +26,17 @@ export default function AddJobOffer() {
     title: "",
     website: "",
   };
-  const { user } = useSelector((state: any) => state.user);
+  const { user } = useSelector((state: any) => state?.user);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<JobListing>(InitialData);
-  const handleChange = (
+  function handleChange(
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
-  ) => {
-    const { id, value } = e.target;
+  ) {
+    const { id, value } = e?.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
-  };
+  }
   const [configurationOpen, setConfigurationOpen] = useState(false);
   const [slug, setSlug] = useState("");
   const [category, setCategory] = useState("");
@@ -105,17 +105,13 @@ export default function AddJobOffer() {
             formData={formData}
             handleChange={handleChange}
             currentStep={currentStep}
-            user={user}
           />
           <StepThree
             prevStep={prevStep}
-            nextStep={nextStep}
             formData={formData}
             handleChange={handleChange}
             currentStep={currentStep}
-            setFormData={setFormData}
             user={user}
-            InitialData={InitialData}
             setIsAnimating={setIsAnimating}
             isAnimating={isAnimating}
             isSent={isSent}

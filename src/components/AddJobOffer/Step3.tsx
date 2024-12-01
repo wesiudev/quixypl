@@ -4,7 +4,6 @@ import ReactConfetti from "react-confetti";
 import { addJobOffer, updateUser } from "@/firebase";
 import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
-import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { IProject, JobPosting } from "@/types";
 import { setUser } from "@/redux/slices/user";
@@ -17,10 +16,7 @@ export default function StepThree({
   handleChange,
   currentStep,
   prevStep,
-  nextStep,
-  setFormData,
   user,
-  InitialData,
   isAnimating,
   setIsAnimating,
   isSent,
@@ -33,10 +29,7 @@ export default function StepThree({
   handleChange: any;
   currentStep: number;
   prevStep: any;
-  nextStep: any;
-  setFormData: any;
   user: any;
-  InitialData: any;
   isAnimating: any;
   setIsAnimating: any;
   isSent: any;
