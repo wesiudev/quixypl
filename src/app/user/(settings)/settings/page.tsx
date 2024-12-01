@@ -1,5 +1,9 @@
 "use client";
-import Settings from "@/components/Dashboard/Settings/Settings";
+import dynamic from "next/dynamic";
+const Settings = dynamic(
+  () => import("@/components/Dashboard/Settings/Settings"),
+  { ssr: false }
+);
 
 export default function Page() {
   return (
