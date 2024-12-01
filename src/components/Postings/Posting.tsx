@@ -1,3 +1,4 @@
+"use client";
 import { deleteJobOffer, updateUser } from "@/firebase";
 import Viewer from "../AddJobOffer/Viewer";
 import moment from "moment";

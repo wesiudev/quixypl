@@ -36,7 +36,7 @@ export interface IProject {
   link: string;
 }
 
-const JobOfferList = () => {
+export default function JobOfferList() {
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.user);
   const [loading, setLoading] = useState(false);
@@ -112,6 +112,4 @@ const JobOfferList = () => {
       </div>
     </div>
   );
-};
-
-export default JobOfferList;
+}
