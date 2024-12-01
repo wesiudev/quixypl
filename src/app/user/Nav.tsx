@@ -89,7 +89,7 @@ export default function Nav({
   return (
     <div>
       {/* <Settings source={user} setSource={setSource} /> */}
-      {/* <div
+      <div
         className={`!z-[999999999999999999] fixed scrollbar !text-white ${
           isNavOpen
             ? "translate-x-[0] duration-300"
@@ -254,7 +254,7 @@ export default function Nav({
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }
