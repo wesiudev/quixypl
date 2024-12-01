@@ -18,12 +18,14 @@ export default function Settings() {
       <button
         disabled={error}
         onClick={() => {
-          changesWereMade
-            ? setError(true)
-            : dispatch(set_modals({ ...modals, config: !modals.config }));
-          setTimeout(() => {
-            setError(false);
-          }, 1200);
+          if (changesWereMade) {
+            setError(true);
+            setTimeout(() => {
+              setError(false);
+            }, 1200);
+          } else {
+            dispatch(set_modals({ ...modals, config: !modals.config }));
+          }
         }}
         className={`disabled:cursor-not-allowed fixed z-[999999999999999999] left-0 top-0 w-screen h-screen ${
           modals.config
@@ -41,7 +43,7 @@ export default function Settings() {
       >
         <div className={`${error && "vibrate-screen"}`}>
           <UserEditDashboard
-            source={user}
+            source={user || source}
             setSource={setSource}
             changesWereMade={changesWereMade}
             setChangesWereMade={setChangesWereMade}
@@ -51,7 +53,7 @@ export default function Settings() {
             changesWereMade={changesWereMade}
             error={error}
             updateUser={updateUser}
-            source={user}
+            source={user || source}
             setSource={setSource}
             setChangesWereMade={setChangesWereMade}
           />
