@@ -1,7 +1,6 @@
 "use client";
 import { auth } from "@/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import LoginPage from "./LoginPage";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import InitUser from "./InitUser";
 import Nav from "./Nav";
@@ -22,7 +21,7 @@ export default function AdminLayout({
       {userData && (
         <div>
           <Nav setNavOpen={setNavOpen} isNavOpen={isNavOpen} />
-          <Settings />
+          {/* <Settings /> */}
           <div
             className={`${
               isNavOpen
