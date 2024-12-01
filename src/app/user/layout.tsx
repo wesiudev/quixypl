@@ -7,6 +7,7 @@ import InitUser from "./InitUser";
 import Nav from "./Nav";
 import { useState } from "react";
 import Settings from "@/components/Dashboard/Settings/Settings";
+import { useSelector } from "react-redux";
 export default function AdminLayout({
   children,
 }: {
@@ -14,19 +15,25 @@ export default function AdminLayout({
 }) {
   const [isNavOpen, setNavOpen] = useState(true);
   const [user, loading] = useAuthState(auth);
+  const userData = useSelector((state: any) => state.user);
   return (
     <div className="w-full relative z-[9999] bg-primary">
-      <InitUser user={user} />
-      <Nav setNavOpen={setNavOpen} isNavOpen={isNavOpen} />
-      <div
-        className={`${
-          isNavOpen
-            ? "lg:pl-[300px] ml-[300px] lg:ml-0 duration-300 lg:scale-[0.9]"
-            : "lg:pl-0 ml-0 duration-300 scale-100"
-        } min-w-full min-h-screen bg-primary`}
-      >
-        {children}
-      </div>
+      {user && <InitUser user={user} />}
+      {userData && (
+        <div>
+          <Nav setNavOpen={setNavOpen} isNavOpen={isNavOpen} />
+          <Settings />
+          <div
+            className={`${
+              isNavOpen
+                ? "lg:pl-[300px] ml-[300px] lg:ml-0 duration-300 lg:scale-[0.9]"
+                : "lg:pl-0 ml-0 duration-300 scale-100"
+            } min-w-full min-h-screen bg-primary`}
+          >
+            {children}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
