@@ -82,11 +82,14 @@ export default function Nav({
   useEffect(() => {
     if (user) {
       setSource(user);
+    } else {
+      return;
     }
   }, [user]);
+  if (typeof window === "undefined") return null;
   return (
     <div>
-      <Settings source={source} setSource={setSource} />
+      <Settings source={user} setSource={setSource} />
       <div
         className={`!z-[999999999999999999] fixed scrollbar !text-white ${
           isNavOpen
