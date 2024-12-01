@@ -96,17 +96,13 @@ export default function EditJobOffer({
             formData={formData}
             handleChange={handleChange}
             currentStep={currentStep}
-            user={user}
           />
           <StepThree
             prevStep={prevStep}
-            nextStep={nextStep}
             formData={formData}
             handleChange={handleChange}
             currentStep={currentStep}
-            setFormData={setFormData}
             user={user}
-            InitialData={jobOffer}
             setIsAnimating={setIsAnimating}
             isAnimating={isAnimating}
             isSent={isSent}
