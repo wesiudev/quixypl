@@ -267,9 +267,8 @@ export default function TagsHandler() {
       {user?.tags?.length > 0 && (
         <>
           {" "}
-          <h1 className="font-bold text-black mt-2 font-coco text-lg">
-            {user?.seek && user?.seek !== "ask" && "Twoje specjalizacje"}
-            {!user?.seek && user?.seek !== "ask" && "Twoje specjalizacje"}
+          <h1 className="font-extrabold text-black mt-2 text-xl">
+            Twoje specjalizacje
           </h1>
           <p className="text-black">
             Twoja oferta trafi do poszczególnych widoków naszej aplikacji
@@ -306,20 +305,22 @@ export default function TagsHandler() {
               Całość
             </button>
           </div>
-          <div className="mt-2 font-bold text-black ">
+          <div className="mt-2 font-extrabold text-black ">
             {user?.tags?.length === 0 && "Czym się zajmujesz?"}{" "}
-            {user?.tags?.length > 0 && tagsOpenLevel === 0 && "Wybrane "}
-            {user?.tags?.length > 0 && tagsOpenLevel === 1 && "Kategorie"}
-            {user?.tags?.length > 0 &&
-              user?.seek &&
-              user?.seek !== "ask" &&
-              tagsOpenLevel === 2 &&
-              "Twoja obecność w strukturze strony"}
-            {user?.tags?.length > 0 &&
-              !user?.seek &&
-              user?.seek !== "ask" &&
-              tagsOpenLevel === 2 &&
-              "Profil firmy w strukturze strony"}
+            <div className="text-xl">
+              {user?.tags?.length > 0 && tagsOpenLevel === 0 && "Wybrane "}
+              {user?.tags?.length > 0 && tagsOpenLevel === 1 && "Kategorie"}
+              {user?.tags?.length > 0 &&
+                user?.seek &&
+                user?.seek !== "ask" &&
+                tagsOpenLevel === 2 &&
+                "Twoja obecność w strukturze strony"}
+              {user?.tags?.length > 0 &&
+                !user?.seek &&
+                user?.seek !== "ask" &&
+                tagsOpenLevel === 2 &&
+                "Profil firmy w strukturze strony"}
+            </div>
             <div
               className={`${
                 tagsOpenLevel === 0 ? "flex flex-row flex-wrap -ml-2" : ""

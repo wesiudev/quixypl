@@ -11,7 +11,6 @@ export default function Unsaved({
   setSource,
   setChangesWereMade,
   updateUser,
-  data,
 }: {
   changesWereMade: boolean;
   error: boolean;
@@ -19,7 +18,6 @@ export default function Unsaved({
   setSource: any;
   setChangesWereMade: (value: boolean) => void;
   updateUser: (uid: string, data: any) => Promise<void>;
-  data: any;
 }) {
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
@@ -63,7 +61,6 @@ export default function Unsaved({
               try {
                 await updateUser(source?.uid, {
                   ...source,
-                  ...data,
                   configured: true,
                   history: [
                     ...history,

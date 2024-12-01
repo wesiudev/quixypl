@@ -51,11 +51,21 @@ export default function AddJobOffer() {
   const prevStep = () => setCurrentStep((prev) => prev - 1);
 
   return (
-    <div className="relative overflow-hidden min-h-screen w-full flex flex-col bg-gradient-to-r from-primary to-cta items-center">
-      <div
-        style={{ boxShadow: "0px 0px 5px black" }}
-        className="w-[100%] max-w-[55rem] h-max bg-white z-50 relative p-6 lg:p-10 overflow-hidden"
-      >
+    <div className="relative overflow-hidden min-h-screen w-full flex flex-col bg-gray-600 items-center">
+      <div className="w-full justify-between bg-gradient-to-r from-primary to-cta py-3 px-6 text-white font-bold text-lg flex items-center">
+        <Link href="/user" className="flex items-center">
+          <FaChevronLeft className="mr-2 text-xl" />
+          Powrót
+        </Link>
+        <div className="flex flex-col text-white pl-12">
+          <h2 className="font-extrabold">Nowe ogłoszenie</h2>
+          <p className="text-xs font-coco">
+            Zarządzaj ustawieniami oferty o pracę.
+          </p>
+        </div>
+      </div>
+      <div className="py-12"></div>
+      <div className="max-w-[40rem] rounded-xl bg-white z-50 relative p-6 lg:p-10 overflow-hidden">
         {isAnimating && <ReactConfetti />}
         <h1 className="text-xl md:text-3xl font-gotham text-zinc-800">
           Dodaj darmową ofertę pracy
@@ -115,13 +125,6 @@ export default function AddJobOffer() {
             job={job}
           />
         </div>
-        <Link
-          href="/dashboard"
-          className="mt-4 p-2 bg-primary text-white  hover:bg-primary-dark flex items-center justify-center"
-        >
-          <FaChevronLeft className="mr-2" />
-          Powrót do panelu
-        </Link>
       </div>
     </div>
   );
