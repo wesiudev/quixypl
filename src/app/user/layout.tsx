@@ -15,7 +15,7 @@ export default function AdminLayout({
   const [isNavOpen, setNavOpen] = useState(true);
   const [user, loading] = useAuthState(auth);
   return (
-    <div className="w-full relative z-[9999] bg-white">
+    <div className="w-full relative z-[9999] bg-primary">
       {user ? (
         <>
           <InitUser user={user} />
