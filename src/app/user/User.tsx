@@ -1,5 +1,4 @@
 "use client";
-
 import { set_modals } from "@/redux/slices/modalsopen";
 import moment from "moment";
 import { useState } from "react";
@@ -18,14 +17,12 @@ async function sendVerificationEmail(email: string, verificationCode: string) {
   );
   return data;
 }
-
 export default function User() {
   const { user } = useSelector((state: any) => state.user);
   moment.locale("pl");
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
   const [sent, setSent] = useState(false);
-
   function copyToClipboard(text: string) {
     navigator.clipboard.writeText(text);
   }

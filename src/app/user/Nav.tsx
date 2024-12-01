@@ -114,8 +114,7 @@ export default function Nav({
                 <div className="mb-3 relative w-full bg-gradient-to-r from-primary to-cta text-white hover:from-cta hover:to-cta rounded-xl">
                   <button
                     onClick={() => {
-                      dispatch(set_modals({ ...modals, config: true }));
-                      setNavOpen(!isNavOpen);
+                      router.push("/user/settings");
                     }}
                     className="w-full"
                   >
