@@ -1,3 +1,4 @@
+"use client";
 import { getDocument } from "@/firebase";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { setUser } from "@/redux/slices/user";
@@ -55,10 +56,22 @@ export default function Unsaved({
         </div>
         <div className="flex flex-col-reverse sm:flex-row items-center w-max">
           <button
-            onClick={async () => {
+            onClick={() => {
               const history = source?.history ? [...source?.history] : [];
-              try {
-                await updateUser(source?.uid, {
+              updateUser(source?.uid, {
+                ...source,
+                configured: true,
+                history: [
+                  ...history,
+                  {
+                    creationTime: Date.now(),
+                    action: "Aktualizacja profilu",
+                  },
+                ],
+              });
+              dispatch(set_modals({ ...modals, config: false }));
+              dispatch(
+                setUser({
                   ...source,
                   configured: true,
                   history: [
@@ -68,26 +81,9 @@ export default function Unsaved({
                       action: "Aktualizacja profilu",
                     },
                   ],
-                });
-                dispatch(set_modals({ ...modals, config: false }));
-                dispatch(
-                  setUser({
-                    ...source,
-                    configured: true,
-                    history: [
-                      ...history,
-                      {
-                        creationTime: Date.now(),
-                        action: "Aktualizacja profilu",
-                      },
-                    ],
-                  })
-                );
-              } catch (error) {
-                console.error(error);
-              } finally {
-                setChangesWereMade(false);
-              }
+                })
+              );
+              setChangesWereMade(false);
             }}
             className="text-white text-sm  bg-[green] font-gotham px-6 py-2"
           >

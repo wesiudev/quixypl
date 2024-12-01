@@ -7,7 +7,6 @@ import { setUser } from "@/redux/slices/user";
 import Image from "next/image";
 import EssentialUserInfo from "./EssentialUserInfo";
 import SettingsHeader from "./SettingsHeader";
-import PortfolioItems from "./PortfolioItems";
 
 export default function UserEditDashboard({
   source,
