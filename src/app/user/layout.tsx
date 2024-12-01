@@ -23,7 +23,7 @@ export default function AdminLayout({
         {user ? (
           <>
             <InitUser user={user} />
-            {/* <Nav setNavOpen={setNavOpen} isNavOpen={isNavOpen} /> */}
+            <Nav setNavOpen={setNavOpen} isNavOpen={isNavOpen} />
             <div className="pl-[300px] min-w-full min-h-screen bg-[#222430]">
               {children}
             </div>
