@@ -19,10 +19,6 @@ export default function Settings() {
         disabled={error}
         onClick={() => {
           if (changesWereMade) {
-            setError(true);
-            setTimeout(() => {
-              setError(false);
-            }, 1200);
           } else {
             dispatch(set_modals({ ...modals, config: !modals.config }));
           }
