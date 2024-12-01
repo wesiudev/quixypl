@@ -35,8 +35,8 @@ export default function Settings() {
         ref={wrapperRef}
         className={`h-[80vh] w-[95vw] lg:w-[80vw] overflow-y-scroll scrollbarChat ${
           modals.config
-            ? "z-[99999999999999999] opacity-100 fixed left-0 top-0"
-            : "z-[-1000] opacity-0 -translate-y-[150vh]"
+            ? "z-[99999999999999999] opacity-100 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            : "z-[-1000] opacity-0 fixed -translate-y-[150vh]"
         } mb-12`}
       >
         <div className={`${error && "vibrate-screen"}`}>
