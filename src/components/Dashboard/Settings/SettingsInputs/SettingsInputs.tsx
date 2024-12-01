@@ -50,7 +50,7 @@ export default function UserEditDashboard({
     price: 24.41,
   });
   return (
-    <>
+    <div>
       {isUploading && (
         <div className="z-[500] flex items-center justify-center text-center sticky left-0 top-0 bg-black bg-opacity-75 w-full h-screen font-bold text-xl text-white">
           Dodawanie {uploadCount} obrazów...
@@ -69,14 +69,14 @@ export default function UserEditDashboard({
           />
         )}
         {source?.configured && source?.seek !== "ask" && (
-          <>
+          <div>
             <EssentialUserInfo
               source={source}
               setChangesWereMade={setChangesWereMade}
               setSource={setSource}
             />
             {source?.seek !== "ask" && (
-              <>
+              <div>
                 <TagsHandler />
                 <PreferencesHandler
                   addPreference={addPreference}
@@ -93,11 +93,11 @@ export default function UserEditDashboard({
                   setUploading={setUploading}
                   setUploadCount={setUploadCount}
                 /> */}
-              </>
+              </div>
             )}
-          </>
+          </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

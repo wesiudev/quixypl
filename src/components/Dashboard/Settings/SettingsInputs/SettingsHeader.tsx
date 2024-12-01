@@ -1,5 +1,5 @@
+"use client";
 import { set_modals } from "@/redux/slices/modalsopen";
-import { AiOutlineFullscreen, AiOutlineFullscreenExit } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 
