@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div>
-      <Settings />
+      {/* <Settings /> */}
       <UserPanel />
       <DashboardUnderMenu />
       <User />
