@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import { IoCheckmarkCircle, IoCloseCircle } from "react-icons/io5";
 import { updateUser } from "@/firebase"; // Assuming updateUser is imported from "@/firebase"

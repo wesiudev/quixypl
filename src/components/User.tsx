@@ -10,13 +10,6 @@ import AccountHistory from "@/components/Dashboard/ImageGenerator/dashboard/Acco
 import ServiceList from "@/components/Dashboard/ProjectList";
 import MultiStepVerification from "@/components/Dashboard/Settings/SettingsInputs/MultiStepVerification";
 import Viewer from "@/components/AddJobOffer/Viewer";
-async function sendVerificationEmail(email: string, verificationCode: string) {
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`,
-    { cache: "no-store" }
-  );
-  return data;
-}
 
 export default function User() {
   const { user } = useSelector((state: any) => state.user);
@@ -24,7 +17,16 @@ export default function User() {
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
   const [sent, setSent] = useState(false);
-
+  async function sendVerificationEmail(
+    email: string,
+    verificationCode: string
+  ) {
+    const data = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`,
+      { cache: "no-store" }
+    );
+    return data;
+  }
   function copyToClipboard(text: string) {
     navigator.clipboard.writeText(text);
   }
