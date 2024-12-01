@@ -15,7 +15,6 @@ import { AiFillThunderbolt } from "react-icons/ai";
 import { usePathname, useRouter } from "next/navigation";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { useDispatch, useSelector } from "react-redux";
-import Settings from "@/components/Dashboard/Settings/Settings";
 export default function Nav({
   isNavOpen,
   setNavOpen,
@@ -77,18 +76,8 @@ export default function Nav({
   const pathname = usePathname();
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
-  const { user } = useSelector((state: any) => state.user);
-  const [source, setSource] = useState();
-  useEffect(() => {
-    if (user) {
-      setSource(user);
-    } else {
-      return;
-    }
-  }, [user]);
   return (
     <div>
-      <Settings source={user} setSource={setSource} />
       <div
         className={`!z-[999999999999999999] fixed scrollbar !text-white ${
           isNavOpen
