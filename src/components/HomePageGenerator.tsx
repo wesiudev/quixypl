@@ -10,8 +10,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { IoIosClose } from "react-icons/io";
+import GenerateIdeaInputs from "./GenerateIdeaInputs";
 import { cutSentence } from "@/lib/cutSentence";
 import RegisterPopup from "./RegisterPopup";
+import { FaCheck } from "react-icons/fa";
 
 async function sendVerificationEmail(email: string, verificationCode: string) {
   const data = await fetch(
@@ -75,6 +78,7 @@ export default function HomePageGenerator({
       toastUpdate("Proszę wpisać email", id, "error");
       return;
     }
+
     (async () => {
       try {
         await createUserWithEmailAndPassword(
@@ -116,7 +120,7 @@ export default function HomePageGenerator({
           toastUpdate("Sukces!", id, "success");
 
           sendVerificationEmail(userData.email, res.user?.uid).then(() => {
-            router.push(`${process.env.NEXT_PUBLIC_URL}/user`);
+            router.push(`${process.env.NEXT_PUBLIC_URL}/dashboard`);
           });
         });
       } catch (err: any) {
@@ -140,7 +144,7 @@ export default function HomePageGenerator({
         ).then((userCredential) => {
           toastUpdate("Sukces!", id, "success");
           setThinking(false);
-          router.push(`${process.env.NEXT_PUBLIC_URL}/user`);
+          router.push(`${process.env.NEXT_PUBLIC_URL}/dashboard`);
         });
       } catch (err: any) {
         const errorMsg = errorCatcher(err);
@@ -149,6 +153,64 @@ export default function HomePageGenerator({
       }
     })();
   }
+  function handleGenerateIdea() {
+    if (generatedIdea?.content) {
+      setGeneratorPopup(true);
+      return;
+    }
+    if (user) {
+      router.push(`${process.env.NEXT_PUBLIC_URL}/dashboard`);
+    } else {
+      if (!config.investment) {
+        toast.error("Uzupełnij pole 'Inwestycja'", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+      }
+      if (!config.product) {
+        toast.error("Uzupełnij pole 'Produkt'", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+      }
+
+      if (!config.place) {
+        toast.error("Uzupełnij pole 'Miejsce'", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+      }
+      if (!config.place || !config.product || !config.investment) {
+        return;
+      }
+      const id = toast.loading("Generuję nowy pomysł...", {
+        position: "bottom-right",
+      });
+      setThinking(true);
+
+      sendGenerateIdeaRequest(
+        config.additional,
+        config.place,
+        config.product,
+        config.investment
+      ).then((res: any) => {
+        toastUpdate("Sukces!", id, "success");
+        setGeneratedIdea(JSON.parse(res.choices[0].text));
+        setGeneratorPopup(true);
+        setThinking(false);
+      });
+    }
+  }
+
   return (
     <div className="w-full flex flex-col md:flex-row">
       <button

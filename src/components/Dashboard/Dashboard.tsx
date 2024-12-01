@@ -11,6 +11,8 @@ import MultiStepVerification from "./Settings/SettingsInputs/MultiStepVerificati
 import { useState } from "react";
 import ReactConfetti from "react-confetti";
 import Link from "next/link";
+import ProjectList from "./ProjectList";
+import JobOfferList from "../JobOfferList";
 import ServiceList from "./ProjectList";
 async function sendVerificationEmail(email: string, verificationCode: string) {
   const data = await fetch(
@@ -39,21 +41,6 @@ export default function Dashboard() {
             <div>
               <div className="">
                 <div className="flex flex-col bg-white">
-                  {!user?.emailVerified && (
-                    <div className="bg-primary text-white p-3 w-full">
-                      <b>Witaj w Quixy!</b>Wysłaliśmy wiadomość aktywującą konto
-                      na podany adres e-mail - {user?.email}{" "}
-                      <button
-                        disabled={sent}
-                        onClick={() => {
-                          sendVerificationEmail(user?.email, user?.uid);
-                          setSent(true);
-                        }}
-                      >
-                        E-mail nie dotarł?
-                      </button>
-                    </div>
-                  )}
                   <div
                     className={`grid grid-cols-1 w-full ${
                       !user?.seek &&
@@ -65,6 +52,21 @@ export default function Dashboard() {
                         : "xl:grid-cols-1"
                     }`}
                   >
+                    {!user?.emailVerified && (
+                      <div className="bg-primary text-white p-3 w-full">
+                        <b>Witaj w Quixy!</b>Wysłaliśmy wiadomość aktywującą
+                        konto na podany adres e-mail - {user?.email}{" "}
+                        <button
+                          disabled={sent}
+                          onClick={() => {
+                            sendVerificationEmail(user?.email, user?.uid);
+                            setSent(true);
+                          }}
+                        >
+                          E-mail nie dotarł?
+                        </button>
+                      </div>
+                    )}
                     <div className="grid grid-cols-1 bg-white p-3 lg:p-6">
                       <div className="h-full w-full">
                         <div>
@@ -90,7 +92,7 @@ export default function Dashboard() {
                           </div>
                           <Link
                             title="Zobacz wszystkie zlecenia"
-                            href="/user/leads"
+                            href="/dashboard/leads"
                             className="font-bold w-max text-white bg-primary text-lg flex items-center px-2 py-1.5 rounded-lg mt-1"
                           >
                             Zobacz wszystkie
@@ -98,25 +100,23 @@ export default function Dashboard() {
                         </div>
                       </div>
                     </div>
-                    <div className="p-3 lg:p-6">
-                      {(user?.seek === "ask" ||
-                        !user?.pseudo ||
-                        !user?.name ||
-                        !user?.emailVerified ||
-                        !user?.configured ||
-                        !user?.access) && (
-                        <MultiStepVerification
-                          seek={user?.seek}
-                          pseudo={user?.pseudo}
-                          name={user?.name}
-                          emailVerified={user?.emailVerified}
-                          configured={user?.configured}
-                          user={user}
-                          setIsAnimating={setIsAnimating}
-                          isAnimating={isAnimating}
-                        />
-                      )}
-                    </div>
+                    {(user?.seek === "ask" ||
+                      !user?.pseudo ||
+                      !user?.name ||
+                      !user?.emailVerified ||
+                      !user?.configured ||
+                      !user?.access) && (
+                      <MultiStepVerification
+                        seek={user?.seek}
+                        pseudo={user?.pseudo}
+                        name={user?.name}
+                        emailVerified={user?.emailVerified}
+                        configured={user?.configured}
+                        user={user}
+                        setIsAnimating={setIsAnimating}
+                        isAnimating={isAnimating}
+                      />
+                    )}
                   </div>
                 </div>
 

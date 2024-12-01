@@ -1,9 +1,12 @@
+import Link from "next/link";
 import { toast } from "react-toastify";
+import { polishToEnglish } from "../../../utils/polishToEnglish";
 import {
   FaChevronCircleLeft,
   FaChevronLeft,
   FaChevronRight,
   FaMinusCircle,
+  FaPlus,
 } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 export default function CategorySelector({

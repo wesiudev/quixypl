@@ -30,7 +30,7 @@ export default async function Page(props: { params: Promise<any> }) {
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
-    }&slug=${polishToEnglish(params.job)}`,
+    }&slug=${polishToEnglish(params.slug)}`,
     {
       next: { revalidate: 60 },
     }
@@ -38,7 +38,7 @@ export default async function Page(props: { params: Promise<any> }) {
   const companies = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/companies/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
-    }&slug=${polishToEnglish(params.job)}`,
+    }&slug=${polishToEnglish(params.slug)}`,
     {
       next: { revalidate: 60 },
     }
@@ -46,12 +46,6 @@ export default async function Page(props: { params: Promise<any> }) {
   const content = await getPageContent(polishToEnglish(params.job));
   const products: any = await getProducts();
   const leads: any = await getDocuments("services");
-  const allCities = Array.from(
-    new Set([
-      ...talents.map((item: any) => item?.city),
-      ...companies.map((item: any) => item?.city),
-    ])
-  );
   return (
     <>
       <Header jobsList={jobs} />
@@ -159,21 +153,6 @@ export default async function Page(props: { params: Promise<any> }) {
         </div>
         <div className="my-12">
           <Viewer value={content?.salary} />
-        </div>
-        <div className="mb-12 grid grid-cols-2 lg:grid-cols-3">
-          {allCities.map((city: any, i: any) => (
-            <Link
-              key={city}
-              target="_blank"
-              href={`/praca-zdalna/${params.slug}/${params.category}/${
-                params.job
-              }/${polishToEnglish(city)}`}
-            >
-              <h2 className="text-black font-bold">
-                {content?.informal_title_plural} {city}
-              </h2>
-            </Link>
-          ))}
         </div>
       </div>
       <MainFooter jobsList={jobs} />

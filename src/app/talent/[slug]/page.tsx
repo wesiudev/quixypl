@@ -33,6 +33,25 @@ export default async function Page(props: {
       <div className="relative mx-auto bg-white">
         {/* Breadcrumbs with Icons */}
         <div className="bg-white py-6 grid grid-cols-1 h-max w-full mx-auto relative z-50">
+          <div className="px-3 lg:px-12 items-end flex justify-between w-full text-sm bg-white !text-black relative z-50">
+            <div className="flex flex-col breadcrumbs">
+              <ul className="flex items-center flex-wrap">
+                <li className="">
+                  <Link href={`/talent`} title="praca zdalna talent">
+                    talent
+                  </Link>
+                </li>
+                <li className="">
+                  <Link href={`/talent/${params.slug}`} title={params.slug}>
+                    {params.slug}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div className="lg:block hidden w-max bg-gradient-to-r from-primary to-cta text-white italic text-lg font-coco font-extralight px-3 ">
+              Quixy Talent&trade;
+            </div>
+          </div>
           <div>
             <div className="px-3 lg:px-12 mt-6 w-full">
               <div className="flex justify-between w-full">

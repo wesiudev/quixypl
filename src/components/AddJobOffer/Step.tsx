@@ -75,18 +75,18 @@ export default function StepOne({
   setJob: any;
 }) {
   function addPreference(preference: any) {
-    setFormData((prevFormData: any) => ({
-      ...prevFormData,
-      preferences: [...(prevFormData?.preferences || []), preference],
-    }));
+    if (!formData.preferences) {
+      formData.preferences = [];
+    }
+    formData.preferences.push(preference);
+    setFormData({ ...formData });
   }
 
   function removePreference(preference: any) {
-    setFormData((prevFormData: any) => ({
-      ...prevFormData,
-      preferences:
-        prevFormData?.preferences?.filter((p: any) => p !== preference) || [],
-    }));
+    formData.preferences = formData.preferences.filter(
+      (p: any) => p !== preference
+    );
+    setFormData({ ...formData });
   }
   return (
     <div
@@ -104,48 +104,34 @@ export default function StepOne({
         placeholder="Wpisz tytuł ogłoszenia o pracę..."
       />
       <div>
-        {!formData?.job && (
-          <CategorySelector
-            setTagsOpenLevel={setTagsOpenLevel}
-            tagsOpenLevel={tagsOpenLevel}
-            setTagDeletion={setTagDeletion}
-            selectedTag={selectedTag}
-            setSelectedTag={setSelectedTag}
-            tagDeletion={tagDeletion}
-            configurationOpen={configurationOpen}
-            setConfigurationOpen={setConfigurationOpen}
-            slug={slug}
-            setSlug={setSlug}
-            category={category}
-            setCategory={setCategory}
-            jobs={jobs}
-            user={user}
-            formData={formData}
-            setFormData={setFormData}
-            job={job}
-            setJob={setJob}
-          />
-        )}
-        {formData?.job && (
-          <div className="">
-            <p
-              onClick={() => console.log(formData.description)}
-              className="text-black font-extrabold text-lg mb-2"
-            >
-              Kategoria:
-            </p>
-            <div className="text-white bg-gradient-to-r from-primary to-cta w-max max-w-full p-2">
-              {formData.job}
-            </div>
-          </div>
-        )}
+        <CategorySelector
+          setTagsOpenLevel={setTagsOpenLevel}
+          tagsOpenLevel={tagsOpenLevel}
+          setTagDeletion={setTagDeletion}
+          selectedTag={selectedTag}
+          setSelectedTag={setSelectedTag}
+          tagDeletion={tagDeletion}
+          configurationOpen={configurationOpen}
+          setConfigurationOpen={setConfigurationOpen}
+          slug={slug}
+          setSlug={setSlug}
+          category={category}
+          setCategory={setCategory}
+          jobs={jobs}
+          user={user}
+          formData={formData}
+          setFormData={setFormData}
+          job={job}
+          setJob={setJob}
+        />
         <div className="mt-2"></div>
         <p
           onClick={() => console.log(formData.description)}
-          className="text-black font-extrabold text-lg mb-2"
+          className="text-black text-lg mb-2"
         >
-          Treść oferty:
+          Treść oferty pracy:
         </p>
+
         <ReactQuill
           theme="snow"
           placeholder="Wpisz tekst"
@@ -166,16 +152,15 @@ export default function StepOne({
         <JobPreferencesHandler
           addPreference={addPreference}
           removePreference={removePreference}
-          formData={formData}
-          setFormData={setFormData}
+          source={user}
         />
         <button
           type="button"
           onClick={() => {
             if (
-              formData?.category &&
-              formData?.slug &&
-              formData?.job &&
+              category &&
+              slug &&
+              job &&
               formData?.description &&
               formData?.title &&
               formData?.preferences.length

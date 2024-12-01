@@ -1,7 +1,7 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import { FaChevronLeft, FaPlus } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa6";
 import { IoCloseCircle } from "react-icons/io5";
 import { JobPosting } from "@/types";
 import { updateJobOffer, updateUser } from "@/firebase";
@@ -36,7 +36,7 @@ export interface IProject {
   link: string;
 }
 
-export default function JobOfferList() {
+const JobOfferList = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.user);
   const [loading, setLoading] = useState(false);
@@ -79,7 +79,7 @@ export default function JobOfferList() {
           Nie znaleziono aktywnych ofert pracy. Dodaj nową ofertę,
           <br /> aby rozpocząć!
         </p>
-        <Link href="/user/add_job_offer" className="mt-2">
+        <Link href="/dashboard/add_job_offer" className="mt-2">
           <div className="flex items-center justify-center bg-gradient-to-r from-cta to-primary text-white font-bold py-2 px-4 rounded">
             <FaPlus className="mr-2" />
             Dodaj ofertę pracy
@@ -90,18 +90,6 @@ export default function JobOfferList() {
   }
   return (
     <div className="flex flex-col w-full">
-      <div className="w-full justify-between bg-gradient-to-r from-primary to-cta py-3 px-6 text-white font-bold text-lg flex items-center">
-        <Link href="/user" className="flex items-center">
-          <FaChevronLeft className="mr-2 text-xl" />
-          Powrót
-        </Link>
-        <div className="flex flex-col text-white pl-12">
-          <h2 className="font-extrabold">Sekcja ogłoszeń</h2>
-          <p className="text-xs font-coco">
-            Wszystkie ogłoszenia, którymi możesz zarządzać.
-          </p>
-        </div>
-      </div>
       <h2 className="z-50 shadow-sm sticky top-0 text-black p-3 px-6 lg:p-6 bg-white font-bold font-coco text-lg sm:text-3xl">
         Twoje Oferty Pracy
       </h2>
@@ -112,4 +100,6 @@ export default function JobOfferList() {
       </div>
     </div>
   );
-}
+};
+
+export default JobOfferList;

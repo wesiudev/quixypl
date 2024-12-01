@@ -1,15 +1,24 @@
 "use client";
+
 import { set_modals } from "@/redux/slices/modalsopen";
 import moment from "moment";
+import { Metadata } from "next";
+import Link from "next/link";
 import { useState } from "react";
 import { FaClipboard } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import Loading from "../app/loading";
+import Loading from "../loading";
 import AccountHistory from "@/components/Dashboard/ImageGenerator/dashboard/AccountHistory";
 import ServiceList from "@/components/Dashboard/ProjectList";
 import MultiStepVerification from "@/components/Dashboard/Settings/SettingsInputs/MultiStepVerification";
-import Viewer from "@/components/AddJobOffer/Viewer";
+async function sendVerificationEmail(email: string, verificationCode: string) {
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`,
+    { cache: "no-store" }
+  );
+  return data;
+}
 
 export default function User() {
   const { user } = useSelector((state: any) => state.user);
@@ -17,16 +26,7 @@ export default function User() {
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
   const [sent, setSent] = useState(false);
-  async function sendVerificationEmail(
-    email: string,
-    verificationCode: string
-  ) {
-    const data = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`,
-      { cache: "no-store" }
-    );
-    return data;
-  }
+
   function copyToClipboard(text: string) {
     navigator.clipboard.writeText(text);
   }
@@ -50,6 +50,22 @@ export default function User() {
                         : "xl:grid-cols-1"
                     }`}
                   >
+                    {!user?.emailVerified && (
+                      <div className="bg-primary text-white p-3 w-full">
+                        <b>Witaj w Quixy!</b>Wysłaliśmy wiadomość aktywującą
+                        konto na podany adres e-mail - {user?.email}{" "}
+                        <button
+                          disabled={sent}
+                          onClick={() => {
+                            sendVerificationEmail(user?.email, user?.uid);
+                            setSent(true);
+                          }}
+                        >
+                          E-mail nie dotarł?
+                        </button>
+                      </div>
+                    )}
+
                     {(user?.seek === "ask" ||
                       !user?.pseudo ||
                       !user?.name ||
@@ -84,23 +100,27 @@ export default function User() {
                       </div>
                     )}
                     {(user?.seek || !user?.seek) && user?.seek !== "ask" && (
-                      <div className="px-4 lg:px-6 pb-3 lg:pb-3">
+                      <div className="px-4 lg:px-12 pb-3 lg:pb-3">
                         {!user?.title && (
                           <div>
                             {user?.seek && user?.seek !== "ask" && (
-                              <h2 className="font-extrabold text-lg text-black ">
+                              <h2 className="font-bold text-xl text-black ">
                                 Tytuł
                               </h2>
                             )}
-
+                            {(!user?.seek || user?.seek === "ask") && (
+                              <h2 className="font-bold text-xl text-black ">
+                                Nazwa firmy lub działalności
+                              </h2>
+                            )}
                             <h3 className={`text-black`}>
-                              {user?.title ? user?.title : "Twój tytuł..."}
+                              {user?.title ? user?.title : "Brak..."}
                             </h3>
                           </div>
                         )}
 
                         <div className="mt-3">
-                          <h2 className="font-extrabold text-lg text-black">
+                          <h2 className="font-bold text-xl text-black">
                             Unikalny link
                           </h2>
                           {!user?.pseudo && (
@@ -110,7 +130,7 @@ export default function User() {
                           )}
                         </div>
 
-                        <div className="text-black font-bold mt-1">
+                        <div className="text-black font-bold mt-2">
                           {user?.pseudo && (
                             <div className="flex flex-col">
                               <button
@@ -179,14 +199,20 @@ export default function User() {
                               </div>
                             )}
                         </div>
-
-                        <h2 className="text-lg text-black font-extrabold mt-3">
-                          Specjalizacje
-                        </h2>
+                        {user?.seek && user?.seek !== "ask" && (
+                          <h2 className="text-xl text-black font-bold mt-3">
+                            Specjalizacje
+                          </h2>
+                        )}
+                        {!user?.seek && user?.seek !== "ask" && (
+                          <h2 className="text-xl text-black font-bold mt-3">
+                            Specjalizacje
+                          </h2>
+                        )}
                         <div className="w-full -ml-1 flex flex-wrap items-center">
                           {user?.tags?.map((item: any, i: any) => (
                             <div className="text-sm" key={i}>
-                              <div className="text-xs sm:text-sm lg:text-base bg-gradient-to-r from-primary to-cta p-2 text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5">
+                              <div className="text-white ml-1 mt-1 bg-gradient-to-r from-primary to-cta flex items-center px-3 py-1.5">
                                 {item.title}
                               </div>
                             </div>
@@ -197,9 +223,16 @@ export default function User() {
                             </h3>
                           )}
                         </div>
-                        <h2 className="text-lg font-extrabold text-black mt-3">
-                          Dostępność
-                        </h2>
+                        {user?.seek && user?.seek !== "ask" && (
+                          <h2 className="text-xl font-bold text-black mt-3">
+                            Dostępność
+                          </h2>
+                        )}
+                        {!user?.seek && user?.seek !== "ask" && (
+                          <h2 className="font-bold text-lg text-black mt-3">
+                            Ilość pracowników
+                          </h2>
+                        )}
                         {user?.seek && user?.seek !== "ask" && (
                           <div className="-ml-1 flex items-center flex-wrap">
                             {user?.preferences?.length === 0 && (
@@ -211,7 +244,7 @@ export default function User() {
                               user?.preferences?.map((item: any, i: any) => (
                                 <h3
                                   key={i}
-                                  className={`text-xs sm:text-sm lg:text-base bg-gradient-to-r from-primary to-cta p-2 text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5`}
+                                  className={`text-white ml-1 mt-1 bg-gradient-to-r from-primary to-cta flex items-center px-3 py-1.5`}
                                 >
                                   {item}
                                 </h3>
@@ -229,7 +262,7 @@ export default function User() {
                               user?.preferences?.map((item: any, i: any) => (
                                 <h3
                                   key={i}
-                                  className={`text-xs sm:text-sm lg:text-base bg-gradient-to-r from-primary to-cta p-2 text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5`}
+                                  className={`text-white ml-1 mt-1 bg-gradient-to-r from-primary to-cta flex items-center px-3 py-1.5`}
                                 >
                                   {item}
                                 </h3>
@@ -241,17 +274,19 @@ export default function User() {
                             )}
                           </div>
                         )}
-                        <h2 className="font-extrabold text-lg text-black mt-3">
-                          Opis
-                        </h2>
+
+                        {(user?.seek || user?.seek === "ask") && (
+                          <h2 className="font-bold text-xl text-black mt-3">
+                            Opis użytkownika
+                          </h2>
+                        )}
+                        {!user?.seek && user?.seek !== "ask" && (
+                          <h2 className="font-bold text-xl text-black mt-3">
+                            Opis firmy
+                          </h2>
+                        )}
                         <h3 className={`text-black`}>
-                          {user?.description ? (
-                            <div className="mt-3">
-                              <Viewer value={user?.description} />
-                            </div>
-                          ) : (
-                            "Brak..."
-                          )}
+                          {user?.bio ? user?.bio : "Brak..."}
                         </h3>
                       </div>
                     )}

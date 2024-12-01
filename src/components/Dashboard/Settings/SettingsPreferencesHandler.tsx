@@ -117,13 +117,13 @@ export default function PreferencesHandler({
       return {
         title: "Czas pracy",
         type: "time",
-        description: "Ile czasu możesz poświęcić na pracę?",
+        description: "Ile czasu możesz poświęcać tygodniowo?",
       };
     } else {
       return {
-        title: "Dostępność",
+        title: "Liczba pracowników",
         type: "companySize",
-        description: "Podaj przybliżoną ilość pracowników.",
+        description: "Podaj przybliżoną liczbę pracowników.",
       };
     }
   };
@@ -131,8 +131,8 @@ export default function PreferencesHandler({
   const { title, description, type } = getTitleAndDescription();
 
   return (
-    <div className="flex flex-col w-full px-4 sm:px-6 mb-6">
-      <div className="mt-3 text-black font-extrabold text-xl">{title}</div>
+    <div className="flex flex-col w-full px-4 sm:px-6 font-coco mb-6">
+      <div className="mt-3 text-lg text-black">{title}</div>
       <p className="text-sm text-black mb-2">{description}</p>
       <div className="-ml-1 -mt-1 flex flex-wrap items-center w-full">
         {source?.seek && source?.seek !== "ask"

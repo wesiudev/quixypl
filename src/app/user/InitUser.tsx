@@ -1,12 +1,10 @@
 "use client";
-import { auth, getDocument } from "@/firebase";
+import { getDocument } from "@/firebase";
 import { setUser } from "@/redux/slices/user";
 import { useEffect } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
 
-export default function InitUser() {
-  const [user, loading] = useAuthState(auth);
+export default function InitUser({ user }: { user: any }) {
   const dispatch = useDispatch();
   useEffect(() => {
     if (user) {
@@ -14,6 +12,6 @@ export default function InitUser() {
         dispatch(setUser(data));
       });
     }
-  }, [loading]);
+  }, []);
   return <div></div>;
 }

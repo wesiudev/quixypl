@@ -5,10 +5,11 @@ import { useSelector } from "react-redux";
 
 export default function AccountHistory() {
   const { user } = useSelector((state: any) => state.user);
+
   return (
-    <div className="flex flex-col relative px-4 lg:px-6">
-      <h2 className="text-xl font-extrabold text-black">Twoje działania</h2>
-      <div className="h-full bg-white w-full mt-1">
+    <div className="flex flex-col relative px-4">
+      <h2 className="text-3xl font-extrabold text-black">Twoje działania</h2>
+      <div className="h-full bg-white w-full">
         {user?.history?.length && (
           <div className="max-h-[30vh] overflow-y-scroll">
             {user?.history

@@ -1,6 +1,7 @@
-"use client";
 import { toast } from "react-toastify";
 import { InputField } from "./InputField";
+import { useState } from "react";
+
 export default function StepTwo({
   formData,
   handleChange,
@@ -8,8 +9,10 @@ export default function StepTwo({
   prevStep,
   nextStep,
   setFormData,
+  user,
 }: {
   setFormData: any;
+  user: any;
   formData: any;
   handleChange: any;
   currentStep: number;

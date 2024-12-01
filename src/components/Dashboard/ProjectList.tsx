@@ -10,10 +10,12 @@ const ServiceList = ({ projects }: { projects: any }) => {
   const { user } = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
   return (
-    <div className="bg-white h-max w-full py-3 px-4 lg:px-6">
-      <h2 className="w-full text-xl text-black font-extrabold">Twoje usługi</h2>
+    <div className="bg-white h-max w-full py-3">
+      <h2 className="w-full px-3 lg:px-6 text-2xl text-black font-bold drop-shadow-lg">
+        Twoje usługi
+      </h2>
       {projects?.length === 0 ? (
-        <div className="text-lg text-black">
+        <div className="text-lg text-black px-3 lg:px-6 pb-3 lg:pt-3">
           Nie dodano żadnych usług. Możesz tego dokonać{" "}
           <button
             onClick={() => dispatch(set_modals({ ...modals, config: true }))}

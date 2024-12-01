@@ -26,7 +26,7 @@ export const InputField: React.FC<InputFieldProps> = ({
   return (
     <div>
       <label
-        className="font-extrabold text-xl text-black drop-shadow-lg mt-3"
+        className="font-extrabold text-black drop-shadow-lg mt-2"
         htmlFor={id}
       >
         {label}

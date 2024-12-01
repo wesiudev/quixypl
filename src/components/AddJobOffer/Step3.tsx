@@ -4,6 +4,8 @@ import ReactConfetti from "react-confetti";
 import { addJobOffer, updateUser } from "@/firebase";
 import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
+import { useRouter } from "next/navigation";
+import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { IProject, JobPosting } from "@/types";
 import { setUser } from "@/redux/slices/user";
@@ -16,7 +18,10 @@ export default function StepThree({
   handleChange,
   currentStep,
   prevStep,
+  nextStep,
+  setFormData,
   user,
+  InitialData,
   isAnimating,
   setIsAnimating,
   isSent,
@@ -29,7 +34,10 @@ export default function StepThree({
   handleChange: any;
   currentStep: number;
   prevStep: any;
+  nextStep: any;
+  setFormData: any;
   user: any;
+  InitialData: any;
   isAnimating: any;
   setIsAnimating: any;
   isSent: any;
@@ -42,97 +50,63 @@ export default function StepThree({
   const dispatch = useDispatch();
 
   const handleRecruitmentStart = async () => {
-    try {
-      if (doesOfferExist()) {
-        // Update existing job offer
-        await updateJobOffers();
-      } else {
-        // Add new job offer
-        await addJobOfferToUser();
-      }
+    await updateJobOffers().then(() => {
       showToastSuccess("Pomyślnie zapisano ofertę pracy!");
-      setIsAnimating(true);
-    } catch (error) {
-      showToastError("Nie udało się zapisać oferty pracy.");
-    }
+    });
+    setIsAnimating(true);
   };
-
-  const doesOfferExist = () => {
-    return user?.job_offers?.some(
-      (offer: JobPosting) => offer.slug === formData.slug || offer.slug === slug
-    );
-  };
-
+  const router = useRouter();
   const updateJobOffers = async () => {
     try {
       setIsLoading(true);
 
-      // Create the updated job offer
-      const updatedJobOffer: JobPosting = {
-        ...formData,
-        id:
-          user.job_offers.find(
-            (offer: JobPosting) => offer.slug === formData.slug
-          )?.id || uuid(),
-        creationTime: Date.now(),
-        authorId: user.uid,
-        slug: slug || formData.slug,
-        category: category || formData.slug,
-        job: job || formData.slug,
-      };
+      // Check if the user has enough tokens
+      const hasEnoughTokens = true;
 
-      // Update the job offer in the user's job_offers
-      const updatedJobOffers = user.job_offers.map((offer: JobPosting) =>
-        offer.slug === formData.slug ? updatedJobOffer : offer
-      );
-
-      // Update the user in the database
-      await updateUser(user.uid, { job_offers: updatedJobOffers });
-
-      // Dispatch updated user state to Redux
-      dispatch(
-        setUser({
-          ...user,
-          job_offers: updatedJobOffers,
-        })
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const addJobOfferToUser = async () => {
-    try {
-      setIsLoading(true);
-
+      // Create new job offer
       const jobOfferId = uuid();
       const newJobOffer: JobPosting = {
         ...formData,
+        isPaid: hasEnoughTokens,
         id: jobOfferId,
         creationTime: Date.now(),
         authorId: user.uid,
-        slug: slug || formData.slug,
-        category: category || formData.slug,
-        job: job || formData.slug,
+        slug: slug,
+        category: category,
+        job: job,
       };
 
+      // Update job offers list for the user
       const updatedJobOffers = user.job_offers
         ? [...user.job_offers, newJobOffer]
         : [newJobOffer];
 
-      // Update the user in the database
-      await updateUser(user.uid, { job_offers: updatedJobOffers });
-      await addJobOffer(newJobOffer);
+      // Calculate updated tokens if user has enough
+      const updatedTokens = hasEnoughTokens
+        ? user.tokens - formData.price
+        : user.tokens;
 
+      // Update user in the database
+      await updateUser(user.uid, {
+        job_offers: updatedJobOffers,
+        // tokens: updatedTokens,
+      });
+      await addJobOffer(newJobOffer);
       // Dispatch updated user state to Redux
       dispatch(
         setUser({
           ...user,
           job_offers: updatedJobOffers,
+          // tokens: updatedTokens,
         })
       );
+
+      setIsAnimating(false);
+    } catch (error) {
+      showToastError("Failed to add job offer.");
     } finally {
       setIsLoading(false);
+      router.push("/dashboard/my-postings");
     }
   };
 
@@ -177,7 +151,7 @@ export default function StepThree({
             {isSent && (
               <Link
                 className="p-2 bg-gradient-to-r from-primary via-cta to-primary py-0.5 text-white  flex items-center"
-                href="/user/job_offers"
+                href="/dashboard/my-postings"
               >
                 Już dodano, przeglądaj oferty <FaChevronRight />
               </Link>

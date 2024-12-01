@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { updateUser } from "@/firebase/";
 import { toast } from "react-toastify";
 import { IoSend } from "react-icons/io5";
-import { v4 as uuidv4 } from "uuid";
 
 interface MessageInputProps {
   source: any;
@@ -34,10 +33,9 @@ const MessageInput: React.FC<MessageInputProps> = ({ source, value }) => {
       toast.error("Numer telefonu jest nieprawidłowy");
       return;
     }
-    const uniqId = uuidv4();
     await updateUser(value?.uid, {
       leads: value?.leads
-        ? [...value?.leads, { message, phoneNumber, id: uniqId, note: "" }]
+        ? [...value?.leads, { message, phoneNumber }]
         : [{ message, phoneNumber }],
     });
     setSent(true);
@@ -54,7 +52,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ source, value }) => {
           type="text"
           placeholder="Numer telefonu"
           className={`my-2 text-black ${
-            sent ? "border-green-500" : "border-blue-300"
+            sent ? "border-green-500" : "border-transparent"
           } border-2`}
         />
         <textarea
@@ -63,15 +61,13 @@ const MessageInput: React.FC<MessageInputProps> = ({ source, value }) => {
           placeholder="Wpisz treść zapytania"
           autoFocus
           className={`${
-            sent ? "border-green-500" : "border-blue-300"
+            sent ? "border-green-500" : "border-transparent"
           } border-2 text-black p-3 h-24 w-full resize-none outline-none `}
           disabled={!value?.access || sent}
         />
-        {sent && (
-          <div className="p-3 text-green-500 font-bold animate-pulse">
-            Zapytanie zostało wysłane!
-          </div>
-        )}
+        <div className="p-3 text-green-500 font-bold">
+          Zapytanie zostało wysłane!
+        </div>
         <div className="">
           <button
             onClick={() => handleSendMessage(source, value)}

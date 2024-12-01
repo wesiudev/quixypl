@@ -1,3 +1,4 @@
+import react from "react";
 import localFont from "next/font/local";
 import { Cardo } from "next/font/google";
 import { Providers } from "@/redux/Provider";
@@ -6,8 +7,7 @@ import "../styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import InitUser from "@/components/InitUser";
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
