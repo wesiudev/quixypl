@@ -1,13 +1,13 @@
 "use client";
-import UserEditDashboard from "./SettingsInputs/SettingsInputs";
+import SettingsInputs from "./SettingsInputs/SettingsInputs";
 import { useState } from "react";
 import Unsaved from "./SettingsInputs/Unsaved";
 import { updateUser } from "@/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { set_modals } from "@/redux/slices/modalsopen";
 export default function Settings() {
-  const [error, setError] = useState(false);
-  const [changesWereMade, setChangesWereMade] = useState(false);
+  const [error, setError] = useState<any>(false);
+  const [changesWereMade, setChangesWereMade] = useState<any>(false);
   const { modals } = useSelector((state: any) => state.modals);
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.user);
@@ -38,7 +38,7 @@ export default function Settings() {
         } mb-12`}
       >
         <div className={`${error && "vibrate-screen"}`}>
-          <UserEditDashboard
+          <SettingsInputs
             source={user || source}
             setSource={setSource}
             changesWereMade={changesWereMade}
