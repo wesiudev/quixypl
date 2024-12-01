@@ -79,7 +79,6 @@ export default function Nav({
   const { modals } = useSelector((state: any) => state.modals);
   return (
     <div>
-      <Settings />
       <div
         className={`!z-[999999999999999999] fixed scrollbar !text-white ${
           isNavOpen
