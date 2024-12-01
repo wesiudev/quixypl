@@ -17,7 +17,6 @@ export default function Settings({
   const [changesWereMade, setChangesWereMade] = useState(false);
   const { modals } = useSelector((state: any) => state.modals);
   const dispatch = useDispatch();
-
   return (
     <div className="overflow-x-hidden">
       <button
