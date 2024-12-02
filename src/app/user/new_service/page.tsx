@@ -1,6 +1,9 @@
-import NewService from "@/components/NewService";
-
-export default async function Page() {
+"use client";
+import dynamic from "next/dynamic";
+const NewService = dynamic(() => import("@/components/NewService"), {
+  ssr: false,
+});
+export default function Page() {
   return (
     <div>
       <NewService />
