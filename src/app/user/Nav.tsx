@@ -4,6 +4,10 @@ const Settings = dynamic(
   () => import("@/components/Dashboard/Settings/Settings"),
   { ssr: false }
 );
+const QuixiesModule = dynamic(
+  () => import("@/components/Dashboard/QuixiesModule"),
+  { ssr: false }
+);
 import Link from "next/link";
 import {
   FaChevronDown,
@@ -20,7 +24,7 @@ import { AiFillThunderbolt } from "react-icons/ai";
 import { usePathname, useRouter } from "next/navigation";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { useDispatch, useSelector } from "react-redux";
-import QuixiesModule from "@/components/Dashboard/QuixiesModule";
+
 export default function Nav({
   isNavOpen,
   setNavOpen,
