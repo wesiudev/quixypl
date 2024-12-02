@@ -3,10 +3,12 @@ import StripeButton from "@/components/StripeButton";
 import { set_modals } from "@/redux/slices/modalsopen";
 import Image from "next/image";
 import Link from "next/link";
+import { FaCoins } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-export default function QuixiesModule({ userCoins }: { userCoins: number }) {
+export default function QuixiesModule() {
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
+  const { user } = useSelector((state: any) => state.user);
   return (
     <>
       <button
@@ -26,23 +28,23 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
       >
         <div
           onClick={(e: any) => e.stopPropagation()}
-          className="flex flex-wrap w-full my-auto mx-auto bg-white sm: p-3 lg:p-6 relative"
+          className="flex flex-wrap w-full my-auto mx-auto bg-white p-4 lg:p-6 relative"
         >
-          <div className="flex flex-row sm:justify-between w-full">
+          <div className="flex flex-row justify-between w-full">
             <div className="flex flex-col">
-              <h2 className="font-extrabold text-black text-3xl">
+              <h2 className="font-extrabold text-black text-xl">
                 Doładuj Quixies
               </h2>
-              <p className="font-normal text-gray-700">
-                Wybierz odpowiedni pakiet Quixies dla swoich potrzeb
-              </p>
             </div>
 
-            <div className="h-max text-white text-3xl bg-gradient-to-r from-primary to-cta p-2 font-gotham font-extrabold w-max flex flex-row items-center">
-              💎
-              <div>{userCoins?.toFixed(2)}</div>
+            <div className="gap-2 h-max text-white text-xl bg-gradient-to-r from-primary to-cta px-2 py-0.5 font-gotham font-extrabold w-max flex items-center">
+              <FaCoins />
+              <div>{user?.tokens}</div>
             </div>
           </div>
+          <p className="font-normal text-black mt-1">
+            Wybierz odpowiedni pakiet Quixies dla swoich potrzeb
+          </p>
           {/* <Image
             style={{ boxShadow: "0 0 16px 0 cyan" }}
             src="/assets/quixies5.png"
@@ -124,8 +126,8 @@ export default function QuixiesModule({ userCoins }: { userCoins: number }) {
 
 const shopProducts = [
   {
-    quantity: 25,
-    price: 9,
+    quantity: 50,
+    price: 29,
     discount: 0,
     discountSize: 0,
     image: "/assets/quixies1.png",
@@ -134,7 +136,7 @@ const shopProducts = [
   },
   {
     quantity: 100,
-    price: 24,
+    price: 49,
     discount: 0,
     discountSize: 0,
     image: "/assets/quixies2.png",
@@ -143,7 +145,7 @@ const shopProducts = [
   },
   {
     quantity: 300,
-    price: 54, // Adjusted price
+    price: 99, // Adjusted price
     discount: 0.1,
     discountSize: 110,
     image: "/assets/quixies3.png",
@@ -152,7 +154,7 @@ const shopProducts = [
   },
   {
     quantity: 750,
-    price: 99,
+    price: 199,
     discount: 0.2,
     discountSize: 120,
     image: "/assets/quixies4.png",
@@ -163,14 +165,13 @@ const shopProducts = [
 const QuixiesInfo = () => {
   return (
     <div className="mx-auto bg-white mt-6">
-      <h1 className="text-3xl font-gotham text-zinc-800 mb-4">
+      <h1 className="text-xl font-extrabold text-black mb-4">
         Czym są Quixies?
       </h1>
       <p className="text-black font-light font-gotham text-lg mb-6">
-        Quixies to wirtualna waluta wykorzystywana na naszej platformie,
-        umożliwiająca dostęp do różnorodnych funkcji i usług. Dzięki Quixies
-        możesz w pełni korzystać z zaawansowanych narzędzi oraz funkcji
-        wspierających rozwój Twojej kariery lub biznesu.
+        Quixies to wirtualna waluta wykorzystywana na naszej platformie. Dzięki
+        tym tokenom możesz w pełni korzystać z naszych usług, jednocześnie
+        wspierając rozwój naszej działalności.
       </p>
 
       <h2 className="text-2xl font-gotham text-zinc-800 mb-4">
@@ -182,16 +183,15 @@ const QuixiesInfo = () => {
             className="text-white bg-gradient-to-r from-primary to-cta p-1  px-2 text-xl font-coco"
             style={{ textShadow: "1px 1px 1px black" }}
           >
-            Usługi AI
+            Rozwijaj swoje portfolio usług
           </strong>{" "}
           <br />
           <p className="font-gotham font-light mt-1 text-base py-3 pl-1">
-            Wykorzystaj Quixies, aby uzyskać dostęp do usług sztucznej
-            inteligencji, które pomogą Ci w optymalizacji procesów, tworzeniu
-            treści oraz automatyzacji zadań.
+            Wykorzystaj Quixies, aby dodać usługi do swojego profilu i zdobyć
+            nowych klientów.
           </p>
         </li>
-        <li className="mb-3">
+        {/* <li className="mb-3">
           <strong
             className="text-white bg-gradient-to-r from-primary to-cta p-1  px-2 text-xl font-coco"
             style={{ textShadow: "1px 1px 1px black" }}
@@ -204,8 +204,8 @@ const QuixiesInfo = () => {
             grona specjalistów z różnych branż. To idealna okazja, by szybko
             znaleźć odpowiednich kandydatów na wolne stanowiska.
           </p>
-        </li>
-        <li className="mb-3">
+        </li> */}
+        {/* <li className="mb-3">
           <strong
             className="text-white bg-gradient-to-r from-primary to-cta p-1  px-2 text-xl font-coco"
             style={{ textShadow: "1px 1px 1px black" }}
@@ -217,7 +217,7 @@ const QuixiesInfo = () => {
             Dzięki Quixies możesz ubiegać się o atrakcyjne oferty pracy i
             projekty tworzone przez innych użytkowników.
           </p>
-        </li>
+        </li> */}
       </ul>
 
       {/* <h2 className="text-2xl font-gotham text-black mb-4">

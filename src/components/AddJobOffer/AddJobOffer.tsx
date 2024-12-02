@@ -64,66 +64,67 @@ export default function AddJobOffer() {
           </p>
         </div>
       </div>
-      <div className="py-12"></div>
-      <div className="max-w-[40rem] rounded-xl bg-white z-50 relative p-6 lg:p-10 overflow-hidden">
-        {isAnimating && <ReactConfetti />}
-        <h1 className="text-xl md:text-3xl font-gotham text-zinc-800">
-          Dodaj darmową ofertę pracy
-        </h1>
-        <p className="mt-2 text-sm font-coco text-black">
-          Podaj najważniejsze informacje dotyczące rekrutacji.
-        </p>
-        <div className="mt-2"></div>
-        <div className="flex flex-col w-full font-coco">
-          <StepOne
-            formData={formData}
-            handleChange={handleChange}
-            nextStep={nextStep}
-            currentStep={currentStep}
-            tagsOpenLevel={tagsOpenLevel}
-            setTagsOpenLevel={setTagsOpenLevel}
-            setTagDeletion={setTagDeletion}
-            selectedTag={selectedTag}
-            setSelectedTag={setSelectedTag}
-            tagDeletion={tagDeletion}
-            configurationOpen={configurationOpen}
-            setConfigurationOpen={setConfigurationOpen}
-            setSlug={setSlug}
-            slug={slug}
-            category={category}
-            job={job}
-            setCategory={setCategory}
-            jobs={jobs}
-            user={user}
-            setFormData={setFormData}
-            setJob={setJob}
-          />
-          <StepTwo
-            setFormData={setFormData}
-            prevStep={prevStep}
-            nextStep={nextStep}
-            formData={formData}
-            handleChange={handleChange}
-            currentStep={currentStep}
-            user={user}
-          />
-          <StepThree
-            prevStep={prevStep}
-            nextStep={nextStep}
-            formData={formData}
-            handleChange={handleChange}
-            currentStep={currentStep}
-            setFormData={setFormData}
-            user={user}
-            InitialData={InitialData}
-            setIsAnimating={setIsAnimating}
-            isAnimating={isAnimating}
-            isSent={isSent}
-            setIsSent={setIsSent}
-            slug={slug}
-            category={category}
-            job={job}
-          />
+      <div className="w-full flex items-center justify-center">
+        <div className="max-w-[40rem] rounded-b-xl bg-white z-50 relative p-6 lg:p-10 overflow-hidden">
+          {isAnimating && <ReactConfetti />}
+          <h1 className="text-xl md:text-3xl font-gotham font-bold text-black">
+            Dodaj ofertę pracy
+          </h1>
+          <p className="mt-2 text-sm font-coco text-black">
+            Podaj najważniejsze informacje dotyczące rekrutacji.
+          </p>
+          <div className="mt-2"></div>
+          <div className="flex flex-col w-full font-coco">
+            <StepOne
+              formData={formData}
+              handleChange={handleChange}
+              nextStep={nextStep}
+              currentStep={currentStep}
+              tagsOpenLevel={tagsOpenLevel}
+              setTagsOpenLevel={setTagsOpenLevel}
+              setTagDeletion={setTagDeletion}
+              selectedTag={selectedTag}
+              setSelectedTag={setSelectedTag}
+              tagDeletion={tagDeletion}
+              configurationOpen={configurationOpen}
+              setConfigurationOpen={setConfigurationOpen}
+              setSlug={setSlug}
+              slug={slug}
+              category={category}
+              job={job}
+              setCategory={setCategory}
+              jobs={jobs}
+              user={user}
+              setFormData={setFormData}
+              setJob={setJob}
+            />
+            <StepTwo
+              setFormData={setFormData}
+              prevStep={prevStep}
+              nextStep={nextStep}
+              formData={formData}
+              handleChange={handleChange}
+              currentStep={currentStep}
+              user={user}
+            />
+            <StepThree
+              prevStep={prevStep}
+              nextStep={nextStep}
+              formData={formData}
+              handleChange={handleChange}
+              currentStep={currentStep}
+              setFormData={setFormData}
+              user={user}
+              InitialData={InitialData}
+              setIsAnimating={setIsAnimating}
+              isAnimating={isAnimating}
+              isSent={isSent}
+              setIsSent={setIsSent}
+              slug={slug}
+              category={category}
+              job={job}
+            />
+          </div>
         </div>
       </div>
     </div>

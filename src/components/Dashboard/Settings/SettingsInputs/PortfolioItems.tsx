@@ -3,6 +3,7 @@ import {
   FaChevronRight,
   FaMinusCircle,
   FaPlus,
+  FaPlusCircle,
   FaTimes,
 } from "react-icons/fa";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
@@ -45,6 +46,8 @@ export default function PortfolioItems({
   const [isImageDescriptionOpen, setImageDescriptionOpen] = useState(-1);
   const { modals } = useSelector((state: any) => state.modals);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
   const proceedWithProjectUpdate = async (isPaid: boolean) => {
     const uniqId = uuid();
     const updatedProjects = updateProjectsList(source.projects, project, {
@@ -68,7 +71,9 @@ export default function PortfolioItems({
     dispatch(
       setUser({ ...source, tokens: updatedTokens, projects: updatedProjects })
     );
-    showToastSuccess("Pomyślnie dodano projekt!");
+    setLoading(false);
+    setSent(true);
+    showToastSuccess("Pomyślnie dodano usługę!");
   };
   const updateProjectsList = (
     existingProjects: any,
@@ -104,7 +109,8 @@ export default function PortfolioItems({
     });
   };
   const handleRecruitmentStart = async () => {
-    const hasEnoughTokens = source?.tokens >= project?.price;
+    setLoading(true);
+    const hasEnoughTokens = source?.tokens >= 10;
     const isProjectValid = isProjectDataValid(project);
 
     if (!isProjectValid) {
@@ -118,7 +124,7 @@ export default function PortfolioItems({
     }
   };
   const isProjectDataValid = (project: IProject) => {
-    return project.name && project.time && project.desc;
+    return project.name && project.tags.length > 0 && project.desc;
   };
   const openTokenModal = () => {
     dispatch(set_modals({ ...modals, quixies: true }));
@@ -155,24 +161,17 @@ export default function PortfolioItems({
     }
   }
   return (
-    <div className={`px-6 mt-3`}>
+    <div className={``}>
       <div className="font-extrabold text-lg flex items-center text-black">
-        <div className="bg-gradient-to-r from-primary to-cta w-24 rounded-xl h-12 flex items-center justify-center mr-2">
-          <FaStar className="text-white text-3xl" />
+        <div className="bg-gradient-to-r from-primary to-cta w-10  h-10 flex items-center justify-center mr-2">
+          <FaStar className="text-white text-xl" />
         </div>
-        Rozwiń swoje portfolio usług aby zdobywać nowych klientów!
+        Dodajesz nową usługę do naszego rynku
       </div>
-      <p className="text-sm text-black my-2">
-        Dodaj nową usługę do naszego rynku z usługami.
-      </p>
 
       <>
-        <div className="rounded-xl p-3 bg-gradient-to-r from-primary to-cta mt-3">
-          <span className="text-xl text-white font-extrabold">
-            Dodajesz nową usługę
-          </span>
-
-          <div className="bg-white rounded-xl p-3 mt-3">
+        <div className="">
+          <div className="bg-white mt-3">
             <h1 className="text-base font-bold text-black font-coco">
               Kategorie
             </h1>
@@ -329,9 +328,9 @@ export default function PortfolioItems({
                 {!configurationOpen && slug.title === "" && (
                   <button
                     onClick={() => setConfigurationOpen(true)}
-                    className="ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80  duration-100 text-white flex flex-row items-center justify-center outline-none h-[28px] sm:h-[32px] aspect-square"
+                    className="px-1 py-0.5 ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80  duration-100 text-white flex flex-row items-center justify-center outline-none h-[28px] sm:h-[32px]"
                   >
-                    <FaPlus />
+                    <FaPlusCircle className="mr-1" /> Dodaj kategorię
                   </button>
                 )}
                 {configurationOpen &&
@@ -620,7 +619,7 @@ export default function PortfolioItems({
             </div> */}
 
             {project?.images?.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-3">
                 {project?.images?.map((item: any, i: any) => (
                   <div key={i}>
                     <div className="relative flex flex-col">
@@ -706,35 +705,10 @@ export default function PortfolioItems({
             )}
 
             <button
-              disabled={source?.tokens < 10}
+              disabled={source?.tokens < 10 || loading || sent}
               onClick={() => {
-                if (project.name && project.time && project.desc) {
-                  updateUser(source.uid, {
-                    ...source,
-                    projects: source?.projects
-                      ? [
-                          ...source.projects,
-                          { ...project, isPaid: source?.tokens >= 10 },
-                        ]
-                      : [{ ...project, isPaid: source?.tokens >= 10 }],
-                  });
-                  dispatch(
-                    setUser({
-                      ...source,
-                      projects: source?.projects
-                        ? [
-                            ...source.projects,
-                            { ...project, isPaid: source?.tokens >= 10 },
-                          ]
-                        : [{ ...project, isPaid: source?.tokens >= 10 }],
-                    })
-                  );
-                  setProject({
-                    images: [],
-                    desc: "",
-                    name: "",
-                    time: "",
-                  });
+                if (project.name && project.desc && project?.tags?.length > 0) {
+                  handleRecruitmentStart();
                 } else {
                   toast.error("Uzupełnij wszystkie pola!", {
                     position: "top-right",
@@ -746,20 +720,16 @@ export default function PortfolioItems({
                     progress: undefined,
                   });
                 }
-                async () => {
-                  await handleRecruitmentStart().then(() =>
-                    setProject({
-                      images: [],
-                      name: "",
-                      time: "",
-                      desc: "",
-                    })
-                  );
-                };
               }}
-              className="disabled:from-red-500 disabled:via-red-500 disabled:to-red-500 disabled:cursor-not-allowed w-max text-xl left-0 bg-gradient-to-r from-primary via-cta to-primary text-white font-extrabold px-2 py-1.5"
+              className="disabled:bg-gray-500 disabled:cursor-not-allowed w-max text-xl left-0 bg-cta text-white font-extrabold px-2 py-1.5"
             >
-              Dodaj usługę (10,00💎)
+              {!loading && !sent && <div>Dodaj usługę (10,00💎)</div>}
+              {loading && (
+                <div className="flex items-center gap-2">
+                  <div className="loading loading-spinner w-7 h-7"></div>
+                  Dodawanie...
+                </div>
+              )}
             </button>
             {source?.tokens > 10 && (
               <div className="text-green-500 text-sm mt-2 font-extrabold">
@@ -781,10 +751,7 @@ export default function PortfolioItems({
                 </button>
               </div>
             )}
-            <h3 className="font-coco text-black drop-shadow-lg mt-1.5 mb-3">
-              Możesz uwzględnić kilka obrazów usługi (np. logo, stronę
-              główną...)
-            </h3>
+
             <ImagePicker handler={uploadImages} user={source} />
           </div>
         </div>

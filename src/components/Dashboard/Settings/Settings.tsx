@@ -16,7 +16,7 @@ export default function Settings() {
     <div>
       {user && (
         <div>
-          {/* <button
+          <button
             disabled={error}
             onClick={() => {
               changesWereMade
@@ -31,7 +31,7 @@ export default function Settings() {
                 ? "bg-opacity-80 translate-y-0"
                 : "bg-opacity-0 translate-x-[100vw]"
             }  bg-black hover:bg-opacity-60`}
-          /> */}
+          />
           <div
             className={`h-[80vh] w-[95vw] lg:w-[80vw] overflow-y-scroll scrollbarChat ${
               modals?.config
@@ -47,14 +47,14 @@ export default function Settings() {
                 setChangesWereMade={setChangesWereMade}
                 setError={setError}
               />
-              {/* <Unsaved
+              <Unsaved
                 changesWereMade={changesWereMade}
                 error={error}
                 updateUser={updateUser}
                 source={user || source}
                 setSource={setSource}
                 setChangesWereMade={setChangesWereMade}
-              /> */}
+              />
             </div>
           </div>
         </div>

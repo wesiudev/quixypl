@@ -79,7 +79,7 @@ const JobOfferList = () => {
           Nie znaleziono aktywnych ofert pracy. Dodaj nową ofertę,
           <br /> aby rozpocząć!
         </p>
-        <Link href="/dashboard/add_job_offer" className="mt-2">
+        <Link href="/user/add_job_offer" className="mt-2">
           <div className="flex items-center justify-center bg-gradient-to-r from-cta to-primary text-white font-bold py-2 px-4 rounded">
             <FaPlus className="mr-2" />
             Dodaj ofertę pracy

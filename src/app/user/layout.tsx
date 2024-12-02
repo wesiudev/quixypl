@@ -5,7 +5,6 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import InitUser from "./InitUser";
 import Nav from "./Nav";
 import { useState } from "react";
-import Settings from "@/components/Dashboard/Settings/Settings";
 import { useSelector } from "react-redux";
 export default function AdminLayout({
   children,

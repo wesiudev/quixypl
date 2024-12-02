@@ -20,6 +20,7 @@ import { AiFillThunderbolt } from "react-icons/ai";
 import { usePathname, useRouter } from "next/navigation";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { useDispatch, useSelector } from "react-redux";
+import QuixiesModule from "@/components/Dashboard/QuixiesModule";
 export default function Nav({
   isNavOpen,
   setNavOpen,
@@ -56,14 +57,14 @@ export default function Nav({
     },
     {
       expandable: true,
-      title: "Usługi",
+      title: "Rynek",
       href: ``,
       icon: <FaTag />,
       subItems: [
         {
           title: "Dodaj usługę",
           href: `/user/new_service`,
-          icon: <FaUpload />,
+          icon: <FaPlusCircle />,
         },
         // {
         //   title: "Wszystkie produkty",
@@ -82,25 +83,26 @@ export default function Nav({
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
   return (
-    <div>
+    <div className="h-full">
       <Settings />
+      <QuixiesModule />
       <div
-        className={`!z-[999999999999999999] fixed scrollbar !text-white ${
+        className={`!z-[999999999999999999] h-full fixed scrollbar !text-white ${
           isNavOpen
             ? "translate-x-[0] duration-300"
             : "-translate-x-[300px] duration-300"
         }`}
       >
-        <div className="relative flex flex-col gap-12">
+        <div className="relative flex flex-col gap-12 h-full">
           <button
             onClick={() => setNavOpen(!isNavOpen)}
-            className="absolute -right-[50px] w-[50px] h-[50px] bottom-12 bg-blue-600 hover:bg-blue-400 duration-200 text-white flex items-center justify-center"
+            className="absolute -right-[50px] w-[50px] h-[50px] bottom-12 bg-cta hover:bg-cta/80 duration-200 text-white flex items-center justify-center"
           >
             <FaArrowLeft
               className={`text-3xl ${isNavOpen ? "rotate-0" : "rotate-180"}`}
             />
           </button>
-          <div className="flex flex-col justify-between h-screen w-[300px] border-r-[1px] border-[#303345] bg-[#222430]">
+          <div className="flex flex-col justify-between h-full w-[300px] border-r-[1px] border-[#303345] bg-[#222430]">
             <div>
               <div className="w-max mx-auto">
                 <Link href="/" className="text-white py-4 px-3">
