@@ -59,8 +59,8 @@ function HeroSection() {
           Przeglądaj oferty pracy lub utwórz portfolio
         </h1>
         <p className="lg:text-lg font-coco text-black px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
-          Wystarczy opublikować swoje usługi na naszej platformie by rozpocząć
-          pozyskiwanie klientów już dziś! Dołącz do nas za darmo!
+          Opublikuj swoje usługi na naszej platformie i rozpocznij pozyskiwanie
+          klientów już dziś! Dołącz za darmo!
         </p>
         <div className="mt-5"></div>
         <JoinButton />
@@ -121,12 +121,11 @@ function WhyChooseQuixySection() {
         <h2 className="font-extrabold text-3xl mb-2 text-black mt-6 lg:mt-0">
           Dlaczego warto wybrać Quixy?
         </h2>
-        <p className="text-lg text-black font-gotham lg:max-w-3xl">
+        <p className="text-black lg:max-w-3xl">
           Oferujemy połączenie z najlepszymi specjalistami w rozwoju
           oprogramowania, usługach IT, marketingu, designu, i nie tylko. Nasza
-          platforma łączy firmy z doświadczonymi profesjonalistami, którzy
-          dostarczają najwyższej jakości usługi, zawsze na czas i zgodnie z
-          wymaganiami.
+          platforma łączy klientów z doświadczonymi profesjonalistami, którzy
+          dostarczają najwyższej jakości usługi.
         </p>
       </div>
     </section>
@@ -202,19 +201,19 @@ function WhatMakesUsUniqueSection() {
         <HighlightCard
           icon={<FaRocket className="text-white text-5xl" />}
           title="Portfolio usług"
-          description="Zaprezentuj swoje usługi na platformie Quixy i pozyskuj zlecenia."
-          linkTitle="Dodaj ofertę"
+          description="Zaprezentuj swoje usługi na rynku i zdobądź zlecenia."
+          linkTitle="Utwórz konto"
         />
         <HighlightCard
           icon={<FaRocket className="text-white text-5xl" />}
           title="Oferty pracy"
-          description="Proces rekrutacji jest szybki i efektywny, pozwalając Ci skupić się na rozwoju projektu."
+          description="Dodaj darmową ofertę pracy i przyśpiesz proces rekrutacji."
           linkTitle="Dodaj ofertę"
         />
         <HighlightCard
           icon={<FaUsers className="text-white text-5xl" />}
-          title="Dostępni freelancerzy"
-          description="Współpracujemy z doświadczonymi firmami oraz freelancerami, aby zapewnić najwyższą jakość usług."
+          title="Dostępni eksperci"
+          description="Współpracujemy z doświadczonymi firmami oraz freelancerami."
           linkTitle="Szukaj pracy"
         />
         {/* <HighlightCard
@@ -262,7 +261,7 @@ function HighlightCard({
 function CallToActionSection() {
   return (
     <section className="flex flex-col-reverse lg:flex-row lg:my-12 text-left mx-auto">
-      <div className="px-6 lg:pl-12 overflow-hidden h-full mt-12 lg:mt-0">
+      <div className="pl-6 lg:pl-12 overflow-hidden h-full mt-12 lg:mt-0">
         <Image
           src="/happy.webp"
           width={500}
@@ -279,10 +278,10 @@ function CallToActionSection() {
         <h2 className="font-extrabold text-3xl mb-2 text-black mt-6 lg:mt-0">
           Znajdziesz wolne stanowisko pracy zdalnej!
         </h2>
-        <p className="mb-3 text-black max-w-2xl font-coco sm:text-lg">
-          Quixy.pl to najlepsza platforma z pracą zdalną w Polsce. Technologia z
-          której korzystamy jest szybka i niezawodna, stwórz portfolio w którym
-          zaprezentujesz swoje usługi.
+        <p className="mb-3 text-black max-w-2xl">
+          Quixy to najskuteczniejsza platforma z pracą zdalną w Polsce.
+          Technologia z której korzystamy jest szybka i niezawodna. Stwórz
+          portfolio w którym zaprezentujesz swoje usługi.
         </p>
         <Link
           href="/register"

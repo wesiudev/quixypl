@@ -58,9 +58,9 @@ export default function GenerateIdea({
   const updateUserData = async (id: string, data: any, cost: number) => {
     const newIdea = { id, ...data.idea };
     const newHistoryEntry = {
-      action: `Wygenerowano pomysł "${data.idea.name}", Koszt: 💎${cost.toFixed(
-        2
-      )}`,
+      action: `Wygenerowano pomysł "${
+        data.idea.name
+      }", Koszt: 💎${cost?.toFixed(2)}`,
       creationTime: Date.now(),
     };
 

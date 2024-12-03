@@ -108,7 +108,7 @@ export default function GenerateButton(props: any) {
               creationTime: Date.now(),
               action: `Wygenerowano obraz "${prompt} ${
                 styles && styles?.join(", ")
-              }, za  ${cost.toFixed(2)} Quixies"`,
+              }, za  ${cost?.toFixed(2)} Quixies"`,
             },
           ],
           tokens: newTokens,
@@ -121,7 +121,9 @@ export default function GenerateButton(props: any) {
               ...history,
               {
                 creationTime: Date.now(),
-                action: `Wygenerowano obraz ${prompt}, za 💎${cost.toFixed(2)}`,
+                action: `Wygenerowano obraz ${prompt}, za 💎${cost?.toFixed(
+                  2
+                )}`,
               },
             ],
           })

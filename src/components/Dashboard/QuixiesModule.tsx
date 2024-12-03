@@ -39,7 +39,7 @@ export default function QuixiesModule() {
 
             <div className="gap-2 h-max text-white text-xl bg-gradient-to-r from-primary to-cta px-2 py-0.5 font-gotham font-extrabold w-max flex items-center">
               <FaCoins />
-              <div>{user?.tokens.toFixed(2)}</div>
+              <div>{user?.tokens?.toFixed(2)}</div>
             </div>
           </div>
           <p className="font-normal text-black mt-1">

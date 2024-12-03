@@ -17,15 +17,15 @@ export default function Contact() {
   });
   const [sent, setSent] = useState(false);
   return (
-    <div className="min-h-screen flex flex-col font-gotham">
+    <div className="min-h-screen flex flex-col">
       <Header jobsList={jobs} />
 
       <div className="flex-grow">
         {/* Contact Section */}
         <div className="flex flex-col relative overflow-hidden bg-white">
           {/* Conditional Form Section */}
-          <div className="bg-white py-12 container mx-auto px-4">
-            <div className="font-light text-black flex flex-col breadcrumbs">
+          <div className="bg-white py-6 container mx-auto px-4">
+            <div className=" text-black flex flex-col breadcrumbs">
               <ul className="flex items-center flex-wrap">
                 <li className="">
                   <Link href={`/`} title="praca zdalna">
@@ -39,31 +39,29 @@ export default function Contact() {
                 </li>
               </ul>
             </div>
-            <h1 className="pt-6 text-3xl lg:text-5xl font-gotham bg-white text-zinc-800">
+            <h1 className="pt-3 text-2xl font-extrabold bg-white text-zinc-800">
               Skontaktuj się z nami!
             </h1>
           </div>
-          <div className="px-4 py-24 bg-gray-200">
+          <div className="px-4 py-12 bg-gray-200">
             <div className="mx-auto container flex flex-col lg:flex-row items-center lg:items-start justify-center lg:space-x-6">
               <div
                 style={{ boxShadow: "0px 0px 5px black" }}
                 className="max-w-lg lg:max-w-lg xl:max-w-2xl  overflow-hidden"
               >
                 <div className="bg-white shadow-lg relative z-50 pb-3 lg:pb-6 mx-auto lg:mx-0">
-                  <h2 className="flex items-center p-6 text-3xl text-white bg-gradient-to-r font-light italic font-coco from-primary to-cta">
+                  <h2 className="flex items-center p-4 text-3xl text-white bg-gradient-to-r from-primary to-cta">
                     <FaEnvelope className="mr-2" /> Wypełnij formularz
                   </h2>
-                  <p className="text-lg text-justify font-light text-black p-6">
+                  <p className="text-lg text-justify  text-black p-4">
                     Chcesz o coś zapytać, dołączyć do naszego zespołu, a może
-                    masz propozycję współpracy lub problem z naszymi usługami?
-                    Wypełnij formularz, a my skontaktujemy się z Tobą w
-                    najblizszym czasie.
+                    masz problem z naszymi usługami?
                   </p>
-                  <div className="w-full flex flex-col px-6">
+                  <div className="w-full flex flex-col px-4">
                     <div className="flex flex-col lg:flex-row lg:space-x-6 w-full">
                       <div className="w-full">
                         <label
-                          className="text-black block text-lg font-light mb-2"
+                          className="text-black block text-lg "
                           htmlFor="name"
                         >
                           Imię
@@ -75,14 +73,14 @@ export default function Contact() {
                           value={data.name}
                           type="text"
                           id="name"
-                          className="w-full p-4 input-lg font-light text-black  "
+                          className="w-full p-2   text-black  "
                           placeholder="Wpisz swoje imię"
                         />
                       </div>
 
                       <div className="w-full">
                         <label
-                          className="text-black block text-lg font-light mb-2"
+                          className="text-black block text-lg  mt-2"
                           htmlFor="email"
                         >
                           Email
@@ -94,7 +92,7 @@ export default function Contact() {
                           value={data.email}
                           type="email"
                           id="email"
-                          className="input-lg font-light text-black  w-full p-4 "
+                          className="  text-black  w-full p-2 "
                           placeholder="Wpisz swój email"
                         />
                       </div>
@@ -102,7 +100,7 @@ export default function Contact() {
 
                     <div className="w-full h-full mt-3">
                       <label
-                        className="block text-black text-lg font-light mb-2"
+                        className="block text-black text-lg  mb-2"
                         htmlFor="message"
                       >
                         Wiadomość
@@ -113,13 +111,13 @@ export default function Contact() {
                         }
                         value={data.message}
                         id="message"
-                        className=" text-black min-h-full w-full p-4 textarea-lg font-light "
+                        className=" text-black min-h-full w-full p-2  "
                         placeholder="Wpisz swoją wiadomość"
                       ></textarea>
                     </div>
                   </div>
                 </div>
-                <div className="flex justify-center z-50 relative font-light">
+                <div className="flex justify-center z-50 relative ">
                   <button
                     onClick={(e: any) => {
                       e.preventDefault();
@@ -158,12 +156,12 @@ export default function Contact() {
                 </div>
               </div>
               <div className="text-zinc-800 py-12 lg:py-0 flex flex-col items-center justify-center lg:items-start lg:justify-start w-full">
-                <h2 className="pt-2 text-3xl text-white text-center lg:text-left">
-                  <span className="font-light italic font-coco p-2  w-max max-w-full bg-gradient-to-r from-primary to-cta">
+                <h2 className="pt-2 text-2xl text-white text-center lg:text-left">
+                  <span className="p-2 w-max max-w-full bg-gradient-to-r from-primary to-cta">
                     Informacje Kontaktowe
                   </span>
                 </h2>
-                <p className="text-center lg:text-left mt-4 text-lg font-light max-w-lg">
+                <p className="text-center lg:text-left mt-4 text-lg max-w-lg">
                   Możesz również skontaktować się z nami bezpośrednio:
                 </p>
                 <div className="flex flex-col items-center justify-center lg:justify-start lg:items-start mt-4">
@@ -183,7 +181,7 @@ export default function Contact() {
                   width={224}
                   height={224}
                   alt=""
-                  className="w-24 h-auto mx-auto lg:mx-0 relative z-50"
+                  className="mt-4 w-24 h-auto mx-auto lg:mx-0 relative z-50"
                 />
               </div>
             </div>

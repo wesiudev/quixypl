@@ -59,19 +59,19 @@ export default async function Page(props: {
         <div className="px-6 lg:px-12 relative flex flex-col items-center justify-center text-center bg-gradient-to-r from-primary to-cta">
           <div className="w-full py-6 lg:py-12 text-center overflow-hidden relative mt-6 lg:mt-12 bg-white">
             <div className="container mx-auto">
-              <p className="pb-4 lg:pb-6 px-6 text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-extrabold mb-6 leading-snug w-full text-center mx-auto bg-gradient-to-r from-primary to-cta text-transparent bg-clip-text">
+              <p className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-extrabold w-full text-center mx-auto bg-gradient-to-r from-primary to-cta text-transparent bg-clip-text">
                 Freelancer Job Boards – {slug.title}
               </p>
             </div>
             {/* <h2 className="text-2xl font-semibold mb-6">{slug.h2}</h2> */}
             {isTalent && (
-              <p className="-mt-6 font-coco text-black w-full sm:text-lg lg:max-w-xl mx-auto">
-                Zaprezentuj swoje usługi i znajdź pracę by rozwinąc swoje
-                portfolio.
+              <p className="mt-2 text-black w-full sm:text-lg lg:max-w-xl mx-auto">
+                Zaprezentuj swoje usługi i znajdź pracę i rozwijaj swoje
+                portfolio w Quixy.
               </p>
             )}
             {!isTalent && (
-              <p className="-mt-6 font-coco text-black w-full sm:text-lg lg:max-w-xl mx-auto">
+              <p className="mt-2 text-black w-full sm:text-lg lg:max-w-xl mx-auto">
                 Stwórz najskuteczniejsze oferty pracy w {content?.genitive}!
                 Poszukujesz klientów? Dodaj swoje usługi do profilu i rozpocznij
                 współpracę!
@@ -97,7 +97,7 @@ export default async function Page(props: {
               className="w-full h-auto mb-6 lg:mb-0"
             />
             <div className="flex flex-col w-full">
-              <h1 className="font-extrabold text-2xl lg:text-4xl text-white drop-shadow-md shadow-black mb-6">
+              <h1 className="font-extrabold text-2xl lg:text-4xl text-white drop-shadow-md shadow-black mb-4">
                 {isTalent && "Szukaj pracy zdalnej"}{" "}
                 {!isTalent && "Dodaj ofertę pracy"} w {content?.genitive}.{" "}
               </h1>
@@ -107,7 +107,7 @@ export default async function Page(props: {
                 } flex mt-3`}
               >
                 <div className="p-6 text-black bg-white">
-                  <h2 className="text-black w-max font-extrabold">
+                  <h2 className="text-black text-xl mb-2 font-extrabold">
                     Dla klientów
                   </h2>
                   <p className="sm:text-lg 2xl:text-xl pb-3 text-black">
@@ -127,7 +127,7 @@ export default async function Page(props: {
                   </div>
                 </div>
                 <div className="p-6 mt-6 text-black bg-white">
-                  <h2 className="text-black w-max font-extrabold">
+                  <h2 className="text-black text-xl font-extrabold mb-2">
                     Dla freelancerów i firm
                   </h2>
                   <p className="sm:text-lg 2xl:text-xl pb-3 text-black">
