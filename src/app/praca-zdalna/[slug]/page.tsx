@@ -10,6 +10,7 @@ import BlogPostList from "@/components/BlogPostList";
 import { getDocuments, getProducts } from "@/firebase";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
+import { removePolishSignsAndSpaces } from "@/lib/removePolish";
 export async function generateStaticParams() {
   return jobs.flatMap((service: any) => ({
     slug: polishToEnglish(service.title),
@@ -48,12 +49,7 @@ export default async function Page(props: {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
-  const removePolishSignsAndSpaces = (str: string) => {
-    return str
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/\s/g, "");
-  };
+
   const leads: any = await getDocuments("services");
   return (
     <>
@@ -247,8 +243,8 @@ export default async function Page(props: {
               </li>
             ))}
 
-            {isTalent && <li>#znajdzprace</li>}
-            {!isTalent && <li>#rekrutacja</li>}
+            <li>#znajdzprace</li>
+            <li>#rekrutacja</li>
             <li>#pracazdalna</li>
             <li>#firmy{removePolishSignsAndSpaces(content?.genitive)}</li>
             <li>#freelancer</li>
@@ -257,7 +253,19 @@ export default async function Page(props: {
             <li>#ofertypracy</li>
             <li>#ogloszeniaoprace</li>
             <li>#ogloszeniapracy</li>
-            <li>#{removePolishSignsAndSpaces(slug.title.toLowerCase())}</li>
+            <li>
+              #
+              {removePolishSignsAndSpaces(
+                content?.informal_title_plural.toLowerCase()
+              )}
+            </li>
+            <li>
+              #
+              {removePolishSignsAndSpaces(
+                content?.informal_title_singular.toLowerCase()
+              )}
+            </li>
+            <li>#{removePolishSignsAndSpaces(content?.title.toLowerCase())}</li>
           </ul>
         </div>
       </div>

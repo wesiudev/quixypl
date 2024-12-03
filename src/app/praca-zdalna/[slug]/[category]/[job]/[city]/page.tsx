@@ -3,7 +3,6 @@ import { polishToEnglish } from "../../../../../../../utils/polishToEnglish";
 import jobs from "../../../../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Header from "@/components/Header";
-import Image from "next/image";
 import { getPageContent } from "@/lib/getPageContent";
 import { JobPosting, Tag } from "@/types";
 import { TfiFlagAlt } from "react-icons/tfi";
@@ -12,6 +11,7 @@ import { getProducts } from "@/firebase";
 import JobOfferCard from "@/components/Dashboard/JobOfferCard";
 import CityBreadcrumbs from "@/components/CitySlugComponents/CityBreadcrumbs";
 import JobBoardList from "@/components/JobBoardList";
+import { removePolishSignsAndSpaces } from "@/lib/removePolish";
 
 export async function generateStaticParams() {
   return jobs
@@ -162,6 +162,40 @@ export default async function Page(props: { params: Promise<any> }) {
           </section>
         </div>
         <div className="mt-6"></div>
+      </div>
+      <div className="bg-white px-6 lg:px-12 py-12 flex flex-col w-full text-black">
+        <h4 className="text-lg w-max font-extrabold">Tagi</h4>
+        <ul className="font-coco flex items-center flex-wrap gap-2">
+          {content?.synonyms.map((item: any, i: any) => (
+            <li key={i} className={``}>
+              #{removePolishSignsAndSpaces(item.toLowerCase())}
+            </li>
+          ))}
+
+          <li>#znajdzprace</li>
+          <li>#rekrutacja</li>
+          <li>#pracazdalna</li>
+          <li>#firmy{removePolishSignsAndSpaces(content?.genitive)}</li>
+          <li>#freelancer</li>
+          <li>#jobboards</li>
+          <li>#joboffers</li>
+          <li>#ofertypracy</li>
+          <li>#ogloszeniaoprace</li>
+          <li>#ogloszeniapracy</li>
+          <li>
+            #
+            {removePolishSignsAndSpaces(
+              content?.informal_title_plural.toLowerCase()
+            )}
+          </li>
+          <li>
+            #
+            {removePolishSignsAndSpaces(
+              content?.informal_title_singular.toLowerCase()
+            )}
+          </li>
+          <li>#{removePolishSignsAndSpaces(content?.title.toLowerCase())}</li>
+        </ul>
       </div>
       <MainFooter jobsList={jobs} />
     </>

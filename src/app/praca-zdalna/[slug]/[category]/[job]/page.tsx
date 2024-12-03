@@ -11,7 +11,7 @@ import { getDocuments, getProducts } from "@/firebase";
 import JobOfferCard from "@/components/Dashboard/JobOfferCard";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
-import Viewer from "@/components/AddJobOffer/Viewer";
+import { removePolishSignsAndSpaces } from "@/lib/removePolish";
 export async function generateStaticParams() {
   return jobs
     .flatMap((service: any) =>
@@ -151,8 +151,42 @@ export default async function Page(props: { params: Promise<any> }) {
             <BlogPostList posts={products} />
           </section>
         </div>
-        <div className="my-12">
+        {/* <div className="my-12">
           <Viewer value={content?.salary} />
+        </div> */}
+        <div className="bg-white px-6 lg:px-12 py-12 flex flex-col w-full text-black">
+          <h4 className="text-lg w-max font-extrabold">Tagi</h4>
+          <ul className="font-coco flex items-center flex-wrap gap-2">
+            {content?.synonyms.map((item: any, i: any) => (
+              <li key={i} className={``}>
+                #{removePolishSignsAndSpaces(item.toLowerCase())}
+              </li>
+            ))}
+
+            <li>#znajdzprace</li>
+            <li>#rekrutacja</li>
+            <li>#pracazdalna</li>
+            <li>#firmy{removePolishSignsAndSpaces(content?.genitive)}</li>
+            <li>#freelancer</li>
+            <li>#jobboards</li>
+            <li>#joboffers</li>
+            <li>#ofertypracy</li>
+            <li>#ogloszeniaoprace</li>
+            <li>#ogloszeniapracy</li>
+            <li>
+              #
+              {removePolishSignsAndSpaces(
+                content?.informal_title_plural.toLowerCase()
+              )}
+            </li>
+            <li>
+              #
+              {removePolishSignsAndSpaces(
+                content?.informal_title_singular.toLowerCase()
+              )}
+            </li>
+            <li>#{removePolishSignsAndSpaces(content?.title.toLowerCase())}</li>
+          </ul>
         </div>
       </div>
       <MainFooter jobsList={jobs} />
