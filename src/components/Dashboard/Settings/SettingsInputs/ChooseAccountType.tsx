@@ -53,7 +53,7 @@ export default function ChooseAccountType(props: any) {
                 </div>
               </div>
               <span className="text-left font-gotham font-light text-black mt-4">
-                Dołączam jako klient, chcę zatrudnić talent lub grupę
+                Dołączam jako klient, chcę zatrudnić freelancera lub firmę
               </span>
             </button>
 
@@ -94,7 +94,8 @@ export default function ChooseAccountType(props: any) {
                 </div>
               </div>
               <span className="text-left font-gotham font-light text-black mt-4">
-                Szukam pracy zdalnej, chcę realizować projekty sam lub w grupie
+                Jestem firmą lub freelancerem, chcę zdobyć zlecenia lub znaleźć
+                pracę
               </span>
             </button>
           </div>

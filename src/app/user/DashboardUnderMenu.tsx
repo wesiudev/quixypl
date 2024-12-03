@@ -13,31 +13,48 @@ export default function DashboardUnderMenu() {
       <div className="flex flex-col group">
         <div className="flex items-start justify-between bg-white px-4 lg:px-6 pt-4 lg:pt-6 h-max relative w-full">
           <div className="flex">
-            <button
-              onClick={() => dispatch(set_modals({ ...modals, config: true }))}
-              className=""
-            >
-              {user?.photoURL && (
-                <div className="rounded-full w-24 aspect-square overflow-hidden relative">
-                  <Image
+            <div className="flex flex-col">
+              <button
+                onClick={() =>
+                  dispatch(set_modals({ ...modals, config: true }))
+                }
+                className=""
+              >
+                {user?.photoURL && (
+                  <div className="rounded-full w-24 aspect-square overflow-hidden relative">
+                    <Image
+                      style={{ boxShadow: "inset 0px 0px 8px black" }}
+                      src={user?.photoURL}
+                      width={256}
+                      height={256}
+                      alt=""
+                      className="shadow-sm shadow-black rounded-full bg-white absolute inset-0 object-cover w-full h-full"
+                    />
+                  </div>
+                )}
+                {!user?.photoURL && (
+                  <div
                     style={{ boxShadow: "inset 0px 0px 8px black" }}
-                    src={user?.photoURL}
-                    width={256}
-                    height={256}
-                    alt=""
-                    className="shadow-sm shadow-black rounded-full bg-white absolute inset-0 object-cover w-full h-full"
-                  />
+                    className="rounded-full bg-gradient-to-r from-primary to-cta w-24 aspect-square text-white flex items-center justify-center"
+                  >
+                    <FaUser className="text-3xl lg:text-5xl" />
+                  </div>
+                )}
+              </button>
+              <button
+                onClick={() =>
+                  dispatch(set_modals({ ...modals, quixies: true }))
+                }
+                className="flex items-center mt-3"
+              >
+                <div className="gap-2 flex items-center justify-center px-2 py-1.5 h-8 bg-gradient-to-r from-primary to-cta rounded-lg">
+                  <FaCoins className="text-lg text-white" />
+                  <div className="font-extrabold text-white font-coco">
+                    {user?.tokens?.toFixed(2)}
+                  </div>
                 </div>
-              )}
-              {!user?.photoURL && (
-                <div
-                  style={{ boxShadow: "inset 0px 0px 8px black" }}
-                  className="rounded-full bg-gradient-to-r from-primary to-cta w-24 aspect-square text-white flex items-center justify-center"
-                >
-                  <FaUser className="text-3xl lg:text-5xl" />
-                </div>
-              )}
-            </button>
+              </button>
+            </div>
             {!user?.configured && (user?.seek === "ask" || !user?.seek) && (
               <div className="pl-4 pt-4">
                 <h2 className="text-white bg-gradient-to-r from-zinc-800 via-gray-700 to-zinc-950 w-max rounded-xl px-2 font-extrabold">
@@ -73,17 +90,6 @@ export default function DashboardUnderMenu() {
               </div>
             )}{" "}
           </div>
-          <button
-            onClick={() => dispatch(set_modals({ ...modals, quixies: true }))}
-            className="flex items-center"
-          >
-            <div className="gap-2 flex items-center justify-center px-2 py-1.5 h-8 bg-gradient-to-r from-primary to-cta rounded-lg">
-              <FaCoins className="text-lg text-white" />
-              <div className="font-extrabold text-white font-coco">
-                {user?.tokens?.toFixed(2)}
-              </div>
-            </div>
-          </button>
         </div>
       </div>
     </div>

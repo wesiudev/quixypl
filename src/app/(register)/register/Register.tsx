@@ -116,7 +116,7 @@ export default function Register() {
               setSeek={setSeek}
               setConfigured={setConfigured}
             />
-            <button
+            {/* <button
               onClick={() => {
                 setStep(1);
                 setSeek("ask");
@@ -126,7 +126,7 @@ export default function Register() {
               }`}
             >
               Chcę skorzystać z usług AI
-            </button>
+            </button> */}
           </>
         )}
         {step === 2 && (

@@ -15,21 +15,21 @@ export default function FirstStepButtons({
         <button
           style={{ borderRadius: "0px" }}
           onClick={() => setStep(2)}
-          className="button !font-normal !px-12"
+          className="bg-gradient-to-r from-primary to-cta py-2 !font-normal !px-4 text-white"
         >
-          Pomyślmy nad biznesem!
+          Zatrudnij talent!
         </button>
       )}
       {seek && seek !== "ask" && step === 1 && (
         <button
           style={{ borderRadius: "0px" }}
           onClick={() => setStep(2)}
-          className="button !font-normal !px-12"
+          className="bg-gradient-to-r from-primary to-cta py-2 !font-normal !px-4 text-white"
         >
           Znajdźmy pracę!
         </button>
       )}
-      {seek === "ask" && step === 1 && (
+      {/* {seek === "ask" && step === 1 && (
         <button
           style={{ borderRadius: "0px" }}
           onClick={() => setStep(2)}
@@ -37,7 +37,7 @@ export default function FirstStepButtons({
         >
           Wypróbuj za darmo!
         </button>
-      )}
+      )} */}
     </div>
   );
 }
