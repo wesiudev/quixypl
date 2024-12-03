@@ -163,7 +163,7 @@ export default async function Page(props: { params: Promise<any> }) {
         </div>
         <div className="mt-6"></div>
       </div>
-      <div className="bg-white px-6 lg:px-12 py-12 flex flex-col w-full text-black">
+      <div className="bg-white py-12 flex flex-col w-full text-black">
         <h4 className="text-lg w-max font-extrabold">Tagi</h4>
         <ul className="font-coco flex items-center flex-wrap gap-2">
           {content?.synonyms.map((item: any, i: any) => (

@@ -3,7 +3,12 @@ import Link from "next/link";
 import jobs from "../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import { FaFileSignature, FaImages, FaUsers } from "react-icons/fa";
-import { FaDiamondTurnRight, FaFileArrowUp, FaStar } from "react-icons/fa6";
+import {
+  FaDiamondTurnRight,
+  FaFileArrowUp,
+  FaStar,
+  FaUser,
+} from "react-icons/fa6";
 import { Metadata } from "next";
 import Image from "next/image";
 import Regions from "@/components/Regions";
@@ -74,12 +79,12 @@ export default async function Page() {
           </div>
         </div>
         {/* Services Section */}
-        <div className="container mx-auto rounded-xl" id="search">
+        <div className="mx-auto px-4 w-full max-w-[1366px]" id="search">
           <Market leads={leads} />
         </div>
       </main>
-      <div className="mt-12 py-12 bg-gradient-to-r from-primary to-cta text-black">
-        <div className="container mx-auto px-4">
+      <div className="py-12 bg-gradient-to-r from-primary to-cta text-black">
+        <div className="mx-auto px-4 w-full max-w-[1366px]">
           <h2 className="text-3xl font-extrabold text-white">
             Nasze kategorie pracy zdalnej
           </h2>
@@ -228,34 +233,16 @@ export default async function Page() {
 
 const secondMenuItems = [
   {
-    urlLabel: "Generator obrazów",
-    url: "/register",
-    color: "#F97316",
-    icon: FaImages,
-  },
-  {
-    urlLabel: "Pracuj zdalnie",
-    url: "/praca-zdalna",
-    color: "#74B901",
-    icon: FaUsers,
-  },
-  {
     urlLabel: "Stwórz portfolio",
     url: "/register",
     color: "#F59BBB",
-    icon: FaFileArrowUp,
+    icon: FaUser,
   },
   {
     urlLabel: "Przeglądaj usługi",
     url: "/marketplace",
     color: "#468CA9",
     icon: FaFileSignature,
-  },
-  {
-    urlLabel: "Rynek usług",
-    url: "/marketplace",
-    color: "red",
-    icon: FaDiamondTurnRight,
   },
 ];
 export const metadata: Metadata = {

@@ -2,25 +2,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import {
-  FaUserTie,
-  FaBriefcase,
-  FaCheckCircle,
-  FaHandsHelping,
-  FaRocket,
-  FaCogs,
-} from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
 
 export default function AboutQuixyTalent() {
   const [content, setContent] = useState("talent");
 
   return (
     <div className="mt-12">
-      <div className="relative  mx-auto">
-        <div className="grid grid-cols-2 font-gotham">
+      <div className="relative mx-auto">
+        <div className="grid grid-cols-2">
           <button
             onClick={() => setContent("client")}
-            className={`lg:text-xl border-[2px] font-bold flex items-center justify-center py-2 rounded-l-lg ${
+            className={`text-sm sm:text-base border-[2px] font-bold flex items-center justify-center py-2  ${
               content === "talent"
                 ? "border-primary text-white bg-primary/75"
                 : "border-cta text-white bg-gradient-to-r from-primary to-cta"
@@ -33,7 +26,7 @@ export default function AboutQuixyTalent() {
           </button>
           <button
             onClick={() => setContent("talent")}
-            className={`lg:text-xl border-[2px] font-bold flex items-center justify-center py-2 rounded-r-lg ${
+            className={`text-sm sm:text-base border-[2px] font-bold flex items-center justify-center py-2  ${
               content === "client"
                 ? "border-primary text-white bg-primary/75"
                 : "border-cta text-white bg-gradient-to-r from-primary to-cta"
@@ -42,7 +35,7 @@ export default function AboutQuixyTalent() {
               boxShadow: content === "client" ? "5px 0 0 0 #F4F4F4" : "none",
             }}
           >
-            FREELANCER
+            FREELANCER/FIRMA
           </button>
         </div>
 
@@ -50,10 +43,10 @@ export default function AboutQuixyTalent() {
           <div className="mt-8">
             <div className="mb-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="lg:pr-6">
-                <h2 className="text-4xl font-extrabold flex items-center text-black">
+                <h2 className="text-2xl font-extrabold flex items-center text-black">
                   Jak Quixy pomaga klientom?
                 </h2>
-                <p className="mt-6 text-xl text-black">
+                <p className="mt-3 text-black">
                   Korzystając z naszej platformy otrzymujesz łatwy dostęp do
                   najlepszych funkcji i narzędzi, które pomogą Ci zoptymalizować
                   proces rekrutacji. Opublikuj swoje usługi i pozyskuj nowe
@@ -119,10 +112,10 @@ export default function AboutQuixyTalent() {
           <div className="mt-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="lg:pr-6">
-                <h2 className="text-4xl font-extrabold flex items-center text-black">
+                <h2 className="text-2xl font-extrabold flex items-center text-black">
                   Zostań talentem w Quixy!
                 </h2>
-                <p className="mt-6 text-xl text-black">
+                <p className="mt-3 text-black">
                   Jako talent w Quixy, możesz pracować nad projektami,{" "}
                   <strong>wyświetlać swoje usługi</strong> i pozyskiwać
                   klientów. Współpracuj z firmami – rozwiń swoje{" "}
@@ -139,7 +132,7 @@ export default function AboutQuixyTalent() {
                 </Link>
                 <ul className="list-none mt-8 space-y-5 text-black mb-7">
                   <li className="relative mt-3">
-                    <FaCogs className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
+                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
 
                     <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
                       Zarejestruj się, aby znaleźć klientów i zacząć pracować
@@ -147,7 +140,7 @@ export default function AboutQuixyTalent() {
                     </div>
                   </li>
                   <li className="relative mt-3">
-                    <FaCogs className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
+                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
 
                     <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
                       Otrzymuj oferty pracy w IT, e-commerce, marketingu,
@@ -155,7 +148,7 @@ export default function AboutQuixyTalent() {
                     </div>
                   </li>
                   <li className="relative mt-3">
-                    <FaCogs className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
+                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
 
                     <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
                       Korzystaj z <b>Quixy AI™</b>, by generować unikalne
@@ -163,7 +156,7 @@ export default function AboutQuixyTalent() {
                     </div>
                   </li>
                   <li className="relative mt-3">
-                    <FaCogs className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
+                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
 
                     <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
                       Zarabiaj, sprzedając gotowe prace, aplikacje, strony
@@ -187,16 +180,16 @@ export default function AboutQuixyTalent() {
                 </div>
               </div>
             </div>
-            <p className="text-xl text-black mt-2 font-coco">
-              W Quixy.pl możesz rozwijać swoją karierę, pracować nad
-              niesamowitymi projektami, i współpracować z najlepszymi klientami.
+            <p className="text-black mt-2">
+              W Quixy możesz rozwijać swoją karierę, pracować nad niesamowitymi
+              projektami, i współpracować z najlepszymi klientami.
               <span className="font-bold ml-1">
                 Nie bój się zmian i otwórz drzwi do nowych możliwości!
               </span>
             </p>
           </div>
         )}
-        <p className="mt-3 bg-gradient-to-r from-primary to-cta bg  p-3 text-white max-w-3xl font-coco">
+        <p className="mt-3 bg-gradient-to-r from-primary to-cta bg  p-3 text-white max-w-3xl">
           Nasz system CCRM umożliwia nawiązywanie współpracy i wspólne tworzenie
           innowacyjnych rozwiązań. To podejście oparte na partnerstwie oraz
           wzajemnym wsparciu pozwala na dynamiczny rozwój zarówno naszych

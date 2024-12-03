@@ -56,7 +56,7 @@ export default function DisplayTalentsOrInviter({ data }: { data: any }) {
               <TfiFlagAlt className="text-white text-4xl" />
             </div>
             <p className="max-w-sm  text-black p-3">
-              Brak freelancerów - skonfiguruj profil i wyświetl się jako
+              Brak specjalistów - skonfiguruj profil i wyświetl się jako
               pierwszy/a{" "}
             </p>
           </div>

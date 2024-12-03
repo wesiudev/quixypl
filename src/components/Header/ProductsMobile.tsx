@@ -75,25 +75,24 @@ export default function ProductsMobile({
           </Link>
         </div>
         <div className="bg-white p-6 sm:p-12">
-          <h2 className="text-2xl font-extrabold text-black pb-6">
+          <h2 className="text-xl font-extrabold text-black pb-3">
             Chcesz wyświetlić swoje usługi w naszej aplikacji?
           </h2>
-          <p className="text-black pb-6">
-            Zarejestruj się i skonfiguruj wygodnie konto oraz usługi aby
-            rozpocząć pozyskiwanie zleceń.
+          <p className="text-black pb-3">
+            Skonfiguruj konto usługi aby rozpocząć poszukiwanie zleceń.
           </p>
           <div className="flex items-center">
             <Link
               onClick={resetHeader}
               href="/register"
-              className="text-black font-coco py-3 mr-3"
+              className="text-black font-coco py-0.5 text-sm mr-3"
             >
               Przeglądaj usługi
             </Link>
             <Link
               onClick={resetHeader}
               href="/register"
-              className="font-coco text-white px-6 py-3 bg-gradient-to-r from-primary to-cta"
+              className="font-coco text-white px-3 py-2 text-sm bg-gradient-to-r from-primary to-cta"
             >
               Skonfiguruj konto
             </Link>

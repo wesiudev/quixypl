@@ -154,7 +154,7 @@ export default async function Page(props: { params: Promise<any> }) {
         {/* <div className="my-12">
           <Viewer value={content?.salary} />
         </div> */}
-        <div className="bg-white px-6 lg:px-12 py-12 flex flex-col w-full text-black">
+        <div className="bg-white py-12 flex flex-col w-full text-black">
           <h4 className="text-lg w-max font-extrabold">Tagi</h4>
           <ul className="font-coco flex items-center flex-wrap gap-2">
             {content?.synonyms.map((item: any, i: any) => (
@@ -210,7 +210,7 @@ export async function generateMetadata(props: { params: Promise<any> }) {
     .map((item: any) => ({ title: item.title }))
     .find((item) => polishToEnglish(item.title) === params.job);
   const content = await getPageContent(params.job);
-  const title = `Freelancer Job Boards ${job?.title} - Co robią, ile zarabiają? Zlecenia, Praca Zdalna`;
+  const title = `${job?.title} Oferty Pracy, Zlecenia, Specjaliści i Usługi`;
   const description = `Przeglądaj nasze oferty pracy zdalnej jako ${job?.title} w kategorii ${category}. Zrealizuj swój projekt z Quixy!`;
 
   return {
