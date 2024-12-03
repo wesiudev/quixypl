@@ -80,7 +80,7 @@ export default function DashboardUnderMenu() {
             <div className="gap-2 flex items-center justify-center px-2 py-1.5 h-8 bg-gradient-to-r from-primary to-cta rounded-lg">
               <FaCoins className="text-lg text-white" />
               <div className="font-extrabold text-white font-coco">
-                {user?.tokens}
+                {user?.tokens?.toFixed(2)}
               </div>
             </div>
           </button>

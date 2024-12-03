@@ -197,7 +197,7 @@ function WhatMakesUsUniqueSection() {
       <h2 className="text-3xl mb-6 text-black font-extrabold">
         Co nas wyróżnia?
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-8 text-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8 text-center">
         <HighlightCard
           icon={<FaRocket className="text-white text-5xl" />}
           title="Portfolio usług"
