@@ -79,7 +79,7 @@ export default function Nav({
     },
     {
       title: "Wyloguj",
-      href: `/admin/logout`,
+      href: `/user/logout`,
       icon: <FaSignOutAlt />,
     },
   ];

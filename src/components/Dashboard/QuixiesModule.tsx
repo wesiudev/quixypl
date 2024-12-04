@@ -43,7 +43,7 @@ export default function QuixiesModule() {
             </div>
           </div>
           <p className="font-normal text-black mt-1">
-            Wybierz odpowiedni pakiet Quixies dla swoich potrzeb
+            Wybierz odpowiedni pakiet dla swoich potrzeb
           </p>
           {/* <Image
             style={{ boxShadow: "0 0 16px 0 cyan" }}

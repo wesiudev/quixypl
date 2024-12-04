@@ -31,9 +31,7 @@ export default function AdminLayout({
           <Nav setNavOpen={setNavOpen} isNavOpen={isNavOpen} />
           <div
             className={`${
-              isNavOpen
-                ? "lg:pl-[300px] ml-[300px] lg:ml-0 duration-300 lg:scale-x-[0.9] lg:py-12"
-                : "lg:pl-0 ml-0 duration-300 scale-x-100 py-0"
+              isNavOpen ? "ml-[300px] duration-300" : "ml-0 duration-300"
             } min-w-full min-h-screen bg-primary`}
           >
             {children}

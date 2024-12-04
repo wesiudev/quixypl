@@ -144,7 +144,7 @@ export default function HomePageGenerator({
         ).then((userCredential) => {
           toastUpdate("Sukces!", id, "success");
           setThinking(false);
-          router.push(`${process.env.NEXT_PUBLIC_URL}/dashboard`);
+          router.push(`${process.env.NEXT_PUBLIC_URL}/user`);
         });
       } catch (err: any) {
         const errorMsg = errorCatcher(err);
@@ -159,7 +159,7 @@ export default function HomePageGenerator({
       return;
     }
     if (user) {
-      router.push(`${process.env.NEXT_PUBLIC_URL}/dashboard`);
+      router.push(`${process.env.NEXT_PUBLIC_URL}/user`);
     } else {
       if (!config.investment) {
         toast.error("Uzupełnij pole 'Inwestycja'", {

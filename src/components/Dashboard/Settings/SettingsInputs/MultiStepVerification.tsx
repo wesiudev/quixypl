@@ -52,37 +52,41 @@ export default function MultiStepVerification({
   };
   const { modals } = useSelector((state: any) => state.modals);
   return (
-    <div className={`bg-gradient-to-r from-primary to-cta py-12`}>
+    <div className={`bg-white w-full mb-6`}>
       {isAnimating && <Confetti />}
-      <h2 className="mx-auto font-extrabold mb-3 text-2xl text-white w-[90%] max-w-full">
-        Weryfikacja przed wyświetleniem na stronie
-      </h2>
       <div
         className={`${
           user?.access === true && "hidden"
-        } mx-auto bg-white w-[90%] p-3 rounded-xl`}
+        } bg-gradient-to-r from-primary/20 to-cta/20 p-3 rounded-xl mt-1`}
       >
+        <h2 className="font-extrabold text-2xl text-black">
+          Ukończ konfigurację konta
+        </h2>
+        <p className="text-black">
+          Po pomyślnej weryfikacji Twoje konto zostanie wyświetlone w
+          odpowiednich kategoriach.
+        </p>
         <button
           onClick={() => dispatch(set_modals({ ...modals, config: true }))}
-          className="w-full text-center text-xl text-white bg-cta px-2 py-1 mb-3 rounded-xl"
+          className="w-full text-center text-xl text-white bg-cta px-2 py-1 mt-3 rounded-xl"
         >
           Uruchom ustawienia
         </button>
 
         <div className="space-y-3 p-3 lg:p-6">
           <StepItem
+            step={2}
+            title="Rodzaj profilu"
+            isCompleted={(seek === true || seek === false) && seek !== "ask"}
+            completedText={seek ? "Talent" : "Klient"}
+            incompleteText="Wybierz typ profilu"
+          />
+          <StepItem
             step={1}
             title="Konfiguracja"
             isCompleted={configured && seek !== "ask"}
             completedText="Proces rozpoczęty"
             incompleteText="Rozpocznij konfigurację"
-          />
-          <StepItem
-            step={3}
-            title="Przedstaw się"
-            isCompleted={name}
-            completedText="Pomyślnie ukończono"
-            incompleteText={`Imię/nazwisko lub nazwa firmy`}
           />
           <StepItem
             step={4}
@@ -92,18 +96,18 @@ export default function MultiStepVerification({
             incompleteText="Zweryfikuj E-mail"
           />
           <StepItem
-            step={2}
-            title="Rodzaj profilu"
-            isCompleted={(seek === true || seek === false) && seek !== "ask"}
-            completedText={seek ? "Talent" : "Klient"}
-            incompleteText="Wybierz typ profilu"
-          />
-          <StepItem
             step={5}
-            title="Pseudonim"
+            title="Nazwa profilu"
             isCompleted={pseudo}
             completedText={pseudo}
             incompleteText="Ustaw unikalną nazwę"
+          />
+          <StepItem
+            step={3}
+            title="Przedstaw się"
+            isCompleted={name}
+            completedText="Pomyślnie ukończono"
+            incompleteText={`Imię/nazwisko lub nazwa firmy`}
           />
         </div>
         <div className="p-3 bg-gradient-to-r from-cta/50 to-primary/50 rounded-xl mt-3">

@@ -1,31 +1,29 @@
 // ProjectList.js
 import React from "react";
-import ProjectCard from "./ProjectCard";
-import { set_modals } from "@/redux/slices/modalsopen";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ServiceCard from "./ServiceCard";
+import { useRouter } from "next/navigation";
 
 const ServiceList = ({ projects }: { projects: any }) => {
-  const { modals } = useSelector((state: any) => state.modals);
   const { user } = useSelector((state: any) => state.user);
-  const dispatch = useDispatch();
+  const router = useRouter();
   return (
     <div className="bg-white h-max w-full py-3">
-      <h2 className="w-full px-3 lg:px-6 text-2xl text-black font-bold drop-shadow-lg">
+      <h2 className="w-full text-2xl text-black font-extrabold">
         Twoje usługi
       </h2>
       {projects?.length === 0 ? (
-        <div className="text-lg text-black px-3 lg:px-6 pb-3 lg:pt-3">
-          Nie dodano żadnych usług. Możesz tego dokonać{" "}
+        <div className="text-black pb-3 lg:pt-1">
+          Nie dodano żadnych usług. Możesz dodać nową usługę{" "}
           <button
-            onClick={() => dispatch(set_modals({ ...modals, config: true }))}
+            onClick={() => router.push("/user/new_service")}
             className="text-cta font-bold"
           >
-            klikając tutaj
+            tutaj
           </button>
         </div>
       ) : (
-        <div className="pt-3 px-3 grid grid-cols-1 gap-3">
+        <div className="pt-3 grid grid-cols-1 lg:grid-cols-2 gap-3">
           {projects?.map((project: any, i: any) => (
             <ServiceCard key={i} project={project} user={user} />
           ))}

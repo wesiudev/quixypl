@@ -5,6 +5,8 @@ import { set_modals } from "@/redux/slices/modalsopen";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { AiFillThunderbolt } from "react-icons/ai";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function UserPanel() {
   const dispatch = useDispatch();
@@ -48,7 +50,7 @@ export default function UserPanel() {
         {linksData.map((link, index) => (
           <button
             key={index}
-            className="bg-cta hover:bg-cta/70 relative text-white text-center"
+            className="rounded-lg bg-cta hover:bg-cta/70 relative text-white text-center"
             onClick={() => {
               router.push(link.href);
             }}
@@ -60,8 +62,9 @@ export default function UserPanel() {
             </div>
           </button>
         ))}
+
         <button
-          className="bg-cta hover:bg-cta/70 relative text-white text-center"
+          className="rounded-lg bg-cta hover:bg-cta/70 relative text-white text-center"
           onClick={() => {
             dispatch(set_modals({ ...modals, quixies: true }));
           }}

@@ -63,16 +63,6 @@ export default function ServiceCard({
           <h5 className="mb-3 text-3xl font-extrabold tracking-tight text-blue-500 dark:text-blue-400">
             {project.name}
           </h5>
-          {!project?.isPaid && (
-            <button
-              onClick={() => bid()}
-              className="text-white bg-gradient-to-r from-primary to-cta max-w-full w-max p-2 rounded-bl-xl rounded-tr-xl"
-            >
-              Jeszcze nie opłacono usługi, kliknij aby kontynuuować
-              <br />
-              (10.00💎)
-            </button>
-          )}
           <p className="mb-2 text-md font-medium text-gray-900 dark:text-gray-100">
             <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
               Typ wynagrodzenia:
@@ -109,31 +99,14 @@ export default function ServiceCard({
           />
         ))}
       </div>
-
-      {/* Duration with icons for visual cues */}
-      <p className="mb-2 text-md font-medium text-gray-900 dark:text-gray-100">
-        <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
-          Dodano na:
-        </span>{" "}
-        {project.days} msc.
-      </p>
-
       {/* Creation date */}
       <p className="mb-1 text-sm text-gray-600 dark:text-gray-400">
         <span className="font-bold">Data utworzenia:</span>{" "}
         {moment(project.creationTime).format("DD MMM YYYY")}
       </p>
-
-      {/* Expiry date with subtle differentiation */}
-      <p className="text-sm text-red-600 dark:text-red-400 font-semibold">
-        Wygasa:{" "}
-        {moment(project.creationTime)
-          .add(project?.days, "months")
-          .format("DD MMM YYYY")}
-      </p>
       <Link
-        href={`/dashboard/leads`}
-        className="flex items-center gap-2 text-white font-extrabold bg-gradient-to-r from-primary to-cta w-max max-w-full p-1.5 mt-2 rounded-bl-xl rounded-tr-xl"
+        href={`/user/leads`}
+        className="flex items-center gap-2 text-white font-extrabold bg-gradient-to-r from-primary to-cta w-max max-w-full p-1.5 mt-2 rounded-lg"
       >
         do sekcji leadów <FaArrowRightLong />
       </Link>

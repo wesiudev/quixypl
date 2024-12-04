@@ -59,7 +59,7 @@ export default function GoogleAuthButton({
         });
         await sendVerificationEmail(user?.email!, user?.uid);
       }
-      router.push(`${process.env.NEXT_PUBLIC_URL}/dashboard`);
+      router.push(`${process.env.NEXT_PUBLIC_URL}/user`);
     } catch (error: any) {
       errorCatcher(error);
     }

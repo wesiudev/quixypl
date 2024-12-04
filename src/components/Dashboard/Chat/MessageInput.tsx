@@ -52,7 +52,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ source, value }) => {
           type="text"
           placeholder="Numer telefonu"
           className={`my-2 text-black ${
-            sent ? "border-green-500" : "border-transparent"
+            sent ? "border-green-500" : "border-gray-300"
           } border-2`}
         />
         <textarea
@@ -61,13 +61,15 @@ const MessageInput: React.FC<MessageInputProps> = ({ source, value }) => {
           placeholder="Wpisz treść zapytania"
           autoFocus
           className={`${
-            sent ? "border-green-500" : "border-transparent"
+            sent ? "border-green-500" : "border-gray-300"
           } border-2 text-black p-3 h-24 w-full resize-none outline-none `}
           disabled={!value?.access || sent}
         />
-        <div className="p-3 text-green-500 font-bold">
-          Zapytanie zostało wysłane!
-        </div>
+        {sent && (
+          <div className="p-3 text-green-500 font-bold">
+            Zapytanie zostało wysłane!
+          </div>
+        )}
         <div className="">
           <button
             onClick={() => handleSendMessage(source, value)}
