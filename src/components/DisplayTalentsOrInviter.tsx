@@ -40,8 +40,8 @@ export default function DisplayTalentsOrInviter({ data }: { data: any }) {
               <h2 className="text-lg font-extrabold text-black">
                 {talent?.name}
               </h2>
-              <h3 style={{ lineHeight: 2.3 }}>
-                <span className="p-2 w-max max-w-full text-white bg-gradient-to-r from-primary to-cta">
+              <h3 style={{ lineHeight: 1.7 }}>
+                <span className="text-sm xl:text-base p-1 w-max max-w-full text-white bg-gradient-to-r from-primary to-cta">
                   {talent?.title}
                 </span>
               </h3>

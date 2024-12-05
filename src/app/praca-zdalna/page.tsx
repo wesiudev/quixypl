@@ -375,27 +375,13 @@ export const metadata: Metadata = {
 
 const faqItems = [
   {
-    question: "Jak szybko mogę zatrudnić specjalistę?",
-    answer:
-      "Proces rekrutacji jest zazwyczaj zakończony w ciągu kilku dni, w zależności od specyfikacji projektu oraz dostępności ekspertów.",
-  },
-  {
     question: "Jakie są koszty zatrudnienia?",
     answer: "Możesz dodać ofertę pracy za darmo.",
   },
   {
     question: "Czy oferujecie gwarancję jakości?",
     answer:
-      "Każdy nasz specjalista jest weryfikowany, aby zapewnić najwyższą jakość usług, a klienci mogą zweryfikować metodę płatności.",
-  },
-  {
-    question: "Jakie usługi oferujecie?",
-    answer:
-      "Oferujemy usługi z zakresu IT, marketingu, projektowania, oraz wsparcia biznesowego.",
-  },
-  {
-    question: "Czy mogę anulować projekt po jego rozpoczęciu?",
-    answer: "Tak, możesz anulować projekt na każdym etapie.",
+      "Każdy nasz specjalista jest weryfikowany, aby zapewnić najwyższą jakość usług.",
   },
   {
     question: "Jak mogę się skontaktować z zespołem wsparcia?",
@@ -403,31 +389,50 @@ const faqItems = [
       "Możesz skontaktować się z nami poprzez formularz, email lub telefon, dostępny na naszej stronie kontaktowej.",
   },
   {
-    question: "Jak działa generator pomysłów na biznes?",
+    question: "Jak działa rynek usług?",
     answer:
-      "Generator pomysłów na biznes tworzy unikalne koncepty w oparciu o wybrane kryteria, takie jak lokalizacja, budżet i dostępne zasoby. Możesz rozwijać swój pomysł, korzystając z dodatkowych funkcji, odblokowanych za pomocą Quixies.",
+      "Nasza platforma prezentuje oferty usług wszystkich użytkowników, umożliwiając klientom łatwe dotarcie do profilu dostawcy, który świadczy interesującą ich usługę.",
   },
   {
-    question: "Jakie błędy najczęściej popełniają początkujący przedsiębiorcy?",
+    question: "Czy mogę ustawić różne ceny dla różnych usług?",
     answer:
-      "Najczęściej popełniane błędy to zbyt optymistyczne prognozy sprzedaży, niedoszacowanie kosztów oraz brak elastyczności w modelu biznesowym. Quixy oferuje rozwijane poradniki, które pomogą Ci uniknąć tych błędów, dostępne po odblokowaniu za pomocą Quixies.",
+      "Tak, możesz dostosować cenę oraz preferowany sposób płatności indywidualnie dla każdej dodawanej usługi.",
+  },
+  {
+    question: "Jak klienci kontaktują się ze mną po znalezieniu mojej oferty?",
+    answer:
+      "Klienci mogą skorzystać z przycisku *Wyślij zapytanie* dostępnego na Twoim profilu.",
+  },
+  {
+    question: "Czy istnieje opłata za korzystanie z platformy?",
+    answer:
+      "Dodanie usługi na naszej platformie wiąże się z jednorazową opłatą w wysokości 10 Quixies.",
+  },
+  {
+    question: "Ile kosztuje 1 Quixie?",
+    answer:
+      "Aktualny cennik jest dostępny w panelu użytkownika po zalogowaniu się na platformę.",
+  },
+  {
+    question: "Jakie rodzaje usług są najczęściej poszukiwane przez klientów?",
+    answer:
+      "Najczęściej wyszukiwane usługi to: tworzenie stron internetowych, aplikacje mobilne, marketing, projektowanie graficzne, księgowość oraz usługi biznesowe.",
+  },
+  {
+    question: "Czy platforma oferuje wsparcie w promowaniu moich usług?",
+    answer:
+      "Tak, oferty dostępne na naszym rynku są promowane m.in. za pośrednictwem Google.",
   },
   {
     question:
-      "Czy pomysł wygenerowany w Quixy można później zlecić komuś do realizacji?",
+      "Jakie informacje powinienem umieścić w swoim profilu, aby przyciągnąć klientów?",
     answer:
-      "Tak, pomysł wygenerowany w Quixy można zlecić do realizacji innym osobom lub zespołom, przypisując go jako zadanie lub projekt do wykonania.",
-  },
-
-  {
-    question:
-      "Czy mogę zapisać i wrócić do mojego pomysłu na biznes w późniejszym czasie?",
-    answer:
-      "Tak, każdy wygenerowany pomysł jest zapisywany na Twoim profilu. Możesz powrócić do niego w dowolnym momencie.",
+      "Zadbaj o szczegółowy opis swoich usług, profesjonalne zdjęcia, referencje od klientów oraz jasne warunki współpracy.",
   },
   {
-    question: "Jak mogę zdobyć więcej Quixies?",
-    answer: "Możesz zakupić Quixies bezpośrednio poprzez naszą platformę.",
+    question: "Czy platforma zapewnia ochronę płatności za świadczone usługi?",
+    answer:
+      "Płatności są ustalane bezpośrednio między klientami a dostawcami usług. Platforma nie pośredniczy w rozliczeniach.",
   },
 ];
 

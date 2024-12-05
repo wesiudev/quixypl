@@ -29,12 +29,12 @@ export default function MarketCategorySelector({
   showResults: any;
 }) {
   return (
-    <div className="bg-white">
+    <div className="bg-white w-full">
       <h3 className="text-2xl font-extrabold text-black">Wyszukiwarka usług</h3>
 
       {!slug && <div className="my-1.5 font-bold text-black">Kategoria</div>}
       {slug !== "" && category === "" && (
-        <div className="text-black flex flex-col mt-1">
+        <div className="text-black flex flex-col mt-1 w-full">
           <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1 px-2 text-white w-max max-w-[100%]">
             {slug}
           </div>
@@ -42,7 +42,7 @@ export default function MarketCategorySelector({
         </div>
       )}
       {slug !== "" && category !== "" && (
-        <div className="text-black flex flex-col mt-1">
+        <div className="text-black flex flex-col mt-1 w-full">
           <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1 px-2 text-white w-max max-w-[100%]">
             {slug}
           </div>
@@ -50,8 +50,8 @@ export default function MarketCategorySelector({
         </div>
       )}
       {slug !== "" && category !== "" && (
-        <div className="flex flex-col mt-1">
-          <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1  px-2 text-white w-max max-w-[100%]">
+        <div className="flex flex-col mt-1 w-full">
+          <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1 px-2 text-white w-max max-w-[100%]">
             {category}
           </div>
           <div className="font-bold text-black">Wybierz kategorię</div>
@@ -65,7 +65,7 @@ export default function MarketCategorySelector({
               setCategory("");
               setShowResults(false);
             }}
-            className="text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+            className="text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[32px] aspect-square"
           >
             <FaChevronLeft className="hover:scale-110" />
           </button>
@@ -76,7 +76,7 @@ export default function MarketCategorySelector({
               setJob("");
               setShowResults(false);
             }}
-            className="text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+            className="text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[32px] aspect-square"
           >
             <FaChevronCircleLeft className="hover:scale-110" />
           </button>
@@ -87,7 +87,7 @@ export default function MarketCategorySelector({
               setSlug(""), setConfigurationOpen(false);
               setShowResults(false);
             }}
-            className=" text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[40px] aspect-square"
+            className=" text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[32px] aspect-square"
           >
             <FaChevronLeft className="hover:scale-110" />
           </button>
@@ -97,7 +97,7 @@ export default function MarketCategorySelector({
             {jobs.map((item: any, k: any) => (
               <button
                 onClick={() => setSlug(item.title)}
-                className=" bg-[#126b91] hover:bg-opacity-90 duration-100  text-white font-extralight p-2"
+                className=" bg-[#126b91] hover:bg-opacity-90 duration-100  text-white font-extralight p-1"
                 key={uuidv4()}
               >
                 {item.title}
@@ -114,7 +114,7 @@ export default function MarketCategorySelector({
                     {item.data.map((cat: any, j: any) => (
                       <button
                         onClick={() => setCategory(cat.title)}
-                        className="bg-[#126b91] hover:bg-opacity-90 duration-100  text-white font-extralight p-2"
+                        className="bg-[#126b91] hover:bg-opacity-90 duration-100  text-white font-extralight p-1"
                         key={uuidv4()}
                       >
                         {cat.title}
@@ -147,7 +147,7 @@ export default function MarketCategorySelector({
                                   job === j.title
                                     ? "bg-gradient-to-r from-primary to-cta"
                                     : "bg-[#126b91]"
-                                }  hover:bg-opacity-90 duration-100  text-white font-extralight p-2`}
+                                }  hover:bg-opacity-90 duration-100  text-white font-extralight p-1`}
                                 key={uuidv4()}
                               >
                                 {j.title}

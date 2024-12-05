@@ -29,7 +29,7 @@ export default function Page() {
               <Link href="/about#ccrm" className="italic">
                 CCRM
               </Link>
-              , która łączy freelancerów z klientami!
+              , która łączy freelancerów i firmy z klientami!
             </p>
             <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 w-full mt-2">
               <Link
@@ -103,12 +103,14 @@ export default function Page() {
               Zapoznaj się z naszymi tablicami ofert dla klientów! Wyświetlaj
               swoje usługi jako freelancer lub firma.
             </p>
-            <Link
-              href="/register"
-              className="w-max font-gotham bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
-            >
-              Skonfiguruj konto!
-            </Link>
+            <div className="w-full">
+              <Link
+                href="/register"
+                className="w-max font-gotham bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white p-2 py-1.5 text-center"
+              >
+                Skonfiguruj konto!
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -418,6 +420,52 @@ const faqItems = [
     question: "Czy dołączenie do Quixy jest darmowe?",
     answer:
       "Tak, dołączenie do naszej platformy jest w pełni darmowe. Możesz dodawać oferty pracy oraz zatrudniać freelancerów za darmo.",
+  },
+  {
+    question: "Jak działa rynek usług?",
+    answer:
+      "Nasza platforma prezentuje oferty usług wszystkich użytkowników, umożliwiając klientom łatwe dotarcie do profilu dostawcy, który świadczy interesującą ich usługę.",
+  },
+  {
+    question: "Czy mogę ustawić różne ceny dla różnych usług?",
+    answer:
+      "Tak, możesz dostosować cenę oraz preferowany sposób płatności indywidualnie dla każdej dodawanej usługi.",
+  },
+  {
+    question: "Jak klienci kontaktują się ze mną po znalezieniu mojej oferty?",
+    answer:
+      "Klienci mogą skorzystać z przycisku *Wyślij zapytanie* dostępnego na Twoim profilu.",
+  },
+  {
+    question: "Czy istnieje opłata za korzystanie z platformy?",
+    answer:
+      "Dodanie usługi na naszej platformie wiąże się z jednorazową opłatą w wysokości 10 Quixies.",
+  },
+  {
+    question: "Ile kosztuje 1 Quixie?",
+    answer:
+      "Aktualny cennik jest dostępny w panelu użytkownika po zalogowaniu się na platformę.",
+  },
+  {
+    question: "Jakie rodzaje usług są najczęściej poszukiwane przez klientów?",
+    answer:
+      "Najczęściej wyszukiwane usługi to: tworzenie stron internetowych, aplikacje mobilne, marketing, projektowanie graficzne, księgowość oraz usługi biznesowe.",
+  },
+  {
+    question: "Czy platforma oferuje wsparcie w promowaniu moich usług?",
+    answer:
+      "Tak, oferty dostępne na naszym rynku są promowane m.in. za pośrednictwem Google.",
+  },
+  {
+    question:
+      "Jakie informacje powinienem umieścić w swoim profilu, aby przyciągnąć klientów?",
+    answer:
+      "Zadbaj o szczegółowy opis swoich usług, profesjonalne zdjęcia, referencje od klientów oraz jasne warunki współpracy.",
+  },
+  {
+    question: "Czy platforma zapewnia ochronę płatności za świadczone usługi?",
+    answer:
+      "Płatności są ustalane bezpośrednio między klientami a dostawcami usług. Platforma nie pośredniczy w rozliczeniach.",
   },
   {
     question: "Jak mogę znaleźć pracę zdalną na Quixy?",

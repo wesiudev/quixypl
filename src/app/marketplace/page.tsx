@@ -15,6 +15,8 @@ import Regions from "@/components/Regions";
 import heroImg from "../../../public/assets/AI-Image.png";
 import { getDocuments } from "@/firebase";
 import Market from "@/components/marketplace/Market";
+import AboutQuixyTalent from "@/components/AboutQuixyTalent";
+import FAQ from "@/components/Faq";
 export const revalidate = 60;
 export default async function Page() {
   const leads: any = await getDocuments("services");
@@ -189,60 +191,63 @@ export default async function Page() {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-3 h-max container mx-auto px-4 py-12">
-        {secondMenuItems.map((item: any, i: number) => (
-          <article key={i} className="w-full">
-            {item && (
-              <Link
-                title={`Wypróbuj Quixy Talent™: ${item.urlLabel}`}
-                aria-label={`Link to ${item.urlLabel}`}
-                href={item.url}
-                className={`bg-gradient-to-r from-primary to-cta aspect-square group w-full h-max text-white font-bold text-sm sm:text-lg text-center relative overflow-hidden flex flex-col items-center justify-center`}
-                style={{
-                  boxShadow: "0px 0px 3px rgb(0, 0, 0)",
-                }}
-              >
-                <div className="absolute w-full h-full left-0 top-0 z-[50] opacity-100 hover:opacity-0 duration-300" />
-                <div className="mx-auto my-auto h-full w-full flex items-center justify-center relative z-[201]">
-                  <div
-                    className="group-hover:scale-90 bg-white duration-300 flex items-center justify-center w-[40%] p-[10%] rounded-full"
-                    style={{
-                      boxShadow: "0px 0px 5px black",
-                    }}
-                  >
-                    <item.icon className="text-black drop-shadow-sm shadow-black w-full h-auto" />
-                  </div>
-                </div>
-                <h4
-                  style={{ textShadow: "0px 4px 6px rgb(0, 0, 0)" }}
-                  className="text-center absolute bg-opacity-50 font-gotham text-white font-bold bottom-[10%] left-1/2 -translate-x-1/2 h-max w-full drop-shadow-xl shadow-black z-[202] py-2 text-lg sm:text-xl"
-                >
-                  {item.urlLabel}
-                </h4>
-              </Link>
-            )}
-          </article>
-        ))}
+      <div className="mx-auto px-4 w-full max-w-[1366px]">
+        <AboutQuixyTalent />
+        <div className="mt-6 mb-12">
+          <FAQ faqItems={faqItems} />
+        </div>
       </div>
-
       {/* Footer */}
       <MainFooter jobsList={jobs} />
     </div>
   );
 }
-
-const secondMenuItems = [
+const faqItems = [
   {
-    urlLabel: "Stwórz portfolio",
-    url: "/register",
-    color: "#F59BBB",
-    icon: FaUser,
+    question: "Jak działa rynek usług?",
+    answer:
+      "Nasza platforma prezentuje oferty usług wszystkich użytkowników, umożliwiając klientom łatwe dotarcie do profilu dostawcy, który świadczy interesującą ich usługę.",
   },
   {
-    urlLabel: "Przeglądaj usługi",
-    url: "/marketplace",
-    color: "#468CA9",
-    icon: FaFileSignature,
+    question: "Czy mogę ustawić różne ceny dla różnych usług?",
+    answer:
+      "Tak, możesz dostosować cenę oraz preferowany sposób płatności indywidualnie dla każdej dodawanej usługi.",
+  },
+  {
+    question: "Jak klienci kontaktują się ze mną po znalezieniu mojej oferty?",
+    answer:
+      "Klienci mogą skorzystać z przycisku *Wyślij zapytanie* dostępnego na Twoim profilu.",
+  },
+  {
+    question: "Czy istnieje opłata za korzystanie z platformy?",
+    answer:
+      "Dodanie usługi na naszej platformie wiąże się z jednorazową opłatą w wysokości 10 Quixies.",
+  },
+  {
+    question: "Ile kosztuje 1 Quixie?",
+    answer:
+      "Aktualny cennik jest dostępny w panelu użytkownika po zalogowaniu się na platformę.",
+  },
+  {
+    question: "Jakie rodzaje usług są najczęściej poszukiwane przez klientów?",
+    answer:
+      "Najczęściej wyszukiwane usługi to: tworzenie stron internetowych, aplikacje mobilne, marketing, projektowanie graficzne, księgowość oraz usługi biznesowe.",
+  },
+  {
+    question: "Czy platforma oferuje wsparcie w promowaniu moich usług?",
+    answer:
+      "Tak, oferty dostępne na naszym rynku są promowane m.in. za pośrednictwem Google.",
+  },
+  {
+    question:
+      "Jakie informacje powinienem umieścić w swoim profilu, aby przyciągnąć klientów?",
+    answer:
+      "Zadbaj o szczegółowy opis swoich usług, profesjonalne zdjęcia, referencje od klientów oraz jasne warunki współpracy.",
+  },
+  {
+    question: "Czy platforma zapewnia ochronę płatności za świadczone usługi?",
+    answer:
+      "Płatności są ustalane bezpośrednio między klientami a dostawcami usług. Platforma nie pośredniczy w rozliczeniach.",
   },
 ];
 export const metadata: Metadata = {
@@ -280,7 +285,7 @@ export const metadata: Metadata = {
   verification: {
     google: "google85185d3abec28326.html",
   },
-  title: "Rynek Aplikacji i Stron Internetowych - Kup lub Sprzedaj",
+  title: "Rynek Usług Zdalnych - Ogłoszenia dla firm i freelancerów",
   description:
     "Nasi eksperci czekają na Ciebie! Usługi IT, E-commerce, Marketing, Rozwój Oprogramowania, Web Development, SEO, Graphic Design...",
   openGraph: {

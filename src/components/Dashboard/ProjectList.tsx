@@ -12,7 +12,7 @@ const ServiceList = ({ projects }: { projects: any }) => {
       <h2 className="w-full text-2xl text-black font-extrabold">
         Twoje usługi
       </h2>
-      {projects?.length === 0 ? (
+      {!projects ? (
         <div className="text-black pb-3 lg:pt-1">
           Nie dodano żadnych usług. Możesz dodać nową usługę{" "}
           <button

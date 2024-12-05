@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import User from "./User";
 import DashboardUnderMenu from "./DashboardUnderMenu";
 import UserPanel from "@/components/UserPanel";
 
@@ -12,7 +11,6 @@ export default async function Page() {
     <div>
       <UserPanel />
       <DashboardUnderMenu />
-      <User />
     </div>
   );
 }

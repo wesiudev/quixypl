@@ -112,15 +112,6 @@ export default function LeadApplication({
           </tr>
         </tbody>
       </table>
-      <div className="pt-3 w-full flex flex-row justify-between">
-        <div>Notatka:</div>
-        <button
-          onClick={() => setNoteOpen(lead)}
-          className="text-blue-500 font-light p-0.5 px-2 hover:bg-white hover:bg-opacity-20"
-        >
-          Edytuj
-        </button>
-      </div>
       {lead?.note && <p className="text-white font-light">{lead?.note}</p>}
       <div className="flex flex-col w-full mt-3">
         {!lead.isFinished && (

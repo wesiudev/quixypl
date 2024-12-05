@@ -1,13 +1,15 @@
 import { addDocument, updateUser } from "@/firebase";
 import { setUser } from "@/redux/slices/user";
 import { IProject } from "@/types";
-import moment from "moment";
 import Link from "next/link";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Viewer from "../AddJobOffer/Viewer";
 import Image from "next/image";
+import ProjectImages from "./ImageGenerator/dashboard/ProjectImages";
+import { useState } from "react";
+import { set_modals } from "@/redux/slices/modalsopen";
 
 export default function ServiceCard({
   project,
@@ -45,71 +47,74 @@ export default function ServiceCard({
       autoClose: 5000,
     });
   }
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const { modals } = useSelector((state: any) => state.modals);
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-zinc-800 dark:hover:bg-zinc-800">
-      {/* Title with prominent visual hierarchy */}
-      <div className="flex flex-col sm:flex-row gap-3">
-        {project?.images?.length > 0 && (
-          <Image
-            src={project?.images[0].src}
-            width={250}
-            height={250}
-            alt={project?.images[0].desc}
-            className="rounded-xl w-auto h-[250px]"
-          />
-        )}
-
-        <div className="">
-          <h5 className="mb-3 text-3xl font-extrabold tracking-tight text-blue-500 dark:text-blue-400">
-            {project.name}
-          </h5>
-          <p className="mb-2 text-md font-medium text-gray-900 dark:text-gray-100">
-            <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
-              Typ wynagrodzenia:
-            </span>{" "}
-            {project.time}
-          </p>
-          <p className="mb-2 text-md font-medium text-gray-900 dark:text-gray-100">
-            <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
-              Wynagrodzenie:
-            </span>{" "}
-            {project.salaryValue}
-          </p>
-          <p className="mb-2 text-md font-medium text-gray-900 dark:text-gray-100">
-            <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
-              Czas wykonania:
-            </span>{" "}
-            {project.duration}
-          </p>
+    <>
+      <div className="block p-6 bg-gray-800 hover:bg-zinc-800 rounded-xl">
+        <div className="flex flex-col sm:flex-row gap-3">
+          <div>
+            <h5 className="mb-3 text-3xl font-extrabold tracking-tight text-blue-500">
+              {project.name}
+            </h5>
+            <p className="mb-2 text-white">
+              <span className="text-sm font-bold text-white">Płatność:</span>{" "}
+              {project.time}
+            </p>
+            <p className="mb-2 text-white">
+              <span className="text-sm font-bold text-white">Cena:</span>{" "}
+              {project.salaryValue}
+            </p>
+            <p className="mb-2 text-white">
+              <span className="text-sm font-bold text-white">
+                Czas wykonania:
+              </span>{" "}
+              {project.duration}
+            </p>
+            <div className="bg-white p-2 my-3 rounded-md">
+              <Viewer value={project?.desc} />
+            </div>
+            <div className="mt-2 gap-3 grid grid-cols-5">
+              {project.images.map((image: any, i: any) => (
+                <button
+                  onClick={() => {
+                    setCurrentIndex(i);
+                    dispatch(set_modals({ ...modals, isProjectOpen: true }));
+                    setIsOpen(true);
+                  }}
+                  key={i}
+                >
+                  <Image
+                    src={image.src}
+                    width={250}
+                    height={250}
+                    alt={image.desc}
+                    className="w-full h-auto rounded-md"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className="bg-white p-3 rounded-xl my-6">
-        <Viewer value={project?.desc} />
+        <Link
+          href={`/user/leads`}
+          className="flex items-center gap-2 text-white font-extrabold bg-gradient-to-r from-primary to-cta w-max max-w-full p-1.5 mt-3 rounded-lg"
+        >
+          Wszystkie zlecenia <FaArrowRightLong />
+        </Link>
       </div>
-      <div className="gap-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-2">
-        {project.images.map((image: any, i: any) => (
-          <Image
-            key={i}
-            src={image.src}
-            width={250}
-            height={250}
-            alt={image.desc}
-            className={`${i > 0 ? "block" : "hidden"} rounded-xl w-full h-auto`}
-          />
-        ))}
-      </div>
-      {/* Creation date */}
-      <p className="mb-1 text-sm text-gray-600 dark:text-gray-400">
-        <span className="font-bold">Data utworzenia:</span>{" "}
-        {moment(project.creationTime).format("DD MMM YYYY")}
-      </p>
-      <Link
-        href={`/user/leads`}
-        className="flex items-center gap-2 text-white font-extrabold bg-gradient-to-r from-primary to-cta w-max max-w-full p-1.5 mt-2 rounded-lg"
+      <div
+        className={`fixed left-0 top-0 ${isOpen ? "block" : "hidden"} z-[9999]`}
       >
-        do sekcji leadów <FaArrowRightLong />
-      </Link>
-    </div>
+        <ProjectImages
+          project={project}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
+          setIsOpen={setIsOpen}
+        />
+      </div>
+    </>
   );
 }

@@ -55,16 +55,12 @@ export default function ProjectCard({
   }
 
   return (
-    <div
-      className={`z-[99999999999] ${
-        project.isPaid ? "" : "hidden"
-      } bg-zinc-800 rounded-xl p-3 mt-3`}
-    >
-      <ProjectImages
+    <div className={`z-[99999999999] bg-zinc-800 p-3 mt-3`}>
+      {/* <ProjectImages
         project={project}
         currentIndex={currentIndex}
         setCurrentIndex={setCurrentIndex}
-      />
+      /> */}
       <div className={`flex flex-row items-start w-full relative px-3 py-2`}>
         <div className="flex flex-col sm:flex-row gap-3">
           {project?.images?.length > 0 && (
@@ -73,12 +69,12 @@ export default function ProjectCard({
               width={250}
               height={250}
               alt={project?.images[0].desc}
-              className="rounded-xl w-auto sm:h-[250px]"
+              className="w-auto sm:h-[250px]"
             />
           )}
 
           <div className="flex flex-col gap-2">
-            <h5 className="mb-3 text-3xl font-extrabold tracking-tight text-blue-500 dark:text-blue-400">
+            <h5 className="mb-3 text-3xl font-extrabold tracking-tight text-blue-500">
               {project.name}
             </h5>
             <div className="flex items-center flex-wrap gap-2">
@@ -98,20 +94,20 @@ export default function ProjectCard({
                 </Link>
               ))}
             </div>
-            <p className="mb-2 text-md font-medium text-gray-900 dark:text-gray-100">
-              <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
+            <p className="mb-2 text-white">
+              <span className="text-sm font-bold text-white">
                 Typ wynagrodzenia:
               </span>{" "}
               {project.time}
             </p>
-            <p className="mb-2 text-md font-medium text-gray-900 dark:text-gray-100">
-              <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
+            <p className="mb-2 ttext-white">
+              <span className="text-sm font-bold text-white">
                 Wynagrodzenie:
               </span>{" "}
               {project.salaryValue}
             </p>
-            <p className="text-md font-medium text-gray-900 dark:text-gray-100 mb-2">
-              <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
+            <p className="ttext-white mb-2">
+              <span className="text-sm font-bold text-white">
                 Czas wykonania:
               </span>{" "}
               {project.duration}

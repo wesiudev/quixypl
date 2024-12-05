@@ -34,10 +34,10 @@ export default function NewService() {
           </p>
         </div>
       </div>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center pb-12">
         <div className="bg-white rounded-b-xl p-3 lg:p-6 w-full lg:w-[40rem]">
           <PortfolioItems
-            source={user}
+            user={user}
             setProject={setProject}
             project={project}
             setUploading={setUploading}

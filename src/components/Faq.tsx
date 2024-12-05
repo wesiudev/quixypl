@@ -37,12 +37,12 @@ const FAQ: React.FC<FAQProps> = ({ faqItems }) => {
         {faqItems.slice(0, visibleItems).map((faq, index) => (
           <li
             key={index}
-            className={`lg:hover:!text-white text-zinc-800 lg:hover:bg-gradient-to-r lg:hover:from-primary lg:hover:to-cta font-gotham p-3 ${
+            className={`lg:hover:!text-white text-black lg:hover:bg-gradient-to-r lg:hover:from-primary lg:hover:to-cta p-3 ${
               index + 1 !== visibleItems && "border-primary/50 border-b-2"
             }`}
           >
             <h4 className="font-extrabold">{faq.question}</h4>
-            <p className="font-coco">{faq.answer}</p>
+            <p className="text-base">{faq.answer}</p>
           </li>
         ))}
       </ul>

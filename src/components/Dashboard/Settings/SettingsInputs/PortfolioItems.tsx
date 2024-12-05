@@ -25,13 +25,13 @@ import ReactQuill from "react-quill-new";
 import { TOOLBAR_OPTIONS } from "@/components/AddJobOffer/Step";
 
 export default function PortfolioItems({
-  source,
+  user,
   project,
   setProject,
   setUploading,
   setUploadCount,
 }: {
-  source: any;
+  user: any;
   project: any;
   setProject: any;
   setUploading: any;
@@ -50,26 +50,28 @@ export default function PortfolioItems({
   const [sent, setSent] = useState(false);
   const proceedWithProjectUpdate = async (isPaid: boolean) => {
     const uniqId = uuid();
-    const updatedProjects = updateProjectsList(source.projects, project, {
+    const updatedProjects = updateProjectsList(user?.projects, project, {
       ...project,
-      isPaid: isPaid,
       creationTime: Date.now(),
-      pseudo: source?.pseudo,
+      pseudo: user?.pseudo,
+      userType: user?.seek,
       id: uniqId,
     });
-
-    const updatedTokens = isPaid ? source.tokens - 10 : source.tokens;
+    const updatedTokens = isPaid ? user.tokens - 10 : user.tokens;
     await addDocument("services", uniqId, {
       ...project,
+      creationTime: Date.now(),
+      pseudo: user?.pseudo,
+      userType: user?.seek,
       id: uniqId,
     });
 
-    await updateUser(source.uid, {
+    await updateUser(user.uid, {
       tokens: updatedTokens,
       projects: updatedProjects,
     });
     dispatch(
-      setUser({ ...source, tokens: updatedTokens, projects: updatedProjects })
+      setUser({ ...user, tokens: updatedTokens, projects: updatedProjects })
     );
     setLoading(false);
     setSent(true);
@@ -110,7 +112,7 @@ export default function PortfolioItems({
   };
   const handleRecruitmentStart = async () => {
     setLoading(true);
-    const hasEnoughTokens = source?.tokens >= 10;
+    const hasEnoughTokens = user?.tokens >= 10;
     const isProjectValid = isProjectDataValid(project);
 
     if (!isProjectValid) {
@@ -161,7 +163,7 @@ export default function PortfolioItems({
     }
   }
   return (
-    <div className={``}>
+    <div>
       <div className="font-extrabold text-lg flex items-center text-black">
         <div className="bg-gradient-to-r from-primary to-cta w-10  h-10 flex items-center justify-center mr-2">
           <FaStar className="text-white text-xl" />
@@ -170,12 +172,10 @@ export default function PortfolioItems({
       </div>
 
       <>
-        <div className="">
+        <div>
           <div className="bg-white mt-3">
-            <h1 className="text-base font-bold text-black font-coco">
-              Kategorie
-            </h1>
-            <p className=" text-black font-coco sm:text-base">
+            <h1 className="text-base font-bold text-black ">Kategorie</h1>
+            <p className=" text-black  sm:text-base">
               Twoje usługi trafią do poszczególnych widoków naszej aplikacji
             </p>
 
@@ -190,7 +190,7 @@ export default function PortfolioItems({
                 {project?.tags && tagsOpenLevel === 1
                   ? project?.tags?.map((item: any, i: any) => (
                       <div className="text-sm mt-4 bg-slate-300  p-2" key={i}>
-                        <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
+                        <div className="-mt-2 w-full flex flex-wrap items-center  font-light">
                           <div className="bg-[#126b91]  p-1 text-white mt-2">
                             {item.slugTitle}
                           </div>
@@ -206,7 +206,7 @@ export default function PortfolioItems({
                   : tagsOpenLevel === 2
                   ? project?.tags?.map((item: any, i: any) => (
                       <div className="text-sm mt-4 bg-slate-300  p-2" key={i}>
-                        <div className="-mt-2 w-full flex flex-wrap items-center font-gotham font-light">
+                        <div className="-mt-2 w-full flex flex-wrap items-center  font-light">
                           <div className="flex items-center">
                             <div className="bg-[#126b91]  p-1 text-white mt-2">
                               {item.slugTitle}
@@ -230,7 +230,7 @@ export default function PortfolioItems({
                   : project?.tags?.map((item: any, i: any) => (
                       <div
                         key={i}
-                        className="w-max max-w-[100%] ml-2 mt-2 flex flex-wrap items-center font-gotham font-light text-white"
+                        className="w-max max-w-[100%] ml-2 mt-2 flex flex-wrap items-center  font-light text-white"
                       >
                         <div
                           className={`${
@@ -250,7 +250,7 @@ export default function PortfolioItems({
                             </button>
                           </div>
                           {tagDeletion && selectedTag.title === item.title && (
-                            <div className="flex flex-col w-[90%] my-2 sticky left-0 top-0 bg-black bg-opacity-60 p-3 ">
+                            <div className="flex flex-col my-2 sticky left-0 top-0 bg-black bg-opacity-60 p-3 ">
                               <h2>Usunąć {selectedTag?.title}?</h2>
                               <div className="grid grid-cols-2 gap-3 mt-3">
                                 <button
@@ -278,7 +278,7 @@ export default function PortfolioItems({
                                     setTagDeletion(false);
                                     setSelectedTag({});
                                   }}
-                                  className="bg-red-500 text-white px-3 py-1 "
+                                  className="bg-red-500 text-white p-2"
                                 >
                                   Usuń
                                 </button>
@@ -287,7 +287,7 @@ export default function PortfolioItems({
                                     setTagDeletion(false);
                                     setSelectedTag({});
                                   }}
-                                  className="bg-green-500 text-white px-3 py-1 "
+                                  className="bg-green-500 text-white p-2"
                                 >
                                   Nie
                                 </button>
@@ -304,12 +304,10 @@ export default function PortfolioItems({
               <p className="text-sm text-[green] mb-2"></p>
 
               {configurationOpen && !slug?.title && (
-                <div className="font-gotham font-bold text-black">
-                  Wybierz kategorię
-                </div>
+                <div className=" font-bold text-black">Wybierz kategorię</div>
               )}
               {slug?.title !== "" && category?.title === "" && (
-                <div className="text-black font-gotham flex flex-col">
+                <div className="text-black  flex flex-col">
                   <div className="font-bold mb-1 bg-[#126b91] p-1  text-white w-max max-w-[100%]">
                     {slug.title}
                   </div>
@@ -317,7 +315,7 @@ export default function PortfolioItems({
                 </div>
               )}
               {slug?.title !== "" && category?.title !== "" && (
-                <div className="text-black font-coco flex flex-col">
+                <div className="text-black  flex flex-col">
                   <div className="font-bold mb-1 bg-[#126b91] p-1 text-white w-max max-w-[100%]">
                     {category.title}
                   </div>
@@ -328,7 +326,7 @@ export default function PortfolioItems({
                 {!configurationOpen && slug.title === "" && (
                   <button
                     onClick={() => setConfigurationOpen(true)}
-                    className="px-1 py-0.5 ml-1 mr-0.5 mt-0.5 text-lg w-max bg-[#126b91] hover:bg-opacity-80  duration-100 text-white flex flex-row items-center justify-center outline-none h-[28px] sm:h-[32px]"
+                    className="px-2 py-1 ml-1 mr-0.5 mt-0.5 text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-80  duration-100 text-white flex flex-row items-center justify-center outline-none h-[28px] sm:h-[32px]"
                   >
                     <FaPlusCircle className="mr-1" /> Dodaj kategorię
                   </button>
@@ -505,10 +503,8 @@ export default function PortfolioItems({
                   </div>
                 )}
               </div>
-              <div className="mb-3">
-                <h3 className="font-extrabold text-xl text-black my-2">
-                  Nazwa usługi
-                </h3>
+              <div className="my-3">
+                <h3 className="font-extrabold text-black">Nazwa usługi</h3>
                 <input
                   type="text"
                   value={project.name}
@@ -519,16 +515,13 @@ export default function PortfolioItems({
                     })
                   }
                   placeholder="Wpisz nazwę..."
-                  className="border border-primary p-2 text-black font-coco w-full"
+                  className="border border-primary p-2 text-black w-full"
                 />
               </div>
               <div className="mb-3">
-                <h3 className="font-extrabold text-xl text-black my-2">
-                  Opis usługi
-                </h3>
+                <h3 className="font-extrabold text-black ">Opis usługi</h3>
                 <ReactQuill
                   theme="snow"
-                  placeholder="Wpisz tekst"
                   className="text-black"
                   modules={{
                     toolbar: {
@@ -544,8 +537,8 @@ export default function PortfolioItems({
                   }}
                 />
               </div>
-              {/* <div>
-                <h3 className="font-extrabold text-xl text-black mt-1">Link</h3>
+              <div>
+                <h3 className="font-extrabold text-black">Link</h3>
                 <input
                   type="text"
                   value={project.link}
@@ -555,17 +548,15 @@ export default function PortfolioItems({
                       link: e.target.value,
                     });
                   }}
-                  placeholder=""
-                  className="border border-primary p-2 text-black font-coco w-full duration-300 ease-in-out"
+                  placeholder="Podaj link (opcjonalnie)"
+                  className="border border-primary p-2 text-black w-full duration-300 ease-in-out"
                   aria-label="Link to project"
                 />
-              </div> */}
-              {/* {!source?.seek && source?.seek !== "ask" && (
+              </div>
+              {!user?.seek && user?.seek !== "ask" && (
                 <div className="">
                   <div className="my-3">
-                    <h3 className="font-extrabold text-xl text-black">
-                      Typ wynagrodzenia
-                    </h3>
+                    <h3 className="font-extrabold text-black">Płatność</h3>
                     <select
                       value={project.time}
                       onChange={(e) =>
@@ -582,14 +573,16 @@ export default function PortfolioItems({
                         Stawka miesięczna
                       </option>
                       <option value="Per Milestone">Per Milestone</option>
-                      <option value="Prowizja">Prowizja</option>
-                      <option value="Akcje i udziały">Akcje i udziały</option>
-                      <option value="Inne">Inne</option>
+                      <option value="Płatność z góry">Płatność z góry</option>
+                      <option value="Płatność przed i po">
+                        Płatność przed i po
+                      </option>
+                      <option value="Do ustalenia">Do ustalenia</option>
                     </select>
                   </div>
                   <InputField
                     id="salaryValue"
-                    label="Wynagrodzenie"
+                    label="Cena"
                     value={project.salaryValue}
                     onChange={(e) =>
                       setProject({
@@ -600,10 +593,10 @@ export default function PortfolioItems({
                     placeholder="Wpisz wynagrodzenie..."
                   />
                 </div>
-              )} */}
+              )}
             </div>
 
-            {/* <div className="mt-3">
+            <div className="mt-3">
               <InputField
                 id="duration"
                 label="Czas wykonania"
@@ -614,12 +607,12 @@ export default function PortfolioItems({
                     duration: e.target.value,
                   })
                 }
-                placeholder="Czas wykonania usługi"
+                placeholder="Czas wykonania"
               />
-            </div> */}
+            </div>
 
             {project?.images?.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-3">
                 {project?.images?.map((item: any, i: any) => (
                   <div key={i}>
                     <div className="relative flex flex-col">
@@ -705,7 +698,7 @@ export default function PortfolioItems({
             )}
 
             <button
-              disabled={source?.tokens < 10 || loading || sent}
+              disabled={user?.tokens < 10 || loading || sent}
               onClick={() => {
                 if (project.name && project.desc && project?.tags?.length > 0) {
                   handleRecruitmentStart();
@@ -721,8 +714,11 @@ export default function PortfolioItems({
                   });
                 }
               }}
-              className="disabled:bg-gray-500 disabled:cursor-not-allowed w-max text-xl left-0 bg-cta text-white font-extrabold px-2 py-1.5"
+              className={`${
+                !sent ? "disabled:bg-gray-500" : "disabled:bg-cta"
+              } disabled:cursor-not-allowed w-max text-xl left-0 bg-cta text-white font-extrabold px-2 py-1.5 mt-3`}
             >
+              {sent && <div>Dodano pomyślnie!</div>}
               {!loading && !sent && <div>Dodaj usługę (10,00💎)</div>}
               {loading && (
                 <div className="flex items-center gap-2">
@@ -731,12 +727,12 @@ export default function PortfolioItems({
                 </div>
               )}
             </button>
-            {source?.tokens > 10 && (
-              <div className="text-green-500 text-sm mt-2 font-extrabold">
-                Twoje saldo wynosi {source?.tokens}
+            {user?.tokens > 10 && (
+              <div className="text-cta text-sm mt-2 font-extrabold">
+                Twoje saldo wynosi {user?.tokens}
               </div>
             )}
-            {source?.tokens < 10 && (
+            {user?.tokens < 10 && (
               <div className="flex flex-col gap-2">
                 <div className="text-red-500 text-sm mt-2">
                   Niewystarczająca ilość Quixies
@@ -752,7 +748,7 @@ export default function PortfolioItems({
               </div>
             )}
 
-            <ImagePicker handler={uploadImages} user={source} />
+            <ImagePicker handler={uploadImages} user={user} />
           </div>
         </div>
       </>

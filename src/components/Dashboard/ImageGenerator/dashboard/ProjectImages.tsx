@@ -10,10 +10,12 @@ export default function ProjectImages({
   project,
   currentIndex,
   setCurrentIndex,
+  setIsOpen,
 }: {
   project: IProject;
   currentIndex: number;
   setCurrentIndex: Function;
+  setIsOpen: Function;
 }) {
   const [touchStart, setTouchStart] = useState({ x: 0, y: 0 });
   const [touchEnd, setTouchEnd] = useState({ x: 0, y: 0 });
@@ -64,15 +66,16 @@ export default function ProjectImages({
       {modals.isProjectOpen && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-75">
           <button
-            onClick={() =>
-              dispatch(set_modals({ ...modals, isProjectOpen: false }))
-            }
+            onClick={() => {
+              setIsOpen(false);
+              dispatch(set_modals({ ...modals, isProjectOpen: false }));
+            }}
             className="absolute top-4 right-4 text-white text-2xl"
           >
             ✕
           </button>
-          <div className="container fixed flex items-center justify-center top-1/2 -translate-y-1/2 mx-auto p-4">
-            <div className="relative h-max max-h-[70%] w-full sm:w-3/5 lg:w-3/4 group">
+          <div className="container fixed flex flex-col items-center justify-center top-1/2 -translate-y-1/2 mx-auto p-4">
+            <div className="relative h-[50%] w-auto group">
               {project.images.map((image: IProjectImage, i: number) => (
                 <div
                   onTouchStart={onTouchStart}
@@ -84,7 +87,7 @@ export default function ProjectImages({
                     currentIndex === i
                       ? "opacity-100 duration-500"
                       : "opacity-0 duration-150"
-                  }`}
+                  } `}
                   key={i}
                 >
                   <Image
@@ -92,30 +95,31 @@ export default function ProjectImages({
                     width={1024}
                     height={1024}
                     alt={image.desc}
-                    className="h-full w-auto"
+                    className="max-h-[600px] w-auto"
+                    draggable="false"
                   />
                   <h1 className="text-4xl font-bold text-white">
                     {image.desc}
                   </h1>
                 </div>
               ))}
-              <div className="sm:hidden sm:group-hover:block w-max mx-auto absolute left-0 top-0 bg-gradient-to-r from-primary to-cta text-white font-coco px-4 py-2">
+              <div className="w-max mx-auto absolute left-0 top-0 bg-gradient-to-r from-primary to-cta text-white font-coco px-4 py-2">
                 {currentIndex + 1} / {project.images.length}
               </div>
               <button
                 onClick={() => handlePrev()}
-                className="opacity-0 sm:opacity-100 sm:hidden sm:group-hover:block bg-gradient-to-r from-primary to-cta text-white text-lg p-3 absolute left-0 top-1/2 -translate-y-1/2"
+                className="opacity-0 sm:opacity-100 bg-gradient-to-r from-primary to-cta text-white text-lg p-3 absolute left-0 top-1/2 -translate-y-1/2"
               >
                 <FaChevronLeft />
               </button>
               <button
                 onClick={() => handleNext()}
-                className="opacity-0 sm:opacity-100 sm:hidden sm:group-hover:block bg-gradient-to-r from-primary to-cta text-white text-lg p-3 absolute right-[42px] top-1/2 -translate-y-1/2"
+                className="opacity-0 sm:opacity-100 bg-gradient-to-r from-primary to-cta text-white text-lg p-3 absolute right-0 top-1/2 -translate-y-1/2"
               >
                 <FaChevronRight />
               </button>
               {project.images && (
-                <div className="max-w-full overflow-x-auto whitespace-nowrap space-x-2 pt-2 group-hover:bg-black/50 px-3 scrollbar-thin scrollbar-thumb-gray-700">
+                <div className="w-full absolute bottom-0 left-1/2 -translate-x-1/2 max-w-full overflow-x-scroll whitespace-nowrap space-x-2 pt-2 group-hover:bg-black/50 px-3 scrollbar-thin scrollbar-thumb-gray-700">
                   {project.images.map((image: IProjectImage, i: number) => (
                     <button
                       onClick={() => setCurrentIndex(i)}
