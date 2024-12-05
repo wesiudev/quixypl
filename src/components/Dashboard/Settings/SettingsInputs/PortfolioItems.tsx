@@ -62,7 +62,7 @@ export default function PortfolioItems({
       ...project,
       creationTime: Date.now(),
       pseudo: user?.pseudo,
-      userType: user?.seek,
+      userType: user?.seek === true ? "talent" : "company",
       id: uniqId,
     });
 

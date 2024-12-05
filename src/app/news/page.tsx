@@ -1,48 +1,40 @@
 import Header from "@/components/Header";
-import { getProducts } from "@/firebase";
+import { getDocuments, getProducts } from "@/firebase";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import jobs from "../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
-import { FaChevronRight } from "react-icons/fa";
 import AboutQuixyTalent from "@/components/AboutQuixyTalent";
+import Market from "@/components/marketplace/Market";
 export const revalidate = 30;
 export default async function Page() {
   const posts = await getProducts();
+  const leads: any = await getDocuments("services");
   return (
     <>
       <Header jobsList={jobs} />
-      <div className="py-48 bg-gradient-to-r from-zinc-800 via-gray-800 to-zinc-950 overflow-hidden">
-        <div className="container p-6 lg:p-12 bg-white  relative z-50 mx-auto mb-24">
-          <div className="w-full relative mx-auto">
-            <ul className="breadcrumbs font-gotham font-light flex items-center flex-wrap text-black">
-              <li className="mr-2">
-                <Link
-                  href="/"
-                  className="hover:underline text-sm md:text-base lg:text-lg xl:text-xl"
-                >
-                  strona główna
+      <div className="bg-white overflow-hidden">
+        <div className="container p-6 lg:p-12 bg-white relative z-50 mx-auto">
+          <div className=" text-black flex flex-col breadcrumbs">
+            <ul className="flex items-center flex-wrap">
+              <li className="">
+                <Link href={`/`} title="praca zdalna">
+                  hello!
                 </Link>
               </li>
-              <li className="mx-2 text-sm md:text-base lg:text-lg xl:text-xl">
-                <FaChevronRight className="text-primary" />
-              </li>
-              <li className="mr-2">
-                <Link
-                  href="/news"
-                  className="hover:underline text-sm md:text-base lg:text-lg xl:text-xl"
-                >
+              <li className="">
+                <Link href="/news" title="aktualności">
                   news
                 </Link>
               </li>
             </ul>
           </div>
-          <AboutQuixyTalent />
 
           <div className="min-h-[20vh]">
-            <h1 className="text-black text-lg mb-6 font-coco">
-              Quixy Czytaj - Znajdź pracę zdalną, biznes, AI
+            <h1 className="mb-6 text-black">
+              Aktualności - czytaj o pracy zdalnej, technologii, biznesie i
+              nowościach w AI
             </h1>
             {posts && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 mb-6">
@@ -50,9 +42,8 @@ export default async function Page() {
                   <Link
                     href={`/news/${post.url}`}
                     key={i}
-                    title={`Przejdź do artykułu ${post.title}`}
-                    className="group relative aspect-square h-max flex flex-col hover:bg-[#74B901] hover:bg-opacity-30 hover:p-1 duration-300 ease-in-out"
-                    style={{ boxShadow: "0px 0px 5px #000000" }}
+                    title={`Artykuł ${post.title}`}
+                    className="group relative aspect-square h-max flex flex-col border-2 border-gray-200 hover:border-cta"
                   >
                     <div className="w-full overflow-hidden flex items-start">
                       <Image
@@ -63,10 +54,7 @@ export default async function Page() {
                         className="absolute inset-0 object-cover w-full h-full "
                       />
                     </div>
-                    <h2
-                      style={{ boxShadow: "0px 0px 5px #000000" }}
-                      className="group-hover:bg-gray-300 bg-gray-200 duration-300 absolute bottom-3 left-3 right-3 text-base lg:text-xl mt-3 text-black font-light text-left px-3 py-1"
-                    >
+                    <h2 className="bg-gradient-to-r from-primary to-cta duration-300 absolute bottom-3 left-3 right-3 text-sm mt-3 text-white font-extralight text-left px-3 py-1">
                       {post.title}
                     </h2>
                   </Link>
@@ -80,19 +68,12 @@ export default async function Page() {
               </div>
             )}
           </div>
-          <div>
-            <Link href="/">
-              <Image
-                src="/assets/quixy-logo.png"
-                width={420}
-                height={420}
-                alt=""
-                className="w-[300px]"
-              />
-            </Link>
-          </div>
+          <AboutQuixyTalent />
+          <div className="mt-12"></div>
+          <Market leads={leads} />
         </div>{" "}
       </div>
+
       <MainFooter jobsList={jobs} />
     </>
   );

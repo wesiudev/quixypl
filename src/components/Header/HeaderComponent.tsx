@@ -147,7 +147,7 @@ export default function HeaderComponent({
             href="/news"
             className="text-base drop-shadow-sm shadow-black text-black px-2 py-1  hover:bg-cta hover:text-white "
           >
-            Blog
+            Aktualności
           </Link>
         </div>
         <Link

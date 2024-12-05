@@ -24,7 +24,7 @@ export default function Contact() {
         {/* Contact Section */}
         <div className="flex flex-col relative overflow-hidden bg-white">
           {/* Conditional Form Section */}
-          <div className="bg-white py-6 container mx-auto px-4">
+          <div className="bg-white py-6 container mx-auto">
             <div className=" text-black flex flex-col breadcrumbs">
               <ul className="flex items-center flex-wrap">
                 <li className="">
@@ -33,7 +33,7 @@ export default function Contact() {
                   </Link>
                 </li>
                 <li className="">
-                  <Link href="contact" title="kontakt">
+                  <Link href="/contact" title="kontakt">
                     contact
                   </Link>
                 </li>

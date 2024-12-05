@@ -50,7 +50,7 @@ export default async function Page() {
 
 function HeroSection() {
   return (
-    <header className="p-4 lg:p-12 text-center overflow-hidden relative bg-gradient-to-r from-primary to-cta">
+    <header className="p-4 text-center overflow-hidden relative bg-gradient-to-r from-primary to-cta">
       <div className="py-6 relative z-50 bg-white mx-auto">
         <h1
           style={{ lineHeight: 1.3 }}
@@ -261,7 +261,7 @@ function HighlightCard({
 function CallToActionSection() {
   return (
     <section className="flex flex-col-reverse lg:flex-row lg:my-12 text-left mx-auto">
-      <div className="pl-6 lg:pl-12 overflow-hidden h-full mt-12 lg:mt-0">
+      <div className="px-6 lg:pr-0 lg:pl-12 overflow-hidden h-full mt-12 lg:mt-0">
         <Image
           src="/happy.webp"
           width={500}

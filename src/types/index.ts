@@ -18,6 +18,8 @@ export interface IProject {
   salaryValue: string;
   duration: string;
   tags: any;
+  userType: string;
+  pseudo: string;
 }
 
 export type GenerateIdeaParams = {
