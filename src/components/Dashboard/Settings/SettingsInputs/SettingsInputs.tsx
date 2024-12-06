@@ -7,7 +7,7 @@ import EssentialUserInfo from "./EssentialUserInfo";
 import SettingsHeader from "./SettingsHeader";
 import ChooseAccountType from "./ChooseAccountType";
 
-export default function UserEditDashboard({
+export default function SettingsInputs({
   source,
   changesWereMade,
   setChangesWereMade,

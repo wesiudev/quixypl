@@ -13,9 +13,8 @@ import { storage } from "@/firebase";
 import ReactQuill from "react-quill-new";
 import { TOOLBAR_OPTIONS } from "@/components/AddJobOffer/Step";
 async function isPseudoAvailable(localPseudo: string) {
-  "use server";
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/checkPseudo?pseudo=${localPseudo}&tubylytylkofigi=${process.env.API_SECRET_KEY}`
+    `${process.env.NEXT_PUBLIC_URL}/api/checkPseudo?pseudo=${localPseudo}`
   );
   const data = response.json();
   return data;
@@ -210,7 +209,7 @@ export default function EssentialUserInfo({
             handleReduxUserState={handleReduxUserState}
           /> */}
           {!source?.pseudo && (
-            <div>
+            <>
               <div className="flex flex-col mt-2">
                 <label className="font-bold text-black">Unikalna nazwa</label>
                 <div className="text-black">
@@ -287,7 +286,7 @@ export default function EssentialUserInfo({
                   )}
                 </div>
               </div>
-            </div>
+            </>
           )}
           {source?.seek && source?.seek !== "ask" && (
             <div className="w-full mt-3">
