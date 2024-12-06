@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { isPseudoAvailable } from "../../../../../utils/isPseudoAvailable";
 import CitiesPicker from "./CitiesPicker";
 import Image from "next/image";
 import { FaUser } from "react-icons/fa6";
@@ -13,6 +12,14 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/firebase";
 import ReactQuill from "react-quill-new";
 import { TOOLBAR_OPTIONS } from "@/components/AddJobOffer/Step";
+async function isPseudoAvailable(localPseudo: string) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/checkPseudo?pseudo=${localPseudo}`
+  );
+  const data = response.json();
+  return data;
+}
+
 export default function EssentialUserInfo({
   setSource,
   source,
