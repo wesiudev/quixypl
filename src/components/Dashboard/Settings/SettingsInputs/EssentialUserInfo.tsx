@@ -32,9 +32,9 @@ export default function EssentialUserInfo({
   const [pseudoWasChanged, setPseudoWasChanged] = useState(false);
   const [pseudoIsAvailable, setPseudoIsAvailable] = useState(false);
   const [hasAnswer, setHasAnswer] = useState(false);
-  async function check() {
+  function check() {
     setIsLoading(true),
-      await isPseudoAvailable(localPseudo).then((res: any) => {
+      isPseudoAvailable(localPseudo).then((res: any) => {
         if (res.error) {
           return toast.error("Wystąpił błąd, spróbuj ponownie później.");
         }
@@ -246,7 +246,7 @@ export default function EssentialUserInfo({
                     !pseudoIsAvailable &&
                     localPseudo?.length > 0 && (
                       <button
-                        onClick={check}
+                        onClick={() => check()}
                         disabled={isLoading}
                         className="animate-pulse bg-gradient-to-r from-primary to-cta disabled:cursor-not-allowed w-max  disabled:bg-[#126b91] disabled:duration-500 duration-100 px-2 py-1.5 bg-[#126b91] text-white font-gotham mt-2"
                       >
