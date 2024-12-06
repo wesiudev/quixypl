@@ -23,9 +23,6 @@ export default function AccountHistory() {
                       <span className="text-base text-slate-800 font-light">
                         {moment(item.creationTime).format("DD-MM-yyyy hh:mm a")}{" "}
                       </span>
-                      <div className="ml-2 font-coco text-base lg:text-xl text-cta">
-                        {moment(item.creationTime).fromNow()}
-                      </div>
                     </div>
                   </div>
                   <span className="text-lg flex text-black drop-shadow-sm">

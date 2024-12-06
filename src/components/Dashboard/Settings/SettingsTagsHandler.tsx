@@ -273,43 +273,9 @@ export default function TagsHandler() {
           <p className="text-black">
             Twoja oferta trafi do poszczególnych widoków naszej aplikacji
           </p>
-          <div className="mt-2 w-full grid grid-cols-2 sm:grid-cols-3 gap-2 text-white font-bold text-sm md:text-lg">
-            <button
-              onClick={() => setTagsOpenLevel(0)}
-              className={`bg-[#126b91] ${
-                tagsOpenLevel === 0
-                  ? "bg-opacity-100 hover:bg-opacity-90"
-                  : "bg-opacity-80 hover:bg-opacity-100"
-              } px-2 py-1.5 font-coco`}
-            >
-              Prosty
-            </button>
-            <button
-              onClick={() => setTagsOpenLevel(1)}
-              className={`bg-[#126b91] ${
-                tagsOpenLevel === 1
-                  ? "bg-opacity-100 hover:bg-opacity-90"
-                  : "bg-opacity-80 hover:bg-opacity-100"
-              } px-2 py-1.5 font-coco`}
-            >
-              Rozszerzony
-            </button>
-            <button
-              onClick={() => setTagsOpenLevel(2)}
-              className={`bg-[#126b91] ${
-                tagsOpenLevel === 2
-                  ? "bg-opacity-100 hover:bg-opacity-90"
-                  : "bg-opacity-80 hover:bg-opacity-100"
-              } px-2 py-1.5 font-coco`}
-            >
-              Całość
-            </button>
-          </div>
           <div className="mt-2 font-extrabold text-black ">
             {user?.tags?.length === 0 && "Czym się zajmujesz?"}{" "}
             <div className="text-xl">
-              {user?.tags?.length > 0 && tagsOpenLevel === 0 && "Wybrane "}
-              {user?.tags?.length > 0 && tagsOpenLevel === 1 && "Kategorie"}
               {user?.tags?.length > 0 &&
                 user?.seek &&
                 user?.seek !== "ask" &&

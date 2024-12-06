@@ -53,6 +53,7 @@ export default function Register() {
           userData.password
         ).then((userCredential) => {
           addDocument("users", userCredential.user?.uid, {
+            description: "",
             title: "",
             pseudo: "",
             uid: userCredential.user?.uid,
