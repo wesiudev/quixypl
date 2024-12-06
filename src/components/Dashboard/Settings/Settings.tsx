@@ -1,6 +1,6 @@
 "use client";
 import SettingsInputs from "./SettingsInputs/SettingsInputs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Unsaved from "./SettingsInputs/Unsaved";
 import { updateUser } from "@/firebase";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,11 @@ export default function Settings() {
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.user);
   const [source, setSource] = useState<any>();
+  useEffect(() => {
+    if (user) {
+      setSource(user);
+    }
+  }, []);
   return (
     <div>
       {user && (

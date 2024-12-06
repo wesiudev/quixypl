@@ -22,7 +22,7 @@ export default function DashboardUnderMenu() {
               !user?.emailVerified ||
               !user?.configured ||
               !user?.access
-                ? "grid-cols-1 lg:grid-cols-2"
+                ? "grid-cols-1 lg:grid-cols-2 lg:gap-3"
                 : ""
             }  w-full`}
           >

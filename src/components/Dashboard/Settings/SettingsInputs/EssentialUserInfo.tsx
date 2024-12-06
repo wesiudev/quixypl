@@ -323,7 +323,7 @@ export default function EssentialUserInfo({
               </div>
             </div>
           )}
-          <div className="relative w-full lg:w-1/2 mt-3">
+          <div className="relative w-full mt-3">
             <label className="font-bold text-black mb-2">Twój opis</label>
             <div className="mt-2"></div>
             <ReactQuill
@@ -341,6 +341,7 @@ export default function EssentialUserInfo({
                   ...source,
                   description: e,
                 });
+                setChangesWereMade(true);
               }}
             />
             {/* <textarea
