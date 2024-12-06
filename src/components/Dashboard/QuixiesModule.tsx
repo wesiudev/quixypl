@@ -45,14 +45,6 @@ export default function QuixiesModule() {
           <p className="font-normal text-black mt-1">
             Wybierz odpowiedni pakiet dla swoich potrzeb
           </p>
-          {/* <Image
-            style={{ boxShadow: "0 0 16px 0 cyan" }}
-            src="/assets/quixies5.png"
-            width={1024}
-            height={1024}
-            alt="Quixies"
-            className="w-full h-auto  mb-6"
-          /> */}
           <div className=" grid grid-cols-2 sm:grid-cols-3 gap-3 w-full mt-3 sm:mt-6">
             {shopProducts?.map((item: any, i: any) => (
               <div

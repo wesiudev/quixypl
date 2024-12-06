@@ -19,7 +19,6 @@ async function isPseudoAvailable(localPseudo: string) {
   const data = response.json();
   return data;
 }
-
 export default function EssentialUserInfo({
   setSource,
   source,

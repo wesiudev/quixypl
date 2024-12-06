@@ -4,16 +4,23 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { getStripeCheckoutByQuixyPacket } from "../../utils/getStripeCheckoutByQuixyPacket";
-/**
- * A component that renders a button that sends a request to the server to generate a stripe checkout link.
- * @param {Object} item - An object containing the item to purchase.
- * @param {string} item.plainName - The name of the item to purchase.
- * @param {number} item.price - The price of the item to purchase.
- * @param {number} item.quantity - The quantity of the item to purchase.
- * @param {number} item.discount - The discount of the item to purchase.
- * @returns {React.ReactElement} A component that renders a button that sends a request to the server to generate a stripe checkout link.
- */
+async function getStripeCheckoutByQuixyPacket(uid: any, packet: string) {
+  const req = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/stripe/getStripeCheckoutByQuixyPacket?uid=${uid}&packet=${packet}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      cache: "no-store",
+    }
+  );
+
+  const data = req.json();
+
+  return data;
+}
 function StripeButton({ item }: { item: any }) {
   const router = useRouter();
   const [isLoading, setLoading] = useState(false);
