@@ -31,7 +31,7 @@ export default function DisplayCompaniesOrInviter({ data }: { data: any }) {
             ) : (
               <span
                 style={{ boxShadow: "0px 0px 4px black" }}
-                className="w-12 md:w-24 aspect-square rounded-full mr-2 flex items-center justify-center text-2xl text-primary"
+                className="min-w-16 h-16 aspect-square rounded-full mr-2 flex items-center justify-center text-4xl font-extrabold text-primary"
               >
                 {talent?.pseudo && talent?.pseudo[0]?.toUpperCase()}
               </span>

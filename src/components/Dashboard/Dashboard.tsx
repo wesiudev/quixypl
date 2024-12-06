@@ -33,8 +33,11 @@ export default function Dashboard() {
   const [isAnimating, setIsAnimating] = useState(false);
   return (
     <>
-      {isAnimating && <ReactConfetti />}
-
+      {isAnimating && (
+        <div className="z-50 fixed h-screen w-full left-0 top-0">
+          <ReactConfetti />
+        </div>
+      )}
       {user ? (
         <div className="relative pb-3 lg:pb-6 bg-white">
           <div className="grid grid-cols-1 h-max relative w-full mx-auto">

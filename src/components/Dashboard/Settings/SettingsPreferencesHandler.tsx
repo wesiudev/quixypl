@@ -7,11 +7,9 @@ import { toast } from "react-toastify";
 export default function PreferencesHandler({
   addPreference,
   removePreference,
-  source,
 }: {
   addPreference: (item: string) => void;
   removePreference: (item: string) => void;
-  source: { seek?: string; preferences: string[] };
 }) {
   const [expand, setExpand] = useState(false);
 
@@ -59,7 +57,7 @@ export default function PreferencesHandler({
       <button
         key={item}
         className={`font-coco duration-200 text-white px-1.5 py-1 ml-1 mt-1 text-sm  ${
-          source?.preferences?.includes(item) ? "bg-cta" : "bg-gray-400"
+          user?.preferences?.includes(item) ? "bg-cta" : "bg-gray-400"
         }`}
         onClick={() => {
           handlePreferenceToggle(item);
@@ -114,7 +112,7 @@ export default function PreferencesHandler({
   };
 
   const getTitleAndDescription = () => {
-    if (source?.seek && source?.seek !== "ask") {
+    if (user?.seek && user?.seek !== "ask") {
       return {
         title: "Czas pracy",
         type: "time",
@@ -136,13 +134,13 @@ export default function PreferencesHandler({
       <div className="mt-3 text-black font-extrabold text-xl">{title}</div>
       <p className="text-sm text-black mb-2">{description}</p>
       <div className="-ml-1 -mt-1 flex flex-wrap items-center w-full">
-        {source?.seek && source?.seek !== "ask"
+        {user?.seek && user?.seek !== "ask"
           ? renderPreferences(itemsForTalent, 6, type)
           : renderPreferences(companySize, 6, type)}
 
         {/* Show expand/collapse button if more than 6 options */}
-        {(source?.seek && itemsForTalent.length > 6) ||
-        (!source?.seek && companySize.length > 6) ? (
+        {(user?.seek && itemsForTalent.length > 6) ||
+        (!user?.seek && companySize.length > 6) ? (
           <button
             className="bg-[#126b91] text-white text-sm p-1 px-2 ml-1 mt-1 "
             onClick={() => setExpand(!expand)}

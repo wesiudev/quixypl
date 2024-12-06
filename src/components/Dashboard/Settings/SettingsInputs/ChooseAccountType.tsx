@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 export default function ChooseAccountType(props: any) {
   const dispatch = useDispatch();
-  const { source, setChangesWereMade } = props;
+  const { user, setChangesWereMade } = props;
   return (
     <div className={`relative w-full bg-white p-6 lg:p-12`}>
       <div className="flex flex-col">
@@ -20,12 +20,12 @@ export default function ChooseAccountType(props: any) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-7 my-6">
             <button
               onClick={() => {
-                dispatch(setUser({ ...source, seek: false }));
+                dispatch(setUser({ ...user, seek: false }));
                 setChangesWereMade(true);
               }}
               className={`hover:bg-opacity-80 hover:shadow-sm hover:shadow-primary duration-300 p-3 flex flex-col py-5 border-gray-300 border hover:border-primary ${
-                !source?.seek &&
-                source?.seek !== "ask" &&
+                !user?.seek &&
+                user?.seek !== "ask" &&
                 "bg-opacity-80 shadow-primary shadow-sm border-primary"
               }`}
             >
@@ -40,13 +40,13 @@ export default function ChooseAccountType(props: any) {
                 <div className="relative flex items-center justify-center border-gray-300 rounded-full h-5 w-5 border-[2px]">
                   <div
                     className={`${
-                      (!source?.seek || source?.seek === "ask") &&
+                      (!user?.seek || user?.seek === "ask") &&
                       "border-[10px] duration-75 border-primary"
                     } w-0 h-0 bg-primary rounded-full`}
                   ></div>
                   <div
                     className={`${
-                      (!source?.seek || source?.seek === "ask") &&
+                      (!user?.seek || user?.seek === "ask") &&
                       "border duration-75 border-white"
                     } w-2.5 h-2.5 rounded-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2`}
                   ></div>
@@ -59,12 +59,12 @@ export default function ChooseAccountType(props: any) {
 
             <button
               onClick={() => {
-                dispatch(setUser({ ...source, seek: true }));
+                dispatch(setUser({ ...user, seek: true }));
                 setChangesWereMade(true);
               }}
               className={`hover:bg-opacity-80 hover:shadow-sm hover:shadow-primary duration-300 p-3 flex flex-col py-5 border-gray-300 border hover:border-primary ${
-                source?.seek === true &&
-                source?.seek !== "ask" &&
+                user?.seek === true &&
+                user?.seek !== "ask" &&
                 "bg-opacity-80 shadow-primary shadow-sm border-primary"
               }`}
             >
@@ -79,15 +79,15 @@ export default function ChooseAccountType(props: any) {
                 <div className="relative flex items-center justify-center border-gray-300 rounded-full h-5 w-5 border-[2px]">
                   <div
                     className={`${
-                      source?.seek === true &&
-                      source?.seek !== "ask" &&
+                      user?.seek === true &&
+                      user?.seek !== "ask" &&
                       "border-[10px] duration-75 border-primary"
                     } w-0 h-0 bg-primary  rounded-full`}
                   ></div>
                   <div
                     className={`${
-                      source?.seek === true &&
-                      source?.seek !== "ask" &&
+                      user?.seek === true &&
+                      user?.seek !== "ask" &&
                       "border duration-75 border-white"
                     } w-2.5 h-2.5 rounded-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2`}
                   ></div>

@@ -56,22 +56,20 @@ export default async function Page(props: {
                   <div className="flex w-full">
                     <div className="flex w-max flex-col items-center">
                       {talent?.photoURL && (
-                        <div className="">
-                          <div className="relative w-24 aspect-square h-24">
-                            <Image
-                              src={talent?.photoURL}
-                              width={256}
-                              height={256}
-                              alt=""
-                              className="rounded-full mb-0 absolute inset-0 object-cover w-full h-full shadow-sm shadow-black"
-                            />
-                          </div>
+                        <div className="relative h-20 w-20 sm:w-24 sm:h-24 aspect-square">
+                          <Image
+                            src={talent?.photoURL}
+                            width={256}
+                            height={256}
+                            alt=""
+                            className="rounded-full mb-0 absolute inset-0 object-cover w-full h-full shadow-sm shadow-black"
+                          />
                         </div>
                       )}
                       {!talent?.photoURL && (
                         <div className="flex flex-col items-center">
-                          <div className="bg-[#126b91] aspect-square text-white flex items-center justify-center w-24 shadow-sm shadow-black">
-                            <FaUser className="text-5xl" />
+                          <div className="bg-gradient-to-r from-primary to-cta rounded-full aspect-square text-white flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 shadow-sm shadow-black">
+                            <FaUser className="text-3xl sm:text-5xl" />
                           </div>
                         </div>
                       )}

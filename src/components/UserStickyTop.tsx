@@ -51,18 +51,18 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
       <div className="w-full">
         <div
           style={{ boxShadow: "0px 0px 5px black" }}
-          className={`bg-white h-max duration-500 w-full`}
+          className={`bg-slate-700 h-max duration-500 w-full`}
         >
           <div className="flex w-full justify-between h-full relative">
             <div className="w-full flex items-center py-3 pl-3 sm:pl-4 lg:pl-12">
               {slugData?.photoURL && (
-                <div className="w-auto aspect-square h-12 sm:h-24 relative overflow-hidden">
+                <div className="w-auto aspect-square h-12 sm:h-16 relative overflow-hidden">
                   <Image
                     src={slugData?.photoURL}
                     width={256}
                     height={256}
                     alt={`Zdjęcie profilowe ${slugData.pseudo}`}
-                    className="rounded-full absolute inset-0 object-cover w-auto h-full group-hover:scale-110 duration-500 mb-0"
+                    className="bg-white rounded-full absolute inset-0 object-cover w-auto h-full group-hover:scale-110 duration-500 mb-0"
                   />
                 </div>
               )}
@@ -72,7 +72,7 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
                   <FaUser className="text-3xl lg:text-4xl" />
                 </div>
               )}
-              <div className="pl-3 sm:pl-4 lg:pl-6 text-black">
+              <div className="pl-3 sm:pl-4 lg:pl-6 text-white">
                 <div className="flex flex-col">
                   <h3 className="flex items-center font-extrabold text-sm sm:text-base lg:text-xl">
                     Zatrudnij {slugData?.name}!
@@ -95,7 +95,7 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
                   dispatch(set_modals({ ...modals, currentChat: slugData }));
                 }
               }}
-              className={`mr-3 sm:mr-4 lg:mr-12 my-auto h-max flex text-white font-bold font-coco px-3 py-2 min-h-full max-w-[150px] text-sm sm:text-base bg-cta items-center text-center`}
+              className={`mr-3 sm:mr-4 lg:mr-12 my-auto h-max flex text-white font-extrabold rounded-lg px-3 py-2 min-h-full max-w-[150px] text-sm sm:text-base bg-gradient-to-r from-primary to-cta items-center text-center`}
             >
               Kontakt
               <FaArrowRightLong className="ml-2" />

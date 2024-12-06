@@ -53,7 +53,11 @@ export default function MultiStepVerification({
   const { modals } = useSelector((state: any) => state.modals);
   return (
     <div className={`bg-white w-full mb-6`}>
-      {isAnimating && <Confetti />}
+      {isAnimating && (
+        <div className="z-50 w-full h-screen fixed left-0 top-0">
+          <Confetti />
+        </div>
+      )}
       <div
         className={`${
           user?.access === true && "hidden"

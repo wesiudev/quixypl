@@ -1,77 +1,60 @@
 "use client";
 import TagsHandler from "../SettingsTagsHandler";
 import PreferencesHandler from "../SettingsPreferencesHandler";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/slices/user";
 import EssentialUserInfo from "./EssentialUserInfo";
 import SettingsHeader from "./SettingsHeader";
 import ChooseAccountType from "./ChooseAccountType";
 
 export default function SettingsInputs({
-  source,
   changesWereMade,
   setChangesWereMade,
-  setSource,
+
   setError,
 }: {
-  source: any;
   changesWereMade: any;
   setChangesWereMade: any;
-  setSource: any;
+
   setError: any;
 }) {
   const dispatch = useDispatch();
+  const { user } = useSelector((state: any) => state.user);
   const addPreference = (preference: any) => {
-    const newPreferences = source?.preferences
-      ? [...source?.preferences, preference]
+    const newPreferences = user?.preferences
+      ? [...user?.preferences, preference]
       : [preference];
-    setSource({ ...source, preferences: newPreferences });
-    dispatch(setUser({ ...source, preferences: newPreferences }));
+    dispatch(setUser({ ...user, preferences: newPreferences }));
     setChangesWereMade(true);
   };
 
   const removePreference = (preference: any) => {
-    const newPreferences = source?.preferences.filter(
+    const newPreferences = user?.preferences.filter(
       (item: string) => item !== preference
     );
-    setSource({ ...source, preferences: newPreferences });
-    dispatch(setUser({ ...source, preferences: newPreferences }));
+    dispatch(setUser({ ...user, preferences: newPreferences }));
     setChangesWereMade(true);
   };
 
   return (
     <div>
       <div className="relative bg-white pb-24">
-        <SettingsHeader
-          setError={setError}
-          changesWereMade={changesWereMade}
-          user={source}
-        />
-        {!source?.configured && (
+        <SettingsHeader setError={setError} changesWereMade={changesWereMade} />
+        {!user?.configured && (
           <ChooseAccountType
-            source={source}
+            user={user}
             setChangesWereMade={setChangesWereMade}
           />
         )}
-        {source?.configured && source?.seek !== "ask" && (
-          <div>
-            <EssentialUserInfo
-              source={source}
-              setChangesWereMade={setChangesWereMade}
-              setSource={setSource}
-            />
-            {source?.seek !== "ask" && (
-              <div>
-                <TagsHandler />
-                <PreferencesHandler
-                  addPreference={addPreference}
-                  removePreference={removePreference}
-                  source={source}
-                />
-              </div>
-            )}
-          </div>
-        )}
+        <EssentialUserInfo
+          user={user}
+          setChangesWereMade={setChangesWereMade}
+        />
+        <TagsHandler />
+        <PreferencesHandler
+          addPreference={addPreference}
+          removePreference={removePreference}
+        />
       </div>
     </div>
   );

@@ -3,11 +3,11 @@ import { useState } from "react";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 
 export default function CitiesPicker({
-  source,
+  user,
   handleReduxUserState,
   setChangesWereMade,
 }: {
-  source: any;
+  user: any;
   handleReduxUserState: any;
   setChangesWereMade: any;
 }) {
@@ -32,7 +32,7 @@ export default function CitiesPicker({
       <div className="flex flex-col mt-3 sm:mt-0">
         <label className="font-bold text-black">Województwo</label>
         <select
-          value={source?.region}
+          value={user?.region}
           onChange={(e) => {
             handleReduxUserState(e.target.value, "region");
             openCitySelector(e.target.value);
@@ -65,7 +65,7 @@ export default function CitiesPicker({
           ))}
         </select>
       </div>
-      {source?.region && (
+      {user?.region && (
         <div className="flex flex-col">
           <label className="text-black font-bold" htmlFor="cities">
             Miasto
@@ -74,11 +74,11 @@ export default function CitiesPicker({
             disabled={loading}
             list="cities"
             className={` disabled:bg-primary/50 text-black disabled:cursor-not-allowed disabled:font-bold disabled:text-white border border-primary  p-2 font-light`}
-            value={inputCity === "" ? source?.city : inputCity}
+            value={inputCity === "" ? user?.city : inputCity}
             onClick={() => {
-              if (!cities.length && source?.region) {
+              if (!cities.length && user?.region) {
                 handleReduxUserState("", "city");
-                openCitySelector(source?.region);
+                openCitySelector(user?.region);
               }
             }}
             onChange={(e) => {

@@ -88,10 +88,10 @@ export default function Nav({
   const { modals } = useSelector((state: any) => state.modals);
   return (
     <div className="h-full">
-      <Settings />
+      <Settings isNavOpen={isNavOpen} />
       <QuixiesModule />
       <div
-        className={`!z-[999999999999999999] h-full fixed scrollbar !text-white ${
+        className={`z-[999999999999999] h-full fixed scrollbar !text-white ${
           isNavOpen
             ? "translate-x-[0] duration-300"
             : "-translate-x-[300px] duration-300"

@@ -7,20 +7,17 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Unsaved({
   changesWereMade,
   error,
-  source,
-  setSource,
   setChangesWereMade,
   updateUser,
 }: {
   changesWereMade: boolean;
   error: boolean;
-  source: any;
-  setSource: any;
   setChangesWereMade: (value: boolean) => void;
   updateUser: (uid: string, data: any) => Promise<void>;
 }) {
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
+  const { user } = useSelector((state: any) => state.user);
   return (
     <div
       className={`${
@@ -42,8 +39,7 @@ export default function Unsaved({
           <b>Uwaga!</b> - Masz niezapisane zmiany{" "}
           <button
             onClick={() => {
-              getDocument("users", source?.uid).then((snapshot) => {
-                setSource(snapshot);
+              getDocument("users", user?.uid).then((snapshot) => {
                 dispatch(setUser(snapshot));
               });
               setChangesWereMade(false);
@@ -57,9 +53,9 @@ export default function Unsaved({
         <div className="flex flex-col-reverse sm:flex-row items-center w-max">
           <button
             onClick={() => {
-              const history = source?.history ? [...source?.history] : [];
-              updateUser(source?.uid, {
-                ...source,
+              const history = user?.history ? [...user?.history] : [];
+              updateUser(user?.uid, {
+                ...user,
                 configured: true,
                 history: [
                   ...history,
@@ -71,7 +67,7 @@ export default function Unsaved({
               });
               dispatch(
                 setUser({
-                  ...source,
+                  ...user,
                   configured: true,
                   history: [
                     ...history,

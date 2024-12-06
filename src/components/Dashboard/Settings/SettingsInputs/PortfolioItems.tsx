@@ -747,8 +747,7 @@ export default function PortfolioItems({
                 </button>
               </div>
             )}
-
-            <ImagePicker handler={uploadImages} user={user} />
+            <ImagePicker handler={uploadImages} />
           </div>
         </div>
       </>

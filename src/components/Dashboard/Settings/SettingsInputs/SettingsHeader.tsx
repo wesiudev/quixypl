@@ -6,11 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 export default function SettingsHeader({
   changesWereMade,
   setError,
-  user,
 }: {
   changesWereMade: any;
   setError: any;
-  user: any;
 }) {
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);

@@ -241,8 +241,8 @@ export async function generateMetadata(props: { params: Promise<any> }) {
     .map((item: any) => ({ title: item.title }))
     .find((item: any) => polishToEnglish(item.title) === params.job);
   const content = await getPageContent(params.job);
-  const title = `${job?.title} ${city} Praca Zlecenia Usługi`;
-  const description = `Przeglądaj nasze oferty pracy zdalnej jako ${job?.title} w kategorii ${category}. Zrealizuj swój projekt z Quixy!`;
+  const title = `${job?.title} ${city} | Zlecenia Praca Usługi`;
+  const description = `Interesuje cię ${job?.title?.toLowerCase()}? Przeglądaj zlecenia, oferty pracy lub dodaj usługi w ${category} ${city}.`;
   return {
     title,
     description,
@@ -254,18 +254,7 @@ export async function generateMetadata(props: { params: Promise<any> }) {
       siteName: "Quixy",
       images: [
         {
-          url: "/favicons/favicon-32x32.png",
-          sizes: "32x32",
-          type: "image/png",
-        },
-        {
-          url: "/favicons/android-chrome-192x192.png",
-          sizes: "192x192",
-          type: "image/png",
-        },
-        {
           url: "/favicons/android-chrome-512x512.png",
-          sizes: "512x512",
           type: "image/png",
         },
       ],
@@ -277,7 +266,6 @@ export async function generateMetadata(props: { params: Promise<any> }) {
       description,
       image: {
         url: "/favicons/android-chrome-512x512.png",
-        alt: "Quixy Logo",
       },
     },
   };

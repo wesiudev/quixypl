@@ -4,13 +4,7 @@ import { FaImages } from "react-icons/fa";
 import { FaUpload } from "react-icons/fa6";
 import { toast } from "react-toastify";
 
-export default function ImagePicker({
-  handler,
-  user,
-}: {
-  handler: any;
-  user: any;
-}) {
+export default function ImagePicker({ handler }: { handler: any }) {
   const [dragging, setDragging] = useState(false);
   const [dragCounter, setDragCounter] = useState(0);
 

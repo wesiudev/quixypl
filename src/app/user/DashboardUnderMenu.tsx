@@ -1,7 +1,7 @@
 "use client";
 import MultiStepVerification from "@/components/Dashboard/Settings/SettingsInputs/MultiStepVerification";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import DashboardUserInfo from "./DashboardUserInfo";
 import ServiceList from "@/components/Dashboard/ProjectList";
 import AccountHistory from "@/components/Dashboard/ImageGenerator/dashboard/AccountHistory";
