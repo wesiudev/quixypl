@@ -335,7 +335,7 @@ export default function EssentialUserInfo({
                   container: TOOLBAR_OPTIONS,
                 },
               }}
-              value={source.description}
+              value={source?.description}
               onChange={(e) => {
                 setSource({
                   ...source,
