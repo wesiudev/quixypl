@@ -87,6 +87,7 @@ export default function HomePageGenerator({
           userData.password
         ).then((res) => {
           addDocument("users", res.user?.uid, {
+            pseudo: "",
             uid: res.user?.uid,
             name: "",
             hourRate: "",

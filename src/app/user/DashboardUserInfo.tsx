@@ -123,7 +123,7 @@ export default function DashboardUserInfo() {
             <div className="mt-3">
               {!user?.title && (
                 <div>
-                  {user?.seek && user?.seek !== "ask" && (
+                  {(user?.seek || !user?.seek) && user?.seek !== "ask" && (
                     <h2 className="font-extrabold text-lg text-black">Tytuł</h2>
                   )}
                   <h3 className={`text-black`}>
@@ -260,7 +260,7 @@ export default function DashboardUserInfo() {
                       </h3>
                     ))
                   ) : (
-                    <h3 className="text-white ml-1">Uzupełnij dane...</h3>
+                    <h3 className="text-black ml-1">Uzupełnij dane...</h3>
                   )}
                 </div>
               )}

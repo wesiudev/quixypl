@@ -142,7 +142,7 @@ export default async function Page(props: {
                   <h2 className="w-max text-2xl text-black font-extrabold mt-3">
                     Dostępność
                   </h2>
-                  <div className="w-full -ml-1 mt-1 flex flex-wrap items-center text-white">
+                  <div className="w-full -ml-1 mt-1 flex flex-wrap items-center">
                     {talent?.preferences ? (
                       talent?.preferences?.map((item: any, i: any) => (
                         <h3

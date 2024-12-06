@@ -69,7 +69,6 @@ export default function Unsaved({
                   },
                 ],
               });
-              dispatch(set_modals({ ...modals, config: false }));
               dispatch(
                 setUser({
                   ...source,
