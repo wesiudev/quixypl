@@ -209,7 +209,7 @@ export default function EssentialUserInfo({
             handleReduxUserState={handleReduxUserState}
           /> */}
           {!source?.pseudo && (
-            <>
+            <div>
               <div className="flex flex-col mt-2">
                 <label className="font-bold text-black">Unikalna nazwa</label>
                 <div className="text-black">
@@ -286,7 +286,7 @@ export default function EssentialUserInfo({
                   )}
                 </div>
               </div>
-            </>
+            </div>
           )}
           {source?.seek && source?.seek !== "ask" && (
             <div className="w-full mt-3">

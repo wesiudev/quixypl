@@ -1,7 +1,7 @@
 import { getUsers } from "@/firebase";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
+export async function GET(req: NextRequest) {
   const pseudo = req.nextUrl.searchParams.get("pseudo");
   const users = await getUsers();
   const user = users.find((user) => user?.pseudo === pseudo);
