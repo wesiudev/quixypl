@@ -1,3 +1,4 @@
+"use client";
 import { setUser } from "@/redux/slices/user";
 import { useDispatch } from "react-redux";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
