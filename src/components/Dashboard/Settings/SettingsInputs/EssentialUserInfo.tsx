@@ -32,17 +32,17 @@ export default function EssentialUserInfo({
   const [pseudoWasChanged, setPseudoWasChanged] = useState(false);
   const [pseudoIsAvailable, setPseudoIsAvailable] = useState(false);
   const [hasAnswer, setHasAnswer] = useState(false);
-  function check(pseudo: string) {
-    setIsLoading(true),
-      isPseudoAvailable(pseudo).then((res: any) => {
-        if (res.error) {
-          return toast.error("Wystąpił błąd, spróbuj ponownie później.");
-        }
-        setTriesCount(triesCount + 1);
-        setPseudoIsAvailable(res.available);
-        setIsLoading(false);
-        setHasAnswer(true);
-      });
+  async function check(pseudo: string) {
+    setIsLoading(true);
+    await isPseudoAvailable(pseudo).then((res: any) => {
+      if (res?.error) {
+        return toast.error("Wystąpił błąd, spróbuj ponownie później.");
+      }
+      setTriesCount(triesCount + 1);
+      setPseudoIsAvailable(res.available);
+      setIsLoading(false);
+      setHasAnswer(true);
+    });
     setPseudoWasChanged(true);
   }
   const [loading, setLoading] = useState(false);
