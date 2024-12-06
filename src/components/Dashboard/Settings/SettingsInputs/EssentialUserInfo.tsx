@@ -87,9 +87,6 @@ export default function EssentialUserInfo({
           {!source?.photoURL && (
             <div className="shadow-sm shadow-black bg-gradient-to-r from-primary to-cta h-full rounded-full aspect-square text-white flex items-center justify-center w-40 relative duration-150 flex-col group">
               <FaUser className="text-5xl" />
-              <div className="font-coco z-50 mt-2 px-2 py-1 relative w-max shadow-black text-center bg-gradient-to-r from-primary to-cta text-white shadow-sm">
-                Zmień
-              </div>
             </div>
           )}
         </label>

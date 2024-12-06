@@ -12,11 +12,16 @@ export default function Settings() {
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.user);
   const [source, setSource] = useState<any>();
+  const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
-    if (user) {
-      setSource(user);
+    if (user.email) {
+      if (!source && !isMounted) {
+        setSource(user);
+        setIsMounted(true);
+        console.log("fired");
+      }
     }
-  }, []);
+  }, [user]);
   return (
     <div>
       {user && (
