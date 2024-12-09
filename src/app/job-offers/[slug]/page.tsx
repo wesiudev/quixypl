@@ -26,7 +26,12 @@ export async function generateStaticParams() {
 export const revalidate = 600;
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
-  const offers: any = await getDocuments("offers");
+  const offers = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/offers?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res) => res.json());
   const offer: JobPosting = offers?.find(
     (offer: any) =>
       `${polishToEnglish(offer?.title)}-${offer?.creationTime}` === params?.slug
