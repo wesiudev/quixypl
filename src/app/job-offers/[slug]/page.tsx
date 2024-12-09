@@ -13,23 +13,28 @@ import ApplyBtn from "./ApplyBtn";
 import { getPageContent } from "@/lib/getPageContent";
 import JobOffers from "@/components/JobOffers";
 export async function generateStaticParams() {
-  const offers: any = await getDocuments("offers");
+  const offers = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/offers?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res) => res.json());
   return offers?.map((offer: any) => ({
-    slug: `${polishToEnglish(offer.title)}-${offer.creationTime}`,
+    slug: `${polishToEnglish(offer?.title)}-${offer?.creationTime}`,
   }));
 }
 export const revalidate = 600;
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
   const offers: any = await getDocuments("offers");
-  const offer: JobPosting = offers.find(
+  const offer: JobPosting = offers?.find(
     (offer: any) =>
-      `${polishToEnglish(offer.title)}-${offer.creationTime}` === params.slug
+      `${polishToEnglish(offer?.title)}-${offer?.creationTime}` === params?.slug
   );
-  const similarOffers = offers.filter(
-    (item: any) => polishToEnglish(item.job) === polishToEnglish(offer.job)
+  const similarOffers = offers?.filter(
+    (item: any) => polishToEnglish(item.job) === polishToEnglish(offer?.job)
   );
-  const content = await getPageContent(polishToEnglish(offer.job));
+  const content = await getPageContent(polishToEnglish(offer?.job));
   return (
     <>
       <Header jobsList={jobs} />

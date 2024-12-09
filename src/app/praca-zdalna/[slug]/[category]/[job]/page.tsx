@@ -161,7 +161,7 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
         </div>
         {/* Services Section */}
-        <div className="" id="search">
+        <div id="search">
           <Market leads={leads} />
         </div>
         {/* Content */}

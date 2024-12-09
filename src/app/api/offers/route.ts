@@ -13,10 +13,14 @@ export async function GET(req: NextRequest) {
 
   try {
     const req: any = await getDocuments("offers");
-    const jobOffers = req.filter(
-      (jobOffer: any) => polishToEnglish(jobOffer?.job) === category
-    );
-    return NextResponse.json(jobOffers);
+    if (category) {
+      const jobOffers = req.filter(
+        (jobOffer: any) => polishToEnglish(jobOffer?.job) === category
+      );
+      return NextResponse.json(jobOffers);
+    } else {
+      return NextResponse.json(req);
+    }
   } catch (error) {
     // Handle any potential errors during the process
     return NextResponse.json("-", { status: 500 });
