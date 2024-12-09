@@ -1,6 +1,5 @@
 import jobs from "../../public/14.09.2024.json";
 import { polishToEnglish } from "../../utils/polishToEnglish";
-import data from "polskie-miejscowosci";
 
 export default async function sitemap() {
   const slugs = jobs.flatMap((service: any) => service);
@@ -42,15 +41,6 @@ export default async function sitemap() {
     )}/${polishToEnglish(item.category)}/${polishToEnglish(item.title)}`,
     lastModified: new Date().toISOString(),
   }));
-  const cities = data.splice(0, 10);
-  console.log(cities);
-  const citiesMap = cities.map((item: any) => ({
-    url: `${process.env.NEXT_PUBLIC_URL}/praca-zdalna/${polishToEnglish(
-      item.slug
-    )}/${polishToEnglish(item.city)}`,
-    lastModified: new Date().toISOString(),
-  }));
-
   return [
     {
       url: `${process.env.NEXT_PUBLIC_URL}`,
