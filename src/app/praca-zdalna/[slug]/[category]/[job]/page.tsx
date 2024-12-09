@@ -8,7 +8,7 @@ import BlogPostList from "@/components/BlogPostList";
 import { getDocuments, getProducts } from "@/firebase";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
-import { removePolishSignsAndSpaces } from "@/lib/removePolish";
+import removePolishSignsAndSpaces from "@/lib/removePolish";
 import Image from "next/image";
 export async function generateStaticParams() {
   return jobs

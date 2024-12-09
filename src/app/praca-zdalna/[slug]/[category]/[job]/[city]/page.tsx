@@ -7,7 +7,7 @@ import BlogPostList from "@/components/BlogPostList";
 import { getProducts } from "@/firebase";
 import CityBreadcrumbs from "@/components/CitySlugComponents/CityBreadcrumbs";
 import JobBoardList from "@/components/JobBoardList";
-import { removePolishSignsAndSpaces } from "@/lib/removePolish";
+import removePolishSignsAndSpaces from "@/lib/removePolish";
 export async function generateStaticParams() {
   return jobs
     .flatMap((service: any) =>
