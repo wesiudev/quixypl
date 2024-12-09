@@ -1,20 +1,11 @@
-import Image from "next/image";
-import { FaImage } from "react-icons/fa";
 import Link from "next/link";
 import jobs from "../../../../public/14.09.2024.json";
-import { getDocuments, getProductByUrl, getProducts } from "@/firebase";
-import { renderMarkdown } from "@/lib/parseMarkdown";
-import BlogPostList from "@/components/BlogPostList";
+import { getDocuments } from "@/firebase";
 import Header from "@/components/Header";
 import MainFooter from "@/components/MainFooter";
-import Script from "next/script";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
-import { JobPosting } from "@/types";
 import Viewer from "@/components/AddJobOffer/Viewer";
 import moment from "moment";
-import ApplyBtn from "./ApplyBtn";
-import { getPageContent } from "@/lib/getPageContent";
-import JobOffers from "@/components/JobOffers";
 export async function generateStaticParams() {
   const offers = await getDocuments("offers");
   return offers?.map((offer: any) => ({

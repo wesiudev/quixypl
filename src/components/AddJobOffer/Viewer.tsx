@@ -1,9 +1,7 @@
 "use client";
-
 export interface ViewerProps {
   value: string;
 }
-
 export default function Viewer(props: ViewerProps) {
   return (
     <div

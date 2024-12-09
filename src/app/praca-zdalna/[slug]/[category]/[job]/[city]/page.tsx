@@ -19,13 +19,6 @@ export async function generateStaticParams() {
 
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
-
-  const offers = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/offers/?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`,
-    {
-      next: { revalidate: 60 },
-    }
-  ).then((res) => res.json());
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY

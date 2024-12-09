@@ -9,7 +9,6 @@ import { getDocuments, getProducts } from "@/firebase";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
 import { removePolishSignsAndSpaces } from "@/lib/removePolish";
-import Viewer from "@/components/AddJobOffer/Viewer";
 import Image from "next/image";
 export async function generateStaticParams() {
   return jobs
@@ -20,12 +19,6 @@ export async function generateStaticParams() {
 }
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
-  const offers = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/offers?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`,
-    {
-      next: { revalidate: 60 },
-    }
-  ).then((res) => res.json());
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
@@ -48,7 +41,7 @@ export default async function Page(props: { params: Promise<any> }) {
       ...companies.map((item: any) => item?.city),
     ])
   );
-  const content = await getPageContent(polishToEnglish(params.job));
+  const content: any = await getPageContent(polishToEnglish(params.job));
   const products: any = await getProducts();
   const leads: any = await getDocuments("services");
   return (
@@ -219,9 +212,6 @@ export default async function Page(props: { params: Promise<any> }) {
             </li>
             <li>#{removePolishSignsAndSpaces(content?.title.toLowerCase())}</li>
           </ul>
-        </div>
-        <div className="my-12">
-          <Viewer value={content?.salary} />
         </div>
         <div className="mb-12 grid grid-cols-2 lg:grid-cols-3">
           {allCities.map((city: any, i: any) => (
