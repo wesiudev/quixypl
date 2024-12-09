@@ -1,13 +1,10 @@
-import Image from "next/image";
-import { FaImage } from "react-icons/fa";
 import Link from "next/link";
 import jobs from "../../../../public/14.09.2024.json";
-import { getDocuments, getProductByUrl, getProducts } from "@/firebase";
+import { getDocuments } from "@/firebase";
 import { renderMarkdown } from "@/lib/parseMarkdown";
 import BlogPostList from "@/components/BlogPostList";
 import Header from "@/components/Header";
 import MainFooter from "@/components/MainFooter";
-import Script from "next/script";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
 import { JobPosting } from "@/types";
 import Viewer from "@/components/AddJobOffer/Viewer";
@@ -16,7 +13,7 @@ import ApplyBtn from "./ApplyBtn";
 import { getPageContent } from "@/lib/getPageContent";
 import JobOffers from "@/components/JobOffers";
 export async function generateStaticParams() {
-  const offers = await getDocuments("offers");
+  const offers: any = await getDocuments("offers");
   return offers?.map((offer: any) => ({
     slug: `${polishToEnglish(offer.title)}-${offer.creationTime}`,
   }));
@@ -38,7 +35,7 @@ export default async function Page(props: { params: Promise<any> }) {
       <Header jobsList={jobs} />
       <div className="overflow-x-hidden">
         <div className="bg-gradient-to-r from-primary to-cta">
-          <div className="font-extrabold text-white container mx-auto p-6 lg:p-12">
+          <div className="font-extrabold text-white container mx-auto p-4 lg:p-12">
             <span className="text-base italic font-extralight text-white">
               Oferta Pracy
             </span>{" "}
@@ -47,27 +44,25 @@ export default async function Page(props: { params: Promise<any> }) {
             <div className="gap-3 w-max max-w-full">
               <div className="mt-2 flex flex-col sm:flex-row gap-2">
                 <div className="mt-3 px-3 py-2 bg-zinc-800 w-max max-w-full">
-                  <p className="mb-2 font-medium text-white">
-                    <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
+                  <p className="text-white flex flex-col">
+                    <span className="text-sm font-bold text-indigo-400">
                       Typ wynagrodzenia:
                     </span>{" "}
-                    <br />
-                    {offer.salary}
+                    <span className="font-light">{offer.salary}</span>
                   </p>
                 </div>
                 <div className="mt-3 px-3 py-2 bg-zinc-800 w-max max-w-full">
-                  <p className="font-medium text-white">
-                    <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
+                  <p className="text-white flex flex-col">
+                    <span className="text-sm font-bold text-indigo-400">
                       Wynagrodzenie:
                     </span>{" "}
-                    <br />
-                    {offer.salaryValue}
+                    <span className="font-light">{offer.salaryValue}</span>
                   </p>
                 </div>
               </div>
               <div className="flex flex-col">
                 <p className="mt-3">Ogłoszenie opublikowano:</p>
-                <p className="font-coco text-white text-base">
+                <p className="font-coco font-light text-white text-base">
                   {moment(offer.creationTime).format("DD.MM.YYYY")}
                 </p>
               </div>
@@ -75,7 +70,7 @@ export default async function Page(props: { params: Promise<any> }) {
             </div>
           </div>
         </div>
-        <div className="container mx-auto px-6 lg:px-12 mt-6">
+        <div className="container mx-auto p-4 lg:p-12">
           <h2 className="text-3xl font-extrabold text-black">Treść oferty</h2>
           <div className="font-coco mt-6">
             <Viewer value={offer.description} />
@@ -97,7 +92,7 @@ export default async function Page(props: { params: Promise<any> }) {
           />
         </div>
       </div>
-      <div className="px-6 lg:px-12 mx-auto container">
+      <div className="p-4 lg:p-12 mx-auto container">
         <Link
           className="text-black font-extrabold"
           href={`/praca-zdalna/${polishToEnglish(offer.slug)}/${polishToEnglish(
