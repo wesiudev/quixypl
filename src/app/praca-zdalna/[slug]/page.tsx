@@ -287,7 +287,6 @@ export async function generateMetadata(props: { params: Promise<any> }) {
   const content = await getPageContent(polishToEnglish(slug.title));
   const title = `Oferty pracy w ${content?.genitive} - Job Boards`;
   const description = `Prowadzisz rekrutację lub szukasz pracy w ${content?.genitive}? Chcesz zająć się ${content?.instrumental}? Mamy dla Ciebie zlecenia.`;
-
   return {
     title,
     description,
@@ -299,25 +298,17 @@ export async function generateMetadata(props: { params: Promise<any> }) {
       siteName: "Quixy",
       images: [
         {
-          url: "/favicons/favicon-32x32.png",
-          sizes: "32x32",
-          type: "image/png",
-        },
-
-        {
-          url: "/favicons/android-chrome-192x192.png",
-          sizes: "192x192",
-          type: "image/png",
-        },
-        {
-          url: "/favicons/android-chrome-512x512.png",
-          sizes: "512x512",
+          url: "https://quixy.pl/favicons/android-chrome-512x512.png",
           type: "image/png",
         },
       ],
     },
     twitter: {
       cardType: "summary_large_image",
+      image: {
+        url: "https://quixy.pl/favicons/android-chrome-512x512.png",
+        type: "image/png",
+      },
       site: "@quixy",
       title,
       description,

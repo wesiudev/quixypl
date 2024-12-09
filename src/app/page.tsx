@@ -22,7 +22,7 @@ export default function Page() {
         <div className="mx-auto px-4 w-full max-w-[1366px] flex flex-col lg:items-center lg:grid lg:grid-cols-2 relative z-50 py-12">
           <div className="group relative flex flex-col">
             <h2 className="lg:max-w-lg font-extrabold text-3xl lg:text-5xl text-zinc-800">
-              Twoja platforma z pracą zdalną
+              Utwórz portfolio i szukaj pracy lub zleceń.
             </h2>
             <p className="max-w-[100%] sm:max-w-sm lg:max-w-lg text-black mt-3">
               Pierwsza platforma napędzana technologią{" "}
@@ -33,18 +33,18 @@ export default function Page() {
             </p>
             <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 w-full mt-2">
               <Link
-                href="/praca-zdalna"
+                href="/marketplace"
                 title="Rekrutuj do pracy zdalnej na panelu Quixy"
                 className="font-gotham font-light bg-primary hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
               >
-                <h2 className="w-max mx-auto">Jestem klientem</h2>
+                <h2 className="w-max mx-auto">Rynek Usług</h2>
               </Link>
               <Link
-                href="/praca-zdalna?talent"
+                href="/praca-zdalna"
                 title="Szukaj pracy zdalnej na panelu Quixy"
                 className="font-gotham font-light bg-cta hover:bg-opacity-90 duration-100 text-white text-sm sm:text-base p-2 py-1.5 text-center"
               >
-                <h2 className="w-max mx-auto">Jestem freelancerem</h2>
+                <h2 className="w-max mx-auto">Praca Zdalna</h2>
               </Link>
             </div>
             <Regions />
@@ -414,7 +414,7 @@ const faqItems = [
   {
     question: "Czym jest Quixy?",
     answer:
-      "Quixy to platforma, która łączy klientów z firmami i freelancerami.",
+      "Quixy to platforma, która łączy klientów z firmami i freelancerami. Utwórz swoje portfolio, dodaj usługi na rynek lub znajdź pracę zdalną.",
   },
   {
     question: "Czy dołączenie do Quixy jest darmowe?",

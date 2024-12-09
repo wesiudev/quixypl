@@ -18,7 +18,7 @@ export default async function Page() {
   return (
     <div className="w-full h-full bg-white">
       <Header jobsList={jobs} />
-      <div className="container mx-auto px-4 lg:px-12 pt-4 lg:pt-12">
+      <div className="">
         <HeroSection />
       </div>
       <main className="">
@@ -50,33 +50,47 @@ export default async function Page() {
 
 function HeroSection() {
   return (
-    <header className="p-4 text-center overflow-hidden relative bg-gradient-to-r from-primary to-cta">
-      <div className="py-6 relative z-50 bg-white mx-auto">
+    <section
+      className="p-4 text-left overflow-hidden relative bg-gradient-to-r from-primary to-cta"
+      style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0, 0.5)" }}
+    >
+      <div className="absolute left-0 top-0 w-full h-auto">
+        <Image
+          src="/assets/AI-Image.png"
+          width={1024}
+          height={1024}
+          alt=""
+          className="w-full h-full object-cover opacity-5"
+        />
+      </div>
+      <div className="relative z-50 mx-auto container p-4 lg:p-12">
+        <Breadcrumbs />
         <h1
-          style={{ lineHeight: 1.3 }}
-          className="px-4 pt-6 lg:pt-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 leading-snug w-full text-center mx-auto bg-gradient-to-r from-primary to-cta text-transparent bg-clip-text"
+          style={{ lineHeight: 1.5 }}
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 leading-snug w-full text-white"
         >
           Przeglądaj oferty pracy lub utwórz portfolio
         </h1>
-        <p className="lg:text-lg font-coco text-black px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+        <p className="lg:text-lg font-coco text-white max-w-3xl">
           Opublikuj swoje usługi na naszej platformie i rozpocznij pozyskiwanie
-          klientów już dziś! Dołącz za darmo!
+          klientów już dziś!
         </p>
         <div className="mt-5"></div>
+
         <JoinButton />
       </div>
-    </header>
+    </section>
   );
 }
 
 // Komponent Breadcrumbs
 function Breadcrumbs() {
   return (
-    <div className="!text-white px-6 sm:px-12 breadcrumbs text-xs bg-transparent mx-auto relative z-50 not-italic">
-      <ul className="flex items-center justify-center flex-wrap font-light">
+    <div className="!text-white breadcrumbs relative z-50">
+      <ul className="flex flex-wrap font-light">
         <li>
           <Link title="home" href={`/`}>
-            home
+            hello!
           </Link>
         </li>
         <li>
@@ -93,7 +107,7 @@ function Breadcrumbs() {
 function JoinButton() {
   return (
     <Link
-      className="bg-gradient-to-r from-primary to-cta text-white hover:bg-opacity-90 py-2 px-3 font-gotham font-light  w-max mx-auto relative z-50"
+      className="hover:scale-110 duration-100 rounded-r-xl bg-gradient-to-r from-transparent to-cta text-white hover:bg-opacity-90 py-2 px-4 font-extrabold w-max mx-auto relative z-50"
       href="/register"
     >
       Zarejestruj się
@@ -443,7 +457,7 @@ const links = [
     imageAlt: "Zatrudnij ekspertów od Rozwoju Oprogramowania",
     title: "Specjaliści rozwoju oprogramowania",
     description:
-      "Poszukujesz doświadczonych programistów? Nasza platforma łączy Cię z profesjonalistami, którzy dostosują i stworzą oprogramowanie idealnie odpowiadające Twoim potrzebom biznesowym. Skorzystaj z naszej sieci freelancerów, by przyspieszyć rozwój swojego projektu IT.",
+      "Nasza platforma łączy Cię z doświadczonymi programistami, którzy dostosują i stworzą oprogramowanie odpowiadające Twoim potrzebom biznesowym.",
     goTo: "Rozwój oprogramowania",
   },
   {
@@ -452,7 +466,7 @@ const links = [
     imageAlt: "Wdrożenie Sklepów Internetowych z naszymi ekspertami",
     title: "Programiści sklepów internetowych",
     description:
-      "Chcesz stworzyć lub zoptymalizować swój sklep online? Nasza platforma oferuje dostęp do specjalistów od e-commerce, którzy pomogą Ci maksymalizować sprzedaż i poprawić doświadczenia użytkowników. Zatrudnij naszych ekspertów i przekształć swoje cyfrowe przedsięwzięcia w sukces.",
+      "Nasza platforma oferuje dostęp do specjalistów od e-commerce, którzy pomogą Ci maksymalizować sprzedaż i poprawić doświadczenia użytkowników.",
     goTo: "E-Commerce",
   },
   {
@@ -461,7 +475,7 @@ const links = [
     imageAlt: "Zatrudnij specjalistów od Marketingu",
     title: "Specjaliści marketingu",
     description:
-      "Potrzebujesz skutecznej promocji? Skorzystaj z wiedzy naszych ekspertów marketingowych, którzy zaplanują i zrealizują kampanie reklamowe, które zwiększą Twoją rozpoznawalność i sprzedaż. Nasza platforma umożliwia łatwe i szybkie zatrudnianie doświadczonych marketerów online.",
+      "Potrzebujesz skutecznej promocji? Skorzystaj z wiedzy naszych doświadczonych marketerów online.",
     goTo: "Marketing",
   },
   {
@@ -470,7 +484,7 @@ const links = [
     imageAlt: "Zatrudnij ekspertów od Wsparcia IT",
     title: "Specjaliści Wsparcia IT",
     description:
-      "Nasza platforma oferuje szybki dostęp do specjalistów IT, którzy zapewnią wsparcie techniczne, zarządzanie infrastrukturą, a także optymalizację Twoich systemów. Zatrudnij naszych ekspertów, by utrzymać ciągłość i efektywność Twojej działalności technologicznej.",
+      "Specjaliści IT, którzy zapewnią wsparcie techniczne, zarządzanie infrastrukturą, a także optymalizację Twoich systemów.",
     goTo: "Usługi IT",
   },
   {
@@ -479,7 +493,7 @@ const links = [
     imageAlt: "Zatrudnij doradców biznesowych",
     title: "Doradcy biznesowi",
     description:
-      "Nasza platforma umożliwia łatwe znalezienie i zatrudnienie ekspertów, którzy pomogą w optymalizacji procesów, planowaniu strategicznym i zarządzaniu. Skorzystaj z doświadczenia naszych specjalistów, aby przyspieszyć rozwój i zwiększyć efektywność swojego przedsięwzięcia biznesowego.",
+      "Skorzystaj z doświadczenia naszych specjalistów, aby przyspieszyć rozwój i zwiększyć efektywność swojego przedsięwzięcia biznesowego.",
     goTo: "Usługi biznesowe",
   },
   {
@@ -488,7 +502,7 @@ const links = [
     imageAlt: "Zatrudnij Projektantów dla Twojego Biznesu",
     title: "Projektanci i designerzy",
     description:
-      "Czy potrzebujesz profesjonalnego projektu graficznego lub strony internetowej? Nasza platforma łączy Cię z doświadczonymi projektantami, którzy przekształcą Twoje wizje w rzeczywistość. Wybierz naszych specjalistów i daj się zauważyć dzięki unikalnym i efektownym projektom.",
+      "Czy potrzebujesz profesjonalnego projektu graficznego lub strony internetowej? Połączymy Cię z doświadczonymi projektantami, którzy przekształcą Twoje wizje w rzeczywistość.",
     goTo: "Projektowanie",
   },
 ];

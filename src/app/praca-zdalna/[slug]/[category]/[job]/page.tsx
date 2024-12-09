@@ -12,6 +12,7 @@ import JobOfferCard from "@/components/Dashboard/JobOfferCard";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
 import { removePolishSignsAndSpaces } from "@/lib/removePolish";
+import Viewer from "@/components/AddJobOffer/Viewer";
 export async function generateStaticParams() {
   return jobs
     .flatMap((service: any) =>
@@ -43,6 +44,12 @@ export default async function Page(props: { params: Promise<any> }) {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
+  const allCities = Array.from(
+    new Set([
+      ...talents.map((item: any) => item?.city),
+      ...companies.map((item: any) => item?.city),
+    ])
+  );
   const content = await getPageContent(polishToEnglish(params.job));
   const products: any = await getProducts();
   const leads: any = await getDocuments("services");
@@ -188,6 +195,24 @@ export default async function Page(props: { params: Promise<any> }) {
             <li>#{removePolishSignsAndSpaces(content?.title.toLowerCase())}</li>
           </ul>
         </div>
+        <div className="my-12">
+          <Viewer value={content?.salary} />
+        </div>
+        <div className="mb-12 grid grid-cols-2 lg:grid-cols-3">
+          {allCities.map((city: any, i: any) => (
+            <Link
+              key={city}
+              target="_blank"
+              href={`/praca-zdalna/${params.slug}/${params.category}/${
+                params.job
+              }/${polishToEnglish(city)}`}
+            >
+              <h2 className="text-black font-bold">
+                {content?.informal_title_plural} {city}
+              </h2>
+            </Link>
+          ))}
+        </div>
       </div>
       <MainFooter jobsList={jobs} />
     </>
@@ -209,7 +234,6 @@ export async function generateMetadata(props: { params: Promise<any> }) {
     )
     .map((item: any) => ({ title: item.title }))
     .find((item) => polishToEnglish(item.title) === params.job);
-  const content = await getPageContent(params.job);
   const title = `${job?.title} Oferty Pracy, Zlecenia, Specjaliści i Usługi`;
   const description = `Przeglądaj nasze oferty pracy zdalnej jako ${job?.title} w kategorii ${category}. Zrealizuj swój projekt z Quixy!`;
 
@@ -224,18 +248,7 @@ export async function generateMetadata(props: { params: Promise<any> }) {
       siteName: "Quixy",
       images: [
         {
-          url: "/favicons/favicon-32x32.png",
-          sizes: "32x32",
-          type: "image/png",
-        },
-        {
-          url: "/favicons/android-chrome-192x192.png",
-          sizes: "192x192",
-          type: "image/png",
-        },
-        {
-          url: "/favicons/android-chrome-512x512.png",
-          sizes: "512x512",
+          url: "https://quixy.pl/favicons/android-chrome-512x512.png",
           type: "image/png",
         },
       ],
@@ -246,8 +259,7 @@ export async function generateMetadata(props: { params: Promise<any> }) {
       title,
       description,
       image: {
-        url: "/favicons/android-chrome-512x512.png",
-        alt: "Quixy Logo",
+        url: "https://quixy.pl/favicons/android-chrome-512x512.png",
       },
     },
   };

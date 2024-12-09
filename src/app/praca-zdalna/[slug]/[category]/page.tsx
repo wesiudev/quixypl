@@ -197,10 +197,8 @@ export async function generateMetadata(props: { params: Promise<any> }) {
     .find(
       (item: any) => polishToEnglish(item.category) === params.category
     ).category;
-
   const title = `Oferty Pracy Zdalnej Zlecenia Freelancerzy | ${category}`;
   const description = `Przeglądaj nasze oferty pracy w kategorii ${category}. Zrealizuj swój projekt z Quixy!`;
-
   return {
     title,
     description,
@@ -212,18 +210,7 @@ export async function generateMetadata(props: { params: Promise<any> }) {
       siteName: "Quixy",
       images: [
         {
-          url: "/favicons/favicon-32x32.png",
-          sizes: "32x32",
-          type: "image/png",
-        },
-        {
-          url: "/favicons/android-chrome-192x192.png",
-          sizes: "192x192",
-          type: "image/png",
-        },
-        {
-          url: "/favicons/android-chrome-512x512.png",
-          sizes: "512x512",
+          url: "https://quixy.pl/favicons/android-chrome-512x512.png",
           type: "image/png",
         },
       ],
@@ -234,8 +221,7 @@ export async function generateMetadata(props: { params: Promise<any> }) {
       title,
       description,
       image: {
-        url: "/favicons/android-chrome-512x512.png",
-        alt: "Quixy Logo",
+        url: "https://quixy.pl/favicons/android-chrome-512x512.png",
       },
     },
   };
