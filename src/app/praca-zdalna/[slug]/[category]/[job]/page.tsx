@@ -8,7 +8,7 @@ import BlogPostList from "@/components/BlogPostList";
 import { getDocuments, getProducts } from "@/firebase";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
-import { removePolishSignsAndSpaces } from "@/lib/removePolish";
+import removePolishSignsAndSpaces from "@/lib/removePolish";
 import Viewer from "@/components/AddJobOffer/Viewer";
 import JobOffers from "@/components/JobOffers";
 import Image from "next/image";

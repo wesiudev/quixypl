@@ -8,7 +8,7 @@ import AboutQuixyTalent from "@/components/AboutQuixyTalent";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
 import { getDocuments } from "@/firebase";
-import { removePolishSignsAndSpaces } from "@/lib/removePolish";
+import removePolishSignsAndSpaces from "@/lib/removePolish";
 
 // Generowanie parametrów statycznych
 export async function generateStaticParams() {

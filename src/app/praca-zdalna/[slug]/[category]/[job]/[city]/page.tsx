@@ -11,7 +11,7 @@ import { getProducts } from "@/firebase";
 import JobOfferCard from "@/components/Dashboard/JobOfferCard";
 import CityBreadcrumbs from "@/components/CitySlugComponents/CityBreadcrumbs";
 import JobBoardList from "@/components/JobBoardList";
-import { removePolishSignsAndSpaces } from "@/lib/removePolish";
+import removePolishSignsAndSpaces from "@/lib/removePolish";
 import JobOffers from "@/components/JobOffers";
 
 export async function generateStaticParams() {
