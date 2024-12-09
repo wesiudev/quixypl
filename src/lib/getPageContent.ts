@@ -1,5 +1,3 @@
-"use server";
-
 import { getDocument } from "@/firebase";
 
 export async function getPageContent(id: string) {

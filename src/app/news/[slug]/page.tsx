@@ -7,7 +7,6 @@ import { renderMarkdown } from "@/lib/parseMarkdown";
 import BlogPostList from "@/components/BlogPostList";
 import Header from "@/components/Header";
 import MainFooter from "@/components/MainFooter";
-import Script from "next/script";
 export async function generateStaticParams() {
   const products = await getProducts();
   return products?.map((product: any) => ({
