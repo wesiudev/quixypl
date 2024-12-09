@@ -35,12 +35,12 @@ export default async function Page(props: { params: Promise<any> }) {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
-  const allCities = Array.from(
-    new Set([
-      ...talents.map((item: any) => item?.city),
-      ...companies.map((item: any) => item?.city),
-    ])
-  );
+  // const allCities = Array.from(
+  //   new Set([
+  //     ...talents.map((item: any) => item?.city),
+  //     ...companies.map((item: any) => item?.city),
+  //   ])
+  // );
   const content: any = await getPageContent(polishToEnglish(params.job));
   const products: any = await getProducts();
   const leads: any = await getDocuments("services");
@@ -213,7 +213,7 @@ export default async function Page(props: { params: Promise<any> }) {
             <li>#{removePolishSignsAndSpaces(content?.title.toLowerCase())}</li>
           </ul>
         </div>
-        <div className="mb-12 grid grid-cols-2 lg:grid-cols-3">
+        {/* <div className="mb-12 grid grid-cols-2 lg:grid-cols-3">
           {allCities.map((city: any, i: any) => (
             <Link
               key={city}
@@ -227,7 +227,7 @@ export default async function Page(props: { params: Promise<any> }) {
               </h2>
             </Link>
           ))}
-        </div>
+        </div> */}
       </div>
       <MainFooter jobsList={jobs} />
     </>

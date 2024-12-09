@@ -8,7 +8,6 @@ import { getProducts } from "@/firebase";
 import CityBreadcrumbs from "@/components/CitySlugComponents/CityBreadcrumbs";
 import JobBoardList from "@/components/JobBoardList";
 import { removePolishSignsAndSpaces } from "@/lib/removePolish";
-
 export async function generateStaticParams() {
   return jobs
     .flatMap((service: any) =>
@@ -47,7 +46,6 @@ export default async function Page(props: { params: Promise<any> }) {
     <>
       <Header jobsList={jobs} />
       <div className="bg-white min-h-screen flex flex-col w-full px-4 lg:px-12">
-        {/* Header */}
         {/* Job Title Section */}
         <CityBreadcrumbs params={params} />
         <div className="bg-white w-full mb-6 mx-auto">
