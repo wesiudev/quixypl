@@ -10,7 +10,6 @@ import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
 import { removePolishSignsAndSpaces } from "@/lib/removePolish";
 import Viewer from "@/components/AddJobOffer/Viewer";
-import JobOffers from "@/components/JobOffers";
 import Image from "next/image";
 export async function generateStaticParams() {
   return jobs
@@ -147,7 +146,7 @@ export default async function Page(props: { params: Promise<any> }) {
             content={content}
           />
         </div>
-        <div className="bg-gradient-to-r from-primary to-cta">
+        {/* <div className="bg-gradient-to-r from-primary to-cta">
           <div className="mx-auto container p-4 lg:p-12">
             <h2 className="font-extrabold text-white text-xl lg:text-2xl">
               Oferty pracy w{" "}
@@ -159,7 +158,7 @@ export default async function Page(props: { params: Promise<any> }) {
             </p>
             <JobOffers offers={offers} content={content} />
           </div>
-        </div>
+        </div> */}
         {/* Services Section */}
         <div id="search">
           <Market leads={leads} />

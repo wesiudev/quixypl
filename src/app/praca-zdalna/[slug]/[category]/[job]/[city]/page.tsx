@@ -1,18 +1,13 @@
-import Link from "next/link";
 import { polishToEnglish } from "../../../../../../../utils/polishToEnglish";
 import jobs from "../../../../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Header from "@/components/Header";
 import { getPageContent } from "@/lib/getPageContent";
-import { JobPosting, Tag } from "@/types";
-import { TfiFlagAlt } from "react-icons/tfi";
 import BlogPostList from "@/components/BlogPostList";
 import { getProducts } from "@/firebase";
-import JobOfferCard from "@/components/Dashboard/JobOfferCard";
 import CityBreadcrumbs from "@/components/CitySlugComponents/CityBreadcrumbs";
 import JobBoardList from "@/components/JobBoardList";
 import { removePolishSignsAndSpaces } from "@/lib/removePolish";
-import JobOffers from "@/components/JobOffers";
 
 export async function generateStaticParams() {
   return jobs
@@ -84,7 +79,7 @@ export default async function Page(props: { params: Promise<any> }) {
             </div>
           </div>
         </div>
-        <div>
+        {/* <div>
           <h1
             style={{ lineHeight: 1.45 }}
             className="font-bold text-black text-xl lg:text-3xl my-6"
@@ -95,7 +90,7 @@ export default async function Page(props: { params: Promise<any> }) {
             </span>{" "}
           </h1>
           <JobOffers offers={offers} content={content} />
-        </div>
+        </div> */}
         {/* <div className="bg-white px-6 sm:px-12 py-6 text-gray-800">
         <JobOfferList jobOffers={offers} />
       </div> */}
