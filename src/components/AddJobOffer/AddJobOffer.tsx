@@ -60,7 +60,7 @@ export default function AddJobOffer() {
         <div className="flex flex-col text-white pl-12">
           <h2 className="font-extrabold">Nowe ogłoszenie</h2>
           <p className="text-xs font-coco">
-            Zarządzaj ustawieniami oferty o pracę.
+            Skonfiguruj ofertę pracy i dodaj ją do bazy
           </p>
         </div>
       </div>
