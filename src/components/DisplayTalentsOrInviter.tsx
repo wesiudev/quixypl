@@ -33,7 +33,9 @@ export default function DisplayTalentsOrInviter({ data }: { data: any }) {
                 style={{ boxShadow: "0px 0px 4px black" }}
                 className="min-w-16 h-16 aspect-square rounded-full mr-2 flex items-center justify-center text-4xl font-extrabold text-primary"
               >
-                {talent?.pseudo && talent?.pseudo[0]?.toUpperCase()}
+                {talent?.name
+                  ? talent?.name[0]?.toUpperCase()
+                  : talent?.pseudo[0]?.toUpperCase()}
               </span>
             )}
             <div className="px-3 flex flex-col">
@@ -82,9 +84,6 @@ export default function DisplayTalentsOrInviter({ data }: { data: any }) {
             <h3 className="">
               Skonfiguruj profil na naszej platformie i wyświetlaj swoje usługi
             </h3>
-            <p className="text-white bg-cta px-3 py-1.5 w-max max-w-full mt-1">
-              Do rejestracji!
-            </p>
           </div>
         </Link>
       )}

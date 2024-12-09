@@ -13,14 +13,15 @@ import { JobPosting } from "@/types";
 import Viewer from "@/components/AddJobOffer/Viewer";
 import moment from "moment";
 import ApplyBtn from "./ApplyBtn";
+import { getPageContent } from "@/lib/getPageContent";
+import JobOffers from "@/components/JobOffers";
 export async function generateStaticParams() {
   const offers = await getDocuments("offers");
   return offers?.map((offer: any) => ({
     slug: `${polishToEnglish(offer.title)}-${offer.creationTime}`,
   }));
 }
-export const revalidate = 30;
-
+export const revalidate = 600;
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
   const offers: any = await getDocuments("offers");
@@ -28,47 +29,51 @@ export default async function Page(props: { params: Promise<any> }) {
     (offer: any) =>
       `${polishToEnglish(offer.title)}-${offer.creationTime}` === params.slug
   );
+  const similarOffers = offers.filter(
+    (item: any) => polishToEnglish(item.job) === polishToEnglish(offer.job)
+  );
+  const content = await getPageContent(polishToEnglish(offer.job));
   return (
     <>
       <Header jobsList={jobs} />
       <div className="overflow-x-hidden">
         <div className="bg-gradient-to-r from-primary to-cta">
-          <h1 className="text-3xl font-extrabold text-white container mx-auto p-6 lg:p-12">
+          <div className="font-extrabold text-white container mx-auto p-6 lg:p-12">
             <span className="text-base italic font-extralight text-white">
               Oferta Pracy
             </span>{" "}
             <br />
-            {offer.title}
-            <div className="grid sm:grid-cols-2 gap-3 w-max max-w-full">
-              <div className="mt-3 px-3 pb-3 rounded-xl bg-zinc-800 w-max max-w-full">
-                <p className="mb-2 font-medium text-gray-900 dark:text-gray-100">
-                  <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
-                    Typ wynagrodzenia:
-                  </span>{" "}
-                  <br />
-                  {offer.salary}
+            <h1 className="text-3xl">{offer.title}</h1>
+            <div className="gap-3 w-max max-w-full">
+              <div className="mt-2 flex flex-col sm:flex-row gap-2">
+                <div className="mt-3 px-3 py-2 bg-zinc-800 w-max max-w-full">
+                  <p className="mb-2 font-medium text-white">
+                    <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
+                      Typ wynagrodzenia:
+                    </span>{" "}
+                    <br />
+                    {offer.salary}
+                  </p>
+                </div>
+                <div className="mt-3 px-3 py-2 bg-zinc-800 w-max max-w-full">
+                  <p className="font-medium text-white">
+                    <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
+                      Wynagrodzenie:
+                    </span>{" "}
+                    <br />
+                    {offer.salaryValue}
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <p className="mt-3">Ogłoszenie opublikowano:</p>
+                <p className="font-coco text-white text-base">
+                  {moment(offer.creationTime).format("DD.MM.YYYY")}
                 </p>
               </div>
-              <div className="mt-3 px-3 pb-3 rounded-xl bg-zinc-800 w-max max-w-full">
-                <p className="font-medium text-gray-900 dark:text-gray-100">
-                  <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
-                    Wynagrodzenie:
-                  </span>{" "}
-                  <br />
-                  {offer.salaryValue}
-                </p>
-              </div>
-              <p className="font-extrabold mt-3 text-xl">
-                Ogłoszenie opublikowano:
-              </p>
-              <br />
-              <p className="font-coco text-white text-base">
-                {moment(offer.creationTime).format("DD.MM.YYYY")}
-              </p>
-              <br />
               <ApplyBtn offer={offer} />
             </div>
-          </h1>
+          </div>
         </div>
         <div className="container mx-auto px-6 lg:px-12 mt-6">
           <h2 className="text-3xl font-extrabold text-black">Treść oferty</h2>
@@ -76,31 +81,32 @@ export default async function Page(props: { params: Promise<any> }) {
             <Viewer value={offer.description} />
           </div>
         </div>
-        {offer.requirements}
-        <div className="px-6 lg:px-12 mx-auto container">
-          <Link
-            className="text-black font-extrabold"
-            href={`/praca-zdalna/${polishToEnglish(
-              offer.slug
-            )}/${polishToEnglish(offer.category)}/${polishToEnglish(
-              offer.job
-            )}`}
-          >
-            {offer.job}
-          </Link>
-
-          <h2>Ogłoszenie o pracę {offer?.id}</h2>
+      </div>
+      <div className="bg-gradient-to-r from-primary to-cta">
+        <div className="mx-auto container p-4 lg:p-12">
+          <h2 className="font-extrabold text-white text-xl lg:text-2xl">
+            Oferty pracy w{" "}
+            <span className="">{content?.genitive?.toLowerCase()}</span>{" "}
+          </h2>
+          <p className="text-white mt-2">
+            Szukasz pracy jako {content?.informal_title_singular.toLowerCase()}?
+          </p>
+          <JobOffers
+            offers={similarOffers.filter((item: any) => item.id !== offer.id)}
+            content={content}
+          />
         </div>
       </div>
-
-      <div className="w-full container mx-auto p-6 lg:p-12">
-        <Image
-          src="/assets/quixy-logo.png"
-          width={224}
-          height={224}
-          alt="logo Quixy strona bloga slug"
-          className=""
-        />
+      <div className="px-6 lg:px-12 mx-auto container">
+        <Link
+          className="text-black font-extrabold"
+          href={`/praca-zdalna/${polishToEnglish(offer.slug)}/${polishToEnglish(
+            offer.category
+          )}/${polishToEnglish(offer.job)}`}
+        >
+          {offer.job}
+        </Link>
+        <h2>Ogłoszenie o pracę {offer?.id}</h2>
       </div>
       <MainFooter jobsList={jobs} />
     </>

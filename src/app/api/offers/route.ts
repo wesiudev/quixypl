@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { fetchJobOffers, getDocuments } from "@/firebase";
+import { getDocuments } from "@/firebase";
+import { polishToEnglish } from "../../../../utils/polishToEnglish";
 
 export async function GET(req: NextRequest) {
   const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
@@ -12,7 +13,9 @@ export async function GET(req: NextRequest) {
 
   try {
     const req: any = await getDocuments("offers");
-    const jobOffers = req.filter((jobOffer: any) => jobOffer?.job === category);
+    const jobOffers = req.filter(
+      (jobOffer: any) => polishToEnglish(jobOffer?.job) === category
+    );
     return NextResponse.json(jobOffers);
   } catch (error) {
     // Handle any potential errors during the process

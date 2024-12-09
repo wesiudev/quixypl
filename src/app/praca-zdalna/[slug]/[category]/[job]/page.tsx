@@ -4,15 +4,14 @@ import jobs from "../../../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Header from "@/components/Header";
 import { getPageContent } from "@/lib/getPageContent";
-import { JobPosting, Tag } from "@/types";
-import { TfiFlagAlt } from "react-icons/tfi";
 import BlogPostList from "@/components/BlogPostList";
 import { getDocuments, getProducts } from "@/firebase";
-import JobOfferCard from "@/components/Dashboard/JobOfferCard";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
 import { removePolishSignsAndSpaces } from "@/lib/removePolish";
 import Viewer from "@/components/AddJobOffer/Viewer";
+import JobOffers from "@/components/JobOffers";
+import Image from "next/image";
 export async function generateStaticParams() {
   return jobs
     .flatMap((service: any) =>
@@ -56,82 +55,111 @@ export default async function Page(props: { params: Promise<any> }) {
   return (
     <>
       <Header jobsList={jobs} />
-      <div className=" min-h-screen flex flex-col w-full px-4 lg:px-12">
+      <div className="min-h-screen flex flex-col w-full">
         {/* Header */}
         {/* Job Title Section */}
-        <div className="w-full mt-6 mx-auto">
-          <div className="flex flex-col mx-auto">
-            <div className="">
-              <p className="text-3xl text-black font-extrabold">
-                Freelancer Job Boards
-              </p>
-              <h1 className="text-black">
-                Zlecenia, usługi, oferty pracy zdalnej oraz najlepsi{" "}
-                {content?.informal_title_plural}
-              </h1>{" "}
-              <div className="w-full pb-6 flex flex-col mx-auto">
-                <JobBoardList
-                  talents={talents}
-                  companies={companies}
-                  content={content}
-                />
-              </div>
+        <section
+          className="p-4 text-left overflow-hidden relative bg-gradient-to-r from-primary to-cta"
+          style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0, 0.5)" }}
+        >
+          <div className="absolute left-0 top-0 w-full h-auto">
+            <Image
+              src="/assets/AI-Image.png"
+              width={1024}
+              height={1024}
+              alt=""
+              className="w-full h-full object-cover opacity-5"
+            />
+          </div>
+          <div className="text-xs relative z-50 mx-auto container p-4 lg:p-12">
+            <div className="!text-white breadcrumbs relative z-50">
+              <ul className="flex flex-wrap font-light">
+                <li>
+                  <Link title="home" href={`/`}>
+                    hello!
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    title="Główna zakładka z pracą zdalną"
+                    href={`/praca-zdalna`}
+                  >
+                    praca-zdalna
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    title={`Kategoria Pracy ${params.slug}`}
+                    href={`/praca-zdalna/${params.slug}`}
+                  >
+                    {params.slug}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    title={`Podkategoria Praca Specjaliści ${params.category}`}
+                    href={`/praca-zdalna/${params.slug}/${params.category}`}
+                  >
+                    {params.category}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    title={`Oferty Pracy Zlecenia Freelancerzy Firmy ${params.job}`}
+                    href={`/praca-zdalna/${params.slug}/${params.category}/${params.job}`}
+                  >
+                    {params.job}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <p
+              style={{ lineHeight: 1.5 }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 leading-snug w-full text-white"
+            >
+              Freelancer Job Boards
+            </p>
+            <h1 className="lg:text-lg font-coco text-white max-w-3xl">
+              Zlecenia, usługi, oferty pracy zdalnej oraz najlepsi{" "}
+              {content?.informal_title_plural}
+            </h1>
+            <div className="mt-5"></div>
+            <div className="flex w-max">
+              <Link
+                className="hover:underline text-white hover:bg-opacity-90 py-2 pr-4 font-extrabold w-max mx-auto relative z-50"
+                href="/register"
+              >
+                Wpisz się
+              </Link>
+              <Link
+                className="rounded-r-xl bg-gradient-to-r from-transparent to-cta text-white hover:bg-opacity-90 py-2 px-4 font-extrabold w-max mx-auto relative z-50"
+                href="/register"
+              >
+                Dodaj ofertę
+              </Link>
             </div>
           </div>
+        </section>
+        <div className="my-12 w-full mx-auto container px-4 lg:px-12 flex flex-col">
+          <JobBoardList
+            talents={talents}
+            companies={companies}
+            content={content}
+          />
         </div>
-        <div className=" ">
-          <h2 className="font-extrabold text-black text-xl lg:text-3xl">
-            Oferty pracy zdalnej{" "}
-            <span className="">{content?.title.toLowerCase()}</span>{" "}
-          </h2>
-          <p className="text-black">
-            Szukasz pracy jako {content?.informal_title_singular}?
-          </p>
-          {offers?.length === 0 && (
-            <div className="">
-              <div className="py-3 bg-gradient-to-r from-primary/30 to-cta/30 mx-auto my-6">
-                <div className="bg-gradient-to-r from-primary to-cta rounded-full aspect-square mx-auto w-32 flex items-center justify-center">
-                  <TfiFlagAlt className="text-white text-4xl animate-bounce" />
-                </div>
-                <p className="bg-white font-coco font-light text-black text-base p-3 mt-3 text-center max-w-xl mx-auto">
-                  Brak aktywnych ofert pracy zdalnej dla specjalistów w branży{" "}
-                  {content?.genitive}
-                </p>
-                <h3 className="flex flex-col text-white p-2 font-gotham font-light text-center mx-auto max-w-[332px] group">
-                  <Link
-                    href="/register"
-                    className=" bg-[#14a800] p-2 duration-100 group-hover:bg-opacity-80"
-                  >
-                    Dodaj darmowe ogłoszenie
-                  </Link>
-                  <Link
-                    href="/register"
-                    className=" bg-[#14a800] w-max max-w-[100%] mx-auto p-2 duration-100 group-hover:bg-opacity-80"
-                  >
-                    o pracę już dziś!
-                  </Link>
-                </h3>
-              </div>
-            </div>
-          )}
-          {offers?.length > 0 && (
-            <section className="">
-              {offers.map((offer: JobPosting, i: any) => (
-                <div className="w-full overflow-hidden" key={i}>
-                  <JobOfferCard
-                    href={`/job-offers/${polishToEnglish(offer.title)}-${
-                      offer.creationTime
-                    }`}
-                    offer={offer}
-                  />
-                </div>
-              ))}
-            </section>
-          )}
+        <div className="bg-gradient-to-r from-primary to-cta">
+          <div className="mx-auto container p-4 lg:p-12">
+            <h2 className="font-extrabold text-white text-xl lg:text-2xl">
+              Oferty pracy w{" "}
+              <span className="">{content?.genitive?.toLowerCase()}</span>{" "}
+            </h2>
+            <p className="text-white mt-2">
+              Szukasz pracy jako{" "}
+              {content?.informal_title_singular.toLowerCase()}?
+            </p>
+            <JobOffers offers={offers} content={content} />
+          </div>
         </div>
-        {/* <div className="bg-white  sm:px-12 py-6 text-gray-800">
-        <JobOfferList jobOffers={offers} />
-      </div> */}
         {/* Services Section */}
         <div className="" id="search">
           <Market leads={leads} />
@@ -148,7 +176,6 @@ export default async function Page(props: { params: Promise<any> }) {
                 {content?.informal_title_plural.toLowerCase()}?
               </span>
             </h2>
-
             <div
               className="text-black max-w-3xl markdownSlug font-light font-coco"
               dangerouslySetInnerHTML={{
@@ -169,7 +196,6 @@ export default async function Page(props: { params: Promise<any> }) {
                 #{removePolishSignsAndSpaces(item.toLowerCase())}
               </li>
             ))}
-
             <li>#znajdzprace</li>
             <li>#rekrutacja</li>
             <li>#pracazdalna</li>

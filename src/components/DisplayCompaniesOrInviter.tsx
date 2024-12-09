@@ -82,9 +82,6 @@ export default function DisplayCompaniesOrInviter({ data }: { data: any }) {
             <h3 className="">
               Skonfiguruj profil na naszej platformie i wyświetlaj swoje usługi
             </h3>
-            <p className="text-white bg-cta px-3 py-1.5 w-max max-w-full mt-1">
-              Do rejestracji!
-            </p>
           </div>
         </Link>
       )}

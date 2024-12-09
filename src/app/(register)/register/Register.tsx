@@ -1,6 +1,6 @@
 "use client";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addDocument, auth } from "@/firebase";
 import { toast } from "react-toastify";
 import { toastUpdate } from "@/components/Toast/ToastUpdate";
@@ -10,7 +10,9 @@ import { errorCatcher } from "../../../../utils/errorCatcher";
 import CreateAccountForm from "./CreateAccountForm";
 import FirstStep from "./FirstStep";
 import FirstStepButtons from "./FirstStepButtons";
+import { useAuthState } from "react-firebase-hooks/auth";
 export default function Register() {
+  const [user, loading] = useAuthState(auth);
   const router = useRouter();
   const [step, setStep] = useState(0);
   const [userData, setUserData] = useState({
@@ -92,7 +94,11 @@ export default function Register() {
       }
     })();
   }
-
+  useEffect(() => {
+    if (user && !loading) {
+      router.push("/user");
+    }
+  }, [loading, user]);
   return (
     <div className="font-sans w-full min-h-screen bg-center mx-auto relative flex flex-col-reverse md:flex-row bg-white">
       <div

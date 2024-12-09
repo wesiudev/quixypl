@@ -1,10 +1,7 @@
 "use client";
 import { JobPosting } from "@/types";
 import Link from "next/link";
-import { polishToEnglish } from "../../../utils/polishToEnglish";
-import Viewer from "../AddJobOffer/Viewer";
 import moment from "moment";
-
 export default function JobOfferCard({
   offer,
   href,
@@ -13,11 +10,15 @@ export default function JobOfferCard({
   href: string;
 }) {
   return (
-    <Link className="p-1.5" href={`${href}`}>
-      <div className="flex-wrap bg-gradient-to-r from-primary to-cta font-bold text-white w-full flex justify-between p-3 rounded-xl">
-        <h3 className="">{offer.title}</h3>
-        <h3>{moment(offer.creationTime).format("DD-MM-YYYY")}</h3>
-      </div>
-    </Link>
+    <div className="bg-white p-2">
+      <Link className="" href={`${href}`}>
+        <div className="flex-wrap w-full flex justify-between">
+          <h3 className="text-2xl font-extrabold text-black">{offer.title}</h3>
+          <span className="font-coco">
+            {moment(offer.creationTime).format("DD-MM-YYYY")}
+          </span>
+        </div>
+      </Link>
+    </div>
   );
 }

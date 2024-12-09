@@ -12,6 +12,7 @@ import JobOfferCard from "@/components/Dashboard/JobOfferCard";
 import CityBreadcrumbs from "@/components/CitySlugComponents/CityBreadcrumbs";
 import JobBoardList from "@/components/JobBoardList";
 import { removePolishSignsAndSpaces } from "@/lib/removePolish";
+import JobOffers from "@/components/JobOffers";
 
 export async function generateStaticParams() {
   return jobs
@@ -93,48 +94,7 @@ export default async function Page(props: { params: Promise<any> }) {
               {content?.title}
             </span>{" "}
           </h1>
-          {offers?.length === 0 && (
-            <div className="">
-              <div className=" p-6 bg-gradient-to-r from-primary/20 to-cta/20 mx-auto my-6">
-                <div className="bg-gradient-to-r from-primary to-cta rounded-full aspect-square mx-auto w-32 flex items-center justify-center">
-                  <TfiFlagAlt className="text-white text-4xl animate-bounce" />
-                </div>
-
-                <p className="bg-white font-coco font-light text-black text-base p-3 mt-3 text-center max-w-xl mx-auto">
-                  Brak aktywnych ofert pracy zdalnej dla specjalistów w branży{" "}
-                  {content?.genitive}
-                </p>
-                <h3 className="flex flex-col text-white p-2 font-gotham font-light text-center mx-auto max-w-[332px] group">
-                  <Link
-                    href="/register"
-                    className=" bg-[#14a800] p-2 duration-100 group-hover:bg-opacity-80"
-                  >
-                    Dodaj darmowe ogłoszenie
-                  </Link>
-                  <Link
-                    href="/register"
-                    className=" bg-[#14a800] w-max max-w-[100%] mx-auto p-2  duration-100 group-hover:bg-opacity-80"
-                  >
-                    o pracę już dziś!
-                  </Link>
-                </h3>
-              </div>
-            </div>
-          )}
-          {offers?.length > 0 && (
-            <section className="grid grid-cols-1 lg:grid-cols-2">
-              {offers.map((offer: JobPosting, i: any) => (
-                <div className="h-[40vh] overflow-hidden my-3" key={i}>
-                  <JobOfferCard
-                    offer={offer}
-                    href={`/job-offers/${polishToEnglish(offer?.title)}-${
-                      offer?.creationTime
-                    }`}
-                  />
-                </div>
-              ))}
-            </section>
-          )}
+          <JobOffers offers={offers} content={content} />
         </div>
         {/* <div className="bg-white px-6 sm:px-12 py-6 text-gray-800">
         <JobOfferList jobOffers={offers} />
