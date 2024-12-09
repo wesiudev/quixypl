@@ -1,13 +1,8 @@
-import Image from "next/image";
-import { FaImage } from "react-icons/fa";
 import Link from "next/link";
 import jobs from "../../../../public/14.09.2024.json";
-import { getDocuments, getProductByUrl, getProducts } from "@/firebase";
-import { renderMarkdown } from "@/lib/parseMarkdown";
-import BlogPostList from "@/components/BlogPostList";
+import { getDocuments } from "@/firebase";
 import Header from "@/components/Header";
 import MainFooter from "@/components/MainFooter";
-import Script from "next/script";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
 import { JobPosting } from "@/types";
 import Viewer from "@/components/AddJobOffer/Viewer";
@@ -25,14 +20,14 @@ export const revalidate = 600;
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
   const offers: any = await getDocuments("offers");
-  const offer: any = await offers?.find(
+  const offer: JobPosting = await offers?.find(
     (offer: any) =>
       `${polishToEnglish(offer.title)}-${offer.creationTime}` === params.slug
   );
   const similarOffers = offers.filter(
     (item: any) => polishToEnglish(item.job) === polishToEnglish(offer.job)
   );
-  // const content = await getPageContent(polishToEnglish(offer.job));
+  const content = await getPageContent(polishToEnglish(offer.job));
   return (
     <>
       <Header jobsList={jobs} />
@@ -80,7 +75,7 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
         </div>
       </div>
-      {/* <div className="bg-gradient-to-r from-primary to-cta">
+      <div className="bg-gradient-to-r from-primary to-cta">
         <div className="mx-auto container p-4 lg:p-12">
           <h2 className="font-extrabold text-white text-xl lg:text-2xl">
             Oferty pracy w{" "}
@@ -94,7 +89,7 @@ export default async function Page(props: { params: Promise<any> }) {
             content={content}
           />
         </div>
-      </div> */}
+      </div>
       <div className="p-4 lg:p-12 mx-auto container">
         <Link
           className="text-black font-extrabold"
