@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import Header from "@/components/Header";
 import FAQ from "@/components/Faq";
 import OpinionsForm from "@/components/OpinionsForm";
-import { FaRocket, FaUsers } from "react-icons/fa";
+import { FaRocket, FaUsers, FaCogs } from "react-icons/fa";
 import MainFooter from "@/components/MainFooter";
 import Image from "next/image";
 import { FaArrowRightLong } from "react-icons/fa6";

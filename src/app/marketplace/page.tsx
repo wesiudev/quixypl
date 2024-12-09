@@ -2,7 +2,13 @@ import Header from "@/components/Header";
 import Link from "next/link";
 import jobs from "../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
-import { FaStar } from "react-icons/fa6";
+import { FaFileSignature, FaImages, FaUsers } from "react-icons/fa";
+import {
+  FaDiamondTurnRight,
+  FaFileArrowUp,
+  FaStar,
+  FaUser,
+} from "react-icons/fa6";
 import { Metadata } from "next";
 import Image from "next/image";
 import Regions from "@/components/Regions";

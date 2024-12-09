@@ -8,7 +8,9 @@ import BlogPostList from "@/components/BlogPostList";
 import { getDocuments, getProducts } from "@/firebase";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
-import removePolishSignsAndSpaces from "@/lib/removePolish";
+import { removePolishSignsAndSpaces } from "@/lib/removePolish";
+import Viewer from "@/components/AddJobOffer/Viewer";
+import JobOffers from "@/components/JobOffers";
 import Image from "next/image";
 export async function generateStaticParams() {
   return jobs
@@ -19,6 +21,12 @@ export async function generateStaticParams() {
 }
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
+  const offers = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/offers?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res) => res.json());
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
@@ -35,13 +43,13 @@ export default async function Page(props: { params: Promise<any> }) {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
-  // const allCities = Array.from(
-  //   new Set([
-  //     ...talents.map((item: any) => item?.city),
-  //     ...companies.map((item: any) => item?.city),
-  //   ])
-  // );
-  const content: any = await getPageContent(polishToEnglish(params.job));
+  const allCities = Array.from(
+    new Set([
+      ...talents.map((item: any) => item?.city),
+      ...companies.map((item: any) => item?.city),
+    ])
+  );
+  const content = await getPageContent(polishToEnglish(params.job));
   const products: any = await getProducts();
   const leads: any = await getDocuments("services");
   return (
@@ -139,7 +147,7 @@ export default async function Page(props: { params: Promise<any> }) {
             content={content}
           />
         </div>
-        {/* <div className="bg-gradient-to-r from-primary to-cta">
+        <div className="bg-gradient-to-r from-primary to-cta">
           <div className="mx-auto container p-4 lg:p-12">
             <h2 className="font-extrabold text-white text-xl lg:text-2xl">
               Oferty pracy w{" "}
@@ -151,7 +159,7 @@ export default async function Page(props: { params: Promise<any> }) {
             </p>
             <JobOffers offers={offers} content={content} />
           </div>
-        </div> */}
+        </div>
         {/* Services Section */}
         <div id="search">
           <Market leads={leads} />
@@ -213,7 +221,10 @@ export default async function Page(props: { params: Promise<any> }) {
             <li>#{removePolishSignsAndSpaces(content?.title.toLowerCase())}</li>
           </ul>
         </div>
-        {/* <div className="mb-12 grid grid-cols-2 lg:grid-cols-3">
+        <div className="my-12">
+          <Viewer value={content?.salary} />
+        </div>
+        <div className="mb-12 grid grid-cols-2 lg:grid-cols-3">
           {allCities.map((city: any, i: any) => (
             <Link
               key={city}
@@ -227,7 +238,7 @@ export default async function Page(props: { params: Promise<any> }) {
               </h2>
             </Link>
           ))}
-        </div> */}
+        </div>
       </div>
       <MainFooter jobsList={jobs} />
     </>
