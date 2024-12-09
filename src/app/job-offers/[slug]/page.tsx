@@ -18,7 +18,7 @@ import JobOffers from "@/components/JobOffers";
 export async function generateStaticParams() {
   const offers = await getDocuments("offers");
   return offers?.map((offer: any) => ({
-    slug: `${polishToEnglish(offer.title)}-${offer.creationTime}`,
+    slug: `${polishToEnglish(offer?.title)}-${offer?.creationTime}`,
   }));
 }
 export const revalidate = 600;
@@ -27,10 +27,7 @@ export default async function Page(props: { params: Promise<any> }) {
   const offers: any = await getDocuments("offers");
   const offer: any = await offers?.find(
     (offer: any) =>
-      `${polishToEnglish(offer.title)}-${offer.creationTime}` === params.slug
-  );
-  const similarOffers = offers.filter(
-    (item: any) => polishToEnglish(item.job) === polishToEnglish(offer.job)
+      `${polishToEnglish(offer?.title)}-${offer?.creationTime}` === params?.slug
   );
   // const content = await getPageContent(polishToEnglish(offer.job));
   return (
@@ -43,7 +40,7 @@ export default async function Page(props: { params: Promise<any> }) {
               Oferta Pracy
             </span>{" "}
             <br />
-            <h1 className="text-3xl">{offer.title}</h1>
+            <h1 className="text-3xl">{offer?.title}</h1>
             <div className="gap-3 w-max max-w-full">
               <div className="mt-2 flex flex-col sm:flex-row gap-2">
                 <div className="mt-3 px-3 py-2 bg-zinc-800 w-max max-w-full">
@@ -51,7 +48,7 @@ export default async function Page(props: { params: Promise<any> }) {
                     <span className="text-sm font-bold text-indigo-400">
                       Typ wynagrodzenia:
                     </span>{" "}
-                    <span className="font-light">{offer.salary}</span>
+                    <span className="font-light">{offer?.salary}</span>
                   </p>
                 </div>
                 <div className="mt-3 px-3 py-2 bg-zinc-800 w-max max-w-full">
@@ -59,24 +56,24 @@ export default async function Page(props: { params: Promise<any> }) {
                     <span className="text-sm font-bold text-indigo-400">
                       Wynagrodzenie:
                     </span>{" "}
-                    <span className="font-light">{offer.salaryValue}</span>
+                    <span className="font-light">{offer?.salaryValue}</span>
                   </p>
                 </div>
               </div>
               <div className="flex flex-col">
                 <p className="mt-3">Ogłoszenie opublikowano:</p>
                 <p className="font-coco font-light text-white text-base">
-                  {moment(offer.creationTime).format("DD.MM.YYYY")}
+                  {moment(offer?.creationTime).format("DD.MM.YYYY")}
                 </p>
               </div>
-              <ApplyBtn offer={offer} />
+              {/* <ApplyBtn offer={offer} /> */}
             </div>
           </div>
         </div>
         <div className="container mx-auto p-4 lg:p-12">
           <h2 className="text-3xl font-extrabold text-black">Treść oferty</h2>
           <div className="font-coco mt-6">
-            <Viewer value={offer.description} />
+            <Viewer value={offer?.description} />
           </div>
         </div>
       </div>
