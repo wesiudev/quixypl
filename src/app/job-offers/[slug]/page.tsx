@@ -32,7 +32,7 @@ export default async function Page(props: { params: Promise<any> }) {
   const similarOffers = offers.filter(
     (item: any) => polishToEnglish(item.job) === polishToEnglish(offer.job)
   );
-  const content = await getPageContent(polishToEnglish(offer.job));
+  // const content = await getPageContent(polishToEnglish(offer.job));
   return (
     <>
       <Header jobsList={jobs} />
@@ -80,7 +80,7 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
         </div>
       </div>
-      <div className="bg-gradient-to-r from-primary to-cta">
+      {/* <div className="bg-gradient-to-r from-primary to-cta">
         <div className="mx-auto container p-4 lg:p-12">
           <h2 className="font-extrabold text-white text-xl lg:text-2xl">
             Oferty pracy w{" "}
@@ -94,7 +94,7 @@ export default async function Page(props: { params: Promise<any> }) {
             content={content}
           />
         </div>
-      </div>
+      </div> */}
       <div className="p-4 lg:p-12 mx-auto container">
         <Link
           className="text-black font-extrabold"
