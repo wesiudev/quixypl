@@ -4,11 +4,9 @@ import { getDocuments } from "@/firebase";
 import Header from "@/components/Header";
 import MainFooter from "@/components/MainFooter";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
-import { JobPosting } from "@/types";
 import Viewer from "@/components/AddJobOffer/Viewer";
 import moment from "moment";
 import ApplyBtn from "./ApplyBtn";
-import { getPageContent } from "@/lib/getPageContent";
 import JobOffers from "@/components/JobOffers";
 export async function generateStaticParams() {
   const offers = await getDocuments("offers");
@@ -19,15 +17,26 @@ export async function generateStaticParams() {
 export const revalidate = 600;
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
-  const offers: any = await getDocuments("offers");
-  const offer: JobPosting = await offers?.find(
-    (offer: any) =>
-      `${polishToEnglish(offer.title)}-${offer.creationTime}` === params.slug
-  );
-  const similarOffers = offers.filter(
-    (item: any) => polishToEnglish(item.job) === polishToEnglish(offer.job)
-  );
-  const content = await getPageContent(polishToEnglish(offer.job));
+  const offer = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/offers/${params.slug}?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
+  const offers = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/offers?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
+  const content = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${
+      process.env.API_SECRET_KEY
+    }&job=${polishToEnglish(offer.job)}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
   return (
     <>
       <Header jobsList={jobs} />
@@ -84,10 +93,7 @@ export default async function Page(props: { params: Promise<any> }) {
           <p className="text-white mt-2">
             Szukasz pracy jako {content?.informal_title_singular.toLowerCase()}?
           </p>
-          <JobOffers
-            offers={similarOffers.filter((item: any) => item.id !== offer.id)}
-            content={content}
-          />
+          <JobOffers offers={offers} content={content} />
         </div>
       </div>
       <div className="p-4 lg:p-12 mx-auto container">

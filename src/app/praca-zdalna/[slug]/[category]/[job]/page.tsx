@@ -151,7 +151,7 @@ export default async function Page(props: { params: Promise<any> }) {
           <div className="mx-auto container p-4 lg:p-12">
             <h2 className="font-extrabold text-white text-xl lg:text-2xl">
               Oferty pracy w{" "}
-              <span className="">{content?.genitive?.toLowerCase()}</span>{" "}
+              <span className="">{content?.dative?.toLowerCase()}</span>{" "}
             </h2>
             <p className="text-white mt-2">
               Szukasz pracy jako{" "}
