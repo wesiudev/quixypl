@@ -18,7 +18,7 @@ export const revalidate = 600;
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
   const offer = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/offers/${params.slug}?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    `${process.env.NEXT_PUBLIC_URL}/api/offers/slug?slug=${params.slug}&tubylytylkofigi=${process.env.API_SECRET_KEY}`,
     {
       next: { revalidate: 60 },
       method: "POST",

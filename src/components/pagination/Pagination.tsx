@@ -29,7 +29,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <div className="flex justify-center mt-6">
         <button
           onClick={handleShowMore}
-          className="px-4 py-2 bg-[#126b91] text-white rounded"
+          className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/80"
         >
           Wyświetl więcej
         </button>

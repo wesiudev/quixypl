@@ -64,7 +64,7 @@ export default function Market({ leads }: { leads: IProject[] }) {
             </div>
             <div className="bg-white p-3 text-center max-w-sm mx-auto mt-4">
               {/* Reduced padding */}
-              <p className="text-sm max-w-sm mx-auto">
+              <p className="font-coco font-light max-w-sm mx-auto">
                 Wybierz kategorię i przeglądaj usługi naszych użytkowników.
               </p>
             </div>

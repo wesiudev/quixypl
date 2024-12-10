@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
-import jobs from "../../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Header from "@/components/Header";
 import { FaBriefcase } from "react-icons/fa";
@@ -13,6 +12,12 @@ import Image from "next/image";
 
 // Generowanie parametrów statycznych
 export async function generateStaticParams() {
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   return jobs.flatMap((service: any) =>
     service.data.flatMap((subItem: any) => ({ category: subItem.title }))
   );
@@ -20,7 +25,12 @@ export async function generateStaticParams() {
 
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
-  // Znalezienie odpowiednich danych
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   const cat: any = jobs.find(
     (page: any) => polishToEnglish(page.title) === params.slug
   );
@@ -72,7 +82,7 @@ export default async function Page(props: { params: Promise<any> }) {
         {/* Główna zawartość */}
         <div className="relative z-50 w-full mx-auto container px-4 lg:px-12">
           {/* Breadcrumbs */}
-          <div className="text-xs text-gray-200 breadcrumbs mb-4">
+          <div className="text-xs sm:text-sm text-gray-200 breadcrumbs mb-4">
             <ul className="flex flex-wrap font-light">
               <li>
                 <Link title="Strona główna" href={`/`}>
@@ -211,47 +221,49 @@ export default async function Page(props: { params: Promise<any> }) {
             {content?.synonyms.map((item: any, i: number) => (
               <li
                 key={i}
-                className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105"
+                className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all"
               >
                 #{removePolishSignsAndSpaces(item.toLowerCase())}
               </li>
             ))}
-            <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
-              #firmy{removePolishSignsAndSpaces(content?.genitive)}
+            <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+              #firmy
+              {removePolishSignsAndSpaces(content?.genitive.toLowerCase())}
             </li>
-            <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
-              #zleceniadlafirm{removePolishSignsAndSpaces(content?.genitive)}
+            <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+              #zleceniadlafirm
+              {removePolishSignsAndSpaces(content?.genitive.toLowerCase())}
             </li>
-            <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
+            <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
               #zleceniadlafreelancerow
-              {removePolishSignsAndSpaces(content?.genitive)}
+              {removePolishSignsAndSpaces(content?.genitive.toLowerCase())}
             </li>
-            <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
+            <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
               #ilezarabia
               {removePolishSignsAndSpaces(
                 content?.informal_title_singular.toLowerCase()
               )}
             </li>
-            <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
+            <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
               #jakzostac
               {removePolishSignsAndSpaces(
                 content?.informal_title_singular.toLowerCase()
               )}
             </li>
-            <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
+            <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
               #
               {removePolishSignsAndSpaces(
                 content?.informal_title_singular.toLowerCase()
               )}
               freelance
             </li>
-            <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
+            <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
               #zarobki
               {removePolishSignsAndSpaces(
                 content?.informal_title_plural.toLowerCase()
               )}
             </li>
-            <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
+            <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
               #
               {removePolishSignsAndSpaces(
                 content?.informal_title_plural.toLowerCase()
@@ -293,6 +305,12 @@ export default async function Page(props: { params: Promise<any> }) {
 // Metadata generation
 export async function generateMetadata(props: { params: Promise<any> }) {
   const params = await props.params;
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   const category = jobs
     .flatMap((service: any) =>
       service.data.flatMap((subItem: any) => ({ category: subItem.title }))

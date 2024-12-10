@@ -1,20 +1,21 @@
-import Link from "next/link";
 import { polishToEnglish } from "../../../../../../../utils/polishToEnglish";
-import jobs from "../../../../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Header from "@/components/Header";
 import { getPageContent } from "@/lib/getPageContent";
-import { JobPosting, Tag } from "@/types";
-import { TfiFlagAlt } from "react-icons/tfi";
 import BlogPostList from "@/components/BlogPostList";
 import { getProducts } from "@/firebase";
-import JobOfferCard from "@/components/Dashboard/JobOfferCard";
 import CityBreadcrumbs from "@/components/CitySlugComponents/CityBreadcrumbs";
 import JobBoardList from "@/components/JobBoardList";
 import removePolishSignsAndSpaces from "@/lib/removePolish";
 import JobOffers from "@/components/JobOffers";
 
 export async function generateStaticParams() {
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   return jobs
     .flatMap((service: any) =>
       service.data.flatMap((subItem: any) => subItem.data)
@@ -24,6 +25,12 @@ export async function generateStaticParams() {
 
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   const offers = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/offers/?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`,
     {
@@ -112,7 +119,7 @@ export default async function Page(props: { params: Promise<any> }) {
             </h2>
 
             <div
-              className="text-black max-w-3xl markdownSlug font-light font-coco"
+              className="text-black max-w-3xl markdownSlug  font-coco"
               dangerouslySetInnerHTML={{
                 __html: content?.description,
               }}
@@ -163,6 +170,12 @@ export default async function Page(props: { params: Promise<any> }) {
 
 export async function generateMetadata(props: { params: Promise<any> }) {
   const params = await props.params;
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { polishToEnglish } from "../../../../../../utils/polishToEnglish";
-import jobs from "../../../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Header from "@/components/Header";
 import BlogPostList from "@/components/BlogPostList";
@@ -8,10 +7,15 @@ import { getDocuments, getProducts } from "@/firebase";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
 import removePolishSignsAndSpaces from "@/lib/removePolish";
-import Viewer from "@/components/AddJobOffer/Viewer";
 import JobOffers from "@/components/JobOffers";
 import Image from "next/image";
 export async function generateStaticParams() {
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   return jobs
     .flatMap((service: any) =>
       service.data.flatMap((subItem: any) => subItem.data)
@@ -22,6 +26,12 @@ export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
   const offers = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/offers?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
     {
       next: { revalidate: 600 },
     }
@@ -80,7 +90,7 @@ export default async function Page(props: { params: Promise<any> }) {
           {/* Główna zawartość */}
           <div className="relative z-50 w-full mx-auto container px-4 lg:px-12">
             {/* Breadcrumbs */}
-            <div className="text-xs text-gray-200 breadcrumbs mb-4">
+            <div className="text-xs sm:text-sm text-gray-200 breadcrumbs mb-4">
               <ul className="flex flex-wrap font-light">
                 <li>
                   <Link title="home" href={`/`}>
@@ -203,13 +213,13 @@ export default async function Page(props: { params: Promise<any> }) {
                 </span>
               </h2>
               <div
-                className="text-black max-w-3xl markdownSlug font-light font-coco"
+                className="text-black max-w-3xl markdownSlug  font-coco"
                 dangerouslySetInnerHTML={{
                   __html: content?.description,
                 }}
               />
-              <div className="w-full my-12">
-                <div className="mt-12 flex flex-wrap gap-4">
+              <div className="w-full mt-12">
+                <div className="flex flex-wrap gap-4">
                   {allCities.map((city: any, i: any) => (
                     <Link
                       key={city}
@@ -226,91 +236,88 @@ export default async function Page(props: { params: Promise<any> }) {
                   ))}
                 </div>
               </div>
-              <BlogPostList posts={products} />
             </section>
           </div>
-          <div className="my-12">
-            <div className="my-12 w-full">
-              <h4 className="text-xl font-extrabold text-gray-800 mb-4">
-                Tagi
-              </h4>
-              <ul className="flex overflow-x-scroll lg:overflow-visible w-full lg:flex-wrap gap-4 text-sm lg:text-base">
-                {content?.synonyms.map((item: any, i: number) => (
-                  <li
-                    key={i}
-                    className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105"
-                  >
-                    #{removePolishSignsAndSpaces(item.toLowerCase())}
-                  </li>
-                ))}
-                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
-                  #firmy{removePolishSignsAndSpaces(content?.genitive)}
+          <BlogPostList posts={products} />
+          <div className="my-12 w-full">
+            <h4 className="text-xl font-extrabold text-gray-800 mb-4">Tagi</h4>
+            <ul className="flex overflow-x-scroll lg:overflow-visible w-full lg:flex-wrap gap-4 text-sm lg:text-base">
+              {content?.synonyms.map((item: any, i: number) => (
+                <li
+                  key={i}
+                  className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all"
+                >
+                  #{removePolishSignsAndSpaces(item.toLowerCase())}
                 </li>
-                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
-                  #zleceniadlafirm
-                  {removePolishSignsAndSpaces(content?.genitive)}
-                </li>
-                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
-                  #zleceniadlafreelancerow
-                  {removePolishSignsAndSpaces(content?.genitive)}
-                </li>
-                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
-                  #ilezarabia
-                  {removePolishSignsAndSpaces(
-                    content?.informal_title_singular.toLowerCase()
-                  )}
-                </li>
-                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
-                  #jakzostac
-                  {removePolishSignsAndSpaces(
-                    content?.informal_title_singular.toLowerCase()
-                  )}
-                </li>
-                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
-                  #
-                  {removePolishSignsAndSpaces(
-                    content?.informal_title_singular.toLowerCase()
-                  )}
-                  freelance
-                </li>
-                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
-                  #zarobki
-                  {removePolishSignsAndSpaces(
-                    content?.informal_title_plural.toLowerCase()
-                  )}
-                </li>
-                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
-                  #
-                  {removePolishSignsAndSpaces(
-                    content?.informal_title_plural.toLowerCase()
-                  )}
-                </li>
-                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
-                  #znajdzprace
-                </li>
-                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
-                  #rekrutacja
-                </li>
-                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
-                  #pracazdalna
-                </li>
-                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
-                  #freelancer
-                </li>
-                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
-                  #jobboards
-                </li>
-                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
-                  #joboffers
-                </li>
-                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
-                  #ofertypracy
-                </li>
-                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
-                  #ogloszeniaoprace
-                </li>
-              </ul>
-            </div>
+              ))}
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #firmy
+                {removePolishSignsAndSpaces(content?.genitive.toLowerCase())}
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #zleceniadlafirm
+                {removePolishSignsAndSpaces(content?.genitive.toLowerCase())}
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #zleceniadlafreelancerow
+                {removePolishSignsAndSpaces(content?.genitive.toLowerCase())}
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #ilezarabia
+                {removePolishSignsAndSpaces(
+                  content?.informal_title_singular.toLowerCase()
+                )}
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #jakzostac
+                {removePolishSignsAndSpaces(
+                  content?.informal_title_singular.toLowerCase()
+                )}
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #
+                {removePolishSignsAndSpaces(
+                  content?.informal_title_singular.toLowerCase()
+                )}
+                freelance
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #zarobki
+                {removePolishSignsAndSpaces(
+                  content?.informal_title_plural.toLowerCase()
+                )}
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #
+                {removePolishSignsAndSpaces(
+                  content?.informal_title_plural.toLowerCase()
+                )}
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #znajdzprace
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #rekrutacja
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #pracazdalna
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #freelancer
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #jobboards
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #joboffers
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #ofertypracy
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #ogloszeniaoprace
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -320,6 +327,12 @@ export default async function Page(props: { params: Promise<any> }) {
 }
 
 export async function generateMetadata(props: { params: Promise<any> }) {
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   const params = await props.params;
   const category = jobs
     .flatMap((service: any) =>
@@ -333,7 +346,7 @@ export async function generateMetadata(props: { params: Promise<any> }) {
       service.data.flatMap((subItem: any) => subItem.data)
     )
     .map((item: any) => ({ title: item.title }))
-    .find((item) => polishToEnglish(item.title) === params.job);
+    .find((item: any) => polishToEnglish(item.title) === params.job);
   const title = `${job?.title} Oferty Pracy, Zlecenia, Specjaliści i Usługi`;
   const description = `Przeglądaj nasze oferty pracy zdalnej jako ${job?.title} w kategorii ${category}. Zrealizuj swój projekt z Quixy!`;
 

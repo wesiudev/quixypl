@@ -58,7 +58,7 @@ export default function DisplayTalentsOrInviter({ data }: { data: any }) {
         ))
       ) : (
         /* Gdy brak danych */
-        <div className="flex flex-col items-center justify-center text-center mt-6">
+        <div className="flex flex-col items-center justify-center text-center my-6">
           <div className="bg-gradient-to-r from-primary to-cta rounded-full w-32 h-32 flex items-center justify-center">
             <TfiFlagAlt className="text-white text-4xl" />
           </div>

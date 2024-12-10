@@ -1,12 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDocuments } from "@/firebase";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
-export async function POST(
-  req: NextRequest,
-  { params }: { params: { slug: any } }
-) {
+export async function GET(req: NextRequest) {
   const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
-  const slug = params.slug;
+  const slug = req.nextUrl.searchParams.get("slug");
   if (tubylytylkofigi !== process.env.API_SECRET_KEY) {
     return NextResponse.json("not found", { status: 404 });
   }

@@ -56,37 +56,84 @@ export default async function Page(props: {
       <Header jobsList={jobs} />
       <div>
         {/* Hero Section */}
-        <div className="px-6 lg:px-12 relative flex flex-col items-center justify-center text-center bg-gradient-to-r from-primary to-cta">
-          <div className="w-full py-6 lg:py-12 text-center overflow-hidden relative mt-6 lg:mt-12 bg-white">
-            <div className="container mx-auto">
-              <p className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-extrabold w-full text-center mx-auto bg-gradient-to-r from-primary to-cta text-transparent bg-clip-text">
-                Freelancer Job Boards – {slug.title}
-              </p>
-            </div>
-            {/* <h2 className="text-2xl font-semibold mb-6">{slug.h2}</h2> */}
-            {isTalent && (
-              <p className="mt-2 text-black w-full sm:text-lg lg:max-w-xl mx-auto">
-                Zaprezentuj swoje usługi i znajdź pracę i rozwijaj swoje
-                portfolio w Quixy.
-              </p>
-            )}
-            {!isTalent && (
-              <p className="mt-2 text-black w-full sm:text-lg lg:max-w-xl mx-auto">
-                Stwórz najskuteczniejsze oferty pracy w {content?.genitive}!
-                Poszukujesz klientów? Dodaj swoje usługi do profilu i rozpocznij
-                współpracę!
-              </p>
-            )}
-            <div className="mt-2"></div>
-            <Link href="/register" className="relative z-50">
-              <button className="bg-gradient-to-r from-primary to-cta text-white px-2 py-1.5">
-                Dołącz już dziś
-              </button>
-            </Link>
+        <section
+          className="p-6 lg:p-12 text-left relative bg-gradient-to-r from-primary to-cta"
+          style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0, 0.3)" }}
+        >
+          {/* Obraz tła z lepszą czytelnością */}
+          <div className="absolute left-0 top-0 w-full h-full">
+            <Image
+              src="/assets/AI-Image.png"
+              width={1024}
+              height={1024}
+              alt=""
+              className="w-full h-full object-cover opacity-[0.05]"
+            />
           </div>
-        </div>
-        <div className="bg-gradient-to-r from-primary to-cta w-full h-full mx-auto pt-6 lg:pt-12">
-          <div className="px-6 lg:px-12 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
+
+          {/* Główna zawartość */}
+          <div className="relative z-50 w-full mx-auto container px-4 lg:px-12">
+            {/* Breadcrumbs */}
+            <div className="text-xs sm:text-sm text-gray-200 breadcrumbs mb-4">
+              <ul className="flex flex-wrap font-light">
+                <li>
+                  <Link title="home" href={`/`}>
+                    hello!
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    title="Główna zakładka z pracą zdalną"
+                    href={`/praca-zdalna`}
+                  >
+                    praca-zdalna
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    title={`Kategoria Pracy ${params.slug}`}
+                    href={`/praca-zdalna/${params.slug}`}
+                  >
+                    {params.slug}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Główny nagłówek */}
+            <h1
+              style={{ lineHeight: 1.4 }}
+              className="w-full lg:w-3/4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4"
+            >
+              Oferty pracy oraz zlecenia w {content?.genitive}
+            </h1>
+
+            {/* Opis */}
+            <p className="lg:text-base text-gray-100 max-w-2xl mb-6">
+              Stwórz najskuteczniejsze oferty pracy w {content?.genitive}!
+              Poszukujesz klientów? Dodaj swoje usługi do profilu i rozpocznij
+              współpracę!
+            </p>
+
+            {/* Przyciski */}
+            <div className="flex gap-4">
+              <Link
+                className="text-sm lg:text-base hover:underline text-white py-2 px-4 border border-white rounded-lg transition"
+                href="/register"
+              >
+                Wpisz się
+              </Link>
+              <Link
+                className="text-sm lg:text-base bg-cta hover:bg-opacity-90 text-white py-2 px-4 rounded-lg shadow-md transition"
+                href="/register"
+              >
+                Dodaj ofertę
+              </Link>
+            </div>
+          </div>
+        </section>
+        <div className="mx-auto container px-4 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
             <Image
               src={`/slug/${polishToEnglish(slug.title)}.webp`}
               width={1024}
@@ -97,7 +144,7 @@ export default async function Page(props: {
               className="w-full h-auto mb-6 lg:mb-0"
             />
             <div className="flex flex-col w-full">
-              <h1 className="font-extrabold text-2xl lg:text-4xl text-white drop-shadow-md shadow-black mb-4">
+              <h1 className="font-extrabold text-2xl lg:text-3xl text-black mb-4">
                 {isTalent && "Szukaj pracy zdalnej"}{" "}
                 {!isTalent && "Dodaj ofertę pracy"} w {content?.genitive}.{" "}
               </h1>
@@ -148,23 +195,21 @@ export default async function Page(props: {
               </div>
             </div>
           </div>
-          <div className="bg-white w-full pb-12 px-6 lg:px-12 mt-12">
+          <div className="bg-white w-full py-12">
             <div className="flex flex-col mx-auto">
-              <div className="">
-                <JobBoardList
-                  talents={talents}
-                  companies={companies}
-                  content={content}
-                />
-              </div>
+              <JobBoardList
+                talents={talents}
+                companies={companies}
+                content={content}
+              />
             </div>
           </div>
-          <div className="px-4 lg:px-12 bg-white" id="search">
+          <div className="bg-white" id="search">
             <Market leads={leads} />
           </div>
           {/* Content */}
-          <div className="px-6 lg:px-12 bg-white mx-auto flex flex-col lg:flex-row gap-12">
-            <div className="w-full lg:w-[50%] mt-12">
+          <div className=" bg-white mx-auto flex flex-col lg:flex-row gap-12">
+            <div className="w-full lg:w-[50%]">
               <h2
                 style={{ lineHeight: 1.2 }}
                 className="rounded-xl text-black w-max max-w-full font-extrabold text-4xl mb-6"
@@ -214,59 +259,105 @@ export default async function Page(props: {
                 </div>
               ))}
             </div>
-            <section className="w-full lg:w-[50%]">
+            <section className="w-full lg:w-3/5">
               <h2 className="pb-3 text-black text-2xl font-extrabold">
                 Czym zajmują się {content?.informal_title_plural.toLowerCase()}?
               </h2>
 
               <div
-                className="text-black max-w-3xl markdownSlug font-light font-coco"
+                className="text-black max-w-3xl markdownSlug  font-coco"
                 dangerouslySetInnerHTML={{
                   __html: content?.description,
                 }}
               />
-
-              <BlogPostList posts={products} />
             </section>
           </div>
+
+          <BlogPostList posts={products} />
           {/* <h2 className="text-xl font-semibold text-primary mb-4">
           Najlepsi specjaliści {slug.title}
         </h2> */}
           {/* display users with seek:true and user?.categories includes slug.title, else display "no users, want to be first? man with black glasses italic" */}
-        </div>
-        <div className="bg-white py-12 px-4 lg:px-12 flex flex-col w-full text-black">
-          <h4 className="text-lg w-max font-extrabold">Tagi</h4>
-          <ul className="text-xs lg:text-base flex items-center flex-wrap gap-2">
-            {content?.synonyms.map((item: any, i: any) => (
-              <li key={i} className={``}>
-                #{removePolishSignsAndSpaces(item.toLowerCase())}
+          <div className="my-12 w-full">
+            <h4 className="text-xl font-extrabold text-gray-800 mb-4">Tagi</h4>
+            <ul className="flex overflow-x-scroll lg:overflow-visible w-full lg:flex-wrap gap-4 text-sm lg:text-base">
+              {content?.synonyms.map((item: any, i: number) => (
+                <li
+                  key={i}
+                  className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all"
+                >
+                  #{removePolishSignsAndSpaces(item.toLowerCase())}
+                </li>
+              ))}
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #firmy
+                {removePolishSignsAndSpaces(content?.genitive.toLowerCase())}
               </li>
-            ))}
-
-            <li>#znajdzprace</li>
-            <li>#rekrutacja</li>
-            <li>#pracazdalna</li>
-            <li>#firmy{removePolishSignsAndSpaces(content?.genitive)}</li>
-            <li>#freelancer</li>
-            <li>#jobboards</li>
-            <li>#joboffers</li>
-            <li>#ofertypracy</li>
-            <li>#ogloszeniaoprace</li>
-            <li>#ogloszeniapracy</li>
-            <li>
-              #
-              {removePolishSignsAndSpaces(
-                content?.informal_title_plural.toLowerCase()
-              )}
-            </li>
-            <li>
-              #
-              {removePolishSignsAndSpaces(
-                content?.informal_title_singular.toLowerCase()
-              )}
-            </li>
-            <li>#{removePolishSignsAndSpaces(content?.title.toLowerCase())}</li>
-          </ul>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #zleceniadlafirm
+                {removePolishSignsAndSpaces(content?.genitive.toLowerCase())}
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #zleceniadlafreelancerow
+                {removePolishSignsAndSpaces(content?.genitive.toLowerCase())}
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #ilezarabia
+                {removePolishSignsAndSpaces(
+                  content?.informal_title_singular.toLowerCase()
+                )}
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #jakzostac
+                {removePolishSignsAndSpaces(
+                  content?.informal_title_singular.toLowerCase()
+                )}
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #
+                {removePolishSignsAndSpaces(
+                  content?.informal_title_singular.toLowerCase()
+                )}
+                freelance
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #zarobki
+                {removePolishSignsAndSpaces(
+                  content?.informal_title_plural.toLowerCase()
+                )}
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #
+                {removePolishSignsAndSpaces(
+                  content?.informal_title_plural.toLowerCase()
+                )}
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #znajdzprace
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #rekrutacja
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #pracazdalna
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #freelancer
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #jobboards
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #joboffers
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #ofertypracy
+              </li>
+              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                #ogloszeniaoprace
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
