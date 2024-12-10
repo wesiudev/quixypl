@@ -17,7 +17,7 @@ import marketing from "../../../public/slug/marketing.webp";
 import uslugi from "../../../public/slug/uslugi-it.webp";
 import biznesowe from "../../../public/slug/uslugi-biznesowe.webp";
 import projektowanie from "../../../public/slug/projektowanie.webp";
-// import AiImage from "../../../public/assets/AI-Image.png";
+import AiImage from "../../../public/assets/AI-Image.png";
 // Główna strona
 export default async function Page() {
   const jobs = await fetch(
@@ -77,15 +77,16 @@ function HeroSection() {
       className="p-4 text-left overflow-hidden relative bg-gradient-to-r from-primary to-cta"
       style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0, 0.5)" }}
     >
-      {/* <div className="absolute left-0 top-0 w-full h-auto">
+      <div className="absolute left-0 top-0 w-full h-auto">
         <Image
+          priority
           src={AiImage}
           alt="Praca Zdalna Quixy"
           className="w-full h-full object-cover opacity-5"
           blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
           placeholder="blur"
         />
-      </div> */}
+      </div>
       <div className="relative z-50 mx-auto container p-4 lg:p-12">
         <Breadcrumbs />
         <h1
@@ -303,6 +304,7 @@ function CallToActionSection() {
           placeholder="blur"
           alt="Logo serwisu quixy.pl"
           className="w-full h-auto rounded-md"
+          priority
         />
       </div>
       <div className="px-6 lg:px-12">

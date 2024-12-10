@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDocuments } from "@/firebase";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
-export async function GET(
+export async function POST(
   req: NextRequest,
   { params }: { params: { slug: string } }
 ) {

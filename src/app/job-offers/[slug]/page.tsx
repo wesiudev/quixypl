@@ -21,6 +21,7 @@ export default async function Page(props: { params: Promise<any> }) {
     `${process.env.NEXT_PUBLIC_URL}/api/offers/${params.slug}?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
     {
       next: { revalidate: 60 },
+      method: "POST",
     }
   ).then((res: any) => res.json());
   const offers = await fetch(
