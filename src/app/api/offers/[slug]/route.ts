@@ -3,7 +3,7 @@ import { getDocuments } from "@/firebase";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 export async function POST(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: { slug: any } }
 ) {
   const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
   const slug = params.slug;
