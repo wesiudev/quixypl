@@ -14,7 +14,6 @@ export default function MarketResults({
   category: any;
   job: any;
 }) {
-  console.log(leads);
   return (
     <div className="flex items-center justify-center z-[99999999] overflow-auto h-full">
       <div
@@ -26,12 +25,6 @@ export default function MarketResults({
           {" "}
           {/* Reduced font size */}
           Znalezione usługi {`(${leads?.length})`}
-        </div>
-        <div
-          className={`text-white font-bold bg-gradient-to-r from-primary to-cta p-2 mb-2 flex items-center flex-wrap`}
-        >
-          {slug} {category && <FaChevronRight className="px-1 mx-1" />}{" "}
-          {category} {job && <FaChevronRight className="px-1 mx-1" />} {job}
         </div>
         <div
           className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-2`}

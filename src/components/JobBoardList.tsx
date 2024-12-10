@@ -27,10 +27,7 @@ export default function JobBoardList({
   const indexOfLastIdea = currentPage * itemsPerPage;
   return (
     <div className="">
-      <h2
-        style={{ lineHeight: 1.5 }}
-        className="text-black font-extrabold text-2xl"
-      >
+      <h2 className="text-black font-extrabold text-xl lg:text-3xl">
         {content?.informal_title_plural}{" "}
       </h2>{" "}
       <p className="mb-2 text-black">Czego szukasz tym razem?</p>
@@ -40,9 +37,9 @@ export default function JobBoardList({
             onClick={() => setSearchType("talents")}
             className={`${
               searchType === "talents"
-                ? "shadow-cta shadow-md"
-                : "hover:shadow-cta hover:shadow-md"
-            } text-black flex items-center gap-2 p-2 border border-gray-500/30 duration-200 hover:scale-[1.03] bg-white`}
+                ? "shadow-cta shadow-md bg-gradient-to-r from-primary to-cta text-white"
+                : "hover:shadow-cta hover:shadow-md bg-white text-black"
+            } flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 duration-200 hover:scale-[1.03]`}
           >
             Freelancerzy
           </button>
@@ -50,14 +47,14 @@ export default function JobBoardList({
             onClick={() => setSearchType("companies")}
             className={`${
               searchType === "companies"
-                ? "shadow-cta shadow-md"
-                : "hover:shadow-cta hover:shadow-md"
-            } text-black flex items-center gap-2 p-2 border border-gray-500/30 duration-200 hover:scale-[1.03] bg-white`}
+                ? "shadow-cta shadow-md bg-gradient-to-r from-primary to-cta text-white"
+                : "hover:shadow-cta hover:shadow-md bg-white text-black"
+            } flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 duration-200 hover:scale-[1.03]`}
           >
             Firmy
           </button>
         </div>
-        <div className="p-3 bg-gradient-to-r from-primary/30 to-cta/30  mt-6">
+        <div className="p-3 bg-gradient-to-r from-primary/30 to-cta/30 mt-6">
           {searchType === "talents" && (
             <DisplayTalentsOrInviter data={talents} />
           )}

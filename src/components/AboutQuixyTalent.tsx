@@ -10,32 +10,26 @@ export default function AboutQuixyTalent() {
   return (
     <div className="mt-12">
       <div className="relative mx-auto">
-        <div className="grid grid-cols-2">
+        <div className="flex gap-4 mt-6">
           <button
             onClick={() => setContent("client")}
-            className={`text-sm sm:text-base border-[2px] font-bold flex items-center justify-center py-2  ${
-              content === "talent"
-                ? "border-primary text-white bg-primary/75"
-                : "border-cta text-white bg-gradient-to-r from-primary to-cta"
+            className={`text-sm sm:text-base font-bold py-2 px-6 rounded-lg transition-all duration-300 shadow-md ${
+              content === "client"
+                ? "bg-gradient-to-r from-primary to-cta text-white shadow-lg transform scale-105"
+                : "bg-gray-100 text-black hover:bg-gray-200"
             }`}
-            style={{
-              boxShadow: content === "talent" ? "-5px 0 0 0 #F4F4F4" : "none",
-            }}
           >
-            KLIENT
+            FIRMA
           </button>
           <button
             onClick={() => setContent("talent")}
-            className={`text-sm sm:text-base border-[2px] font-bold flex items-center justify-center py-2  ${
-              content === "client"
-                ? "border-primary text-white bg-primary/75"
-                : "border-cta text-white bg-gradient-to-r from-primary to-cta"
+            className={`text-sm sm:text-base font-bold py-2 px-6 rounded-lg transition-all duration-300 shadow-md ${
+              content === "talent"
+                ? "bg-gradient-to-r from-primary to-cta text-white shadow-lg transform scale-105"
+                : "bg-gray-100 text-black hover:bg-gray-200"
             }`}
-            style={{
-              boxShadow: content === "client" ? "5px 0 0 0 #F4F4F4" : "none",
-            }}
           >
-            FREELANCER/FIRMA
+            FREELANCER
           </button>
         </div>
 
@@ -43,8 +37,8 @@ export default function AboutQuixyTalent() {
           <div className="mt-8">
             <div className="mb-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="lg:pr-6">
-                <h2 className="text-2xl font-extrabold flex items-center text-black">
-                  Jak Quixy pomaga klientom?
+                <h2 className="text-xl lg:text-3xl font-extrabold flex items-center text-black">
+                  Jak Quixy pomaga firmom?
                 </h2>
                 <p className="mt-3 text-black">
                   Korzystając z naszej platformy otrzymujesz łatwy dostęp do
@@ -52,40 +46,40 @@ export default function AboutQuixyTalent() {
                   proces rekrutacji. Opublikuj swoje usługi i pozyskuj nowe
                   zlecenia.
                 </p>
-                <div className="mt-6"></div>
+
                 <Link
                   href="/register"
-                  className="text-white bg-gradient-to-r from-primary to-cta font-gotham py-3 px-6 mt-8 w-max hover:bg-opacity-90 h-max"
+                  className="rounded-md block text-white bg-gradient-to-r from-primary to-cta font-gotham py-3 px-6 mt-4 w-max hover:scale-105 duration-100"
                 >
-                  Otwórz konto klienta
+                  Otwórz konto firmy
                 </Link>
-                <ul className="list-none mt-12 space-y-5 text-black">
+                <ul className="list-none mt-6 space-y-4 text-black mb-7">
                   <li className="relative">
-                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-green-500 mr-2" />{" "}
-                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
+                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />{" "}
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-primary/10 rounded-r-xl pr-3 py-3">
                       Łatwo przeglądaj profile ekspertów i znajdź specjalistów
                       odpowiadających Twoim potrzebom.
                     </div>
                   </li>
                   <li className="relative mt-3">
-                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-green-500 mr-2" />{" "}
-                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
+                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />{" "}
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-primary/10 rounded-r-xl pr-3 py-3">
                       Zlecaj projekty w branżach takich jak IT, marketing,
                       animacja, i wiele więcej.
                     </div>
                   </li>
                   <li className="relative mt-3">
-                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-green-500 mr-2" />{" "}
-                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
+                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />{" "}
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-primary/10 rounded-r-xl pr-3 py-3">
                       Korzystamy z technologii <b>CCRM</b>, by maksymalizować
                       współpracę między klientami.
                     </div>
                   </li>
                   <li className="relative mt-3">
-                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-green-500 mr-2" />{" "}
-                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
+                    <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />{" "}
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-primary/10 rounded-r-xl pr-3 py-3">
                       Skoncentruj się na swoim biznesie, podczas gdy eksperci
-                      dostarczą <b> jakość</b>, którą gwarantujemy.
+                      dostarczą <b>jakość</b>, którą gwarantujemy.
                     </div>
                   </li>
                 </ul>
@@ -112,7 +106,7 @@ export default function AboutQuixyTalent() {
           <div className="mt-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="lg:pr-6">
-                <h2 className="text-2xl font-extrabold flex items-center text-black">
+                <h2 className="text-xl lg:text-3xl font-extrabold flex items-center text-black">
                   Zostań talentem w Quixy!
                 </h2>
                 <p className="mt-3 text-black">
@@ -123,42 +117,38 @@ export default function AboutQuixyTalent() {
                   <strong>nowe doświadczenia</strong> w dynamicznie rosnących
                   branżach.
                 </p>
-                <div className="mt-6"></div>
+
                 <Link
                   href="/register"
-                  className="text-white bg-gradient-to-r from-primary to-cta font-gotham py-3 px-6 mt-8 w-max hover:bg-opacity-90 h-max"
+                  className="rounded-md block text-white bg-gradient-to-r from-primary to-cta font-gotham py-3 px-6 mt-4 w-max hover:scale-105 duration-100"
                 >
                   Otwórz konto talentu
                 </Link>
-                <ul className="list-none mt-8 space-y-5 text-black mb-7">
+                <ul className="list-none mt-6 space-y-4 text-black mb-7">
                   <li className="relative mt-3">
                     <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
-
-                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-primary/10 rounded-r-xl pr-3 py-3">
                       Zarejestruj się, aby znaleźć klientów i zacząć pracować
                       nad ekscytującymi projektami.
                     </div>
                   </li>
                   <li className="relative mt-3">
                     <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
-
-                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-primary/10 rounded-r-xl pr-3 py-3">
                       Otrzymuj oferty pracy w IT, e-commerce, marketingu,
                       animacji, i wielu innych branżach.
                     </div>
                   </li>
                   <li className="relative mt-3">
                     <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
-
-                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-primary/10 rounded-r-xl pr-3 py-3">
                       Korzystaj z <b>Quixy AI™</b>, by generować unikalne
                       pomysły na biznes i projekty.
                     </div>
                   </li>
                   <li className="relative mt-3">
                     <FaCheckCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 z-0 text-cta mr-2" />
-
-                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-black/10 rounded-r-xl pr-3 py-3">
+                    <div className="pl-[52px] max-w-lg bg-gradient-to-r from-transparent to-primary/10 rounded-r-xl pr-3 py-3">
                       Zarabiaj, sprzedając gotowe prace, aplikacje, strony
                       internetowe i wiele więcej.
                     </div>
@@ -189,7 +179,7 @@ export default function AboutQuixyTalent() {
             </p>
           </div>
         )}
-        <p className="mt-3 bg-gradient-to-r from-primary to-cta bg  p-3 text-white max-w-3xl">
+        <p className="mt-3 bg-gradient-to-r from-primary to-cta bg  p-3 text-white max-w-3xl rounded-md">
           Nasz system CCRM umożliwia nawiązywanie współpracy i wspólne tworzenie
           innowacyjnych rozwiązań. To podejście oparte na partnerstwie oraz
           wzajemnym wsparciu pozwala na dynamiczny rozwój zarówno naszych

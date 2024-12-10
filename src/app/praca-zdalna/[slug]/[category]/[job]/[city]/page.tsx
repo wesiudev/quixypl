@@ -24,11 +24,10 @@ export async function generateStaticParams() {
 
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
-
   const offers = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/offers/?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`,
     {
-      next: { revalidate: 60 },
+      next: { revalidate: 600 },
     }
   ).then((res) => res.json());
   const talents = await fetch(
@@ -36,7 +35,7 @@ export default async function Page(props: { params: Promise<any> }) {
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.slug)}`,
     {
-      next: { revalidate: 60 },
+      next: { revalidate: 600 },
     }
   ).then((res: any) => res.json());
   const companies = await fetch(
@@ -44,7 +43,7 @@ export default async function Page(props: { params: Promise<any> }) {
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.slug)}`,
     {
-      next: { revalidate: 60 },
+      next: { revalidate: 600 },
     }
   ).then((res: any) => res.json());
   const content = await getPageContent(polishToEnglish(params.job));

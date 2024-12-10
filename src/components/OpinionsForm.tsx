@@ -1,51 +1,32 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { addOpinion, app, getOpinions } from "@/firebase/";
-import { collection, getFirestore, onSnapshot } from "firebase/firestore";
+import React, { useState } from "react";
+import { addOpinion } from "@/firebase/";
 import { toast } from "react-toastify";
-import { FaChevronRight, FaStar, FaUser } from "react-icons/fa";
 
 interface Opinion {
   name: string;
   feedback: string;
 }
 
-/**
- * Form for collecting opinions from customers.
- *
- * This component displays a form for customers to submit their opinions.
- * The form consists of two input fields: one for the customer's name and one
- * for the customer's feedback. The opinions are stored in the Firestore database
- * and can be displayed in the component.
- *
- * @example
- * <OpinionsForm />
- */
-const OpinionsForm: React.FC = () => {
+function OpinionsForm({ opinions }: { opinions: Opinion[] }) {
   const [name, setName] = useState<string>("");
-  const [opinions, setOpinions] = useState<Opinion[]>([]);
   const [feedback, setFeedback] = useState<string>("");
   const [sent, setSent] = useState<boolean>(false);
 
-  useEffect(() => {
-    const opinionsData = getOpinions();
-  }, []);
-
-  useEffect(() => {
-    const ref = collection(getFirestore(app), "opinions");
-    const unsub = onSnapshot(ref, (querySnapshot: any) => {
-      const snapshotData: any[] = [];
-      querySnapshot.forEach((doc: any) => {
-        snapshotData.push(doc.data());
-      });
-      setOpinions(
-        snapshotData.sort((a, b) => (b.createdAt > a.createdAt ? 1 : -1))
-      );
-    });
-  }, []);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!name || !feedback) {
+      toast.error("Uzupełnij wszystkie pola!", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      return;
+    }
+
     addOpinion({ name, feedback });
     setSent(true);
     toast.success("Dziękujemy za Twoją opinię!", {
@@ -80,7 +61,7 @@ const OpinionsForm: React.FC = () => {
                   value={name}
                   maxLength={30}
                   onChange={(e) => setName(e.target.value)}
-                  className="bg-gray-700 placeholder:text-white w-full py-3 px-4  shadow-sm mb-2 text-white border border-gray-300"
+                  className="bg-gray-700 placeholder:text-white w-full py-3 px-4 shadow-sm mb-2 text-white border border-gray-300 rounded-md"
                 />
               </div>
               <div className="">
@@ -95,7 +76,7 @@ const OpinionsForm: React.FC = () => {
                   placeholder="Wpisz opinię"
                   value={feedback}
                   onChange={(e) => setFeedback(e.target.value)}
-                  className="bg-gray-700 h-full placeholder:text-white w-full py-3 px-4  shadow-sm mb-2 text-white border border-gray-300"
+                  className="bg-gray-700 h-full placeholder:text-white w-full py-3 px-4 shadow-sm mb-2 text-white border border-gray-300 rounded-md"
                 />
               </div>
             </div>
@@ -103,7 +84,7 @@ const OpinionsForm: React.FC = () => {
             <button
               type="submit"
               disabled={sent}
-              className={`w-full sm:w-full mx-auto py-3 px-6 text-white transition-colors duration-300 ${
+              className={`rounded-md shadow-sm shadow-black/50 w-full sm:w-full mx-auto py-3 px-6 text-white transition-colors duration-300 ${
                 sent
                   ? "bg-zinc-500 cursor-not-allowed"
                   : "bg-cta hover:bg-cta/80"
@@ -122,7 +103,7 @@ const OpinionsForm: React.FC = () => {
 
         <div className="md:ml-3 overflow-hidden w-full">
           <h3 className="text-2xl font-extrabold py-4 text-white px-3">
-            Co piszą inni
+            Ostatnie opinie
           </h3>
           <ul className="space-y-6 h-[50vh] overflow-y-scroll p-3">
             {opinions?.map((opinion, index) => (
@@ -139,10 +120,8 @@ const OpinionsForm: React.FC = () => {
           </ul>
         </div>
       </form>
-
-      {/* Display the list of opinions */}
     </div>
   );
-};
+}
 
 export default OpinionsForm;

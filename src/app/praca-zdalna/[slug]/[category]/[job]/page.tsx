@@ -3,7 +3,6 @@ import { polishToEnglish } from "../../../../../../utils/polishToEnglish";
 import jobs from "../../../../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Header from "@/components/Header";
-import { getPageContent } from "@/lib/getPageContent";
 import BlogPostList from "@/components/BlogPostList";
 import { getDocuments, getProducts } from "@/firebase";
 import JobBoardList from "@/components/JobBoardList";
@@ -24,23 +23,23 @@ export default async function Page(props: { params: Promise<any> }) {
   const offers = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/offers?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`,
     {
-      next: { revalidate: 60 },
+      next: { revalidate: 600 },
     }
   ).then((res) => res.json());
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
-    }&slug=${polishToEnglish(params.slug)}`,
+    }&slug=${polishToEnglish(params.job)}`,
     {
-      next: { revalidate: 60 },
+      next: { revalidate: 600 },
     }
   ).then((res: any) => res.json());
   const companies = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/companies/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
-    }&slug=${polishToEnglish(params.slug)}`,
+    }&slug=${polishToEnglish(params.job)}`,
     {
-      next: { revalidate: 60 },
+      next: { revalidate: 600 },
     }
   ).then((res: any) => res.json());
   const allCities = Array.from(
@@ -49,7 +48,12 @@ export default async function Page(props: { params: Promise<any> }) {
       ...companies.map((item: any) => item?.city),
     ])
   );
-  const content = await getPageContent(polishToEnglish(params.job));
+  const content = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.job}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res: any) => res.json());
   const products: any = await getProducts();
   const leads: any = await getDocuments("services");
   return (
@@ -59,20 +63,24 @@ export default async function Page(props: { params: Promise<any> }) {
         {/* Header */}
         {/* Job Title Section */}
         <section
-          className="p-4 text-left overflow-hidden relative bg-gradient-to-r from-primary to-cta"
-          style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0, 0.5)" }}
+          className="p-6 lg:p-12 text-left relative bg-gradient-to-r from-primary to-cta"
+          style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0, 0.3)" }}
         >
-          <div className="absolute left-0 top-0 w-full h-auto">
+          {/* Obraz tła z lepszą czytelnością */}
+          <div className="absolute left-0 top-0 w-full h-full">
             <Image
               src="/assets/AI-Image.png"
               width={1024}
               height={1024}
               alt=""
-              className="w-full h-full object-cover opacity-5"
+              className="w-full h-full object-cover opacity-[0.05]"
             />
           </div>
-          <div className="text-xs relative z-50 mx-auto container p-4 lg:p-12">
-            <div className="!text-white breadcrumbs relative z-50">
+
+          {/* Główna zawartość */}
+          <div className="relative z-50 w-full mx-auto container px-4 lg:px-12">
+            {/* Breadcrumbs */}
+            <div className="text-xs text-gray-200 breadcrumbs mb-4">
               <ul className="flex flex-wrap font-light">
                 <li>
                   <Link title="home" href={`/`}>
@@ -113,26 +121,31 @@ export default async function Page(props: { params: Promise<any> }) {
                 </li>
               </ul>
             </div>
+
+            {/* Główny nagłówek */}
             <p
-              style={{ lineHeight: 1.5 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 leading-snug w-full text-white"
+              style={{ lineHeight: 1.4 }}
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4"
             >
               Freelancer Job Boards
             </p>
-            <h1 className="lg:text-lg font-coco text-white max-w-3xl">
-              Zlecenia, usługi, oferty pracy zdalnej oraz najlepsi{" "}
+
+            {/* Opis */}
+            <h1 className="lg:text-base text-gray-100 max-w-2xl mb-6">
+              Zlecenia, usługi, oferty pracy zdalnej i najlepsi{" "}
               {content?.informal_title_plural}
             </h1>
-            <div className="mt-5"></div>
-            <div className="flex w-max">
+
+            {/* Przyciski */}
+            <div className="flex gap-4">
               <Link
-                className="hover:underline text-white hover:bg-opacity-90 py-2 pr-4 font-extrabold w-max mx-auto relative z-50"
+                className="text-sm lg:text-base hover:underline text-white py-2 px-4 border border-white rounded-lg transition"
                 href="/register"
               >
                 Wpisz się
               </Link>
               <Link
-                className="rounded-r-xl bg-gradient-to-r from-transparent to-cta text-white hover:bg-opacity-90 py-2 px-4 font-extrabold w-max mx-auto relative z-50"
+                className="text-sm lg:text-base bg-cta hover:bg-opacity-90 text-white py-2 px-4 rounded-lg shadow-md transition"
                 href="/register"
               >
                 Dodaj ofertę
@@ -140,104 +153,165 @@ export default async function Page(props: { params: Promise<any> }) {
             </div>
           </div>
         </section>
-        <div className="my-12 w-full mx-auto container px-4 lg:px-12 flex flex-col">
-          <JobBoardList
-            talents={talents}
-            companies={companies}
-            content={content}
-          />
-        </div>
-        <div className="bg-gradient-to-r from-primary to-cta">
-          <div className="mx-auto container p-4 lg:p-12">
-            <h2 className="font-extrabold text-white text-xl lg:text-2xl">
-              Oferty pracy w{" "}
-              <span className="">{content?.dative?.toLowerCase()}</span>{" "}
-            </h2>
-            <p className="text-white mt-2">
-              Szukasz pracy jako{" "}
-              {content?.informal_title_singular.toLowerCase()}?
-            </p>
-            <JobOffers offers={offers} content={content} />
-          </div>
-        </div>
-        {/* Services Section */}
-        <div id="search">
-          <Market leads={leads} />
-        </div>
-        {/* Content */}
-        <div className="flex flex-col lg:flex-row">
-          <section className="text-left">
-            <h2
-              style={{ lineHeight: 1.5 }}
-              className="font-extrabold text-black text-xl lg:text-3xl"
-            >
-              Czym zajmują się
-              <span className="ml-2 text-black">
-                {content?.informal_title_plural.toLowerCase()}?
-              </span>
-            </h2>
-            <div
-              className="text-black max-w-3xl markdownSlug font-light font-coco"
-              dangerouslySetInnerHTML={{
-                __html: content?.description,
-              }}
+        <div className="mx-auto container px-4 lg:px-12">
+          <div className="my-12 w-full flex flex-col">
+            <JobBoardList
+              talents={talents}
+              companies={companies}
+              content={content}
             />
-            <BlogPostList posts={products} />
-          </section>
-        </div>
-        {/* <div className="my-12">
-          <Viewer value={content?.salary} />
-        </div> */}
-        <div className="bg-white py-12 flex flex-col w-full text-black">
-          <h4 className="text-lg w-max font-extrabold">Tagi</h4>
-          <ul className="text-xs lg:text-base flex items-center flex-wrap gap-2">
-            {content?.synonyms.map((item: any, i: any) => (
-              <li key={i} className={``}>
-                #{removePolishSignsAndSpaces(item.toLowerCase())}
-              </li>
-            ))}
-            <li>#znajdzprace</li>
-            <li>#rekrutacja</li>
-            <li>#pracazdalna</li>
-            <li>#firmy{removePolishSignsAndSpaces(content?.genitive)}</li>
-            <li>#freelancer</li>
-            <li>#jobboards</li>
-            <li>#joboffers</li>
-            <li>#ofertypracy</li>
-            <li>#ogloszeniaoprace</li>
-            <li>#ogloszeniapracy</li>
-            <li>
-              #
-              {removePolishSignsAndSpaces(
-                content?.informal_title_plural.toLowerCase()
-              )}
-            </li>
-            <li>
-              #
-              {removePolishSignsAndSpaces(
-                content?.informal_title_singular.toLowerCase()
-              )}
-            </li>
-            <li>#{removePolishSignsAndSpaces(content?.title.toLowerCase())}</li>
-          </ul>
-        </div>
-        <div className="my-12">
-          <Viewer value={content?.salary} />
-        </div>
-        <div className="mb-12 grid grid-cols-2 lg:grid-cols-3">
-          {allCities.map((city: any, i: any) => (
-            <Link
-              key={city}
-              target="_blank"
-              href={`/praca-zdalna/${params.slug}/${params.category}/${
-                params.job
-              }/${polishToEnglish(city)}`}
-            >
-              <h2 className="text-black font-bold">
-                {content?.informal_title_plural} {city}
+          </div>
+          <div
+            className={`${
+              offers.length > 0
+                ? "bg-gradient-to-r from-primary to-cta"
+                : "bg-white"
+            }`}
+          >
+            <div>
+              <h2
+                className={`${
+                  offers.length > 0 ? "text-white" : "text-black"
+                } font-extrabold text-xl lg:text-3xl`}
+              >
+                {content?.title} - oferty pracy
               </h2>
-            </Link>
-          ))}
+              <p
+                className={`${offers.length > 0 ? "text-white" : "text-black"}`}
+              >
+                Szukasz pracy jako{" "}
+                {content?.informal_title_singular.toLowerCase()}?
+              </p>
+              <JobOffers offers={offers} content={content} />
+            </div>
+          </div>
+          {/* Services Section */}
+          <div className="mt-12 w-full" id="search">
+            <Market leads={leads} />
+          </div>
+
+          {/* Content */}
+          <div className="w-full flex flex-col lg:flex-row">
+            <section className="text-left">
+              <h2
+                style={{ lineHeight: 1.5 }}
+                className="font-extrabold text-black text-xl lg:text-3xl"
+              >
+                Czym zajmują się
+                <span className="ml-2 text-black">
+                  {content?.informal_title_plural.toLowerCase()}?
+                </span>
+              </h2>
+              <div
+                className="text-black max-w-3xl markdownSlug font-light font-coco"
+                dangerouslySetInnerHTML={{
+                  __html: content?.description,
+                }}
+              />
+              <div className="w-full my-12">
+                <div className="mt-12 flex flex-wrap gap-4">
+                  {allCities.map((city: any, i: any) => (
+                    <Link
+                      key={city}
+                      target="_blank"
+                      className="block text-white font-bold"
+                      href={`/praca-zdalna/${params.slug}/${params.category}/${
+                        params.job
+                      }/${polishToEnglish(city)}`}
+                    >
+                      <span className="block w-max max-w-full rounded-3xl py-2 px-4 bg-gradient-to-r from-primary to-cta">
+                        {content?.informal_title_plural} {city}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <BlogPostList posts={products} />
+            </section>
+          </div>
+          <div className="my-12">
+            <div className="my-12 w-full">
+              <h4 className="text-xl font-extrabold text-gray-800 mb-4">
+                Tagi
+              </h4>
+              <ul className="flex overflow-x-scroll lg:overflow-visible w-full lg:flex-wrap gap-4 text-sm lg:text-base">
+                {content?.synonyms.map((item: any, i: number) => (
+                  <li
+                    key={i}
+                    className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105"
+                  >
+                    #{removePolishSignsAndSpaces(item.toLowerCase())}
+                  </li>
+                ))}
+                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
+                  #firmy{removePolishSignsAndSpaces(content?.genitive)}
+                </li>
+                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
+                  #zleceniadlafirm
+                  {removePolishSignsAndSpaces(content?.genitive)}
+                </li>
+                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
+                  #zleceniadlafreelancerow
+                  {removePolishSignsAndSpaces(content?.genitive)}
+                </li>
+                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
+                  #ilezarabia
+                  {removePolishSignsAndSpaces(
+                    content?.informal_title_singular.toLowerCase()
+                  )}
+                </li>
+                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
+                  #jakzostac
+                  {removePolishSignsAndSpaces(
+                    content?.informal_title_singular.toLowerCase()
+                  )}
+                </li>
+                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
+                  #
+                  {removePolishSignsAndSpaces(
+                    content?.informal_title_singular.toLowerCase()
+                  )}
+                  freelance
+                </li>
+                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
+                  #zarobki
+                  {removePolishSignsAndSpaces(
+                    content?.informal_title_plural.toLowerCase()
+                  )}
+                </li>
+                <li className="bg-gradient-to-r from-primary to-cta text-white px-4 py-2 rounded-full shadow-sm transition-transform duration-200 lg:hover:scale-105">
+                  #
+                  {removePolishSignsAndSpaces(
+                    content?.informal_title_plural.toLowerCase()
+                  )}
+                </li>
+                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                  #znajdzprace
+                </li>
+                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                  #rekrutacja
+                </li>
+                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                  #pracazdalna
+                </li>
+                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                  #freelancer
+                </li>
+                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                  #jobboards
+                </li>
+                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                  #joboffers
+                </li>
+                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                  #ofertypracy
+                </li>
+                <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
+                  #ogloszeniaoprace
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
       <MainFooter jobsList={jobs} />

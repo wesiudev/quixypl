@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { getDocuments } from "@/firebase";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
 
-export async function GET(req: NextRequest) {
-  const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
-  const category = req.nextUrl.searchParams.get("category");
+export async function GET(request: NextRequest) {
+  const tubylytylkofigi = request.nextUrl.searchParams.get("tubylytylkofigi");
+  const category = request.nextUrl.searchParams.get("category");
 
   // Validate API secret key
   if (tubylytylkofigi !== process.env.API_SECRET_KEY) {

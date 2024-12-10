@@ -1,20 +1,43 @@
 import Link from "next/link";
-import jobs from "../../../public/14.09.2024.json";
-import "../../styles/globals.css";
+import dynamic from "next/dynamic";
 import { Metadata } from "next";
-import Header from "@/components/Header";
-import FAQ from "@/components/Faq";
-import OpinionsForm from "@/components/OpinionsForm";
-import { FaRocket, FaUsers, FaCogs } from "react-icons/fa";
-import MainFooter from "@/components/MainFooter";
+const FAQ = dynamic(() => import("@/components/Faq"));
+const Header = dynamic(() => import("@/components/Header"));
+const OpinionsForm = dynamic(() => import("@/components/OpinionsForm"));
+const MainFooter = dynamic(() => import("@/components/MainFooter"));
+const Market = dynamic(() => import("@/components/marketplace/Market"));
+import { FaRocket, FaUsers } from "react-icons/fa";
 import Image from "next/image";
 import { FaArrowRightLong } from "react-icons/fa6";
-import Market from "@/components/marketplace/Market";
-import { getDocuments } from "@/firebase";
-
+import HeroImage from "../../../public/happy.webp";
+import gif from "../../../public/assets/gif/giremotework.webp";
+import rozwoj from "../../../public/slug/rozwoj-oprogramowania.webp";
+import ecommerce from "../../../public/slug/e-commerce.webp";
+import marketing from "../../../public/slug/marketing.webp";
+import uslugi from "../../../public/slug/uslugi-it.webp";
+import biznesowe from "../../../public/slug/uslugi-biznesowe.webp";
+import projektowanie from "../../../public/slug/projektowanie.webp";
+// import AiImage from "../../../public/assets/AI-Image.png";
 // Główna strona
 export default async function Page() {
-  const leads: any = await getDocuments("services");
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
+  const services = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
+  const opinions = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/opinions?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   return (
     <div className="w-full h-full bg-white">
       <Header jobsList={jobs} />
@@ -35,12 +58,12 @@ export default async function Page() {
           <WhatMakesUsUniqueSection />
         </div>
         <div className="container mx-auto px-4 lg:px-12" id="search">
-          <Market leads={leads} />
+          <Market leads={services} />
         </div>
         <div className="container mx-auto px-4 lg:px-12">
           <FAQ faqItems={faqItems} />
         </div>
-        <OpinionsForm />
+        <OpinionsForm opinions={opinions} />
       </main>
       <FunnyComponent />
       <MainFooter jobsList={jobs} />
@@ -54,15 +77,15 @@ function HeroSection() {
       className="p-4 text-left overflow-hidden relative bg-gradient-to-r from-primary to-cta"
       style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0, 0.5)" }}
     >
-      <div className="absolute left-0 top-0 w-full h-auto">
+      {/* <div className="absolute left-0 top-0 w-full h-auto">
         <Image
-          src="/assets/AI-Image.png"
-          width={1024}
-          height={1024}
-          alt=""
+          src={AiImage}
+          alt="Praca Zdalna Quixy"
           className="w-full h-full object-cover opacity-5"
+          blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
+          placeholder="blur"
         />
-      </div>
+      </div> */}
       <div className="relative z-50 mx-auto container p-4 lg:p-12">
         <Breadcrumbs />
         <h1
@@ -171,12 +194,10 @@ function SpecialistsCategoriesSection() {
             <div className="relative w-full lg:w-max h-full">
               <Image
                 src={link.imageSrc}
-                width={1024}
-                height={1024}
-                loading="lazy"
-                quality={75}
                 alt={link.imageAlt}
                 className="w-full lg:w-[250px] h-auto rounded-xl"
+                blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
+                placeholder="blur"
               />
             </div>
             <div className="w-full">
@@ -191,7 +212,7 @@ function SpecialistsCategoriesSection() {
                   className="w-full text-white group-hover:underline font-light"
                   aria-label={link.goTo}
                 >
-                  <span className="justify-center w-max bg-cta p-2 flex items-center rounded-xl">
+                  <span className="px-4 py-2 justify-center w-max bg-cta flex items-center rounded-xl">
                     {link.goTo}
                     <FaArrowRightLong className="scale-100 group-hover:scale-110 ml-2 duration-150" />
                   </span>
@@ -254,15 +275,15 @@ function HighlightCard({
   linkTitle: string;
 }) {
   return (
-    <div className="p-3 relative bg-gradient-to-r from-primary/30 to-cta/30 rounded-xl">
+    <div className="p-3 relative bg-gradient-to-r from-primary/30 to-cta/30 rounded-lg flex items-center justify-center flex-col">
       <div className="shadow-lg bg-gradient-to-r from-primary to-cta text-white rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
         {icon}
       </div>
       <h3 className="text-xl font-extrabold text-black mb-2 mt-4">{title}</h3>
       <p className="text-black">{description}</p>
-      <div className="mt-6" />
+
       <Link
-        className="rounded-xl shadow-md bg-cta duration-100 text-white px-3 py-2 "
+        className="block mt-4 w-max max-w-full mx-auto rounded-md shadow-md bg-cta duration-100 text-white px-4 py-2"
         href="/register"
         title={linkTitle}
       >
@@ -277,15 +298,11 @@ function CallToActionSection() {
     <section className="flex flex-col-reverse lg:flex-row lg:my-12 text-left mx-auto">
       <div className="px-6 lg:pr-0 lg:pl-12 overflow-hidden h-full mt-12 lg:mt-0">
         <Image
-          src="/happy.webp"
-          width={500}
-          height={500}
-          loading="lazy"
-          quality={75}
+          src={HeroImage}
           blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
           placeholder="blur"
           alt="Logo serwisu quixy.pl"
-          className="w-full h-auto"
+          className="w-full h-auto rounded-md"
         />
       </div>
       <div className="px-6 lg:px-12">
@@ -297,13 +314,6 @@ function CallToActionSection() {
           Technologia z której korzystamy jest szybka i niezawodna. Stwórz
           portfolio w którym zaprezentujesz swoje usługi.
         </p>
-        <Link
-          href="/register"
-          title="Dołącz do Quixy"
-          className="bg-gradient-to-r from-primary to-cta text-white py-2 px-3 hover:bg-opacity-80 transition font-gotham font-light"
-        >
-          Dołącz za darmo!
-        </Link>
       </div>
     </section>
   );
@@ -313,20 +323,21 @@ function CallToActionSection() {
 function FunnyComponent() {
   return (
     <div className="relative mx-auto w-full bg-white container px-4 lg:px-12 my-24">
-      <div className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%] text-[20vw] text-primary/10 italic font-extrabold">
+      <div className="absolute inset-0 flex items-center justify-center text-[20vw] text-primary/5 italic font-extrabold select-none">
         QUIXY
       </div>
-      <div className="flex flex-col md:flex-row md:items-start text-black text-xl max-w-xl">
+      <div className="flex flex-col md:flex-row md:items-start text-black text-lg lg:text-xl">
         <Image
-          src="/assets/gif/giremotework.webp"
+          src={gif}
+          layout="responsive"
           width={512}
           height={512}
           alt="Praca zdalna w biurze"
           title="Praca zdalna w biurze"
-          className="w-auto h-full mt-4 lg:mt-0"
+          className="w-full md:w-auto h-auto mt-4 lg:mt-0"
         />
-        <div className="md:px-6 mt-4 lg:mt-0">
-          <h2 className="text-3xl font-extrabold text-black mb-4">
+        <div className="md:px-6 mt-4 lg:mt-0 flex-1">
+          <h2 className="text-2xl lg:text-3xl font-extrabold text-black mb-4">
             Potrzebujesz chwili wytchnienia?
           </h2>
           <p className="text-black mb-4">
@@ -334,10 +345,10 @@ function FunnyComponent() {
             być zabawnie?
           </p>
 
-          <p className="bg-gradient-to-r from-primary to-cta p-2 text-xl text-white italic w-max max-w-full">
+          <p className="bg-gradient-to-r from-primary to-cta p-2 text-lg lg:text-xl text-white w-max max-w-full">
             „Zatrudnij mnie, zanim zrobi to ktoś inny! 🤖” – Najnowsza AI
           </p>
-          <p className="mt-4 text-sm text-black">
+          <p className="mt-4 text-xs lg:text-sm text-black">
             *Tylko żart, obiecujemy, że nie zatrudniamy robotów... jeszcze.*
           </p>
         </div>
@@ -449,11 +460,10 @@ const faqItems = [
       "Płatności są ustalane bezpośrednio między klientami a dostawcami usług. Platforma nie pośredniczy w rozliczeniach.",
   },
 ];
-
 const links = [
   {
     href: "/praca-zdalna/rozwoj-oprogramowania",
-    imageSrc: "/slug/rozwoj-oprogramowania.webp",
+    imageSrc: rozwoj,
     imageAlt: "Zatrudnij ekspertów od Rozwoju Oprogramowania",
     title: "Specjaliści rozwoju oprogramowania",
     description:
@@ -462,7 +472,7 @@ const links = [
   },
   {
     href: "/praca-zdalna/e-commerce",
-    imageSrc: "/slug/e-commerce.webp",
+    imageSrc: ecommerce,
     imageAlt: "Wdrożenie Sklepów Internetowych z naszymi ekspertami",
     title: "Programiści sklepów internetowych",
     description:
@@ -471,7 +481,7 @@ const links = [
   },
   {
     href: "/praca-zdalna/marketing",
-    imageSrc: "/slug/marketing.webp",
+    imageSrc: marketing,
     imageAlt: "Zatrudnij specjalistów od Marketingu",
     title: "Specjaliści marketingu",
     description:
@@ -480,7 +490,7 @@ const links = [
   },
   {
     href: "/praca-zdalna/uslugi-it",
-    imageSrc: "/slug/uslugi-it.webp",
+    imageSrc: uslugi,
     imageAlt: "Zatrudnij ekspertów od Wsparcia IT",
     title: "Specjaliści Wsparcia IT",
     description:
@@ -489,7 +499,7 @@ const links = [
   },
   {
     href: "/praca-zdalna/uslugi-biznesowe",
-    imageSrc: "/slug/uslugi-biznesowe.webp",
+    imageSrc: biznesowe,
     imageAlt: "Zatrudnij doradców biznesowych",
     title: "Doradcy biznesowi",
     description:
@@ -498,7 +508,7 @@ const links = [
   },
   {
     href: "/praca-zdalna/projektowanie",
-    imageSrc: "/slug/projektowanie.webp",
+    imageSrc: projektowanie,
     imageAlt: "Zatrudnij Projektantów dla Twojego Biznesu",
     title: "Projektanci i designerzy",
     description:

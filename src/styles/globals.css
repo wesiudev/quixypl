@@ -211,26 +211,54 @@ html {
 
 .markdownSlug {
   visibility: visible;
+  color: #333; /* Subtelny szary dla tekstu */
+  line-height: 1.7; /* Poprawiona wysokość linii */
+  font-size: 1rem; /* Ujednolicony rozmiar tekstu */
 }
 
 .markdownSlug > p {
   text-align: justify;
+  margin-bottom: 1.5rem; /* Większy odstęp między akapitami */
+  color: #444; /* Nieco ciemniejszy odcień */
 }
+
 .markdownSlug > ul {
   display: flex;
   flex-direction: column;
-  color: black;
+  gap: 1rem; /* Większy odstęp między elementami listy */
+  color: #000; /* Czarny kolor dla list */
 }
+
 .markdownSlug > ul > li {
-  margin-top: 24px;
-  padding: 12px 10px 12px 20px;
-  background: white;
-  border-left: 10px solid #14a800;
-  /* border-right: 10px solid #14a800; */
-  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: #f9f9f9; /* Jasne tło, by elementy były subtelne */
+  border-left: 6px solid #14a800; /* Cieńszy border dla bardziej minimalistycznego efektu */
+  border-radius: 6px; /* Zaokrąglone rogi */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Delikatniejszy cień */
   max-width: 100%;
-  width: max-content;
+  width: auto;
+  font-weight: 500; /* Trochę grubsza czcionka dla czytelności */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Animacje */
 }
+
+.markdownSlug > ul > li:hover {
+  transform: scale(1.02); /* Delikatne powiększenie na hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Wyraźniejszy cień na hover */
+  background: #ffffff; /* Podkreślenie elementu na hover */
+}
+
+.markdownSlug > ul > li:before {
+  content: "•"; /* Punkt przed elementem */
+  margin-right: 8px;
+  color: #14a800; /* Kolor dopasowany do bordera */
+  font-weight: bold;
+}
+
+.markdownSlug > ul > li:last-child {
+  margin-bottom: 0; /* Usuń odstęp po ostatnim elemencie */
+}
+
 .vibrate-screen {
   animation: vibrate 0.5s infinite linear;
 }

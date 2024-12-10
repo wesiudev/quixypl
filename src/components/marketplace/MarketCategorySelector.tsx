@@ -30,11 +30,13 @@ export default function MarketCategorySelector({
 }) {
   return (
     <div className="bg-white w-full">
-      <h3 className="text-2xl font-extrabold text-black">Wyszukiwarka usług</h3>
+      <h3 className="text-xl lg:text-3xl font-extrabold text-black">
+        Wyszukiwarka usług
+      </h3>
 
       {!slug && <div className="my-1.5 font-bold text-black">Kategoria</div>}
       {slug !== "" && category === "" && (
-        <div className="text-black flex flex-col mt-1 w-full">
+        <div className="text-black flex flex-col mt-3 w-full">
           <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1 px-2 text-white w-max max-w-[100%]">
             {slug}
           </div>
@@ -42,7 +44,7 @@ export default function MarketCategorySelector({
         </div>
       )}
       {slug !== "" && category !== "" && (
-        <div className="text-black flex flex-col mt-1 w-full">
+        <div className="text-black flex flex-col mt-3 w-full">
           <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1 px-2 text-white w-max max-w-[100%]">
             {slug}
           </div>
@@ -50,7 +52,7 @@ export default function MarketCategorySelector({
         </div>
       )}
       {slug !== "" && category !== "" && (
-        <div className="flex flex-col mt-1 w-full">
+        <div className="flex flex-col mt-3 w-full">
           <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1 px-2 text-white w-max max-w-[100%]">
             {category}
           </div>
@@ -58,7 +60,7 @@ export default function MarketCategorySelector({
         </div>
       )}
 
-      <div className="flex flex-row items-start w-full gap-0.5">
+      <div className="flex flex-row items-start w-full gap-1">
         {slug !== "" && category !== "" && job === "" && (
           <button
             onClick={() => {
@@ -93,7 +95,7 @@ export default function MarketCategorySelector({
           </button>
         )}
         {slug === "" && (
-          <div className="gap-0.5 flex flex-wrap">
+          <div className="gap-1 flex flex-wrap">
             {jobs.map((item: any, k: any) => (
               <button
                 onClick={() => setSlug(item.title)}
@@ -110,7 +112,7 @@ export default function MarketCategorySelector({
             {jobs.map((item: any, i: any) => (
               <div key={uuidv4()}>
                 {item.title === slug && (
-                  <div className="gap-0.5 flex flex-wrap">
+                  <div className="gap-1 flex flex-wrap">
                     {item.data.map((cat: any, j: any) => (
                       <button
                         onClick={() => setCategory(cat.title)}
@@ -135,7 +137,7 @@ export default function MarketCategorySelector({
                     {item.data.map((cat: any, i: any) => (
                       <div key={uuidv4()}>
                         {cat.title === category && (
-                          <div className="gap-0.5 flex flex-wrap">
+                          <div className="gap-1 flex flex-wrap">
                             {cat.data.map((j: any, i: any) => (
                               <button
                                 onClick={() => {

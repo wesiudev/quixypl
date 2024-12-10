@@ -15,7 +15,7 @@ export default function MainFooter({ jobsList }: { jobsList: any }) {
             {jobsList.map((item: any, i: any) => (
               <div key={i} className="flex flex-col w-full">
                 <h2 className="pt-[9px] text-white w-max max-w-full text-xl lg:text-2xl 2xl:text-xl font-extrabold">
-                  <span className="p-[9px] bg-gradient-to-r from-primary to-cta">
+                  <span className="p-[9px] bg-gradient-to-r from-primary to-cta rounded-md">
                     {item.title}
                   </span>
                 </h2>
