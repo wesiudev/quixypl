@@ -113,8 +113,8 @@ export default function AddJobOffer() {
               } flex items-center w-full rounded-lg mt-3 xl:mt-0`}
             >
               <div className="rounded-md z-50 relative p-3 xl:p-6 overflow-hidden">
-                <h1 className="absolute left-0 top-0 rounded-tl-md rounded-br-3xl px-4 py-2 text-white bg-gradient-to-b from-primaryStart to-primaryEnd text-xl md:text-2xl font-gotham font-bold">
-                  Dodajesz ofertę pracy
+                <h1 className="absolute left-0 top-0 px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
+                  NOWA OFERTA PRACY
                 </h1>
                 <p className="mt-12 text-sm font-coco">
                   Podaj najważniejsze informacje dotyczące rekrutacji.

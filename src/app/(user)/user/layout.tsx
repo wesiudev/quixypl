@@ -24,26 +24,29 @@ export default function AdminLayout({
   }, [loading]);
   const { light } = useSelector((state: any) => state.light);
   return (
-    <div className="w-full relative">
-      <InitializeUser />
+    <>
       <div className="z-[9999999999999999999999999999999]">
         <Settings isNavOpen={isNavOpen} />
         <QuixiesModule />
       </div>
-      <div>
-        <Nav setNavOpen={setNavOpen} isNavOpen={isNavOpen} />
-        <div
-          className={`duration-300 ${
-            isNavOpen
-              ? "ml-[300px] lg:ml-[0px] lg:pl-[300px]"
-              : "ml-0 lg:pl-[300px]"
-          } min-w-full min-h-screen ${
-            light ? "bg-primaryHoverEnd/30" : "bg-primaryEnd/80"
-          }`}
-        >
-          {children}
+      <div className="w-full relative">
+        <InitializeUser />
+
+        <div>
+          <Nav setNavOpen={setNavOpen} isNavOpen={isNavOpen} />
+          <div
+            className={`duration-300 ${
+              isNavOpen
+                ? "ml-[300px] lg:ml-[0px] lg:pl-[300px]"
+                : "ml-0 lg:pl-[300px]"
+            } min-w-full min-h-screen ${
+              light ? "bg-primaryHoverEnd/30" : "bg-primaryEnd/80"
+            }`}
+          >
+            {children}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

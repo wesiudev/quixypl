@@ -38,7 +38,7 @@ export default function JobOffers({
         </div>
       )}
       {offers?.length > 0 && (
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-3">
+        <section className="grid grid-cols-1 2xl:grid-cols-2 gap-3 mt-3">
           {offers.map((offer: JobOffer, i: any) => (
             <div className="overflow-hidden" key={i}>
               <JobOfferCard job={offer} />

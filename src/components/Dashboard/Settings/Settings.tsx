@@ -33,7 +33,7 @@ export default function Settings({ isNavOpen }: { isNavOpen: boolean }) {
             setError(false);
           }, 1200);
         }}
-        className={`rounded-lg disabled:cursor-not-allowed fixed z-[99999999999999999999999999] left-0 top-0 w-screen h-screen ${
+        className={`rounded-lg disabled:cursor-not-allowed fixed z-[999999999999999] left-0 top-0 w-screen h-screen ${
           modals.config
             ? "bg-opacity-80 translate-y-0"
             : "bg-opacity-0 translate-x-[100vw]"
