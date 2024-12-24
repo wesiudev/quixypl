@@ -28,10 +28,7 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
   return (
     <div className="w-full border border-gray-300 rounded-md shadow-sm font-sans">
       {/* Collapsed Header */}
-      <div
-        className="flex-col relative p-4 flex justify-between cursor-pointer bg-gray-100 hover:bg-gray-200 rounded-t-md"
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
+      <div className="flex-col relative p-4 flex justify-between cursor-pointer bg-gray-100 hover:bg-gray-200 rounded-t-md">
         <div className="flex flex-col lg:flex-row-reverse w-full lg:justify-between">
           <div
             onClick={() => console.log(userData)}
