@@ -5,17 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/slices/user";
 import EssentialUserInfo from "./EssentialUserInfo";
 import SettingsHeader from "./SettingsHeader";
-import ChooseAccountType from "./ChooseAccountType";
+import GoogleView from "./GoogleView";
 
 export default function SettingsInputs({
   changesWereMade,
   setChangesWereMade,
-
+  light,
   setError,
 }: {
   changesWereMade: any;
   setChangesWereMade: any;
-
+  light: any;
   setError: any;
 }) {
   const dispatch = useDispatch();
@@ -38,23 +38,23 @@ export default function SettingsInputs({
 
   return (
     <div>
-      <div className="relative bg-white pb-24">
+      <div
+        className={`${
+          light ? "bg-white text-black" : "bg-[#222430] text-white"
+        } duration-300 pb-24 rounded-lg relative`}
+      >
         <SettingsHeader setError={setError} changesWereMade={changesWereMade} />
-        {!user?.configured && (
-          <ChooseAccountType
-            user={user}
-            setChangesWereMade={setChangesWereMade}
-          />
-        )}
         <EssentialUserInfo
-          user={user}
+          light={light}
           setChangesWereMade={setChangesWereMade}
         />
-        <TagsHandler />
+        <TagsHandler light={light} />
         <PreferencesHandler
+          light={light}
           addPreference={addPreference}
           removePreference={removePreference}
         />
+        <GoogleView setChangesWereMade={setChangesWereMade} />
       </div>
     </div>
   );

@@ -2,7 +2,13 @@ import Contact from "@/components/Contact";
 import { Metadata } from "next";
 
 export default async function Page() {
-  return <Contact />;
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
+  return <Contact jobs={jobs} />;
 }
 
 export const metadata: Metadata = {

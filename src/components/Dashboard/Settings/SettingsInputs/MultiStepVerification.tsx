@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import { IoCheckmarkCircle, IoCloseCircle } from "react-icons/io5";
 import { updateUser } from "@/firebase"; // Assuming updateUser is imported from "@/firebase"
@@ -5,6 +6,7 @@ import Confetti from "react-confetti"; // Assuming react-confetti is installed
 import { setUser } from "@/redux/slices/user";
 import { useDispatch, useSelector } from "react-redux";
 import { set_modals } from "@/redux/slices/modalsopen";
+import { toast } from "react-toastify";
 
 // MultiStepVerification Component
 export default function MultiStepVerification({
@@ -42,48 +44,57 @@ export default function MultiStepVerification({
     setProgress(calculateProgress());
   }, [name, emailVerified, seek, configured, pseudo]);
   const dispatch = useDispatch();
-  const handleAccessClick = () => {
-    updateUser(user?.uid, { access: true }); // Call the updateUser function
-    setIsAnimating(true); // Show confetti
-    setTimeout(() => {
-      setIsAnimating(false);
-      dispatch(setUser({ ...user, access: true }));
-    }, 5000); // Hide confetti after 5 seconds
-  };
+  function handleAccessClick() {
+    if (user?.tokens >= 20) {
+      updateUser(user?.uid, { access: true, tokens: user?.tokens - 20 }); // Call the updateUser function
+      setIsAnimating(true); // Show confetti
+      setTimeout(() => {
+        setIsAnimating(false);
+        dispatch(setUser({ ...user, access: true }));
+      }, 5000); // Hide confetti after 5 seconds
+    } else {
+      toast.error("Nie posiadasz wystarczającej ilości Quixies", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+    }
+  }
   const { modals } = useSelector((state: any) => state.modals);
+  const { light } = useSelector((state: any) => state.light);
   return (
-    <div className={`bg-white w-full mb-6`}>
+    <div>
       {isAnimating && (
         <div className="z-50 w-full h-screen fixed left-0 top-0">
           <Confetti />
         </div>
       )}
       <div
-        className={`${
-          user?.access === true && "hidden"
-        } bg-gradient-to-r from-primary/20 to-cta/20 p-3 rounded-xl mt-1`}
+        className={`${user?.access && "hidden"} ${
+          light ? "bg-white text-black" : "bg-[#222430] text-white"
+        } duration-300 transition-all mt-3 mx-3 lg:mx-6 lg:ml-12 rounded-lg p-3 relative max-w-full`}
       >
-        <h2 className="font-extrabold text-2xl text-black">
-          Ukończ konfigurację konta
-        </h2>
-        <p className="text-black">
-          Po pomyślnej weryfikacji Twoje konto zostanie wyświetlone w
-          odpowiednich kategoriach.
-        </p>
-        <button
-          onClick={() => dispatch(set_modals({ ...modals, config: true }))}
-          className="w-full text-center text-xl text-white bg-cta px-2 py-1 mt-3 rounded-xl"
+        <h2
+          className={`absolute top-0 left-0 text-xl px-[2.5rem] font-sans py-2 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd`}
         >
-          Uruchom ustawienia
-        </button>
-
-        <div className="space-y-3 p-3 lg:p-6">
+          WERYFIKACJA
+        </h2>
+        <p className="mt-12 font-sans">
+          Po opłaceniu wpisowego w wysokości{" "}
+          <b className="p-3 py-1 rounded-md bg-ctaStart text-white">💎20</b>{" "}
+          Twój profil wyświetli się w odpowiednich kategoriach i zacznie
+          docierać do potencjalnych klientów.
+        </p>
+        <div className="space-y-3 p-3 lg:p-6 bg-gray-200 rounded-lg mt-3">
           <StepItem
             step={2}
             title="Rodzaj profilu"
             isCompleted={(seek === true || seek === false) && seek !== "ask"}
             completedText={seek ? "Talent" : "Klient"}
             incompleteText="Wybierz typ profilu"
+            light={light}
           />
           <StepItem
             step={1}
@@ -91,6 +102,7 @@ export default function MultiStepVerification({
             isCompleted={configured && seek !== "ask"}
             completedText="Proces rozpoczęty"
             incompleteText="Rozpocznij konfigurację"
+            light={light}
           />
           <StepItem
             step={4}
@@ -98,6 +110,7 @@ export default function MultiStepVerification({
             isCompleted={emailVerified}
             completedText="Pomyślnie ukończono"
             incompleteText="Zweryfikuj E-mail"
+            light={light}
           />
           <StepItem
             step={5}
@@ -105,6 +118,7 @@ export default function MultiStepVerification({
             isCompleted={pseudo}
             completedText={pseudo}
             incompleteText="Ustaw unikalną nazwę"
+            light={light}
           />
           <StepItem
             step={3}
@@ -112,31 +126,46 @@ export default function MultiStepVerification({
             isCompleted={name}
             completedText="Pomyślnie ukończono"
             incompleteText={`Imię/nazwisko lub nazwa firmy`}
+            light={light}
           />
         </div>
-        <div className="p-3 bg-gradient-to-r from-cta/50 to-primary/50 rounded-xl mt-3">
-          <p className="text-sm text-center text-white bg-gradient-to-r from-primary to-cta rounded-lg mb-3 p-1.5">
+        <div className="w-full flex justify-center">
+          {progress !== 100 && (
+            <button
+              onClick={() =>
+                dispatch(
+                  set_modals({ ...modals, config: true, quixies: false })
+                )
+              }
+              className="mx-auto w-max py-[0.5rem] px-[1rem] max-w-full text-center text-white bg-gradient-to-b from-ctaStart to-ctaEnd mt-3 rounded-lg font-sans"
+            >
+              Uruchom ustawienia
+            </button>
+          )}{" "}
+          {progress === 100 && (
+            <button
+              onClick={handleAccessClick}
+              className="mt-6 bg-gradient-to-r from-ctaStart to-primaryStart text-xl animate-pulse rounded-md text-white py-2 px-4 font-sans font-bold"
+            >
+              Wpisz się! (20.00💎)
+            </button>
+          )}
+        </div>
+        <div className="p-3 bg-gradient-to-r from-primaryStart/70 to-primaryEnd/70 rounded-xl mt-3">
+          <p className="text-white text-sm text-center mb-3 p-1.5 font-coco">
             Uzupełnij swój profil, aby rozpocząć pozyskiwanie klientów lub
             poszukiwanie pracy.
           </p>
-          <div className="relative w-full h-6 bg-white rounded-full mb-3">
+          <div className="relative w-full h-6 bg-gray-300 rounded-full mb-3">
             <div
-              className="h-full bg-gradient-to-r from-primary to-cta rounded-full transition-all duration-500 ease-in-out"
+              className="h-full bg-gradient-to-r from-accentStart to-accentEnd rounded-full transition-all duration-500 ease-in-out"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
-          <p className="text-center text-sm text-white rounded-xl px-2 mx-auto w-max bg-gradient-to-r from-primary to-cta">
+          <p className="text-center text-sm text-white rounded-xl px-2 mx-auto w-max bg-gradient-to-b from-primaryStart to-primaryEnd">
             {progress}% ukończono
           </p>
         </div>
-        {progress === 100 && (
-          <button
-            onClick={handleAccessClick}
-            className="mt-6 bg-gradient-to-r from-primary to-cta text-white py-2 px-4 rounded-lg font-coco font-bold"
-          >
-            Wpisz się! (0.00💎)
-          </button>
-        )}
       </div>
     </div>
   );
@@ -149,12 +178,14 @@ function StepItem({
   isCompleted,
   completedText,
   incompleteText,
+  light,
 }: {
   step: number;
   title: string;
   isCompleted: boolean;
   completedText: string;
   incompleteText: string;
+  light: boolean;
 }) {
   return (
     <div className="flex items-center justify-between">
@@ -164,11 +195,19 @@ function StepItem({
         ) : (
           <IoCloseCircle className="text-3xl aspect-square text-red-500 mr-2" />
         )}
-        <p className="text-sm sm:text-base font-coco font-medium text-gray-800">
+        <p
+          className={`${
+            light ? "text-black" : "text-white"
+          } duration-300 text-sm sm:text-base font-lato`}
+        >
           {title}
         </p>
       </div>
-      <p className="text-sm text-gray-600 text-right">
+      <p
+        className={`font-lato text-sm ${
+          light ? "text-gray-600" : "text-gray-300"
+        } duration-300 text-right`}
+      >
         {isCompleted ? completedText : incompleteText}
       </p>
     </div>

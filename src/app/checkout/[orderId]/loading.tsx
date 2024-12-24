@@ -1,16 +1,24 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
+
 export default function Loading() {
   return (
-    <div className="fixed left-0 top-0 z-[5000] font-sans italic font-light h-screen w-screen flex justify-center items-center text-4xl text-black ">
+    <div className="fixed left-0 top-0 z-[5000] font-coco h-screen w-screen flex justify-center items-center text-4xl">
       <div className="flex flex-col items-center justify-center">
         {" "}
-        <div className="bg-white w-36 h-36 mx-auto  flex flex-col items-center justify-center">
-          <img
-            className="h-24 w-24"
-            src="https://raw.githubusercontent.com/n3r4zzurr0/svg-spinners/abfa05c49acf005b8b1e0ef8eb25a67a7057eb20/svg-css/blocks-shuffle-2.svg"
-            alt=""
-          />
-          <h2 className="text-sm font-bold mt-3 text-center">Wczytywanie...</h2>
+        <div className="rounded-lg bg-gradient-to-b from-accentStart to-accentEnd w-36 h-36 mx-auto flex flex-col items-center justify-center">
+          <div className="flex items-center justify-center rounded-lg p-3 w-16 h-16 bg-white animate-pulse">
+            <Image
+              src="/assets/quixy-logo.png"
+              width={124}
+              height={124}
+              alt=""
+              className=""
+              priority
+            />
+          </div>
+          <h2 className="text-sm font-bold mt-3 text-center text-white">
+            Wczytywanie...
+          </h2>
         </div>
       </div>
     </div>

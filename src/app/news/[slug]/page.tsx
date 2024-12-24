@@ -1,50 +1,58 @@
 import Image from "next/image";
 import { FaImage } from "react-icons/fa";
 import Link from "next/link";
-import jobs from "../../../../public/14.09.2024.json";
 import { getProductByUrl, getProducts } from "@/firebase";
 import { renderMarkdown } from "@/lib/parseMarkdown";
 import BlogPostList from "@/components/BlogPostList";
-import Header from "@/components/Header";
 import MainFooter from "@/components/MainFooter";
-import Script from "next/script";
+import { polishToEnglish } from "../../../../utils/polishToEnglish";
 export async function generateStaticParams() {
   const products = await getProducts();
   return products?.map((product: any) => ({
     slug: product?.url,
   }));
 }
-export const revalidate = 30;
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
+  const posts = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   const product: any = await getProductByUrl(params?.slug);
-  const products: any = await getProducts();
 
   return (
     <>
-      <Header jobsList={jobs} />
       <div className="overflow-x-hidden px-4 container mx-auto">
         <div className="pt-12 pb-24 bg-white relative">
-          <div className="font-coco flex flex-row mb-12 text-zinc-800 text-lg flex-wrap items-center">
-            <Link
-              href="/"
-              className="hover:underline text-sm md:text-base lg:text-lg xl:text-xl w-max"
-            >
-              strona główna
-            </Link>
-            <div className="mx-2 text-sm md:text-base lg:text-lg xl:text-xl">
-              <div className="text-black font-bold mx-2">|</div>
-            </div>
-            <Link
-              href="/news"
-              className="hover:underline text-sm md:text-base lg:text-lg xl:text-xl w-max"
-            >
-              news
-            </Link>
-            <div className="flex items-center text-sm md:text-base lg:text-lg xl:text-xl w-max">
-              <div className="mx-2 text-black font-bold">|</div>
-              {product?.url}
-            </div>
+          <div className=" text-black flex flex-col breadcrumbs">
+            <ul className="flex items-center flex-wrap">
+              <li className="">
+                <Link href={`/`} title="praca zdalna">
+                  hello!
+                </Link>
+              </li>
+              <li className="">
+                <Link href="/news" title="aktualności">
+                  news
+                </Link>
+              </li>
+              <li className="">
+                <Link
+                  href={`/news/${polishToEnglish(product?.url)}`}
+                  title="aktualności"
+                >
+                  {product?.url}
+                </Link>
+              </li>
+            </ul>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-12 mx-auto">
@@ -59,8 +67,7 @@ export default async function Page(props: { params: Promise<any> }) {
               )}
               {product?.shortDesc && (
                 <div
-                  style={{ boxShadow: "0px 0px 5px #000000" }}
-                  className="bg-primary p-3 text-white text-lg lg:text-xl !font-gotham"
+                  className="bg-gradient-to-b from-ctaStart to-ctaEnd rounded-md p-3 text-white text-lg lg:text-xl !font-gotham"
                   dangerouslySetInnerHTML={renderMarkdown(product?.shortDesc)}
                 />
               )}
@@ -77,8 +84,7 @@ export default async function Page(props: { params: Promise<any> }) {
                     width={1024}
                     height={1024}
                     alt={`Obraz ${product?.title}`}
-                    className="w-full h-auto mt-6"
-                    style={{ boxShadow: "0px 0px 5px #000000" }}
+                    className="w-full h-auto mt-6 rounded-md"
                   />
                   <div className="w-max absolute bottom-4 right-4">
                     <Link href="/" className="">
@@ -132,8 +138,7 @@ export default async function Page(props: { params: Promise<any> }) {
                     width={1024}
                     height={1024}
                     alt={`Obraz ${product?.title}`}
-                    className="w-full h-auto"
-                    style={{ boxShadow: "0px 0px 5px #000000" }}
+                    className="w-full h-auto rounded-md"
                   />
                   <div className="w-max absolute bottom-4 right-4">
                     <Link href="/" className="">
@@ -178,15 +183,6 @@ export default async function Page(props: { params: Promise<any> }) {
                     </Link>
                   </div>
                 </div>
-                <div className="flex flex-col">
-                  <h2 className="text-3xl text-left font-bold drop-shadow-xl shadow-black text-zinc-800">
-                    {product?.text4Title}
-                  </h2>
-                  <div
-                    className="text-gray-700 font-light text-lg mt-4"
-                    dangerouslySetInnerHTML={renderMarkdown(product?.text4Desc)}
-                  />
-                </div>
               </div>
             )}
         </div>
@@ -229,20 +225,11 @@ export default async function Page(props: { params: Promise<any> }) {
             )}
         </div>
 
-        <div className="">
-          {products?.length > 1 && <BlogPostList posts={products} />}
+        <div className="mb-12">
+          {posts?.length > 1 && <BlogPostList posts={posts} />}
         </div>
-        <div className="w-full flex justify-center mt-12">
-          <Image
-            src="/assets/quixy-logo.png"
-            width={224}
-            height={224}
-            alt="logo Quixy strona bloga slug"
-            className=""
-          />
-        </div>
-        <MainFooter jobsList={jobs} />
       </div>
+      <MainFooter jobsList={jobs} />
     </>
   );
 }

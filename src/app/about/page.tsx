@@ -1,28 +1,24 @@
-import {
-  FaShieldAlt,
-  FaLightbulb,
-  FaCheckCircle,
-  FaHeadset,
-  FaStar,
-} from "react-icons/fa";
+import { FaShieldAlt, FaCheckCircle, FaHeadset, FaStar } from "react-icons/fa";
 import React from "react";
-import Header from "@/components/Header";
 import MainFooter from "@/components/MainFooter";
-import jobs from "../../../public/14.09.2024.json";
 import Link from "next/link";
 import { Metadata } from "next";
 import Image from "next/image";
 import AboutQuixyTalent from "@/components/AboutQuixyTalent";
-export default function Page() {
+export default async function Page() {
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   return (
     <div className="min-h-screen flex flex-col">
-      <Header jobsList={jobs} />
-
       {/* Hero Section */}
       <div className="flex-grow">
         <div
-          className="h-full w-full bg-gradient-to-r from-primary to-cta overflow-hidden text-white py-12 relative z-50 px-4 lg:px-12 text-center"
-          style={{ textShadow: "2px 2px 2px black" }}
+          className="h-full w-full bg-gradient-to-r from-primaryStart to-primaryEnd overflow-hidden text-white py-12 relative z-50 px-4 lg:px-12 text-center"
+          style={{ boxShadow: "inset 0px 0px 5px black" }}
         >
           <h1 className="text-3xl font-extrabold text-white">QUIXY.PL</h1>
           <p className="text-xl mt-2 max-w-xl mx-auto">
@@ -36,21 +32,18 @@ export default function Page() {
             i nie tylko - na bieżąco rozwijamy nasz serwis i dbamy o
             doświadczenie użytkownika.
           </p>
-          <button className="bg-white text-black font-bold relative z-50 py-1.5 px-3 mt-6 hover:bg-gray-200 transition">
-            Dołącz teraz
+          <button className="bg-gradient-to-b rounded-md text-white from-ctaStart to-ctaEnd relative z-50 py-2 px-4 mt-6 hover:scale-105 duration-100">
+            Dołącz już dziś!
           </button>
         </div>
 
         {/* Services Section */}
-        <div className="py-12 px-4 lg:px-12 text-black">
+        <div className="py-12 px-4 lg:px-12 xl:container mx-auto text-black">
           <h2 className="text-2xl font-extrabold">Jak możemy Ci pomóc?</h2>
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div
-              className="bg-gradient-to-r from-primary/20 to-cta/20 p-6 relative z-50 "
-              style={{ boxShadow: "0px 0px 4px black" }}
-            >
-              <h3 className="text-xl text-black flex">
-                <FaStar className="mr-2 text-cta mt-1" />
+            <div className="bg-gradient-to-r from-primaryStart to-primaryEnd p-6 relative z-50 rounded-md">
+              <h3 className="text-xl text-white flex">
+                <FaStar className="mr-2 text-accentEnd mt-1" />
                 <Link
                   href="/praca-zdalna/rozwoj-oprogramowania"
                   className="flex flex-col font-extrabold"
@@ -59,18 +52,15 @@ export default function Page() {
                   <span className="ml-1 text-sm font-light">Sprawdź</span>
                 </Link>
               </h3>
-              <p className="mt-2 text-black font-coco">
+              <p className="mt-2 text-white font-coco">
                 Zatrudnij ekspertów od aplikacji mobilnych, marketingu, usług
                 biznesowych, web developmentu, frameworków czy programistów
                 nowych technologii w kategorii rozwoju oprogramowania.
               </p>
             </div>
-            <div
-              className="bg-gradient-to-r from-primary/20 to-cta/20 p-6 relative z-50 "
-              style={{ boxShadow: "0px 0px 4px black" }}
-            >
-              <h3 className="text-xl text-black flex">
-                <FaStar className="mr-2 text-cta mt-1" />
+            <div className="bg-gradient-to-r from-primaryStart to-primaryEnd p-6 relative z-50 rounded-md">
+              <h3 className="text-xl text-white flex">
+                <FaStar className="mr-2 text-accentEnd mt-1" />
                 <Link
                   href="/praca-zdalna/e-commerce"
                   className="flex flex-col font-extrabold"
@@ -79,17 +69,14 @@ export default function Page() {
                   <span className="ml-1 text-sm font-light">Sprawdź</span>
                 </Link>
               </h3>
-              <p className="mt-2 text-black font-coco">
+              <p className="mt-2 text-white font-coco">
                 Freelancerzy oferujący pełne wsparcie w tworzeniu sklepów
                 internetowych, rozwiązań Magento, Shopify i innych.
               </p>
             </div>
-            <div
-              className="bg-gradient-to-r from-primary/20 to-cta/20 p-6 relative z-50 "
-              style={{ boxShadow: "0px 0px 4px black" }}
-            >
-              <h3 className="text-xl text-black flex">
-                <FaStar className="mr-2 text-cta mt-1" />
+            <div className="bg-gradient-to-r from-primaryStart to-primaryEnd p-6 relative z-50 rounded-md">
+              <h3 className="text-xl text-white flex">
+                <FaStar className="mr-2 text-accentEnd mt-1" />
                 <Link
                   href="/praca-zdalna/uslugi-it"
                   className="flex flex-col font-extrabold"
@@ -98,17 +85,16 @@ export default function Page() {
                   <span className="ml-1 text-sm font-light">Sprawdź</span>
                 </Link>
               </h3>
-              <p className="mt-2 text-black font-coco">
+              <p className="mt-2 text-white font-coco">
                 Skorzystaj z usług freelancerów i firm doradztwa IT, wsparcia
                 technicznego oraz rozwiązań z zakresu bezpieczeństwa IT.
               </p>
             </div>
           </div>
         </div>
-        <div className="py-2 bg-gradient-to-r from-primary to-cta w-full relative">
+        <div className="py-2 bg-gradient-to-r from-primaryStart to-primaryEnd w-full relative">
           <Link
-            style={{ boxShadow: "0px 0px 4px #000" }}
-            className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 bg-cta text-white font-bold z-50 py-3 px-8  hover:bg-white hover:text-cta transition"
+            className="rounded-md hover:scale-105 duration-100 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 bg-gradient-to-b from-accentStart to-accentEnd text-white font-bold z-50 py-3 px-8  hover:bg-white hover:text-cta transition"
             href="/praca-zdalna"
           >
             Zobacz więcej
@@ -116,55 +102,52 @@ export default function Page() {
         </div>
 
         {/* Features Section */}
-        <div className="py-12 px-4 lg:px-12 relative overflow-hidden">
+        <div className="xl:container mx-auto py-12 px-4 lg:px-12 relative overflow-hidden">
           <h2 className="text-2xl font-extrabold text-black">
             Dlaczego warto wybrać Quixy?
           </h2>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 text-center">
             <div
-              className="p-6 bg-gradient-to-r from-primary/20 to-cta/20"
+              className="p-6 bg-gradient-to-b from-primaryStart to-primaryEnd rounded-md"
               style={{ boxShadow: "0px 0px 5px black" }}
             >
-              <div className="bg-gradient-to-r from-primary to-cta rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <div className="bg-gradient-to-b from-ctaStart to-ctaEnd rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <FaShieldAlt className="text-white text-3xl" />{" "}
-                {/* Ikona bezpieczeństwa */}
               </div>
-              <h3 className="text-xl font-bold text-black">Bezpieczeństwo</h3>
-              <p className="mt-2 text-black font-coco">
+              <h3 className="text-xl font-bold text-white">Bezpieczeństwo</h3>
+              <p className="mt-2 text-white">
                 Nasze rozwiązania są w pełni bezpieczne i niezawodne.
               </p>
             </div>
             <div
-              className="p-6 bg-gradient-to-r from-primary/20 to-cta/20"
+              className="p-6 bg-gradient-to-b from-primaryStart to-primaryEnd rounded-md"
               style={{ boxShadow: "0px 0px 5px black" }}
             >
-              <div className="bg-gradient-to-r from-primary to-cta rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <div className="bg-gradient-to-b from-ctaStart to-ctaEnd rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <FaCheckCircle className="text-white text-3xl" />{" "}
-                {/* Ikona prostoty */}
               </div>
-              <h3 className="text-xl font-bold text-black">Prostota</h3>
-              <p className="mt-2 text-black font-coco">
+              <h3 className="text-xl font-bold text-white">Prostota</h3>
+              <p className="mt-2 text-white">
                 Narzędzie stworzone z myślą o Twoich potrzebach.
               </p>
             </div>
 
             <div
-              className="p-6 bg-gradient-to-r from-primary/20 to-cta/20"
+              className="p-6 bg-gradient-to-b from-primaryStart to-primaryEnd rounded-md"
               style={{ boxShadow: "0px 0px 5px black" }}
             >
-              <div className="bg-gradient-to-r from-primary to-cta rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <div className="bg-gradient-to-b from-ctaStart to-ctaEnd rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <FaHeadset className="text-white text-3xl" />{" "}
-                {/* Ikona wsparcia */}
               </div>
-              <h3 className="text-xl font-bold text-black">Wsparcie 24/7</h3>
-              <p className="mt-2 text-black font-coco">
-                Jesteśmy dostępni, aby pomóc Ci o każdej porze dnia i nocy.
+              <h3 className="text-xl font-bold text-white">Wsparcie</h3>
+              <p className="mt-2 text-white">
+                Użyj zakładki &quot;Kontakt&quot; aby skontaktować się z nami.
               </p>
             </div>
           </div>
         </div>
-        <div className="relative overflow-hidden px-4 lg:px-12">
+        <div className="mx-auto xl:container relative overflow-hidden px-4 lg:px-12">
           <div className="absolute left-0 -top-36" id="ccrm" />
           <div className="flex w-full justify-between items-center">
             <h2 className="text-2xl font-extrabold text-black">
@@ -192,23 +175,8 @@ export default function Page() {
 
           <AboutQuixyTalent />
         </div>
-        {/* Call-to-Action Section */}
-        <div className="bg-gradient-to-r from-primary to-cta text-white pt-12 relative z-50 px-4 lg:px-12 mt-12">
-          <h2 className="text-2xl font-extrabold">Wypróbuj Quixy za darmo!</h2>
-          <p className="text-lg max-w-lg">
-            Zarejestruj się już teraz i otrzymaj darmowe Quixies 💎 na start!
-          </p>
-          <div className="mt-3 bg-cta text-white w-max max-w-full">
-            <Link
-              href="/register"
-              className="px-3 py-2 font-bold relative z-50 hover:bg-opacity-90"
-            >
-              Zarejestruj się
-            </Link>
-          </div>
-        </div>
       </div>
-
+      <div className="mt-12"></div>
       <MainFooter jobsList={jobs} />
     </div>
   );

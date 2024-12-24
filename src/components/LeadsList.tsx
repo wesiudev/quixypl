@@ -4,119 +4,111 @@ import moment from "moment";
 import { useState } from "react";
 import "moment/locale/pl";
 import Link from "next/link";
-import { FaChevronLeft } from "react-icons/fa";
-import Confetti from "react-confetti";
-import { ReactSketchCanvas } from "react-sketch-canvas";
+import { FaChevronLeft } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import LeadApplication from "./LeadApplication";
 export default function LeadsList() {
   const { user } = useSelector((state: any) => state.user);
-  const [isSigning, setIsSigning] = useState(false);
-  const [signingLead, setSigningLead] = useState<any>({});
-  const [isAnimating, setIsAnimating] = useState(false);
   const [noteOpen, setNoteOpen] = useState<any>();
   const [filter, setFilter] = useState("new");
   moment.locale("pl");
+  const { light } = useSelector((state: any) => state.light);
   return (
     <>
-      <div className="bg-gray-600 h-max w-full">
-        <div className="w-full justify-between bg-gradient-to-r from-primary to-cta py-3 px-6 text-white font-bold text-lg flex items-center">
+      <div className="font-sans py-3 mx-3 lg:py-6 lg:mx-6 lg:ml-12">
+        <div
+          className={`${
+            light ? "bg-white text-black" : "bg-[#222430] text-white"
+          } rounded-lg w-full justify-between py-3 px-3 xl:px-6 font-bold text-lg flex items-center`}
+        >
           <Link href="/user" className="flex items-center">
             <FaChevronLeft className="mr-2 text-xl" />
             Powrót
           </Link>
-          <div className="flex flex-col text-white pl-12">
+          <div className="flex flex-col pl-12">
             <h2 className="font-extrabold">Sekcja Leadów</h2>
             <p className="text-xs font-coco">
-              Znajdziesz tutaj wszystkie swoje leady, zlecenia oraz kandydatów.
+              Znajdziesz tutaj wszystkie swoje zlecenia oraz kandydatów.
             </p>
           </div>
         </div>
-        <div className="font-gotham font-light grid grid-cols-2 sm:grid-cols-3 gap-2 p-6 !text-white">
-          <button
-            onClick={() => setFilter("new")}
-            className={` p-1 border-2 border-transparent border-dashed ${
-              filter === "new"
-                ? "bg-gradient-to-r text-white from-primary to-cta"
-                : "bg-gradient-to-r text-white from-primary/50 to-cta/50"
-            }`}
-          >
-            Nowe
-          </button>
-          <button
-            onClick={() => setFilter("old")}
-            className={`bg-gradient-to-r from-primary to-cta text-white p-1 border-2 border-transparent border-dashed ${
-              filter === "old"
-                ? "bg-gradient-to-r text-white from-primary to-cta"
-                : "bg-gradient-to-r text-white from-primary/50 to-cta/50"
-            }`}
-          >
-            Sprawdzone
-          </button>{" "}
-        </div>
-        <div className="px-6 py-3 grid grid-cols-1 xl:grid-cols-3 2xl:grid-cols-4 font-sans gap-6 min-h-screen text-white">
-          {user?.leads?.map((lead: any, i: any) => (
-            <>
-              {filter === "new" && !lead.signed && lead.status !== "trash" && (
-                <LeadApplication
-                  key={i}
-                  lead={lead}
-                  noteOpen={noteOpen}
-                  setNoteOpen={setNoteOpen}
-                  filter={filter}
-                />
-              )}
-            </>
-          ))}
-          {user?.leads?.map((lead: any, i: any) => (
-            <>
-              {filter === "trashcan" &&
-                lead.isTrash &&
-                lead.status === "trash" && (
-                  <LeadApplication
-                    key={i}
-                    lead={lead}
-                    noteOpen={noteOpen}
-                    setNoteOpen={setNoteOpen}
-                    filter={filter}
-                  />
-                )}
-            </>
-          ))}
-          {user?.leads?.map((lead: any, i: any) => (
-            <>
-              {filter === "old" &&
-                lead.isFinished &&
-                lead.status !== "rejected" &&
-                !lead.signed &&
-                lead.status !== "trash" && (
-                  <LeadApplication
-                    key={i}
-                    lead={lead}
-                    noteOpen={noteOpen}
-                    setNoteOpen={setNoteOpen}
-                    filter={filter}
-                  />
-                )}
-            </>
-          ))}
-          {user?.leads?.map((lead: any, i: any) => (
-            <>
-              {filter === "signed" &&
-                lead.isFinished &&
-                lead.status === "accepted" &&
-                lead.signed &&
-                lead.status !== "trash" && (
-                  <LeadApplication
-                    key={i}
-                    lead={lead}
-                    noteOpen={noteOpen}
-                    setNoteOpen={setNoteOpen}
-                    filter={filter}
-                  />
-                )}
-            </>
-          ))}
+        <div
+          className={` ${
+            light ? "bg-white text-black" : "bg-[#222430] text-white"
+          } mt-6 rounded-lg min-h-screen text-white`}
+        >
+          <div className="font-gotham font-light grid grid-cols-2 sm:grid-cols-3 gap-2 p-6 !text-white">
+            <button
+              onClick={() => setFilter("new")}
+              className={`p-1 border-2 border-dashed ${
+                filter === "new"
+                  ? `bg-gradient-to-b text-white ${
+                      light
+                        ? "border-black from-primaryHoverStart to-primaryHoverEnd"
+                        : "border-white from-primaryStart to-primaryEnd"
+                    }`
+                  : `border-transparent bg-gradient-to-b text-white ${
+                      light
+                        ? " from-primaryHoverStart/70 to-primaryHoverEnd/70"
+                        : " from-primaryStart/70 to-primaryEnd/70"
+                    }`
+              }`}
+            >
+              Nowe
+            </button>
+            <button
+              onClick={() => setFilter("old")}
+              className={`text-white p-1 border-2 border-dashed ${
+                filter === "old"
+                  ? `bg-gradient-to-b text-white ${
+                      light
+                        ? "border-black from-primaryHoverStart to-primaryHoverEnd"
+                        : "border-white from-primaryStart to-primaryEnd"
+                    }`
+                  : `border-transparent bg-gradient-to-b text-white ${
+                      light
+                        ? "from-primaryHoverStart/70 to-primaryHoverEnd/70"
+                        : "from-primaryStart/70 to-primaryEnd/70"
+                    }`
+              }`}
+            >
+              Sprawdzone
+            </button>{" "}
+          </div>
+          <div className="grid grid-cols-1 xl:grid-cols-3 2xl:grid-cols-4 font-sans gap-6">
+            {user?.leads?.map((lead: any, i: any) => (
+              <>
+                {filter === "new" &&
+                  !lead.signed &&
+                  lead.status !== "trash" && (
+                    <LeadApplication
+                      key={i}
+                      lead={lead}
+                      noteOpen={noteOpen}
+                      setNoteOpen={setNoteOpen}
+                      filter={filter}
+                    />
+                  )}
+              </>
+            ))}
+            {user?.leads?.map((lead: any, i: any) => (
+              <>
+                {filter === "old" &&
+                  lead.isFinished &&
+                  lead.status !== "rejected" &&
+                  !lead.signed &&
+                  lead.status !== "trash" && (
+                    <LeadApplication
+                      key={i}
+                      lead={lead}
+                      noteOpen={noteOpen}
+                      setNoteOpen={setNoteOpen}
+                      filter={filter}
+                    />
+                  )}
+              </>
+            ))}
+          </div>
         </div>
       </div>
       {noteOpen !== undefined && (
@@ -157,54 +149,6 @@ export default function LeadsList() {
           </div>
         </div>
       )}
-      {isSigning && (
-        <div
-          onClick={() => {
-            setIsSigning(false);
-            setSigningLead({});
-          }}
-          className="z-[120] fixed left-0 top-0 w-full h-full bg-black bg-opacity-50 flex flex-col items-center justify-center"
-        >
-          <div onClick={(e) => e.stopPropagation()} className="w-[300px] h-max">
-            <h2 className="text-xl font-bold bg-black w-full font-gotham p-3">
-              Podpis (parafka)
-            </h2>
-            <ReactSketchCanvas
-              width="300px"
-              height="150px"
-              canvasColor="white"
-              strokeColor="black"
-            />
-            <button
-              onClick={() => {
-                updateApplication(signingLead.id, {
-                  ...signingLead,
-                  signed: true,
-                });
-                setIsAnimating(true);
-                setTimeout(() => {
-                  setIsAnimating(false);
-                }, 7500);
-                setSigningLead({});
-                setIsSigning(false);
-              }}
-              className="w-full text-center bg-green-500 hover:bg-green-400 font-bold text-white py-2 text-base font-gotham"
-            >
-              Zatwierdź
-            </button>
-          </div>
-        </div>
-      )}{" "}
-      {isAnimating && (
-        <div className="fixed w-full h-full top-0 -left-1/2 translate-x-1/2 z-[100]">
-          <Confetti width={1920} height={1019} />
-        </div>
-      )}
-      {isAnimating && (
-        <div className="fixed w-full h-full top-0 -left-1/2 translate-x-1/2 z-[100]">
-          <Confetti width={1920} height={1019} />
-        </div>
-      )}{" "}
     </>
   );
 }

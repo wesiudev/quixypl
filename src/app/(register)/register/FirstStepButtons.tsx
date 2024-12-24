@@ -13,18 +13,16 @@ export default function FirstStepButtons({
     <div>
       {!seek && step === 1 && (
         <button
-          style={{ borderRadius: "0px" }}
           onClick={() => setStep(2)}
-          className="bg-gradient-to-r from-primary to-cta py-2 !font-normal !px-4 text-white"
+          className="bg-gradient-to-b from-ctaStart to-ctaEnd rounded-md py-2 px-4 text-white"
         >
-          Zatrudnij talent!
+          Przejdź do panelu!
         </button>
       )}
       {seek && seek !== "ask" && step === 1 && (
         <button
-          style={{ borderRadius: "0px" }}
           onClick={() => setStep(2)}
-          className="bg-gradient-to-r from-primary to-cta py-2 !font-normal !px-4 text-white"
+          className="bg-gradient-to-b from-ctaStart to-ctaEnd rounded-md py-2 px-4 text-white"
         >
           Znajdźmy pracę!
         </button>

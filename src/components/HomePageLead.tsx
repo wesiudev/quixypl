@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { pushEmail } from "../../utils/pushEmail";
 import { toast } from "react-toastify";
+import { FaCircleXmark } from "react-icons/fa6";
 
 export default function HomePageLead() {
   const [isChecked, setIsChecked] = React.useState(true);
@@ -63,7 +64,7 @@ export default function HomePageLead() {
               pushEmail(email, isChecked).then((res: any) => {
                 if (!res.error) {
                   toast.success("Udało się! Jesteś na bieżąco!", {
-                    position: "bottom-right",
+                    position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -73,7 +74,7 @@ export default function HomePageLead() {
                   setLoading(false);
                 } else {
                   toast.error("${błąd}: res.code", {
-                    position: "bottom-right",
+                    position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -84,7 +85,7 @@ export default function HomePageLead() {
               });
             } else {
               toast.error("Wpisz poprawny email", {
-                position: "bottom-right",
+                position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -93,7 +94,7 @@ export default function HomePageLead() {
             }
           } else {
             toast.error("Musisz zaakceptować warunki korzystania z serwisu", {
-              position: "bottom-right",
+              position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
               closeOnClick: true,

@@ -1,8 +1,10 @@
+import Link from "next/link";
 import jobs from "../../../public/14.09.2024.json";
 import { FaChevronCircleLeft, FaChevronLeft } from "react-icons/fa";
-import { FaMagnifyingGlass } from "react-icons/fa6";
+import { FaCircleXmark, FaMagnifyingGlass } from "react-icons/fa6";
 import { IoClose, IoCloseCircle } from "react-icons/io5";
 import { v4 as uuidv4 } from "uuid";
+import { AiFillThunderbolt } from "react-icons/ai";
 export default function MarketCategorySelector({
   setConfigurationOpen,
   configurationOpen,
@@ -34,26 +36,26 @@ export default function MarketCategorySelector({
         Wyszukiwarka usług
       </h3>
 
-      {!slug && <div className="my-1.5 font-bold text-black">Kategoria</div>}
+      <div className="my-1.5 font-bold text-black">Kategoria</div>
       {slug !== "" && category === "" && (
-        <div className="text-black flex flex-col mt-3 w-full">
-          <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1 px-2 text-white w-max max-w-[100%]">
+        <div className="text-black flex flex-col mt-1 w-full">
+          <div className="font-bold mb-1 bg-gradient-to-b rounded-md from-primaryHoverStart to-primaryHoverEnd p-1 px-2 text-white w-max max-w-[100%]">
             {slug}
           </div>
           <div className="font-bold">Wybierz podkategorię</div>
         </div>
       )}
       {slug !== "" && category !== "" && (
-        <div className="text-black flex flex-col mt-3 w-full">
-          <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1 px-2 text-white w-max max-w-[100%]">
+        <div className="text-black flex flex-col mt-1 w-full">
+          <div className="font-bold mb-1 bg-gradient-to-b rounded-md from-primaryHoverStart to-primaryHoverEnd p-1 px-2 text-white w-max max-w-[100%]">
             {slug}
           </div>
           <div className="font-bold">Podkategoria</div>
         </div>
       )}
       {slug !== "" && category !== "" && (
-        <div className="flex flex-col mt-3 w-full">
-          <div className="font-bold mb-1 bg-gradient-to-r from-primary to-cta p-1 px-2 text-white w-max max-w-[100%]">
+        <div className="flex flex-col mt-1 w-full">
+          <div className="font-bold mb-1 bg-gradient-to-b rounded-md from-primaryHoverStart to-primaryHoverEnd p-1 px-2 text-white w-max max-w-[100%]">
             {category}
           </div>
           <div className="font-bold text-black">Wybierz kategorię</div>
@@ -67,7 +69,7 @@ export default function MarketCategorySelector({
               setCategory("");
               setShowResults(false);
             }}
-            className="text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[32px] aspect-square"
+            className="rounded-md text-lg w-max bg-gradient-to-b from-accentStart to-accentEnd hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[32px] aspect-square"
           >
             <FaChevronLeft className="hover:scale-110" />
           </button>
@@ -78,7 +80,7 @@ export default function MarketCategorySelector({
               setJob("");
               setShowResults(false);
             }}
-            className="text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[32px] aspect-square"
+            className="rounded-md text-lg w-max bg-gradient-to-b from-accentStart to-accentEnd hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[32px] aspect-square"
           >
             <FaChevronCircleLeft className="hover:scale-110" />
           </button>
@@ -89,7 +91,7 @@ export default function MarketCategorySelector({
               setSlug(""), setConfigurationOpen(false);
               setShowResults(false);
             }}
-            className=" text-lg w-max bg-gradient-to-r from-primary to-cta hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[32px] aspect-square"
+            className="rounded-md  text-lg w-max bg-gradient-to-b from-accentStart to-accentEnd hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[32px] aspect-square"
           >
             <FaChevronLeft className="hover:scale-110" />
           </button>
@@ -99,7 +101,7 @@ export default function MarketCategorySelector({
             {jobs.map((item: any, k: any) => (
               <button
                 onClick={() => setSlug(item.title)}
-                className=" bg-[#126b91] hover:bg-opacity-90 duration-100  text-white font-extralight p-1"
+                className=" rounded-md bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd hover:bg-opacity-90 duration-100  text-white font-extralight p-1"
                 key={uuidv4()}
               >
                 {item.title}
@@ -116,7 +118,7 @@ export default function MarketCategorySelector({
                     {item.data.map((cat: any, j: any) => (
                       <button
                         onClick={() => setCategory(cat.title)}
-                        className="bg-[#126b91] hover:bg-opacity-90 duration-100  text-white font-extralight p-1"
+                        className="rounded-md bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd hover:bg-opacity-90 duration-100  text-white font-extralight p-1"
                         key={uuidv4()}
                       >
                         {cat.title}
@@ -147,9 +149,9 @@ export default function MarketCategorySelector({
                                   slug !== "" &&
                                   category !== "" &&
                                   job === j.title
-                                    ? "bg-gradient-to-r from-primary to-cta"
-                                    : "bg-[#126b91]"
-                                }  hover:bg-opacity-90 duration-100  text-white font-extralight p-1`}
+                                    ? "bg-gradient-to-b from-ctaStart to-ctaEnd"
+                                    : "bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd"
+                                } rounded-md hover:bg-opacity-90 duration-100  text-white font-extralight p-1`}
                                 key={uuidv4()}
                               >
                                 {j.title}
@@ -178,7 +180,11 @@ export default function MarketCategorySelector({
               setJob("");
             }
           }}
-          className="p-3 mt-3 bg-gradient-to-r from-primary to-cta text-white font-extralight font-coco text-xl flex items-center gap-2"
+          className={`${
+            !showResults && leads
+              ? "from-ctaStart to-ctaEnd"
+              : "from-red-400 to-red-500"
+          } rounded-md px-4 py-2 mt-3 bg-gradient-to-b  to-cta text-white font-extralight font-coco text-xl flex items-center gap-2 hover:scale-105 duration-100`}
         >
           {!showResults && leads ? (
             <>
@@ -194,9 +200,22 @@ export default function MarketCategorySelector({
         </button>
       )}
       {slug && !leads && (
-        <div className="p-3 mt-3 bg-gradient-to-r from-primary to-cta text-white flex items-center gap-2">
-          Brak aktywnych usług w przeglądanej kategorii - dodaj swoje usługi i
-          rozpocznij pozyskiwanie klientów!
+        <div className="flex-col font-coco text-center py-12 mt-3 bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30 rounded-lg text-black flex items-center justify-center">
+          <div
+            style={{ boxShadow: "0px 1px 10px rgba(0,0,0,0.8)" }}
+            className="rounded-full h-24 w-24 from-primaryStart to-primaryEnd bg-gradient-to-b flex items-center justify-center"
+          >
+            <AiFillThunderbolt className="text-4xl text-white" />
+          </div>
+          <p className="mt-4 max-w-xs text-gray-700">
+            Brak aktywnych usług w przeglądanej kategorii
+          </p>
+          <Link
+            href="/register"
+            className="mt-2 text-sm bg-gradient-to-b from-ctaStart to-ctaEnd font-bold text-white px-4 py-2 rounded-md shadow-md hover:scale-105 duration-200"
+          >
+            Zarządzaj rynkiem
+          </Link>
         </div>
       )}
     </div>

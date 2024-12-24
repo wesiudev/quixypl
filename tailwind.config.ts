@@ -10,14 +10,22 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        cardo: ["var(--font-cocosharp)"],
+        sans: ["var(--font-sans)"],
+        lato: ["var(--font-lato)"],
         coco: ["var(--font-cocosharp)"],
-        gotham: ["var(--font-cocosharp)"],
+        gotham: ["var(--font-lato)"],
       },
       colors: {
-        cta: "#14A800",
-        primary: "#126b91",
-        primaryHover: "#468CA9",
+        ctaStart: "#14A800",
+        ctaEnd: "#0B7D43",
+        primaryStart: "#126b91",
+        primaryEnd: "#082F47",
+        primaryHoverStart: "#468CA9",
+        primaryHoverEnd: "#126b91",
+        bgStart: "#126b91",
+        bgEnd: "#082F47",
+        accentStart: "#FFA726",
+        accentEnd: "#FF7043",
       },
       backgroundImage: {
         "woman-pc": "url('/assets/woman-pc.webp')",
@@ -31,10 +39,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/forms"),
-    require("daisyui"),
-  ],
+  plugins: [require("@tailwindcss/typography")],
 };
 export default config;

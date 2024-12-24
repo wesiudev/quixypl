@@ -3,6 +3,7 @@ import { updateUser } from "@/firebase";
 import { setUser } from "@/redux/slices/user";
 import OpenAI from "openai";
 import { FaImage } from "react-icons/fa";
+import { FaCircleXmark } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -25,16 +26,20 @@ export default function GenerateButton(props: any) {
   const handleImageGeneration = async (prompt: string) => {
     if (user?.tokens < 0.28) {
       return toast.error("Brak Quixies", {
-        position: "bottom-right",
+        position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
       });
     }
     if (!prompt) {
       return toast.error("Wpisz co chcesz zobaczyć...", {
-        position: "bottom-right",
+        position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
       });
     }
     const openai = new OpenAI({

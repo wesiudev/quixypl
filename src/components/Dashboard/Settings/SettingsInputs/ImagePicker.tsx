@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { FaImages } from "react-icons/fa";
-import { FaUpload } from "react-icons/fa6";
+import { FaCircleXmark, FaUpload } from "react-icons/fa6";
 import { toast } from "react-toastify";
 
 export default function ImagePicker({ handler }: { handler: any }) {
@@ -41,13 +41,11 @@ export default function ImagePicker({ handler }: { handler: any }) {
           toast.error(
             "Tylko zdjęcia o rozmiarze do 5MB są dozwolone (kwadratowe lub 16:9)",
             {
-              position: "top-center",
+              position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
             }
           );
           return false;
@@ -100,13 +98,11 @@ export default function ImagePicker({ handler }: { handler: any }) {
 
             if (!validType || !validSize) {
               toast.error("Tylko zdjęcia o rozmiarze do 5MB są dozwolone", {
-                position: "top-center",
+                position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
               });
               return false;
             }

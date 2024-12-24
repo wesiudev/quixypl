@@ -15,28 +15,28 @@ export async function POST(req: NextRequest) {
       switch (packet) {
         case "smallBusiness":
           return {
-            name: "💎25 Quixies - Small Business",
-            price: 2999,
-            quantity: 25,
+            name: "💎50 Quixies - Small Business",
+            price: 4999,
+            quantity: 50,
           };
 
         case "mediumBusiness":
           return {
-            name: "💎100 Quixies - Medium Business",
-            price: 4999,
-            quantity: 100,
+            name: "💎125 Quixies - Medium Business",
+            price: 9999,
+            quantity: 125,
           };
         case "business":
           return {
             name: "💎330 Quixies - Business",
-            price: 9999,
-            quantity: 330,
+            price: 19999,
+            quantity: 600,
           };
         case "bigBusiness":
           return {
-            name: "💎900 Quixies - Big Business",
-            price: 19999,
-            quantity: 900,
+            name: "💎1950 Quixies - Big Business",
+            price: 49999,
+            quantity: 1690,
           };
         default:
           return {

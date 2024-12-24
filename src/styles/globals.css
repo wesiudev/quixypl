@@ -16,8 +16,8 @@
 #root {
   background: #1d1d1d;
 }
-.sectionContent h1 {
-  font-size: 24px;
+.ql-container.ql-snow {
+  height: auto;
 }
 html {
   scroll-behavior: smooth;
@@ -191,7 +191,7 @@ html {
 }
 
 .infinite-bg {
-  background: radial-gradient(circle at center, #e799da 0%, #69d9e7 100%);
+  background: radial-gradient(circle at center, #126b91 0%, #082f47 100%);
   background-size: 150% 100%;
   animation: slideBg 6s linear infinite;
   animation-direction: alternate;
@@ -220,15 +220,37 @@ html {
   text-align: justify;
   margin-bottom: 1.5rem; /* Większy odstęp między akapitami */
   color: #444; /* Nieco ciemniejszy odcień */
+  background: transparent;
 }
-
+.reset > strong {
+  background-color: transparent !important;
+}
 .markdownSlug > ul {
   display: flex;
   flex-direction: column;
   gap: 1rem; /* Większy odstęp między elementami listy */
-  color: #000; /* Czarny kolor dla list */
+}
+ol {
+  margin: 1rem 0;
+  counter-reset: list-counter;
 }
 
+li {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+/* Style for Bulleted List */
+li[data-list="bullet"] {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+/* Style for Numbered List */
+li[data-list="number"] {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
 .markdownSlug > ul > li {
   margin-top: 12px;
   padding: 12px 16px;
@@ -418,4 +440,36 @@ html {
 pre {
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+
+.breadcrumbs {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  color: white;
+}
+.breadcrumbs li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 5px; /* Spacing between items */
+}
+.breadcrumbs li:not(:last-child)::after {
+  content: "›"; /* Chevron character */
+  font-size: 30px;
+  color: #ccc;
+  margin-top: -5px;
+  margin-left: 10px;
+  margin-right: 10px; /* Space before and after the chevron */
+}
+
+/* Remove the chevron for the last item */
+.breadcrumbs li:last-child::after {
+  content: "";
+  margin: 0;
+}
+.input-lg {
+  border: 1px #14a8007e solid;
 }

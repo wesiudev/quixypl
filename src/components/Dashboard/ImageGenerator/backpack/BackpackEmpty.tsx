@@ -5,6 +5,7 @@ import FirstGenerationPopup from "./empty/FirstGenerationPopup";
 import { toast } from "react-toastify";
 import Image from "next/image";
 import Link from "next/link";
+import { FaCircleXmark } from "react-icons/fa6";
 export default function BackpackEmpty({ user }: { user: any }) {
   const [isGenerationPending, setIsGenerationPending] =
     useState<boolean>(false);
@@ -17,6 +18,12 @@ export default function BackpackEmpty({ user }: { user: any }) {
   const displayError = (errorMessage: any) => {
     toast.error(errorMessage, {
       onClose: () => (setIsError(false), setIsGenerationTriggered(false)),
+
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
     });
   };
   return (

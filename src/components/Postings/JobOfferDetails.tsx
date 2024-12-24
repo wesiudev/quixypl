@@ -1,32 +1,27 @@
-import Link from "next/link";
+import { JobOffer } from "@/types";
+import moment from "moment";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-
-interface JobOfferDetailsProps {
-  jobOffer: {
-    title: string;
-    isPaid: boolean;
-    price: number;
-  };
-  loading: boolean;
-  pay: (jobOffer: { title: string; isPaid: boolean; price: number }) => void;
-  setOptionsOpen: (value: boolean) => void;
-  optionsOpen: boolean;
-}
 
 export default function JobOfferDetails({
   jobOffer,
-  loading,
-  pay,
   setOptionsOpen,
   optionsOpen,
-}: JobOfferDetailsProps) {
+  pay,
+  loading,
+}: {
+  jobOffer: JobOffer;
+  setOptionsOpen: (value: boolean) => void;
+  loading: boolean;
+  optionsOpen: boolean;
+  pay: (jobOffer: { title: string; isPaid: boolean; price: number }) => void;
+}) {
   return (
-    <div className="h-full flex flex-row-reverse w-full justify-between mb-4 text-black">
+    <div className="relative h-full flex flex-row-reverse w-full justify-between mb-4">
       <div className="flex flex-col">
         <div className="flex items-end justify-end">
           <button
             onClick={() => setOptionsOpen(!optionsOpen)}
-            className={`w-max text-3xl text-white h-full px-2 bg-gradient-to-r from-primary to-cta hover:bg-opacity-20 relative z-10 duration-200 `}
+            className={`sticky top-3 right-3 w-max text-3xl text-white h-full px-2 bg-gradient-to-r from-primaryHoverStart to-primaryHoverEnd z-10 duration-200 rounded-md`}
           >
             <HiOutlineDotsHorizontal
               className={`${
@@ -37,18 +32,13 @@ export default function JobOfferDetails({
         </div>
       </div>
       <div className="flex flex-col">
-        <h3 className="font-coco text-lg sm:text-xl font-bold text-black mb-2 pr-6">
+        <h3 className=" text-lg sm:text-xl font-bold mb-2 pr-6">
           {jobOffer.title}
         </h3>
-        <div
-          className={`${
-            jobOffer.isPaid ? "hidden" : "block"
-          } col-span-1 font-coco`}
-        >
-          <div className="flex flex-col">
-            <div className="flex items-center font-bold">Do zapłaty</div> 💎
-            {jobOffer.price}
-          </div>
+        <div className={`col-span-1`}>
+          <div className="font-bold">Koszt</div> 💎
+          {jobOffer.price}
+          <div className="font-bold">Status</div>
           <p
             className={`${
               jobOffer.isPaid ? "text-green-500" : "text-red-500"
@@ -60,20 +50,26 @@ export default function JobOfferDetails({
             <button
               disabled={loading}
               onClick={() => pay(jobOffer)}
-              className="bg-gradient-to-r from-primary to-cta px-2 py-0.5 text-white font-bold font-coco text-xl"
+              className="disabled:bg-gray-500 bg-gradient-to-b from-ctaStart to-ctaEnd px-4 py-2 rounded-md text-white font-bold font-coco text-xl"
             >
-              Opublikuj{" "}
-              {loading && <div className="loading-lg loading-infinity"></div>}
+              Opublikuj
+              {loading && (
+                <div className="inline-block mr-2">
+                  <div className="w-4 h-4 border-b-2 border-white rounded-full animate-spin"></div>
+                </div>
+              )}
             </button>
           )}
-          {jobOffer.isPaid && (
-            <Link
-              href="/user/applications"
-              className="bg-gradient-to-r from-primary to-cta px-2 py-0.5  text-white"
-            >
-              Przeglądaj aplikacje
-            </Link>
-          )}
+          <div className="font-bold">Dodano</div>
+          <p className="mb-2">
+            {moment(jobOffer.creationTime).format("DD MMMM YYYY")}
+          </p>
+          <div className="font-bold">Wygasa</div>
+          <p className="mb-2">
+            {moment(jobOffer.creationTime)
+              .add(jobOffer.days, "days")
+              .format("DD MMMM YYYY")}{" "}
+          </p>
         </div>
       </div>
     </div>

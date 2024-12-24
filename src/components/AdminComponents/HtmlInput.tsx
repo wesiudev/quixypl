@@ -1,7 +1,7 @@
 "use client";
 import { FaSignOutAlt } from "react-icons/fa";
-import { useState } from "react";
-import ReactQuill from "react-quill-new";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 import { TOOLBAR_OPTIONS } from "../AddJobOffer/Step";
 
 export default function HtmlInput({

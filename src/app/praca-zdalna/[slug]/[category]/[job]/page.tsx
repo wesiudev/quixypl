@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { polishToEnglish } from "../../../../../../utils/polishToEnglish";
-import MainFooter from "@/components/MainFooter";
-import Header from "@/components/Header";
 import BlogPostList from "@/components/BlogPostList";
-import { getDocuments, getProducts } from "@/firebase";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
 import removePolishSignsAndSpaces from "@/lib/removePolish";
 import JobOffers from "@/components/JobOffers";
 import Image from "next/image";
+import SlugFooter from "@/components/SlugFooter";
+import dynamic from "next/dynamic";
+const InitializeUser = dynamic(() => import("@/components/InitializeUser"));
 export async function generateStaticParams() {
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
@@ -36,6 +36,9 @@ export default async function Page(props: { params: Promise<any> }) {
       next: { revalidate: 600 },
     }
   ).then((res) => res.json());
+  const cat: any = jobs.find(
+    (page: any) => polishToEnglish(page.title) === params.slug
+  );
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
@@ -64,17 +67,27 @@ export default async function Page(props: { params: Promise<any> }) {
       next: { revalidate: 600 },
     }
   ).then((res: any) => res.json());
-  const products: any = await getProducts();
-  const leads: any = await getDocuments("services");
+  const services = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res: any) => res.json());
+  const posts = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res: any) => res.json());
   return (
     <>
-      <Header jobsList={jobs} />
-      <div className="min-h-screen flex flex-col w-full">
+      <div className="font-sans min-h-screen flex flex-col w-full">
+        <InitializeUser />
         {/* Header */}
         {/* Job Title Section */}
         <section
-          className="p-6 lg:p-12 text-left relative bg-gradient-to-r from-primary to-cta"
-          style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0, 0.3)" }}
+          className="py-12 text-left relative bg-gradient-to-r from-primaryStart to-primaryEnd"
+          style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0)" }}
         >
           {/* Obraz tła z lepszą czytelnością */}
           <div className="absolute left-0 top-0 w-full h-full">
@@ -90,7 +103,7 @@ export default async function Page(props: { params: Promise<any> }) {
           {/* Główna zawartość */}
           <div className="relative z-50 w-full mx-auto container px-4 lg:px-12">
             {/* Breadcrumbs */}
-            <div className="text-xs sm:text-sm text-gray-200 breadcrumbs mb-4">
+            <div className="text-white breadcrumbs mb-4">
               <ul className="flex flex-wrap font-light">
                 <li>
                   <Link title="home" href={`/`}>
@@ -99,31 +112,17 @@ export default async function Page(props: { params: Promise<any> }) {
                 </li>
                 <li>
                   <Link
-                    title="Główna zakładka z pracą zdalną"
+                    className="text-lg"
+                    title="Zakładka praca zdalna"
                     href={`/praca-zdalna`}
                   >
-                    praca-zdalna
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    title={`Kategoria Pracy ${params.slug}`}
-                    href={`/praca-zdalna/${params.slug}`}
-                  >
-                    {params.slug}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    title={`Podkategoria Praca Specjaliści ${params.category}`}
-                    href={`/praca-zdalna/${params.slug}/${params.category}`}
-                  >
-                    {params.category}
+                    [...]
                   </Link>
                 </li>
                 <li>
                   <Link
                     title={`Oferty Pracy Zlecenia Freelancerzy Firmy ${params.job}`}
+                    className="text-accentStart"
                     href={`/praca-zdalna/${params.slug}/${params.category}/${params.job}`}
                   >
                     {params.job}
@@ -133,29 +132,33 @@ export default async function Page(props: { params: Promise<any> }) {
             </div>
 
             {/* Główny nagłówek */}
-            <p
+            <h1
               style={{ lineHeight: 1.4 }}
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4"
             >
-              Freelancer Job Boards
-            </p>
+              Oferty pracy, zlecenia usługi i najlepsi{" "}
+              <span className="text-accentStart">
+                {content?.informal_title_plural}
+              </span>
+            </h1>
 
             {/* Opis */}
-            <h1 className="lg:text-base text-gray-100 max-w-2xl mb-6">
-              Zlecenia, usługi, oferty pracy zdalnej i najlepsi{" "}
-              {content?.informal_title_plural}
-            </h1>
+            <p className="lg:text-base text-gray-100 max-w-2xl mb-6">
+              Zatrudnij najlepszych specjalistów od{" "}
+              <b className="text-white">{content?.genitive}</b> na polskim rynku
+              pracy i zrealizuj swój projekt z ich wsparciem!
+            </p>
 
             {/* Przyciski */}
             <div className="flex gap-4">
               <Link
-                className="text-sm lg:text-base hover:underline text-white py-2 px-4 border border-white rounded-lg transition"
+                className="hover:underline text-white py-2 px-4 border border-white rounded-md"
                 href="/register"
               >
                 Wpisz się
               </Link>
               <Link
-                className="text-sm lg:text-base bg-cta hover:bg-opacity-90 text-white py-2 px-4 rounded-lg shadow-md transition"
+                className="bg-gradient-to-b from-ctaStart to-ctaEnd text-white py-2 px-4 rounded-md shadow-md hover:scale-105 duration-100"
                 href="/register"
               >
                 Dodaj ofertę
@@ -179,16 +182,10 @@ export default async function Page(props: { params: Promise<any> }) {
             }`}
           >
             <div>
-              <h2
-                className={`${
-                  offers.length > 0 ? "text-white" : "text-black"
-                } font-extrabold text-xl lg:text-3xl`}
-              >
+              <h2 className={`text-black font-extrabold text-xl lg:text-3xl`}>
                 {content?.title} - oferty pracy
               </h2>
-              <p
-                className={`${offers.length > 0 ? "text-white" : "text-black"}`}
-              >
+              <p className={`text-black`}>
                 Szukasz pracy jako{" "}
                 {content?.informal_title_singular.toLowerCase()}?
               </p>
@@ -197,7 +194,7 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
           {/* Services Section */}
           <div className="mt-12 w-full" id="search">
-            <Market leads={leads} />
+            <Market leads={services} />
           </div>
 
           {/* Content */}
@@ -213,7 +210,7 @@ export default async function Page(props: { params: Promise<any> }) {
                 </span>
               </h2>
               <div
-                className="text-black max-w-3xl markdownSlug  font-coco"
+                className="text-black max-w-3xl markdownSlug font-coco !bg-transparent"
                 dangerouslySetInnerHTML={{
                   __html: content?.description,
                 }}
@@ -223,13 +220,12 @@ export default async function Page(props: { params: Promise<any> }) {
                   {allCities.map((city: any, i: any) => (
                     <Link
                       key={city}
-                      target="_blank"
-                      className="block text-white font-bold"
+                      className="block text-white font-bold hover:scale-105 duration-150"
                       href={`/praca-zdalna/${params.slug}/${params.category}/${
                         params.job
                       }/${polishToEnglish(city)}`}
                     >
-                      <span className="block w-max max-w-full rounded-3xl py-2 px-4 bg-gradient-to-r from-primary to-cta">
+                      <span className="block w-max max-w-full rounded-3xl py-2 px-4 bg-gradient-to-b from-primaryStart to-primaryEnd">
                         {content?.informal_title_plural} {city}
                       </span>
                     </Link>
@@ -238,7 +234,7 @@ export default async function Page(props: { params: Promise<any> }) {
               </div>
             </section>
           </div>
-          <BlogPostList posts={products} />
+          <BlogPostList posts={posts} />
           <div className="my-12 w-full">
             <h4 className="text-xl font-extrabold text-gray-800 mb-4">Tagi</h4>
             <ul className="flex overflow-x-scroll lg:overflow-visible w-full lg:flex-wrap gap-4 text-sm lg:text-base">
@@ -264,12 +260,6 @@ export default async function Page(props: { params: Promise<any> }) {
               </li>
               <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
                 #ilezarabia
-                {removePolishSignsAndSpaces(
-                  content?.informal_title_singular.toLowerCase()
-                )}
-              </li>
-              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
-                #jakzostac
                 {removePolishSignsAndSpaces(
                   content?.informal_title_singular.toLowerCase()
                 )}
@@ -321,7 +311,12 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
         </div>
       </div>
-      <MainFooter jobsList={jobs} />
+      <SlugFooter
+        jobsList={cat.data}
+        title={cat.title}
+        footerTitle={content.title}
+        slug={params.slug}
+      />
     </>
   );
 }
@@ -347,7 +342,7 @@ export async function generateMetadata(props: { params: Promise<any> }) {
     )
     .map((item: any) => ({ title: item.title }))
     .find((item: any) => polishToEnglish(item.title) === params.job);
-  const title = `${job?.title} Oferty Pracy, Zlecenia, Specjaliści i Usługi`;
+  const title = `${job?.title} Oferty Pracy Zlecenia Specjaliści Usługi`;
   const description = `Przeglądaj nasze oferty pracy zdalnej jako ${job?.title} w kategorii ${category}. Zrealizuj swój projekt z Quixy!`;
 
   return {

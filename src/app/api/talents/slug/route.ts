@@ -33,6 +33,7 @@ export async function GET(req: NextRequest) {
       photoURL: user?.photoURL,
       city: user?.city,
       title: user?.title,
+      access: user?.access,
     }));
   return NextResponse.json(talents);
 }

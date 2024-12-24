@@ -2,6 +2,7 @@
 import { auth } from "@/firebase";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { FaCircleXmark } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 export default function HireButton({
@@ -15,10 +16,16 @@ export default function HireButton({
   return (
     <div>
       <button
-        className={`bg-gradient-to-r from-primary to-cta px-2 py-1.5  text-white font-gotham`}
+        className={`bg-gradient-to-b from-ctaStart to-ctaEnd px-4 py-2  text-white font-coco rounded-md font-bold`}
         onClick={() => {
           if (talentSlugData.uid === user?.uid) {
-            return toast.error("Nie możesz aplikować do samego siebie");
+            return toast.error("Nie możesz aplikować do samego siebie", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+            });
           } else {
             dispatch(set_modals({ ...modals, currentChat: talentSlugData }));
           }

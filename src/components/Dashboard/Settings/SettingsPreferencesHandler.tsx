@@ -7,9 +7,11 @@ import { toast } from "react-toastify";
 export default function PreferencesHandler({
   addPreference,
   removePreference,
+  light,
 }: {
   addPreference: (item: string) => void;
   removePreference: (item: string) => void;
+  light: any;
 }) {
   const [expand, setExpand] = useState(false);
 
@@ -56,8 +58,14 @@ export default function PreferencesHandler({
     items.slice(0, expand ? items.length : limit).map((item) => (
       <button
         key={item}
-        className={`font-coco duration-200 text-white px-1.5 py-1 ml-1 mt-1 text-sm  ${
-          user?.preferences?.includes(item) ? "bg-cta" : "bg-gray-400"
+        className={`rounded-md font-coco duration-300 text-white px-2 py-1 text-sm  ${
+          user?.preferences?.includes(item)
+            ? "bg-gradient-to-b from-accentStart to-accentEnd"
+            : `${
+                light
+                  ? "bg-gray-500 hover:bg-gray-400"
+                  : "bg-gray-600 hover:bg-gray-500"
+              }`
         }`}
         onClick={() => {
           handlePreferenceToggle(item);
@@ -130,10 +138,10 @@ export default function PreferencesHandler({
   const { title, description, type } = getTitleAndDescription();
 
   return (
-    <div className="flex flex-col w-full px-4 sm:px-6 mb-6">
-      <div className="mt-3 text-black font-extrabold text-xl">{title}</div>
-      <p className="text-sm text-black mb-2">{description}</p>
-      <div className="-ml-1 -mt-1 flex flex-wrap items-center w-full">
+    <div className="font-sans flex flex-col w-full px-4 sm:px-6 mb-6">
+      <div className="mt-3 font-bold">{title}</div>
+      <p className="text-sm mb-2">{description}</p>
+      <div className="gap-1 flex flex-wrap items-center w-full">
         {user?.seek && user?.seek !== "ask"
           ? renderPreferences(itemsForTalent, 6, type)
           : renderPreferences(companySize, 6, type)}
@@ -142,7 +150,7 @@ export default function PreferencesHandler({
         {(user?.seek && itemsForTalent.length > 6) ||
         (!user?.seek && companySize.length > 6) ? (
           <button
-            className="bg-[#126b91] text-white text-sm p-1 px-2 ml-1 mt-1 "
+            className="bg-[#126b91] text-white font-coco text-sm rounded-md py-1 px-2"
             onClick={() => setExpand(!expand)}
           >
             {expand ? "Pokaż mniej" : "Pokaż więcej"}

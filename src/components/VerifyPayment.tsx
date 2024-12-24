@@ -36,5 +36,5 @@ export default function VerifyPayment({
     }
   }, [isMounted]);
 
-  return null;
+  return <div></div>;
 }

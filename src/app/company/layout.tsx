@@ -1,5 +1,3 @@
-import Header from "@/components/Header";
-import jobs from "../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Chat from "@/components/Dashboard/Chat/Chat";
 export default async function Layout({
@@ -7,9 +5,14 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   return (
     <div className="">
-      <Header jobsList={jobs} />
       {children}
       <Chat />
       <MainFooter jobsList={jobs} />

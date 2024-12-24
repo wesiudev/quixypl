@@ -2,7 +2,7 @@ import { addDocument, updateUser } from "@/firebase";
 import { setUser } from "@/redux/slices/user";
 import { IProject } from "@/types";
 import Link from "next/link";
-import { FaArrowRightLong } from "react-icons/fa6";
+import { FaArrowRightLong, FaCircleXmark } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Viewer from "../AddJobOffer/Viewer";
@@ -24,6 +24,9 @@ export default function ServiceCard({
       return toast.error("Niewystarczająca ilość Quixies", {
         position: "top-right",
         autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
       });
     }
     const updatedTokens = user?.tokens - 10;
@@ -89,7 +92,7 @@ export default function ServiceCard({
                     src={image.src}
                     width={250}
                     height={250}
-                    alt={image.desc}
+                    alt={image.desc || ""}
                     className="w-full h-auto rounded-md"
                   />
                 </button>
@@ -100,7 +103,7 @@ export default function ServiceCard({
 
         <Link
           href={`/user/leads`}
-          className="flex items-center gap-2 text-white font-extrabold bg-gradient-to-r from-primary to-cta w-max max-w-full p-1.5 mt-3 rounded-lg"
+          className="flex items-center gap-2 text-white font-extrabold bg-gradient-to-b from-accentStart to-accentEnd w-max max-w-full p-1.5 mt-3 rounded-lg"
         >
           Wszystkie zlecenia <FaArrowRightLong />
         </Link>

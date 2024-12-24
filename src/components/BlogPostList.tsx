@@ -29,20 +29,19 @@ const BlogPostList = ({ posts }: { posts: any }) => {
           <Link
             href={`/news/${post.url}`}
             key={i}
-            title={`Przejdź do artykułu ${post.title}`}
-            className="group relative aspect-square h-max flex flex-col duration-300 ease-in-out"
+            title={`Artykuł ${post.title}`}
+            className="rounded-lg group relative aspect-square h-max flex flex-col border-2 border-gray-200 hover:border-ctaStart"
           >
-            <div className="w-full overflow-hidden flex items-start ">
+            <div className="w-full overflow-hidden flex items-start">
               <Image
-                style={{ boxShadow: "0px 0px 4px #077777" }}
                 src={post.primaryImage}
                 width={512}
                 height={512}
                 alt={`Obrazek ${post.title}`}
-                className="absolute inset-0 object-cover w-full h-full"
+                className="absolute inset-0 object-cover w-full h-full rounded-md"
               />
             </div>
-            <h2 className="bg-gradient-to-r from-primary to-cta border-black duration-300 absolute bottom-0 left-0 right-0 font-extralight mt-3 text-white text-left p-1 font-coco">
+            <h2 className="rounded-md bg-gradient-to-b from-primaryStart to-primaryEnd duration-300 absolute bottom-3 left-3 right-3 text-sm mt-3 text-white font-extralight text-left px-3 py-1">
               {post.title}
             </h2>
           </Link>

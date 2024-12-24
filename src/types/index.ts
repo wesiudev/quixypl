@@ -119,22 +119,42 @@ export type Comment = {
   offerId?: string;
   candidateId?: string;
 };
-export interface JobListing {
-  days: number;
-  description: any;
-  email: string;
-  isPaid: boolean;
-  location: string;
-  name: string;
-  phone: string;
-  price: number;
-  requirements: string;
-  salary: string;
-  salaryValue: string;
-  tags: Tag[];
-  title: string;
-  website: string;
-}
+export type JobOffer = {
+  city: string; // City where the job is located
+  days: number; // Duration of the job in days
+  description: string; // Job description in HTML format
+  email: string; // Contact email for the job
+  isPaid: boolean; // Whether the job is paid or not
+  location: string; // Additional location details
+  name: string; // Name of the company or person offering the job
+  phone: string; // Contact phone number
+  places: string[]; // Array of place types (e.g., 'Hybrydowy')
+  preferences: string[]; // Array of job preferences (e.g., 'Umowa o pracę', 'Pełny etat')
+  price: number; // Price or hourly rate for the job
+  region: string; // Region where the job is located
+  requirements: string; // Additional job requirements
+  salary: string; // Salary type (e.g., 'Per Milestone')
+  salaryValue: string; // General salary value (optional field)
+  salaryValueBruttoFrom: number | string; // Gross salary range (from)
+  salaryValueBruttoTo: number | string; // Gross salary range (to)
+  salaryValueNettoFrom: number | string; // Net salary range (from)
+  salaryValueNettoTo: number | string; // Net salary range (to)
+  specializations: string[]; // Array of specializations (e.g., 'AI/ML')
+  tags: string[]; // Array of tags associated with the job
+  technologies: string[]; // Array of technologies required for the job
+  title: string; // Title of the job offer
+  website: string; // Company or job website URL
+  logo: string;
+  niceToHave: string;
+  responsibilities: string;
+  weOffer: string;
+  job: string;
+  category: string;
+  slug: string;
+  creationTime: string;
+  uid: string;
+  level: string;
+};
 
 export interface Tag {
   url: string;

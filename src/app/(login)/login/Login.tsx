@@ -3,13 +3,11 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { auth } from "@/firebase";
 import { toast } from "react-toastify";
-import { toastUpdate } from "@/components/Toast/ToastUpdate";
 import { useRouter } from "next/navigation";
 import { errorCatcher } from "../../../../utils/errorCatcher";
 import Link from "next/link";
 import GoogleAuthButton from "@/components/Auth/GoogleButton";
 import { FaKey } from "react-icons/fa";
-import { useDispatch } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function Login() {
@@ -22,28 +20,42 @@ export default function Login() {
     passwordRepeat: "",
     email: "",
   });
-  const dispatch = useDispatch();
   function signIn() {
     setThinking(true);
-    const id = toast.loading(<span>Loguję...</span>);
+    const id = toast.loading(<span>Loguję...</span>, {
+      position: "top-right",
+      isLoading: true,
+    });
+
     (async () => {
       try {
         await signInWithEmailAndPassword(
           auth,
           userData.email,
           userData.password
-        ).then((userCredential) => {
-          toastUpdate("Zalogowano pomyślnie!", id, "success");
+        ).then(() => {
+          toast.update(id, {
+            render: "Zalogowano pomyślnie!",
+            type: "success",
+            isLoading: false,
+            autoClose: 3000,
+          });
           setThinking(false);
           router.push("/user");
         });
       } catch (err: any) {
         const errorMsg = errorCatcher(err);
-        toastUpdate(errorMsg, id, "error");
+        toast.update(id, {
+          render: errorMsg,
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+        });
         setThinking(false);
       }
     })();
   }
+
   useEffect(() => {
     if (user && !loading) {
       router.push("/user");

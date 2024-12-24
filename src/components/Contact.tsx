@@ -1,6 +1,4 @@
 "use client";
-import Header from "@/components/Header";
-import jobs from "../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,7 +7,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { FaEnvelope } from "react-icons/fa6";
 
-export default function Contact() {
+export default function Contact({ jobs }: { jobs: any[] }) {
   const [data, setData] = useState({
     email: "",
     name: "",
@@ -18,8 +16,6 @@ export default function Contact() {
   const [sent, setSent] = useState(false);
   return (
     <div className="min-h-screen flex flex-col">
-      <Header jobsList={jobs} />
-
       <div className="flex-grow">
         {/* Contact Section */}
         <div className="flex flex-col relative overflow-hidden bg-white">
@@ -47,10 +43,10 @@ export default function Contact() {
             <div className="mx-auto container flex flex-col lg:flex-row items-center lg:items-start justify-center lg:space-x-6">
               <div
                 style={{ boxShadow: "0px 0px 5px black" }}
-                className="max-w-lg lg:max-w-lg xl:max-w-2xl  overflow-hidden"
+                className="max-w-lg lg:max-w-lg xl:max-w-2xl overflow-hidden rounded-lg"
               >
                 <div className="bg-white shadow-lg relative z-50 pb-3 lg:pb-6 mx-auto lg:mx-0">
-                  <h2 className="flex items-center p-4 text-3xl text-white bg-gradient-to-r from-primary to-cta">
+                  <h2 className="flex items-center p-4 text-3xl text-white bg-gradient-to-r from-primaryStart to-primaryEnd  rounded-lg">
                     <FaEnvelope className="mr-2" /> Wypełnij formularz
                   </h2>
                   <p className="text-lg text-justify  text-black p-4">
@@ -149,7 +145,7 @@ export default function Contact() {
                       }
                     }}
                     disabled={sent}
-                    className="disabled:duration-500 btn-lg disabled:bg-blue-600 disabled:cursor-not-allowed bg-green-600 hover:bg-green-700 text-white py-2 px-6 w-full disabled:hover:bg-blue-700 duration-75"
+                    className="disabled:duration-500 btn-lg disabled:bg-blue-600 disabled:cursor-not-allowed bg-green-600 hover:bg-green-700 text-white py-2 px-6 w-full disabled:hover:bg-blue-700 duration-75 rounded-lg"
                   >
                     {!sent ? "Wyślij wiadomość" : "Wiadomość została wysłana"}
                   </button>
@@ -157,7 +153,7 @@ export default function Contact() {
               </div>
               <div className="text-zinc-800 py-12 lg:py-0 flex flex-col items-center justify-center lg:items-start lg:justify-start w-full">
                 <h2 className="pt-2 text-2xl text-white text-center lg:text-left">
-                  <span className="p-2 w-max max-w-full bg-gradient-to-r from-primary to-cta">
+                  <span className="p-2 w-max max-w-full bg-gradient-to-b from-primaryStart to-primaryEnd rounded-md">
                     Informacje Kontaktowe
                   </span>
                 </h2>

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Discord from "./Discord";
 import Image from "next/image";
 import { polishToEnglish } from "../../utils/polishToEnglish";
 
@@ -7,36 +6,42 @@ export default function SlugFooter({
   jobsList,
   title,
   footerTitle,
+  slug,
 }: {
   jobsList: any;
   title: string;
   footerTitle: string;
+  slug?: any;
 }) {
   return (
-    <div className="flex flex-col px-6 lg:px-12 p-6 py-12 bg-gradient-to-r from-primary to-cta relative z-50 overflow-hidden">
+    <div className="flex flex-col px-6 lg:px-12 p-6 py-12 bg-gradient-to-r from-primaryHoverStart to-primaryHoverEnd relative z-50 overflow-hidden">
       <div className="flex flex-col z-50 relative">
-        <div className="mb-12">
+        <div className="mb-12 p-3 lg:p-6 bg-black/50 rounded-lg">
           <h2
-            className="font-extrabold text-4xl text-white"
+            className="text-xl lg:text-2xl text-white font-extrabold"
             style={{ lineHeight: 1.35 }}
           >
             Przeglądasz {footerTitle}
           </h2>
-          <div className="bg-black/50 p-3 lg:p-6 mt-12  grid grid-cols-1 md:grid-cols-2 md:gap-4 xl:grid-cols-3 2xl:grid-cols-4 w-full">
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 md:gap-3 lg:grid-cols-3 2xl:grid-cols-4 w-full">
             {jobsList.map((item: any, i: any) => (
               <div key={i} className="flex flex-col w-full">
-                <h2 className="pt-[9px] text-white w-max max-w-full text-xl lg:text-2xl 2xl:text-xl font-extrabold">
-                  <span className="p-[9px] bg-gradient-to-r from-primary to-cta ">
+                <Link
+                  href={`${process.env.NEXT_PUBLIC_URL}/praca-zdalna/${
+                    slug ? `${polishToEnglish(slug)}/` : ""
+                  }${polishToEnglish(item.title)}`}
+                >
+                  <h2 className="hover:scale-105 duration-100 text-center text-white 2xl:text-xl font-extrabold w-full px-4 py-2 bg-gradient-to-b from-primaryStart to-primaryEnd border-2 border-white rounded-md">
                     {item.title}
-                  </span>
-                </h2>
-                <div className="flex flex-row flex-wrap w-full justify-start my-4">
+                  </h2>
+                </Link>
+                <div className="flex flex-row flex-wrap w-full justify-start mt-4 mb-6">
                   {item.data.map((cat: any, i: any) => (
                     <h3 key={i} className="w-full lg:w-max max-w-full">
                       <Link
                         href={`/praca-zdalna/${
-                          polishToEnglish(title)
-                            ? `${polishToEnglish(title)}/`
+                          polishToEnglish(slug)
+                            ? `${polishToEnglish(slug)}/`
                             : ""
                         }${polishToEnglish(item.title)}/${polishToEnglish(
                           cat.title
@@ -52,18 +57,18 @@ export default function SlugFooter({
             ))}
           </div>
         </div>
-        <div className="p-3 lg:p-6 bg-black/50 ">
-          <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 font-coco">
-            Powered by
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="flex flex-col">
-              <div className="w-full grid grid-cols-2 justify-center space-x-6 items-center h-max bg-gradient-to-r from-blue-300 to-[#5865F2] p-4 rounded-xl">
+        <div className="p-3 lg:p-6 bg-black/50 rounded-lg">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 font-coco">
+                Powered by
+              </div>
+              <div className="justify-evenly w-full flex gap-4 items-center h-max bg-white p-4 rounded-xl">
                 <Link
                   href="https://openai.com/"
                   target="_blank"
                   title="openai"
-                  className="  duration-200 group flex items-center justify-center"
+                  className="duration-200 group flex items-center justify-center"
                 >
                   <Image
                     src="/assets/openai2.png"
@@ -88,11 +93,27 @@ export default function SlugFooter({
                     className="group-hover:scale-105 duration-200"
                   />
                 </Link>
+                <Link
+                  href="https://nextjs.org/"
+                  target="_blank"
+                  title="nextjs"
+                  className="duration-200 group flex items-center justify-center"
+                >
+                  <Image
+                    src="/assets/nextjs.png"
+                    width={100}
+                    height={100}
+                    alt=""
+                    className="group-hover:scale-105 duration-200"
+                  />
+                </Link>
               </div>
-              <div className="text-white drop-shadow-lg shadow-black font-extralight my-3 font-coco">
+            </div>
+            <div>
+              <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 font-coco">
                 Developer
               </div>
-              <div className="w-full grid grid-cols-2 justify-center space-x-6 items-center h-max bg-gradient-to-r from-blue-300 to-[#5865F2] p-4 rounded-xl">
+              <div className="w-full flex justify-center items-center h-max bg-white p-4 rounded-xl">
                 <Link
                   href="https://wesiudev.com/"
                   target="_blank"
@@ -109,9 +130,27 @@ export default function SlugFooter({
                 </Link>
               </div>
             </div>
-            <div className="flex justify-center lg:justify-end w-full mt-6 md:mt-0">
-              <Discord />
-            </div>{" "}
+            <div>
+              <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 font-coco">
+                Marketing
+              </div>
+              <div className="w-full justify-cente items-center h-max bg-white p-4 rounded-xl">
+                <Link
+                  href="https://google.com"
+                  target="_blank"
+                  title="google"
+                  className="duration-200 group flex items-center justify-center"
+                >
+                  <Image
+                    src="/assets/google.png"
+                    width={100}
+                    height={100}
+                    alt="google"
+                    className="group-hover:scale-105 duration-200 w-32 h-auto mx-auto"
+                  />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

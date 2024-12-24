@@ -2,13 +2,12 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { Metadata } from "next";
 const FAQ = dynamic(() => import("@/components/Faq"));
-const Header = dynamic(() => import("@/components/Header"));
 const OpinionsForm = dynamic(() => import("@/components/OpinionsForm"));
 const MainFooter = dynamic(() => import("@/components/MainFooter"));
 const Market = dynamic(() => import("@/components/marketplace/Market"));
 import { FaRocket, FaUsers } from "react-icons/fa";
 import Image from "next/image";
-import { FaArrowRightLong } from "react-icons/fa6";
+import { FaArrowRightLong, FaChevronRight } from "react-icons/fa6";
 import HeroImage from "../../../public/happy.webp";
 import gif from "../../../public/assets/gif/giremotework.webp";
 import rozwoj from "../../../public/slug/rozwoj-oprogramowania.webp";
@@ -40,16 +39,12 @@ export default async function Page() {
   ).then((res) => res.json());
   return (
     <div className="w-full h-full bg-white">
-      <Header jobsList={jobs} />
       <div className="">
         <HeroSection />
       </div>
       <main className="">
         <div className="container mx-auto">
           <CallToActionSection />
-        </div>
-        <div className="container mx-auto">
-          <WhyChooseQuixySection />
         </div>
         <div className="mt-12">
           <SpecialistsCategoriesSection />
@@ -63,7 +58,9 @@ export default async function Page() {
         <div className="container mx-auto px-4 lg:px-12">
           <FAQ faqItems={faqItems} />
         </div>
-        <OpinionsForm opinions={opinions} />
+        <div className="mt-12">
+          <OpinionsForm opinions={opinions} />
+        </div>
       </main>
       <FunnyComponent />
       <MainFooter jobsList={jobs} />
@@ -74,20 +71,20 @@ export default async function Page() {
 function HeroSection() {
   return (
     <section
-      className="p-4 text-left overflow-hidden relative bg-gradient-to-r from-primary to-cta"
-      style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0, 0.5)" }}
+      className="py-12 text-left overflow-hidden relative bg-gradient-to-r from-primaryStart to-primaryEnd"
+      style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0)" }}
     >
       <div className="absolute left-0 top-0 w-full h-auto">
         <Image
           priority
           src={AiImage}
           alt="Praca Zdalna Quixy"
-          className="w-full h-full object-cover opacity-5"
+          className="w-full h-full object-cover opacity-15"
           blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
           placeholder="blur"
         />
       </div>
-      <div className="relative z-50 mx-auto container p-4 lg:p-12">
+      <div className="relative z-50 mx-auto container px-4 lg:px-12">
         <Breadcrumbs />
         <h1
           style={{ lineHeight: 1.5 }}
@@ -101,7 +98,15 @@ function HeroSection() {
         </p>
         <div className="mt-5"></div>
 
-        <JoinButton />
+        <div className="flex items-center gap-3">
+          <Link
+            className="block hover:underline text-white py-2 pr-4 w-max relative z-50"
+            href="/register"
+          >
+            Utwórz konto
+          </Link>
+          <JoinButton />
+        </div>
       </div>
     </section>
   );
@@ -111,14 +116,18 @@ function HeroSection() {
 function Breadcrumbs() {
   return (
     <div className="!text-white breadcrumbs relative z-50">
-      <ul className="flex flex-wrap font-light">
+      <ul className="flex flex-wrap">
         <li>
           <Link title="home" href={`/`}>
             hello!
           </Link>
         </li>
         <li>
-          <Link title="praca zdalna" href={`/praca-zdalna`}>
+          <Link
+            className="text-accentStart"
+            title="praca zdalna"
+            href={`/praca-zdalna`}
+          >
             praca-zdalna
           </Link>
         </li>
@@ -131,52 +140,21 @@ function Breadcrumbs() {
 function JoinButton() {
   return (
     <Link
-      className="hover:scale-110 duration-100 rounded-r-xl bg-gradient-to-r from-transparent to-cta text-white hover:bg-opacity-90 py-2 px-4 font-extrabold w-max mx-auto relative z-50"
+      className="block hover:scale-105 duration-100 rounded-md bg-gradient-to-b from-ctaStart to-ctaEnd text-white py-2 px-4 w-max  relative z-50"
       href="/register"
     >
-      Zarejestruj się
+      Dodaj ofertę
     </Link>
-  );
-}
-
-function WhyChooseQuixySection() {
-  return (
-    <section className="px-6 lg:px-12 text-left flex flex-col-reverse lg:flex-row lg:items-center">
-      <h3 className="text-left lg:text-center font-bold">
-        <Link
-          className="rounded-xl w-max max-w-[100%] lg:mx-auto text-center p-3 flex lg:flex-col items-center justify-center bg-gradient-to-r from-primary to-cta hover:from-primary/80 hover:to-cta/80 text-white  lg: lg:h-max relative z-50 mt-6 lg:mt-0 lg:mb-0"
-          href="/register"
-        >
-          <div className="mb-0 lg:mb-3 mr-3 lg:mr-0">
-            <FaRocket className="lg:text-6xl text-xl" />
-          </div>
-          <div className="lg:w-[200px] lg:text-center">
-            Dodaj ogłoszenie o pracę za darmo
-          </div>
-        </Link>
-      </h3>
-      <div className="flex flex-col w-full lg:pl-12">
-        <h2 className="font-extrabold text-3xl mb-2 text-black mt-6 lg:mt-0">
-          Dlaczego warto wybrać Quixy?
-        </h2>
-        <p className="text-black lg:max-w-3xl">
-          Oferujemy połączenie z najlepszymi specjalistami w rozwoju
-          oprogramowania, usługach IT, marketingu, designu, i nie tylko. Nasza
-          platforma łączy klientów z doświadczonymi profesjonalistami, którzy
-          dostarczają najwyższej jakości usługi.
-        </p>
-      </div>
-    </section>
   );
 }
 
 // Sekcja kategorii specjalistów
 function SpecialistsCategoriesSection() {
   return (
-    <section className="py-12 mb-12 w-full bg-gradient-to-r from-primary to-cta">
+    <section className="py-12 mb-12 w-full bg-gradient-to-r from-primaryStart to-primaryEnd">
       <div className="mb-12 px-4 lg:px-12 container mx-auto">
         <h2 className="text-3xl font-extrabold text-white">
-          Kategorie pracy zdalnej
+          Nasze kategorie pracy
         </h2>
         <p className="text-white max-w-lg">
           Poszukujesz specjalistów do wykonania zlecenia? Wybierz kategorię i
@@ -190,30 +168,30 @@ function SpecialistsCategoriesSection() {
             href={link.href}
             className={`${
               index > 0 && "mt-6"
-            } group overflow-hidden flex flex-col lg:flex-row w-full items-center justify-start sm:hover:bg-gradient-to-r sm:hover:from-transparent sm:hover:to-white/10 rounded-xl`}
+            } group overflow-hidden flex flex-col lg:flex-row w-full items-center justify-start sm:hover:bg-gradient-to-r sm:hover:from-white/20 sm:hover:to-white/20 bg-gradient-to-r from-white/10 to-white/10 rounded-xl`}
           >
             <div className="relative w-full lg:w-max h-full">
               <Image
                 src={link.imageSrc}
                 alt={link.imageAlt}
-                className="w-full lg:w-[250px] h-auto rounded-xl"
+                className="w-full lg:w-[250px] h-auto rounded-md"
                 blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
                 placeholder="blur"
               />
             </div>
             <div className="w-full">
-              <div className="lg:pl-12 py-3 pr-3">
-                <h2 className="mt-6 lg:mt-0 text-2xl font-extrabold text-white">
+              <div className="px-4 lg:px-12 py-3 pr-3">
+                <h2 className="lg:mt-0 text-2xl font-extrabold text-white">
                   {link.title}
                 </h2>
                 <p className="mb-3 font-coco text-white mt-2">
                   {link.description}
                 </p>
                 <div
-                  className="w-full text-white group-hover:underline font-light"
+                  className="w-full text-white group-hover:underline font-bold"
                   aria-label={link.goTo}
                 >
-                  <span className="px-4 py-2 justify-center w-max bg-cta flex items-center rounded-xl">
+                  <span className="px-4 py-2 justify-center w-max bg-gradient-to-b from-accentStart to-accentEnd flex items-center rounded-md">
                     {link.goTo}
                     <FaArrowRightLong className="scale-100 group-hover:scale-110 ml-2 duration-150" />
                   </span>
@@ -236,14 +214,14 @@ function WhatMakesUsUniqueSection() {
       <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8 text-center">
         <HighlightCard
           icon={<FaRocket className="text-white text-5xl" />}
-          title="Portfolio usług"
+          title="Kreator portfolio"
           description="Zaprezentuj swoje usługi na rynku i zdobądź zlecenia."
-          linkTitle="Utwórz konto"
+          linkTitle="Utwórz profil"
         />
         <HighlightCard
           icon={<FaRocket className="text-white text-5xl" />}
           title="Oferty pracy"
-          description="Dodaj darmową ofertę pracy i przyśpiesz proces rekrutacji."
+          description="Dodaj ofertę pracy i przyśpiesz proces rekrutacji."
           linkTitle="Dodaj ofertę"
         />
         <HighlightCard
@@ -276,15 +254,15 @@ function HighlightCard({
   linkTitle: string;
 }) {
   return (
-    <div className="p-3 relative bg-gradient-to-r from-primary/30 to-cta/30 rounded-lg flex items-center justify-center flex-col">
-      <div className="shadow-lg bg-gradient-to-r from-primary to-cta text-white rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
+    <div className="p-3 relative bg-gradient-to-r from-primaryStart/30 to-primaryEnd/30 rounded-lg flex items-center justify-center flex-col">
+      <div className="shadow-lg bg-gradient-to-b from-primaryStart to-primaryEnd text-white rounded-full aspect-square w-32 flex items-center justify-center mx-auto">
         {icon}
       </div>
       <h3 className="text-xl font-extrabold text-black mb-2 mt-4">{title}</h3>
       <p className="text-black">{description}</p>
 
       <Link
-        className="block mt-4 w-max max-w-full mx-auto rounded-md shadow-md bg-cta duration-100 text-white px-4 py-2"
+        className="hover:scale-105 duration-100 block mt-4 w-max max-w-full mx-auto rounded-md shadow-md bg-gradient-to-b from-ctaStart to-ctaEnd text-white px-4 py-2"
         href="/register"
         title={linkTitle}
       >
@@ -296,26 +274,35 @@ function HighlightCard({
 }
 function CallToActionSection() {
   return (
-    <section className="flex flex-col-reverse lg:flex-row lg:my-12 text-left mx-auto">
-      <div className="px-6 lg:pr-0 lg:pl-12 overflow-hidden h-full mt-12 lg:mt-0">
+    <section className="flex flex-col lg:flex-row lg:my-12 text-left mx-auto">
+      <div className="px-4 lg:pl-12 overflow-hidden h-full mt-12 lg:mt-0">
         <Image
           src={HeroImage}
           blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
           placeholder="blur"
           alt="Logo serwisu quixy.pl"
-          className="w-full h-auto rounded-md"
+          className="max-w-full lg:max-w-[600px] h-auto rounded-md"
           priority
         />
       </div>
-      <div className="px-6 lg:px-12">
-        <h2 className="font-extrabold text-3xl mb-2 text-black mt-6 lg:mt-0">
-          Znajdziesz wolne stanowisko pracy zdalnej!
-        </h2>
-        <p className="mb-3 text-black max-w-2xl">
-          Quixy to najskuteczniejsza platforma z pracą zdalną w Polsce.
-          Technologia z której korzystamy jest szybka i niezawodna. Stwórz
-          portfolio w którym zaprezentujesz swoje usługi.
-        </p>
+      <div className="px-4 lg:pl-6 lg:pr-12">
+        <div className="flex flex-col w-full">
+          <h2 className="font-extrabold text-3xl mb-2 text-black mt-6 lg:mt-0">
+            Znajdziesz pracę zdalną!
+          </h2>
+          <p className="text-black lg:max-w-3xl">
+            Quixy to najskuteczniejsza platforma z pracą zdalną w Polsce.
+            Technologia z której korzystamy jest szybka i niezawodna. Stwórz
+            portfolio w którym zaprezentujesz swoje usługi.
+          </p>
+          <Link
+            href="/register"
+            title="Zarejestruj się w jedynej takiej polskiej platformie dla freelancerów i firm"
+            className="hover:scale-105 duration-100 w-max max-w-full flex items-center gap-3 text-white mt-3 px-4 py-2 rounded-md bg-gradient-to-b from-ctaStart to-ctaEnd text"
+          >
+            Dołącz teraz <FaChevronRight />
+          </Link>
+        </div>
       </div>
     </section>
   );
@@ -325,9 +312,6 @@ function CallToActionSection() {
 function FunnyComponent() {
   return (
     <div className="relative mx-auto w-full bg-white container px-4 lg:px-12 my-24">
-      <div className="absolute inset-0 flex items-center justify-center text-[20vw] text-primary/5 italic font-extrabold select-none">
-        QUIXY
-      </div>
       <div className="flex flex-col md:flex-row md:items-start text-black text-lg lg:text-xl">
         <Image
           src={gif}
@@ -336,7 +320,7 @@ function FunnyComponent() {
           height={512}
           alt="Praca zdalna w biurze"
           title="Praca zdalna w biurze"
-          className="w-full md:w-auto h-auto mt-4 lg:mt-0"
+          className="w-full md:max-w-[300px] rounded-md h-auto mt-4 lg:mt-0"
         />
         <div className="md:px-6 mt-4 lg:mt-0 flex-1">
           <h2 className="text-2xl lg:text-3xl font-extrabold text-black mb-4">
@@ -347,7 +331,7 @@ function FunnyComponent() {
             być zabawnie?
           </p>
 
-          <p className="bg-gradient-to-r from-primary to-cta p-2 text-lg lg:text-xl text-white w-max max-w-full">
+          <p className="bg-gradient-to-b from-accentStart to-accentEnd p-2 text-lg lg:text-xl text-white w-max max-w-full rounded-md">
             „Zatrudnij mnie, zanim zrobi to ktoś inny! 🤖” – Najnowsza AI
           </p>
           <p className="mt-4 text-xs lg:text-sm text-black">
@@ -383,6 +367,22 @@ export const metadata: Metadata = {
       type: "image/png",
     },
   ],
+  openGraph: {
+    type: "website",
+    siteName: "Quixy",
+    images: [
+      {
+        url: "https://quixy.pl/favicons/android-chrome-512x512.png",
+        type: "image/png",
+      },
+    ],
+  },
+  twitter: {
+    site: "@ZZRPWiS",
+    images: {
+      url: "https://quixy.pl/favicons/android-chrome-512x512.png",
+    },
+  },
   publisher: "wesiu.dev",
   manifest: "/manifest.json",
   authors: [
@@ -394,17 +394,12 @@ export const metadata: Metadata = {
   verification: {
     google: "google85185d3abec28326.html",
   },
-  title:
-    "Praca, Oferty dla Freelancerów | Portfolio | IT, Marketing, E-commerce",
+  title: "Praca Zdalna Zlecenia dla Freelancerów | Freelancer Job Boards",
   description:
     "Znajdź klientów i realizuj projekty zdalnie na naszej platformie. Oferty w IT, e-commerce, marketingu, animacji i więcej! Zarejestruj się i zacznij już dziś.",
 };
 
 const faqItems = [
-  {
-    question: "Jakie są koszty zatrudnienia?",
-    answer: "Możesz dodać ofertę pracy za darmo.",
-  },
   {
     question: "Czy oferujecie gwarancję jakości?",
     answer:
@@ -433,7 +428,7 @@ const faqItems = [
   {
     question: "Czy istnieje opłata za korzystanie z platformy?",
     answer:
-      "Dodanie usługi na naszej platformie wiąże się z jednorazową opłatą w wysokości 10 Quixies.",
+      "Dodanie usługi do naszej platformy wiąże się z jednorazową opłatą.",
   },
   {
     question: "Ile kosztuje 1 Quixie?",
@@ -448,7 +443,7 @@ const faqItems = [
   {
     question: "Czy platforma oferuje wsparcie w promowaniu moich usług?",
     answer:
-      "Tak, oferty dostępne na naszym rynku są promowane m.in. za pośrednictwem Google.",
+      "Tak, nasze podstrony oraz oferty dostępne na rynku są promowane m.in. za pośrednictwem Google.",
   },
   {
     question:

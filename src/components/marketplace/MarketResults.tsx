@@ -15,17 +15,17 @@ export default function MarketResults({
   job: any;
 }) {
   return (
-    <div className="flex items-center justify-center z-[99999999] overflow-auto h-full">
+    <div className="flex flex-col z-[99999999] overflow-auto h-full">
+      <div
+        className={`text-center font-extrabold mt-6 text-xl text-white px-4 py-2 rounded-md bg-gradient-to-b from-primaryStart to-primaryEnd`}
+      >
+        Znalezione usługi {`(${leads?.length})`}
+      </div>
       <div
         className={`${
           leads?.length > 0 && slug !== "" ? "block" : "hidden"
-        } p-4 lg:p-6 bg-gradient-to-r from-primary/30 to-cta/30 w-full mt-3`}
+        } rounded-md p-3 bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30 w-full mt-3`}
       >
-        <div className={`text-black font-extrabold mb-2 text-xl`}>
-          {" "}
-          {/* Reduced font size */}
-          Znalezione usługi {`(${leads?.length})`}
-        </div>
         <div
           className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-2`}
         >
@@ -35,31 +35,29 @@ export default function MarketResults({
             <Link
               href={`/${lead?.userType}/${lead?.pseudo}`}
               key={`${lead?.creationTime}-${index}`}
-              className={`p-2 bg-gray-800 border-zinc-700 hover:bg-zinc-800`} // Reduced padding
+              className={`p-2 bg-white rounded-md`} // Reduced padding
             >
-              <h2 className="text-lg font-bold text-blue-500">
+              <h2 className="text-lg font-extrabold text-black">
                 {" "}
                 {/* Smaller font size */}
                 {lead?.name}
               </h2>
-              <p className="text-xs text-white">
+              <p className="text-sm text-black font-bold">
                 {" "}
                 {/* Smaller font size */}
-                <span className="font-bold text-indigo-400">
-                  Płatność:
-                </span>{" "}
+                <span className="font-bold text-black">Płatność:</span>{" "}
                 {lead.time}
               </p>
-              <p className="text-xs text-white">
+              <p className="text-sm text-black font-bold">
                 {" "}
                 {/* Smaller font size */}
-                <span className="font-bold text-indigo-400">Cena:</span>{" "}
+                <span className="font-bold text-black">Cena:</span>{" "}
                 {lead.salaryValue}
               </p>
-              <p className="text-xs text-white">
+              <p className="text-sm text-black font-bold">
                 {" "}
                 {/* Smaller font size */}
-                <span className="font-bold text-indigo-400">
+                <span className="font-bold text-black">
                   Czas wykonania:
                 </span>{" "}
                 {lead.duration}

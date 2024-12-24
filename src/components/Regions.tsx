@@ -1,5 +1,9 @@
 import Image from "next/image";
-
+import google from "../../public/assets/google.png";
+import deviant from "../../public/assets/deviant.png";
+import pinterest from "../../public/assets/pinterest.png";
+import react from "../../public/assets/react.png";
+import openai from "../../public/assets/openai.png";
 export default function Regions() {
   return (
     <div className="w-[365px] flex items-center overflow-x-hidden">
@@ -38,9 +42,9 @@ export default function Regions() {
 }
 
 const items = [
-  { name: "google", image: "/assets/google.png" },
-  { name: "deviant", image: "/assets/deviant.png" },
-  { name: "pinterest", image: "/assets/pinterest.png" },
-  { name: "react", image: "/assets/react.png" },
-  { name: "openai", image: "/assets/openai.png" },
+  { name: "google", image: google },
+  { name: "deviant", image: deviant },
+  { name: "pinterest", image: pinterest },
+  { name: "react", image: react },
+  { name: "openai", image: openai },
 ];

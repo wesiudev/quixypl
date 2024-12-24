@@ -1,24 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import useWindowDimensions from "../useWidth";
-import ProductsWide from "./ProductsWide";
-import ProductsMobile from "./ProductsMobile";
-import HeaderComponent from "./HeaderComponent";
-import { FaFileSignature, FaList, FaUsers } from "react-icons/fa";
-
-import { FaFileArrowUp, FaLightbulb, FaUserNinja } from "react-icons/fa6";
-
-export const destinations = [
-  {
-    title: "FIRMA",
-    href: "/o-firmie",
-  },
-  {
-    title: "KONTAKT",
-    href: "/kontakt",
-  },
-];
-
+import dynamic from "next/dynamic";
+const ProductsWide = dynamic(() => import("./ProductsWide"));
+const ProductsMobile = dynamic(() => import("./ProductsMobile"));
+const HeaderComponent = dynamic(() => import("./HeaderComponent"));
+import { AiFillThunderbolt, AiOutlineLogin } from "react-icons/ai";
+import { MdOutlineDesignServices } from "react-icons/md";
+import { FiUsers } from "react-icons/fi";
+import { FaStore } from "react-icons/fa6";
+import { usePathname } from "next/navigation";
 export default function Header({ jobsList }: { jobsList: any[] }) {
   const { width } = useWindowDimensions();
   const [hovered, setHovered] = useState("");
@@ -50,13 +41,12 @@ export default function Header({ jobsList }: { jobsList: any[] }) {
 
     return () => window.removeEventListener("scroll", scrollListener);
   }, []);
+  const pathname = usePathname();
   return (
-    <>
-      {/* PRODUCTS TAB ON SHOWN HOVER -> xl devices */}
-
+    <div className={`${pathname.includes("user") && "hidden"}`}>
       <ProductsWide
         width={width}
-        setHovered={setHovered}
+        setProductsOpen={setProductsOpen}
         jobs={jobsList}
         hovered={hovered}
         handleMouseLeave={handleMouseLeave}
@@ -85,38 +75,38 @@ export default function Header({ jobsList }: { jobsList: any[] }) {
         width={width}
         setMenuShow={setMenuShow}
       />
-    </>
+    </div>
   );
 }
 const secondMenuItems = [
   {
-    urlLabel: "Zarejestruj się",
+    urlLabel: "Rejestracja",
     url: "/register",
     color: "#14A800",
-    icon: FaUserNinja,
+    icon: AiOutlineLogin,
   },
   {
-    urlLabel: "Szukaj freelancera",
+    urlLabel: "Freelancerzy",
     url: "/praca-zdalna",
     color: "blue",
-    icon: FaUsers,
+    icon: FiUsers,
   },
   {
-    urlLabel: "Szukaj zleceń",
-    url: "/praca-zdalna?talent",
+    urlLabel: "Praca zdalna",
+    url: "/praca-zdalna",
     color: "#F59BBB",
-    icon: FaList,
+    icon: AiFillThunderbolt,
   },
   {
-    urlLabel: "Szukaj usług",
+    urlLabel: "Marketplace",
     url: "/marketplace",
     color: "#468CA9",
-    icon: FaFileSignature,
+    icon: FaStore,
   },
   {
-    urlLabel: "Dodaj usługę",
+    urlLabel: "Kreator Portfolio",
     url: "/register",
     color: "blue",
-    icon: FaFileArrowUp,
+    icon: MdOutlineDesignServices,
   },
 ];

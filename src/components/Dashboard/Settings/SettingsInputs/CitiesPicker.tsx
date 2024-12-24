@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useState } from "react";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 
@@ -6,10 +5,12 @@ export default function CitiesPicker({
   user,
   handleReduxUserState,
   setChangesWereMade,
+  light,
 }: {
   user: any;
   handleReduxUserState: any;
   setChangesWereMade: any;
+  light: any;
 }) {
   const [cities, setCities] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -26,11 +27,11 @@ export default function CitiesPicker({
     }
     setLoading(false);
   }
-  const [inputCity, setInputCity] = useState("");
+  const [inputCity, setInputCity] = useState<any>("");
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:mt-3">
       <div className="flex flex-col mt-3 sm:mt-0">
-        <label className="font-bold text-black">Województwo</label>
+        <label className="font-bold">Województwo</label>
         <select
           value={user?.region}
           onChange={(e) => {
@@ -38,7 +39,9 @@ export default function CitiesPicker({
             openCitySelector(e.target.value);
             setChangesWereMade(true);
           }}
-          className="border border-primary  p-2 text-black  font-light"
+          className={`${
+            light ? "bg-white text-black" : "bg-gray-700 text-white"
+          } duration-300 border border-primaryStart/70 rounded-md p-2`}
         >
           <option value="">Wybierz</option>
           {[
@@ -67,13 +70,15 @@ export default function CitiesPicker({
       </div>
       {user?.region && (
         <div className="flex flex-col">
-          <label className="text-black font-bold" htmlFor="cities">
+          <label className="font-bold" htmlFor="cities">
             Miasto
           </label>
           <input
             disabled={loading}
             list="cities"
-            className={` disabled:bg-primary/50 text-black disabled:cursor-not-allowed disabled:font-bold disabled:text-white border border-primary  p-2 font-light`}
+            className={`${
+              light ? "bg-white text-black" : "bg-gray-700 text-white"
+            } duration-300 rounded-md disabled:bg-primary/50 disabled:cursor-not-allowed disabled:font-bold disabled:text-white border border-primaryStart/70 p-2`}
             value={inputCity === "" ? user?.city : inputCity}
             onClick={() => {
               if (!cities.length && user?.region) {

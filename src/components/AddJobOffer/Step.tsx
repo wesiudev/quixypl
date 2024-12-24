@@ -5,6 +5,9 @@ import CategorySelector from "./CategorySelector";
 import "react-quill-new/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import JobPreferencesHandler from "../JobOfferPreferencesHandler";
+import JobSpecializations from "../JobSpecializations";
+import EditorWeOffer from "./EditorWeOffer";
+import EditorRequirements from "./Requirements";
 export interface EditorContentChanged {
   html: string;
   markdown: string;
@@ -17,9 +20,7 @@ export interface EditorProps {
   setChangesWereMade?: any;
 }
 
-export const ReactQuill = dynamic(() => import("react-quill-new"), {
-  ssr: false,
-});
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 export const TOOLBAR_OPTIONS = [
   [{ header: [1, 2, 3, false] }],
@@ -51,6 +52,7 @@ export default function StepOne({
   setTagsOpenLevel,
   job,
   setJob,
+  light,
 }: {
   formData: any;
   handleChange: any;
@@ -73,6 +75,7 @@ export default function StepOne({
   setTagsOpenLevel: any;
   job: any;
   setJob: any;
+  light: any;
 }) {
   function addPreference(preference: any) {
     setFormData((prevFormData: any) => ({
@@ -80,7 +83,6 @@ export default function StepOne({
       preferences: [...(prevFormData?.preferences || []), preference],
     }));
   }
-
   function removePreference(preference: any) {
     setFormData((prevFormData: any) => ({
       ...prevFormData,
@@ -88,15 +90,31 @@ export default function StepOne({
         prevFormData?.preferences?.filter((p: any) => p !== preference) || [],
     }));
   }
+  function addJobPreference(preference: any) {
+    setFormData((prevFormData: any) => ({
+      ...prevFormData,
+      specializations: [...(prevFormData?.specializations || []), preference],
+    }));
+  }
+  function removeJobPreference(preference: any) {
+    setFormData((prevFormData: any) => ({
+      ...prevFormData,
+      specializations:
+        prevFormData?.specializations?.filter((p: any) => p !== preference) ||
+        [],
+    }));
+  }
   return (
     <div
       className={`${
         currentStep === 1
-          ? "-translate-y-[0] duration-500"
-          : "translate-y-[-500vh] duration-500 h-px overflow-hidden"
+          ? "-translate-y-[0]"
+          : "translate-y-[-500vh] h-px overflow-hidden"
       }`}
     >
+      <div className="-mt-3"></div>
       <InputField
+        light={light}
         id="title"
         label="Tytuł"
         value={formData.title}
@@ -106,68 +124,61 @@ export default function StepOne({
       <div>
         {!formData?.job && (
           <CategorySelector
-            setTagsOpenLevel={setTagsOpenLevel}
-            tagsOpenLevel={tagsOpenLevel}
-            setTagDeletion={setTagDeletion}
-            selectedTag={selectedTag}
-            setSelectedTag={setSelectedTag}
-            tagDeletion={tagDeletion}
-            configurationOpen={configurationOpen}
             setConfigurationOpen={setConfigurationOpen}
             slug={slug}
             setSlug={setSlug}
             category={category}
             setCategory={setCategory}
             jobs={jobs}
-            user={user}
-            formData={formData}
-            setFormData={setFormData}
             job={job}
             setJob={setJob}
           />
         )}
         {formData?.job && (
           <div className="">
-            <p
-              onClick={() => console.log(formData.description)}
-              className="text-black font-extrabold text-lg mb-2"
-            >
-              Kategoria:
-            </p>
+            <p className={`font-extrabold text-lg mb-2`}>Kategoria</p>
             <div className="text-white bg-gradient-to-r from-primary to-cta w-max max-w-full p-2">
               {formData.job}
             </div>
           </div>
         )}
         <div className="mt-2"></div>
-        <p
-          onClick={() => console.log(formData.description)}
-          className="text-black font-extrabold text-lg mb-2"
-        >
-          Treść oferty:
-        </p>
-        <ReactQuill
-          theme="snow"
-          placeholder="Wpisz tekst"
-          className="text-black"
-          modules={{
-            toolbar: {
-              container: TOOLBAR_OPTIONS,
-            },
-          }}
-          value={formData.description}
-          onChange={(e) => {
-            setFormData({
-              ...formData,
-              description: e,
-            });
-          }}
-        />
+        <p className="font-extrabold text-lg">Treść oferty</p>
+        <div className="rounded-md">
+          <ReactQuill
+            theme="snow"
+            placeholder={!formData?.description ? "Wpisz tekst" : ""}
+            className={`border rounded-md border-primaryStart/70 text-black bg-white w-full max-w-[500px] sm:max-w-[600px] md:max-w-[750px] xl:max-w-[600px] 2xl:max-w-[850px]`}
+            modules={{
+              toolbar: {
+                container: TOOLBAR_OPTIONS,
+              },
+            }}
+            value={formData?.description}
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                description: e,
+              });
+            }}
+          />
+        </div>
+        <div className="flex items-center gap-2 mt-3">
+          <div className="font-extrabold text-lg">Wymagania</div>
+          <p className="text-xs mt-px">(opcjonalnie)</p>
+        </div>
+        <EditorRequirements formData={formData} setFormData={setFormData} />
         <JobPreferencesHandler
           addPreference={addPreference}
           removePreference={removePreference}
           formData={formData}
-          setFormData={setFormData}
+          light={light}
+        />
+        <JobSpecializations
+          addPreference={addJobPreference}
+          removePreference={removeJobPreference}
+          formData={formData}
+          light={light}
         />
         <button
           type="button"
@@ -178,7 +189,7 @@ export default function StepOne({
               (formData?.job || job) &&
               formData?.description &&
               formData?.title &&
-              formData?.preferences.length
+              formData?.preferences?.length
             ) {
               nextStep();
             } else {
@@ -191,7 +202,7 @@ export default function StepOne({
               });
             }
           }}
-          className="mt-3 p-2 bg-gradient-to-r from-primary to-cta py-0.5 text-white "
+          className="rounded-md px-4 py-2 bg-gradient-to-b from-ctaStart to-ctaEnd hover:scale-105 duration-100 text-white "
         >
           Następny krok
         </button>

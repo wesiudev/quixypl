@@ -1,7 +1,5 @@
 import Link from "next/link";
-import jobs from "../../../../public/14.09.2024.json";
 import { getDocuments } from "@/firebase";
-import Header from "@/components/Header";
 import MainFooter from "@/components/MainFooter";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
 import Viewer from "@/components/AddJobOffer/Viewer";
@@ -17,6 +15,12 @@ export async function generateStaticParams() {
 export const revalidate = 600;
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   const offer = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/offers/slug?slug=${params.slug}&tubylytylkofigi=${process.env.API_SECRET_KEY}`,
     {
@@ -40,7 +44,6 @@ export default async function Page(props: { params: Promise<any> }) {
   ).then((res: any) => res.json());
   return (
     <>
-      <Header jobsList={jobs} />
       <div className="overflow-x-hidden">
         <div className="bg-gradient-to-r from-primary to-cta">
           <div className="font-extrabold text-white container mx-auto p-4 lg:p-12">

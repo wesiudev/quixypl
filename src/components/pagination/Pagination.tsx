@@ -19,24 +19,35 @@ const Pagination: React.FC<PaginationProps> = ({
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   // Function to handle "Pokaż więcej talentów"
-  const handleShowMore = () => {
+  function handleShowMore() {
     onShowMore();
-  };
+  }
 
   // Hide pagination if items > 6 and show "pokaż więcej talentów" button
   if (totalItems > itemsPerPage) {
     return (
-      <div className="flex justify-center mt-6">
-        <button
-          onClick={handleShowMore}
-          className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/80"
-        >
-          Wyświetl więcej
-        </button>
+      <div className="flex justify-center">
+        {totalItems > 1 && (
+          <button
+            style={{ boxShadow: "0px 1px 5px rgba(0,0,0,0.8)" }}
+            onClick={handleShowMore}
+            className="mt-4 font-coco border-gray-300 hover:scale-105 duration-100 px-4 py-2 bg-gradient-to-b from-accentStart to-accentEnd text-white rounded-md"
+          >
+            Wyświetl więcej
+          </button>
+        )}
       </div>
     );
   } else {
-    return <div></div>;
+    return (
+      <div>
+        {totalItems > 6 && (
+          <div className="mt-4 font-coco text-center text-white bg-gradient-to-b to-accentEnd from-accentStart w-max py-2 px-4 rounded-md mx-auto">
+            Jesteś na bieżąco
+          </div>
+        )}
+      </div>
+    );
   }
 };
 

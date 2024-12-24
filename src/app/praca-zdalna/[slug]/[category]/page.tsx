@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
-import MainFooter from "@/components/MainFooter";
-import Header from "@/components/Header";
 import { FaBriefcase } from "react-icons/fa";
-import AboutQuixyTalent from "@/components/AboutQuixyTalent";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
-import { getDocuments } from "@/firebase";
 import removePolishSignsAndSpaces from "@/lib/removePolish";
 import Image from "next/image";
+import SlugFooter from "@/components/SlugFooter";
+import BlogPostList from "@/components/BlogPostList";
+import { AiFillThunderbolt } from "react-icons/ai";
 
 // Generowanie parametrów statycznych
 export async function generateStaticParams() {
@@ -22,7 +21,6 @@ export async function generateStaticParams() {
     service.data.flatMap((subItem: any) => ({ category: subItem.title }))
   );
 }
-
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
   const jobs = await fetch(
@@ -59,14 +57,25 @@ export default async function Page(props: { params: Promise<any> }) {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
-  const leads: any = await getDocuments("services");
+
+  const services = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
+  const posts = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
   return (
     <div className="bg-gradient-to-b relative bg-white">
-      <Header jobsList={jobs} />
       {/* Hero Section */}
       <section
-        className="p-6 lg:p-12 text-left relative bg-gradient-to-r from-primary to-cta"
-        style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0, 0.3)" }}
+        className="py-12 text-left relative bg-gradient-to-r from-primaryStart to-primaryEnd"
+        style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0)" }}
       >
         {/* Obraz tła z lepszą czytelnością */}
         <div className="absolute left-0 top-0 w-full h-full">
@@ -75,14 +84,14 @@ export default async function Page(props: { params: Promise<any> }) {
             width={1024}
             height={1024}
             alt=""
-            className="w-full h-full object-cover opacity-[0.05]"
+            className="w-full h-full object-cover opacity-10"
           />
         </div>
 
         {/* Główna zawartość */}
         <div className="relative z-50 w-full mx-auto container px-4 lg:px-12">
           {/* Breadcrumbs */}
-          <div className="text-xs sm:text-sm text-gray-200 breadcrumbs mb-4">
+          <div className="text-white breadcrumbs mb-4">
             <ul className="flex flex-wrap font-light">
               <li>
                 <Link title="Strona główna" href={`/`}>
@@ -90,20 +99,17 @@ export default async function Page(props: { params: Promise<any> }) {
                 </Link>
               </li>
               <li>
-                <Link title="Zakładka praca zdalna" href={`/praca-zdalna`}>
-                  praca-zdalna
-                </Link>
-              </li>
-              <li>
                 <Link
-                  title={`Kategoria: ${params.slug}`}
-                  href={`/praca-zdalna/${params.slug}`}
+                  className="text-lg"
+                  title="Zakładka praca zdalna"
+                  href={`/praca-zdalna`}
                 >
-                  {params.slug}
+                  [...]
                 </Link>
               </li>
               <li>
                 <Link
+                  className="text-accentStart"
                   title={`Podkategoria: ${params.category}`}
                   href={`/praca-zdalna/${params.slug}/${params.category}`}
                 >
@@ -118,7 +124,8 @@ export default async function Page(props: { params: Promise<any> }) {
             style={{ lineHeight: 1.4 }}
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4"
           >
-            {slug?.title} - Zlecenia, Usługi, Oferty Pracy
+            Oferty pracy, zlecenia usługi i najlepsi eksperci -{" "}
+            <span className="text-accentStart">{slug?.title}</span>
           </h1>
 
           {/* Opis */}
@@ -131,13 +138,13 @@ export default async function Page(props: { params: Promise<any> }) {
           {/* Przyciski */}
           <div className="flex gap-4">
             <Link
-              className="text-sm lg:text-base hover:underline text-white py-2 px-4 border border-white rounded-lg transition"
+              className="hover:underline text-white py-2 px-4 border border-white rounded-md"
               href="/register"
             >
               Wpisz się
             </Link>
             <Link
-              className="text-sm lg:text-base bg-cta hover:bg-opacity-90 text-white py-2 px-4 rounded-lg shadow-md transition"
+              className="bg-gradient-to-b from-ctaStart to-ctaEnd text-white py-2 px-4 rounded-md shadow-md hover:scale-105 duration-100"
               href="/register"
             >
               Dodaj ofertę
@@ -160,7 +167,7 @@ export default async function Page(props: { params: Promise<any> }) {
 
         {/* Sekcja wyszukiwania */}
         <div className="mt-12 w-full" id="search">
-          <Market leads={leads} />
+          <Market leads={services} />
         </div>
 
         {/* Podkategorie */}
@@ -169,17 +176,19 @@ export default async function Page(props: { params: Promise<any> }) {
             <h1 className="text-black text-2xl lg:text-3xl font-extrabold mb-6">
               Oferty Pracy - {slug.title}
             </h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+            <div className="w-full bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30 p-3 rounded-lg grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
               {slug.data.map((item: any, index: number) => (
                 <Link
                   href={`/praca-zdalna/${params.slug}/${
                     params.category
                   }/${polishToEnglish(item.title)}`}
                   key={index}
-                  className="flex items-center justify-between bg-gradient-to-r from-primary to-cta text-white px-4 py-3 rounded-lg shadow-md hover:shadow-lg transition"
+                  className="hover:scale-105 duration-100 flex items-center bg-gradient-to-r from-primaryStart to-primaryEnd text-white px-4 py-3 rounded-lg shadow-md hover:shadow-lg transition"
                 >
-                  <h2 className="flex items-center gap-3">
-                    <FaBriefcase className="w-6 h-6" />
+                  <div className="flex items-center justify-center min-w-9 min-h-9 rounded-full bg-white text-accentEnd">
+                    <FaBriefcase className="w-5 h-5" />
+                  </div>
+                  <h2 className="font-coco w-full flex items-center justify-center text-center gap-3">
                     {item.title}
                   </h2>
                 </Link>
@@ -209,9 +218,7 @@ export default async function Page(props: { params: Promise<any> }) {
             </section>
           </div>
 
-          <div className="mt-8">
-            <AboutQuixyTalent />
-          </div>
+          <BlogPostList posts={posts} />
         </div>
 
         {/* Sekcja tagów */}
@@ -244,12 +251,7 @@ export default async function Page(props: { params: Promise<any> }) {
                 content?.informal_title_singular.toLowerCase()
               )}
             </li>
-            <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
-              #jakzostac
-              {removePolishSignsAndSpaces(
-                content?.informal_title_singular.toLowerCase()
-              )}
-            </li>
+
             <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
               #
               {removePolishSignsAndSpaces(
@@ -297,7 +299,12 @@ export default async function Page(props: { params: Promise<any> }) {
         </div>
       </div>
       {/* Footer Section */}
-      <MainFooter jobsList={cat.data} />
+      <SlugFooter
+        jobsList={cat.data}
+        title={slug.title}
+        footerTitle={slug.title}
+        slug={params.slug}
+      />
     </div>
   );
 }
@@ -318,7 +325,7 @@ export async function generateMetadata(props: { params: Promise<any> }) {
     .find(
       (item: any) => polishToEnglish(item.category) === params.category
     ).category;
-  const title = `Oferty Pracy Zdalnej Zlecenia Freelancerzy | ${category}`;
+  const title = `${category} Oferty Pracy Zdalnej Zlecenia Freelancerzy`;
   const description = `Przeglądaj nasze oferty pracy w kategorii ${category}. Zrealizuj swój projekt z Quixy!`;
   return {
     title,

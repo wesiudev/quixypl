@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: any = {
-  job_offers: {},
+  job_offers: "",
 };
 
 export const job_offers = createSlice({

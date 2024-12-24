@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { FaUser } from "react-icons/fa";
-import { FaArrowRightLong } from "react-icons/fa6";
+import { FaArrowRightLong, FaCircleXmark } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -56,19 +56,19 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
           <div className="flex w-full justify-between h-full relative">
             <div className="w-full flex items-center py-3 pl-3 sm:pl-4 lg:pl-12">
               {slugData?.photoURL && (
-                <div className="w-auto aspect-square h-12 sm:h-16 relative overflow-hidden">
+                <div className="w-auto aspect-square h-12 sm:h-24 relative overflow-hidden">
                   <Image
                     src={slugData?.photoURL}
                     width={256}
                     height={256}
                     alt={`Zdjęcie profilowe ${slugData.pseudo}`}
-                    className="bg-white rounded-full absolute inset-0 object-cover w-auto h-full group-hover:scale-110 duration-500 mb-0"
+                    className="bg-white rounded-full absolute inset-0 object-cover w-full h-full group-hover:scale-110 duration-500 mb-0"
                   />
                 </div>
               )}
 
               {!slugData?.photoURL && (
-                <div className="rounded-full flex bg-[#126b91] aspect-square w-12 sm:w-24 text-white justify-center">
+                <div className="rounded-full flex bg-gradient-to-b from-primaryStart to-primaryEnd aspect-square w-12 sm:w-24 text-white justify-center">
                   <FaUser className="text-3xl lg:text-4xl" />
                 </div>
               )}
@@ -95,7 +95,7 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
                   dispatch(set_modals({ ...modals, currentChat: slugData }));
                 }
               }}
-              className={`mr-3 sm:mr-4 lg:mr-12 my-auto h-max flex text-white font-extrabold rounded-lg px-3 py-2 min-h-full max-w-[150px] text-sm sm:text-base bg-gradient-to-r from-primary to-cta items-center text-center`}
+              className={`mr-3 sm:mr-4 lg:mr-12 my-auto h-max flex text-white font-extrabold rounded-lg px-3 py-2 min-h-full max-w-[150px] text-sm sm:text-base bg-gradient-to-b from-ctaStart to-ctaEnd items-center text-center`}
             >
               Kontakt
               <FaArrowRightLong className="ml-2" />

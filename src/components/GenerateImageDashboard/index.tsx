@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import GenerateButton from "../Dashboard/ImageGenerator/backpack/empty/GenerateButton";
 import FirstGenerationPopup from "../Dashboard/ImageGenerator/backpack/empty/FirstGenerationPopup";
 import Image from "next/image";
+import { FaCircleXmark } from "react-icons/fa6";
 export default function GenerateImageDashboard() {
   const [isGenerationPending, setIsGenerationPending] =
     useState<boolean>(false);
@@ -18,6 +19,12 @@ export default function GenerateImageDashboard() {
   const displayError = (errorMessage: any) => {
     toast.error(errorMessage, {
       onClose: () => (setIsError(false), setIsGenerationTriggered(false)),
+
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
     });
   };
   return (

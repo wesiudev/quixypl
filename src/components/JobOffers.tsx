@@ -1,33 +1,35 @@
 import Link from "next/link";
-import JobOfferCard from "./Dashboard/JobOfferCard";
-import { JobPosting } from "@/types";
+import JobOfferCard from "./JobOfferCard";
+import { JobOffer } from "@/types";
 import { polishToEnglish } from "../../utils/polishToEnglish";
-import { TfiFlagAlt } from "react-icons/tfi";
-import { FaBriefcase, FaPlus } from "react-icons/fa6";
+import { AiFillThunderbolt } from "react-icons/ai";
 export default function JobOffers({
   offers,
   content,
 }: {
-  offers: JobPosting[];
+  offers: JobOffer[];
   content: any;
 }) {
   return (
     <div>
       {offers?.length === 0 && (
-        <div className="p-6 bg-gradient-to-r from-primary/20 to-cta/20 my-6 w-full mx-auto">
+        <div className="rounded-lg p-3 bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30 mt-6 w-full mx-auto">
           {/* Ikona w centrum */}
-          <div className="bg-gradient-to-r from-primary to-cta rounded-full aspect-square mx-auto w-32 flex items-center justify-center">
-            <FaPlus className="text-white text-5xl" />
+          <div
+            style={{ boxShadow: "0px 1px 10px rgba(0,0,0,0.8)" }}
+            className="bg-gradient-to-b from-primaryStart to-primaryEnd rounded-full aspect-square mx-auto w-24 flex items-center justify-center"
+          >
+            <AiFillThunderbolt className="text-white text-4xl" />
           </div>
 
           {/* Treść komponentu */}
-          <div className="mt-6 bg-white rounded-lg shadow-md flex flex-col items-center justify-center p-6 max-w-xl mx-auto">
-            <p className="font-coco font-light text-black text-center text-base">
-              Brak aktywnych ofert pracy
+          <div className="mt-4 flex flex-col items-center justify-center max-w-xs mx-auto">
+            <p className="font-coco font-light text-gray-700 text-center text-base">
+              Brak aktywnych ofert pracy w kategorii {content?.title}
             </p>
             <Link
               href="/register"
-              className="mt-4 text-sm bg-cta font-bold text-white px-4 py-2 rounded-md shadow-md transition duration-200 hover:bg-opacity-80 focus:ring focus:ring-cta/50"
+              className="mt-4 text-sm bg-gradient-to-b from-ctaStart to-ctaEnd font-bold text-white px-4 py-2 rounded-md shadow-md hover:scale-105 duration-200"
             >
               Opublikuj ogłoszenie
             </Link>
@@ -35,15 +37,10 @@ export default function JobOffers({
         </div>
       )}
       {offers?.length > 0 && (
-        <section className="grid grid-cols-1">
-          {offers.map((offer: JobPosting, i: any) => (
-            <div className="overflow-hidden my-3" key={i}>
-              <JobOfferCard
-                offer={offer}
-                href={`/job-offers/${polishToEnglish(offer?.title)}-${
-                  offer?.creationTime
-                }`}
-              />
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-3">
+          {offers.map((offer: JobOffer, i: any) => (
+            <div className="overflow-hidden" key={i}>
+              <JobOfferCard job={offer} />
             </div>
           ))}
         </section>

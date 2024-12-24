@@ -215,7 +215,11 @@ export default function Dashboard() {
                                 className="text-black underline font-bold"
                                 onClick={() =>
                                   dispatch(
-                                    set_modals({ ...modals, config: true })
+                                    set_modals({
+                                      ...modals,
+                                      config: true,
+                                      quixies: false,
+                                    })
                                   )
                                 }
                               >
@@ -230,7 +234,11 @@ export default function Dashboard() {
                                   className="text-black underline font-bold"
                                   onClick={() =>
                                     dispatch(
-                                      set_modals({ ...modals, config: true })
+                                      set_modals({
+                                        ...modals,
+                                        config: true,
+                                        quixies: false,
+                                      })
                                     )
                                   }
                                 >

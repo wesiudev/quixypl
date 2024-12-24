@@ -40,7 +40,7 @@ export default function FirstGenerationPopup(props: FirstGenerationPopupProps) {
 
   const saveImage = async () => {
     const id = toast.loading("Trwa zapisywanie...", {
-      position: "bottom-right",
+      position: "top-right",
       autoClose: false,
       closeOnClick: false,
       pauseOnHover: false,

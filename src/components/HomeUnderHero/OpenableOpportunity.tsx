@@ -14,20 +14,18 @@ export default function OpenableOpportunity({
       key={i}
       className={`bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out`}
     >
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
-          <h2 className="text-2xl font-extrabold text-black">
-            {opportunity.title}
-          </h2>
-        </div>
+      <div className="flex justify-between">
+        <h2 className="text-xl lg:text-2xl font-extrabold text-black">
+          {opportunity.title}
+        </h2>
         <Link
           href={`/praca-zdalna/${polishToEnglish(opportunity.title)}`}
-          className=" bg-primary/70 hover:bg-primary p-1.5 rounded-xl text-white text-sm font-bold duration-300"
+          className="h-max bg-gradient-to-r from-accentStart to-accentEnd px-4 py-2 rounded-xl text-white text-sm font-bold duration-300"
         >
           <div className="w-max">Zobacz więcej</div>
         </Link>
       </div>
-      <div className="mt-4 grid grid-cols-2 gap-4 bg-gradient-to-r from-transparent to-black/10 p-4 rounded-3xl">
+      <div className="mt-4 grid grid-cols-2 gap-4 bg-gradient-to-r from-primaryStart/15 to-primaryStart/15 p-3 rounded-md">
         {opportunity.data.map((subcategory: any, i: any) => (
           <Link
             key={i}

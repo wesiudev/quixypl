@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { FaSignOutAlt } from "react-icons/fa";
-import { FaUpload } from "react-icons/fa6";
+import { FaCircleXmark, FaUpload } from "react-icons/fa6";
 import { toast } from "react-toastify";
 export default function ImagePicker({
   handler,
@@ -130,7 +130,13 @@ export default function ImagePicker({
                 (file: any) => file.size > 2 * 1024 * 1024
               );
               if (tooLargeFiles.length > 0) {
-                return toast.error(`Some images are larger than 2MB`);
+                return toast.error("Some images are larger than 2MB", {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                });
               }
               // Filter out non-image files if needed
               const imageFiles = Array.from(files).filter((file: any) =>

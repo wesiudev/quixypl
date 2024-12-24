@@ -1,14 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 import Pagination from "./pagination/Pagination";
-import { polishToEnglish } from "../../utils/polishToEnglish";
-import { JobPosting } from "@/types";
+import { JobOffer } from "@/types";
+import JobOfferCard from "./JobOfferCard";
 
 export default function JobOfferList({
   job_offers,
 }: {
-  job_offers: JobPosting[];
+  job_offers: JobOffer[];
 }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6); // Initially, 6 items per page
@@ -35,16 +34,8 @@ export default function JobOfferList({
         niech inni dołączą do Ciebie!
       </p>
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {offers?.map((offer: JobPosting, i: number) => (
-          <Link
-            key={i}
-            href={`/job_offers/${polishToEnglish(
-              offer?.name
-            )}${offer?.creationTime?.toString()}`}
-            className="bg-gradient-to-r from-primary to-cta text-white flex flex-col justify-between p-6 border  shadow-sm hover:shadow-lg hover:border-primary hover:shadow-primary hover:scale-105 duration-300"
-          >
-            {offer?.name}
-          </Link>
+        {offers?.map((offer: JobOffer, i: number) => (
+          <JobOfferCard job={offer} key={i} />
         ))}
       </div>
       <Pagination

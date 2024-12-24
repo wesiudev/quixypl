@@ -9,6 +9,7 @@ import { sendGenerateIdeaRequest } from "../../../utils/sendGenerateIdeaRequest"
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/slices/user";
+import { FaCircleXmark } from "react-icons/fa6";
 
 const initialState = {
   place: "",
@@ -32,8 +33,8 @@ export default function GenerateIdea({
   const userData = useSelector((state: any) => state.user?.user);
   const dispatch = useDispatch();
   const showError = (message: string) => {
-    toast.error(<span>{message}</span>, {
-      position: "bottom-right",
+    toast.error(message, {
+      position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,

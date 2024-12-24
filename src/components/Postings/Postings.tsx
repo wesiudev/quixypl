@@ -1,8 +1,8 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import { FaPlus } from "react-icons/fa6";
-import { IoCloseCircle } from "react-icons/io5";
+import { FaChevronLeft, FaPlus } from "react-icons/fa6";
+import { IoClose, IoCloseCircle } from "react-icons/io5";
 import { JobPosting } from "@/types";
 import { updateJobOffer, updateUser } from "@/firebase";
 import { useState } from "react";
@@ -12,6 +12,7 @@ import "moment/locale/pl";
 import { toast } from "react-toastify";
 import Posting from "./Posting";
 import { set_modals } from "@/redux/slices/modalsopen";
+import EditJobOffer from "../EditJobOffer/EditJobOffer";
 interface IProjectImage {
   src: string;
   desc: string;
@@ -41,6 +42,8 @@ const JobOfferList = () => {
   const { user } = useSelector((state: any) => state.user);
   const [loading, setLoading] = useState(false);
   const { modals } = useSelector((state: any) => state.modals);
+  const [editOpen, setEditOpen] = useState(false);
+  const [openedJobOffer, setOpenedJobOffer] = useState<any>({});
   const pay = (jobOffer: JobPosting) => {
     setLoading(true);
     if (user?.tokens < jobOffer.price) {
@@ -50,6 +53,9 @@ const JobOfferList = () => {
         toast.error("Niewystarczająca ilość Quixies", {
           position: "top-right",
           autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
         })
       );
     }
@@ -70,32 +76,101 @@ const JobOfferList = () => {
       })
     );
   };
-
+  function closeEdit() {
+    setEditOpen(false);
+    setOpenedJobOffer({});
+  }
+  const { light } = useSelector((state: any) => state.light);
   if (!user?.job_offers || user?.job_offers?.length === 0) {
     return (
-      <div className="h-screen flex items-center justify-center bg-gradient-to-r from-primary to-cta flex-col">
-        <IoCloseCircle className="text-8xl mb-3 text-white" />
-        <p className="text-lg font-light italic text-white font-coco px-4 text-center">
-          Nie znaleziono aktywnych ofert pracy. Dodaj nową ofertę,
-          <br /> aby rozpocząć!
-        </p>
-        <Link href="/user/add_job_offer" className="mt-2">
-          <div className="flex items-center justify-center bg-gradient-to-r from-cta to-primary text-white font-bold py-2 px-4 rounded">
-            <FaPlus className="mr-2" />
-            Dodaj ofertę pracy
+      <div className="font-sans py-3 mx-3 lg:py-6 lg:mx-6 lg:ml-12">
+        <div
+          className={`${
+            light ? "bg-white text-black" : "bg-[#222430] text-white"
+          } duration-300  rounded-lg w-full justify-between py-3 px-3 xl:px-6 font-bold text-lg flex items-center`}
+        >
+          <Link href="/user" className="flex items-center">
+            <FaChevronLeft className="mr-2 text-xl" />
+            Powrót
+          </Link>
+          <div className="flex flex-col pl-12">
+            <h2 className="font-extrabold">Oferty pracy</h2>
+            <p className="text-xs font-coco">
+              Tutaj znajdziesz wszystkie swoje oferty pracy
+            </p>
           </div>
-        </Link>
+        </div>
+        <div
+          className={`mt-6 h-screen flex items-center justify-center flex-col ${
+            light ? "bg-white text-black" : "bg-[#222430] text-white"
+          } duration-300 rounded-lg`}
+        >
+          <div
+            className={`${
+              light ? "bg-gray-200 text-black" : "bg-gray-700 text-white"
+            } duration-300 flex justify-center items-center rounded-md flex-col p-3 lg:p-6 border border-gray-300`}
+          >
+            <div className="w-24 h-24 flex mb-3 items-center justify-center bg-gradient-to-br from-ctaStart via-ctaEnd to-primaryEnd rounded-full">
+              <IoClose className="text-5xl text-white" />
+            </div>
+            <p
+              className={`${
+                light ? "text-black" : "text-white"
+              } duration-300 text-lg font-light text-black font-coco px-4 text-center`}
+            >
+              Nie znaleziono aktywnych ofert pracy. Dodaj nową ofertę,
+              <br /> aby rozpocząć!
+            </p>
+            <Link href="/user/add_job_offer" className="mt-2">
+              <div className="flex items-center justify-center bg-gradient-to-r from-ctaStart to-primaryStart text-white font-bold py-2 px-4 rounded">
+                <FaPlus className="mr-2" />
+                Dodaj ofertę pracy
+              </div>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
   return (
-    <div className="flex flex-col w-full">
-      <h2 className="z-50 shadow-sm sticky top-0 text-black p-3 px-6 lg:p-6 bg-white font-bold font-coco text-lg sm:text-3xl">
-        Twoje Oferty Pracy
-      </h2>
-      <div className="bg-gray-200 min-h-screen grid grid-cols-1 2xl:grid-cols-2 gap-6 p-6">
+    <div className={`flex flex-col w-full font-sans`}>
+      {editOpen && (
+        <EditJobOffer jobOffer={openedJobOffer} closeEdit={closeEdit} />
+      )}
+      <div
+        className={`${editOpen && "hidden"} py-3 mx-3 lg:py-6 lg:mx-6 lg:ml-12`}
+      >
+        <div
+          className={`${
+            light ? "bg-white text-black" : "bg-[#222430] text-white"
+          } duration-300 rounded-lg w-full justify-between py-3 px-3 xl:px-6 font-bold text-lg flex items-center`}
+        >
+          <Link href="/user" className="flex items-center">
+            <FaChevronLeft className="mr-2 text-xl" />
+            Powrót
+          </Link>
+          <div className="flex flex-col pl-12">
+            <h2 className="font-extrabold">Oferty pracy</h2>
+            <p className="text-xs font-coco">
+              Tutaj znajdziesz wszystkie swoje oferty pracy
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className={`${
+          editOpen && "hidden"
+        } min-h-screen grid grid-cols-1 2xl:grid-cols-2 gap-3 mx-3 lg:mx-6 lg:ml-12 rounded-lg`}
+      >
         {user?.job_offers?.map((jobOffer: JobPosting, i: number) => (
-          <Posting key={i} jobOffer={jobOffer} pay={pay} loading={loading} />
+          <Posting
+            setEditOpen={setEditOpen}
+            setOpenedJobOffer={setOpenedJobOffer}
+            key={i}
+            job={jobOffer}
+            pay={pay}
+            loading={loading}
+          />
         ))}
       </div>
     </div>

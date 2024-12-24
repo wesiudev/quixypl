@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { updateUser } from "@/firebase/";
 import { toast } from "react-toastify";
 import { IoSend } from "react-icons/io5";
+import { FaCircleXmark } from "react-icons/fa6";
 
 interface MessageInputProps {
   source: any;
@@ -26,11 +27,23 @@ const MessageInput: React.FC<MessageInputProps> = ({ source, value }) => {
 
   const handleSendMessage = async (source: any, value: any) => {
     if (message.trim() === "") {
-      toast.error("Treść zapytania jest wymagana");
+      toast.error("Treść zapytania jest wymagana", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
       return;
     }
     if (!validatePhoneNumber(phoneNumber)) {
-      toast.error("Numer telefonu jest nieprawidłowy");
+      toast.error("Numer telefonu jest nieprawidłowy", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
       return;
     }
     await updateUser(value?.uid, {

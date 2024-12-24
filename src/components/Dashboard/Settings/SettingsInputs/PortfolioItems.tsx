@@ -20,9 +20,10 @@ import { v4 as uuid } from "uuid";
 import { addDocument, storage, updateUser } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { InputField } from "@/components/AddJobOffer/InputField";
-import { FaStar } from "react-icons/fa6";
-import ReactQuill from "react-quill-new";
+import { FaCircleXmark, FaStar } from "react-icons/fa6";
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 import { TOOLBAR_OPTIONS } from "@/components/AddJobOffer/Step";
+import dynamic from "next/dynamic";
 
 export default function PortfolioItems({
   user,
@@ -48,6 +49,7 @@ export default function PortfolioItems({
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const { light } = useSelector((state: any) => state.light);
   const proceedWithProjectUpdate = async (isPaid: boolean) => {
     const uniqId = uuid();
     const updatedProjects = updateProjectsList(user?.projects, project, {
@@ -107,7 +109,6 @@ export default function PortfolioItems({
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
-      draggable: true,
     });
   };
   const handleRecruitmentStart = async () => {
@@ -422,13 +423,16 @@ export default function PortfolioItems({
                                               toast.error(
                                                 `Oferta w ${category.title} i ${job.title} już się wyświetla.`,
                                                 {
+                                                  style: {
+                                                    background: "red",
+                                                    color: "white",
+                                                  },
+
                                                   position: "top-right",
                                                   autoClose: 5000,
                                                   hideProgressBar: false,
                                                   closeOnClick: true,
                                                   pauseOnHover: true,
-                                                  draggable: true,
-                                                  progress: undefined,
                                                 }
                                               ),
                                               setConfigurationOpen(false),
@@ -581,6 +585,7 @@ export default function PortfolioItems({
                     </select>
                   </div>
                   <InputField
+                    light={light}
                     id="salaryValue"
                     label="Cena"
                     value={project.salaryValue}
@@ -598,6 +603,7 @@ export default function PortfolioItems({
 
             <div className="mt-3">
               <InputField
+                light={light}
                 id="duration"
                 label="Czas wykonania"
                 value={project.duration}
@@ -709,8 +715,6 @@ export default function PortfolioItems({
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
                   });
                 }
               }}

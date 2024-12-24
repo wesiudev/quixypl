@@ -10,6 +10,7 @@ export default function Loading() {
           height={224}
           alt="Logo serwisu quixy.pl"
           className="mb-6 w-24 h-auto animate-pulse"
+          priority
         />
         <div className="text-center flex items-center">
           <div className="loading loading-spinner scale-150 mr-3"></div>

@@ -10,6 +10,7 @@ export default function OfferOptionsOpened({
   jobOffer,
   deleteMenu,
   setDeleteMenu,
+  setOpenedJobOffer,
 }: {
   optionsOpen: any;
   setEditOpen: (value: boolean) => void;
@@ -19,24 +20,26 @@ export default function OfferOptionsOpened({
   jobOffer: { id: string };
   deleteMenu: any;
   setDeleteMenu: any;
+  setOpenedJobOffer: any;
 }) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   return (
     <div
-      className={`px-2 z-10 absolute top-7 right-12 w-max h-max py-6 bg-zinc-800 flex flex-col items-start space-y-1 duration-500 ease-in-out ${
-        !optionsOpen ? "-translate-y-[80px] scale-x-0" : "-translate-y-0"
+      className={`rounded-md px-2 z-10 absolute top-7 right-12 w-max h-max py-6 bg-gray-700 flex flex-col items-start space-y-1 duration-200 ease-in-out ${
+        !optionsOpen ? "-translate-y-[80px] scale-y-0" : "-translate-y-0"
       }`}
     >
-      {/* <button
+      <button
         onClick={() => {
           setEditOpen(true);
+          setOpenedJobOffer(jobOffer);
           setOptionsOpen(false);
         }}
         className="w-full px-4 py-1 text-white bg-white bg-opacity-10 duration-150 hover:bg-opacity-20"
       >
         Edytuj
-      </button> */}
+      </button>
       <button
         onClick={() => {
           router.push("/user/leads");
@@ -53,7 +56,10 @@ export default function OfferOptionsOpened({
         disabled={loading}
         className="w-full px-4 py-1 text-red-500 bg-white disabled:bg-red-400 bg-opacity-10 duration-150 hover:bg-opacity-20"
       >
-        {loading && <div className="loading loading-spinner"></div>}{" "}
+        {loading && (
+          <div className="h-4 w-4 border-t-2 border-white border-solid rounded-full animate-spin mr-2"></div>
+        )}
+
         {deleteMenu ? "Anuluj" : "Usuń"}
       </button>
       {deleteMenu && (
@@ -65,7 +71,10 @@ export default function OfferOptionsOpened({
           }}
           className="disabled:bg-red-400 w-full px-4 py-1 text-white bg-red-500 bg-opacity-100 duration-150 hover:bg-opacity-90"
         >
-          {loading && <div className="loading loading-spinner"></div>} Usuń
+          {loading && (
+            <div className="h-4 w-4 border-b-2 border-white border-solid rounded-full animate-spin"></div>
+          )}{" "}
+          Usuń
         </button>
       )}
     </div>

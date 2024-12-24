@@ -1,10 +1,8 @@
 import Link from "next/link";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import VerifyPayment from "../../../components/VerifyPayment";
 import { getDocument } from "@/firebase";
 import { Metadata } from "next";
 import Image from "next/image";
-
 export default async function Page(props: {
   params: Promise<{ orderId: string }>;
 }) {
@@ -26,62 +24,72 @@ export default async function Page(props: {
   const orderToCompare = await getDocument("orders", params.orderId);
   const user = await getDocument("users", order?.metadata?.uid);
 
-  if (order?.payment_status !== "paid") {
-    return (
-      <div className="bg-white flex flex-col items-center justify-center text-black font-gotham h-screen left-0 top-0 w-screen">
-        <Image
-          src="/assets/quixy-logo.png"
-          width={224}
-          height={224}
-          alt="Logo serwisu quixy.pl"
-          className="w-[88px] h-auto"
-        />
-        <h1 className="text-3xl font-bold text-center mt-3">Wystąpił błąd</h1>
-        <p className="text-lg text-center max-w-xl my-2 font-light">
-          Płatność nie powiodła się. Nie pobraliśmy środków z twojego konta.
-        </p>
-        <Link
-          href="/user"
-          className="text-black font-bold text-xl flex flex-row items-center relative z-50"
-        >
-          <FaChevronLeft className="mr-2" />
-          <div
-            className="bg-[#126b91] p-2 text-white  hover:bg-opacity-90 durtion-100 font-light px-12"
-            style={{ boxShadow: "inset 0px 0px 16px black" }}
-          >
-            Panel Użytkownika
-          </div>
-          <FaChevronRight className="ml-2" />
-        </Link>
-      </div>
-    );
-  }
   return (
-    <div className="text-center">
-      <div className="bg-white w-full h-screen flex items-center justify-center flex-col left-0 top-0">
-        {order.payment_status === "paid" && orderToCompare?.realized && (
-          <div className="flex items-center justify-center bg-[#126b91] text-white font-bold text-center p-12 ">
-            Dziękujemy za zakupy, {order.metadata.quantity}💎 Quixies zostało
-            dodane do twojego konta.
+    <>
+      {order?.payment_status !== "paid" && (
+        <div className="bg-gradient-to-b from-accentStart to-accentEnd flex flex-col items-center justify-center text-black font-gotham h-screen left-0 top-0 w-screen">
+          <div className="p-4 lg:p-12 bg-white rounded-lg">
+            <Image
+              src="/assets/quixy-logo.png"
+              width={224}
+              height={224}
+              alt="Logo serwisu quixy.pl"
+              className="w-[88px] h-auto mx-auto"
+            />
+            <h1 className="text-3xl font-bold text-center mt-3">
+              Wystąpił błąd
+            </h1>
+            <p className="text-lg text-center max-w-lg my-2 font-light">
+              Płatność nie powiodła się. Nie pobraliśmy środków z twojego konta.
+            </p>
             <Link
               href="/user"
-              className="mt-3 bg-cta font-extrabold text-xl text-white p-2"
+              className="text-black font-bold text-xl flex flex-row items-center relative z-50 w-max max-w-full mx-auto"
             >
-              Przejdź do panelu
+              <div className="bg-gradient-to-b from-ctaStart to-ctaEnd p-2 text-white rounded-md px-12">
+                Panel Użytkownika
+              </div>
             </Link>
           </div>
-        )}
-        {order.payment_status === "paid" && !orderToCompare?.realized && (
-          <VerifyPayment
-            order={order}
-            user={user}
-            orderToCompare={orderToCompare}
-          />
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+      {order?.payment_status === "paid" && (
+        <div className="bg-gradient-to-b from-accentStart to-accentEnd flex flex-col items-center justify-center text-black font-gotham h-screen left-0 top-0 w-screen">
+          <div className="p-4 lg:p-12 bg-white rounded-lg">
+            <Image
+              src="/assets/quixy-logo.png"
+              width={224}
+              height={224}
+              alt="Logo serwisu quixy.pl"
+              className="w-[88px] h-auto mx-auto"
+            />
+            <h1 className="text-3xl font-bold text-center mt-3">Sukces!</h1>
+            <p className="text-lg text-center max-w-lg my-2 font-light">
+              Dziękujemy za zakupy! {order.metadata.quantity}💎 zostało
+              przypisane do Twojego konta.
+            </p>
+            <Link
+              href="/user"
+              className="text-black font-bold text-xl flex flex-row items-center relative z-50 mx-auto w-max max-w-full"
+            >
+              <div className="bg-gradient-to-b from-ctaStart to-ctaEnd p-2 text-white rounded-md px-12">
+                Panel Użytkownika
+              </div>
+            </Link>
+          </div>
+        </div>
+      )}
+      {order.payment_status === "paid" && !orderToCompare?.realized && (
+        <VerifyPayment
+          order={order}
+          user={user}
+          orderToCompare={orderToCompare}
+        />
+      )}
+    </>
   );
 }
+
 export const metadata: Metadata = {
   icons: [
     {

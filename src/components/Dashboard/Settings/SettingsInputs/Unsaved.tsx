@@ -5,11 +5,13 @@ import { setUser } from "@/redux/slices/user";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Unsaved({
+  light,
   changesWereMade,
   error,
   setChangesWereMade,
   updateUser,
 }: {
+  light: any;
   changesWereMade: boolean;
   error: boolean;
   setChangesWereMade: (value: boolean) => void;
@@ -28,7 +30,9 @@ export default function Unsaved({
     >
       <div
         className={`flex space-x-3 lg:space-x-6 p-3 px-5 items-center justify-center w-full ${
-          error ? "bg-red-500" : "bg-primary"
+          error
+            ? "bg-red-500"
+            : "bg-gradient-to-b from-primaryStart to-primaryEnd"
         } ${
           changesWereMade
             ? "duration-300 translate-y-0"
@@ -80,7 +84,7 @@ export default function Unsaved({
               );
               setChangesWereMade(false);
             }}
-            className="text-white text-sm  bg-[green] font-gotham px-6 py-2"
+            className="text-white text-sm bg-gradient-to-b rounded-md from-ctaStart to-ctaEnd font-gotham px-6 py-2"
           >
             Zapisz
           </button>

@@ -13,8 +13,10 @@ export default function SettingsHeader({
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
   return (
-    <div className="sticky top-[-1px] left-0 bg-gradient-to-r from-primary to-cta text-base text-white font-bold p-3 z-[5000] flex items-center justify-between w-full">
-      <div className="ml-3">MÓJ PROFIL</div>
+    <div className="sticky top-0 left-0 text-base text-white font-bold z-[5000] flex items-center justify-between w-full">
+      <div className="px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
+        PORTFOLIO
+      </div>
       <div className="flex">
         <button
           onClick={() => {

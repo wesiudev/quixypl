@@ -1,17 +1,21 @@
 import Link from "next/link";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
-import jobs from "../../../../public/14.09.2024.json";
 import SlugFooter from "@/components/SlugFooter";
-import Header from "@/components/Header";
-import { FaArrowRightLong } from "react-icons/fa6";
 import { getPageContent } from "@/lib/getPageContent";
 import Image from "next/image";
 import BlogPostList from "@/components/BlogPostList";
-import { getDocuments, getProducts } from "@/firebase";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
 import removePolishSignsAndSpaces from "@/lib/removePolish";
+import OpinionsForm from "@/components/OpinionsForm";
+
 export async function generateStaticParams() {
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   return jobs.flatMap((service: any) => ({
     slug: polishToEnglish(service.title),
   }));
@@ -20,8 +24,13 @@ export default async function Page(props: {
   params: Promise<any>;
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const searchParams = await props.searchParams;
   const params = await props.params;
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   const slug: any = jobs.find(
     (page: any) => polishToEnglish(page.title) === params.slug
   );
@@ -31,8 +40,14 @@ export default async function Page(props: {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
-  const products: any = await getProducts();
-  const isTalent = searchParams?.talent === "" ? true : false;
+
+  const posts = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
+
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
@@ -49,33 +64,45 @@ export default async function Page(props: {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
-
-  const leads: any = await getDocuments("services");
+  const opinions = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/opinions?tubylytylkofigi=${
+      process.env.API_SECRET_KEY
+    }&slug=${polishToEnglish(params.slug)}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
+  const services = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res: any) => res.json());
   return (
     <>
-      <Header jobsList={jobs} />
       <div>
         {/* Hero Section */}
         <section
-          className="p-6 lg:p-12 text-left relative bg-gradient-to-r from-primary to-cta"
-          style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0, 0.3)" }}
+          className="py-12 text-left relative bg-gradient-to-r from-primaryStart to-primaryEnd"
+          style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0)" }}
         >
           {/* Obraz tła z lepszą czytelnością */}
           <div className="absolute left-0 top-0 w-full h-full">
             <Image
-              src="/assets/AI-Image.png"
+              src={`/slug/${params.slug}Hero.png`}
               width={1024}
               height={1024}
-              alt=""
-              className="w-full h-full object-cover opacity-[0.05]"
+              alt="Praca Zdalna Quixy"
+              className="w-full h-full object-cover opacity-15"
+              priority
             />
           </div>
 
           {/* Główna zawartość */}
           <div className="relative z-50 w-full mx-auto container px-4 lg:px-12">
             {/* Breadcrumbs */}
-            <div className="text-xs sm:text-sm text-gray-200 breadcrumbs mb-4">
-              <ul className="flex flex-wrap font-light">
+            <div className="text-white breadcrumbs mb-3">
+              <ul className="flex flex-wrap">
                 <li>
                   <Link title="home" href={`/`}>
                     hello!
@@ -92,6 +119,7 @@ export default async function Page(props: {
                 <li>
                   <Link
                     title={`Kategoria Pracy ${params.slug}`}
+                    className="text-accentStart"
                     href={`/praca-zdalna/${params.slug}`}
                   >
                     {params.slug}
@@ -105,7 +133,8 @@ export default async function Page(props: {
               style={{ lineHeight: 1.4 }}
               className="w-full lg:w-3/4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4"
             >
-              Oferty pracy oraz zlecenia w {content?.genitive}
+              Oferty pracy i specjalisci w{" "}
+              <span className="text-accentStart">{content?.genitive}</span>
             </h1>
 
             {/* Opis */}
@@ -118,13 +147,13 @@ export default async function Page(props: {
             {/* Przyciski */}
             <div className="flex gap-4">
               <Link
-                className="text-sm lg:text-base hover:underline text-white py-2 px-4 border border-white rounded-lg transition"
+                className="text-sm lg:text-base hover:underline text-white py-2 px-4 border border-white rounded-md"
                 href="/register"
               >
                 Wpisz się
               </Link>
               <Link
-                className="text-sm lg:text-base bg-cta hover:bg-opacity-90 text-white py-2 px-4 rounded-lg shadow-md transition"
+                className="hover:scale-105 duration-100 text-sm lg:text-base bg-gradient-to-b from-ctaStart to-ctaEnd hover:bg-opacity-90 text-white py-2 px-4 rounded-md shadow-md"
                 href="/register"
               >
                 Dodaj ofertę
@@ -133,68 +162,6 @@ export default async function Page(props: {
           </div>
         </section>
         <div className="mx-auto container px-4 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
-            <Image
-              src={`/slug/${polishToEnglish(slug.title)}.webp`}
-              width={1024}
-              height={1024}
-              alt={`Prace Zdalne w ${content?.genitive}`}
-              blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
-              placeholder="blur"
-              className="w-full h-auto mb-6 lg:mb-0"
-            />
-            <div className="flex flex-col w-full">
-              <h1 className="font-extrabold text-2xl lg:text-3xl text-black mb-4">
-                {isTalent && "Szukaj pracy zdalnej"}{" "}
-                {!isTalent && "Dodaj ofertę pracy"} w {content?.genitive}.{" "}
-              </h1>
-              <div
-                className={`${
-                  isTalent ? "flex-col-reverse" : "flex-col"
-                } flex mt-3`}
-              >
-                <div className="p-6 text-black bg-white">
-                  <h2 className="text-black text-xl mb-2 font-extrabold">
-                    Dla klientów
-                  </h2>
-                  <p className="sm:text-lg 2xl:text-xl pb-3 text-black">
-                    Zatrudnij najlepszych specjalistów — opublikuj ofertę pracy
-                    w kategorii <b className="font-bold">{slug.title}</b> i
-                    znajdź ekspertów w tej dziedzinie. Promuj swoje usługi, by
-                    dotrzeć do odpowiednich odbiorców.
-                  </p>
-                  <div className="flex w-full">
-                    <Link
-                      href="/register"
-                      className="text-white bg-gradient-to-r from-primary to-cta font-extrabold p-3 flex items-center"
-                    >
-                      Stwórz konto klienta
-                      <FaArrowRightLong className="ml-2" />
-                    </Link>
-                  </div>
-                </div>
-                <div className="p-6 mt-6 text-black bg-white">
-                  <h2 className="text-black text-xl font-extrabold mb-2">
-                    Dla freelancerów i firm
-                  </h2>
-                  <p className="sm:text-lg 2xl:text-xl pb-3 text-black">
-                    Znajdź pracę zdalną lub jednorazowe zlecenia i rozwijaj
-                    swoje portfolio w panelu użytkownika. Przeglądaj ogłoszenia
-                    pracy, dołącz do zespołu i twórz innowacyjne rozwiązania.
-                  </p>
-                  <div className="flex w-full">
-                    <Link
-                      href="/register"
-                      className="text-white bg-gradient-to-r from-primary to-cta font-extrabold p-3 flex items-center"
-                    >
-                      Stwórz konto talentu
-                      <FaArrowRightLong className="ml-2" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <div className="bg-white w-full py-12">
             <div className="flex flex-col mx-auto">
               <JobBoardList
@@ -205,10 +172,65 @@ export default async function Page(props: {
             </div>
           </div>
           <div className="bg-white" id="search">
-            <Market leads={leads} />
+            <Market leads={services} />
+          </div>
+          <div className="w-full mb-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
+              <div className="flex flex-col w-full justify-center items-center">
+                <div className="text-black">
+                  <div className="relative overflow-hidden bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30 px-3 rounded-md">
+                    <h2 className="text-sm text-white px-3 py-1 bg-gradient-to-b from-accentStart to-accentEnd rounded-b-3xl w-max mb-2">
+                      Quixy dla firm
+                    </h2>
+                    <p className="text-center sm:text-lg text-black p-3 bg-white rounded-md mt-6 mb-8">
+                      Zatrudnij najlepszych specjalistów — opublikuj ofertę
+                      pracy w kategorii{" "}
+                      <b className="font-bold">{slug.title.toLowerCase()}</b> i
+                      znajdź ekspertów w tej dziedzinie. Promuj swoje usługi, by
+                      dotrzeć do odpowiednich odbiorców.
+                    </p>
+                    <Link
+                      href="/register"
+                      className="translate-y-4 hover:translate-y-0 duration-200 absolute bottom-0 right-3 pb-6 ml-auto bg-gradient-to-b from-ctaStart to-ctaEnd mt-3 block w-max max-w-full text-white py-2 px-4 rounded-t-3xl"
+                    >
+                      Dołącz jako firma
+                    </Link>
+                  </div>
+                </div>
+                <div className="mt-6 text-black">
+                  <div className="relative overflow-hidden bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30 px-3 rounded-md">
+                    <h2 className="text-sm text-white px-3 py-1 bg-gradient-to-b from-accentStart to-accentEnd rounded-b-3xl w-max mb-2">
+                      Quixy bez firmy
+                    </h2>
+                    <p className="sm:text-lg text-black text-center p-3 bg-white rounded-md mt-6 mb-8">
+                      Znajdź pracę zdalną lub jednorazowe zlecenia i rozwijaj
+                      swoje portfolio w panelu użytkownika. Przeglądaj
+                      ogłoszenia pracy, dołącz do zespołu i twórz innowacyjne
+                      rozwiązania.
+                    </p>
+
+                    <Link
+                      href="/register"
+                      className="translate-y-4 hover:translate-y-0 duration-200 absolute bottom-0 right-3 pb-6 ml-auto bg-gradient-to-b from-ctaStart to-ctaEnd mt-3 block w-max max-w-full text-white py-2 px-4 rounded-t-3xl"
+                    >
+                      Dołącz jako freelancer
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              <Image
+                src={`/assets/mockup.png`}
+                width={1024}
+                height={1024}
+                alt={`Prace Zdalne w ${content?.genitive}`}
+                blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
+                placeholder="blur"
+                className="w-full h-auto mb-6 lg:mb-0 mx-auto"
+              />
+            </div>
           </div>
           {/* Content */}
-          <div className=" bg-white mx-auto flex flex-col lg:flex-row gap-12">
+          <div className="bg-white mx-auto flex flex-col lg:flex-row gap-12">
             <div className="w-full lg:w-[50%]">
               <h2
                 style={{ lineHeight: 1.2 }}
@@ -220,27 +242,25 @@ export default async function Page(props: {
                 <div key={i}>
                   {polishToEnglish(job.title) === params.slug && (
                     <div className="flex flex-col" key={i}>
-                      <div className="flex flex-col bg-white rounded-xl gap-3">
+                      <div className="flex flex-col bg-white rounded-xl gap-6">
                         {job.data.map((item: any, j: any) => (
-                          <div
-                            key={j}
-                            className="relative bg-gradient-to-r from-transparent to-primary/10 p-3 rounded-xl"
-                          >
+                          <div key={j} className="relative">
                             <h2
                               title={`Pracuj zdalnie w ${item.title}`}
-                              className="pb-3 text-black font-extrabold w-full text-xl"
+                              style={{ boxShadow: "0px 1px 10px black" }}
+                              className="rounded-md px-4 py-2 text-center w-full bg-gradient-to-b text-white from-accentStart to-accentEnd font-extrabold text-xl"
                             >
-                              <div className="w-[90%]">{item.title}</div>
+                              <div className="">{item.title}</div>
                             </h2>
 
                             {/* Hover dropdown */}
-                            <div className="flex w-[90%] flex-wrap">
+                            <div className="grid grid-cols-2 gap-3 mt-4">
                               {item.data.map((subcategory: any, k: any) => (
                                 <Link
                                   title={`Pracuj zdalnie w ${subcategory.title}`}
                                   key={k}
                                   style={{ boxShadow: "1px 0px 4px black" }}
-                                  className="max-w-[300px] bg-[#126b91] hover:bg-[#468CA9] duration-75 font-extralight font-coco text-lg text-white p-2 w-max"
+                                  className="rounded-md text-center py-3 px-6 bg-[#126b91] hover:bg-[#468CA9] duration-75 font-extralight font-coco text-lg text-white"
                                   href={`/praca-zdalna/${polishToEnglish(
                                     job.title
                                   )}/${polishToEnglish(
@@ -273,11 +293,14 @@ export default async function Page(props: {
             </section>
           </div>
 
-          <BlogPostList posts={products} />
+          <BlogPostList posts={posts} />
           {/* <h2 className="text-xl font-semibold text-primary mb-4">
           Najlepsi specjaliści {slug.title}
         </h2> */}
           {/* display users with seek:true and user?.categories includes slug.title, else display "no users, want to be first? man with black glasses italic" */}
+          <div className="rounded-md overflow-hidden mt-12">
+            <OpinionsForm opinions={opinions} />
+          </div>
           <div className="my-12 w-full">
             <h4 className="text-xl font-extrabold text-gray-800 mb-4">Tagi</h4>
             <ul className="flex overflow-x-scroll lg:overflow-visible w-full lg:flex-wrap gap-4 text-sm lg:text-base">
@@ -303,12 +326,6 @@ export default async function Page(props: {
               </li>
               <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
                 #ilezarabia
-                {removePolishSignsAndSpaces(
-                  content?.informal_title_singular.toLowerCase()
-                )}
-              </li>
-              <li className="text-black bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:bg-gray-200 transition-all">
-                #jakzostac
                 {removePolishSignsAndSpaces(
                   content?.informal_title_singular.toLowerCase()
                 )}
@@ -365,6 +382,7 @@ export default async function Page(props: {
         jobsList={slug.data}
         title={slug.title}
         footerTitle={slug.title}
+        slug={params.slug}
       />
     </>
   );
@@ -372,11 +390,17 @@ export default async function Page(props: {
 
 export async function generateMetadata(props: { params: Promise<any> }) {
   const params = await props.params;
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   const slug: any = jobs.find(
     (page: any) => polishToEnglish(page.title) === params.slug
   );
   const content = await getPageContent(polishToEnglish(slug.title));
-  const title = `Oferty pracy w ${content?.genitive} - Job Boards`;
+  const title = `Praca Zdalna ${content?.title} - Freelancer Job Boards`;
   const description = `Prowadzisz rekrutację lub szukasz pracy w ${content?.genitive}? Chcesz zająć się ${content?.instrumental}? Mamy dla Ciebie zlecenia.`;
   return {
     title,

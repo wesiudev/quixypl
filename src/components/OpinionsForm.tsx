@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { addOpinion } from "@/firebase/";
 import { toast } from "react-toastify";
+import { FaCircleXmark } from "react-icons/fa6";
 
 interface Opinion {
   name: string;
@@ -17,20 +18,20 @@ function OpinionsForm({ opinions }: { opinions: Opinion[] }) {
     e.preventDefault();
 
     if (!name || !feedback) {
-      toast.error("Uzupełnij wszystkie pola!", {
-        position: "bottom-right",
+      return toast.error("Uzupełnij wszystkie pola!", {
+        position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
       });
-      return;
     }
 
     addOpinion({ name, feedback });
     setSent(true);
     toast.success("Dziękujemy za Twoją opinię!", {
-      position: "bottom-right",
+      style: { background: "green" },
+      position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -39,7 +40,7 @@ function OpinionsForm({ opinions }: { opinions: Opinion[] }) {
   };
 
   return (
-    <div className="mt-12 bg-gradient-to-r from-primary to-cta py-6">
+    <div className="bg-gradient-to-r from-primaryStart to-primaryEnd py-6">
       <form
         onSubmit={handleSubmit}
         className="container mx-auto flex flex-col md:flex-row justify-start items-start space-y-12"
@@ -86,8 +87,8 @@ function OpinionsForm({ opinions }: { opinions: Opinion[] }) {
               disabled={sent}
               className={`rounded-md shadow-sm shadow-black/50 w-full sm:w-full mx-auto py-3 px-6 text-white transition-colors duration-300 ${
                 sent
-                  ? "bg-zinc-500 cursor-not-allowed"
-                  : "bg-cta hover:bg-cta/80"
+                  ? "bg-green-500 cursor-not-allowed"
+                  : "hover:underline bg-gradient-to-b from-accentStart to-accentEnd"
               }`}
             >
               {sent ? "Dziękujemy!!" : "Wyślij opinię"}

@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: any = {
   modals: {
-    quixies: false,
-    config: false,
-    isProjectOpen: false,
+    quixies: "",
+    config: "",
+    isProjectOpen: "",
     currentChat: "",
   },
 };

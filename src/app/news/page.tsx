@@ -1,19 +1,30 @@
-import Header from "@/components/Header";
-import { getDocuments, getProducts } from "@/firebase";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import jobs from "../../../public/14.09.2024.json";
 import MainFooter from "@/components/MainFooter";
 import AboutQuixyTalent from "@/components/AboutQuixyTalent";
 import Market from "@/components/marketplace/Market";
-export const revalidate = 30;
 export default async function Page() {
-  const posts = await getProducts();
-  const leads: any = await getDocuments("services");
+  const jobs = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
+  const services = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
+  const posts = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res) => res.json());
   return (
     <>
-      <Header jobsList={jobs} />
       <div className="bg-white overflow-hidden">
         <div className="container p-6 lg:p-12 bg-white relative z-50 mx-auto">
           <div className=" text-black flex flex-col breadcrumbs">
@@ -43,7 +54,7 @@ export default async function Page() {
                     href={`/news/${post.url}`}
                     key={i}
                     title={`Artykuł ${post.title}`}
-                    className="group relative aspect-square h-max flex flex-col border-2 border-gray-200 hover:border-cta"
+                    className="rounded-lg group relative aspect-square h-max flex flex-col border-2 border-gray-200 hover:border-ctaStart"
                   >
                     <div className="w-full overflow-hidden flex items-start">
                       <Image
@@ -51,10 +62,10 @@ export default async function Page() {
                         width={512}
                         height={512}
                         alt={`Obrazek ${post.title}`}
-                        className="absolute inset-0 object-cover w-full h-full "
+                        className="absolute inset-0 object-cover w-full h-full rounded-md"
                       />
                     </div>
-                    <h2 className="bg-gradient-to-r from-primary to-cta duration-300 absolute bottom-3 left-3 right-3 text-sm mt-3 text-white font-extralight text-left px-3 py-1">
+                    <h2 className="rounded-md bg-gradient-to-b from-primaryStart to-primaryEnd duration-300 absolute bottom-3 left-3 right-3 text-sm mt-3 text-white font-extralight text-left px-3 py-1">
                       {post.title}
                     </h2>
                   </Link>
@@ -70,7 +81,7 @@ export default async function Page() {
           </div>
           <AboutQuixyTalent />
           <div className="mt-12"></div>
-          <Market leads={leads} />
+          <Market leads={services} />
         </div>{" "}
       </div>
 

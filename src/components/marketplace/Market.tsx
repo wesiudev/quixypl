@@ -57,14 +57,17 @@ export default function Market({ leads }: { leads: IProject[] }) {
           />
         )}
         {slug === "" && (
-          <div className="mt-3 py-6 bg-gradient-to-r from-primary/30 to-cta/30 px-6 pb-6 text-black text-center items-center justify-center h-full w-full">
+          <div className="rounded-lg mt-3 py-12 bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30 px-6 text-black text-center items-center justify-center w-full">
             {" "}
-            <div className="bg-gradient-to-r from-primary to-cta rounded-full aspect-square mx-auto w-32 flex items-center justify-center">
+            <div
+              style={{ boxShadow: "0px 1px 10px rgba(0,0,0,0.8)" }}
+              className="bg-gradient-to-b from-primaryStart to-primaryEnd rounded-full aspect-square mx-auto w-24 flex items-center justify-center"
+            >
               <BiCategory className="text-white text-4xl" />
             </div>
-            <div className="bg-white p-3 text-center max-w-sm mx-auto mt-4">
+            <div className="text-center max-w-sm mx-auto mt-4 rounded-md">
               {/* Reduced padding */}
-              <p className="font-coco font-light max-w-sm mx-auto">
+              <p className="font-coco font-light max-w-sm mx-auto text-gray-700">
                 Wybierz kategorię i przeglądaj usługi naszych użytkowników.
               </p>
             </div>

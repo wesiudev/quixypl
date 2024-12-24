@@ -1,16 +1,19 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { FaChevronLeft } from "react-icons/fa";
+import { FaChevronLeft } from "react-icons/fa6";
 import jobs from "../../../public/14.09.2024.json";
 import StepThree from "./Step3";
 import StepTwo from "./Step2";
 import StepOne from "./Step";
-import { JobListing } from "@/types";
+import { JobOffer } from "@/types";
 import ReactConfetti from "react-confetti";
 import { useSelector } from "react-redux";
+import MultiStepFormIndicator from "./MultiStepFormIndicator";
+import StepFour from "./Step4";
 export default function AddJobOffer() {
-  const InitialData = {
+  const InitialData: JobOffer = {
+    city: "",
     days: 1,
     description: "",
     email: "",
@@ -18,17 +21,36 @@ export default function AddJobOffer() {
     location: "",
     name: "",
     phone: "",
+    places: [],
+    preferences: [],
     price: 24.41,
+    region: "",
     requirements: "",
     salary: "",
     salaryValue: "",
+    salaryValueBruttoFrom: "",
+    salaryValueBruttoTo: "",
+    salaryValueNettoFrom: "",
+    salaryValueNettoTo: "",
+    specializations: [],
     tags: [],
+    technologies: [],
     title: "",
     website: "",
+    logo: "",
+    niceToHave: "",
+    responsibilities: "",
+    weOffer: "",
+    slug: "",
+    category: "",
+    job: "",
+    creationTime: "",
+    uid: "",
+    level: "",
   };
   const { user } = useSelector((state: any) => state.user);
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<JobListing>(InitialData);
+  const [formData, setFormData] = useState<JobOffer>(InitialData);
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -49,84 +71,120 @@ export default function AddJobOffer() {
 
   const nextStep = () => setCurrentStep((prev) => prev + 1);
   const prevStep = () => setCurrentStep((prev) => prev - 1);
-
+  const { light } = useSelector((state: any) => state.light);
   return (
-    <div className="relative overflow-hidden min-h-screen w-full flex flex-col bg-gray-600 items-center">
-      <div className="w-full justify-between bg-gradient-to-r from-primary to-cta py-3 px-6 text-white font-bold text-lg flex items-center">
-        <Link href="/user" className="flex items-center">
-          <FaChevronLeft className="mr-2 text-xl" />
-          Powrót
-        </Link>
-        <div className="flex flex-col text-white pl-12">
-          <h2 className="font-extrabold">Nowe ogłoszenie</h2>
-          <p className="text-xs font-coco">
-            Skonfiguruj ofertę pracy i dodaj ją do bazy
-          </p>
+    <>
+      {isAnimating && (
+        <div className="z-50 fixed left-0 top-0 w-screen h-screen">
+          <ReactConfetti />
         </div>
-      </div>
-      <div className="w-full flex items-center justify-center">
-        <div className="max-w-[40rem] rounded-b-xl bg-white z-50 relative p-6 lg:p-10 overflow-hidden">
-          {isAnimating && <ReactConfetti />}
-          <h1 className="text-xl md:text-3xl font-gotham font-bold text-black">
-            Dodaj ofertę pracy
-          </h1>
-          <p className="mt-2 text-sm font-coco text-black">
-            Podaj najważniejsze informacje dotyczące rekrutacji.
-          </p>
-          <div className="mt-2"></div>
-          <div className="flex flex-col w-full font-coco">
-            <StepOne
-              formData={formData}
-              handleChange={handleChange}
-              nextStep={nextStep}
-              currentStep={currentStep}
-              tagsOpenLevel={tagsOpenLevel}
-              setTagsOpenLevel={setTagsOpenLevel}
-              setTagDeletion={setTagDeletion}
-              selectedTag={selectedTag}
-              setSelectedTag={setSelectedTag}
-              tagDeletion={tagDeletion}
-              configurationOpen={configurationOpen}
-              setConfigurationOpen={setConfigurationOpen}
-              setSlug={setSlug}
-              slug={slug}
-              category={category}
-              job={job}
-              setCategory={setCategory}
-              jobs={jobs}
-              user={user}
-              setFormData={setFormData}
-              setJob={setJob}
-            />
-            <StepTwo
-              setFormData={setFormData}
-              prevStep={prevStep}
-              nextStep={nextStep}
-              formData={formData}
-              handleChange={handleChange}
-              currentStep={currentStep}
-              user={user}
-            />
-            <StepThree
-              prevStep={prevStep}
-              nextStep={nextStep}
-              formData={formData}
-              handleChange={handleChange}
-              currentStep={currentStep}
-              setFormData={setFormData}
-              user={user}
-              InitialData={InitialData}
-              setIsAnimating={setIsAnimating}
-              isAnimating={isAnimating}
-              isSent={isSent}
-              setIsSent={setIsSent}
-              slug={slug}
-              category={category}
-              job={job}
-            />
+      )}
+      <div className="font-sans relative overflow-hidden min-h-screen flex flex-col items-center mx-3 lg:mx-6 lg:ml-12 py-6">
+        <div
+          className={`${
+            light ? "bg-white text-black" : "bg-[#222430] text-white"
+          } rounded-lg w-full justify-between py-3 px-3 xl:px-6 font-bold text-lg flex items-center`}
+        >
+          <Link href="/user" className="flex items-center">
+            <FaChevronLeft className="mr-2 text-xl" />
+            Powrót
+          </Link>
+          <div className="flex flex-col pl-12">
+            <h2 className="font-extrabold">Nowe ogłoszenie</h2>
+            <p className="text-xs font-coco">
+              Skonfiguruj ofertę pracy i opublikuj
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-col xl:flex-row-reverse w-full max-w-full mt-3">
+          <MultiStepFormIndicator
+            steps={[
+              { step: 1, title: "Treść" },
+              { step: 2, title: "Szczegóły" },
+              { step: 3, title: "Dodatki" },
+              { step: 4, title: "Finalizacja" },
+            ]}
+            currentStep={currentStep}
+          />
+          <div className="flex flex-col w-full">
+            <div
+              className={`${
+                light ? "bg-white text-black" : "bg-[#222430] text-white"
+              } flex items-center w-full rounded-lg mt-3 xl:mt-0`}
+            >
+              <div className="rounded-md z-50 relative p-3 xl:p-6 overflow-hidden">
+                <h1 className="absolute left-0 top-0 rounded-tl-md rounded-br-3xl px-4 py-2 text-white bg-gradient-to-b from-primaryStart to-primaryEnd text-xl md:text-2xl font-gotham font-bold">
+                  Dodajesz ofertę pracy
+                </h1>
+                <p className="mt-12 text-sm font-coco">
+                  Podaj najważniejsze informacje dotyczące rekrutacji.
+                </p>
+                <div className="flex flex-col w-full font-coco">
+                  <StepOne
+                    formData={formData}
+                    handleChange={handleChange}
+                    nextStep={nextStep}
+                    currentStep={currentStep}
+                    tagsOpenLevel={tagsOpenLevel}
+                    setTagsOpenLevel={setTagsOpenLevel}
+                    setTagDeletion={setTagDeletion}
+                    selectedTag={selectedTag}
+                    setSelectedTag={setSelectedTag}
+                    tagDeletion={tagDeletion}
+                    configurationOpen={configurationOpen}
+                    setConfigurationOpen={setConfigurationOpen}
+                    setSlug={setSlug}
+                    slug={slug}
+                    category={category}
+                    job={job}
+                    setCategory={setCategory}
+                    jobs={jobs}
+                    user={user}
+                    setFormData={setFormData}
+                    setJob={setJob}
+                    light={light}
+                  />
+                  <StepTwo
+                    setFormData={setFormData}
+                    prevStep={prevStep}
+                    nextStep={nextStep}
+                    formData={formData}
+                    handleChange={handleChange}
+                    currentStep={currentStep}
+                    light={light}
+                  />
+                  <StepThree
+                    setFormData={setFormData}
+                    prevStep={prevStep}
+                    nextStep={nextStep}
+                    formData={formData}
+                    handleChange={handleChange}
+                    currentStep={currentStep}
+                    light={light}
+                  />
+                  <StepFour
+                    prevStep={prevStep}
+                    nextStep={nextStep}
+                    formData={formData}
+                    handleChange={handleChange}
+                    currentStep={currentStep}
+                    setFormData={setFormData}
+                    user={user}
+                    InitialData={InitialData}
+                    setIsAnimating={setIsAnimating}
+                    isAnimating={isAnimating}
+                    isSent={isSent}
+                    setIsSent={setIsSent}
+                    slug={slug}
+                    category={category}
+                    job={job}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

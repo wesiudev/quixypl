@@ -3,7 +3,6 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { addDocument, auth } from "@/firebase";
 import { toast } from "react-toastify";
-import { toastUpdate } from "@/components/Toast/ToastUpdate";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { errorCatcher } from "../../../../utils/errorCatcher";
@@ -28,22 +27,40 @@ export default function Register() {
   function createAccount() {
     setLoading(true);
     const id = toast.loading(<span>Sekundarnie...</span>, {
-      position: "bottom-right",
+      position: "top-right",
       isLoading: true,
     });
+
     if (userData.password !== userData.repeatPassword) {
       setLoading(false);
-      toastUpdate("Hasła nie są takie same", id, "error");
+      toast.update(id, {
+        render: "Hasła nie są takie same",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
       return;
     }
+
     if (userData.password?.length < 6) {
       setLoading(false);
-      toastUpdate("Hasło powinno składać się z minimum 6 znaków", id, "error");
+      toast.update(id, {
+        render: "Hasło powinno składać się z minimum 6 znaków",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
       return;
     }
+
     if (!userData.email) {
       setLoading(false);
-      toastUpdate("Prosimy wpisać email", id, "error");
+      toast.update(id, {
+        render: "Prosimy wpisać email",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
       return;
     }
 
@@ -55,6 +72,7 @@ export default function Register() {
           userData.password
         ).then((userCredential) => {
           addDocument("users", userCredential.user?.uid, {
+            city: "",
             description: "",
             title: "",
             pseudo: "",
@@ -83,17 +101,29 @@ export default function Register() {
             seek: seek === true || seek === false ? seek : "ask",
             configured: configured,
           });
-          toastUpdate("Konto utworzone pomyślnie!", id, "success");
+
+          toast.update(id, {
+            render: "Konto utworzone pomyślnie!",
+            type: "success",
+            isLoading: false,
+            autoClose: 3000,
+          });
           router.push("/user");
           setLoading(false);
         });
       } catch (err: any) {
         const errorMsg = errorCatcher(err);
-        toastUpdate(errorMsg, id, "error");
+        toast.update(id, {
+          render: errorMsg,
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+        });
         setLoading(false);
       }
     })();
   }
+
   useEffect(() => {
     if (user && !loading) {
       router.push("/user");
@@ -155,9 +185,8 @@ export default function Register() {
         <div className="w-full flex flex-col justify-center items-center mt-12">
           {step === 0 && (
             <button
-              style={{ borderRadius: "0px" }}
               disabled
-              className="cursor-not-allowed button !bg-[#E3ECF0] !text-zinc-400 !font-normal !px-12"
+              className="rounded-md cursor-not-allowed !bg-[#E3ECF0] !text-zinc-400 !font-normal py-2 px-4"
             >
               Zarejestruj się
             </button>
