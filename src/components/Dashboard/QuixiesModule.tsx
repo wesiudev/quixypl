@@ -16,14 +16,14 @@ export default function QuixiesModule() {
         onClick={() => dispatch(set_modals({ ...modals, quixies: false }))}
         className={`disabled:cursor-not-allowed fixed left-0 top-0 w-full h-full ${
           modals.quixies
-            ? "z-[99999] bg-opacity-80 translate-y-0"
+            ? "z-[99999999999999999] bg-opacity-80 translate-y-0"
             : "z-[-99999] bg-opacity-0 translate-x-[100vw]"
         } bg-gradient-to-b from-primaryStart/70 to-primaryEnd/70 hover:from-primaryStart/50 hover:to-primaryEnd/50`}
       />
       <div
         className={`w-screen sm:w-[90%] lg:max-w-[50rem] xl:max-w-[60rem] h-screen sm:h-[80vh] fixed overflow-y-scroll scrollbar ${
           modals.quixies
-            ? "z-[9999999999999999999999] opacity-100 left-0 top-0 sm:left-1/2 sm:-translate-x-1/2 sm:top-1/2 sm:-translate-y-1/2"
+            ? "z-[999999999999999999999999] opacity-100 left-0 top-0 sm:left-1/2 sm:-translate-x-1/2 sm:top-1/2 sm:-translate-y-1/2"
             : "z-[-1000] opacity-0 -translate-y-[150vh]"
         }`}
       >
