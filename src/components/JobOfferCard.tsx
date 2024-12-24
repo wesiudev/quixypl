@@ -28,9 +28,15 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
   return (
     <div className="w-full border border-gray-300 rounded-md shadow-sm font-sans">
       {/* Collapsed Header */}
-      <div className="flex-col relative p-4 flex justify-between cursor-pointer bg-gray-100 hover:bg-gray-200 rounded-t-md">
+      <div
+        className="flex-col relative p-4 flex justify-between cursor-pointer bg-gray-100 hover:bg-gray-200 rounded-t-md"
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
         <div className="flex flex-col lg:flex-row-reverse w-full lg:justify-between">
-          <div className="text-gray-500 text-xs font-light">
+          <div
+            onClick={() => console.log(userData)}
+            className="text-gray-500 text-xs font-light"
+          >
             Opublikowana: {moment(job.creationTime).format("DD MMMM YYYY")}
           </div>
           <div className="flex flex-col">
