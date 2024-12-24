@@ -1,8 +1,9 @@
+"use client";
 import Link from "next/link";
-import JobOfferCard from "./JobOfferCard";
+const JobOfferCard = dynamic(() => import("./JobOfferCard"), { ssr: false });
 import { JobOffer } from "@/types";
-import { polishToEnglish } from "../../utils/polishToEnglish";
 import { AiFillThunderbolt } from "react-icons/ai";
+import dynamic from "next/dynamic";
 export default function JobOffers({
   offers,
   content,

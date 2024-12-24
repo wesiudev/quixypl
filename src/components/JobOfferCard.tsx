@@ -30,10 +30,7 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
       {/* Collapsed Header */}
       <div className="flex-col relative p-4 flex justify-between cursor-pointer bg-gray-100 hover:bg-gray-200 rounded-t-md">
         <div className="flex flex-col lg:flex-row-reverse w-full lg:justify-between">
-          <div
-            onClick={() => console.log(userData)}
-            className="text-gray-500 text-xs font-light"
-          >
+          <div className="text-gray-500 text-xs font-light">
             Opublikowana: {moment(job.creationTime).format("DD MMMM YYYY")}
           </div>
           <div className="flex flex-col">

@@ -4,7 +4,7 @@ import BlogPostList from "@/components/BlogPostList";
 import JobBoardList from "@/components/JobBoardList";
 import Market from "@/components/marketplace/Market";
 import removePolishSignsAndSpaces from "@/lib/removePolish";
-import JobOffers from "@/components/JobOffers";
+const JobOffers = dynamic(() => import("@/components/JobOffers"));
 import Image from "next/image";
 import SlugFooter from "@/components/SlugFooter";
 import dynamic from "next/dynamic";
