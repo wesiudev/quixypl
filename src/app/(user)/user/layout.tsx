@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import InitializeUser from "@/components/InitializeUser";
+import Settings from "@/components/Dashboard/Settings/Settings";
+import QuixiesModule from "@/components/Dashboard/QuixiesModule";
 export default function AdminLayout({
   children,
 }: {
@@ -22,9 +24,12 @@ export default function AdminLayout({
   }, [loading]);
   const { light } = useSelector((state: any) => state.light);
   return (
-    <div className="w-full relative z-[9999]">
+    <div className="w-full relative">
       <InitializeUser />
-
+      <div className="z-[9999999999999999999999999999999]">
+        <Settings isNavOpen={isNavOpen} />
+        <QuixiesModule />
+      </div>
       <div>
         <Nav setNavOpen={setNavOpen} isNavOpen={isNavOpen} />
         <div
