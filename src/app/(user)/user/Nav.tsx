@@ -84,8 +84,6 @@ export default function Nav({
   const { light } = useSelector((state: any) => state.light);
   return (
     <>
-      <Settings isNavOpen={isNavOpen} />
-      <QuixiesModule />
       <div className="h-full">
         <div
           className={`lg:py-6 lg:px-6 h-full fixed scrollbar ${

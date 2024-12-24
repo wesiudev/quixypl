@@ -170,7 +170,7 @@ export default function DashboardUserInfo() {
         <div>
           {!user?.emailVerified && (
             <div
-              className={`rounded-lg border-l-4 border-primaryStart p-3 mt-3 mx-3 lg:mx-6 lg:ml-12 px-3 w-full ${
+              className={`rounded-lg border-l-4 border-primaryStart p-3 mt-3 mx-3 lg:mx-6 lg:ml-12 px-3 w-full max-w-full ${
                 light ? "bg-white text-black" : "bg-[#222430] text-white"
               } duration-300`}
             >
@@ -249,7 +249,7 @@ export default function DashboardUserInfo() {
                       </div>
                     )}
                     {!user?.seek && user?.seek !== "ask" && (
-                      <div className="-ml-1 flex items-center flex-wrap">
+                      <div className="w-full flex flex-wrap items-center gap-2 p-[0.7rem]">
                         {user?.preferences ? (
                           user?.preferences?.map((item: any, i: any) => (
                             <h3
