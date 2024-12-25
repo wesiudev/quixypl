@@ -1,16 +1,15 @@
-import Link from "next/link";
-import { HiOutlineDocumentAdd, HiOutlineDocumentSearch } from "react-icons/hi";
+import { HiOutlineDocumentSearch } from "react-icons/hi";
 
 export default function Documents({
   user,
   setFormState,
   formState,
-  handleFileChange,
+  handleUpload,
 }: {
   user: any;
   setFormState: any;
   formState: any;
-  handleFileChange: any;
+  handleUpload: any;
 }) {
   return (
     <div>
@@ -50,7 +49,7 @@ export default function Documents({
               id="file"
               type="file"
               name="file"
-              onChange={handleFileChange}
+              onChange={handleUpload}
             />
           </div>
         </div>

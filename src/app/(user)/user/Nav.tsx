@@ -78,7 +78,7 @@ export default function Nav({
     <>
       <div className="h-full">
         <div
-          className={`z-[50] lg:py-6 lg:px-6 h-full fixed scrollbar ${
+          className={`z-[150] lg:py-6 lg:px-6 h-full fixed scrollbar ${
             light ? "text-black" : "text-white"
           } ${
             isNavOpen

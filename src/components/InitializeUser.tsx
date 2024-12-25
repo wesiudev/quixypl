@@ -15,6 +15,6 @@ export default function InitializeUser() {
         dispatch(setUser(data));
       });
     }
-  }, [user]);
+  }, [user, loading]);
   return <div></div>;
 }

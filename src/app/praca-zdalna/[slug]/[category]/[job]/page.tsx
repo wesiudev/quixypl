@@ -219,7 +219,7 @@ export default async function Page(props: { params: Promise<any> }) {
                   {allCities.map((city: any, i: any) => (
                     <Link
                       key={city}
-                      className="block text-white font-bold hover:scale-105 duration-150"
+                      className="text-xs sm:text-sm block text-white hover:scale-105 duration-150"
                       href={`/praca-zdalna/${params.slug}/${params.category}/${
                         params.job
                       }/${polishToEnglish(city)}`}
