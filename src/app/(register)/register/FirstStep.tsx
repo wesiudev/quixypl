@@ -60,7 +60,7 @@ export default function FirstStep({
           </div>
         </div>
         <span className="text-left font-gotham font-light text-black  mt-4">
-          Dołączam jako firma, chcę dodać ofertę pracy lub pozyskiwać leady
+          Dołączam jako firma, chcę dodać ofertę pracy lub znaleźć klientów
         </span>
       </button>
       <button
@@ -104,7 +104,7 @@ export default function FirstStep({
         </div>
 
         <span className="text-left font-gotham font-light text-black  mt-4">
-          Jestem freelancerem, chcę zdobyć zlecenia lub znaleźć pracę
+          Nie posiadam firmy, chcę zdobyć zlecenia lub znaleźć pracę
         </span>
       </button>
     </div>
