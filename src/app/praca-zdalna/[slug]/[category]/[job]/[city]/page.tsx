@@ -1,8 +1,6 @@
 import { polishToEnglish } from "../../../../../../../utils/polishToEnglish";
 import MainFooter from "@/components/MainFooter";
-import { getPageContent } from "@/lib/getPageContent";
 import BlogPostList from "@/components/BlogPostList";
-
 import removePolishSignsAndSpaces from "@/lib/removePolish";
 import JobOffers from "@/components/JobOffers";
 import Link from "next/link";
@@ -54,7 +52,12 @@ export default async function Page(props: { params: Promise<any> }) {
       next: { revalidate: 600 },
     }
   ).then((res: any) => res.json());
-  const content = await getPageContent(polishToEnglish(params.job));
+  const content = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.job}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res: any) => res.json());
   const services = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
     {
@@ -150,9 +153,8 @@ export default async function Page(props: { params: Promise<any> }) {
 
             {/* Opis */}
             <p className="lg:text-base text-gray-100 max-w-2xl mb-6">
-              Zatrudnij najlepszych specjalistów od{" "}
-              <b className="text-white">{content?.genitive}</b> na polskim rynku
-              pracy i zrealizuj swój projekt z ich wsparciem!
+              Zatrudnij najlepszych specjalistów na polskim rynku pracy i
+              zrealizuj swój projekt z ich wsparciem!
             </p>
 
             {/* Przyciski */}

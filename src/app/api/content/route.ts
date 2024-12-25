@@ -1,4 +1,3 @@
-import { getUsers } from "@/firebase";
 import { NextRequest, NextResponse } from "next/server";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
 import { getPageContent } from "@/lib/getPageContent";

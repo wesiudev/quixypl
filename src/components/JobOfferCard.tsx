@@ -1,14 +1,12 @@
 "use client";
 import { JobOffer } from "@/types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsBuildings } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import Viewer from "./AddJobOffer/Viewer";
 import Image from "next/image";
 import moment from "moment";
 import "moment/locale/pl";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/firebase";
 import { BsClipboardCheck } from "react-icons/bs";
 import { MdOutlineChecklist } from "react-icons/md";
 import { AiOutlineCode } from "react-icons/ai";
@@ -17,14 +15,25 @@ import { GiGiftOfKnowledge } from "react-icons/gi";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import RecruitmentForm from "./RecruitmentForm";
-// Main JobOfferCard Component
 const JobOfferCard = ({ job }: { job: JobOffer }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [user, loading] = useAuthState(auth);
   const [applyOpen, setApplyOpen] = useState(false);
+  const [formState, setFormState] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    file: "",
+  });
   const userData = useSelector((state: any) => state.user.user);
+  useEffect(() => {
+    userData &&
+      setFormState({
+        ...formState,
+        name: userData.name,
+        email: userData.email,
+      });
+  }, []);
   function apply(uid: string) {}
-
   return (
     <div className="w-full border border-gray-300 rounded-md shadow-sm font-sans">
       {/* Collapsed Header */}
@@ -33,7 +42,7 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="flex flex-col 2xl:flex-row-reverse w-full lg:justify-between">
-          <div className="text-gray-500 text-xs font-light">
+          <div className="text-gray-500 text-xs font-extralight 2xl:mt-2">
             Opublikowana: {moment(job.creationTime).format("DD MMMM YYYY")}
           </div>
           <div className="flex flex-col">
@@ -287,6 +296,8 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
               <div className="">
                 <div className="bg-[#222430] rounded-b-lg overflow-y-scroll max-h-[45vh] scrollbar">
                   <RecruitmentForm
+                    formState={formState}
+                    setFormState={setFormState}
                     updateUserLeads={apply}
                     uid={job.uid}
                     companyName={job.name}
@@ -296,7 +307,7 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
                 </div>
               </div>
             )}
-            {user && !applyOpen && (
+            {userData && !applyOpen && (
               <div className="p-4">
                 <button
                   onClick={() => setApplyOpen(true)}
@@ -306,7 +317,7 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
                 </button>
               </div>
             )}
-            {!user && (
+            {!userData && (
               <Link
                 href="/register"
                 target="_blank"

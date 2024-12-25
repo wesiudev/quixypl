@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
 import SlugFooter from "@/components/SlugFooter";
-import { getPageContent } from "@/lib/getPageContent";
 import Image from "next/image";
 import BlogPostList from "@/components/BlogPostList";
 import JobBoardList from "@/components/JobBoardList";
@@ -13,7 +12,7 @@ export async function generateStaticParams() {
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
     {
-      next: { revalidate: 600 },
+      next: { revalidate: 60 },
     }
   ).then((res) => res.json());
   return jobs.flatMap((service: any) => ({
@@ -28,9 +27,10 @@ export default async function Page(props: {
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
     {
-      next: { revalidate: 600 },
+      next: { revalidate: 60 },
     }
   ).then((res) => res.json());
+
   const slug: any = jobs.find(
     (page: any) => polishToEnglish(page.title) === params.slug
   );
@@ -399,7 +399,12 @@ export async function generateMetadata(props: { params: Promise<any> }) {
   const slug: any = jobs.find(
     (page: any) => polishToEnglish(page.title) === params.slug
   );
-  const content = await getPageContent(polishToEnglish(slug.title));
+  const content = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.job}`,
+    {
+      next: { revalidate: 600 },
+    }
+  ).then((res: any) => res.json());
   const title = `Praca Zdalna ${content?.title} - Freelancer Job Boards`;
   const description = `Prowadzisz rekrutację lub szukasz pracy w ${content?.genitive}? Chcesz zająć się ${content?.instrumental}? Mamy dla Ciebie zlecenia.`;
   return {

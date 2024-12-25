@@ -144,9 +144,8 @@ export default async function Page(props: { params: Promise<any> }) {
 
             {/* Opis */}
             <p className="lg:text-base text-gray-100 max-w-2xl mb-6">
-              Zatrudnij najlepszych specjalistów od{" "}
-              <b className="text-white">{content?.genitive}</b> na polskim rynku
-              pracy i zrealizuj swój projekt z ich wsparciem!
+              Zatrudnij najlepszych specjalistów na polskim rynku pracy i
+              zrealizuj swój projekt z ich wsparciem!
             </p>
 
             {/* Przyciski */}

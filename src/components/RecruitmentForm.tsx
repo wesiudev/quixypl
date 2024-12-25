@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { toast } from "react-toastify";
+import Documents from "./Documents";
 
 export default function RecruitmentForm({
   updateUserLeads,
@@ -11,12 +12,16 @@ export default function RecruitmentForm({
   companyName,
   setApplyOpen,
   user,
+  formState,
+  setFormState,
 }: {
   updateUserLeads: any;
   uid: string;
   companyName: string;
   setApplyOpen: any;
   user: any;
+  formState: any;
+  setFormState: any;
 }) {
   const [isSent, setIsSent] = useState(false);
   const [inputs, setInputs] = useState<{
@@ -74,14 +79,14 @@ export default function RecruitmentForm({
             Imię i nazwisko
           </label>
           <input
-            className="border-b-[3px]  focus:border-ctaStart bg-gray-200 focus:bg-white duration-200 hover:bg-gray-100 px-2 py-0.5 outline-none focus:outline-none border-transparent"
+            className="rounded-md p-2 border-b-[3px]  focus:border-ctaStart bg-gray-200 focus:bg-white duration-200 hover:bg-gray-100  outline-none focus:outline-none border-transparent"
             type="text"
             id="name"
             name="name"
-            value={user?.name}
+            value={formState?.name}
             placeholder="Jan Kowalski"
             onChange={(e) =>
-              setInputs((prev) => ({ ...prev, name: e.target.value }))
+              setFormState(() => ({ ...formState, name: e.target.value }))
             }
           />
         </div>
@@ -92,14 +97,14 @@ export default function RecruitmentForm({
             </label>
             <input
               required
-              className="border-b-[3px] focus:border-blue-600 bg-gray-200 focus:bg-white duration-200 hover:bg-gray-100 px-2 py-0.5 outline-none focus:outline-none border-transparent"
+              className="rounded-md p-2 border-b-[3px] focus:border-ctaStart bg-gray-200 focus:bg-white duration-200 hover:bg-gray-100  outline-none focus:outline-none border-transparent"
               type="email"
               id="email"
               name="email"
               placeholder="jan.kowalski@gmail.com"
-              value={inputs.email}
+              value={formState.email}
               onChange={(e) =>
-                setInputs((prev) => ({ ...prev, email: e.target.value }))
+                setFormState(() => ({ ...formState, email: e.target.value }))
               }
             />
           </div>
@@ -109,35 +114,31 @@ export default function RecruitmentForm({
             </label>
             <input
               required
-              className="border-b-[3px] focus:border-blue-600 bg-gray-200 focus:bg-white duration-200 hover:bg-gray-100 px-2 py-0.5 outline-none focus:outline-none border-transparent"
+              className="rounded-md p-2 border-b-[3px] focus:border-ctaStart bg-gray-200 focus:bg-white duration-200 hover:bg-gray-100  outline-none focus:outline-none border-transparent"
               type="tel"
               id="phoneNumber"
               name="phoneNumber"
-              value={inputs.phoneNumber}
+              value={formState?.phoneNumber}
               placeholder="Numer telefonu"
               onChange={(e) =>
-                setInputs((prev) => ({ ...prev, phoneNumber: e.target.value }))
+                setFormState(() => ({
+                  ...formState,
+                  phoneNumber: e.target.value,
+                }))
               }
             />
           </div>
         </div>
-        <div className="flex flex-col">
-          <label className="text-sm text-white" htmlFor="file">
-            Załącz CV
-          </label>
-          <input
-            required
-            className=" border-gray-300 text-white py-0.5 outline-none focus:outline-none border-transparent"
-            id="file"
-            type="file"
-            name="file"
-            onChange={handleFileChange}
-          />
-        </div>
+        <Documents
+          user={user}
+          setFormState={setFormState}
+          formState={formState}
+          handleFileChange={handleFileChange}
+        />
         <div className="flex flex-col items-center justify-center text-sm text-white">
           {isFileTooBig && <p className="text-red-600">Plik jest za duży</p>}
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 sticky bottom-[1rem]">
           {!fileUploading && (
             <button
               onClick={() => {
@@ -179,11 +180,11 @@ export default function RecruitmentForm({
             zawartych w formularzu rekrutacyjnym przez Quixy.pl
           </summary>
           <p>
-            na rzecz w celu przeprowadzenia procesu rekrutacji przez{" "}
-            {companyName} zgodnie z przepisami Rozporządzenia Parlamentu
-            Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w
-            sprawie ochrony osób fizycznych w związku z przetwarzaniem danych
-            osobowych i w sprawie swobodnego przepływu takich danych (RODO).
+            w celu przeprowadzenia procesu rekrutacji przez {companyName}{" "}
+            zgodnie z przepisami Rozporządzenia Parlamentu Europejskiego i Rady
+            (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób
+            fizycznych w związku z przetwarzaniem danych osobowych i w sprawie
+            swobodnego przepływu takich danych (RODO).
           </p>
         </details>
       </div>
