@@ -19,7 +19,7 @@ export default function QuixiesModule() {
         } bg-black/80`}
       />
       <div
-        className={`left-0 top-0 sm:left-1/2 sm:-translate-x-1/2 sm:top-1/2 sm:-translate-y-1/2 w-screen sm:w-[90%] lg:max-w-[50rem] xl:max-w-[60rem] h-screen sm:h-[80vh] fixed overflow-y-scroll scrollbar ${
+        className={`sm:rounded-lg z-[80] left-0 top-0 sm:left-1/2 sm:-translate-x-1/2 sm:top-1/2 sm:-translate-y-1/2 w-screen sm:w-[90%] lg:max-w-[50rem] xl:max-w-[60rem] h-screen sm:h-[80vh] fixed overflow-y-scroll scrollbar ${
           modals?.quixies ? "block" : "hidden"
         }`}
       >
@@ -27,7 +27,7 @@ export default function QuixiesModule() {
           onClick={(e: any) => e.stopPropagation()}
           className={`${
             light ? "bg-white" : "bg-[#222430]"
-          } flex flex-wrap w-full my-auto mx-auto relative px-3`}
+          } sm:rounded-lg flex flex-wrap w-full my-auto mx-auto relative px-3`}
         >
           <div className="font-sans sticky -top-px z-[100] flex flex-row justify-between w-full gap-6">
             <div className="flex flex-col bg-gradient-to-b from-primaryStart to-primaryEnd rounded-b-xl px-4 py-2">
@@ -175,7 +175,7 @@ const QuixiesInfo = ({ light }: { light: any }) => {
             Portfolio usług
           </strong>{" "}
           <p className="pt-2">
-            Dodaj usługi do swojego profilu oraz naszego Marketplace&trade;
+            Zaprezentuj swoje usługi na naszym Marketplace&trade;
           </p>
         </li>
         <li className="mb-4 flex flex-col">

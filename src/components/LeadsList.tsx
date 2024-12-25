@@ -37,10 +37,10 @@ export default function LeadsList() {
             light ? "bg-white text-black" : "bg-[#222430] text-white"
           } mt-6 rounded-lg min-h-screen text-white`}
         >
-          <div className="font-gotham font-light grid grid-cols-2 sm:grid-cols-3 gap-2 p-6 !text-white">
+          <div className="font-gotham font-light grid grid-cols-2 gap-2 p-6 !text-white">
             <button
               onClick={() => setFilter("new")}
-              className={`p-1 border-2 border-dashed ${
+              className={`rounded-md p-1 border-2 border-dashed ${
                 filter === "new"
                   ? `bg-gradient-to-b text-white ${
                       light
@@ -54,11 +54,11 @@ export default function LeadsList() {
                     }`
               }`}
             >
-              Nowe
+              NOWE
             </button>
             <button
               onClick={() => setFilter("old")}
-              className={`text-white p-1 border-2 border-dashed ${
+              className={`rounded-md text-white p-1 border-2 border-dashed ${
                 filter === "old"
                   ? `bg-gradient-to-b text-white ${
                       light
@@ -72,7 +72,7 @@ export default function LeadsList() {
                     }`
               }`}
             >
-              Sprawdzone
+              SPRAWDZONE
             </button>{" "}
           </div>
           <div className="grid grid-cols-1 xl:grid-cols-3 2xl:grid-cols-4 font-sans gap-6">
