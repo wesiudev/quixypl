@@ -1,13 +1,5 @@
 "use client";
 import dynamic from "next/dynamic";
-const Settings = dynamic(
-  () => import("@/components/Dashboard/Settings/Settings"),
-  { ssr: false }
-);
-const QuixiesModule = dynamic(
-  () => import("@/components/Dashboard/QuixiesModule"),
-  { ssr: false }
-);
 import Link from "next/link";
 import { FaChevronDown, FaHome, FaPlusCircle, FaTag } from "react-icons/fa";
 import { useState } from "react";
@@ -86,22 +78,18 @@ export default function Nav({
     <>
       <div className="h-full">
         <div
-          className={`lg:py-6 lg:px-6 h-full fixed scrollbar ${
+          className={`z-[50] lg:py-6 lg:px-6 h-full fixed scrollbar ${
             light ? "text-black" : "text-white"
-          } ${
-            !modals.quixies && !modals.config
-              ? "z-[999999999999999999999999999]"
-              : "z-0"
           } ${
             isNavOpen
               ? "translate-x-[0] duration-300"
               : "-translate-x-[300px] lg:-translate-x-0 duration-300"
           }`}
         >
-          <div className=" relative flex flex-col gap-12 h-full">
+          <div className="relative flex flex-col gap-12 h-full">
             <button
               onClick={() => setNavOpen(!isNavOpen)}
-              className="lg:hidden absolute -right-[38px] w-[38px] h-[38px] bottom-12 rounded-r-lg bg-gradient-to-b from-accentStart to-accentEnd duration-200 text-white flex items-center justify-center"
+              className="lg:hidden absolute -right-[38px] w-[38px] h-[38px] top-1/2 -translate-y-1/2 rounded-r-lg bg-gradient-to-b from-accentStart to-accentEnd duration-200 text-white flex items-center justify-center"
             >
               <FaChevronLeft
                 className={`lg:hidden text-xl ${
