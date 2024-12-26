@@ -36,7 +36,7 @@ export default async function Page(props: { params: Promise<any> }) {
       next: { revalidate: 600 },
     }
   ).then((res) => res.json());
-  const cat: any = jobs.find(
+  const cat: any = jobs?.find(
     (page: any) => polishToEnglish(page.title) === params.slug
   );
   const talents = await fetch(
@@ -55,10 +55,10 @@ export default async function Page(props: { params: Promise<any> }) {
       next: { revalidate: 600 },
     }
   ).then((res: any) => res.json());
-  const allCities = Array.from(
+  const allCities = Array?.from(
     new Set([
-      ...talents.map((item: any) => item?.city),
-      ...companies.map((item: any) => item?.city),
+      ...talents?.map((item: any) => item?.city),
+      ...companies?.map((item: any) => item?.city),
     ])
   );
   const content = await fetch(

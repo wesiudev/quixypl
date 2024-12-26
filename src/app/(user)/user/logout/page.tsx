@@ -11,8 +11,12 @@ export default function Logout() {
   const router = useRouter();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setUser({}));
-    signOut(auth).then(() => router.push("/login"));
+    signOut(auth).then(() => {
+      setTimeout(() => {
+        router.push("/login");
+      }, 3000);
+      dispatch(setUser({}));
+    });
   }, []);
   return;
 }

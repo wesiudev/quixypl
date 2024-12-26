@@ -1,10 +1,12 @@
 "use client";
-import { storage } from "@/firebase";
+import { storage, updateDocument } from "@/firebase";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { toast } from "react-toastify";
 import Documents from "./Documents";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/slices/user";
 
 export default function RecruitmentForm({
   updateUserLeads,
@@ -24,20 +26,9 @@ export default function RecruitmentForm({
   setFormState: any;
 }) {
   const [isSent, setIsSent] = useState(false);
-  const [inputs, setInputs] = useState<{
-    name: string;
-    email: string;
-    phoneNumber: string;
-    file: File | string;
-  }>({
-    name: "",
-    email: "",
-    phoneNumber: "",
-    file: "",
-  });
-  const [isFileTooBig, setIsFileTooBig] = useState<boolean>(false);
   const [fileUploading, setFileUploading] = useState(false);
 
+  const dispatch = useDispatch();
   const handleFileChange = (e: any) => {
     const file = e.target.files[0];
     if (file.size > 20 * 1024 * 1024) {
@@ -48,8 +39,16 @@ export default function RecruitmentForm({
         closeOnClick: true,
         pauseOnHover: true,
       });
-    } else if (!["application/pdf", "application/msword"].includes(file.type)) {
-      return toast.error("Dozwolone formaty plików w: PDF, DOC, DOCX", {
+    } else if (
+      ![
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "text/plain",
+        "application/rtf",
+      ].includes(file.type)
+    ) {
+      return toast.error("Dozwolone formaty plików: PDF, DOC, DOCX, TXT, RTF", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -57,16 +56,35 @@ export default function RecruitmentForm({
         pauseOnHover: true,
       });
     } else {
-      setIsFileTooBig(false);
       setFileUploading(true);
       const randId = `cv-${uuidv4()}`;
       const docRef = ref(storage, randId);
-
       uploadBytes(docRef, file)
         .then(async () => {
           const url = await getDownloadURL(docRef);
-          setInputs((prev) => ({ ...prev, file: url }));
+          setFormState(() => ({ ...formState, file: url }));
           setFileUploading(false);
+          const randomId = `cv-${uuidv4()}`;
+          const newFile = {
+            userFileName: file?.name,
+            creationTime: Date.now(),
+            systemFileName: randomId,
+            url: url,
+          };
+          await updateDocument(
+            ["documents"],
+            [user?.documents ? [...user?.documents, newFile] : [newFile]],
+            "users",
+            user?.uid
+          );
+          dispatch(
+            setUser({
+              ...user,
+              documents: user?.documents
+                ? [...user?.documents, newFile]
+                : [newFile],
+            })
+          );
         })
         .catch((error) => {
           console.error("Error uploading file:", error);
@@ -77,7 +95,7 @@ export default function RecruitmentForm({
 
   return (
     <div>
-      <div className="grid grid-cols-1 gap-4 p-4 rounded-b-lg">
+      <div className="grid grid-cols-1 gap-4 rounded-b-lg">
         <div className="flex flex-col text-black">
           <label className="text-sm text-white" htmlFor="name">
             Imię i nazwisko
@@ -139,13 +157,14 @@ export default function RecruitmentForm({
           formState={formState}
           handleUpload={handleFileChange}
         />
-        <div className="flex flex-col items-center justify-center text-sm text-white">
-          {isFileTooBig && <p className="text-red-600">Plik jest za duży</p>}
-        </div>
         <div className="grid grid-cols-2 gap-4 sticky bottom-[1rem]">
           {!fileUploading && (
             <button
-              disabled={isSent || isFileTooBig}
+              disabled={isSent}
+              onClick={() => {
+                setIsSent(true);
+                updateUserLeads(formState, uid);
+              }}
               className="disabled:cursor-not-allowed bg-gradient-to-r from-ctaStart to-primaryHoverEnd text-white text border-transparent-zinc-800 outline-none focus:outline-none duration-200 text-center py-2 rounded-md"
             >
               {!isSent && "APLIKUJ"}
