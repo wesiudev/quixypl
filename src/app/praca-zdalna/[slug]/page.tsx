@@ -31,7 +31,7 @@ export default async function Page(props: {
     }
   ).then((res) => res.json());
 
-  const slug: any = jobs.find(
+  const slug: any = jobs?.find(
     (page: any) => polishToEnglish(page.title) === params.slug
   );
   const content = await fetch(
@@ -40,7 +40,6 @@ export default async function Page(props: {
       next: { revalidate: 60 },
     }
   ).then((res: any) => res.json());
-
   const posts = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
     {
@@ -185,9 +184,9 @@ export default async function Page(props: {
                     <p className="text-center sm:text-lg text-black p-3 bg-white rounded-md mt-6 mb-8">
                       Zatrudnij najlepszych specjalistów — opublikuj ofertę
                       pracy w kategorii{" "}
-                      <b className="font-bold">{slug.title.toLowerCase()}</b> i
-                      znajdź ekspertów w tej dziedzinie. Promuj swoje usługi, by
-                      dotrzeć do odpowiednich odbiorców.
+                      <b className="font-bold">{slug?.title?.toLowerCase()}</b>{" "}
+                      i znajdź ekspertów w tej dziedzinie. Promuj swoje usługi,
+                      by dotrzeć do odpowiednich odbiorców.
                     </p>
                     <Link
                       href="/register"
