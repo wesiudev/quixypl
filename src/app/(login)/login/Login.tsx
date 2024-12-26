@@ -1,7 +1,7 @@
 "use client";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { auth } from "@/firebase";
+import { auth, getDocument } from "@/firebase";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { errorCatcher } from "../../../../utils/errorCatcher";
@@ -9,6 +9,8 @@ import Link from "next/link";
 import GoogleAuthButton from "@/components/Auth/GoogleButton";
 import { FaKey } from "react-icons/fa";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { setUser } from "@/redux/slices/user";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
   const [user, loading] = useAuthState(auth);
@@ -55,10 +57,16 @@ export default function Login() {
       }
     })();
   }
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (user && !loading) {
-      router.push("/user");
+      getDocument("users", user?.uid)
+        .then((data) => {
+          dispatch(setUser(data));
+        })
+        .then(() => {
+          router.push("/user");
+        });
     }
   }, [loading, user]);
   return (

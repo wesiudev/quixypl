@@ -17,6 +17,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { useDispatch, useSelector } from "react-redux";
 import { setLight } from "@/redux/slices/lightSlice";
+import { signOut } from "firebase/auth";
+import { auth } from "@/firebase";
+import { setUser } from "@/redux/slices/user";
 export default function Nav({
   isNavOpen,
   setNavOpen,
@@ -64,16 +67,17 @@ export default function Nav({
         },
       ],
     },
-    {
-      title: "Wyloguj",
-      href: `/user/logout`,
-      icon: <FaPowerOff />,
-    },
   ];
   const pathname = usePathname();
   const dispatch = useDispatch();
   const { modals } = useSelector((state: any) => state.modals);
   const { light } = useSelector((state: any) => state.light);
+  function logout() {
+    dispatch(setUser(""));
+    signOut(auth).then(() => {
+      router.push("/login");
+    });
+  }
   return (
     <>
       <div className="h-full">
@@ -189,6 +193,7 @@ export default function Nav({
                             Sklep
                           </button>
                         )}
+
                         <button
                           onClick={() => {
                             if (item.expandable) {
@@ -266,6 +271,7 @@ export default function Nav({
                             </div>
                           )}
                         </button>
+
                         {item.expandable &&
                           expandedItems.includes(index as never) && (
                             <div
@@ -299,6 +305,28 @@ export default function Nav({
                               ))}
                             </div>
                           )}
+                        {index + 1 === navItems.length && (
+                          <button
+                            onClick={() => {
+                              logout();
+                              setNavOpen(!isNavOpen);
+                            }}
+                            className={`mt-2 ${
+                              modals.quixies
+                                ? `border-primaryStart ${
+                                    light ? "bg-gray-200" : "bg-[#2F313C]"
+                                  }`
+                                : `border-transparent ${
+                                    light
+                                      ? "hover:bg-gray-200"
+                                      : "hover:bg-[#2F313C]"
+                                  }`
+                            } border-l-2 mb-2 flex items-center py-2 px-4 w-full rounded-md`}
+                          >
+                            <FaPowerOff className="mr-2" />
+                            Wyloguj
+                          </button>
+                        )}
                       </div>
                     ))}
                   </div>

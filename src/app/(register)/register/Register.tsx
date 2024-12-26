@@ -1,7 +1,7 @@
 "use client";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { addDocument, auth } from "@/firebase";
+import { addDocument, auth, getDocument } from "@/firebase";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,8 @@ import CreateAccountForm from "./CreateAccountForm";
 import FirstStep from "./FirstStep";
 import FirstStepButtons from "./FirstStepButtons";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { setUser } from "@/redux/slices/user";
+import { useDispatch } from "react-redux";
 export default function Register() {
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
@@ -123,10 +125,16 @@ export default function Register() {
       }
     })();
   }
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (user && !loading) {
-      router.push("/user");
+      getDocument("users", user?.uid)
+        .then((data) => {
+          dispatch(setUser(data));
+        })
+        .then(() => {
+          router.push("/user");
+        });
     }
   }, [loading, user]);
   return (
