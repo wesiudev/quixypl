@@ -1,7 +1,12 @@
 import Link from "next/link";
 import jobs from "../../../public/14.09.2024.json";
 import { FaChevronCircleLeft, FaChevronLeft } from "react-icons/fa";
-import { FaCircleXmark, FaMagnifyingGlass } from "react-icons/fa6";
+import {
+  FaArrowLeft,
+  FaArrowLeftLong,
+  FaCircleXmark,
+  FaMagnifyingGlass,
+} from "react-icons/fa6";
 import { IoClose, IoCloseCircle } from "react-icons/io5";
 import { v4 as uuidv4 } from "uuid";
 import { AiFillThunderbolt } from "react-icons/ai";
@@ -39,7 +44,7 @@ export default function MarketCategorySelector({
       <div className="my-1.5 font-bold text-black">Kategoria</div>
       {slug !== "" && category === "" && (
         <div className="text-black flex flex-col mt-1 w-full">
-          <div className="font-bold mb-1 bg-gradient-to-b rounded-md from-primaryHoverStart to-primaryHoverEnd p-1 px-2 text-white w-max max-w-[100%]">
+          <div className="font-bold mb-1 bg-gradient-to-b rounded-md from-primaryHoverStart to-primaryHoverEnd flex items-center justify-center px-2 text-white w-max max-w-[100%] p-1 sm:px-[0.7rem] h-[32px] sm:h-[50px]">
             {slug}
           </div>
           <div className="font-bold">Wybierz podkategorię</div>
@@ -47,7 +52,7 @@ export default function MarketCategorySelector({
       )}
       {slug !== "" && category !== "" && (
         <div className="text-black flex flex-col mt-1 w-full">
-          <div className="font-bold mb-1 bg-gradient-to-b rounded-md from-primaryHoverStart to-primaryHoverEnd p-1 px-2 text-white w-max max-w-[100%]">
+          <div className="font-bold mb-1 bg-gradient-to-b rounded-md from-primaryHoverStart to-primaryHoverEnd flex items-center justify-center px-2 text-white w-max max-w-[100%] p-1 sm:px-[0.7rem] h-[32px] sm:h-[50px]">
             {slug}
           </div>
           <div className="font-bold">Podkategoria</div>
@@ -55,7 +60,7 @@ export default function MarketCategorySelector({
       )}
       {slug !== "" && category !== "" && (
         <div className="flex flex-col mt-1 w-full">
-          <div className="font-bold mb-1 bg-gradient-to-b rounded-md from-primaryHoverStart to-primaryHoverEnd p-1 px-2 text-white w-max max-w-[100%]">
+          <div className="font-bold mb-1 bg-gradient-to-b rounded-md from-primaryHoverStart to-primaryHoverEnd flex items-center justify-center px-2 text-white w-max max-w-[100%] p-1 sm:px-[0.7rem] h-[32px] sm:h-[50px]">
             {category}
           </div>
           <div className="font-bold text-black">Wybierz kategorię</div>
@@ -69,20 +74,21 @@ export default function MarketCategorySelector({
               setCategory("");
               setShowResults(false);
             }}
-            className="rounded-md text-lg w-max bg-gradient-to-b from-accentStart to-accentEnd hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[32px] aspect-square"
+            className="rounded-md text-lg w-max bg-gradient-to-b from-accentStart to-accentEnd hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[32px] sm:h-[50px] aspect-square"
           >
-            <FaChevronLeft className="hover:scale-110" />
+            <FaArrowLeft className="hover:scale-110" />
           </button>
         )}
         {slug !== "" && category !== "" && job !== "" && (
           <button
             onClick={() => {
               setJob("");
+              setCategory("");
               setShowResults(false);
             }}
-            className="rounded-md text-lg w-max bg-gradient-to-b from-accentStart to-accentEnd hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[32px] aspect-square"
+            className="rounded-md text-lg w-max bg-gradient-to-b from-accentStart to-accentEnd hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[32px] sm:h-[50px] aspect-square"
           >
-            <FaChevronCircleLeft className="hover:scale-110" />
+            <FaArrowLeftLong className="hover:scale-110" />
           </button>
         )}
         {slug !== "" && category === "" && (
@@ -91,7 +97,7 @@ export default function MarketCategorySelector({
               setSlug(""), setConfigurationOpen(false);
               setShowResults(false);
             }}
-            className="rounded-md  text-lg w-max bg-gradient-to-b from-accentStart to-accentEnd hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[32px] aspect-square"
+            className="rounded-md  text-lg w-max bg-gradient-to-b from-accentStart to-accentEnd hover:bg-opacity-90 duration-100 text-white flex flex-row items-center justify-center outline-none h-[32px] sm:h-[50px] aspect-square"
           >
             <FaChevronLeft className="hover:scale-110" />
           </button>
@@ -101,7 +107,7 @@ export default function MarketCategorySelector({
             {jobs.map((item: any, k: any) => (
               <button
                 onClick={() => setSlug(item.title)}
-                className=" rounded-md bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd hover:bg-opacity-90 duration-100  text-white font-extralight p-1"
+                className=" rounded-md bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd hover:from-primaryHoverStart/80 hover:to-primaryHoverEnd/80 duration-100  text-white font-extralight p-1 sm:px-[0.7rem] h-[32px] sm:h-[50px]"
                 key={uuidv4()}
               >
                 {item.title}
@@ -118,7 +124,7 @@ export default function MarketCategorySelector({
                     {item.data.map((cat: any, j: any) => (
                       <button
                         onClick={() => setCategory(cat.title)}
-                        className="rounded-md bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd hover:bg-opacity-90 duration-100  text-white font-extralight p-1"
+                        className="rounded-md bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd hover:from-primaryHoverStart/80 hover:to-primaryHoverEnd/80 duration-100  text-white font-extralight p-1 sm:px-[0.7rem] h-[32px] sm:h-[50px]"
                         key={uuidv4()}
                       >
                         {cat.title}
@@ -149,9 +155,9 @@ export default function MarketCategorySelector({
                                   slug !== "" &&
                                   category !== "" &&
                                   job === j.title
-                                    ? "bg-gradient-to-b from-ctaStart to-ctaEnd"
-                                    : "bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd"
-                                } rounded-md hover:bg-opacity-90 duration-100  text-white font-extralight p-1`}
+                                    ? "from-ctaStart to-ctaEnd"
+                                    : "from-primaryHoverStart to-primaryHoverEnd hover:from-primaryHoverStart/80 hover:to-primaryHoverEnd/80 "
+                                } rounded-md duration-100 bg-gradient-to-b text-white font-extralight p-1 sm:px-[0.7rem] h-[32px] sm:h-[50px]`}
                                 key={uuidv4()}
                               >
                                 {j.title}
