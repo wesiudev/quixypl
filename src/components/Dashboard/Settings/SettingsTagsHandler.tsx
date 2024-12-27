@@ -54,7 +54,9 @@ export default function TagsHandler({ light }: { light: any }) {
         </div>
         <div
           className={`${
-            configurationOpen ? "bg-gray-300 p-1" : "bg-white"
+            configurationOpen
+              ? `${light ? "bg-gray-300" : "bg-gray-700"} p-1 sm:p-3 `
+              : ""
           } rounded-md gap-1 flex flex-col items-start w-full`}
         >
           {!configurationOpen && slug.title === "" && (

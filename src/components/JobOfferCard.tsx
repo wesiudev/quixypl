@@ -123,9 +123,9 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
               {/* Salary Section */}
               {/* Salary Section */}
               <div className="mt-4 w-full relative border border-gray-300 rounded-md">
-                <span className="rounded-tl-md rounded-br-xl w-max bg-gradient-to-b px-3 py-1.5 from-ctaStart to-ctaEnd text-white text-sm">
+                <div className="rounded-tl-md rounded-br-xl w-max bg-gradient-to-b px-3 py-1.5 from-ctaStart to-ctaEnd text-white text-sm">
                   WYNAGRODZENIE
-                </span>
+                </div>
                 <div className="flex flex-col gap-4 p-4">
                   {hasNetto && (
                     <div>

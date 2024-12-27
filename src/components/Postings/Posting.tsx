@@ -136,14 +136,14 @@ export default function Posting({
             Wygląd oferty po otwarciu
           </h2>
           <div className="relative w-full">
-            <div className="bg-white w-full">
+            <div className="bg-white rounded-md w-full p-[1rem]">
               <div className="">
                 {/* Specializations */}
                 <div>
-                  <div className="w-full relative border border-gray-300 rounded-md">
-                    <span className="rounded-tl-md rounded-br-xl w-max bg-gradient-to-b px-3 py-1.5 from-ctaStart to-ctaEnd text-white text-sm">
+                  <div className="rounded-md w-full relative border border-gray-300">
+                    <div className="rounded-tl-md rounded-br-xl w-max bg-gradient-to-b px-3 py-1.5 from-ctaStart to-ctaEnd text-white text-sm">
                       SPECJALIZACJE
-                    </span>
+                    </div>
                     {job.specializations && (
                       <div className="flex flex-wrap p-[1rem]">
                         {job.specializations.map(
@@ -164,9 +164,9 @@ export default function Posting({
                   </div>
                   {/* Salary Section */}
                   <div className="mt-4 w-full relative border border-gray-300 rounded-md">
-                    <span className="rounded-tl-md rounded-br-xl w-max bg-gradient-to-b px-3 py-1.5 from-ctaStart to-ctaEnd text-white text-sm">
+                    <div className="rounded-tl-md rounded-br-xl w-max bg-gradient-to-b px-3 py-1.5 from-ctaStart to-ctaEnd text-white text-sm">
                       WYNAGRODZENIE
-                    </span>
+                    </div>
                     <div className="flex flex-col gap-[1rem] p-[1rem]">
                       <div>
                         {job.preferences.filter((p: string) =>

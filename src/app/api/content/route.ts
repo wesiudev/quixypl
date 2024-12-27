@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
-import { getPageContent } from "@/lib/getPageContent";
+import { getDocuments } from "@/firebase";
 
 export async function GET(req: NextRequest) {
   const tubylytylkofigi = req.nextUrl.searchParams.get("tubylytylkofigi");
@@ -12,9 +12,9 @@ export async function GET(req: NextRequest) {
   if (!job) {
     return NextResponse.json({ error: "no content" });
   }
+  const res = await getDocuments("content");
   try {
-    const content = await getPageContent(polishToEnglish(job));
-
+    const content = res.find((doc) => polishToEnglish(doc.title) === job);
     if (!content) {
       return NextResponse.json({ error: "no content" });
     } else {
