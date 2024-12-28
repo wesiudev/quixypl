@@ -14,12 +14,12 @@ export default function QuixiesModule() {
     <>
       <button
         onClick={() => dispatch(set_modals({ ...modals, quixies: false }))}
-        className={`z-[70] disabled:cursor-not-allowed fixed left-0 top-0 w-full h-full ${
+        className={`z-[700] disabled:cursor-not-allowed fixed left-0 top-0 w-full h-full ${
           modals?.quixies ? "block" : "hidden"
         } bg-black/80`}
       />
       <div
-        className={`sm:rounded-lg z-[80] left-0 top-0 sm:left-1/2 sm:-translate-x-1/2 sm:top-1/2 sm:-translate-y-1/2 w-screen sm:w-[90%] lg:max-w-[50rem] xl:max-w-[60rem] h-screen sm:h-[80vh] fixed overflow-y-scroll scrollbar ${
+        className={`sm:rounded-lg z-[800] left-0 top-0 sm:left-1/2 sm:-translate-x-1/2 sm:top-1/2 sm:-translate-y-1/2 w-screen sm:w-[90%] lg:max-w-[50rem] xl:max-w-[60rem] h-screen sm:h-[80vh] fixed overflow-y-scroll scrollbar ${
           modals?.quixies ? "block" : "hidden"
         }`}
       >
@@ -34,7 +34,7 @@ export default function QuixiesModule() {
               <h2 className="font-extrabold text-white text-xl lg:text-2xl">
                 Doładuj Quixies
               </h2>
-              <p className="font-normal text-white mt-1">
+              <p className="text-sm text-white mt-1">
                 Wybierz odpowiedni pakiet dla swoich potrzeb
               </p>
             </div>
@@ -59,17 +59,17 @@ export default function QuixiesModule() {
                     className="w-full"
                   />
                   <p
-                    className={`rounded-b-3xl font-coco font-bold text-center text-white bg-gradient-to-b from-ctaStart to-ctaEnd px-3 py-1 absolute top-0 left-2 sm:left-3 text-sm sm:text-base`}
+                    className={`rounded-b-3xl font-coco font-bold text-center text-white bg-gradient-to-b from-ctaStart to-ctaEnd px-3 py-1 absolute top-0 left-0 sm:left-3 text-sm sm:text-base`}
                     style={{ textShadow: "0px 1px 1px black" }}
                   >
                     {item.price}
-                    ,99 PLN
+                    ,99zł
                   </p>
                 </div>
                 {item.discount > 0 && (
                   <div
                     style={{ textShadow: "0px 1px 2px black" }}
-                    className="w-max absolute top-0 right-2 sm:right-3 bg-gradient-to-b from-accentStart to-accentEnd text-white text-sm sm:text-base font-coco font-bold rounded-b-3xl px-4 py-1"
+                    className="w-max absolute top-0 right-0 sm:right-3 bg-gradient-to-b from-accentStart to-accentEnd text-white text-sm sm:text-base font-coco font-bold rounded-b-3xl px-2 py-1"
                   >
                     {item.discountSize}%
                   </div>

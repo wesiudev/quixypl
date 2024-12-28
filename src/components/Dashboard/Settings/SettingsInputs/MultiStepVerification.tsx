@@ -74,97 +74,99 @@ export default function MultiStepVerification({
       <div
         className={`${user?.access && "hidden"} ${
           light ? "bg-white text-black" : "bg-[#222430] text-white"
-        } duration-300 transition-all mt-3 mx-3 lg:mx-6 lg:ml-12 rounded-lg p-3 relative max-w-full`}
+        } duration-300 transition-all mt-3 mx-3 lg:mx-6 lg:ml-12 rounded-lg relative max-w-full`}
       >
-        <h2
-          className={`absolute top-0 left-0 text-xl px-[2.5rem] font-sans py-2 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd`}
-        >
+        <h2 className="px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
           WERYFIKACJA
         </h2>
-        <p className="mt-12 font-sans">
-          Po opłaceniu wpisowego w wysokości{" "}
-          <b className="p-3 py-1 rounded-md bg-ctaStart text-white">💎20</b>{" "}
-          Twój profil wyświetli się w odpowiednich kategoriach i zacznie
-          docierać do potencjalnych klientów.
-        </p>
-        <div className="space-y-3 p-3 lg:p-6 bg-gray-200 rounded-lg mt-3">
-          <StepItem
-            step={2}
-            title="Rodzaj profilu"
-            isCompleted={(seek === true || seek === false) && seek !== "ask"}
-            completedText={seek ? "Talent" : "Klient"}
-            incompleteText="Wybierz typ profilu"
-            light={light}
-          />
-          <StepItem
-            step={1}
-            title="Konfiguracja"
-            isCompleted={configured && seek !== "ask"}
-            completedText="Proces rozpoczęty"
-            incompleteText="Rozpocznij konfigurację"
-            light={light}
-          />
-          <StepItem
-            step={4}
-            title="E-mail"
-            isCompleted={emailVerified}
-            completedText="Pomyślnie ukończono"
-            incompleteText="Zweryfikuj E-mail"
-            light={light}
-          />
-          <StepItem
-            step={5}
-            title="Nazwa profilu"
-            isCompleted={pseudo}
-            completedText={pseudo}
-            incompleteText="Ustaw unikalną nazwę"
-            light={light}
-          />
-          <StepItem
-            step={3}
-            title="Przedstaw się"
-            isCompleted={name}
-            completedText="Pomyślnie ukończono"
-            incompleteText={`Imię/nazwisko lub nazwa firmy`}
-            light={light}
-          />
-        </div>
-        <div className="w-full flex justify-center">
-          {progress !== 100 && (
-            <button
-              onClick={() =>
-                dispatch(
-                  set_modals({ ...modals, config: true, quixies: false })
-                )
-              }
-              className="mx-auto w-max py-[0.5rem] px-[1rem] max-w-full text-center text-white bg-gradient-to-b from-ctaStart to-ctaEnd mt-3 rounded-lg font-sans"
-            >
-              Uruchom ustawienia
-            </button>
-          )}{" "}
-          {progress === 100 && (
-            <button
-              onClick={handleAccessClick}
-              className="mt-6 bg-gradient-to-r from-ctaStart to-primaryStart text-xl animate-pulse rounded-md text-white py-2 px-4 font-sans font-bold"
-            >
-              Wpisz się! (20.00💎)
-            </button>
-          )}
-        </div>
-        <div className="p-3 bg-gradient-to-r from-primaryStart/70 to-primaryEnd/70 rounded-xl mt-3">
-          <p className="text-white text-sm text-center mb-3 p-1.5 font-coco">
-            Uzupełnij swój profil, aby rozpocząć pozyskiwanie klientów lub
-            poszukiwanie pracy.
+        <div className="p-[1.5rem]">
+          <p className="font-sans">
+            Po opłaceniu wpisowego w wysokości{" "}
+            <b className="px-1.5 py-1 rounded-md bg-ctaStart text-white">
+              💎20
+            </b>{" "}
+            Twój profil wyświetli się w odpowiednich kategoriach i zacznie
+            docierać do potencjalnych klientów.
           </p>
-          <div className="relative w-full h-6 bg-gray-300 rounded-full mb-3">
-            <div
-              className="h-full bg-gradient-to-r from-accentStart to-accentEnd rounded-full transition-all duration-500 ease-in-out"
-              style={{ width: `${progress}%` }}
-            ></div>
+          <div className="space-y-3 p-3 lg:p-6 bg-gray-200 rounded-lg mt-3">
+            <StepItem
+              step={2}
+              title="Rodzaj profilu"
+              isCompleted={(seek === true || seek === false) && seek !== "ask"}
+              completedText={seek ? "Talent" : "Klient"}
+              incompleteText="Wybierz typ profilu"
+              light={light}
+            />
+            <StepItem
+              step={1}
+              title="Konfiguracja"
+              isCompleted={configured && seek !== "ask"}
+              completedText="Proces rozpoczęty"
+              incompleteText="Rozpocznij konfigurację"
+              light={light}
+            />
+            <StepItem
+              step={4}
+              title="E-mail"
+              isCompleted={emailVerified}
+              completedText="Pomyślnie ukończono"
+              incompleteText="Zweryfikuj E-mail"
+              light={light}
+            />
+            <StepItem
+              step={5}
+              title="Nazwa profilu"
+              isCompleted={pseudo}
+              completedText={pseudo}
+              incompleteText="Ustaw unikalną nazwę"
+              light={light}
+            />
+            <StepItem
+              step={3}
+              title="Przedstaw się"
+              isCompleted={name}
+              completedText="Pomyślnie ukończono"
+              incompleteText={`Imię/nazwisko lub nazwa firmy`}
+              light={light}
+            />
           </div>
-          <p className="text-center text-sm text-white rounded-xl px-2 mx-auto w-max bg-gradient-to-b from-primaryStart to-primaryEnd">
-            {progress}% ukończono
-          </p>
+          <div className="w-full flex justify-center">
+            {progress !== 100 && (
+              <button
+                onClick={() =>
+                  dispatch(
+                    set_modals({ ...modals, config: true, quixies: false })
+                  )
+                }
+                className="mx-auto w-max py-[0.5rem] px-[1rem] max-w-full text-center text-white bg-gradient-to-b from-ctaStart to-ctaEnd mt-3 rounded-lg font-sans"
+              >
+                Uruchom ustawienia
+              </button>
+            )}{" "}
+            {progress === 100 && (
+              <button
+                onClick={handleAccessClick}
+                className="mt-6 bg-gradient-to-r from-ctaStart to-primaryStart text-xl animate-pulse rounded-md text-white py-2 px-4 font-sans font-bold"
+              >
+                Wpisz się! (20.00💎)
+              </button>
+            )}
+          </div>
+          <div className="p-3 bg-gradient-to-r from-primaryStart/70 to-primaryEnd/70 rounded-xl mt-3">
+            <p className="text-white text-sm text-center mb-3 p-1.5 font-coco">
+              Uzupełnij swój profil, aby rozpocząć pozyskiwanie klientów lub
+              poszukiwanie pracy.
+            </p>
+            <div className="relative w-full h-6 bg-gray-300 rounded-full mb-3">
+              <div
+                className="h-full bg-gradient-to-r from-accentStart to-accentEnd rounded-full transition-all duration-500 ease-in-out"
+                style={{ width: `${progress}%` }}
+              ></div>
+            </div>
+            <p className="text-center text-sm text-white rounded-xl px-2 mx-auto w-max bg-gradient-to-b from-primaryStart to-primaryEnd">
+              {progress}% ukończono
+            </p>
+          </div>
         </div>
       </div>
     </div>

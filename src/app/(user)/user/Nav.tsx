@@ -65,6 +65,11 @@ export default function Nav({
           href: `/user/new_service`,
           icon: <FaPlusCircle />,
         },
+        {
+          title: "Moje usługi",
+          href: `/user/services`,
+          icon: <FaList />,
+        },
       ],
     },
   ];

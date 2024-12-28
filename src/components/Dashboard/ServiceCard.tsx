@@ -1,4 +1,4 @@
-import { addDocument, updateUser } from "@/firebase";
+import { addDocument, deleteService, updateUser } from "@/firebase";
 import { setUser } from "@/redux/slices/user";
 import { IProject } from "@/types";
 import Link from "next/link";
@@ -10,18 +10,52 @@ import Image from "next/image";
 import ProjectImages from "./ImageGenerator/dashboard/ProjectImages";
 import { useState } from "react";
 import { set_modals } from "@/redux/slices/modalsopen";
+import ServiceOptionsOpened from "./ServiceOptionsOpened";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
 export default function ServiceCard({
   project,
+  setEditOpen,
+  setOpenedService,
   user,
 }: {
   project: IProject;
+  setEditOpen: any;
+  setOpenedService: any;
   user: any;
 }) {
   const dispatch = useDispatch();
-  async function bid() {
-    if (user?.tokens < 10) {
-      return toast.error("Niewystarczająca ilość Quixies", {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const { modals } = useSelector((state: any) => state.modals);
+  const [isOpen, setIsOpen] = useState(false);
+  const [optionsOpen, setOptionsOpen] = useState(false);
+  const [deleteMenu, setDeleteMenu] = useState(false);
+  const handleDeleteService = async (id: string) => {
+    try {
+      // Delete job offer from the collection
+      await deleteService(id);
+
+      // Update the user's job offers by removing the deleted one
+      const updatedServices = user.projects.filter(
+        (service: any) => service.id !== id
+      );
+
+      // Update user in the database
+      await updateUser(user.uid, { projects: updatedServices });
+
+      // Dispatch updated user state to Redux
+      dispatch(
+        setUser({
+          ...user,
+          services: updatedServices,
+        })
+      );
+
+      toast.success("Pomyślnie usunięto usługę.");
+      setOptionsOpen(false);
+      setDeleteMenu(false);
+    } catch (error) {
+      toast.error("Przepraszamy! Wystąpił błąd.", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -29,56 +63,57 @@ export default function ServiceCard({
         pauseOnHover: true,
       });
     }
-    const updatedTokens = user?.tokens - 10;
-    const updatedProjects = user?.projects.map((p: IProject) =>
-      p.id === project.id ? { ...p, isPaid: true } : p
-    );
-    await updateUser(user?.uid, {
-      tokens: updatedTokens,
-      projects: updatedProjects,
-    });
-    const uniqueId = Date.now().toString();
-    await addDocument("services", uniqueId, {
-      ...project,
-      isPaid: true,
-    });
-    dispatch(
-      setUser({ ...user, tokens: updatedTokens, projects: updatedProjects })
-    );
-    toast.success("Pomyślnie dodano usługę!", {
-      position: "top-right",
-      autoClose: 5000,
-    });
-  }
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const { modals } = useSelector((state: any) => state.modals);
-  const [isOpen, setIsOpen] = useState(false);
+  };
   return (
     <>
-      <div className="block p-6 bg-gray-800 hover:bg-zinc-800 rounded-xl">
+      <div className="block p-6 bg-gray-800 hover:bg-zinc-800 rounded-md relative">
+        <ServiceOptionsOpened
+          setDeleteMenu={setDeleteMenu}
+          deleteMenu={deleteMenu}
+          optionsOpen={optionsOpen}
+          setEditOpen={setEditOpen}
+          setOptionsOpen={setOptionsOpen}
+          handleDeleteService={handleDeleteService}
+          service={project}
+          setOpenedService={setOpenedService}
+        />
         <div className="flex flex-col sm:flex-row gap-3">
           <div>
-            <h5 className="mb-3 text-3xl font-extrabold tracking-tight text-blue-500">
-              {project.name}
-            </h5>
+            <div className="flex flex-wrap w-full justify-between">
+              <h5 className="mb-3 text-2xl sm:text-3xl font-extrabold tracking-tight text-blue-500">
+                {project?.name}
+              </h5>
+              <div className="flex items-end justify-end">
+                <button
+                  onClick={() => setOptionsOpen(!optionsOpen)}
+                  className={`absolute h-max top-3 right-3 w-max text-3xl text-white px-2 bg-gradient-to-r from-primaryHoverStart to-primaryHoverEnd z-10 duration-200 rounded-md`}
+                >
+                  <HiOutlineDotsHorizontal
+                    className={`${
+                      optionsOpen
+                        ? "scale-125 hover:scale-110"
+                        : "hover:scale-90"
+                    }`}
+                  />
+                </button>
+              </div>
+            </div>
             <p className="mb-2 text-white">
               <span className="text-sm font-bold text-white">Płatność:</span>{" "}
-              {project.time}
+              {project?.time}
             </p>
             <p className="mb-2 text-white">
               <span className="text-sm font-bold text-white">Cena:</span>{" "}
-              {project.salaryValue}
+              {project?.salaryValue}
             </p>
             <p className="mb-2 text-white">
               <span className="text-sm font-bold text-white">
                 Czas wykonania:
               </span>{" "}
-              {project.duration}
+              {project?.duration}
             </p>
-            <div className="bg-white p-2 my-3 rounded-md">
-              <Viewer value={project?.desc} />
-            </div>
-            <div className="mt-2 gap-3 grid grid-cols-5">
+            <p className="text-white my-3 rounded-md">{project?.desc}</p>
+            <div className="mt-2 gap-3 grid grid-cols-2 w-full">
               {project.images.map((image: any, i: any) => (
                 <button
                   onClick={() => {
@@ -87,26 +122,20 @@ export default function ServiceCard({
                     setIsOpen(true);
                   }}
                   key={i}
+                  className="relative aspect-square w-full"
                 >
                   <Image
                     src={image.src}
-                    width={250}
-                    height={250}
-                    alt={image.desc || ""}
-                    className="w-full h-auto rounded-md"
+                    width={550}
+                    height={550}
+                    alt={image?.desc || "Obraz usługi"}
+                    className="w-full h-full rounded-md absolute inset-0 object-cover group-hover:scale-110 duration-500"
                   />
                 </button>
               ))}
             </div>
           </div>
         </div>
-
-        <Link
-          href={`/user/leads`}
-          className="flex items-center gap-2 text-white font-extrabold bg-gradient-to-b from-accentStart to-accentEnd w-max max-w-full p-1.5 mt-3 rounded-lg"
-        >
-          Wszystkie zlecenia <FaArrowRightLong />
-        </Link>
       </div>
       <div
         className={`fixed left-0 top-0 ${isOpen ? "block" : "hidden"} z-[9999]`}

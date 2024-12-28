@@ -16,15 +16,11 @@ export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   const posts = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   const product: any = await getProductByUrl(params?.slug);
 

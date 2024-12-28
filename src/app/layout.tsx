@@ -15,9 +15,7 @@ export default async function RootLayout({
 }) {
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   const itCategories = await jobs.flatMap((job: any) => [
     { title: job.title, data: job.data.map((subItem: any) => subItem) },

@@ -28,7 +28,6 @@ export default function Posting({
   setOpenedJobOffer: any;
 }) {
   const [optionsOpen, setOptionsOpen] = useState(false);
-  const [applicationsOpen, setApplicationsOpen] = useState(false);
   const [deleteMenu, setDeleteMenu] = useState(false);
   const { user } = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
@@ -81,7 +80,6 @@ export default function Posting({
             optionsOpen={optionsOpen}
             setEditOpen={setEditOpen}
             setOptionsOpen={setOptionsOpen}
-            setApplicationsOpen={setApplicationsOpen}
             handleDeleteJobOffer={handleDeleteJobOffer}
             jobOffer={job}
             setOpenedJobOffer={setOpenedJobOffer}

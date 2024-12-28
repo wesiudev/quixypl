@@ -52,9 +52,7 @@ function StripeButton({ item }: { item: any }) {
         className={`w-full font-bold relative flex items-center justify-center text-center text-white bg-gradient-to-b from-ctaStart to-ctaEnd px-6 py-1 mt-2 text-base `}
       >
         {isLoading && (
-          <div className="flex items-center justify-center">
-            <div className="h-[28px] w-[28px] loading-spinner loading border-gray-900"></div>
-          </div>
+          <div className="animate-spin h-5 w-5 border-4 border-t-transparent border-white rounded-full mr-3"></div>
         )}
         {!isLoading && (
           <>
@@ -62,7 +60,7 @@ function StripeButton({ item }: { item: any }) {
               Kup za {item.price},99 PLN
             </div>
             <div
-              className={`text-lg group-hover:scale-y-0 duration-150 ease-in-out ${
+              className={`w-max text-sm sm:text-lg group-hover:scale-y-0 duration-150 ease-in-out ${
                 item.discount > 0 && "line-through text-gray-400"
               }`}
             >
@@ -72,7 +70,7 @@ function StripeButton({ item }: { item: any }) {
             <div
               className={`${
                 item.discount === 0 && "hidden"
-              } text-lg group-hover:scale-y-0 duration-150 ease-in-out`}
+              } w-max text-sm sm:text-lg group-hover:scale-y-0 duration-150 ease-in-out`}
             >
               {" "}
               <span className="mr-1">💎</span>

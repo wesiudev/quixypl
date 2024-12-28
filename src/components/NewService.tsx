@@ -5,16 +5,13 @@ import { useState } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 export default function NewService() {
-  const [project, setProject] = useState<any>({
-    images: [],
-    days: 1,
-    price: 24.41,
-  });
+  const [project, setProject] = useState<any>("");
   const [isUploading, setUploading] = useState(false);
   const [uploadCount, setUploadCount] = useState(0);
   const { user } = useSelector((state: any) => state.user);
+  const { light } = useSelector((state: any) => state.light);
   return (
-    <div className="w-full min-h-screen bg-gray-600">
+    <div className="mx-3 lg:mx-6 lg:ml-12 py-6">
       {isUploading && (
         <div className="fixed left-0 top-0 z-[99999999999999999999999] h-screen w-screen flex justify-center items-center bg-[#202020]/50 text-xl text-white">
           <div className="flex flex-col items-center justify-center">
@@ -22,20 +19,31 @@ export default function NewService() {
           </div>
         </div>
       )}
-      <div className="w-full justify-between bg-gradient-to-r from-primary to-cta py-3 px-6 text-white font-bold text-lg flex items-center">
+      <div
+        className={`${
+          light ? "bg-white text-black" : "bg-[#222430] text-white"
+        } rounded-lg justify-between py-3 px-3 xl:px-6 font-bold text-lg flex items-center max-w-full`}
+      >
         <Link href="/user" className="flex items-center">
           <FaChevronLeft className="mr-2 text-xl" />
           Powrót
         </Link>
-        <div className="flex flex-col text-white pl-12">
-          <h2 className="font-extrabold">Zarządzaj rynkiem</h2>
+        <div className="flex flex-col pl-12">
+          <h2 className="font-extrabold">Nowe ogłoszenie</h2>
           <p className="text-xs font-coco">
-            Opublikuj swoje usługi na platformie Quixy i pozyskuj zlecenia
+            Skonfiguruj ofertę pracy i opublikuj
           </p>
         </div>
       </div>
-      <div className="flex items-center justify-center pb-12">
-        <div className="bg-white rounded-b-xl p-3 lg:p-6 w-full lg:w-[40rem]">
+      <div
+        className={`${
+          light ? "bg-white text-black" : "bg-[#222430] text-white"
+        } relative rounded-lg flex items-center justify-center pb-12 mt-6`}
+      >
+        <h1 className="absolute left-0 top-0 px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
+          DODAJ USŁUGĘ
+        </h1>
+        <div className="p-3 lg:p-6 w-full mt-12">
           <PortfolioItems
             user={user}
             setProject={setProject}

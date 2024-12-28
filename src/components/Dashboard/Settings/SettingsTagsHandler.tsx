@@ -247,7 +247,7 @@ export default function TagsHandler({ light }: { light: any }) {
                                       setSlug({ title: "", url: "" });
                                     }
                                   }}
-                                  className="h-[40px] sm:h-[50px] bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd hover:from-primaryHoverStart/80 hover:to-primaryHoverEnd/80 rounded-md text-white font-light px-[0.5rem] sm:px-[1rem] text-xs sm:text-sm md:text-base hover:bg-opacity-80"
+                                  className="h-[40px] sm:h-[50px] bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd hover:from-primaryHoverStart/80 hover:to-primaryHoverEnd/80 rounded-md text-white font-light px-[0.5rem] sm:px-[1rem] text-xs sm:text-sm md:text-base"
                                   key={i}
                                 >
                                   {job.title}

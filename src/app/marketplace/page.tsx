@@ -13,15 +13,11 @@ export const revalidate = 60;
 export default async function Page() {
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   const services = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   return (
     <div className="min-h-screen w-full flex flex-col">

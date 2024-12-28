@@ -14,7 +14,7 @@ export default function JobOffers({
   return (
     <div>
       {offers?.length === 0 && (
-        <div className="rounded-lg p-3 bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30 mt-6 w-full mx-auto">
+        <div className="rounded-lg p-3 bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30 mt-6 w-full mx-auto py-12">
           {/* Ikona w centrum */}
           <div
             style={{ boxShadow: "0px 1px 10px rgba(0,0,0,0.8)" }}

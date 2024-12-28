@@ -19,7 +19,7 @@ import { addDocument, storage, updateUser } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { InputField } from "@/components/AddJobOffer/InputField";
 
-export default function PortfolioItems({
+export default function ServiceEditor({
   user,
   project,
   setProject,

@@ -8,9 +8,7 @@ import AboutQuixyTalent from "@/components/AboutQuixyTalent";
 export default async function Page() {
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   return (
     <div className="min-h-screen flex flex-col">

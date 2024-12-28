@@ -80,10 +80,10 @@ export default function DashboardUserInfo() {
           </button>
           {!user?.configured && (user?.seek === "ask" || !user?.seek) && (
             <div className="pl-4">
-              <h2 className="text-white bg-gradient-to-b from-accentStart to-accentEnd w-max rounded-xl px-2 font-extrabold">
+              <h2 className="text-black w-max font-extrabold">
                 Nie skonfigurowano profilu
               </h2>
-              <p className="text-black max-w-lg my-1 text-sm">
+              <p className="text-black mt-1 text-sm">
                 Określ typ profilu w zakładce{" "}
                 <b className="italic">Ustawienia</b>, by rozpocząć swoją
                 przygodę w Quixy
@@ -159,7 +159,7 @@ export default function DashboardUserInfo() {
                 </div>
               )}
               {!user?.pseudo && (
-                <div className="mt-3">
+                <div className="mt-1">
                   <h2 className="font-extrabold text-lg">Unikalny link</h2>
                   <h3 className={`mt-1`}>Nie skonfigurowano...</h3>
                 </div>
@@ -170,7 +170,7 @@ export default function DashboardUserInfo() {
         <div>
           {!user?.emailVerified && (
             <div
-              className={`rounded-lg border-l-4 border-primaryStart p-3 mt-3 mx-3 lg:mx-6 lg:ml-12 px-3 w-full max-w-full ${
+              className={`rounded-lg border-l-4 border-primaryStart p-3 mt-3 mx-3 lg:mx-6 lg:ml-12 px-3 max-w-full ${
                 light ? "bg-white text-black" : "bg-[#222430] text-white"
               } duration-300`}
             >
@@ -187,7 +187,7 @@ export default function DashboardUserInfo() {
           )}
           <div>
             {(user?.seek || !user?.seek) && user?.seek !== "ask" && (
-              <div className="mt-6">
+              <div className={`mt-3`}>
                 <div className="grid xl:grid-cols-2 mx-3 lg:mx-6 lg:ml-12 gap-3">
                   <div
                     className={`rounded-lg duration-300 relative ${
@@ -210,7 +210,7 @@ export default function DashboardUserInfo() {
                         <h3
                           className={`${
                             light ? "text-black" : "text-white"
-                          } duration-300 ml-1`}
+                          } duration-300 ml-1 p-[0.7rem]`}
                         >
                           Brak podanych specjalizacji...
                         </h3>
@@ -241,7 +241,7 @@ export default function DashboardUserInfo() {
                           <h3
                             className={`${
                               light ? "text-black" : "text-white"
-                            } duration-300 ml-1`}
+                            } duration-300 ml-1 p-[0.7rem]`}
                           >
                             Brak danych o dostępności...
                           </h3>
@@ -263,7 +263,7 @@ export default function DashboardUserInfo() {
                           <h3
                             className={`${
                               light ? "text-black" : "text-white"
-                            } duration-300 ml-1`}
+                            } duration-300 ml-1 p-[0.7rem]`}
                           >
                             Uzupełnij dane...
                           </h3>
@@ -273,7 +273,7 @@ export default function DashboardUserInfo() {
                   </div>
                 </div>
                 <div
-                  className={`mt-6 mx-3 lg:mx-6 lg:ml-12 ${
+                  className={`mt-3 mx-3 lg:mx-6 lg:ml-12 ${
                     light ? "bg-white" : "bg-[#222430]"
                   } duration-300 rounded-lg relative`}
                 >

@@ -1,25 +1,24 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function OfferOptionsOpened({
+export default function ServiceOptionsOpened({
   optionsOpen,
   setEditOpen,
   setOptionsOpen,
-
-  handleDeleteJobOffer,
-  jobOffer,
+  handleDeleteService,
+  service,
   deleteMenu,
   setDeleteMenu,
-  setOpenedJobOffer,
+  setOpenedService,
 }: {
   optionsOpen: any;
   setEditOpen: (value: boolean) => void;
   setOptionsOpen: (value: boolean) => void;
-  handleDeleteJobOffer: (id: string) => Promise<void>;
-  jobOffer: { id: string };
+  handleDeleteService: (id: string) => Promise<void>;
+  service: any;
   deleteMenu: any;
   setDeleteMenu: any;
-  setOpenedJobOffer: any;
+  setOpenedService: any;
 }) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -32,21 +31,12 @@ export default function OfferOptionsOpened({
       <button
         onClick={() => {
           setEditOpen(true);
-          setOpenedJobOffer(jobOffer);
+          setOpenedService(service);
           setOptionsOpen(false);
         }}
         className="w-full px-4 py-1 text-white bg-white bg-opacity-10 duration-150 hover:bg-opacity-20"
       >
         Edytuj
-      </button>
-      <button
-        onClick={() => {
-          router.push("/user/leads");
-          setOptionsOpen(false);
-        }}
-        className="w-full px-4 py-1 text-white bg-white bg-opacity-10 duration-150 hover:bg-opacity-20"
-      >
-        Kandydaci
       </button>
       <button
         onClick={() => {
@@ -66,7 +56,7 @@ export default function OfferOptionsOpened({
           disabled={loading}
           onClick={() => {
             setLoading(true);
-            handleDeleteJobOffer(jobOffer.id).then(() => setLoading(false));
+            handleDeleteService(service.id).then(() => setLoading(false));
           }}
           className="disabled:bg-red-400 w-full px-4 py-1 text-white bg-red-500 bg-opacity-100 duration-150 hover:bg-opacity-90"
         >

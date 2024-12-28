@@ -8,13 +8,12 @@ const JobOffers = dynamic(() => import("@/components/JobOffers"));
 import Image from "next/image";
 import SlugFooter from "@/components/SlugFooter";
 import dynamic from "next/dynamic";
+import { getDocument } from "@/firebase";
 const InitializeUser = dynamic(() => import("@/components/InitializeUser"));
 export async function generateStaticParams() {
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   return jobs
     .flatMap((service: any) =>
@@ -26,15 +25,11 @@ export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
   const offers = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/offers?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   const cat: any = jobs?.find(
     (page: any) => polishToEnglish(page.title) === params.slug
@@ -43,17 +38,13 @@ export default async function Page(props: { params: Promise<any> }) {
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.job)}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   const companies = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/companies/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.job)}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   const allCities = Array?.from(
     new Set([
@@ -63,28 +54,20 @@ export default async function Page(props: { params: Promise<any> }) {
   );
   const content = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.job}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   const services = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   const posts = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   return (
     <>
       <div className="font-sans min-h-screen flex flex-col w-full">
         <InitializeUser />
-        {/* Header */}
-        {/* Job Title Section */}
         <section
           className="py-12 text-left relative bg-gradient-to-r from-primaryStart to-primaryEnd"
           style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0)" }}
@@ -102,39 +85,10 @@ export default async function Page(props: { params: Promise<any> }) {
 
           {/* Główna zawartość */}
           <div className="relative z-50 w-full mx-auto container px-4 lg:px-12">
-            {/* Breadcrumbs */}
-            <div className="text-white breadcrumbs mb-4">
-              <ul className="flex flex-wrap font-light">
-                <li>
-                  <Link title="home" href={`/`}>
-                    hello!
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="text-lg"
-                    title="Zakładka praca zdalna"
-                    href={`/praca-zdalna`}
-                  >
-                    [...]
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    title={`Oferty Pracy Zlecenia Freelancerzy Firmy ${params.job}`}
-                    className="text-accentStart"
-                    href={`/praca-zdalna/${params.slug}/${params.category}/${params.job}`}
-                  >
-                    {params.job}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
             {/* Główny nagłówek */}
             <h1
               style={{ lineHeight: 1.4 }}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4"
+              className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4"
             >
               Oferty pracy, zlecenia usługi i najlepsi{" "}
               <span className="text-accentStart">
@@ -201,7 +155,7 @@ export default async function Page(props: { params: Promise<any> }) {
             <section className="text-left">
               <h2
                 style={{ lineHeight: 1.5 }}
-                className="font-extrabold text-black text-xl lg:text-3xl"
+                className="font-extrabold text-black text-xl lg:text-3xl mb-3"
               >
                 Czym zajmują się
                 <span className="ml-2 text-black">
@@ -313,7 +267,7 @@ export default async function Page(props: { params: Promise<any> }) {
       <SlugFooter
         jobsList={cat.data}
         title={cat.title}
-        footerTitle={content.title}
+        footerTitle={content?.title}
         slug={params.slug}
       />
     </>
@@ -323,9 +277,7 @@ export default async function Page(props: { params: Promise<any> }) {
 export async function generateMetadata(props: { params: Promise<any> }) {
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   const params = await props.params;
   const category = jobs

@@ -3,7 +3,6 @@ import MultiStepVerification from "@/components/Dashboard/Settings/SettingsInput
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import DashboardUserInfo from "./DashboardUserInfo";
-import ServiceList from "@/components/Dashboard/ProjectList";
 import AccountHistory from "@/components/Dashboard/ImageGenerator/dashboard/AccountHistory";
 
 export default function DashboardUnderMenu() {
@@ -39,7 +38,6 @@ export default function DashboardUnderMenu() {
                   isAnimating={isAnimating}
                 />
               </div>
-              <ServiceList projects={user?.projects} />
               <AccountHistory />
             </div>
           </div>

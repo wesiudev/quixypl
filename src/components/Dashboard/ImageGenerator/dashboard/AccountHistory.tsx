@@ -14,7 +14,7 @@ export default function AccountHistory() {
     <div
       className={`${
         light ? "bg-white" : "bg-[#222430]"
-      } duration-300 flex flex-col relative mx-3 lg:mx-6 lg:ml-12 mt-6 mb-6 rounded-lg`}
+      } duration-300 flex flex-col relative mx-3 lg:mx-6 lg:ml-12 mt-3 mb-6 rounded-lg`}
     >
       <h2 className="px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
         HISTORIA

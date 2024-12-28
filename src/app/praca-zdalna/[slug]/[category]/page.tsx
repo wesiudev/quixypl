@@ -8,14 +8,13 @@ import Image from "next/image";
 import SlugFooter from "@/components/SlugFooter";
 import BlogPostList from "@/components/BlogPostList";
 import { AiFillThunderbolt } from "react-icons/ai";
+import { getDocument } from "@/firebase";
 
 // Generowanie parametrów statycznych
 export async function generateStaticParams() {
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   return jobs.flatMap((service: any) =>
     service.data.flatMap((subItem: any) => ({ category: subItem.title }))
@@ -25,9 +24,7 @@ export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   const cat: any = jobs.find(
     (page: any) => polishToEnglish(page.title) === params.slug
@@ -37,38 +34,29 @@ export default async function Page(props: { params: Promise<any> }) {
   );
   const content = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.category}`,
-    {
-      next: { revalidate: 60 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
+
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.category)}`,
-    {
-      next: { revalidate: 60 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   const companies = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/companies/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.category)}`,
-    {
-      next: { revalidate: 60 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
 
   const services = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 60 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   const posts = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 60 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   return (
     <div className="bg-gradient-to-b relative bg-white">
@@ -90,39 +78,10 @@ export default async function Page(props: { params: Promise<any> }) {
 
         {/* Główna zawartość */}
         <div className="relative z-50 w-full mx-auto container px-4 lg:px-12">
-          {/* Breadcrumbs */}
-          <div className="text-white breadcrumbs mb-4">
-            <ul className="flex flex-wrap font-light">
-              <li>
-                <Link title="Strona główna" href={`/`}>
-                  hello!
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="text-lg"
-                  title="Zakładka praca zdalna"
-                  href={`/praca-zdalna`}
-                >
-                  [...]
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="text-accentStart"
-                  title={`Podkategoria: ${params.category}`}
-                  href={`/praca-zdalna/${params.slug}/${params.category}`}
-                >
-                  {params.category}
-                </Link>
-              </li>
-            </ul>
-          </div>
-
           {/* Główny nagłówek */}
           <h1
             style={{ lineHeight: 1.4 }}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4"
+            className="text-4xl lg:text-5xl font-extrabold text-white mb-4"
           >
             Oferty pracy, zlecenia usługi i najlepsi eksperci -{" "}
             <span className="text-accentStart">{slug?.title}</span>
@@ -173,20 +132,20 @@ export default async function Page(props: { params: Promise<any> }) {
         {/* Podkategorie */}
         {slug?.data?.length > 0 && (
           <div className="w-full">
-            <h1 className="text-black text-2xl lg:text-3xl font-extrabold mb-6">
+            <h2 className="text-black text-2xl lg:text-3xl font-extrabold mb-6">
               Oferty Pracy - {slug.title}
-            </h1>
-            <div className="w-full bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30 p-3 rounded-lg grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+            </h2>
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
               {slug.data.map((item: any, index: number) => (
                 <Link
                   href={`/praca-zdalna/${params.slug}/${
                     params.category
                   }/${polishToEnglish(item.title)}`}
                   key={index}
-                  className="hover:scale-105 duration-100 flex items-center bg-gradient-to-r from-primaryStart to-primaryEnd text-white px-4 py-3 rounded-lg shadow-md hover:shadow-lg transition"
+                  className="p-1 hover:scale-105 duration-100 flex items-center bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd text-white pr-4 h-[50px] rounded-lg shadow-md hover:shadow-lg transition"
                 >
-                  <div className="flex items-center justify-center min-w-9 min-h-9 rounded-full bg-white text-accentEnd">
-                    <FaBriefcase className="w-5 h-5" />
+                  <div className="flex items-center justify-center aspect-square h-full rounded-md bg-white text-primaryHoverEnd">
+                    <FaBriefcase className="w-6 h-6" />
                   </div>
                   <h2 className="font-coco w-full flex items-center justify-center text-center gap-3">
                     {item.title}
@@ -203,7 +162,7 @@ export default async function Page(props: { params: Promise<any> }) {
             {/* Główna sekcja tekstowa */}
             <section className="w-full lg:w-3/5">
               {/* Nagłówek */}
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl text-black font-extrabold mb-6 leading-tight">
+              <h2 className="font-extrabold text-black text-xl lg:text-3xl mb-3">
                 Czym zajmują się {content?.informal_title_plural?.toLowerCase()}
                 ?
               </h2>
@@ -314,9 +273,7 @@ export async function generateMetadata(props: { params: Promise<any> }) {
   const params = await props.params;
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   const category = jobs
     .flatMap((service: any) =>

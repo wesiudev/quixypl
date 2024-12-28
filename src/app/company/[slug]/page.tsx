@@ -19,21 +19,15 @@ export default async function Page(props: {
     `${process.env.NEXT_PUBLIC_URL}/api/talents/get?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&pseudo=${polishToEnglish(params.slug)}`,
-    {
-      next: { revalidate: 60 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/getSimilarTalents?tubylytylkofigi=${process.env.API_SECRET_KEY}&id=${talent.uid}`,
-    {
-      next: { revalidate: 60 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   const companies = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/getSimilarCompanies?tubylytylkofigi=${process.env.API_SECRET_KEY}&id=${talent.uid}`,
-    {
-      next: { revalidate: 60 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   return (
     <>
@@ -290,9 +284,7 @@ export async function generateMetadata(props: {
     `${process.env.NEXT_PUBLIC_URL}/api/talents/get?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&pseudo=${polishToEnglish(params.slug)}`,
-    {
-      next: { revalidate: 60 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
 
   const title = !slug?.googleTitle

@@ -11,9 +11,7 @@ import JobBoardList from "@/components/JobBoardList";
 export async function generateStaticParams() {
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   return jobs
     .flatMap((service: any) =>
@@ -26,49 +24,35 @@ export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   const offers = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/offers/?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`,
-    {
-      next: { revalidate: 600 },
-    }
+    `${process.env.NEXT_PUBLIC_URL}/api/offers?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`,
+    { cache: "no-store" }
   ).then((res) => res.json());
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.slug)}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   const companies = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/companies/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.slug)}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   const content = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.job}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   const services = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   const posts = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   const categoryTalents = talents.filter(
     (item: any) => polishToEnglish(item?.city) === params.city
@@ -103,42 +87,6 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
           {/* Główna zawartość */}
           <div className="relative z-50 w-full mx-auto container px-4 lg:px-12">
-            {/* Breadcrumbs */}
-            <div className="text-white breadcrumbs mb-4">
-              <ul className="flex flex-wrap font-light">
-                <li>
-                  <Link title="home" href={`/`}>
-                    hello!
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="text-lg"
-                    title="Zakładka praca zdalna"
-                    href={`/praca-zdalna`}
-                  >
-                    [...]
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    title={`Oferty Pracy Zlecenia Freelancerzy Firmy ${params.job}`}
-                    href={`/praca-zdalna/${params.slug}/${params.category}/${params.job}`}
-                  >
-                    {params.job}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="text-accentStart"
-                    href={`/praca-zdalna/${params.slug}/${params.category}/${params.job}/${params.city}`}
-                  >
-                    {params.city}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
             {/* Główny nagłówek */}
             <h1
               style={{ lineHeight: 1.4 }}
@@ -150,13 +98,11 @@ export default async function Page(props: { params: Promise<any> }) {
               </span>{" "}
               - {city}
             </h1>
-
             {/* Opis */}
             <p className="lg:text-base text-gray-100 max-w-2xl mb-6">
               Zatrudnij najlepszych specjalistów na polskim rynku pracy i
               zrealizuj swój projekt z ich wsparciem!
             </p>
-
             {/* Przyciski */}
             <div className="flex gap-4">
               <Link
@@ -335,25 +281,19 @@ export async function generateMetadata(props: { params: Promise<any> }) {
   const params = await props.params;
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { cache: "no-store" }
   ).then((res) => res.json());
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.slug)}`,
-    {
-      next: { revalidate: 60 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   const companies = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/companies/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.slug)}`,
-    {
-      next: { revalidate: 60 },
-    }
+    { cache: "no-store" }
   ).then((res: any) => res.json());
   const categoryTalents = talents.filter(
     (item: any) => polishToEnglish(item?.city) === params.city
