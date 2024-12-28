@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { IoSend } from "react-icons/io5";
-import updateUserLeads from "@/lib/updateUserLeads";
 import { v4 as uuidv4 } from "uuid";
+import { updateUserLeads } from "@/lib/updateUserLeads";
+
 interface MessageInputProps {
   value: any;
 }
@@ -87,7 +88,6 @@ const MessageInput: React.FC<MessageInputProps> = ({ value }) => {
     });
     setSent(true);
   };
-
   return (
     <div className="w-full flex flex-col gap-2">
       <div className="flex flex-col">

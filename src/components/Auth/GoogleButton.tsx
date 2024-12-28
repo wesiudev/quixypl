@@ -6,8 +6,7 @@ import { useRouter } from "next/navigation";
 import { errorCatcher } from "../../../utils/errorCatcher";
 async function sendVerificationEmail(email: string, verificationCode: string) {
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`,
-    { cache: "no-store" }
+    `${process.env.NEXT_PUBLIC_URL}/api/sendVerificationEmail?email=${email}&verificationCode=${verificationCode}`
   );
   return data;
 }

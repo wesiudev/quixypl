@@ -13,8 +13,7 @@ import Messages from "./Messages";
  */
 async function getAnswer(question: string, mode: string) {
   const answer = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/v1/assistantMessages?msg=${question}&mode=${mode}`,
-    { cache: "no-store" }
+    `${process.env.NEXT_PUBLIC_URL}/api/v1/assistantMessages?msg=${question}&mode=${mode}`
   );
   return answer;
 }

@@ -8,8 +8,7 @@ export async function pushEmail(email: string, isChecked: boolean) {
     return { error: "email already exist", code: 400 };
   }
   await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/sendEmail?email=${email}&tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    { cache: "no-store" }
+    `${process.env.NEXT_PUBLIC_URL}/api/sendEmail?email=${email}&tubylytylkofigi=${process.env.API_SECRET_KEY}`
   );
   return await addDocument("leads", email, {
     email,

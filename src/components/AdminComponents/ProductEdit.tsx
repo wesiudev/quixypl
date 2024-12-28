@@ -25,8 +25,7 @@ import { toastUpdate } from "../Toast/ToastUpdate";
 import { polishToEnglish } from "../../../utils/polishToEnglish";
 async function requestPostGeneration(topic: string) {
   const answer = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/generateBlogPost?topic=${topic}`,
-    { cache: "no-store" }
+    `${process.env.NEXT_PUBLIC_URL}/api/generateBlogPost?topic=${topic}`
   );
   return answer;
 }
