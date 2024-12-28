@@ -1,19 +1,18 @@
 "use client";
 import React, { useState } from "react";
-import { updateUser } from "@/firebase/";
 import { toast } from "react-toastify";
 import { IoSend } from "react-icons/io5";
-import { FaCircleXmark } from "react-icons/fa6";
-
+import updateUserLeads from "@/lib/updateUserLeads";
+import { v4 as uuidv4 } from "uuid";
 interface MessageInputProps {
-  source: any;
   value: any;
 }
 
-const MessageInput: React.FC<MessageInputProps> = ({ source, value }) => {
+const MessageInput: React.FC<MessageInputProps> = ({ value }) => {
   const [sent, setSent] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
 
   const validatePhoneNumber = (phoneNumber: string) => {
     const regex = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
@@ -25,7 +24,12 @@ const MessageInput: React.FC<MessageInputProps> = ({ source, value }) => {
     );
   };
 
-  const handleSendMessage = async (source: any, value: any) => {
+  const validateEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  const handleSendMessage = async (value: any) => {
     if (message.trim() === "") {
       toast.error("Treść zapytania jest wymagana", {
         position: "top-right",
@@ -46,53 +50,122 @@ const MessageInput: React.FC<MessageInputProps> = ({ source, value }) => {
       });
       return;
     }
-    await updateUser(value?.uid, {
+    if (!validateEmail(email)) {
+      toast.error("Adres email jest nieprawidłowy", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      return;
+    }
+    const id = uuidv4();
+    await updateUserLeads(value?.uid, {
       leads: value?.leads
-        ? [...value?.leads, { message, phoneNumber }]
-        : [{ message, phoneNumber }],
+        ? [
+            ...value?.leads,
+            {
+              message,
+              phoneNumber,
+              creationTime: Date.now(),
+              email,
+              type: "order",
+              id,
+            },
+          ]
+        : [
+            {
+              message,
+              phoneNumber,
+              creationTime: Date.now(),
+              email,
+              type: "order",
+              id,
+            },
+          ],
     });
     setSent(true);
   };
 
   return (
-    <div className="w-full flex flex-col bg-white shadow-md">
-      <>
+    <div className="w-full flex flex-col gap-2">
+      <div className="flex flex-col">
+        <label
+          htmlFor="phoneNumber"
+          className="text-sm font-semibold text-gray-700 mb-1"
+        >
+          Numer telefonu
+        </label>
         <input
+          id="phoneNumber"
           value={phoneNumber}
-          onChange={(e: any) => {
-            setPhoneNumber(e.target.value);
-          }}
+          onChange={(e: any) => setPhoneNumber(e.target.value)}
           type="text"
-          placeholder="Numer telefonu"
-          className={`my-2 text-black ${
-            sent ? "border-green-500" : "border-gray-300"
-          } border-2`}
+          placeholder="Wpisz numer telefonu"
+          className={`p-2 rounded-md text-black border-2 focus:ring-2 focus:ring-accent ${
+            sent ? "border-green-500 bg-gray-300" : "border-gray-500"
+          }`}
         />
+      </div>
+
+      <div className="flex flex-col">
+        <label
+          htmlFor="email"
+          className="text-sm font-semibold text-gray-700 mb-1"
+        >
+          Email
+        </label>
+        <input
+          id="email"
+          value={email}
+          onChange={(e: any) => setEmail(e.target.value)}
+          type="text"
+          placeholder="Wpisz email"
+          className={`p-2 rounded-md text-black border-2 focus:ring-2 focus:ring-accent ${
+            sent ? "border-green-500 bg-gray-300" : "border-gray-500"
+          }`}
+        />
+      </div>
+
+      <div className="flex flex-col">
+        <label
+          htmlFor="message"
+          className="text-sm font-semibold text-gray-700 mb-1"
+        >
+          Treść zapytania
+        </label>
         <textarea
+          id="message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Wpisz treść zapytania"
           autoFocus
-          className={`${
-            sent ? "border-green-500" : "border-gray-300"
-          } border-2 text-black p-3 h-24 w-full resize-none outline-none `}
+          className={`p-3 h-24 w-full resize-none rounded-md border-2 text-black outline-none focus:ring-2 focus:ring-accent ${
+            sent ? "border-green-500 bg-gray-300" : "border-gray-500"
+          }`}
           disabled={!value?.access || sent}
         />
-        {sent && (
-          <div className="p-3 text-green-500 font-bold">
-            Zapytanie zostało wysłane!
-          </div>
-        )}
-        <div className="">
-          <button
-            onClick={() => handleSendMessage(source, value)}
-            className="mt-2 py-1 w-full bg-cta text-white font-bold flex items-center justify-center"
-          >
-            Wyślij zapytanie
-            <IoSend className="ml-2" />
-          </button>
+      </div>
+
+      {sent && (
+        <div className="text-green-500 font-bold">
+          Zapytanie zostało wysłane!
         </div>
-      </>
+      )}
+
+      <button
+        onClick={() => handleSendMessage(value)}
+        className={`py-2 w-full bg-gradient-to-r from-accentStart to-accentEnd text-white font-bold rounded-md flex items-center justify-center hover:opacity-90 transition-opacity ${
+          !sent
+            ? " from-accentStart to-accentEnd "
+            : "from-green-500 to-green-600"
+        }`}
+      >
+        {!sent ? "Wyślij zapytanie" : "Dziękujemy!"}
+
+        {!sent && <IoSend className="ml-2" />}
+      </button>
     </div>
   );
 };

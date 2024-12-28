@@ -36,7 +36,7 @@ export default async function Page() {
               </h1>
               <p className="max-w-[100%] sm:max-w-sm lg:max-w-lg text-black mt-3">
                 Marketplace Quixy to jedyne takie miejsce, w którym spotkasz
-                profesjonalistów do współpracy zdalnej w Polsce.
+                profesjonalistów do współpracy zdalnej.
               </p>
               <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 w-full mt-2">
                 <Link

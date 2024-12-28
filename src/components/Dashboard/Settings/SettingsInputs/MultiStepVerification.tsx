@@ -81,19 +81,23 @@ export default function MultiStepVerification({
         </h2>
         <div className="p-[1.5rem]">
           <p className="font-sans">
-            Po opłaceniu wpisowego w wysokości{" "}
+            Po pomyślnej weryfikacji oraz opłaceniu wpisowego w wysokości{" "}
             <b className="px-1.5 py-1 rounded-md bg-ctaStart text-white">
               💎20
             </b>{" "}
             Twój profil wyświetli się w odpowiednich kategoriach i zacznie
             docierać do potencjalnych klientów.
           </p>
-          <div className="space-y-3 p-3 lg:p-6 bg-gray-200 rounded-lg mt-3">
+          <div
+            className={`${
+              light ? "bg-gray-200" : "bg-gray-700"
+            } space-y-3 p-3 lg:p-6 rounded-lg mt-3`}
+          >
             <StepItem
               step={2}
               title="Rodzaj profilu"
               isCompleted={(seek === true || seek === false) && seek !== "ask"}
-              completedText={seek ? "Talent" : "Klient"}
+              completedText={seek ? "Talent" : "Firma"}
               incompleteText="Wybierz typ profilu"
               light={light}
             />
@@ -126,7 +130,7 @@ export default function MultiStepVerification({
               title="Przedstaw się"
               isCompleted={name}
               completedText="Pomyślnie ukończono"
-              incompleteText={`Imię/nazwisko lub nazwa firmy`}
+              incompleteText={`Imię i nazwisko lub nazwa firmy`}
               light={light}
             />
           </div>

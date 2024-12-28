@@ -48,15 +48,22 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
           : "opacity-100 translate-y-0 duration-500 "
       } w-full flex justify-center z-[999999999] gap-3`}
     >
+      <div className="absolute left-1/2 -translate-x-1/2 -top-8">
+        {slugData?.hourRate && (
+          <div className="block w-max max-w-full font-coco font-extrabold text-white bg-gradient-to-r from-accentStart to-accentEnd rounded-t-md px-3 py-1 text-center">
+            {slugData?.hourRate} zł/h
+          </div>
+        )}
+      </div>
       <div className="w-full">
         <div
           style={{ boxShadow: "0px 0px 5px black" }}
-          className={`bg-slate-700 h-max duration-500 w-full`}
+          className={`bg-slate-700 h-max duration-500 w-full relative`}
         >
           <div className="flex w-full justify-between h-full relative">
             <div className="w-full flex items-center py-3 pl-3 sm:pl-4 lg:pl-12">
               {slugData?.photoURL && (
-                <div className="w-auto aspect-square h-12 sm:h-24 relative overflow-hidden">
+                <div className="aspect-square min-w-12 sm:min-w-24 relative overflow-hidden">
                   <Image
                     src={slugData?.photoURL}
                     width={256}
@@ -68,16 +75,17 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
               )}
 
               {!slugData?.photoURL && (
-                <div className="rounded-full flex bg-gradient-to-b from-primaryStart to-primaryEnd aspect-square w-12 sm:w-24 text-white justify-center">
+                <div className="rounded-full flex bg-gradient-to-b from-primaryStart to-primaryEnd aspect-square min-w-12 sm:min-w-24 text-white justify-center">
                   <FaUser className="text-3xl lg:text-4xl" />
                 </div>
               )}
-              <div className="pl-3 sm:pl-4 lg:pl-6 text-white">
+              <div className="flex flex-col pl-3 sm:pl-4 lg:pl-6 text-white">
+                <h3 className="flex items-center font-bold text-sm sm:text-base lg:text-xl">
+                  Zatrudnij
+                </h3>
+                <p className="">{slugData?.name}!</p>
                 <div className="flex flex-col">
-                  <h3 className="flex items-center font-extrabold text-sm sm:text-base lg:text-xl">
-                    Zatrudnij {slugData?.name}!
-                  </h3>
-                  <p className="mb-1 text-sm sm:text-base">
+                  <p className="mb-1 text-sm sm:text-base text-gray-300">
                     {slugData?.title && slugData?.title}
                   </p>
                 </div>
@@ -95,7 +103,7 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
                   dispatch(set_modals({ ...modals, currentChat: slugData }));
                 }
               }}
-              className={`mr-3 sm:mr-4 lg:mr-12 my-auto h-max flex text-white font-extrabold rounded-lg px-3 py-2 min-h-full max-w-[150px] text-sm sm:text-base bg-gradient-to-b from-ctaStart to-ctaEnd items-center text-center`}
+              className={`font-lato mr-3 sm:mr-4 lg:mr-12 my-auto h-max flex text-white rounded-md py-[0.5rem] px-[1rem] min-h-full max-w-[150px] text-sm sm:text-base bg-gradient-to-b from-ctaStart to-ctaEnd items-center text-center`}
             >
               Kontakt
               <FaArrowRightLong className="ml-2" />

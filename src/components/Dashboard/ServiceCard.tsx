@@ -30,13 +30,15 @@ export default function ServiceCard({
   const [isOpen, setIsOpen] = useState(false);
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [deleteMenu, setDeleteMenu] = useState(false);
+  console.log(user?.projects);
+
   const handleDeleteService = async (id: string) => {
     try {
       // Delete job offer from the collection
       await deleteService(id);
 
       // Update the user's job offers by removing the deleted one
-      const updatedServices = user.projects.filter(
+      const updatedServices = user?.projects?.filter(
         (service: any) => service.id !== id
       );
 
@@ -47,7 +49,7 @@ export default function ServiceCard({
       dispatch(
         setUser({
           ...user,
-          services: updatedServices,
+          projects: updatedServices,
         })
       );
 

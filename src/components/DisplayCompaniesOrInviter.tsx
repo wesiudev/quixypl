@@ -48,11 +48,11 @@ export default function DisplayCompaniesOrInviter({ data }: { data: any }) {
             )}
 
             {/* Informacje o talencie */}
-            <div className="px-4 flex flex-col">
-              <h2 className="text-lg font-extrabold text-black">
+            <div className="px-2 sm:px-4 flex flex-col">
+              <h2 className="sm:text-lg font-extrabold text-black">
                 {talent?.name}
               </h2>
-              <h3 className="text-sm xl:text-base">
+              <h3 className="text-xs sm:text-sm xl:text-base mt-0.5">
                 <span
                   style={{ lineHeight: 1.8 }}
                   className="text-white bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd rounded-md px-2 py-1 w-max max-w-full"

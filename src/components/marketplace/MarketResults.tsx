@@ -19,7 +19,7 @@ export default function MarketResults({
       <div
         className={`${
           leads?.length > 0 && slug !== "" ? "block" : "hidden"
-        } rounded-t-lg bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30 w-full mt-3`}
+        } rounded-lg bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30 w-full mt-3`}
       >
         <div
           className={`text-center font-extrabold text-xl text-white px-4 py-2 rounded-t-lg bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd`}

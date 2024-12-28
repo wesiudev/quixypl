@@ -9,6 +9,9 @@ import { IoLocationOutline } from "react-icons/io5";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
 import Viewer from "@/components/AddJobOffer/Viewer";
 import JobBoardList from "@/components/JobBoardList";
+import dynamic from "next/dynamic";
+import LeadCard from "@/components/Dashboard/LeadCard";
+const Tags = dynamic(() => import("@/components/Tags"));
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
@@ -145,12 +148,14 @@ export default async function Page(props: {
                             <h2 className="text-xl lg:text-2xl pr-2">
                               {talent?.name ? talent?.name : "Nie podano"}
                             </h2>
-                            {talent?.hourRate && (
-                              <div className="block w-max max-w-full font-coco font-extrabold text-white bg-gradient-to-b from-ctaStart to-ctaEnd rounded-md px-3 py-1 text-center">
-                                {talent?.hourRate} zł/h
-                              </div>
-                            )}
                           </div>
+                          {talent?.title && (
+                            <h3>
+                              <span className="my-0.5 block font-lato w-max max-w-full text-white rounded-md py-0.5 px-1 bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd">
+                                {talent?.title}
+                              </span>
+                            </h3>
+                          )}
                           {talent?.city && (
                             <div className="text-black flex items-center">
                               <IoLocationOutline className="-ml-px text-xl mr-1" />{" "}
@@ -158,52 +163,34 @@ export default async function Page(props: {
                             </div>
                           )}
                         </div>
-                        {talent?.title && (
-                          <h3>
-                            <span className="mt-1 block font-extrabold w-max max-w-full text-white rounded-md py-0.5 px-1 bg-gradient-to-b from-accentStart to-accentEnd">
-                              {talent?.title}
-                            </span>
-                          </h3>
-                        )}
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="w-full flex justify-between mt-3 lg:mt-6">
-                  <HireButton talentSlugData={talent} />
-                </div>
+
                 <div
                   className={`grid ${
                     talent?.tags?.length > 10
                       ? "grid-cols-1"
                       : "grid-cols-1 lg:grid-cols-2"
-                  } gap-3 mt-3`}
+                  } mt-6`}
                 >
                   <div>
-                    <h2 className="w-max text-2xl text-black font-extrabold mt-3">
+                    <h2 className="w-max text-2xl text-black font-extrabold">
                       Specjalizacje
                     </h2>
                     <div className="w-full -ml-1 mt-1 flex flex-wrap items-center text-black">
-                      {talent?.tags?.map((item: any, i: any) => (
-                        <h3 className="" key={i}>
-                          <Link
-                            href={`/praca-zdalna/${item?.slugUrl}/${
-                              item?.categoryUrl
-                            }/${item?.url}/${
-                              talent?.city ? polishToEnglish(talent?.city) : ""
-                            }`}
-                            className="rounded-md text-xs sm:text-sm lg:text-base bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd p-2 text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5"
-                          >
-                            {item.title}
-                          </Link>
-                        </h3>
-                      ))}
+                      <Tags talent={talent} />
                       {talent?.tags?.length === 0 &&
                         "Brak podanych specjalizacji..."}
                     </div>
                   </div>
                   <div>
-                    <h2 className="w-max text-2xl text-black font-extrabold mt-3">
+                    <h2
+                      className={`${
+                        talent?.tags?.length > 10 ? "mt-6" : "lg:mt-0"
+                      } w-max text-2xl text-black font-extrabold`}
+                    >
                       Dostępność
                     </h2>
                     <div className="w-full -ml-1 mt-1 flex flex-wrap items-center">
@@ -211,7 +198,7 @@ export default async function Page(props: {
                         talent?.preferences?.map((item: any, i: any) => (
                           <h3
                             key={i}
-                            className={`rounded-md text-xs sm:text-sm lg:text-base bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd p-2 text-white ml-1 mt-1 duration-100 flex items-center px-2 py-0.5`}
+                            className={`rounded-md text-xs sm:text-sm lg:text-base bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd px-[0.7rem] text-white ml-1 mt-1 duration-100 flex items-center py-[0.5rem]`}
                           >
                             {item}
                           </h3>
@@ -226,10 +213,10 @@ export default async function Page(props: {
                 </div>
                 {talent?.description && (
                   <>
-                    <h2 className="mt-3 text-2xl text-black font-extrabold">
+                    <h2 className="mt-6 text-2xl text-black font-extrabold">
                       Opis
                     </h2>
-                    <div className="mt-2 bg-gradient-to-r from-primary/30 to-cta/30 p-3">
+                    <div className="mt-3 bg-gradient-to-r">
                       <div className={`text-black my-3 reset`}>
                         <Viewer value={talent?.description} displayBlack />
                       </div>
@@ -238,31 +225,21 @@ export default async function Page(props: {
                 )}
               </div>
             </div>
-            {talent?.projects?.filter((project: IProject) => project?.isPaid)
-              .length > 0 && (
-              <div
-                className={`py-12 bg-gradient-to-r from-primary to-cta h-max w-full mt-12 px-3 lg:px-12`}
-              >
-                <h2
-                  className={`text-3xl text-white drop-shadow-lg font-extrabold mb-6`}
-                >
-                  Usługi
-                </h2>
-                <div className="gap-3">
-                  {talent?.projects?.map((project: IProject, i: any) => (
-                    <ProjectCard
-                      key={i}
-                      project={project}
-                      isSlug={true}
-                      slug={talent}
-                    />
-                  ))}
+            {talent?.projects?.length > 0 && (
+              <div className="mt-6">
+                <div className={`h-max w-full`}>
+                  <h2 className="text-2xl text-black font-extrabold">Usługi</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mt-3">
+                    {talent?.projects?.map((project: IProject, i: any) => (
+                      <LeadCard key={i} project={project} slug />
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
           </div>
         </div>
-        <div className="container mx-auto py-12 bg-white px-4 lg:px-12">
+        <div className="container mx-auto pb-12 mt-6 bg-white px-4 lg:px-12">
           <div className="bg-white relative overflow-hidden">
             <h2 className="text-black w-full text-xl lg:text-2xl font-extrabold">
               Zobacz podobne profile

@@ -26,7 +26,7 @@ export default function LeadsList() {
             Powrót
           </Link>
           <div className="flex flex-col pl-12">
-            <h2 className="font-extrabold">Sekcja Leadów</h2>
+            <h2 className="font-extrabold">Twoje zapytania</h2>
             <p className="text-xs font-coco">
               Znajdziesz tutaj wszystkie swoje zlecenia oraz kandydatów.
             </p>
@@ -37,7 +37,7 @@ export default function LeadsList() {
             light ? "bg-white text-black" : "bg-[#222430] text-white"
           } mt-6 rounded-lg min-h-screen text-white`}
         >
-          <div className="font-gotham font-light grid grid-cols-2 gap-2 p-6 !text-white">
+          <div className="font-gotham font-light grid grid-cols-2 gap-3 lg:gap-6 p-6 !text-white">
             <button
               onClick={() => setFilter("new")}
               className={`rounded-md p-1 border-2 border-dashed ${
@@ -75,19 +75,13 @@ export default function LeadsList() {
               SPRAWDZONE
             </button>{" "}
           </div>
-          <div className="grid grid-cols-1 xl:grid-cols-3 2xl:grid-cols-4 font-sans gap-6">
+          <div className="grid grid-cols-1 xl:grid-cols-3 2xl:grid-cols-4 font-sans gap-6 px-3 lg:px-6">
             {user?.leads?.map((lead: any, i: any) => (
               <>
                 {filter === "new" &&
                   !lead.signed &&
                   lead.status !== "trash" && (
-                    <LeadApplication
-                      key={i}
-                      lead={lead}
-                      noteOpen={noteOpen}
-                      setNoteOpen={setNoteOpen}
-                      filter={filter}
-                    />
+                    <LeadApplication light={light} key={i} lead={lead} />
                   )}
               </>
             ))}
@@ -98,57 +92,13 @@ export default function LeadsList() {
                   lead.status !== "rejected" &&
                   !lead.signed &&
                   lead.status !== "trash" && (
-                    <LeadApplication
-                      key={i}
-                      lead={lead}
-                      noteOpen={noteOpen}
-                      setNoteOpen={setNoteOpen}
-                      filter={filter}
-                    />
+                    <LeadApplication light={light} key={i} lead={lead} />
                   )}
               </>
             ))}
           </div>
         </div>
       </div>
-      {noteOpen !== undefined && (
-        <div
-          onClick={() => {
-            setNoteOpen(undefined);
-          }}
-          className="z-[120] fixed left-0 top-0 w-full h-full bg-black bg-opacity-80 flex flex-col items-center justify-center"
-        >
-          <div
-            className="bg-slate-700 border-black border-2 p-6 sm:p-12"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <textarea
-              onChange={(e) =>
-                setNoteOpen({ ...noteOpen, note: e.target.value })
-              }
-              name="note"
-              id="note"
-              rows={10}
-              autoFocus
-              placeholder="Wpisz tekst"
-              className="font-bold text-base font-sans p-3 w-full text-zinc-800 drop-shadow-xl shadow-black"
-            />
-
-            <button
-              onClick={() => {
-                updateApplication(noteOpen.id, {
-                  ...noteOpen,
-                  note: noteOpen.note,
-                });
-                setNoteOpen(undefined);
-              }}
-              className="w-full bg-green-500 hover:bg-green-400 font-gotham p-3 text-white font-bold"
-            >
-              Zapisz
-            </button>
-          </div>
-        </div>
-      )}
     </>
   );
 }

@@ -16,15 +16,11 @@ const updateUserLead = async (id: string, data: any) => {
 };
 
 export default function LeadApplication({
+  light,
   lead,
-  noteOpen,
-  setNoteOpen,
-  filter,
 }: {
+  light: any;
   lead: any;
-  noteOpen: any;
-  setNoteOpen: any;
-  filter: string;
 }) {
   const [optionsOpen, setOptionsOpen] = useState(false);
   const { user } = useSelector((state: any) => state.user);
@@ -49,12 +45,12 @@ export default function LeadApplication({
     dispatch(setUser({ ...user, leads: updatedLeads }));
     updateDocument(["leads"], [updatedLeads], "users", user?.id);
   };
-
-  const { modals } = useSelector((state: any) => state.modals);
   return (
     <div
       key={lead?.id}
-      className={`relative bg-zinc-800 p-3 h-max border-[3px] overflow-hidden ${
+      className={`${
+        light ? "bg-gray-300 text-black" : "bg-gray-700 text-white"
+      } relative p-3 h-max border-[3px] overflow-hidden ${
         lead.status === "trash"
           ? "border-orange-700"
           : lead.status === "reseted"

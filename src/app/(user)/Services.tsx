@@ -6,6 +6,7 @@ import { FaChevronLeft, FaPlus } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import EditService from "./EditService";
+import { FaInfoCircle } from "react-icons/fa";
 
 export default function Services() {
   const { light } = useSelector((state: any) => state.light);
@@ -21,7 +22,7 @@ export default function Services() {
       <div
         className={`${
           editOpen && "hidden"
-        } font-sans py-3 mx-3 lg:py-6 lg:mx-6 lg:ml-12`}
+        }  font-sans py-3 mx-3 lg:py-6 lg:mx-6 lg:ml-12`}
       >
         <div
           className={`${editOpen && "hidden"} ${
@@ -42,11 +43,15 @@ export default function Services() {
         <div
           className={`${
             light ? "bg-white text-black" : "bg-[#222430] text-white"
-          } mt-6 rounded-lg min-h-screen text-white`}
+          } relative mt-6 rounded-lg min-h-[70vh] text-white`}
         >
-          {!user?.projects ? (
+          {" "}
+          <h1 className="px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
+            TWOJE USŁUGI
+          </h1>
+          {!user?.projects || user?.projects?.length === 0 ? (
             <div
-              className={`mt-6 h-screen flex items-center justify-center flex-col ${
+              className={`mt-6 min-h-[70vh] flex items-center justify-center flex-col ${
                 light ? "bg-white text-black" : "bg-[#222430] text-white"
               } duration-300 rounded-lg`}
             >
@@ -77,9 +82,6 @@ export default function Services() {
           ) : (
             <>
               <div className={`${editOpen && "hidden"}`}>
-                <h1 className="px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
-                  TWOJE USŁUGI
-                </h1>
                 <div className="mt-6 px-6 grid grid-cols-1 lg:grid-cols-2 gap-3">
                   {user?.projects?.map((project: any, i: any) => (
                     <ServiceCard

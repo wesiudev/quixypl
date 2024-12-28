@@ -490,46 +490,45 @@ export default function PortfolioItems({
             } h-[150px] duration-300 border border-primaryStart/70 rounded-md p-2 w-full resize-none`}
           ></textarea>
         </div>
-        {!user?.seek && user?.seek !== "ask" && (
-          <div className="w-full sm:w-[300px] mt-3">
-            <div className="">
-              <h3 className="font-extrabold text-lg">Płatność</h3>
-              <select
-                value={project?.time}
-                onChange={(e) =>
-                  setProject({
-                    ...project,
-                    time: e.target.value,
-                  })
-                }
-                className={`${
-                  light ? "bg-white text-black" : "bg-gray-700 text-white"
-                }  duration-300 border border-primaryStart/70 rounded-md p-2 w-full`}
-              >
-                <option value="Nie podano">Nie wybrano...</option>
-                <option value="Stawka godzinowa">Stawka godzinowa</option>
-                <option value="Stawka miesięczna">Stawka miesięczna</option>
-                <option value="Per Milestone">Per Milestone</option>
-                <option value="Płatność z góry">Płatność z góry</option>
-                <option value="Płatność przed i po">Płatność przed i po</option>
-                <option value="Do ustalenia">Do ustalenia</option>
-              </select>
-            </div>
-            <InputField
-              light={light}
-              id="salaryValue"
-              label="Cena"
-              value={project?.salaryValue}
+
+        <div className="w-full sm:w-[300px] mt-3">
+          <div className="">
+            <h3 className="font-extrabold text-lg">Płatność</h3>
+            <select
+              value={project?.time}
               onChange={(e) =>
                 setProject({
                   ...project,
-                  salaryValue: e.target.value,
+                  time: e.target.value,
                 })
               }
-              placeholder="Wpisz wynagrodzenie..."
-            />
+              className={`${
+                light ? "bg-white text-black" : "bg-gray-700 text-white"
+              }  duration-300 border border-primaryStart/70 rounded-md p-2 w-full`}
+            >
+              <option value="Nie podano">Nie wybrano...</option>
+              <option value="Stawka godzinowa">Stawka godzinowa</option>
+              <option value="Stawka miesięczna">Stawka miesięczna</option>
+              <option value="Per Milestone">Per Milestone</option>
+              <option value="Płatność z góry">Płatność z góry</option>
+              <option value="Płatność przed i po">Płatność przed i po</option>
+              <option value="Do ustalenia">Do ustalenia</option>
+            </select>
           </div>
-        )}
+          <InputField
+            light={light}
+            id="salaryValue"
+            label="Cena"
+            value={project?.salaryValue || ""}
+            onChange={(e) =>
+              setProject({
+                ...project,
+                salaryValue: e.target.value,
+              })
+            }
+            placeholder="Wpisz wynagrodzenie..."
+          />
+        </div>
       </div>
 
       <div className="">
@@ -537,7 +536,7 @@ export default function PortfolioItems({
           light={light}
           id="duration"
           label="Czas wykonania"
-          value={project?.duration}
+          value={project?.duration || ""}
           onChange={(e) =>
             setProject({
               ...project,
@@ -647,6 +646,15 @@ export default function PortfolioItems({
       <button
         disabled={user?.tokens < 10 || loading || sent}
         onClick={() => {
+          if (!user?.access) {
+            return toast.error("Brak dostępu", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+            });
+          }
           if (project?.name && project?.desc && project?.tags?.length > 0) {
             handleRecruitmentStart();
           } else {

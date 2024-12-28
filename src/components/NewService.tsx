@@ -2,6 +2,7 @@
 import PortfolioItems from "@/components/Dashboard/Settings/SettingsInputs/PortfolioItems";
 import Link from "next/link";
 import { useState } from "react";
+import { FaInfoCircle } from "react-icons/fa";
 import { FaChevronLeft } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 export default function NewService() {
@@ -29,9 +30,9 @@ export default function NewService() {
           Powrót
         </Link>
         <div className="flex flex-col pl-12">
-          <h2 className="font-extrabold">Nowe ogłoszenie</h2>
+          <h2 className="font-extrabold">Nowa usługa</h2>
           <p className="text-xs font-coco">
-            Skonfiguruj ofertę pracy i opublikuj
+            Skonfiguruj usługę i opublikuj na rynku
           </p>
         </div>
       </div>
@@ -40,7 +41,31 @@ export default function NewService() {
           light ? "bg-white text-black" : "bg-[#222430] text-white"
         } relative rounded-lg flex items-center justify-center pb-12 mt-6`}
       >
-        <h1 className="absolute left-0 top-0 px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
+        {!user?.access && (
+          <div
+            className={`${
+              light ? "bg-black/50" : "bg-black/70"
+            } z-50 rounded-md absolute left-0 top-0 w-full h-full`}
+          >
+            <div className="flex items-center justify-center w-full h-full">
+              <div className="text-white text-center">
+                <div className="flex items-center justify-center mb-2">
+                  <FaInfoCircle className="mr-2 text-3xl" />
+                  <h1 className="text-3xl font-bold">Brak dostępu</h1>
+                </div>
+
+                <p className="font-light font-coco max-w-lg">
+                  Twoje usługi będą mogły wyświetlać się po weryfikacji konta
+                  oraz opłaceniu wpisowego w wysokości{" "}
+                  <b className="px-1.5 py-1 rounded-md bg-ctaStart text-white">
+                    💎20
+                  </b>{" "}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+        <h1 className="absolute left-0 top-0 px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd flex items-center justify-center gap-2">
           DODAJ USŁUGĘ
         </h1>
         <div className="p-3 lg:p-6 w-full mt-12">

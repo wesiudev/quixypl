@@ -1,12 +1,18 @@
+"use client";
 import Link from "next/link";
 import ProjectImages from "./ImageGenerator/dashboard/ProjectImages";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import Viewer from "../AddJobOffer/Viewer";
 import { set_modals } from "@/redux/slices/modalsopen";
 
-export default function LeadCard({ project }: { project: any }) {
+export default function LeadCard({
+  project,
+  slug,
+}: {
+  project: any;
+  slug?: boolean;
+}) {
   const dispatch = useDispatch();
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -34,15 +40,18 @@ export default function LeadCard({ project }: { project: any }) {
               </span>{" "}
               {project.duration}
             </p>
-            <div className="bg-white p-2 my-3 rounded-md">
-              <Viewer value={project?.desc} />
-            </div>
-            <Link
-              className="text-white px-[1rem] py-[0.5rem] bg-gradient-to-r from-ctaStart to-primaryStart rounded-md my-2 block w-max "
-              href={`/${project?.userType}/${project?.pseudo}`}
-            >
-              Kontakt
-            </Link>
+            <div className="text-white my-3 rounded-md">{project?.desc}</div>
+            {!slug && (
+              <Link
+                target="_blank"
+                className="text-white px-[1rem] py-[0.5rem] bg-gradient-to-r from-ctaStart to-primaryStart rounded-md my-2 block w-max "
+                href={`/${project?.userType ? "talent" : "company"}/${
+                  project?.pseudo
+                }`}
+              >
+                Kontakt
+              </Link>
+            )}
 
             <div className="mt-2 gap-3 grid grid-cols-2 w-full">
               {project.images.map((image: any, i: any) => (

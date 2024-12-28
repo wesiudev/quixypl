@@ -11,11 +11,9 @@ import Image from "next/image";
 import { setUser } from "@/redux/slices/user";
 import ImagePicker from "./ImagePicker";
 import { useDispatch, useSelector } from "react-redux";
-import { set_modals } from "@/redux/slices/modalsopen";
-import { IProject } from "@/types";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
-import { addDocument, storage, updateUser } from "@/firebase";
+import { storage, updateUser } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { InputField } from "@/components/AddJobOffer/InputField";
 
@@ -25,12 +23,14 @@ export default function ServiceEditor({
   setProject,
   setUploading,
   setUploadCount,
+  closeEdit,
 }: {
   user: any;
   project: any;
   setProject: any;
   setUploading: any;
   setUploadCount: any;
+  closeEdit: any;
 }) {
   const [configurationOpen, setConfigurationOpen] = useState(false);
   const [slug, setSlug] = useState({ title: "", url: "" });
@@ -39,99 +39,35 @@ export default function ServiceEditor({
   const [tagDeletion, setTagDeletion] = useState(false);
   const [selectedTag, setSelectedTag] = useState<any>({});
   const [isImageDescriptionOpen, setImageDescriptionOpen] = useState(-1);
-  const { modals } = useSelector((state: any) => state.modals);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const { light } = useSelector((state: any) => state.light);
-  const proceedWithProjectUpdate = async (isPaid: boolean) => {
-    const uniqId = uuid();
-    const updatedProjects = updateProjectsList(user?.projects, project, {
-      ...project,
-      creationTime: Date.now(),
-      pseudo: user?.pseudo,
-      userType: user?.seek,
-      id: uniqId,
-    });
-    const updatedTokens = isPaid ? user.tokens - 10 : user.tokens;
-    await addDocument("services", uniqId, {
-      ...project,
-      creationTime: Date.now(),
-      pseudo: user?.pseudo,
-      userType: user?.seek === true ? "talent" : "company",
-      id: uniqId,
-    });
-
-    await updateUser(user.uid, {
-      tokens: updatedTokens,
-      projects: updatedProjects,
-    });
-    dispatch(
-      setUser({ ...user, tokens: updatedTokens, projects: updatedProjects })
-    );
-    setLoading(false);
-    setSent(true);
-    showToastSuccess("Pomyślnie dodano usługę!");
-    setProject("");
-  };
-  const updateProjectsList = (
-    existingProjects: any,
-    project: IProject,
-    additionalProps: any
-  ) => {
-    const newProject = {
-      ...project,
-      creationTime: Date.now(),
-      ...additionalProps,
-    };
-
-    return existingProjects ? [...existingProjects, newProject] : [newProject];
-  };
-  const showToastSuccess = (message: string) => {
-    toast.success(message, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
-  };
-  const showToastError = (message: string) => {
-    toast.error(message, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-    });
-  };
-  const handleRecruitmentStart = async () => {
-    setLoading(true);
-    const hasEnoughTokens = user?.tokens >= 10;
-    const isProjectValid = isProjectDataValid(project);
-
-    if (!isProjectValid) {
-      return showToastError("Uzupełnij dane!");
+  const editService = async () => {
+    try {
+      setLoading(true);
+      const updatedServices = user.projects?.map((service: any) =>
+        service.id === project.id ? project : service
+      ) || [project];
+      await updateUser(user.uid, {
+        projects: updatedServices,
+      });
+      // Dispatch updated user state to Redux
+      dispatch(
+        setUser({
+          ...user,
+          projects: updatedServices,
+        })
+      );
+    } finally {
+      setLoading(false);
+      setSent(true);
+      setTimeout(() => {
+        closeEdit();
+      }, 2000);
     }
-    await proceedWithProjectUpdate(hasEnoughTokens);
-
-    if (!hasEnoughTokens) {
-      showToastError("Nie posiadasz wystarczającej ilości Quixies!");
-      openTokenModal();
-    }
-  };
-  const isProjectDataValid = (project: IProject) => {
-    return project?.name && project?.tags.length > 0 && project?.desc;
-  };
-  const openTokenModal = () => {
-    dispatch(set_modals({ ...modals, quixies: true }));
   };
   async function uploadImages(files: any) {
-    if (files.length > 4) {
-      showToastError("Możesz dodać maksymalnie 4 zdjęcia!");
-      return;
-    }
     setUploadCount(files.length);
     setUploading(true);
     const localImagesArray: any = [];
@@ -490,46 +426,44 @@ export default function ServiceEditor({
             } h-[150px] duration-300 border border-primaryStart/70 rounded-md p-2 w-full resize-none`}
           ></textarea>
         </div>
-        {!user?.seek && user?.seek !== "ask" && (
-          <div className="w-full sm:w-[300px] mt-3">
-            <div className="">
-              <h3 className="font-extrabold text-lg">Płatność</h3>
-              <select
-                value={project?.time}
-                onChange={(e) =>
-                  setProject({
-                    ...project,
-                    time: e.target.value,
-                  })
-                }
-                className={`${
-                  light ? "bg-white text-black" : "bg-gray-700 text-white"
-                }  duration-300 border border-primaryStart/70 rounded-md p-2 w-full`}
-              >
-                <option value="Nie podano">Nie wybrano...</option>
-                <option value="Stawka godzinowa">Stawka godzinowa</option>
-                <option value="Stawka miesięczna">Stawka miesięczna</option>
-                <option value="Per Milestone">Per Milestone</option>
-                <option value="Płatność z góry">Płatność z góry</option>
-                <option value="Płatność przed i po">Płatność przed i po</option>
-                <option value="Do ustalenia">Do ustalenia</option>
-              </select>
-            </div>
-            <InputField
-              light={light}
-              id="salaryValue"
-              label="Cena"
-              value={project?.salaryValue}
+        <div className="w-full sm:w-[300px] mt-3">
+          <div className="">
+            <h3 className="font-extrabold text-lg">Płatność</h3>
+            <select
+              value={project?.time}
               onChange={(e) =>
                 setProject({
                   ...project,
-                  salaryValue: e.target.value,
+                  time: e.target.value,
                 })
               }
-              placeholder="Wpisz wynagrodzenie..."
-            />
+              className={`${
+                light ? "bg-white text-black" : "bg-gray-700 text-white"
+              }  duration-300 border border-primaryStart/70 rounded-md p-2 w-full`}
+            >
+              <option value="Nie podano">Nie wybrano...</option>
+              <option value="Stawka godzinowa">Stawka godzinowa</option>
+              <option value="Stawka miesięczna">Stawka miesięczna</option>
+              <option value="Per Milestone">Per Milestone</option>
+              <option value="Płatność z góry">Płatność z góry</option>
+              <option value="Płatność przed i po">Płatność przed i po</option>
+              <option value="Do ustalenia">Do ustalenia</option>
+            </select>
           </div>
-        )}
+          <InputField
+            light={light}
+            id="salaryValue"
+            label="Cena"
+            value={project?.salaryValue || ""}
+            onChange={(e) =>
+              setProject({
+                ...project,
+                salaryValue: e.target.value,
+              })
+            }
+            placeholder="Wpisz wynagrodzenie..."
+          />
+        </div>
       </div>
 
       <div className="">
@@ -537,7 +471,7 @@ export default function ServiceEditor({
           light={light}
           id="duration"
           label="Czas wykonania"
-          value={project?.duration}
+          value={project?.duration || ""}
           onChange={(e) =>
             setProject({
               ...project,
@@ -564,11 +498,11 @@ export default function ServiceEditor({
                   <div>
                     <div className="relative">
                       <div className="absolute right-2 top-1/2 -translate-y-1/2">
-                        {project?.name?.length}/30
+                        {project?.images[i]?.desc?.length}/30
                       </div>
                       <input
                         type="text"
-                        maxLength={25}
+                        maxLength={30}
                         value={project?.images[i]?.desc || ""}
                         placeholder="Co przedstawia obraz?"
                         onChange={(e) => {
@@ -645,10 +579,10 @@ export default function ServiceEditor({
       )}
 
       <button
-        disabled={user?.tokens < 10 || loading || sent}
+        disabled={loading || sent}
         onClick={() => {
           if (project?.name && project?.desc && project?.tags?.length > 0) {
-            handleRecruitmentStart();
+            editService();
           } else {
             toast.error("Uzupełnij wszystkie pola!", {
               position: "top-right",
@@ -665,27 +599,15 @@ export default function ServiceEditor({
             : "disabled:from-ctaStart disabled:to-ctaEnd"
         } rounded-md bg-gradient-to-r from-ctaStart to-primaryStart disabled:cursor-not-allowed w-max left-0 bg-cta text-white py-[0.4rem] px-[0.8rem] mt-3`}
       >
-        {sent && <div>Dodano pomyślnie!</div>}
-        {!loading && !sent && <div>Dodaj usługę (💎10,00)</div>}
+        {sent && <div>Zaaktualizowano pomyślnie!</div>}
+        {!loading && !sent && <div>Zaaktualizuj</div>}
         {loading && (
-          <div className="flex items-center gap-2">
-            <div className="loading loading-spinner w-7 h-7"></div>
-            Dodawanie...
+          <div className="flex items-center">
+            <div className="border-2 border-gray-300 rounded-full h-5 w-5 animate-spin mr-2"></div>
+            <div className="flex items-center gap-2">Aktualizowanie...</div>
           </div>
         )}
       </button>
-      {user?.tokens > 10 && (
-        <div className="text-cta text-sm mt-2 font-extrabold">
-          Twoje saldo wynosi 💎{user?.tokens?.toFixed(2)}
-        </div>
-      )}
-      {user?.tokens < 10 && (
-        <div className="flex flex-col gap-2">
-          <div className="text-red-500 text-sm mt-2">
-            Niewystarczająca ilość Quixies
-          </div>
-        </div>
-      )}
       <ImagePicker handler={uploadImages} />
     </div>
   );

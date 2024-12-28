@@ -32,12 +32,12 @@ export default function Nav({
   const navItems = [
     { title: "Przegląd", href: `/user`, icon: <FaHome /> },
     {
-      title: "Moje leady",
+      title: "Zapytania",
       href: `/user/leads`,
       icon: <AiFillThunderbolt />,
     },
     {
-      title: "Praca zdalna",
+      title: "Praca",
       href: `/praca-zdalna`,
       expandable: true,
       icon: <FaBriefcase />,
