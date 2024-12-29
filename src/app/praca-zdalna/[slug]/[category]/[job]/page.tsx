@@ -20,7 +20,7 @@ export default async function Page(props: { params: Promise<any> }) {
     { next: { revalidate: 600 } }
   ).then((res) => res.json());
   const users = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/users/${params.job}?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    `${process.env.NEXT_PUBLIC_URL}/api/users/${params.job}`,
     { next: { revalidate: 60 } }
   ).then((res: any) => res.json());
   const content = await getContent(params.job);

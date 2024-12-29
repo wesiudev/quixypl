@@ -5,6 +5,7 @@ import { getProductByUrl, getProducts } from "@/firebase";
 import { renderMarkdown } from "@/lib/parseMarkdown";
 import BlogPostList from "@/components/BlogPostList";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
+import { getPosts } from "@/lib/getPosts";
 export async function generateStaticParams() {
   const products = await getProducts();
   return products?.map((product: any) => ({
@@ -18,7 +19,7 @@ export default async function Page(props: { params: Promise<any> }) {
     `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res) => res.json());
   const product: any = await getProductByUrl(params?.slug);
-
+  const posts = await getPosts();
   return (
     <>
       <div className="overflow-x-hidden px-4 container mx-auto">
@@ -216,7 +217,9 @@ export default async function Page(props: { params: Promise<any> }) {
             )}
         </div>
 
-        <div className="mb-12">{posts?.length > 1 && <BlogPostList />}</div>
+        <div className="mb-12">
+          {posts?.length > 1 && <BlogPostList posts={posts} />}
+        </div>
       </div>
     </>
   );

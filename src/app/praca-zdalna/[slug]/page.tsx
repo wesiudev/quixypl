@@ -20,7 +20,7 @@ export default async function Page(props: {
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res) => res.json());
   const users = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/users/${params.slug}?tubylytylkofigi=${process.env.API_SECRET_KEY}`
+    `${process.env.NEXT_PUBLIC_URL}/api/users/${params.slug}`
   ).then((res: any) => res.json());
   const opinions = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/opinions?tubylytylkofigi=${

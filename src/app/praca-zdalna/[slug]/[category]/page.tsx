@@ -33,7 +33,7 @@ export default async function Page(props: { params: Promise<any> }) {
     (item: any) => polishToEnglish(item.title) === params.category
   );
   const users = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/users/${params.category}?tubylytylkofigi=${process.env.API_SECRET_KEY}`
+    `${process.env.NEXT_PUBLIC_URL}/api/users/${params.category}`
   ).then((res: any) => res.json());
   const content = await getContent(params.category);
   const services = await getServices();
