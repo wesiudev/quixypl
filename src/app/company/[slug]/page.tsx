@@ -9,6 +9,8 @@ import Viewer from "@/components/AddJobOffer/Viewer";
 import JobBoardList from "@/components/JobBoardList";
 import dynamic from "next/dynamic";
 import LeadCard from "@/components/Dashboard/LeadCard";
+import { Suspense } from "react";
+import Loadinger from "@/app/praca-zdalna/loading";
 const Tags = dynamic(() => import("@/components/Tags"));
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -29,7 +31,7 @@ export default async function Page(props: {
     `${process.env.NEXT_PUBLIC_URL}/api/getSimilarCompanies?tubylytylkofigi=${process.env.API_SECRET_KEY}&id=${talent.uid}`
   ).then((res: any) => res.json());
   return (
-    <>
+    <Suspense fallback={<Loadinger />}>
       <div className={`relative h-full font-sans`}>
         <div
           className={`${
@@ -246,7 +248,7 @@ export default async function Page(props: {
           </div>
         </div>
       </div>
-    </>
+    </Suspense>
   );
 }
 export async function generateMetadata(props: {

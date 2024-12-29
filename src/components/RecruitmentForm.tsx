@@ -30,7 +30,7 @@ export default function RecruitmentForm({
   const dispatch = useDispatch();
   const handleFileChange = (e: any) => {
     const file = e.target.files[0];
-    if (file.size > 20 * 1024 * 1024) {
+    if (file?.size > 20 * 1024 * 1024) {
       toast.error("Plik jest za duży", {
         position: "top-right",
         autoClose: 5000,
@@ -45,7 +45,7 @@ export default function RecruitmentForm({
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         "text/plain",
         "application/rtf",
-      ].includes(file.type)
+      ].includes(file?.type)
     ) {
       return toast.error("Dozwolone formaty plików: PDF, DOC, DOCX, TXT, RTF", {
         position: "top-right",
@@ -58,7 +58,11 @@ export default function RecruitmentForm({
       setFileUploading(true);
       const randId = `cv-${uuidv4()}`;
       const docRef = ref(storage, randId);
-      uploadBytes(docRef, file)
+      const metadata = {
+        contentType: file?.type, // Explicitly set content type
+      };
+
+      uploadBytes(docRef, file, metadata) // Pass metadata here
         .then(async () => {
           const url = await getDownloadURL(docRef);
           setFormState(() => ({ ...formState, file: url }));
@@ -159,7 +163,7 @@ export default function RecruitmentForm({
         <div className="grid grid-cols-2 gap-4 sticky bottom-[1rem]">
           {!fileUploading && (
             <button
-              disabled={isSent}
+              disabled={isSent || fileUploading}
               onClick={() => {
                 setIsSent(true);
                 addApplication({ ...formState, uid, creationTime: Date.now() });

@@ -2,6 +2,7 @@ import { updateDocument, updateUser } from "@/firebase";
 import { set_modals } from "@/redux/slices/modalsopen";
 import { setUser } from "@/redux/slices/user";
 import moment from "moment";
+import Link from "next/link";
 import { useState } from "react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
@@ -45,12 +46,22 @@ export default function LeadApplication({
     dispatch(setUser({ ...user, leads: updatedLeads }));
     updateDocument(["leads"], [updatedLeads], "users", user?.id);
   };
+  const downloadFile = async (urldata: string, name: string) => {
+    const response = await fetch(urldata);
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = name;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
   return (
     <div
       key={lead?.id}
       className={`${
         light ? "bg-gray-300 text-black" : "bg-gray-700 text-white"
-      } relative p-3 h-max border-[3px] overflow-hidden ${
+      } relative p-3 h-max overflow-hidden ${
         lead.status === "trash"
           ? "border-orange-700"
           : lead.status === "reseted"
@@ -70,12 +81,6 @@ export default function LeadApplication({
         <div className="flex space-x-2">
           <p>{moment(lead?.creationTime).format("DD-MM-YYYY")}</p>
         </div>
-        <button
-          onClick={() => setOptionsOpen(!optionsOpen)}
-          className="text-3xl text-white h-full px-2 hover:bg-white hover:bg-opacity-20 relative z-50"
-        >
-          <HiOutlineDotsHorizontal />
-        </button>
         <div
           className={`z-50 absolute top-14 right-14 w-max h-max py-6 bg-zinc-800 flex flex-col items-start space-y-1 duration-200 ease-in-out ${
             !optionsOpen ? "-translate-y-[300px]" : "-translate-y-0"
@@ -98,17 +103,30 @@ export default function LeadApplication({
 
       <table className="w-full mt-3">
         <tbody>
-          <tr className="bg-gray-700">
+          <tr className={`${light ? "bg-gray-200" : "bg-gray-600"}`}>
+            <td>Imię i nazwisko:</td>
+            <td>{lead.name}</td>
+          </tr>
+          <tr className={`${light ? "bg-gray-300" : "bg-gray-700"}`}>
             <td>Numer Telefonu:</td>
             <td>{lead.phoneNumber}</td>
           </tr>
-          <tr className="bg-gray-700">
-            <td>Wiadomość:</td>
-            <td>{lead.message}</td>
+          <tr className={`${light ? "bg-gray-200" : "bg-gray-600"}`}>
+            <td>E-mail:</td>
+            <td>{lead.email}</td>
+          </tr>
+          <tr className={`${light ? "bg-gray-300" : "bg-gray-700"}`}>
+            <button
+              className="block mt-2 w-max rounded bg-blue-500 text-white px-3 py-1"
+              onClick={() =>
+                downloadFile(lead.document.url, lead.document.userFileName)
+              }
+            >
+              Pobierz CV
+            </button>
           </tr>
         </tbody>
       </table>
-      {lead?.note && <p className="text-white font-light">{lead?.note}</p>}
       <div className="flex flex-col w-full mt-3">
         {!lead.isFinished && (
           <button
@@ -117,22 +135,6 @@ export default function LeadApplication({
           >
             Oznacz jako sprawdzone
           </button>
-        )}
-        {lead.isFinished && (!lead?.status || lead.status === "reseted") && (
-          <div className="grid grid-cols-2 mt-2 gap-2">
-            <button
-              onClick={() => handleUpdate("rejected")}
-              className="bg-gray-500 hover:bg-gray-400 p-3 rounded"
-            >
-              Odrzuć
-            </button>
-            <button
-              onClick={() => handleUpdate("accepted")}
-              className="bg-green-500 hover:bg-green-400 p-3 rounded"
-            >
-              Akceptuj
-            </button>
-          </div>
         )}
       </div>
     </div>
