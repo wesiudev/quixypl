@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { polishToEnglish } from "../../../../../../utils/polishToEnglish";
-import BlogPostList from "@/components/BlogPostList";
 import JobBoardList from "@/components/JobBoardList";
-import Market from "@/components/marketplace/Market";
+const BlogPostList = dynamic(() => import("@/components/BlogPostList"));
+const Market = dynamic(() => import("@/components/marketplace/Market"));
 import removePolishSignsAndSpaces from "@/lib/removePolish";
 const JobOffers = dynamic(() => import("@/components/JobOffers"));
 import Image from "next/image";

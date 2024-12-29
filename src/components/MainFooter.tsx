@@ -1,9 +1,16 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { polishToEnglish } from "../../utils/polishToEnglish";
+import { usePathname } from "next/navigation";
 export default function MainFooter({ jobsList }: { jobsList: any }) {
+  const pathname = usePathname();
   return (
-    <div className="flex flex-col px-6 lg:px-12 p-6 py-12 bg-gradient-to-r from-primaryHoverStart to-primaryHoverEnd relative z-50 overflow-hidden">
+    <div
+      className={`${
+        pathname.includes("user") && "hidden"
+      } flex flex-col px-6 lg:px-12 p-6 py-12 bg-gradient-to-r from-primaryHoverStart to-primaryHoverEnd relative z-50 overflow-hidden`}
+    >
       <div className="flex flex-col relative z-50">
         <div className="mb-12 p-3 lg:p-6 bg-black/50 rounded-lg">
           <h2 className="text-xl lg:text-2xl text-white font-extrabold">

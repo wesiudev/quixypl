@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
 import Image from "next/image";
-import BlogPostList from "@/components/BlogPostList";
 import JobBoardList from "@/components/JobBoardList";
-import Market from "@/components/marketplace/Market";
+const BlogPostList = dynamic(() => import("@/components/BlogPostList"));
+const Market = dynamic(() => import("@/components/marketplace/Market"));
 import removePolishSignsAndSpaces from "@/lib/removePolish";
 import OpinionsForm from "@/components/OpinionsForm";
+import dynamic from "next/dynamic";
 export const revalidate = 60;
 export const dynamicParams = true;
 export default async function Page(props: {

@@ -4,7 +4,7 @@ import removePolishSignsAndSpaces from "@/lib/removePolish";
 import JobOffers from "@/components/JobOffers";
 import Link from "next/link";
 import Image from "next/image";
-import Market from "@/components/marketplace/Market";
+const Market = dynamic(() => import("@/components/marketplace/Market"));
 import JobBoardList from "@/components/JobBoardList";
 import dynamic from "next/dynamic";
 export const revalidate = 60;

@@ -2,11 +2,11 @@ import Link from "next/link";
 import { polishToEnglish } from "../../../../../utils/polishToEnglish";
 import { FaBriefcase } from "react-icons/fa";
 import JobBoardList from "@/components/JobBoardList";
-import Market from "@/components/marketplace/Market";
 import removePolishSignsAndSpaces from "@/lib/removePolish";
 import Image from "next/image";
-import SlugFooter from "@/components/SlugFooter";
-import BlogPostList from "@/components/BlogPostList";
+import dynamic from "next/dynamic";
+const Market = dynamic(() => import("@/components/marketplace/Market"));
+const BlogPostList = dynamic(() => import("@/components/BlogPostList"));
 // Generowanie parametrów statycznych
 export async function generateStaticParams() {
   const jobs = await fetch(
