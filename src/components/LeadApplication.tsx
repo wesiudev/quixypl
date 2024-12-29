@@ -19,32 +19,22 @@ const updateUserLead = async (id: string, data: any) => {
 export default function LeadApplication({
   light,
   lead,
+  filter,
 }: {
   light: any;
   lead: any;
+  filter: any;
 }) {
   const [optionsOpen, setOptionsOpen] = useState(false);
   const { user } = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
-  const deleteUserLead = async (id: string, leadId: string) => {
-    await updateUser(id, {
-      leads: user?.leads?.filter((lead: any) => lead.id !== leadId),
-    });
-  };
-  const handleUpdate = (status: string) => {
+  const handleUpdate = (status: string, id: string) => {
     setOptionsOpen(false);
     const updatedLeads = user.leads.map((l: any) =>
-      l.id === lead.id ? { ...l, status: status } : l
+      l.id === id ? { ...l, status: status } : l
     );
     dispatch(setUser({ ...user, leads: updatedLeads }));
     updateUserLead(user?.id, { ...lead, status: status });
-  };
-
-  const handleDelete = () => {
-    setOptionsOpen(false);
-    const updatedLeads = user?.leads.filter((l: any) => l.id !== lead.id);
-    dispatch(setUser({ ...user, leads: updatedLeads }));
-    updateDocument(["leads"], [updatedLeads], "users", user?.id);
   };
   const downloadFile = async (urldata: string, name: string) => {
     const response = await fetch(urldata);
@@ -58,84 +48,80 @@ export default function LeadApplication({
   };
   return (
     <div
-      key={lead?.id}
       className={`${
         light ? "bg-gray-300 text-black" : "bg-gray-700 text-white"
-      } relative p-3 h-max overflow-hidden ${
-        lead.status === "trash"
-          ? "border-orange-700"
-          : lead.status === "reseted"
-          ? "border-white"
-          : lead.status === "accepted"
-          ? "border-green-500"
-          : lead.status === undefined
-          ? "border-zinc-800"
-          : "border-red-500"
-      }`}
+      } relative p-3 h-max overflow-hidden rounded-md`}
     >
       {optionsOpen && (
         <div className="w-full h-full absolute left-0 top-0 bg-black bg-opacity-50" />
       )}
-
       <div className="flex w-full justify-between items-center">
         <div className="flex space-x-2">
           <p>{moment(lead?.creationTime).format("DD-MM-YYYY")}</p>
         </div>
-        <div
-          className={`z-50 absolute top-14 right-14 w-max h-max py-6 bg-zinc-800 flex flex-col items-start space-y-1 duration-200 ease-in-out ${
-            !optionsOpen ? "-translate-y-[300px]" : "-translate-y-0"
-          }`}
-        >
-          <button
-            onClick={() => handleUpdate("reseted")}
-            className="w-full px-4 py-1 text-white bg-white bg-opacity-0 duration-150 hover:bg-opacity-20"
-          >
-            Resetuj
-          </button>
-          <button
-            onClick={handleDelete}
-            className="w-full px-4 py-1 text-white bg-red-500 bg-opacity-0 duration-150 hover:bg-opacity-20"
-          >
-            Usuń
-          </button>
-        </div>
       </div>
 
-      <table className="w-full mt-3">
-        <tbody>
-          <tr className={`${light ? "bg-gray-200" : "bg-gray-600"}`}>
-            <td>Imię i nazwisko:</td>
-            <td>{lead.name}</td>
-          </tr>
-          <tr className={`${light ? "bg-gray-300" : "bg-gray-700"}`}>
-            <td>Numer Telefonu:</td>
-            <td>{lead.phoneNumber}</td>
-          </tr>
-          <tr className={`${light ? "bg-gray-200" : "bg-gray-600"}`}>
-            <td>E-mail:</td>
-            <td>{lead.email}</td>
-          </tr>
-          <tr className={`${light ? "bg-gray-300" : "bg-gray-700"}`}>
-            <button
-              className="block mt-2 w-max rounded bg-blue-500 text-white px-3 py-1"
-              onClick={() =>
-                downloadFile(lead.document.url, lead.document.userFileName)
-              }
-            >
-              Pobierz CV
-            </button>
-          </tr>
-        </tbody>
-      </table>
+      {lead.type === "application" && (
+        <table className={`w-full mt-3`}>
+          <tbody>
+            <tr className={`${light ? "bg-gray-300" : "bg-gray-700"}`}>
+              <td>Rodzaj:</td>
+              <td>Aplikacja</td>
+            </tr>
+            <tr className={`${light ? "bg-gray-200" : "bg-gray-600"}`}>
+              <td>Imię i nazwisko:</td>
+              <td>{lead.name}</td>
+            </tr>
+            <tr className={`${light ? "bg-gray-300" : "bg-gray-700"}`}>
+              <td>Numer Telefonu:</td>
+              <td>{lead.phoneNumber}</td>
+            </tr>
+            <tr className={`${light ? "bg-gray-200" : "bg-gray-600"}`}>
+              <td>E-mail:</td>
+              <td>{lead.email}</td>
+            </tr>
+            <tr className={`${light ? "bg-gray-300" : "bg-gray-700"}`}>
+              <button
+                className="block mt-2 w-max rounded bg-blue-500 text-white px-3 py-1"
+                onClick={() =>
+                  downloadFile(lead.document.url, lead.document.userFileName)
+                }
+              >
+                Pobierz CV
+              </button>
+            </tr>
+          </tbody>
+        </table>
+      )}
+      {lead.type === "order" && (
+        <table className="w-full mt-3">
+          <tbody>
+            <tr className={`${light ? "bg-gray-200" : "bg-gray-600"}`}>
+              <td>Rodzaj:</td>
+              <td>Zapytanie o usługę</td>
+            </tr>
+            <tr className={`${light ? "bg-gray-300" : "bg-gray-700"}`}>
+              <td>Numer Telefonu:</td>
+              <td>{lead.phoneNumber}</td>
+            </tr>
+            <tr className={`${light ? "bg-gray-200" : "bg-gray-600"}`}>
+              <td>E-mail:</td>
+              <td>{lead.email}</td>
+            </tr>
+            <tr className={`${light ? "bg-gray-300" : "bg-gray-700"}`}>
+              <td>Wiadomość:</td>
+              <td>{lead.message}</td>
+            </tr>
+          </tbody>
+        </table>
+      )}
       <div className="flex flex-col w-full mt-3">
-        {!lead.isFinished && (
-          <button
-            onClick={() => handleUpdate("accepted")}
-            className="w-full text-center bg-green-500 text-white py-2 hover:bg-green-400 font-light text-base rounded"
-          >
-            Oznacz jako sprawdzone
-          </button>
-        )}
+        <button
+          disabled
+          className="disabled:cursor-not-allowed w-full text-center bg-green-500 text-white py-2 hover:bg-green-400 font-light text-base rounded"
+        >
+          Oznacz jako sprawdzone
+        </button>
       </div>
     </div>
   );

@@ -74,13 +74,11 @@ export default function LeadsList() {
               SPRAWDZONE
             </button>{" "}
           </div>
-          <div className="grid grid-cols-1 xl:grid-cols-3 2xl:grid-cols-4 font-sans gap-6 px-3 lg:px-6">
+          <div className="grid grid-cols-1 xl:grid-cols-3 2xl:grid-cols-4 font-sans gap-6 px-3 lg:px-6 pb-6">
             {user?.leads?.map((lead: any, i: any) => (
-              <>
-                {filter === "new" && (
-                  <LeadApplication light={light} key={i} lead={lead} />
-                )}
-              </>
+              <div key={i}>
+                <LeadApplication light={light} lead={lead} filter={filter} />
+              </div>
             ))}
           </div>
         </div>

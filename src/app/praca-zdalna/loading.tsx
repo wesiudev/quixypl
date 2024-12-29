@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Loadinger() {
   return (
-    <div className="font-sans font-light h-screen w-screen flex justify-center items-center bg-[#202020] text-xl text-white">
+    <div className="font-sans font-light min-h-screen w-screen flex justify-center items-center bg-[#202020] text-xl text-white">
       <div className="flex flex-col items-center justify-center">
         <Image
           src="/assets/quixy-logo.png"
