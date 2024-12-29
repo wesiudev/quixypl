@@ -5,7 +5,9 @@ import JobBoardList from "@/components/JobBoardList";
 import removePolishSignsAndSpaces from "@/lib/removePolish";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { getDocument } from "@/firebase";
+import { getServices } from "@/lib/getServices";
+import { getPosts } from "@/lib/getPosts";
+import { getContent } from "@/lib/getContent";
 const Market = dynamic(() => import("@/components/marketplace/Market"));
 const BlogPostList = dynamic(() => import("@/components/BlogPostList"));
 // Generowanie parametrów statycznych
@@ -30,19 +32,12 @@ export default async function Page(props: { params: Promise<any> }) {
   const slug = cat?.data.find(
     (item: any) => polishToEnglish(item.title) === params.category
   );
-  const content = await getDocument("content", params.category);
-  const talents = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
-      process.env.API_SECRET_KEY
-    }&slug=${polishToEnglish(params.category)}`,
-    { next: { revalidate: 60 } }
+  const users = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/users/${params.category}?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res: any) => res.json());
-  const companies = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/companies/slug?tubylytylkofigi=${
-      process.env.API_SECRET_KEY
-    }&slug=${polishToEnglish(params.category)}`,
-    { next: { revalidate: 60 } }
-  ).then((res: any) => res.json());
+  const content = await getContent(params.category);
+  const services = await getServices();
+  const posts = await getPosts();
   return (
     <div className="bg-gradient-to-b relative bg-white">
       {/* Hero Section */}
@@ -102,8 +97,8 @@ export default async function Page(props: { params: Promise<any> }) {
         <div className="mt-12 w-full">
           <div className="flex flex-col mx-auto ">
             <JobBoardList
-              talents={talents}
-              companies={companies}
+              talents={users.filter((user: any) => user.seek)}
+              companies={users.filter((user: any) => !user.seek)}
               content={content}
             />
           </div>
@@ -111,7 +106,7 @@ export default async function Page(props: { params: Promise<any> }) {
 
         {/* Sekcja wyszukiwania */}
         <div className="mt-12 w-full" id="search">
-          <Market />
+          <Market services={services} />
         </div>
 
         {/* Podkategorie */}
@@ -162,7 +157,7 @@ export default async function Page(props: { params: Promise<any> }) {
             </section>
           </div>
 
-          <BlogPostList />
+          <BlogPostList posts={posts} />
         </div>
 
         {/* Sekcja tagów */}

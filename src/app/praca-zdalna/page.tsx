@@ -16,11 +16,13 @@ import uslugi from "../../../public/slug/uslugi-it.webp";
 import biznesowe from "../../../public/slug/uslugi-biznesowe.webp";
 import projektowanie from "../../../public/slug/projektowanie.webp";
 import AiImage from "../../../public/assets/AI-Image.png";
+import { getServices } from "@/lib/getServices";
 // Główna strona
 export default async function Page() {
   const opinions = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/opinions?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res) => res.json());
+  const services = await getServices();
   return (
     <div className="w-full h-full bg-white">
       <div className="">
@@ -37,7 +39,7 @@ export default async function Page() {
           <WhatMakesUsUniqueSection />
         </div>
         <div className="container mx-auto px-4 lg:px-12" id="search">
-          <Market />
+          <Market services={services} />
         </div>
         <div className="container mx-auto px-4 lg:px-12">
           <FAQ faqItems={faqItems} />

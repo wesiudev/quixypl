@@ -10,7 +10,8 @@ import { Metadata } from "next";
 import heroImg from "../../public/assets/mockup.png";
 export default async function Page() {
   const jobs = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    { next: { revalidate: 6000 } }
   ).then((res) => res.json());
   return (
     <div className="flex flex-col bg-white">
@@ -78,8 +79,8 @@ export default async function Page() {
       <div className="mx-auto px-4 lg:px-12 mb-12 xl:container">
         <AboutQuixyTalent />
       </div>
-      <div className="xl:container px-4 lg:px-12 mb-12">
-        <div className="flex flex-col-reverse md:flex-row text-black">
+      <div className="mx-auto w-full xl:container lg:px-12 px-4  mb-12">
+        <div className="flex flex-col-reverse md:flex-row text-black w-full">
           <Image
             src="/assets/gif/gihome.webp"
             width={512}

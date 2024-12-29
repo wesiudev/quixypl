@@ -9,9 +9,6 @@ import dynamic from "next/dynamic";
 const Header = dynamic(() => import("@/components/Header"));
 const MainFooter = dynamic(() => import("@/components/MainFooter"));
 import { Open_Sans } from "next/font/google";
-import { getPosts } from "@/lib/getPosts";
-import { getServices } from "@/lib/getServices";
-const InitData = dynamic(() => import("@/components/InitData"));
 export const revalidate = 60;
 export default async function RootLayout({
   children,
@@ -21,9 +18,6 @@ export default async function RootLayout({
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res) => res.json());
-  const services = await getServices();
-  const posts = await getPosts();
-
   const categories = await jobs.flatMap((job: any) => [
     { title: job.title, data: job.data.map((subItem: any) => subItem) },
   ]);
@@ -36,10 +30,7 @@ export default async function RootLayout({
         <div className="relative z-[9999999999]">
           <ToastContainer />
         </div>
-        <Providers>
-          <InitData posts={posts} services={services} />
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
         <MainFooter jobsList={categories} />
         <Script src="https://www.googletagmanager.com/gtag/js?id=GT-WRDF58Q" />
         <Script id="google-analytics">

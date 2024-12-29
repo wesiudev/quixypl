@@ -3,9 +3,13 @@ import Link from "next/link";
 import AboutQuixyTalent from "@/components/AboutQuixyTalent";
 const Market = dynamic(() => import("@/components/marketplace/Market"));
 import dynamic from "next/dynamic";
+import { getServices } from "@/lib/getServices";
+import { getPosts } from "@/lib/getPosts";
 const BlogPostList = dynamic(() => import("@/components/BlogPostList"));
 
 export default async function Page() {
+  const services = await getServices();
+  const posts = await getPosts();
   return (
     <>
       <div className="bg-white overflow-hidden">
@@ -30,11 +34,11 @@ export default async function Page() {
               Aktualności - czytaj o pracy zdalnej, technologii, biznesie i
               nowościach w AI
             </h1>
-            <BlogPostList />
+            <BlogPostList posts={posts} />
           </div>
           <AboutQuixyTalent />
           <div className="mt-12"></div>
-          <Market />
+          <Market services={services} />
         </div>{" "}
       </div>
     </>

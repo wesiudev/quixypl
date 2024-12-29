@@ -7,11 +7,10 @@ import heroImg from "../../../public/assets/AI-Image.png";
 import Market from "@/components/marketplace/Market";
 import AboutQuixyTalent from "@/components/AboutQuixyTalent";
 import FAQ from "@/components/Faq";
+import { getServices } from "@/lib/getServices";
 export const revalidate = 60;
 export default async function Page() {
-  const services = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res) => res.json());
+  const services = await getServices();
   return (
     <div className="min-h-screen w-full flex flex-col">
       <main className="">
@@ -69,7 +68,7 @@ export default async function Page() {
         </div>
         {/* Services Section */}
         <div className="mx-auto px-4 w-full max-w-[1366px]" id="search">
-          <Market />
+          <Market services={services} />
         </div>
       </main>
       <div className="py-12 bg-gradient-to-r from-primaryHoverStart to-primaryHoverEnd text-black">

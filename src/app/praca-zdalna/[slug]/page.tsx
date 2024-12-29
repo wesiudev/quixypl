@@ -2,12 +2,13 @@ import Link from "next/link";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
 import Image from "next/image";
 import JobBoardList from "@/components/JobBoardList";
-const BlogPostList = dynamic(() => import("@/components/BlogPostList"));
-const Market = dynamic(() => import("@/components/marketplace/Market"));
 import removePolishSignsAndSpaces from "@/lib/removePolish";
 import OpinionsForm from "@/components/OpinionsForm";
-import dynamic from "next/dynamic";
-import { getDocument } from "@/firebase";
+import Market from "@/components/marketplace/Market";
+import BlogPostList from "@/components/BlogPostList";
+import { getServices } from "@/lib/getServices";
+import { getPosts } from "@/lib/getPosts";
+import { getContent } from "@/lib/getContent";
 export const revalidate = 60;
 export const dynamicParams = true;
 export default async function Page(props: {
@@ -18,22 +19,17 @@ export default async function Page(props: {
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res) => res.json());
-  const content = await getDocument("content", params.slug);
-  const talents = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
-      process.env.API_SECRET_KEY
-    }&slug=${polishToEnglish(params.slug)}`
-  ).then((res: any) => res.json());
-  const companies = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/companies/slug?tubylytylkofigi=${
-      process.env.API_SECRET_KEY
-    }&slug=${polishToEnglish(params.slug)}`
+  const users = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/users/${params.slug}?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res: any) => res.json());
   const opinions = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/opinions?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.slug)}`
   ).then((res: any) => res.json());
+  const services = await getServices();
+  const content = await getContent(params.slug);
+  const posts = await getPosts();
   return (
     <>
       <div>
@@ -93,14 +89,14 @@ export default async function Page(props: {
           <div className="bg-white w-full py-12">
             <div className="flex flex-col mx-auto">
               <JobBoardList
-                talents={talents}
-                companies={companies}
+                talents={users.filter((user: any) => user.seek)}
+                companies={users.filter((user: any) => !user.seek)}
                 content={content}
               />
             </div>
           </div>
           <div className="bg-white" id="search">
-            <Market />
+            <Market services={services} />
           </div>
           <div className="w-full mb-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -148,15 +144,17 @@ export default async function Page(props: {
                   </div>
                 </div>
               </div>
-              <Image
-                src={`/assets/mockup.png`}
-                width={1024}
-                height={1024}
-                alt={`Prace Zdalne w ${content?.genitive}`}
-                blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
-                placeholder="blur"
-                className="my-12 sm:my-0 w-full scale-125 sm:scale-100 h-auto mx-auto"
-              />
+              <div className="flex items-center justify-center">
+                <Image
+                  src={`/assets/mockup.png`}
+                  width={1024}
+                  height={1024}
+                  alt={`Prace Zdalne w ${content?.genitive}`}
+                  blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4WAoAAAAQAAAfAADuwH/xAAfAQADAAQAAAAAAQAvAQADAAQAAAAAAQAvAQA"
+                  placeholder="blur"
+                  className="my-12 sm:my-0 w-full scale-125 sm:scale-100 h-auto mx-auto"
+                />
+              </div>
             </div>
           </div>
           {/* Content */}
@@ -164,7 +162,7 @@ export default async function Page(props: {
             <div className="w-full lg:w-[50%]">
               <h2
                 style={{ lineHeight: 1.2 }}
-                className="rounded-xl text-black w-max max-w-full font-extrabold text-4xl mb-6"
+                className="rounded-xl text-black w-max max-w-full font-extrabold text-2xl 2xl:text-4xl mb-6"
               >
                 Zlecenia i oferty pracy zdalnej dla freelancerów oraz firm
               </h2>
@@ -190,7 +188,7 @@ export default async function Page(props: {
                                   title={`Pracuj zdalnie w ${subcategory.title}`}
                                   key={k}
                                   style={{ boxShadow: "1px 0px 4px black" }}
-                                  className="rounded-md text-center py-3 px-6 bg-[#126b91] hover:bg-[#468CA9] duration-75 font-extralight  text-lg text-white"
+                                  className="rounded-md text-center py-3 px-6 bg-[#126b91] hover:bg-[#468CA9] duration-75 font-extralight text-sm xl:text-lg text-white"
                                   href={`/praca-zdalna/${polishToEnglish(
                                     job.title
                                   )}/${polishToEnglish(
@@ -223,7 +221,7 @@ export default async function Page(props: {
             </section>
           </div>
 
-          <BlogPostList />
+          <BlogPostList posts={posts} />
           {/* <h2 className="text-xl font-semibold text-primary mb-4">
           Najlepsi specjaliści {slug.title}
         </h2> */}
@@ -313,9 +311,7 @@ export default async function Page(props: {
 
 export async function generateMetadata(props: { params: Promise<any> }) {
   const params = await props.params;
-  const content = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.slug}`
-  ).then((res: any) => res.json());
+  const content = await getContent(params.slug);
   const title = `${content?.title} Praca Zdalna Freelancer Job Boards`;
   const description = `Prowadzisz rekrutację lub szukasz pracy w ${content?.genitive}? Chcesz zająć się ${content?.instrumental}? Mamy dla Ciebie zlecenia.`;
   return {

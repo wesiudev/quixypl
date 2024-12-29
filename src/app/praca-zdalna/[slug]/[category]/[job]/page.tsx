@@ -7,32 +7,25 @@ import removePolishSignsAndSpaces from "@/lib/removePolish";
 const JobOffers = dynamic(() => import("@/components/JobOffers"));
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { getDocument } from "@/firebase";
+import { getServices } from "@/lib/getServices";
+import { getPosts } from "@/lib/getPosts";
+import { getContent } from "@/lib/getContent";
 const InitializeUser = dynamic(() => import("@/components/InitializeUser"));
 export const revalidate = 60;
 export const dynamicParams = true;
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
   const offers = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/offers?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`
+    `${process.env.NEXT_PUBLIC_URL}/api/offers?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`,
+    { next: { revalidate: 600 } }
   ).then((res) => res.json());
-  const talents = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
-      process.env.API_SECRET_KEY
-    }&slug=${polishToEnglish(params.job)}`
+  const users = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/users/${params.job}?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
+    { next: { revalidate: 60 } }
   ).then((res: any) => res.json());
-  const companies = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/companies/slug?tubylytylkofigi=${
-      process.env.API_SECRET_KEY
-    }&slug=${polishToEnglish(params.job)}`
-  ).then((res: any) => res.json());
-  const allCities = Array?.from(
-    new Set([
-      ...talents?.map((item: any) => item?.city),
-      ...companies?.map((item: any) => item?.city),
-    ])
-  );
-  const content = await getDocument("content", params.job);
+  const content = await getContent(params.job);
+  const services = await getServices();
+  const posts = await getPosts();
   return (
     <>
       <div className="font-sans min-h-screen flex flex-col w-full">
@@ -91,8 +84,8 @@ export default async function Page(props: { params: Promise<any> }) {
         <div className="mx-auto container px-4 lg:px-12">
           <div className="my-12 w-full flex flex-col">
             <JobBoardList
-              talents={talents}
-              companies={companies}
+              talents={users.filter((user: any) => user.seek)}
+              companies={users.filter((user: any) => !user.seek)}
               content={content}
             />
           </div>
@@ -116,7 +109,7 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
           {/* Services Section */}
           <div className="mt-12 w-full" id="search">
-            <Market />
+            <Market services={services} />
           </div>
 
           {/* Content */}
@@ -137,26 +130,9 @@ export default async function Page(props: { params: Promise<any> }) {
                   __html: content?.description,
                 }}
               />
-              <div className="w-full mt-12">
-                <div className="flex flex-wrap gap-4">
-                  {allCities.map((city: any, i: any) => (
-                    <Link
-                      key={city}
-                      className="text-xs sm:text-sm block text-white hover:scale-105 duration-150"
-                      href={`/praca-zdalna/${params.slug}/${params.category}/${
-                        params.job
-                      }/${polishToEnglish(city)}`}
-                    >
-                      <span className="block w-max max-w-full rounded-3xl py-2 px-4 bg-gradient-to-b from-primaryStart to-primaryEnd">
-                        {content?.informal_title_plural} {city}
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
             </section>
           </div>
-          <BlogPostList />
+          <BlogPostList posts={posts} />
           <div className="my-12 w-full">
             <h4 className="text-xl font-extrabold text-gray-800 mb-4">Tagi</h4>
             <ul className="flex overflow-x-scroll lg:overflow-visible w-full lg:flex-wrap gap-4 text-sm lg:text-base">
