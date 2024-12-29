@@ -3,7 +3,19 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { IoSend } from "react-icons/io5";
 import { v4 as uuidv4 } from "uuid";
-import { addOrder } from "@/lib/addOrder";
+async function addOrder(data: any) {
+  const isSuccess = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/addOrder/`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data }),
+    }
+  ).then((res: any) => res.json());
+  return isSuccess;
+}
 
 interface MessageInputProps {
   value: any;

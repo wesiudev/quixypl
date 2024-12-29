@@ -7,8 +7,19 @@ import { toast } from "react-toastify";
 import Documents from "./Documents";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/slices/user";
-import { addApplication } from "@/lib/addApplication";
-
+async function addApplication(data: any) {
+  const isSuccess = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/addApplication/`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data }),
+    }
+  ).then((res: any) => res.json());
+  return isSuccess;
+}
 export default function RecruitmentForm({
   uid,
   companyName,
