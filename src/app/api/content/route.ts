@@ -12,8 +12,8 @@ export async function GET(req: NextRequest) {
   if (!job) {
     return NextResponse.json({ error: "no content" });
   }
-  const res = await getDocuments("content");
   try {
+    const res = await getDocuments("content");
     const content = res.find((doc) => polishToEnglish(doc.title) === job);
     if (!content) {
       return NextResponse.json({ error: "no content" });

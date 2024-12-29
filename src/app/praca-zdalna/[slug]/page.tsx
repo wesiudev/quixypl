@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
-import SlugFooter from "@/components/SlugFooter";
 import Image from "next/image";
 import BlogPostList from "@/components/BlogPostList";
 import JobBoardList from "@/components/JobBoardList";
