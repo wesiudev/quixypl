@@ -10,10 +10,10 @@ export default async function Page() {
       {/* Hero Section */}
       <div className="flex-grow">
         <div
-          className="h-full w-full bg-gradient-to-r from-primaryStart to-primaryEnd overflow-hidden text-white py-12 relative z-50 px-4 lg:px-12 text-center"
+          className="h-full w-full bg-gradient-to-b from-ctaStart/70 to-ctaEnd/70 overflow-hidden text-white py-12 relative z-50 px-4 lg:px-12 text-center"
           style={{ boxShadow: "inset 0px 0px 5px black" }}
         >
-          <h1 className="text-3xl font-extrabold text-white">QUIXY.PL</h1>
+          <h1 className="text-3xl font-extrabold text-white">Kim jesteśmy?</h1>
           <p className="text-xl mt-2 max-w-xl mx-auto">
             <Link href="/praca-zdalna" target="_blank">
               Quixy to platforma z pracą zdalną
@@ -34,7 +34,7 @@ export default async function Page() {
         <div className="py-12 px-4 lg:px-12 xl:container mx-auto text-black">
           <h2 className="text-2xl font-extrabold">Jak możemy Ci pomóc?</h2>
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-gradient-to-r from-primaryStart to-primaryEnd p-6 relative z-50 rounded-md">
+            <div className="bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd p-6 relative z-50 rounded-md">
               <h3 className="text-xl text-white flex">
                 <FaStar className="mr-2 text-accentEnd mt-1" />
                 <Link
@@ -45,13 +45,13 @@ export default async function Page() {
                   <span className="ml-1 text-sm font-light">Sprawdź</span>
                 </Link>
               </h3>
-              <p className="mt-2 text-white ">
+              <p className="mt-2 text-black rounded-md p-2 bg-white">
                 Zatrudnij ekspertów od aplikacji mobilnych, marketingu, usług
                 biznesowych, web developmentu, frameworków czy programistów
                 nowych technologii w kategorii rozwoju oprogramowania.
               </p>
             </div>
-            <div className="bg-gradient-to-r from-primaryStart to-primaryEnd p-6 relative z-50 rounded-md">
+            <div className="bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd p-6 relative z-50 rounded-md">
               <h3 className="text-xl text-white flex">
                 <FaStar className="mr-2 text-accentEnd mt-1" />
                 <Link
@@ -62,12 +62,12 @@ export default async function Page() {
                   <span className="ml-1 text-sm font-light">Sprawdź</span>
                 </Link>
               </h3>
-              <p className="mt-2 text-white ">
+              <p className="mt-2 text-black rounded-md p-2 bg-white">
                 Freelancerzy oferujący pełne wsparcie w tworzeniu sklepów
                 internetowych, rozwiązań Magento, Shopify i innych.
               </p>
             </div>
-            <div className="bg-gradient-to-r from-primaryStart to-primaryEnd p-6 relative z-50 rounded-md">
+            <div className="bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd p-6 relative z-50 rounded-md">
               <h3 className="text-xl text-white flex">
                 <FaStar className="mr-2 text-accentEnd mt-1" />
                 <Link
@@ -78,7 +78,7 @@ export default async function Page() {
                   <span className="ml-1 text-sm font-light">Sprawdź</span>
                 </Link>
               </h3>
-              <p className="mt-2 text-white ">
+              <p className="mt-2 text-black rounded-md p-2 bg-white">
                 Skorzystaj z usług freelancerów i firm doradztwa IT, wsparcia
                 technicznego oraz rozwiązań z zakresu bezpieczeństwa IT.
               </p>

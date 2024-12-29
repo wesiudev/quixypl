@@ -11,12 +11,12 @@ export default async function Page() {
         <div className="container p-6 lg:p-12 bg-white relative z-50 mx-auto">
           <div className=" text-black flex flex-col breadcrumbs">
             <ul className="flex items-center flex-wrap">
-              <li className="">
+              <li className="!text-black">
                 <Link href={`/`} title="praca zdalna">
                   hello!
                 </Link>
               </li>
-              <li className="">
+              <li className="!text-black">
                 <Link href="/news" title="aktualności">
                   news
                 </Link>

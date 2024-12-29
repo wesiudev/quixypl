@@ -77,9 +77,9 @@ export default async function Page(props: {
                     </div>
                     <div className="w-full flex items-center justify-center flex-col text-center">
                       <div>
-                        <h2 className="lg:text-2xl mt-2">
+                        <h1 className="lg:text-2xl mt-2">
                           {talent?.name ? talent?.name : "Brak nazwy"}
-                        </h2>
+                        </h1>
 
                         {talent?.city && (
                           <div className="text-black flex items-center justify-center text-center">

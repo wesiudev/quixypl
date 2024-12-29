@@ -86,7 +86,7 @@ export default function Services() {
                       setEditOpen={setEditOpen}
                       setOpenedService={setOpenedService}
                       key={i}
-                      project={project}
+                      service={project}
                       user={user}
                     />
                   ))}

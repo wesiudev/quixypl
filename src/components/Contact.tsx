@@ -14,7 +14,7 @@ export default function Contact() {
   });
   const [sent, setSent] = useState(false);
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col">
       <div className="flex-grow">
         {/* Contact Section */}
         <div className="flex flex-col relative overflow-hidden bg-white">
@@ -22,12 +22,12 @@ export default function Contact() {
           <div className="bg-white py-6 container mx-auto">
             <div className=" text-black flex flex-col breadcrumbs">
               <ul className="flex items-center flex-wrap">
-                <li className="">
+                <li className="!text-black">
                   <Link href={`/`} title="praca zdalna">
                     hello!
                   </Link>
                 </li>
-                <li className="">
+                <li className="!text-black">
                   <Link href="/contact" title="kontakt">
                     contact
                   </Link>
@@ -45,7 +45,7 @@ export default function Contact() {
                 className="max-w-lg lg:max-w-lg xl:max-w-2xl overflow-hidden rounded-lg"
               >
                 <div className="bg-white shadow-lg relative z-50 pb-3 lg:pb-6 mx-auto lg:mx-0">
-                  <h2 className="flex items-center p-4 text-3xl text-white bg-gradient-to-r from-primaryStart to-primaryEnd  rounded-lg">
+                  <h2 className="flex items-center p-4 text-3xl text-white bg-gradient-to-r from-ctaStart to-primaryEnd  rounded-lg">
                     <FaEnvelope className="mr-2" /> Wypełnij formularz
                   </h2>
                   <p className="text-lg text-justify  text-black p-4">
@@ -152,8 +152,8 @@ export default function Contact() {
               </div>
               <div className="text-zinc-800 py-12 lg:py-0 flex flex-col items-center justify-center lg:items-start lg:justify-start w-full">
                 <h2 className="pt-2 text-2xl text-white text-center lg:text-left">
-                  <span className="p-2 w-max max-w-full bg-gradient-to-b from-primaryStart to-primaryEnd rounded-md">
-                    Informacje Kontaktowe
+                  <span className="px-[1rem] py-[0.5rem] w-max max-w-full bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd rounded-md">
+                    Informacje kontaktowe
                   </span>
                 </h2>
                 <p className="text-center lg:text-left mt-4 text-lg max-w-lg">

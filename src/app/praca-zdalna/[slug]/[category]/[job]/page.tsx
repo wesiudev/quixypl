@@ -60,7 +60,7 @@ export default async function Page(props: { params: Promise<any> }) {
               style={{ lineHeight: 1.4 }}
               className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4"
             >
-              Oferty pracy, zlecenia usługi i najlepsi{" "}
+              Oferty pracy, zlecenia, usługi i najlepsi{" "}
               <span className="text-accentStart">
                 {content?.informal_title_plural}
               </span>

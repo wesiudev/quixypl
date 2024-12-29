@@ -141,9 +141,9 @@ export default async function Page(props: {
                       <div className="pl-3 lg:pl-6 w-full">
                         <div className="flex flex-col w-full">
                           <div className="text-black font-extrabold w-full flex justify-between">
-                            <h2 className="text-xl lg:text-2xl pr-2">
+                            <h1 className="text-xl lg:text-2xl pr-2">
                               {talent?.name ? talent?.name : "Nie podano"}
-                            </h2>
+                            </h1>
                           </div>
                           {talent?.title && (
                             <h3>
