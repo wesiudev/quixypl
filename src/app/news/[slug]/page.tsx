@@ -15,9 +15,6 @@ export async function generateStaticParams() {
 export const revalidate = 60;
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
-  const posts = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res) => res.json());
   const product: any = await getProductByUrl(params?.slug);
   const posts = await getPosts();
   return (
