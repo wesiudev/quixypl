@@ -6,6 +6,7 @@ import { setUser } from "@/redux/slices/user";
 import EssentialUserInfo from "./EssentialUserInfo";
 import SettingsHeader from "./SettingsHeader";
 import GoogleView from "./GoogleView";
+import ChooseAccountType from "./ChooseAccountType";
 
 export default function SettingsInputs({
   changesWereMade,
@@ -44,17 +45,24 @@ export default function SettingsInputs({
         } duration-300 pb-24 rounded-lg relative`}
       >
         <SettingsHeader setError={setError} changesWereMade={changesWereMade} />
-        <EssentialUserInfo
-          light={light}
-          setChangesWereMade={setChangesWereMade}
-        />
-        <TagsHandler light={light} />
-        <PreferencesHandler
-          light={light}
-          addPreference={addPreference}
-          removePreference={removePreference}
-        />
-        <GoogleView setChangesWereMade={setChangesWereMade} />
+        {user?.seek === "ask" && (
+          <ChooseAccountType setChangesWereMade={setChangesWereMade} />
+        )}
+        {user?.seek !== "ask" && (
+          <>
+            <EssentialUserInfo
+              light={light}
+              setChangesWereMade={setChangesWereMade}
+            />
+            <TagsHandler light={light} />
+            <PreferencesHandler
+              light={light}
+              addPreference={addPreference}
+              removePreference={removePreference}
+            />
+            <GoogleView setChangesWereMade={setChangesWereMade} />
+          </>
+        )}
       </div>
     </div>
   );

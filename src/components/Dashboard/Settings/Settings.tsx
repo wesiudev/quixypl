@@ -35,10 +35,10 @@ export default function Settings({ isNavOpen }: { isNavOpen: boolean }) {
         }}
         className={`disabled:cursor-not-allowed fixed z-[500] left-0 top-0 w-screen h-screen ${
           modals.config ? "block" : "hidden"
-        } bg-black/80`}
+        } bg-black/80 hover:bg-black/70 duration-300`}
       />
       <div
-        className={`fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 h-[80vh] z-[800] w-[95vw] lg:w-[50rem] rounded-lg overflow-y-scroll scrollbar ${
+        className={`fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 max-h-[80vh] z-[800] w-[95vw] lg:w-[50rem] rounded-lg overflow-y-scroll scrollbar ${
           modals?.config ? "block" : "hidden"
         } mb-12`}
       >

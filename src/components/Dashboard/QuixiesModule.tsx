@@ -16,7 +16,7 @@ export default function QuixiesModule() {
         onClick={() => dispatch(set_modals({ ...modals, quixies: false }))}
         className={`z-[700] disabled:cursor-not-allowed fixed left-0 top-0 w-full h-full ${
           modals?.quixies ? "block" : "hidden"
-        } bg-black/80`}
+        } bg-black/80 hover:bg-black/70 duration-300`}
       />
       <div
         className={`sm:rounded-lg z-[800] left-0 top-0 sm:left-1/2 sm:-translate-x-1/2 sm:top-1/2 sm:-translate-y-1/2 w-screen sm:w-[90%] lg:max-w-[50rem] xl:max-w-[60rem] h-screen sm:h-[80vh] fixed overflow-y-scroll scrollbar ${

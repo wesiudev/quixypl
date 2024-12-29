@@ -157,197 +157,196 @@ export default function EssentialUserInfo({
             )}
           </div>
         </div>
-        {user?.seek !== "ask" && (
-          <div
-            className={`${
-              light ? "bg-white" : "bg-[#222430]"
-            } duration-300 relative w-full px-4 sm:px-6`}
-          >
-            <div className="mt-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="flex flex-col">
-                  <label className="font-bold">Nazwa</label>
-                  <input
-                    type="text"
-                    value={user?.name}
-                    onChange={(e) => {
-                      handleReduxUserState(e.target.value, "name");
-                      setChangesWereMade(true);
-                    }}
-                    className={`${
-                      light ? "bg-white text-black" : "bg-gray-700 text-white"
-                    } duration-300 border border-primaryStart/70 rounded-md p-2`}
-                    placeholder="imię/nazwa firmy"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <label className="font-bold">Tytuł</label>
-                  <input
-                    type="text"
-                    value={user?.title}
-                    onChange={(e) => {
-                      handleReduxUserState(e.target.value, "title");
-                      setChangesWereMade(true);
-                    }}
-                    className={`${
-                      light ? "bg-white text-black" : "bg-gray-700 text-white"
-                    } duration-300 border border-primaryStart/70 rounded-md p-2`}
-                    placeholder={`np. ${user?.seek ? "Młodszy Księgowy" : ""}${
-                      !user?.seek ? "Project Manager" : ""
-                    }`}
-                  />
-                </div>
+
+        <div
+          className={`${
+            light ? "bg-white" : "bg-[#222430]"
+          } duration-300 relative w-full px-4 sm:px-6`}
+        >
+          <div className="mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="flex flex-col">
+                <label className="font-bold">Nazwa</label>
+                <input
+                  type="text"
+                  value={user?.name}
+                  onChange={(e) => {
+                    handleReduxUserState(e.target.value, "name");
+                    setChangesWereMade(true);
+                  }}
+                  className={`${
+                    light ? "bg-white text-black" : "bg-gray-700 text-white"
+                  } duration-300 border border-primaryStart/70 rounded-md p-2`}
+                  placeholder="imię/nazwa firmy"
+                />
               </div>
-              <CitiesPicker
-                light={light}
-                user={user}
-                setChangesWereMade={setChangesWereMade}
-                handleReduxUserState={handleReduxUserState}
-              />
+              <div className="flex flex-col">
+                <label className="font-bold">Tytuł</label>
+                <input
+                  type="text"
+                  value={user?.title}
+                  onChange={(e) => {
+                    handleReduxUserState(e.target.value, "title");
+                    setChangesWereMade(true);
+                  }}
+                  className={`${
+                    light ? "bg-white text-black" : "bg-gray-700 text-white"
+                  } duration-300 border border-primaryStart/70 rounded-md p-2`}
+                  placeholder={`np. ${user?.seek ? "Młodszy Księgowy" : ""}${
+                    !user?.seek ? "Project Manager" : ""
+                  }`}
+                />
+              </div>
             </div>
-            {/* <UserSocialLinksAdder
+            <CitiesPicker
+              light={light}
+              user={user}
+              setChangesWereMade={setChangesWereMade}
+              handleReduxUserState={handleReduxUserState}
+            />
+          </div>
+          {/* <UserSocialLinksAdder
             user={user}
             setChangesWereMade={setChangesWereMade}
             handleReduxUserState={handleReduxUserState}
           /> */}
-            {!user?.pseudo && (
-              <>
-                <div className="flex flex-col mt-2">
-                  <label className="font-bold">Unikalna nazwa</label>
-                  <div className="">
-                    {!localPseudo &&
-                      "Wartość ta pozwala na wyświetlanie profilu w zakładce pracy zdalnej."}
-                    {localPseudo && pseudoWasChanged && pseudoIsAvailable && (
-                      <div className="">
-                        To będzie Twój Unikalny Link w Quixy.pl
-                      </div>
-                    )}
-                  </div>
-                  {hasAnswer && !pseudoIsAvailable && (
-                    <div className="mb-2 text-red-500 font-light font-gotham">
-                      Nazwa {localPseudo} jest zajęta...
+          {!user?.pseudo && (
+            <>
+              <div className="flex flex-col mt-2">
+                <label className="font-bold">Unikalna nazwa</label>
+                <div className="">
+                  {!localPseudo &&
+                    "Wartość ta pozwala na wyświetlanie profilu w zakładce pracy zdalnej."}
+                  {localPseudo && pseudoWasChanged && pseudoIsAvailable && (
+                    <div className="">
+                      To będzie Twój Unikalny Link w Quixy.pl
                     </div>
                   )}
-                  <input
-                    type="text"
-                    value={localPseudo}
-                    onChange={(e) => {
-                      setLocalPseudo(polishToEnglish(e.target.value));
-                      setPseudoWasChanged(true);
-                      setHasAnswer(false);
-                      setPseudoIsAvailable(false);
-                    }}
-                    className={`${
-                      light ? "bg-white text-black" : "bg-gray-700 text-white"
-                    } duration-300 border ${
-                      hasAnswer &&
-                      !pseudoIsAvailable &&
-                      "bg-red-500 text-white !font-bold"
-                    } border-primaryStart/70 rounded-md p-2 font-light`}
-                    placeholder="np. jan345"
-                  />
-                  <span className="text-primary">
-                    quixy.pl/{user?.seek ? "talent" : "company"}/{localPseudo}
-                  </span>
-                  <div className="grid grid-cols-2 gap-3">
-                    {pseudoWasChanged &&
-                      !pseudoIsAvailable &&
-                      localPseudo?.length > 0 && (
-                        <button
-                          onClick={() => check(localPseudo)}
-                          disabled={isLoading}
-                          className="animate-pulse bg-gradient-to-b from-accentStart to-accentEnd disabled:cursor-not-allowed w-max  disabled:bg-[#126b91] disabled:duration-500 duration-100 px-4 py-2 text-white font-gotham mt-2 rounded-md"
-                        >
-                          {!isLoading && "Sprawdź dostępność"}
-                          {isLoading && "Sprawdzam..."}
-                        </button>
-                      )}
-                    {pseudoWasChanged && pseudoIsAvailable && (
-                      <div className="flex flex-col">
-                        <div className="font-gotham font-bold text-green-500">
-                          Nazwa jest dostępna.
-                        </div>
-                        <button
-                          disabled={
-                            isLoading ||
-                            !pseudoIsAvailable ||
-                            localPseudo === "" ||
-                            !pseudoWasChanged
-                          }
-                          onClick={() => {
-                            setChangesWereMade(true);
-                            handleReduxUserState(localPseudo, "pseudo");
-                            setPseudoIsAvailable(false);
-                            setLocalPseudo("");
-                            setHasAnswer(false);
-                            setPseudoWasChanged(false);
-                          }}
-                          className="animate-pulse bg-gradient-to-b from-primaryStart to-primaryEnd disabled:cursor-not-allowed w-max  disabled:bg-[#126b91] disabled:duration-500 duration-100 px-4 py-2 text-white  rounded-md mt-2"
-                        >
-                          Zarezerwuj nazwę
-                        </button>
-                      </div>
-                    )}
-                  </div>
                 </div>
-              </>
-            )}
-
-            <div className="w-full mt-3">
-              <div className="flex flex-col">
-                <label htmlFor="hourRate" className="font-bold">
-                  Stawka godzinowa
-                </label>
-                <div className="grid grid-cols-2">
-                  <div className="relative w-full">
-                    <input
-                      id="hourRate"
-                      className={`${
-                        light ? "bg-white text-black" : "bg-gray-700 text-white"
-                      } duration-300 w-full border border-primaryStart/70 p-2 rounded-md`}
-                      placeholder={`Wpisz stawkę`}
-                      type="text"
-                      value={user?.hourRate}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        // Allow only numbers
-                        if (/^\d*$/.test(value)) {
-                          setChangesWereMade(true);
-                          handleReduxUserState(e.target.value, "hourRate");
-                        }
-                      }}
-                    />
-                    <div className="rounded-r-md flex items-center justify-center absolute right-0 top-0 h-full bg-gradient-to-b from-accentStart to-accentEnd text-white  px-3 ">
-                      zł/h
-                    </div>
+                {hasAnswer && !pseudoIsAvailable && (
+                  <div className="mb-2 text-red-500 font-light font-gotham">
+                    Nazwa {localPseudo} jest zajęta...
                   </div>
-                  <div className=""></div>
+                )}
+                <input
+                  type="text"
+                  value={localPseudo}
+                  onChange={(e) => {
+                    setLocalPseudo(polishToEnglish(e.target.value));
+                    setPseudoWasChanged(true);
+                    setHasAnswer(false);
+                    setPseudoIsAvailable(false);
+                  }}
+                  className={`${
+                    light ? "bg-white text-black" : "bg-gray-700 text-white"
+                  } duration-300 border ${
+                    hasAnswer &&
+                    !pseudoIsAvailable &&
+                    "bg-red-500 text-white !font-bold"
+                  } border-primaryStart/70 rounded-md p-2 font-light`}
+                  placeholder="np. jan345"
+                />
+                <span className="text-primary">
+                  quixy.pl/{user?.seek ? "talent" : "company"}/{localPseudo}
+                </span>
+                <div className="grid grid-cols-2 gap-3">
+                  {pseudoWasChanged &&
+                    !pseudoIsAvailable &&
+                    localPseudo?.length > 0 && (
+                      <button
+                        onClick={() => check(localPseudo)}
+                        disabled={isLoading}
+                        className="animate-pulse bg-gradient-to-b from-accentStart to-accentEnd disabled:cursor-not-allowed w-max  disabled:bg-[#126b91] disabled:duration-500 duration-100 px-4 py-2 text-white font-gotham mt-2 rounded-md"
+                      >
+                        {!isLoading && "Sprawdź dostępność"}
+                        {isLoading && "Sprawdzam..."}
+                      </button>
+                    )}
+                  {pseudoWasChanged && pseudoIsAvailable && (
+                    <div className="flex flex-col">
+                      <div className="font-gotham font-bold text-green-500">
+                        Nazwa jest dostępna.
+                      </div>
+                      <button
+                        disabled={
+                          isLoading ||
+                          !pseudoIsAvailable ||
+                          localPseudo === "" ||
+                          !pseudoWasChanged
+                        }
+                        onClick={() => {
+                          setChangesWereMade(true);
+                          handleReduxUserState(localPseudo, "pseudo");
+                          setPseudoIsAvailable(false);
+                          setLocalPseudo("");
+                          setHasAnswer(false);
+                          setPseudoWasChanged(false);
+                        }}
+                        className="animate-pulse bg-gradient-to-b from-primaryStart to-primaryEnd disabled:cursor-not-allowed w-max  disabled:bg-[#126b91] disabled:duration-500 duration-100 px-4 py-2 text-white  rounded-md mt-2"
+                      >
+                        Zarezerwuj nazwę
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
+            </>
+          )}
 
-            <div className="relative w-full mt-3">
-              <label className="font-bold">Twój opis</label>
-
-              <div className="rounded-md">
-                <ReactQuill
-                  placeholder={!user?.description ? "Wpisz tekst" : ""}
-                  className={`border rounded-md border-primaryStart/70 text-black bg-white`}
-                  modules={{
-                    toolbar: {
-                      container: TOOLBAR_OPTIONS,
-                    },
-                  }}
-                  value={user?.description}
-                  onChange={(e) => {
-                    handleReduxUserState(e, "description");
-                    setChangesWereMade(true);
-                  }}
-                />
+          <div className="w-full mt-3">
+            <div className="flex flex-col">
+              <label htmlFor="hourRate" className="font-bold">
+                Stawka godzinowa
+              </label>
+              <div className="grid grid-cols-2">
+                <div className="relative w-full">
+                  <input
+                    id="hourRate"
+                    className={`${
+                      light ? "bg-white text-black" : "bg-gray-700 text-white"
+                    } duration-300 w-full border border-primaryStart/70 p-2 rounded-md`}
+                    placeholder={`Wpisz stawkę`}
+                    type="text"
+                    value={user?.hourRate}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      // Allow only numbers
+                      if (/^\d*$/.test(value)) {
+                        setChangesWereMade(true);
+                        handleReduxUserState(e.target.value, "hourRate");
+                      }
+                    }}
+                  />
+                  <div className="rounded-r-md flex items-center justify-center absolute right-0 top-0 h-full bg-gradient-to-b from-accentStart to-accentEnd text-white  px-3 ">
+                    zł/h
+                  </div>
+                </div>
+                <div className=""></div>
               </div>
             </div>
           </div>
-        )}
+
+          <div className="relative w-full mt-3">
+            <label className="font-bold">Twój opis</label>
+
+            <div className="rounded-md">
+              <ReactQuill
+                placeholder={!user?.description ? "Wpisz tekst" : ""}
+                className={`border rounded-md border-primaryStart/70 text-black bg-white`}
+                modules={{
+                  toolbar: {
+                    container: TOOLBAR_OPTIONS,
+                  },
+                }}
+                value={user?.description}
+                onChange={(e) => {
+                  handleReduxUserState(e, "description");
+                  setChangesWereMade(true);
+                }}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

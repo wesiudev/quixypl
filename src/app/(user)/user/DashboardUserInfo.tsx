@@ -77,7 +77,7 @@ export default function DashboardUserInfo() {
               </div>
             )}
           </button>
-          {!user?.configured && (user?.seek === "ask" || !user?.seek) && (
+          {!user?.configured && (
             <div className="pl-4">
               <h2 className="text-black w-max font-extrabold">
                 Nie skonfigurowano profilu
@@ -89,7 +89,7 @@ export default function DashboardUserInfo() {
               </p>
             </div>
           )}
-          {user?.configured && user?.seek !== "ask" && (
+          {user?.configured && (
             <div
               className={`flex flex-col h-max px-3 ${
                 light ? "text-black" : "text-white"
@@ -185,7 +185,7 @@ export default function DashboardUserInfo() {
             </div>
           )}
           <div>
-            {(user?.seek || !user?.seek) && user?.seek !== "ask" && (
+            {(user?.seek || !user?.seek) && (
               <div className={`mt-3`}>
                 <div className="grid xl:grid-cols-2 mx-3 lg:mx-6 lg:ml-12 gap-3">
                   <div
@@ -225,7 +225,7 @@ export default function DashboardUserInfo() {
                       DOSTĘPNOŚĆ
                     </h2>
                     <div className="" />
-                    {user?.seek && user?.seek !== "ask" && (
+                    {user?.seek && (
                       <div className="w-full flex flex-wrap items-center gap-2 p-[0.7rem]">
                         {user?.preferences ? (
                           user?.preferences?.map((item: any, i: any) => (
@@ -247,7 +247,7 @@ export default function DashboardUserInfo() {
                         )}
                       </div>
                     )}
-                    {!user?.seek && user?.seek !== "ask" && (
+                    {!user?.seek && (
                       <div className="w-full flex flex-wrap items-center gap-2 p-[0.7rem]">
                         {user?.preferences ? (
                           user?.preferences?.map((item: any, i: any) => (
