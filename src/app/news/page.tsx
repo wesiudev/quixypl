@@ -1,15 +1,11 @@
-"use client";
 import { Metadata } from "next";
 import Link from "next/link";
 import AboutQuixyTalent from "@/components/AboutQuixyTalent";
-const Market = dynamic(() => import("@/components/marketplace/Market"), {
-  ssr: false,
-});
+const Market = dynamic(() => import("@/components/marketplace/Market"));
 import dynamic from "next/dynamic";
-const BlogPostList = dynamic(() => import("@/components/BlogPostList"), {
-  ssr: false,
-});
-export default function Page() {
+const BlogPostList = dynamic(() => import("@/components/BlogPostList"));
+
+export default async function Page() {
   return (
     <>
       <div className="bg-white overflow-hidden">

@@ -24,47 +24,51 @@ export default function Market() {
   return (
     <div className="pb-12">
       <div>
-        <MarketCategorySelector
-          slug={slug}
-          setSlug={setSlug}
-          setConfigurationOpen={setConfigurationOpen}
-          setCategory={setCategory}
-          category={category}
-          setJob={setJob}
-          job={job}
-          services={
-            slug &&
-            services.filter((service: IProject) =>
-              service.tags.some(
-                (tag: any) =>
-                  tag.slugTitle === slug &&
-                  (!category || tag.categoryTitle === category) &&
-                  (!job || tag.title === job)
-              )
-            ).length
-          }
-          setShowResults={setShowResults}
-          showResults={showResults}
-          configurationOpen={configurationOpen}
-        />
-        {showResults && (
-          <MarketResults
-            services={
-              slug
-                ? services.filter((service: IProject) =>
-                    service.tags.some(
-                      (tag: any) =>
-                        tag.slugTitle === slug &&
-                        (!category || tag.categoryTitle === category) &&
-                        (!job || tag.title === job)
-                    )
+        {services && (
+          <>
+            <MarketCategorySelector
+              slug={slug}
+              setSlug={setSlug}
+              setConfigurationOpen={setConfigurationOpen}
+              setCategory={setCategory}
+              category={category}
+              setJob={setJob}
+              job={job}
+              services={
+                slug &&
+                services?.filter((service: IProject) =>
+                  service?.tags?.some(
+                    (tag: any) =>
+                      tag.slugTitle === slug &&
+                      (!category || tag.categoryTitle === category) &&
+                      (!job || tag.title === job)
                   )
-                : services
-            }
-            slug={slug}
-            category={category}
-            job={job}
-          />
+                )?.length
+              }
+              setShowResults={setShowResults}
+              showResults={showResults}
+              configurationOpen={configurationOpen}
+            />
+            {showResults && (
+              <MarketResults
+                services={
+                  slug
+                    ? services?.filter((service: IProject) =>
+                        service?.tags?.some(
+                          (tag: any) =>
+                            tag.slugTitle === slug &&
+                            (!category || tag.categoryTitle === category) &&
+                            (!job || tag.title === job)
+                        )
+                      )
+                    : services
+                }
+                slug={slug}
+                category={category}
+                job={job}
+              />
+            )}
+          </>
         )}
         {slug === "" && (
           <div className="rounded-lg mt-3 py-12 bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30 px-6 text-black text-center items-center justify-center w-full">
