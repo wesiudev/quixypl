@@ -5,6 +5,7 @@ import JobBoardList from "@/components/JobBoardList";
 import removePolishSignsAndSpaces from "@/lib/removePolish";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import { getDocument } from "@/firebase";
 const Market = dynamic(() => import("@/components/marketplace/Market"));
 const BlogPostList = dynamic(() => import("@/components/BlogPostList"));
 // Generowanie parametrów statycznych
@@ -29,38 +30,7 @@ export default async function Page(props: { params: Promise<any> }) {
   const slug = cat?.data.find(
     (item: any) => polishToEnglish(item.title) === params.category
   );
-  {
-    slug?.data?.length > 0 && (
-      <div className="w-full">
-        <h2 className="text-black text-2xl lg:text-3xl font-extrabold mb-6">
-          Oferty Pracy - {slug.title}
-        </h2>
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
-          {slug.data.map((item: any, index: number) => (
-            <Link
-              href={`/praca-zdalna/${params.slug}/${
-                params.category
-              }/${polishToEnglish(item.title)}`}
-              key={index}
-              className="p-1 hover:scale-105 duration-100 flex items-center bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd text-white pr-4 h-[50px] rounded-lg shadow-md hover:shadow-lg transition"
-            >
-              <div className="flex items-center justify-center aspect-square h-full rounded-md bg-white text-primaryHoverEnd">
-                <FaBriefcase className="w-6 h-6" />
-              </div>
-              <h2 className="font-coco w-full flex items-center justify-center text-center gap-3">
-                {item.title}
-              </h2>
-            </Link>
-          ))}
-        </div>
-      </div>
-    );
-  }
-  const content = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.category}`,
-    { next: { revalidate: 60 } }
-  ).then((res: any) => res.json());
-
+  const content = await getDocument("content", params.category);
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
@@ -71,15 +41,6 @@ export default async function Page(props: { params: Promise<any> }) {
     `${process.env.NEXT_PUBLIC_URL}/api/companies/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.category)}`,
-    { next: { revalidate: 60 } }
-  ).then((res: any) => res.json());
-
-  const services = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    { next: { revalidate: 60 } }
-  ).then((res: any) => res.json());
-  const posts = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
     { next: { revalidate: 60 } }
   ).then((res: any) => res.json());
   return (

@@ -7,6 +7,7 @@ import removePolishSignsAndSpaces from "@/lib/removePolish";
 const JobOffers = dynamic(() => import("@/components/JobOffers"));
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import { getDocument } from "@/firebase";
 const InitializeUser = dynamic(() => import("@/components/InitializeUser"));
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -31,9 +32,7 @@ export default async function Page(props: { params: Promise<any> }) {
       ...companies?.map((item: any) => item?.city),
     ])
   );
-  const content = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.job}`
-  ).then((res: any) => res.json());
+  const content = await getDocument("content", params.job);
   return (
     <>
       <div className="font-sans min-h-screen flex flex-col w-full">

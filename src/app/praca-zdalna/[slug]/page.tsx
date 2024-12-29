@@ -7,6 +7,7 @@ const Market = dynamic(() => import("@/components/marketplace/Market"));
 import removePolishSignsAndSpaces from "@/lib/removePolish";
 import OpinionsForm from "@/components/OpinionsForm";
 import dynamic from "next/dynamic";
+import { getDocument } from "@/firebase";
 export const revalidate = 60;
 export const dynamicParams = true;
 export default async function Page(props: {
@@ -17,9 +18,7 @@ export default async function Page(props: {
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res) => res.json());
-  const content = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.slug}`
-  ).then((res: any) => res.json());
+  const content = await getDocument("content", params.slug);
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY

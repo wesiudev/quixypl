@@ -7,6 +7,7 @@ import Image from "next/image";
 const Market = dynamic(() => import("@/components/marketplace/Market"));
 import JobBoardList from "@/components/JobBoardList";
 import dynamic from "next/dynamic";
+import { getDocument } from "@/firebase";
 export const revalidate = 60;
 export const dynamicParams = true;
 
@@ -25,9 +26,7 @@ export default async function Page(props: { params: Promise<any> }) {
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.slug)}`
   ).then((res: any) => res.json());
-  const content = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.job}`
-  ).then((res: any) => res.json());
+  const content = await getDocument("content", params.job);
   const categoryTalents = talents.filter(
     (item: any) => polishToEnglish(item?.city) === params.city
   );
