@@ -17,6 +17,8 @@ import biznesowe from "../../../public/slug/uslugi-biznesowe.webp";
 import projektowanie from "../../../public/slug/projektowanie.webp";
 import AiImage from "../../../public/assets/AI-Image.png";
 import { getServices } from "@/lib/getServices";
+import { Suspense } from "react";
+import Loadinger from "./loading";
 // Główna strona
 export default async function Page() {
   const opinions = await fetch(
@@ -24,32 +26,34 @@ export default async function Page() {
   ).then((res) => res.json());
   const services = await getServices();
   return (
-    <div className="w-full h-full bg-white">
-      <div className="">
-        <HeroSection />
+    <Suspense fallback={<Loadinger />}>
+      <div className="w-full h-full bg-white">
+        <div className="">
+          <HeroSection />
+        </div>
+        <main className="">
+          <div className="container mx-auto">
+            <CallToActionSection />
+          </div>
+          <div className="mt-12">
+            <SpecialistsCategoriesSection />
+          </div>
+          <div className="container mx-auto">
+            <WhatMakesUsUniqueSection />
+          </div>
+          <div className="container mx-auto px-4 lg:px-12" id="search">
+            <Market services={services} />
+          </div>
+          <div className="container mx-auto px-4 lg:px-12">
+            <FAQ faqItems={faqItems} />
+          </div>
+          <div className="mt-12">
+            <OpinionsForm opinions={opinions} />
+          </div>
+        </main>
+        <FunnyComponent />
       </div>
-      <main className="">
-        <div className="container mx-auto">
-          <CallToActionSection />
-        </div>
-        <div className="mt-12">
-          <SpecialistsCategoriesSection />
-        </div>
-        <div className="container mx-auto">
-          <WhatMakesUsUniqueSection />
-        </div>
-        <div className="container mx-auto px-4 lg:px-12" id="search">
-          <Market services={services} />
-        </div>
-        <div className="container mx-auto px-4 lg:px-12">
-          <FAQ faqItems={faqItems} />
-        </div>
-        <div className="mt-12">
-          <OpinionsForm opinions={opinions} />
-        </div>
-      </main>
-      <FunnyComponent />
-    </div>
+    </Suspense>
   );
 }
 

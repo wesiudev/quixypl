@@ -9,6 +9,8 @@ import BlogPostList from "@/components/BlogPostList";
 import { getServices } from "@/lib/getServices";
 import { getPosts } from "@/lib/getPosts";
 import { getContent } from "@/lib/getContent";
+import { Suspense } from "react";
+import Loadinger from "../loading";
 export const revalidate = 60;
 export const dynamicParams = true;
 export default async function Page(props: {
@@ -31,7 +33,7 @@ export default async function Page(props: {
   const content = await getContent(params.slug);
   const posts = await getPosts();
   return (
-    <>
+    <Suspense fallback={<Loadinger />}>
       <div>
         {/* Hero Section */}
         <section
@@ -305,7 +307,7 @@ export default async function Page(props: {
           </div>
         </div>
       </div>
-    </>
+    </Suspense>
   );
 }
 
