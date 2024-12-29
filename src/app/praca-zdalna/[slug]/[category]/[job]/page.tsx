@@ -10,6 +10,8 @@ import dynamic from "next/dynamic";
 import { getServices } from "@/lib/getServices";
 import { getPosts } from "@/lib/getPosts";
 import { getContent } from "@/lib/getContent";
+import { Suspense } from "react";
+import Loading from "@/app/loading";
 const InitializeUser = dynamic(() => import("@/components/InitializeUser"));
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -27,7 +29,7 @@ export default async function Page(props: { params: Promise<any> }) {
   const services = await getServices();
   const posts = await getPosts();
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       <div className="font-sans min-h-screen flex flex-col w-full">
         <InitializeUser />
         <section
@@ -209,7 +211,7 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
         </div>
       </div>
-    </>
+    </Suspense>
   );
 }
 

@@ -30,56 +30,56 @@ export default function ProductsMobile({
           productsOpen ? "pt-[65px] opacity-100 z-[500]" : "z-[-10] opacity-0"
         } scrollbar lg:hidden`}
       >
-        <div className="bg-white px-3 mt-3 gap-2 grid grid-cols-3 mx-auto">
+        <div className="bg-white px-3 mt-3 gap-1.5 grid grid-cols-2 mx-auto">
           <Link
             onClick={resetHeader}
             href="/praca-zdalna"
-            className="bg-gradient-to-b from-primaryStart to-primaryEnd text-white p-2 text-center text-sm rounded-md"
+            className="bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd text-white p-2 text-center text-sm rounded"
           >
             Home
           </Link>
           <Link
             onClick={resetHeader}
             href="/marketplace"
-            className="bg-gradient-to-b from-primaryStart to-primaryEnd text-white p-2 text-center text-sm rounded-md"
+            className="bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd text-white p-2 text-center text-sm rounded"
           >
             Marketplace
           </Link>
           <Link
             onClick={resetHeader}
             href="/contact"
-            className="bg-gradient-to-b from-primaryStart to-primaryEnd text-white p-2 text-center text-sm rounded-md"
+            className="bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd text-white p-2 text-center text-sm rounded"
           >
             Kontakt
           </Link>
           <Link
             onClick={resetHeader}
             href="/praca-zdalna"
-            className="bg-gradient-to-b from-primaryStart to-primaryEnd text-white p-2 text-center text-sm rounded-md"
+            className="bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd text-white p-2 text-center text-sm rounded"
           >
             Praca Zdalna
           </Link>
           <Link
             onClick={resetHeader}
             href="/register"
-            className="bg-gradient-to-b from-primaryStart to-primaryEnd text-white p-2 text-center text-sm rounded-md"
+            className="bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd text-white p-2 text-center text-sm rounded"
           >
             Newsy
           </Link>
           <Link
             onClick={resetHeader}
             href="/about"
-            className="bg-gradient-to-b from-primaryStart to-primaryEnd text-white p-2 text-center text-sm rounded-md"
+            className="bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd text-white p-2 text-center text-sm rounded"
           >
             O nas
           </Link>
         </div>
         <div className="bg-white px-3 my-6">
           <h2 className="text-xl font-extrabold text-black pb-3">
-            Chcesz wyświetlić swoje usługi w naszej aplikacji?
+            Chcesz wyświetlać swoje usługi w naszej aplikacji?
           </h2>
           <p className="text-black pb-3">
-            Skonfiguruj konto usługi aby rozpocząć poszukiwanie zleceń.
+            Skonfiguruj konto aby rozpocząć poszukiwanie zleceń.
           </p>
           <div className="flex items-center">
             <Link
@@ -91,7 +91,7 @@ export default function ProductsMobile({
             </Link>
           </div>
         </div>
-        <div className="w-full py-4 px-3 sm:px-5 flex items-center justify-between z-[200] sticky top-0 left-0 bg-gradient-to-r from-primaryStart to-primaryEnd drop-shadow-lg shadow-zinc-800">
+        <div className="w-full py-4 px-3 sm:px-5 flex items-center justify-between z-[200] sticky top-0 left-0 bg-gradient-to-b from-primaryHoverStart to-primaryEnd drop-shadow-lg shadow-zinc-800">
           <div className="flex flex-col">
             <p className="font-extralight text-white">
               Szukasz freelancera, firmy, pracy lub zleceń?
@@ -114,31 +114,17 @@ export default function ProductsMobile({
           {jobs.map((job: any, i: any) => (
             <div className="flex flex-col" key={i}>
               <div
-                className={`py-6 flex flex-col border-b-2 border-primaryStart ${
-                  i % 2 === 0 ? "" : "bg-gray-200"
+                className={`py-6 flex flex-col gap-3 ${
+                  i % 2 === 0
+                    ? ""
+                    : "bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30"
                 } `}
               >
                 {job.data.map((item: any, z: any) => (
                   <div key={z} className="relative px-3">
                     <div
-                      className={`flex ${
-                        z === 0 ? "flex-row-reverse" : "mt-3"
-                      } items-center justify-between w-full text-xl`}
+                      className={`flex items-center justify-between w-full text-xl`}
                     >
-                      {z === 0 && (
-                        <Link
-                          href={`/praca-zdalna/${polishToEnglish(job.title)}`}
-                          onClick={resetHeader}
-                          title={`Przejdź do ofert pracy ${job.title}`}
-                        >
-                          <div
-                            className={`bg-gradient-to-b from-accentStart to-accentEnd w-max mx-auto text-white text-sm px-2 py-1 rounded-3xl`}
-                            style={{ boxShadow: "inset 0px 0px 5px black" }}
-                          >
-                            {job.title}
-                          </div>
-                        </Link>
-                      )}
                       <Link
                         href={`/praca-zdalna/${polishToEnglish(
                           job.title
@@ -156,13 +142,13 @@ export default function ProductsMobile({
                     </div>
 
                     {/* Hover dropdown */}
-                    <div className="flex gap-2 flex-wrap mt-4">
+                    <div className="flex gap-1.5 flex-wrap mt-4">
                       {item.data.map((subcategory: any, i: any) => (
                         <Link
                           title={`Pracuj zdalnie w ${subcategory.title}`}
                           key={i}
                           onClick={resetHeader}
-                          className="text-sm max-w-[300px] rounded-md bg-gradient-to-b from-primaryStart to-primaryEnd text-white duration-100 px-4 py-2 w-max"
+                          className="text-sm max-w-[300px] rounded bg-primaryHoverEnd text-white duration-100 px-[1rem] py-[0.7rem] w-max"
                           href={`/praca-zdalna/${polishToEnglish(
                             job.title
                           )}/${polishToEnglish(item.title)}/${polishToEnglish(
