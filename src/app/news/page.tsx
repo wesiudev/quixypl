@@ -4,7 +4,7 @@ import AboutQuixyTalent from "@/components/AboutQuixyTalent";
 const Market = dynamic(() => import("@/components/marketplace/Market"));
 import dynamic from "next/dynamic";
 const BlogPostList = dynamic(() => import("@/components/BlogPostList"));
-export default async function Page() {
+export default function Page() {
   return (
     <>
       <div className="bg-white overflow-hidden">
