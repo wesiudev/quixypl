@@ -4,6 +4,7 @@ import userReducer from "./slices/user";
 import modalsReducer from "./slices/modalsopen";
 import joboffersReducer from "./slices/joboffers";
 import postsReducer from "./slices/posts";
+import servicesReducer from "./slices/services";
 import lightReducer from "./slices/lightSlice";
 
 export const store = configureStore({
@@ -13,6 +14,7 @@ export const store = configureStore({
     job_offers: joboffersReducer,
     modals: modalsReducer,
     posts: postsReducer,
+    services: servicesReducer,
     light: lightReducer,
   },
 });

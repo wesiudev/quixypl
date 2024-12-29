@@ -46,7 +46,7 @@ export default function SlugFooter({
                         }${polishToEnglish(item.title)}/${polishToEnglish(
                           cat.title
                         )}`}
-                        className="hover:underline w-full lg:w-max max-w-full text-white p-2 font-coco font-extralight text-lg"
+                        className="hover:underline w-full lg:w-max max-w-full text-white p-2  font-extralight text-lg"
                       >
                         {cat.title}
                       </Link>
@@ -60,7 +60,7 @@ export default function SlugFooter({
         <div className="p-3 lg:p-6 bg-black/50 rounded-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 font-coco">
+              <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 ">
                 Powered by
               </div>
               <div className="justify-evenly w-full flex gap-4 items-center h-max bg-white p-4 rounded-xl">
@@ -110,7 +110,7 @@ export default function SlugFooter({
               </div>
             </div>
             <div>
-              <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 font-coco">
+              <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 ">
                 Developer
               </div>
               <div className="w-full flex justify-center items-center h-max bg-white p-4 rounded-xl">
@@ -131,7 +131,7 @@ export default function SlugFooter({
               </div>
             </div>
             <div>
-              <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 font-coco">
+              <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 ">
                 Marketing
               </div>
               <div className="w-full justify-cente items-center h-max bg-white p-4 rounded-xl">

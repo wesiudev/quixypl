@@ -16,7 +16,7 @@ export default function AccountHistory() {
         light ? "bg-white" : "bg-[#222430]"
       } duration-300 flex flex-col relative mx-3 lg:mx-6 lg:ml-12 mt-3 mb-6 rounded-lg`}
     >
-      <h2 className="px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
+      <h2 className="px-[2.5rem]  py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
         HISTORIA
       </h2>
       <div className="h-full w-full">
@@ -33,7 +33,7 @@ export default function AccountHistory() {
                       <span
                         className={`${
                           light ? "text-gray-800" : "text-white"
-                        } duration-300 text-base font-light font-coco`}
+                        } duration-300 text-base font-light `}
                       >
                         {moment(item.creationTime).format("DD-MM-yyyy hh:mm")}{" "}
                       </span>

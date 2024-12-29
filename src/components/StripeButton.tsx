@@ -44,7 +44,7 @@ function StripeButton({ item }: { item: any }) {
   };
   return (
     <button
-      className={`w-full disabled:cursor-not-allowed font-coco`}
+      className={`w-full disabled:cursor-not-allowed `}
       disabled={isLoading || success}
       onClick={sendCheckoutRequest}
     >

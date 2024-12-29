@@ -85,7 +85,7 @@ export default function ProductsMobile({
             <Link
               onClick={resetHeader}
               href="/register"
-              className="font-coco text-white px-3 py-2 text-sm bg-gradient-to-r from-ctaStart to-ctaEnd rounded-md"
+              className=" text-white px-3 py-2 text-sm bg-gradient-to-r from-ctaStart to-ctaEnd rounded-md"
             >
               Skonfiguruj konto
             </Link>

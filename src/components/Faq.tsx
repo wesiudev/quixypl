@@ -41,7 +41,7 @@ const FAQ: React.FC<FAQProps> = ({ faqItems }) => {
         <div className="w-full flex items-start justify-start mt-3">
           <button
             onClick={handleShowMore}
-            className="bg-gradient-to-r from-accentStart to-accentEnd text-white py-2 px-4 hover:scale-105 duration-100 rounded-md font-coco"
+            className="bg-gradient-to-r from-accentStart to-accentEnd text-white py-2 px-4 hover:scale-105 duration-100 rounded-md "
           >
             Pokaż więcej
           </button>
@@ -50,7 +50,7 @@ const FAQ: React.FC<FAQProps> = ({ faqItems }) => {
         <div className="w-full flex items-start justify-start mt-3">
           <Link
             href="/contact"
-            className="bg-gradient-to-r from-ctaStart to-ctaEnd text-white py-2 px-4 hover:scale-105 duration-100 rounded-md font-coco"
+            className="bg-gradient-to-r from-ctaStart to-ctaEnd text-white py-2 px-4 hover:scale-105 duration-100 rounded-md "
           >
             Masz inne pytanie?
           </Link>

@@ -43,7 +43,7 @@ export default function EditService({
               } flex items-center w-full rounded-lg mt-3 xl:mt-0`}
             >
               <div className="rounded-md z-50 relative overflow-hidden">
-                <h1 className="px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
+                <h1 className="px-[2.5rem]  py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
                   EDYTUJESZ USŁUGĘ
                 </h1>
                 <div className="flex flex-col w-full font-sans p-3 xl:p-6">

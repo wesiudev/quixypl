@@ -76,7 +76,7 @@ export default function MultiStepVerification({
           light ? "bg-white text-black" : "bg-[#222430] text-white"
         } duration-300 transition-all mt-3 mx-3 lg:mx-6 lg:ml-12 rounded-lg relative max-w-full`}
       >
-        <h2 className="px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
+        <h2 className="px-[2.5rem]  py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
           WERYFIKACJA
         </h2>
         <div className="p-[1.5rem]">
@@ -157,7 +157,7 @@ export default function MultiStepVerification({
             )}
           </div>
           <div className="p-3 bg-gradient-to-r from-primaryStart/70 to-primaryEnd/70 rounded-xl mt-3">
-            <p className="text-white text-sm text-center mb-3 p-1.5 font-coco">
+            <p className="text-white text-sm text-center mb-3 p-1.5 ">
               Uzupełnij swój profil, aby rozpocząć pozyskiwanie klientów lub
               poszukiwanie pracy.
             </p>

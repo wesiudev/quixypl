@@ -252,7 +252,7 @@ export default function StepFour({
                         // setIsSent(true);
                         // await handleRecruitmentStart();
                       }}
-                      className="font-bold font-coco animate-pulse flex items-center px-4 py-2 rounded-md bg-gradient-to-b from-ctaStart to-ctaEnd text-white"
+                      className="font-bold  animate-pulse flex items-center px-4 py-2 rounded-md bg-gradient-to-b from-ctaStart to-ctaEnd text-white"
                     >
                       <FaSave className="mr-2" />{" "}
                       {isLoading ? "Wczytywanie..." : "Zapisz zmiany"}
@@ -272,7 +272,7 @@ export default function StepFour({
                         setIsSent(true);
                         await addOffer();
                       }}
-                      className="font-bold font-coco animate-pulse flex items-center px-4 py-2 rounded-md bg-gradient-to-b from-ctaStart to-ctaEnd text-white"
+                      className="font-bold  animate-pulse flex items-center px-4 py-2 rounded-md bg-gradient-to-b from-ctaStart to-ctaEnd text-white"
                     >
                       <FaCirclePlus className="mr-2" />{" "}
                       {isLoading ? "Wczytywanie..." : "Dodaj ofertę"}

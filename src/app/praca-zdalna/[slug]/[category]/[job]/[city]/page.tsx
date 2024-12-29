@@ -1,29 +1,17 @@
 import { polishToEnglish } from "../../../../../../../utils/polishToEnglish";
-import MainFooter from "@/components/MainFooter";
-import BlogPostList from "@/components/BlogPostList";
+const BlogPostList = dynamic(() => import("@/components/BlogPostList"));
 import removePolishSignsAndSpaces from "@/lib/removePolish";
 import JobOffers from "@/components/JobOffers";
 import Link from "next/link";
 import Image from "next/image";
 import Market from "@/components/marketplace/Market";
 import JobBoardList from "@/components/JobBoardList";
+import dynamic from "next/dynamic";
 export const revalidate = 60;
-export async function generateStaticParams() {
-  const jobs = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res) => res.json());
-  return jobs
-    .flatMap((service: any) =>
-      service.data.flatMap((subItem: any) => subItem.data)
-    )
-    .map((item: any) => ({ job: polishToEnglish(item.title) }));
-}
+export const dynamicParams = true;
 
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
-  const jobs = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res) => res.json());
   const offers = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/offers?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`
   ).then((res) => res.json());
@@ -39,12 +27,6 @@ export default async function Page(props: { params: Promise<any> }) {
   ).then((res: any) => res.json());
   const content = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.job}`
-  ).then((res: any) => res.json());
-  const services = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res: any) => res.json());
-  const posts = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res: any) => res.json());
   const categoryTalents = talents.filter(
     (item: any) => polishToEnglish(item?.city) === params.city
@@ -146,7 +128,7 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
           {/* Services Section */}
           <div className="mt-12 w-full" id="search">
-            <Market leads={services} />
+            <Market />
           </div>
 
           {/* Content */}
@@ -162,7 +144,7 @@ export default async function Page(props: { params: Promise<any> }) {
                 </span>
               </h2>
               <div
-                className="text-black max-w-3xl markdownSlug  font-coco"
+                className="text-black max-w-3xl markdownSlug  "
                 dangerouslySetInnerHTML={{
                   __html: content?.description,
                 }}
@@ -186,7 +168,7 @@ export default async function Page(props: { params: Promise<any> }) {
               </div>
             </section>
           </div>
-          <BlogPostList posts={posts} />
+          <BlogPostList />
           <div className="my-12 w-full">
             <h4 className="text-xl font-extrabold text-gray-800 mb-4">Tagi</h4>
             <ul className="flex overflow-x-scroll lg:overflow-visible w-full lg:flex-wrap gap-4 text-sm lg:text-base">
@@ -263,17 +245,15 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
         </div>
       </div>
-
-      <MainFooter jobsList={jobs} />
     </>
   );
 }
 
 export async function generateMetadata(props: { params: Promise<any> }) {
   const params = await props.params;
-  const jobs = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res) => res.json());
+  const content = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.job}`
+  ).then((res: any) => res.json());
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
@@ -291,21 +271,10 @@ export async function generateMetadata(props: { params: Promise<any> }) {
     (item: any) => polishToEnglish(item?.city) === params.city
   );
   const city = categoryTalents[0]?.city || categoryCompanies[0]?.city;
-  const category = jobs
-    .flatMap((service: any) =>
-      service.data.flatMap((subItem: any) => ({ category: subItem.title }))
-    )
-    .find(
-      (item: any) => polishToEnglish(item.category) === params.category
-    ).category;
-  const job = jobs
-    .flatMap((service: any) =>
-      service.data.flatMap((subItem: any) => subItem.data)
-    )
-    .map((item: any) => ({ title: item.title }))
-    .find((item: any) => polishToEnglish(item.title) === params.job);
-  const title = `${job?.title} ${city} Oferty Pracy Zlecenia Specjaliści Usługi`;
-  const description = `Interesuje cię ${job?.title?.toLowerCase()}? Przeglądaj zlecenia, oferty pracy lub dodaj usługi w ${category} ${city}.`;
+  const title = `${content?.title} ${city} Oferty Pracy Zlecenia Specjaliści Usługi`;
+  const description = `Interesuje cię ${content?.title?.toLowerCase()}? Przeglądaj zlecenia, oferty pracy lub dodaj usługi w ${
+    content?.title
+  } ${city}.`;
   return {
     title,
     description,

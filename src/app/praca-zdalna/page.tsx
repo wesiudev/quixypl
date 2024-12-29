@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import { Metadata } from "next";
 const FAQ = dynamic(() => import("@/components/Faq"));
 const OpinionsForm = dynamic(() => import("@/components/OpinionsForm"));
-const MainFooter = dynamic(() => import("@/components/MainFooter"));
 const Market = dynamic(() => import("@/components/marketplace/Market"));
 import { FaRocket, FaUsers } from "react-icons/fa";
 import Image from "next/image";
@@ -19,12 +18,6 @@ import projektowanie from "../../../public/slug/projektowanie.webp";
 import AiImage from "../../../public/assets/AI-Image.png";
 // Główna strona
 export default async function Page() {
-  const jobs = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res) => res.json());
-  const services = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res) => res.json());
   const opinions = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/opinions?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res) => res.json());
@@ -44,7 +37,7 @@ export default async function Page() {
           <WhatMakesUsUniqueSection />
         </div>
         <div className="container mx-auto px-4 lg:px-12" id="search">
-          <Market leads={services} />
+          <Market />
         </div>
         <div className="container mx-auto px-4 lg:px-12">
           <FAQ faqItems={faqItems} />
@@ -54,7 +47,6 @@ export default async function Page() {
         </div>
       </main>
       <FunnyComponent />
-      <MainFooter jobsList={jobs} />
     </div>
   );
 }
@@ -83,7 +75,7 @@ function HeroSection() {
         >
           Przeglądaj oferty pracy lub utwórz portfolio
         </h1>
-        <p className="lg:text-lg font-coco text-white max-w-3xl">
+        <p className="lg:text-lg  text-white max-w-3xl">
           Opublikuj swoje usługi na naszej platformie i rozpocznij pozyskiwanie
           klientów już dziś!
         </p>
@@ -175,9 +167,7 @@ function SpecialistsCategoriesSection() {
                 <h2 className="lg:mt-0 text-2xl font-extrabold text-white">
                   {link.title}
                 </h2>
-                <p className="mb-3 font-coco text-white mt-2">
-                  {link.description}
-                </p>
+                <p className="mb-3  text-white mt-2">{link.description}</p>
                 <div
                   className="w-full text-white group-hover:underline font-bold"
                   aria-label={link.goTo}

@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Pagination from "./pagination/Pagination";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
-const BlogPostList = ({ posts }: { posts: any }) => {
+const BlogPostList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3); // Initially, 3 items per page
-
+  const { posts } = useSelector((state: any) => state.posts);
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
@@ -18,7 +19,6 @@ const BlogPostList = ({ posts }: { posts: any }) => {
 
   const indexOfLastIdea = currentPage * itemsPerPage;
   const currentIdeas = posts?.slice(0, indexOfLastIdea);
-
   return (
     <div className="mt-12">
       <h3 className="text-black text-xl lg:text-3xl font-extrabold">

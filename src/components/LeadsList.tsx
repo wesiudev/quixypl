@@ -27,7 +27,7 @@ export default function LeadsList() {
           </Link>
           <div className="flex flex-col pl-12">
             <h2 className="font-extrabold">Twoje zapytania</h2>
-            <p className="text-xs font-coco">
+            <p className="text-xs ">
               Znajdziesz tutaj wszystkie swoje zlecenia oraz kandydatów.
             </p>
           </div>

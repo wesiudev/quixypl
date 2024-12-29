@@ -91,9 +91,7 @@ export default function AddJobOffer() {
           </Link>
           <div className="flex flex-col pl-12">
             <h2 className="font-extrabold">Nowe ogłoszenie</h2>
-            <p className="text-xs font-coco">
-              Skonfiguruj ofertę pracy i opublikuj
-            </p>
+            <p className="text-xs ">Skonfiguruj ofertę pracy i opublikuj</p>
           </div>
         </div>
         <div className="flex flex-col xl:flex-row-reverse w-full max-w-full mt-3">
@@ -113,13 +111,13 @@ export default function AddJobOffer() {
               } flex items-center w-full rounded-lg mt-3 xl:mt-0`}
             >
               <div className="rounded-md z-50 relative p-3 xl:p-6 overflow-hidden">
-                <h1 className="absolute left-0 top-0 px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
+                <h1 className="absolute left-0 top-0 px-[2.5rem]  py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
                   NOWA OFERTA PRACY
                 </h1>
-                <p className="mt-12 text-sm font-coco">
+                <p className="mt-12 text-sm ">
                   Podaj najważniejsze informacje dotyczące rekrutacji.
                 </p>
-                <div className="flex flex-col w-full font-coco">
+                <div className="flex flex-col w-full ">
                   <StepOne
                     formData={formData}
                     handleChange={handleChange}

@@ -1,14 +1,10 @@
 import { FaShieldAlt, FaCheckCircle, FaHeadset, FaStar } from "react-icons/fa";
 import React from "react";
-import MainFooter from "@/components/MainFooter";
 import Link from "next/link";
 import { Metadata } from "next";
 import Image from "next/image";
 import AboutQuixyTalent from "@/components/AboutQuixyTalent";
 export default async function Page() {
-  const jobs = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res) => res.json());
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
@@ -49,7 +45,7 @@ export default async function Page() {
                   <span className="ml-1 text-sm font-light">Sprawdź</span>
                 </Link>
               </h3>
-              <p className="mt-2 text-white font-coco">
+              <p className="mt-2 text-white ">
                 Zatrudnij ekspertów od aplikacji mobilnych, marketingu, usług
                 biznesowych, web developmentu, frameworków czy programistów
                 nowych technologii w kategorii rozwoju oprogramowania.
@@ -66,7 +62,7 @@ export default async function Page() {
                   <span className="ml-1 text-sm font-light">Sprawdź</span>
                 </Link>
               </h3>
-              <p className="mt-2 text-white font-coco">
+              <p className="mt-2 text-white ">
                 Freelancerzy oferujący pełne wsparcie w tworzeniu sklepów
                 internetowych, rozwiązań Magento, Shopify i innych.
               </p>
@@ -82,7 +78,7 @@ export default async function Page() {
                   <span className="ml-1 text-sm font-light">Sprawdź</span>
                 </Link>
               </h3>
-              <p className="mt-2 text-white font-coco">
+              <p className="mt-2 text-white ">
                 Skorzystaj z usług freelancerów i firm doradztwa IT, wsparcia
                 technicznego oraz rozwiązań z zakresu bezpieczeństwa IT.
               </p>
@@ -174,7 +170,6 @@ export default async function Page() {
         </div>
       </div>
       <div className="mt-12"></div>
-      <MainFooter jobsList={jobs} />
     </div>
   );
 }

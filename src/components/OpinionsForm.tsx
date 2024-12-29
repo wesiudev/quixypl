@@ -93,7 +93,7 @@ function OpinionsForm({ opinions }: { opinions: Opinion[] }) {
             >
               {sent ? "Dziękujemy!!" : "Wyślij opinię"}
             </button>
-            <p className="text-white text-xs sm:text-sm font-coco text-justify py-3">
+            <p className="text-white text-xs sm:text-sm  text-justify py-3">
               Przesyłając opinię, wyrażasz zgodę na upublicznienie wprowadzonych
               danych na naszej stronie internetowej oraz potwierdzasz akceptację
               Regulaminu serwisu Quixy.pl. Przed opublikowaniem Twojej opinii,

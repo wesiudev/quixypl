@@ -1,5 +1,5 @@
 {
-  "name": "Praca Zdalna Oferty Pracy, Zatrudnij najlepszych ekspertów, talentów oraz przeglądaj klientów.",
+  "name": "Quixy.pl",
   "short_name": "Quixy",
   "description": "Platforma z Ofertami Pracy Zdalnej. Przeprowadź rekrutację, szukaj pracy lub nawiąż współpracę online.",
   "start_url": "https://quixy.pl/",
@@ -33,12 +33,6 @@
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
-    }
-  ],
-  "related_applications": [
-    {
-      "platform": "Quixy",
-      "url": "https://www.quixy.pl/"
     }
   ]
 }

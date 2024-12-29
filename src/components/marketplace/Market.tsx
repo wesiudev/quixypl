@@ -1,16 +1,26 @@
 "use client";
 import { IProject } from "@/types";
-import MarketCategorySelector from "./MarketCategorySelector";
+import dynamic from "next/dynamic";
+const MarketCategorySelector = dynamic(
+  () => import("./MarketCategorySelector"),
+  {
+    ssr: false,
+  }
+);
+const MarketResults = dynamic(() => import("./MarketResults"), {
+  ssr: false,
+});
 import { useState } from "react";
-import MarketResults from "./MarketResults";
 import { BiCategory } from "react-icons/bi";
-export default function Market({ leads }: { leads: IProject[] }) {
+import { useSelector } from "react-redux";
+export default function Market() {
   const [tagsOpenLevel, setTagsOpenLevel] = useState(false);
   const [configurationOpen, setConfigurationOpen] = useState(false);
   const [slug, setSlug] = useState<any>("");
   const [category, setCategory] = useState<any>("");
   const [job, setJob] = useState<any>("");
   const [showResults, setShowResults] = useState(false);
+  const { services } = useSelector((state: any) => state.services);
   return (
     <div className="pb-12">
       <div>
@@ -22,10 +32,10 @@ export default function Market({ leads }: { leads: IProject[] }) {
           category={category}
           setJob={setJob}
           job={job}
-          leads={
+          services={
             slug &&
-            leads.filter((lead) =>
-              lead.tags.some(
+            services.filter((service: IProject) =>
+              service.tags.some(
                 (tag: any) =>
                   tag.slugTitle === slug &&
                   (!category || tag.categoryTitle === category) &&
@@ -39,17 +49,17 @@ export default function Market({ leads }: { leads: IProject[] }) {
         />
         {showResults && (
           <MarketResults
-            leads={
+            services={
               slug
-                ? leads.filter((lead) =>
-                    lead.tags.some(
+                ? services.filter((service: IProject) =>
+                    service.tags.some(
                       (tag: any) =>
                         tag.slugTitle === slug &&
                         (!category || tag.categoryTitle === category) &&
                         (!job || tag.title === job)
                     )
                   )
-                : leads
+                : services
             }
             slug={slug}
             category={category}
@@ -67,7 +77,7 @@ export default function Market({ leads }: { leads: IProject[] }) {
             </div>
             <div className="text-center max-w-sm mx-auto mt-4 rounded-md">
               {/* Reduced padding */}
-              <p className="font-coco font-light max-w-sm mx-auto text-gray-700">
+              <p className=" font-light max-w-sm mx-auto text-gray-700">
                 Wybierz kategorię i przeglądaj usługi naszych użytkowników.
               </p>
             </div>

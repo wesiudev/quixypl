@@ -35,9 +35,7 @@ export default function Services() {
           </Link>
           <div className="flex flex-col pl-12">
             <h2 className="font-extrabold">Usługi</h2>
-            <p className="text-xs font-coco">
-              Znajdziesz tutaj wszystkie swoje usługi.
-            </p>
+            <p className="text-xs ">Znajdziesz tutaj wszystkie swoje usługi.</p>
           </div>
         </div>
         <div
@@ -46,7 +44,7 @@ export default function Services() {
           } relative mt-6 rounded-lg min-h-[70vh] text-white`}
         >
           {" "}
-          <h1 className="px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
+          <h1 className="px-[2.5rem]  py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
             TWOJE USŁUGI
           </h1>
           {!user?.projects || user?.projects?.length === 0 ? (
@@ -66,7 +64,7 @@ export default function Services() {
                 <p
                   className={`${
                     light ? "text-black" : "text-white"
-                  } duration-300 text-lg font-light text-black font-coco px-4 text-center`}
+                  } duration-300 text-lg font-light text-black  px-4 text-center`}
                 >
                   Nie znaleziono aktywnych usług. Dodaj nową usługę,
                   <br /> aby rozpocząć!

@@ -6,31 +6,15 @@ import Market from "@/components/marketplace/Market";
 import removePolishSignsAndSpaces from "@/lib/removePolish";
 const JobOffers = dynamic(() => import("@/components/JobOffers"));
 import Image from "next/image";
-import SlugFooter from "@/components/SlugFooter";
 import dynamic from "next/dynamic";
 const InitializeUser = dynamic(() => import("@/components/InitializeUser"));
 export const revalidate = 60;
-export async function generateStaticParams() {
-  const jobs = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res) => res.json());
-  return jobs
-    .flatMap((service: any) =>
-      service.data.flatMap((subItem: any) => subItem.data)
-    )
-    .map((item: any) => ({ job: polishToEnglish(item.title) }));
-}
+export const dynamicParams = true;
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
   const offers = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/offers?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`
   ).then((res) => res.json());
-  const jobs = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res) => res.json());
-  const cat: any = jobs?.find(
-    (page: any) => polishToEnglish(page.title) === params.slug
-  );
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
@@ -49,12 +33,6 @@ export default async function Page(props: { params: Promise<any> }) {
   );
   const content = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.job}`
-  ).then((res: any) => res.json());
-  const services = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res: any) => res.json());
-  const posts = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res: any) => res.json());
   return (
     <>
@@ -139,7 +117,7 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
           {/* Services Section */}
           <div className="mt-12 w-full" id="search">
-            <Market leads={services} />
+            <Market />
           </div>
 
           {/* Content */}
@@ -155,7 +133,7 @@ export default async function Page(props: { params: Promise<any> }) {
                 </span>
               </h2>
               <div
-                className="text-black max-w-3xl markdownSlug font-coco !bg-transparent"
+                className="text-black max-w-3xl markdownSlug  !bg-transparent"
                 dangerouslySetInnerHTML={{
                   __html: content?.description,
                 }}
@@ -179,7 +157,7 @@ export default async function Page(props: { params: Promise<any> }) {
               </div>
             </section>
           </div>
-          <BlogPostList posts={posts} />
+          <BlogPostList />
           <div className="my-12 w-full">
             <h4 className="text-xl font-extrabold text-gray-800 mb-4">Tagi</h4>
             <ul className="flex overflow-x-scroll lg:overflow-visible w-full lg:flex-wrap gap-4 text-sm lg:text-base">
@@ -256,12 +234,6 @@ export default async function Page(props: { params: Promise<any> }) {
           </div>
         </div>
       </div>
-      <SlugFooter
-        jobsList={cat.data}
-        title={cat.title}
-        footerTitle={content?.title}
-        slug={params.slug}
-      />
     </>
   );
 }

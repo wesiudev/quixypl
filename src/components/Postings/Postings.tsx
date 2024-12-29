@@ -95,7 +95,7 @@ const JobOfferList = () => {
           </Link>
           <div className="flex flex-col pl-12">
             <h2 className="font-extrabold">Oferty pracy</h2>
-            <p className="text-xs font-coco">
+            <p className="text-xs ">
               Tutaj znajdziesz wszystkie swoje oferty pracy
             </p>
           </div>
@@ -116,7 +116,7 @@ const JobOfferList = () => {
             <p
               className={`${
                 light ? "text-black" : "text-white"
-              } duration-300 text-lg font-light text-black font-coco px-4 text-center`}
+              } duration-300 text-lg font-light text-black  px-4 text-center`}
             >
               Nie znaleziono aktywnych ofert pracy. Dodaj nową ofertę,
               <br /> aby rozpocząć!
@@ -151,7 +151,7 @@ const JobOfferList = () => {
           </Link>
           <div className="flex flex-col pl-12">
             <h2 className="font-extrabold">Oferty pracy</h2>
-            <p className="text-xs font-coco">
+            <p className="text-xs ">
               Tutaj znajdziesz wszystkie swoje oferty pracy
             </p>
           </div>

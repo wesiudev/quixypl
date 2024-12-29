@@ -1,6 +1,4 @@
-import Header from "@/components/Header";
 import Link from "next/link";
-import MainFooter from "@/components/MainFooter";
 import { FaStar } from "react-icons/fa6";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -11,16 +9,11 @@ import AboutQuixyTalent from "@/components/AboutQuixyTalent";
 import FAQ from "@/components/Faq";
 export const revalidate = 60;
 export default async function Page() {
-  const jobs = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res) => res.json());
   const services = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res) => res.json());
   return (
     <div className="min-h-screen w-full flex flex-col">
-      {/* Header */}
-      <Header jobsList={jobs} />
       <main className="">
         {/* Hero Section */}
         <div className="">
@@ -67,7 +60,7 @@ export default async function Page() {
                 <h2 className="text-xl font-extrabold">
                   Promuj swoje usługi na rynku Quixy!
                 </h2>
-                <p className="font-coco text-sm">
+                <p className=" text-sm">
                   Quixy to idealne rozwiązanie dla freelancerów i firm.
                 </p>
               </div>
@@ -76,7 +69,7 @@ export default async function Page() {
         </div>
         {/* Services Section */}
         <div className="mx-auto px-4 w-full max-w-[1366px]" id="search">
-          <Market leads={services} />
+          <Market />
         </div>
       </main>
       <div className="py-12 bg-gradient-to-r from-primaryHoverStart to-primaryHoverEnd text-black">
@@ -98,7 +91,7 @@ export default async function Page() {
                   Rozwój Oprogramowania
                 </Link>
               </h3>
-              <p className="mt-2 text-black font-coco">
+              <p className="mt-2 text-black ">
                 W kategorii rozwoju oprogramowania znajdziesz najlepszych
                 freelancerów od aplikacji mobilnych, stron internetowych czy
                 gier.
@@ -114,7 +107,7 @@ export default async function Page() {
                   E-Commerce{" "}
                 </Link>
               </h3>
-              <p className="mt-2 text-black font-coco">
+              <p className="mt-2 text-black ">
                 Freelancerzy oferujący pełne wsparcie w tworzeniu sklepów
                 internetowych, rozwiązań Magento, Shopify i innych.
               </p>
@@ -129,7 +122,7 @@ export default async function Page() {
                   Usługi IT{" "}
                 </Link>
               </h3>
-              <p className="mt-2 text-black font-coco">
+              <p className="mt-2 text-black ">
                 Skorzystaj z usług freelancerów i firm doradztwa IT, wsparcia
                 technicznego oraz rozwiązań z zakresu bezpieczeństwa IT.
               </p>
@@ -144,7 +137,7 @@ export default async function Page() {
                   Marketing
                 </Link>
               </h3>
-              <p className="mt-2 text-black font-coco">
+              <p className="mt-2 text-black ">
                 Przeglądaj portfolia marketingowe naszych użytkowników od reklam
                 w Google, Social Mediach i nie tylko.
               </p>
@@ -162,7 +155,7 @@ export default async function Page() {
                   Projektowanie
                 </Link>
               </h3>
-              <p className="mt-2 text-black font-coco">
+              <p className="mt-2 text-black ">
                 Skorzystaj z usług freelancerów i firm doradztwa IT, wsparcia
                 technicznego oraz rozwiązań z zakresu bezpieczeństwa IT.
               </p>
@@ -180,7 +173,7 @@ export default async function Page() {
                   Usługi biznesowe{" "}
                 </Link>
               </h3>
-              <p className="mt-2 text-black font-coco">
+              <p className="mt-2 text-black ">
                 Skorzystaj z usług doradztwa biznesowego takich jak wsparcie
                 sprzedaży, ksiegowość zdalna, czy zasoby ludzkie.
               </p>
@@ -194,8 +187,6 @@ export default async function Page() {
           <FAQ faqItems={faqItems} />
         </div>
       </div>
-      {/* Footer */}
-      <MainFooter jobsList={jobs} />
     </div>
   );
 }

@@ -264,7 +264,7 @@ export default function Posting({
                   {/* Requirements */}
                   {job.requirements && (
                     <div className="border border-gray-300 rounded-md">
-                      <h3 className="flex justify-center items-center font-coco font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
+                      <h3 className="flex justify-center items-center  font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
                         <MdOutlineChecklist className="text-2xl mr-2" />
                         Wymagania
                       </h3>
@@ -278,7 +278,7 @@ export default function Posting({
                   {/* Responsibilities */}
                   {job.responsibilities && (
                     <div className="border border-gray-300 rounded-md">
-                      <h3 className="flex justify-center items-center font-coco font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
+                      <h3 className="flex justify-center items-center  font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
                         <BsClipboardCheck className="text-2xl mr-2" />
                         Obowiązki
                       </h3>
@@ -295,7 +295,7 @@ export default function Posting({
                 {/* Technologies */}
                 {job.technologies && (
                   <div className="mt-4 border border-gray-300 rounded-md">
-                    <h3 className="flex justify-center items-center font-coco font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
+                    <h3 className="flex justify-center items-center  font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
                       <AiOutlineCode className="text-3xl mr-2" />
                       Technologie
                     </h3>
@@ -314,7 +314,7 @@ export default function Posting({
                 {/* Responsibilities */}
                 {job.niceToHave && (
                   <div className="border border-gray-300 rounded-md mt-4">
-                    <h3 className="flex justify-center items-center font-coco font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
+                    <h3 className="flex justify-center items-center  font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
                       <FaRegSmileBeam className="text-2xl mr-2" />
                       Mile widziane
                     </h3>
@@ -327,7 +327,7 @@ export default function Posting({
                 {/* Responsibilities */}
                 {job.weOffer && (
                   <div className="border border-gray-300 rounded-md mt-4">
-                    <h3 className="flex justify-center items-center font-coco font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
+                    <h3 className="flex justify-center items-center  font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
                       <GiGiftOfKnowledge className="text-2xl mr-2" />
                       Oferujemy
                     </h3>

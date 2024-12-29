@@ -31,9 +31,7 @@ export default function NewService() {
         </Link>
         <div className="flex flex-col pl-12">
           <h2 className="font-extrabold">Nowa usługa</h2>
-          <p className="text-xs font-coco">
-            Skonfiguruj usługę i opublikuj na rynku
-          </p>
+          <p className="text-xs ">Skonfiguruj usługę i opublikuj na rynku</p>
         </div>
       </div>
       <div
@@ -54,7 +52,7 @@ export default function NewService() {
                   <h1 className="text-3xl font-bold">Brak dostępu</h1>
                 </div>
 
-                <p className="font-light font-coco max-w-lg">
+                <p className="font-light  max-w-lg">
                   Twoje usługi będą mogły wyświetlać się po weryfikacji konta
                   oraz opłaceniu wpisowego w wysokości{" "}
                   <b className="px-1.5 py-1 rounded-md bg-ctaStart text-white">
@@ -65,7 +63,7 @@ export default function NewService() {
             </div>
           </div>
         )}
-        <h1 className="absolute left-0 top-0 px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd flex items-center justify-center gap-2">
+        <h1 className="absolute left-0 top-0 px-[2.5rem]  py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd flex items-center justify-center gap-2">
           DODAJ USŁUGĘ
         </h1>
         <div className="p-3 lg:p-6 w-full mt-12">

@@ -49,7 +49,7 @@ export default async function Page(props: {
               </p>
               <div className="mt-3 bg-gray-200 rounded-lg px-3 py-6 relative">
                 {talent?.hourRate && (
-                  <div className="absolute right-0 top-0 rounded-tr-md rounded-bl-xl block w-max max-w-full text-sm font-coco font-extrabold text-white bg-gradient-to-b from-ctaStart to-ctaEnd px-2 py-1 text-center">
+                  <div className="absolute right-0 top-0 rounded-tr-md rounded-bl-xl block w-max max-w-full text-sm  font-extrabold text-white bg-gradient-to-b from-ctaStart to-ctaEnd px-2 py-1 text-center">
                     {talent?.hourRate} zł/h
                   </div>
                 )}
@@ -101,7 +101,7 @@ export default async function Page(props: {
               </div>
               <Link
                 href="/user"
-                className="mx-auto text-center w-max max-w-full block mt-3 font-bold font-coco text-white py-2 px-4 rounded-md bg-gradient-to-r from-ctaStart to-ctaEnd"
+                className="mx-auto text-center w-max max-w-full block mt-3 font-bold  text-white py-2 px-4 rounded-md bg-gradient-to-r from-ctaStart to-ctaEnd"
               >
                 Przejdź do panelu
               </Link>
@@ -227,7 +227,7 @@ export default async function Page(props: {
                   <h2 className="text-2xl text-black font-extrabold">Usługi</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mt-3">
                     {talent?.projects?.map((project: IProject, i: any) => (
-                      <LeadCard key={i} project={project} slug />
+                      <LeadCard key={i} service={project} slug />
                     ))}
                   </div>
                 </div>

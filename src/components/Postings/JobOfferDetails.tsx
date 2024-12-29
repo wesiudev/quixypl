@@ -50,7 +50,7 @@ export default function JobOfferDetails({
             <button
               disabled={loading}
               onClick={() => pay(jobOffer)}
-              className="disabled:bg-gray-500 bg-gradient-to-b from-ctaStart to-ctaEnd px-4 py-2 rounded-md text-white font-bold font-coco text-xl"
+              className="disabled:bg-gray-500 bg-gradient-to-b from-ctaStart to-ctaEnd px-4 py-2 rounded-md text-white font-bold  text-xl"
             >
               Opublikuj
               {loading && (

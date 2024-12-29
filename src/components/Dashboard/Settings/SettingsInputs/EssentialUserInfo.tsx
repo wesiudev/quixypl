@@ -125,16 +125,14 @@ export default function EssentialUserInfo({
               <div className="text-white py-1 px-2 bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd rounded-md w-max">
                 Email
               </div>{" "}
-              <span className="font-coco my-2 text-sm sm:text-base">
-                {user?.email}
-              </span>
+              <span className=" my-2 text-sm sm:text-base">{user?.email}</span>
             </div>
             {user?.pseudo && (
               <div className="flex flex-col lg:pt-0">
                 <div className="text-white py-1 px-2  bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd rounded-md w-max mt-2 lg:mt-0">
                   Unikalna nazwa
                 </div>{" "}
-                <span className="font-coco my-2 text-sm sm:text-base">
+                <span className=" my-2 text-sm sm:text-base">
                   {user?.pseudo}
                 </span>
               </div>
@@ -144,7 +142,7 @@ export default function EssentialUserInfo({
                 <div className="text-white py-1 px-2  bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd rounded-md w-max mt-2 lg:mt-0">
                   Województwo
                 </div>{" "}
-                <span className="font-coco my-2 text-sm sm:text-base">
+                <span className=" my-2 text-sm sm:text-base">
                   {user?.region}
                 </span>
               </div>
@@ -154,9 +152,7 @@ export default function EssentialUserInfo({
                 <div className="text-white py-1 px-2  bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd rounded-md w-max mt-2 lg:mt-0">
                   Miasto
                 </div>{" "}
-                <span className="font-coco my-2 text-sm sm:text-base">
-                  {user?.city}
-                </span>
+                <span className=" my-2 text-sm sm:text-base">{user?.city}</span>
               </div>
             )}
           </div>
@@ -286,7 +282,7 @@ export default function EssentialUserInfo({
                             setHasAnswer(false);
                             setPseudoWasChanged(false);
                           }}
-                          className="animate-pulse bg-gradient-to-b from-primaryStart to-primaryEnd disabled:cursor-not-allowed w-max  disabled:bg-[#126b91] disabled:duration-500 duration-100 px-4 py-2 text-white font-coco rounded-md mt-2"
+                          className="animate-pulse bg-gradient-to-b from-primaryStart to-primaryEnd disabled:cursor-not-allowed w-max  disabled:bg-[#126b91] disabled:duration-500 duration-100 px-4 py-2 text-white  rounded-md mt-2"
                         >
                           Zarezerwuj nazwę
                         </button>
@@ -321,7 +317,7 @@ export default function EssentialUserInfo({
                         }
                       }}
                     />
-                    <div className="rounded-r-md flex items-center justify-center absolute right-0 top-0 h-full bg-gradient-to-b from-accentStart to-accentEnd text-white font-coco px-3 ">
+                    <div className="rounded-r-md flex items-center justify-center absolute right-0 top-0 h-full bg-gradient-to-b from-accentStart to-accentEnd text-white  px-3 ">
                       zł/h
                     </div>
                   </div>

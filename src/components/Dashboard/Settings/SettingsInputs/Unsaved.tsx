@@ -39,7 +39,7 @@ export default function Unsaved({
             : "translate-y-[200px] duration-300"
         } `}
       >
-        <div className="text-white font-extralight pr-3 font-coco">
+        <div className="text-white font-extralight pr-3 ">
           <b>Uwaga!</b> - Masz niezapisane zmiany{" "}
           <button
             onClick={() => {

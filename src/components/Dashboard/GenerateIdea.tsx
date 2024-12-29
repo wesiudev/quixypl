@@ -143,7 +143,7 @@ export default function GenerateIdea({
                   alt="Logo serwisu quixy.pl"
                   className="w-[100px] h-auto"
                 />
-                <h2 className="pl-6 sm:pl-0 font-coco text-3xl xl:text-4xl text-black  font-bold drop-shadow-xl shadow-black">
+                <h2 className="pl-6 sm:pl-0  text-3xl xl:text-4xl text-black  font-bold drop-shadow-xl shadow-black">
                   Generator Pomysłów
                 </h2>
               </div>

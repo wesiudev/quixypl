@@ -1,13 +1,18 @@
-import localFont from "next/font/local";
 import { Lato } from "next/font/google";
 import Script from "next/script";
 import "../styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Header from "@/components/Header";
 import { Providers } from "@/redux/Provider";
-
+import dynamic from "next/dynamic";
+const Header = dynamic(() => import("@/components/Header"));
+const MainFooter = dynamic(() => import("@/components/MainFooter"));
+import { Open_Sans } from "next/font/google";
+import { getPosts } from "@/lib/getPosts";
+import { getServices } from "@/lib/getServices";
+const InitData = dynamic(() => import("@/components/InitData"));
+export const revalidate = 60;
 export default async function RootLayout({
   children,
 }: {
@@ -16,20 +21,26 @@ export default async function RootLayout({
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res) => res.json());
-  const itCategories = await jobs.flatMap((job: any) => [
+  const services = await getServices();
+  const posts = await getPosts();
+
+  const categories = await jobs.flatMap((job: any) => [
     { title: job.title, data: job.data.map((subItem: any) => subItem) },
   ]);
   return (
     <html lang="pl">
       <body
-        className={`font-sans scrollbar bg-white overflow-x-hidden relative ${cocosharp.variable} ${lato.variable} ${gotham.variable} ${sans.variable}`}
+        className={`font-sans scrollbar bg-white overflow-x-hidden relative ${lato.variable} ${sans.variable}`}
       >
-        <Header jobsList={itCategories} />
+        <Header jobsList={categories} />
         <div className="relative z-[9999999999]">
           <ToastContainer />
         </div>
-        <Providers>{children}</Providers>
-
+        <Providers>
+          <InitData posts={posts} services={services} />
+          {children}
+        </Providers>
+        <MainFooter jobsList={categories} />
         <Script src="https://www.googletagmanager.com/gtag/js?id=GT-WRDF58Q" />
         <Script id="google-analytics">
           {`
@@ -43,7 +54,6 @@ export default async function RootLayout({
     </html>
   );
 }
-import { Open_Sans } from "next/font/google";
 
 const sans = Open_Sans({
   weight: ["300", "400", "600", "700"],
@@ -58,63 +68,6 @@ const lato = Lato({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-lato",
-});
-//font
-const gotham = localFont({
-  src: [
-    {
-      path: "../../public/fonts/Gotham.ttf",
-      weight: "400",
-      style: "regular",
-    },
-    {
-      path: "../../public/fonts/Gotham-Light.ttf",
-      weight: "300",
-      style: "light",
-    },
-    {
-      path: "../../public/fonts/GothamBold.ttf",
-      weight: "500",
-      style: "bold",
-    },
-  ],
-  variable: "--font-gotham",
-});
-const cocosharp = localFont({
-  src: [
-    {
-      path: "../../public/fonts/Italic.ttf",
-      weight: "400",
-      style: "italic",
-    },
-    {
-      path: "../../public/fonts/BoldItalic.ttf",
-      weight: "700",
-      style: "italic",
-    },
-    {
-      path: "../../public/fonts/Bold.ttf",
-      weight: "700",
-    },
-    {
-      path: "../../public/fonts/ExtraLight.ttf",
-      weight: "200",
-    },
-    {
-      path: "../../public/fonts/Light.ttf",
-      weight: "300",
-    },
-    {
-      path: "../../public/fonts/LightItalic.ttf",
-      weight: "300",
-      style: "italic",
-    },
-    {
-      path: "../../public/fonts/Regular.ttf",
-      weight: "500",
-    },
-  ],
-  variable: "--font-cocosharp",
 });
 export const viewport: Viewport = {
   themeColor: "#F87315",

@@ -25,7 +25,7 @@ export default function JobOffers({
 
           {/* Treść komponentu */}
           <div className="mt-4 flex flex-col items-center justify-center max-w-xs mx-auto">
-            <p className="font-coco font-light text-gray-700 text-center text-base">
+            <p className=" font-light text-gray-700 text-center text-base">
               Brak aktywnych ofert pracy w kategorii {content?.title}
             </p>
             <Link

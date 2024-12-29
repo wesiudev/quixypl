@@ -7,8 +7,8 @@ export default function MainFooter({ jobsList }: { jobsList: any }) {
       <div className="flex flex-col relative z-50">
         <div className="mb-12 p-3 lg:p-6 bg-black/50 rounded-lg">
           <h2 className="text-xl lg:text-2xl text-white font-extrabold">
-            Odkryj świat pracy zdalnej – znajdź ekspertów, zlecenia i firmy,
-            które zmieniają przyszłość!
+            Świat pracy zdalnej – freelancerzy i firmy, które zmieniają
+            przyszłość!
           </h2>
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 md:gap-3 lg:grid-cols-3 2xl:grid-cols-4 w-full">
             {jobsList.map((item: any, i: any) => (
@@ -32,7 +32,7 @@ export default function MainFooter({ jobsList }: { jobsList: any }) {
                         }/praca-zdalna/${polishToEnglish(
                           item.title
                         )}/${polishToEnglish(cat.title)}`}
-                        className="hover:underline w-full lg:w-max max-w-full text-white p-2 font-coco font-extralight text-lg"
+                        className="hover:underline w-full lg:w-max max-w-full text-white p-2  font-extralight text-lg"
                       >
                         {cat.title}
                       </Link>
@@ -46,7 +46,7 @@ export default function MainFooter({ jobsList }: { jobsList: any }) {
         <div className="p-3 lg:p-6 bg-black/50 rounded-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 font-coco">
+              <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 ">
                 Powered by
               </div>
               <div className="justify-evenly w-full flex gap-4 items-center h-max bg-white p-4 rounded-xl">
@@ -96,7 +96,7 @@ export default function MainFooter({ jobsList }: { jobsList: any }) {
               </div>
             </div>
             <div>
-              <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 font-coco">
+              <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 ">
                 Developer
               </div>
               <div className="w-full flex justify-center items-center h-max bg-white p-4 rounded-xl">
@@ -117,7 +117,7 @@ export default function MainFooter({ jobsList }: { jobsList: any }) {
               </div>
             </div>
             <div>
-              <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 font-coco">
+              <div className="text-white drop-shadow-lg shadow-black font-extralight mb-3 ">
                 Marketing
               </div>
               <div className="w-full justify-cente items-center h-max bg-white p-4 rounded-xl">

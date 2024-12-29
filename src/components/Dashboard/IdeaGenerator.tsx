@@ -15,7 +15,7 @@ export default function IdeaGenerator({ setIdeaOpen }: { setIdeaOpen: any }) {
         <div className=" flex justify-center items-center text-center">
           <span
             style={{ boxDecorationBreak: "slice", lineHeight: 1.19 }}
-            className="relative text-2xl font-bold font-coco drop-shadow-sm shadow-black text-white"
+            className="relative text-2xl font-bold  drop-shadow-sm shadow-black text-white"
           >
             Twoje pomysły na biznes ({userData?.ideas?.length})
           </span>

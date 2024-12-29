@@ -7,12 +7,12 @@ import { set_modals } from "@/redux/slices/modalsopen";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 export default function ProjectImages({
-  project,
+  service,
   currentIndex,
   setCurrentIndex,
   setIsOpen,
 }: {
-  project: IProject;
+  service: IProject;
   currentIndex: number;
   setCurrentIndex: Function;
   setIsOpen: Function;
@@ -48,13 +48,13 @@ export default function ProjectImages({
 
   function handleNext() {
     setCurrentIndex(
-      currentIndex + 1 === project.images.length ? 0 : currentIndex + 1
+      currentIndex + 1 === service.images.length ? 0 : currentIndex + 1
     );
   }
 
   function handlePrev() {
     setCurrentIndex(
-      currentIndex === 0 ? project.images.length - 1 : currentIndex - 1
+      currentIndex === 0 ? service.images.length - 1 : currentIndex - 1
     );
   }
 
@@ -88,7 +88,7 @@ export default function ProjectImages({
               className="fixed flex flex-col items-center justify-center top-1/2 -translate-y-1/2 mx-auto p-4"
             >
               <div className="flex justify-center relative h-[50%] w-auto group">
-                {project.images.map((image: IProjectImage, i: number) => (
+                {service.images.map((image: IProjectImage, i: number) => (
                   <div
                     onTouchStart={onTouchStart}
                     onTouchMove={onTouchMove}
@@ -108,7 +108,7 @@ export default function ProjectImages({
                         width={1024}
                         height={1024}
                         alt={image?.desc || "Obraz usługi"}
-                        className="max-h-[600px] w-auto mx-auto"
+                        className="min-h-[500px] max-h-[600px] w-auto mx-auto"
                         blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII="
                         placeholder="blur"
                         draggable="false"
@@ -116,8 +116,8 @@ export default function ProjectImages({
                       <div className="absolute left-16 top-2 font-bold text-white max-w-full">
                         {image.desc}
                       </div>
-                      <div className="w-max mx-auto absolute left-0 top-0 bg-gradient-to-r from-primaryHoverStart to-primaryHoverEnd text-white font-coco px-4 py-2">
-                        {currentIndex + 1} / {project.images.length}
+                      <div className="w-max mx-auto absolute left-0 top-0 bg-gradient-to-r from-primaryHoverStart to-primaryHoverEnd text-white  px-4 py-2">
+                        {currentIndex + 1} / {service.images.length}
                       </div>
                       <button
                         onClick={() => handlePrev()}
@@ -131,9 +131,9 @@ export default function ProjectImages({
                       >
                         <FaChevronRight />
                       </button>
-                      {project.images && (
+                      {service.images && (
                         <div className="z-50 w-full absolute bottom-0 left-1/2 -translate-x-1/2 max-w-full overflow-x-auto whitespace-nowrap space-x-2 pt-2 group-hover:bg-black/50 bg-transparent duration-200 px-3 scrollbar">
-                          {project.images.map(
+                          {service.images.map(
                             (image: IProjectImage, i: number) => (
                               <button
                                 onClick={() => setCurrentIndex(i)}

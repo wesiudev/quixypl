@@ -49,7 +49,7 @@ export default function DashboardUserInfo() {
         <div
           className={`${
             light ? "bg-white" : "bg-[#222430]"
-          } duration-300 font-coco flex flex-row items-start mt-3 mx-3 lg:mt-6 lg:mx-6 lg:ml-12 p-3 rounded-lg`}
+          } duration-300  flex flex-row items-start mt-3 mx-3 lg:mt-6 lg:mx-6 lg:ml-12 p-3 rounded-lg`}
         >
           <button
             onClick={() =>
@@ -96,7 +96,7 @@ export default function DashboardUserInfo() {
               } duration-300`}
             >
               {!user?.name && (
-                <h2 className="text-sm drop-shadow-lg font-bold font-coco italic">
+                <h2 className="text-sm drop-shadow-lg font-bold  italic">
                   {user?.seek && "Imię (lub imię i nazwisko)"}
                   {(!user?.seek || user?.seek === "ask") &&
                     "Nazwa firmy/dane rekrutera"}
@@ -193,7 +193,7 @@ export default function DashboardUserInfo() {
                       light ? "bg-white" : "bg-[#222430]"
                     } `}
                   >
-                    <h2 className="px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
+                    <h2 className="px-[2.5rem]  py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
                       SPECJALIZACJE
                     </h2>
                     <div className="w-full flex flex-wrap items-center gap-2 p-[0.7rem]">
@@ -221,7 +221,7 @@ export default function DashboardUserInfo() {
                       light ? "bg-white" : "bg-[#222430]"
                     } `}
                   >
-                    <h2 className="px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
+                    <h2 className="px-[2.5rem]  py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
                       DOSTĘPNOŚĆ
                     </h2>
                     <div className="" />
@@ -276,7 +276,7 @@ export default function DashboardUserInfo() {
                     light ? "bg-white" : "bg-[#222430]"
                   } duration-300 rounded-lg relative`}
                 >
-                  <h2 className="px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
+                  <h2 className="px-[2.5rem]  py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
                     OPIS
                   </h2>
                   <div className="p-[1.5rem]">

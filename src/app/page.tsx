@@ -1,4 +1,3 @@
-import MainFooter from "@/components/MainFooter";
 import SearchJobs from "@/components/HomeUnderHero/SearchJobs";
 import OpenableOpportunity from "@/components/HomeUnderHero/OpenableOpportunity";
 import FAQ from "@/components/Faq";
@@ -13,9 +12,6 @@ export default async function Page() {
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res) => res.json());
-  const itCategories = await jobs.flatMap((job: any) => [
-    { title: job.title, data: job.data.map((subItem: any) => subItem) },
-  ]);
   return (
     <div className="flex flex-col bg-white">
       <div className="">
@@ -71,7 +67,7 @@ export default async function Page() {
           <div className="flex flex-row">
             <h2
               style={{ textShadow: "0px 1px 5px black" }}
-              className="font-coco w-full md:max-w-[50rem] xl:max-w-[1024px] text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white text-center"
+              className=" w-full md:max-w-[50rem] xl:max-w-[1024px] text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white text-center"
             >
               Wyobraź sobie wymarzony biznes, pomnożony przez maksymalizację
               efektywności
@@ -82,7 +78,7 @@ export default async function Page() {
       <div className="mx-auto px-4 lg:px-12 mb-12 xl:container">
         <AboutQuixyTalent />
       </div>
-      <div className="xl:container mx-auto px-4 lg:px-12 mb-12">
+      <div className="xl:container px-4 lg:px-12 mb-12">
         <div className="flex flex-col-reverse md:flex-row text-black">
           <Image
             src="/assets/gif/gihome.webp"
@@ -200,7 +196,7 @@ export default async function Page() {
             <h2 className="text-xl lg:text-3xl font-extrabold text-white">
               Znajdź eksperta, którego potrzebujesz!
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 font-coco gap-2 md:gap-4 mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2  gap-2 md:gap-4 mt-4">
               <Link
                 href={`${process.env.NEXT_PUBLIC_URL}/praca-zdalna/rozwoj-oprogramowania/web-development`}
                 className="group flex flex-col  bg-black/50 text-white group p-3 rounded-md"
@@ -262,7 +258,7 @@ export default async function Page() {
                 <h3 className="text-lg lg:text-2xl font-bold text-black">
                   4.95/5
                 </h3>
-                <p className="text-black text-xs sm:text-sm md:text-base font-coco">
+                <p className="text-black text-xs sm:text-sm md:text-base ">
                   Według opinii naszych klientów
                 </p>
               </div>
@@ -303,7 +299,7 @@ export default async function Page() {
                 <h3 className="text-lg lg:text-2xl font-bold text-black -mt-1">
                   5/5
                 </h3>
-                <p className="text-black text-xs sm:text-sm md:text-base font-coco">
+                <p className="text-black text-xs sm:text-sm md:text-base ">
                   Korzystamy z niezawodnej technologii
                 </p>
               </div>
@@ -333,7 +329,7 @@ export default async function Page() {
                 <h3 className="font-bold text-lg -mt-1 font-gotham">
                   Darmowe Quixies na start
                 </h3>
-                <p className="text-sm w-3/4 font-coco">
+                <p className="text-sm w-3/4 ">
                   Na początku przygody otrzymasz od nas bonus.
                 </p>
               </div>
@@ -344,7 +340,7 @@ export default async function Page() {
                 <h3 className="font-bold text-lg -mt-1 font-gotham">
                   Wyświetlaj swoje usługi
                 </h3>
-                <p className="text-sm w-3/4 font-coco">
+                <p className="text-sm w-3/4 ">
                   Zdobywaj zlecenia jako freelancer lub firma.
                 </p>
               </div>
@@ -355,7 +351,7 @@ export default async function Page() {
                 <h3 className="font-bold text-lg -mt-1 font-gotham">
                   Zapewnimy bezpieczeństwo
                 </h3>
-                <p className="text-sm w-3/4 font-coco">
+                <p className="text-sm w-3/4 ">
                   Potrzebujesz pomocy? Skontaktuj się z nami!
                 </p>
               </div>
@@ -376,7 +372,7 @@ export default async function Page() {
               <h2 className="text-black text-2xl lg:text-4xl font-extrabold">
                 Szukaj zleceń lub pracy zdalnej
               </h2>
-              <p className="text-base lg:text-lg my-3 lg:my-4 lg:mb-3 font-coco">
+              <p className="text-base lg:text-lg my-3 lg:my-4 lg:mb-3 ">
                 Przeglądaj zlecenia klientów, szukaj pracy zdalnej lub
                 sprzedawaj gotowe strony internetowe, aplikacje lub projekty.
               </p>
@@ -387,7 +383,7 @@ export default async function Page() {
                 Utwórz portfolio <FaChevronRight />
               </Link>
             </div>
-            <div className="flex items-end font-coco text-base md:text-sm lg:text-base xl:text-lg">
+            <div className="flex items-end  text-base md:text-sm lg:text-base xl:text-lg">
               <div className="w-full grid grid-cols-2 gap-3 pt-3 mt-12 border-t-2 border-primaryStart">
                 <h4 className="text-center bg-gradient-to-r from-primaryStart to-primaryEnd text-white py-2 rounded-md">
                   Wysyłaj aplikacje
@@ -408,9 +404,6 @@ export default async function Page() {
       </div>
       <div className="mt-12 xl:container mx-auto bg-white relative h-max pb-12 px-4 lg:px-12">
         <FAQ faqItems={faqItems} />
-      </div>
-      <div className="relative">
-        <MainFooter jobsList={itCategories} />
       </div>
     </div>
   );

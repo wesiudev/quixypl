@@ -1,5 +1,4 @@
 "use client";
-import MainFooter from "@/components/MainFooter";
 import Link from "next/link";
 import Image from "next/image";
 import { pushLead } from "@/firebase";
@@ -7,7 +6,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { FaEnvelope } from "react-icons/fa6";
 
-export default function Contact({ jobs }: { jobs: any[] }) {
+export default function Contact() {
   const [data, setData] = useState({
     email: "",
     name: "",
@@ -183,11 +182,7 @@ export default function Contact({ jobs }: { jobs: any[] }) {
             </div>
           </div>
         </div>
-
-        {/* Contact Info Section */}
       </div>
-
-      <MainFooter jobsList={jobs} />
     </div>
   );
 }

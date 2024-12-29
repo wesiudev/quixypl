@@ -33,7 +33,7 @@ export default function JobPreferencesHandler({
     items.slice(0, expand ? items.length : limit).map((item) => (
       <button
         key={item}
-        className={`rounded-md font-coco duration-300 text-white px-2 py-1 text-sm  ${
+        className={`rounded-md  duration-300 text-white px-2 py-1 text-sm  ${
           formData?.preferences?.includes(item)
             ? "bg-gradient-to-b from-accentStart to-accentEnd"
             : `${
@@ -62,7 +62,7 @@ export default function JobPreferencesHandler({
         {renderPreferences(itemsForTalent, 6, light)}
         {itemsForTalent.length > 6 && (
           <button
-            className="bg-[#126b91] text-white font-coco text-sm rounded-md py-1 px-2"
+            className="bg-[#126b91] text-white  text-sm rounded-md py-1 px-2"
             onClick={() => setExpand(!expand)}
           >
             {expand ? "Pokaż mniej" : "Pokaż więcej"}

@@ -54,7 +54,7 @@ export default function CompanyStickyTop({ slugData }: { slugData: any }) {
             )}
             <div className="px-4 ">
               <div className="flex flex-col py-2">
-                <h1 className="flex items-center font-coco text-xl">
+                <h1 className="flex items-center  text-xl">
                   Skontaktuj się z {slugData?.name}!
                 </h1>
                 <p className="font-bold mb-1">
@@ -73,7 +73,7 @@ export default function CompanyStickyTop({ slugData }: { slugData: any }) {
             onClick={() =>
               dispatch(set_modals({ ...modals, currentChat: slugData }))
             }
-            className={`flex text-white font-bold font-coco px-3 py-2 min-h-full max-w-[150px] text-sm sm:text-base  bg-gradient-to-r from-primary to-cta items-center text-center`}
+            className={`flex text-white font-bold  px-3 py-2 min-h-full max-w-[150px] text-sm sm:text-base  bg-gradient-to-r from-primary to-cta items-center text-center`}
           >
             Kontakt
             <FaArrowRightLong className="ml-2" />

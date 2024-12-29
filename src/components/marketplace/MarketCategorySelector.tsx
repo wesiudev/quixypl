@@ -1,13 +1,12 @@
 import Link from "next/link";
 import jobs from "../../../public/14.09.2024.json";
-import { FaChevronCircleLeft, FaChevronLeft } from "react-icons/fa";
+import { FaChevronLeft } from "react-icons/fa";
 import {
   FaArrowLeft,
   FaArrowLeftLong,
-  FaCircleXmark,
   FaMagnifyingGlass,
 } from "react-icons/fa6";
-import { IoClose, IoCloseCircle } from "react-icons/io5";
+import { IoCloseCircle } from "react-icons/io5";
 import { v4 as uuidv4 } from "uuid";
 import { AiFillThunderbolt } from "react-icons/ai";
 export default function MarketCategorySelector({
@@ -20,7 +19,7 @@ export default function MarketCategorySelector({
   setJob,
   job,
   setShowResults,
-  leads,
+  services,
   showResults,
 }: {
   setConfigurationOpen: any;
@@ -32,7 +31,7 @@ export default function MarketCategorySelector({
   setJob: any;
   job: any;
   setShowResults: any;
-  leads: any;
+  services: any;
   showResults: any;
 }) {
   return (
@@ -177,7 +176,7 @@ export default function MarketCategorySelector({
       {slug !== "" && (
         <button
           onClick={() => {
-            if (slug !== "" && leads && !showResults) {
+            if (slug !== "" && services && !showResults) {
               setShowResults(true);
             } else {
               setShowResults(false);
@@ -187,15 +186,15 @@ export default function MarketCategorySelector({
             }
           }}
           className={`${
-            !showResults && leads
+            !showResults && services
               ? "from-ctaStart to-ctaEnd"
               : "from-red-400 to-red-500"
-          } rounded-md px-4 py-2 mt-3 bg-gradient-to-b  to-cta text-white font-extralight font-coco text-xl flex items-center gap-2 hover:scale-105 duration-100`}
+          } rounded-md px-4 py-2 mt-3 bg-gradient-to-b  to-cta text-white font-extralight  text-xl flex items-center gap-2 hover:scale-105 duration-100`}
         >
-          {!showResults && leads ? (
+          {!showResults && services ? (
             <>
               {" "}
-              <FaMagnifyingGlass /> Znalezione usługi: <b>{leads}</b>
+              <FaMagnifyingGlass /> Znalezione usługi: <b>{services}</b>
             </>
           ) : (
             <>
@@ -205,8 +204,8 @@ export default function MarketCategorySelector({
           )}
         </button>
       )}
-      {slug && !leads && (
-        <div className="flex-col font-coco text-center py-12 mt-3 bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30 rounded-lg text-black flex items-center justify-center">
+      {slug && !services && (
+        <div className="flex-col  text-center py-12 mt-3 bg-gradient-to-r from-primaryHoverStart/30 to-primaryHoverEnd/30 rounded-lg text-black flex items-center justify-center">
           <div
             style={{ boxShadow: "0px 1px 10px rgba(0,0,0,0.8)" }}
             className="rounded-full h-24 w-24 from-primaryStart to-primaryEnd bg-gradient-to-b flex items-center justify-center"

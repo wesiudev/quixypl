@@ -7,10 +7,10 @@ import { useState } from "react";
 import { set_modals } from "@/redux/slices/modalsopen";
 
 export default function LeadCard({
-  project,
+  service,
   slug,
 }: {
-  project: any;
+  service: any;
   slug?: boolean;
 }) {
   const dispatch = useDispatch();
@@ -24,29 +24,29 @@ export default function LeadCard({
         <div className="flex flex-col gap-3">
           <div>
             <h5 className="mb-3 text-3xl font-extrabold tracking-tight text-blue-500">
-              {project.name.charAt(0).toUpperCase() + project.name.slice(1)}
+              {service.name.charAt(0).toUpperCase() + service.name.slice(1)}
             </h5>
             <p className="mb-2 text-white">
               <span className="text-sm font-bold text-white">Płatność:</span>{" "}
-              {project.time}
+              {service.time}
             </p>
             <p className="mb-2 text-white">
               <span className="text-sm font-bold text-white">Cena:</span>{" "}
-              {project.salaryValue}
+              {service.salaryValue}
             </p>
             <p className="mb-2 text-white">
               <span className="text-sm font-bold text-white">
                 Czas wykonania:
               </span>{" "}
-              {project.duration}
+              {service.duration}
             </p>
-            <div className="text-white my-3 rounded-md">{project?.desc}</div>
+            <div className="text-white my-3 rounded-md">{service?.desc}</div>
             {!slug && (
               <Link
                 target="_blank"
                 className="text-white px-[1rem] py-[0.5rem] bg-gradient-to-r from-ctaStart to-primaryStart rounded-md my-2 block w-max "
-                href={`/${project?.userType ? "talent" : "company"}/${
-                  project?.pseudo
+                href={`/${service?.userType ? "talent" : "company"}/${
+                  service?.pseudo
                 }`}
               >
                 Kontakt
@@ -54,7 +54,7 @@ export default function LeadCard({
             )}
 
             <div className="mt-2 gap-3 grid grid-cols-2 w-full">
-              {project.images.map((image: any, i: any) => (
+              {service.images.map((image: any, i: any) => (
                 <button
                   onClick={() => {
                     setCurrentIndex(i);
@@ -65,6 +65,8 @@ export default function LeadCard({
                   className="relative aspect-square w-full"
                 >
                   <Image
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII="
                     src={image.src}
                     width={250}
                     height={250}
@@ -81,7 +83,7 @@ export default function LeadCard({
         className={`fixed left-0 top-0 ${isOpen ? "block" : "hidden"} z-[9999]`}
       >
         <ProjectImages
-          project={project}
+          service={service}
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
           setIsOpen={setIsOpen}

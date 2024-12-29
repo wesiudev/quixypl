@@ -50,7 +50,7 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
     >
       <div className="absolute left-1/2 -translate-x-1/2 -top-8">
         {slugData?.hourRate && (
-          <div className="block w-max max-w-full font-coco font-extrabold text-white bg-gradient-to-r from-accentStart to-accentEnd rounded-t-md px-3 py-1 text-center">
+          <div className="block w-max max-w-full  font-extrabold text-white bg-gradient-to-r from-accentStart to-accentEnd rounded-t-md px-3 py-1 text-center">
             {slugData?.hourRate} zł/h
           </div>
         )}

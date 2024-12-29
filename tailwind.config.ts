@@ -12,8 +12,6 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-sans)"],
         lato: ["var(--font-lato)"],
-        coco: ["var(--font-cocosharp)"],
-        gotham: ["var(--font-lato)"],
       },
       colors: {
         ctaStart: "#14A800",

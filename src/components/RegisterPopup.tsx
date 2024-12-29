@@ -158,7 +158,7 @@ export default function RegisterPopup({
             )}
           </div>
           {view === "register" && (
-            <div className="text-black font-coco flex flex-row items-center mt-4">
+            <div className="text-black  flex flex-row items-center mt-4">
               <button
                 onClick={() => {
                   if (config.terms !== "accepted") {
@@ -189,7 +189,7 @@ export default function RegisterPopup({
             </div>
           )}
           {view === "register" && (
-            <div className="font-coco text-black flex flex-row items-center mt-4">
+            <div className=" text-black flex flex-row items-center mt-4">
               <button
                 onClick={() => {
                   setUserData({ ...userData, logout: !userData.logout });
@@ -207,7 +207,7 @@ export default function RegisterPopup({
               Nie wylogowuj mnie z konta
             </div>
           )}
-          <div className="text-justify flex mt-3 font-coco text-black">
+          <div className="text-justify flex mt-3  text-black">
             {view === "register" ? (
               <>
                 Posiadasz już konto?{" "}

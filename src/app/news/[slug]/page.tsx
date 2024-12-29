@@ -4,7 +4,6 @@ import Link from "next/link";
 import { getProductByUrl, getProducts } from "@/firebase";
 import { renderMarkdown } from "@/lib/parseMarkdown";
 import BlogPostList from "@/components/BlogPostList";
-import MainFooter from "@/components/MainFooter";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
 export async function generateStaticParams() {
   const products = await getProducts();
@@ -12,11 +11,9 @@ export async function generateStaticParams() {
     slug: product?.url,
   }));
 }
+export const revalidate = 60;
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
-  const jobs = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res) => res.json());
   const posts = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res) => res.json());
@@ -219,11 +216,8 @@ export default async function Page(props: { params: Promise<any> }) {
             )}
         </div>
 
-        <div className="mb-12">
-          {posts?.length > 1 && <BlogPostList posts={posts} />}
-        </div>
+        <div className="mb-12">{posts?.length > 1 && <BlogPostList />}</div>
       </div>
-      <MainFooter jobsList={jobs} />
     </>
   );
 }

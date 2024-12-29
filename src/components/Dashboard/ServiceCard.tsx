@@ -1,25 +1,21 @@
-import { addDocument, deleteService, updateUser } from "@/firebase";
+import { deleteService, updateUser } from "@/firebase";
 import { setUser } from "@/redux/slices/user";
 import { IProject } from "@/types";
-import Link from "next/link";
-import { FaArrowRightLong, FaCircleXmark } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import Viewer from "../AddJobOffer/Viewer";
 import Image from "next/image";
-import ProjectImages from "./ImageGenerator/dashboard/ProjectImages";
-import { useState } from "react";
 import { set_modals } from "@/redux/slices/modalsopen";
 import ServiceOptionsOpened from "./ServiceOptionsOpened";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-
+import ProjectImages from "./ImageGenerator/dashboard/ProjectImages";
+import { useState } from "react";
 export default function ServiceCard({
-  project,
+  service,
   setEditOpen,
   setOpenedService,
   user,
 }: {
-  project: IProject;
+  service: IProject;
   setEditOpen: any;
   setOpenedService: any;
   user: any;
@@ -30,7 +26,7 @@ export default function ServiceCard({
   const [isOpen, setIsOpen] = useState(false);
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [deleteMenu, setDeleteMenu] = useState(false);
-  console.log(user?.projects);
+  console.log(user?.services);
 
   const handleDeleteService = async (id: string) => {
     try {
@@ -38,18 +34,18 @@ export default function ServiceCard({
       await deleteService(id);
 
       // Update the user's job offers by removing the deleted one
-      const updatedServices = user?.projects?.filter(
+      const updatedServices = user?.services?.filter(
         (service: any) => service.id !== id
       );
 
       // Update user in the database
-      await updateUser(user.uid, { projects: updatedServices });
+      await updateUser(user.uid, { services: updatedServices });
 
       // Dispatch updated user state to Redux
       dispatch(
         setUser({
           ...user,
-          projects: updatedServices,
+          services: updatedServices,
         })
       );
 
@@ -76,14 +72,14 @@ export default function ServiceCard({
           setEditOpen={setEditOpen}
           setOptionsOpen={setOptionsOpen}
           handleDeleteService={handleDeleteService}
-          service={project}
+          service={service}
           setOpenedService={setOpenedService}
         />
         <div className="flex flex-col sm:flex-row gap-3">
           <div>
             <div className="flex flex-wrap w-full justify-between">
               <h5 className="mb-3 text-2xl sm:text-3xl font-extrabold tracking-tight text-blue-500">
-                {project?.name}
+                {service?.name}
               </h5>
               <div className="flex items-end justify-end">
                 <button
@@ -102,25 +98,25 @@ export default function ServiceCard({
             </div>
             <p className="mb-2 text-white">
               <span className="text-sm font-bold text-white">Płatność:</span>{" "}
-              {project?.time}
+              {service?.time}
             </p>
             <p className="mb-2 text-white">
               <span className="text-sm font-bold text-white">Cena:</span>{" "}
-              {project?.salaryValue}
+              {service?.salaryValue}
             </p>
             <p className="mb-2 text-white">
               <span className="text-sm font-bold text-white">
                 Czas wykonania:
               </span>{" "}
-              {project?.duration}
+              {service?.duration}
             </p>
-            <p className="text-white my-3 rounded-md">{project?.desc}</p>
+            <p className="text-white my-3 rounded-md">{service?.desc}</p>
             <div className="mt-2 gap-3 grid grid-cols-2 w-full">
-              {project.images.map((image: any, i: any) => (
+              {service.images.map((image: any, i: any) => (
                 <button
                   onClick={() => {
                     setCurrentIndex(i);
-                    dispatch(set_modals({ ...modals, isProjectOpen: true }));
+                    dispatch(set_modals({ ...modals, isserviceOpen: true }));
                     setIsOpen(true);
                   }}
                   key={i}
@@ -143,7 +139,7 @@ export default function ServiceCard({
         className={`fixed left-0 top-0 ${isOpen ? "block" : "hidden"} z-[9999]`}
       >
         <ProjectImages
-          project={project}
+          service={service}
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
           setIsOpen={setIsOpen}

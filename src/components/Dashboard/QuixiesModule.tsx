@@ -59,7 +59,7 @@ export default function QuixiesModule() {
                     className="w-full"
                   />
                   <p
-                    className={`rounded-b-3xl font-coco font-bold text-center text-white bg-gradient-to-b from-ctaStart to-ctaEnd px-3 py-1 absolute top-0 left-0 sm:left-3 text-sm sm:text-base`}
+                    className={`rounded-b-3xl  font-bold text-center text-white bg-gradient-to-b from-ctaStart to-ctaEnd px-3 py-1 absolute top-0 left-0 sm:left-3 text-sm sm:text-base`}
                     style={{ textShadow: "0px 1px 1px black" }}
                   >
                     {item.price}
@@ -69,7 +69,7 @@ export default function QuixiesModule() {
                 {item.discount > 0 && (
                   <div
                     style={{ textShadow: "0px 1px 2px black" }}
-                    className="w-max absolute top-0 right-0 sm:right-3 bg-gradient-to-b from-accentStart to-accentEnd text-white text-sm sm:text-base font-coco font-bold rounded-b-3xl px-2 py-1"
+                    className="w-max absolute top-0 right-0 sm:right-3 bg-gradient-to-b from-accentStart to-accentEnd text-white text-sm sm:text-base  font-bold rounded-b-3xl px-2 py-1"
                   >
                     {item.discountSize}%
                   </div>
@@ -97,7 +97,7 @@ export default function QuixiesModule() {
           </div>
           <button
             onClick={() => dispatch(set_modals({ ...modals, quixies: false }))}
-            className="sm:hidden font-coco mt-6 sticky left-1/2 -translate-x-1/2 bottom-3 w-max rounded-md px-4 py-2 bg-red-500 hover:bg-red-400 duration-200 text-white z-50 "
+            className="sm:hidden  mt-6 sticky left-1/2 -translate-x-1/2 bottom-3 w-max rounded-md px-4 py-2 bg-red-500 hover:bg-red-400 duration-200 text-white z-50 "
           >
             Wyjście
           </button>
@@ -200,7 +200,7 @@ const QuixiesInfo = ({ light }: { light: any }) => {
         </li>
         {/* <li className="mb-3">
           <strong
-            className="text-white bg-gradient-to-r from-primary to-cta p-1  px-2 text-xl font-coco"
+            className="text-white bg-gradient-to-r from-primary to-cta p-1  px-2 text-xl "
             style={{ textShadow: "1px 1px 1px black" }}
           >
             Aplikowanie na oferty

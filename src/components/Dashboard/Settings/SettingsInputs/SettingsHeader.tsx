@@ -14,7 +14,7 @@ export default function SettingsHeader({
   const { modals } = useSelector((state: any) => state.modals);
   return (
     <div className="sticky top-0 left-0 text-base text-white font-bold z-[5000] flex items-center justify-between w-full">
-      <div className="px-[2.5rem] font-coco py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
+      <div className="px-[2.5rem]  py-3 w-max rounded-tl-lg rounded-br-3xl bg-gradient-to-r text-white from-primaryStart to-primaryEnd">
         PORTFOLIO
       </div>
       <div className="flex">

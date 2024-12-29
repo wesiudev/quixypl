@@ -8,14 +8,7 @@ import Market from "@/components/marketplace/Market";
 import removePolishSignsAndSpaces from "@/lib/removePolish";
 import OpinionsForm from "@/components/OpinionsForm";
 export const revalidate = 60;
-export async function generateStaticParams() {
-  const jobs = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res) => res.json());
-  return jobs.flatMap((service: any) => ({
-    slug: polishToEnglish(service.title),
-  }));
-}
+export const dynamicParams = true;
 export default async function Page(props: {
   params: Promise<any>;
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -24,16 +17,9 @@ export default async function Page(props: {
   const jobs = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res) => res.json());
-  const slug: any = jobs?.find(
-    (page: any) => polishToEnglish(page.title) === params.slug
-  );
   const content = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.slug}`
   ).then((res: any) => res.json());
-  const posts = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res: any) => res.json());
-
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
@@ -48,9 +34,6 @@ export default async function Page(props: {
     `${process.env.NEXT_PUBLIC_URL}/api/opinions?tubylytylkofigi=${
       process.env.API_SECRET_KEY
     }&slug=${polishToEnglish(params.slug)}`
-  ).then((res: any) => res.json());
-  const services = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res: any) => res.json());
   return (
     <>
@@ -118,7 +101,7 @@ export default async function Page(props: {
             </div>
           </div>
           <div className="bg-white" id="search">
-            <Market leads={services} />
+            <Market />
           </div>
           <div className="w-full mb-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -131,7 +114,9 @@ export default async function Page(props: {
                     <p className="text-center sm:text-lg text-black p-3 bg-white rounded-md mt-6 mb-8">
                       Zatrudnij najlepszych specjalistów — opublikuj ofertę
                       pracy w kategorii{" "}
-                      <b className="font-bold">{slug?.title?.toLowerCase()}</b>{" "}
+                      <b className="font-bold">
+                        {content?.title?.toLowerCase()}
+                      </b>{" "}
                       i znajdź ekspertów w tej dziedzinie. Promuj swoje usługi,
                       by dotrzeć do odpowiednich odbiorców.
                     </p>
@@ -206,7 +191,7 @@ export default async function Page(props: {
                                   title={`Pracuj zdalnie w ${subcategory.title}`}
                                   key={k}
                                   style={{ boxShadow: "1px 0px 4px black" }}
-                                  className="rounded-md text-center py-3 px-6 bg-[#126b91] hover:bg-[#468CA9] duration-75 font-extralight font-coco text-lg text-white"
+                                  className="rounded-md text-center py-3 px-6 bg-[#126b91] hover:bg-[#468CA9] duration-75 font-extralight  text-lg text-white"
                                   href={`/praca-zdalna/${polishToEnglish(
                                     job.title
                                   )}/${polishToEnglish(
@@ -231,7 +216,7 @@ export default async function Page(props: {
               </h2>
 
               <div
-                className="text-black max-w-3xl markdownSlug  font-coco"
+                className="text-black max-w-3xl markdownSlug  "
                 dangerouslySetInnerHTML={{
                   __html: content?.description,
                 }}
@@ -239,7 +224,7 @@ export default async function Page(props: {
             </section>
           </div>
 
-          <BlogPostList posts={posts} />
+          <BlogPostList />
           {/* <h2 className="text-xl font-semibold text-primary mb-4">
           Najlepsi specjaliści {slug.title}
         </h2> */}
@@ -323,36 +308,23 @@ export default async function Page(props: {
           </div>
         </div>
       </div>
-
-      <SlugFooter
-        jobsList={slug.data}
-        title={slug.title}
-        footerTitle={slug.title}
-        slug={params.slug}
-      />
     </>
   );
 }
 
 export async function generateMetadata(props: { params: Promise<any> }) {
   const params = await props.params;
-  const jobs = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
-  ).then((res) => res.json());
-  const slug: any = jobs.find(
-    (page: any) => polishToEnglish(page.title) === params.slug
-  );
   const content = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.slug}`
   ).then((res: any) => res.json());
-  const title = `Praca ${content?.title} Freelancer Job Boards Zdalnie`;
+  const title = `${content?.title} Praca Zdalna Freelancer Job Boards`;
   const description = `Prowadzisz rekrutację lub szukasz pracy w ${content?.genitive}? Chcesz zająć się ${content?.instrumental}? Mamy dla Ciebie zlecenia.`;
   return {
     title,
     description,
     openGraph: {
       type: "website",
-      url: `https://quixy.pl/praca-zdalna/${polishToEnglish(slug.title)}`,
+      url: `https://quixy.pl/praca-zdalna/${polishToEnglish(params.slug)}`,
       title,
       description,
       siteName: "Quixy",

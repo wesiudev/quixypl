@@ -32,7 +32,7 @@ export default function HeaderComponent({
           showHeader || menuShow || hovered === "cat" || productsOpen
             ? "-translate-y-0"
             : "-translate-y-[100%]"
-        } duration-300 font-coco`}
+        } duration-300 `}
       >
         {/* Header Content */}
         <div className="flex w-full items-center justify-between">
@@ -149,7 +149,7 @@ export default function HeaderComponent({
           </div>
           <Link
             href="/register"
-            className={`py-[2px] px-[10px] text-lg  bg-gradient-to-r from-ctaStart to-ctaEnd rounded-md hover:bg-opacity-90 text-white cursor-pointer font-coco`}
+            className={`py-[2px] px-[10px] text-lg  bg-gradient-to-r from-ctaStart to-ctaEnd rounded-md hover:bg-opacity-90 text-white cursor-pointer `}
           >
             Rejestracja
           </Link>

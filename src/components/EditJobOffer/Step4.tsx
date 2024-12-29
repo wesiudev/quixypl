@@ -174,7 +174,7 @@ export default function StepFour({
                       setIsSent(true);
                       await editOffer();
                     }}
-                    className="font-bold font-coco animate-pulse flex items-center px-4 py-2 rounded-md bg-gradient-to-b from-ctaStart to-ctaEnd text-white"
+                    className="font-bold  animate-pulse flex items-center px-4 py-2 rounded-md bg-gradient-to-b from-ctaStart to-ctaEnd text-white"
                   >
                     <FaCircleCheck className="mr-2" />{" "}
                     {isLoading ? "Wczytywanie..." : "Zapisz zmiany"}

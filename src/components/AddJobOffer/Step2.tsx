@@ -175,7 +175,7 @@ export default function StepTwo({
                       }
                     }}
                   />
-                  <div className="rounded-r-md flex items-center justify-center absolute right-0 top-0 h-full bg-gradient-to-b from-accentStart to-accentEnd text-white font-coco px-3 ">
+                  <div className="rounded-r-md flex items-center justify-center absolute right-0 top-0 h-full bg-gradient-to-b from-accentStart to-accentEnd text-white  px-3 ">
                     zł{formData.salary === "Stawka godzinowa" && "/h"}
                   </div>
                 </div>
@@ -205,7 +205,7 @@ export default function StepTwo({
                       }
                     }}
                   />
-                  <div className="rounded-r-md flex items-center justify-center absolute right-0 top-0 h-full bg-gradient-to-b from-accentStart to-accentEnd text-white font-coco px-3 ">
+                  <div className="rounded-r-md flex items-center justify-center absolute right-0 top-0 h-full bg-gradient-to-b from-accentStart to-accentEnd text-white  px-3 ">
                     zł{formData.salary === "Stawka godzinowa" && "/h"}
                   </div>
                 </div>
@@ -263,7 +263,7 @@ export default function StepTwo({
                       }
                     }}
                   />
-                  <div className="rounded-r-md flex items-center justify-center absolute right-0 top-0 h-full bg-gradient-to-b from-accentStart to-accentEnd text-white font-coco px-3 ">
+                  <div className="rounded-r-md flex items-center justify-center absolute right-0 top-0 h-full bg-gradient-to-b from-accentStart to-accentEnd text-white  px-3 ">
                     zł{formData.salary === "Stawka godzinowa" && "/h"}
                   </div>
                 </div>
@@ -293,7 +293,7 @@ export default function StepTwo({
                       }
                     }}
                   />
-                  <div className="rounded-r-md flex items-center justify-center absolute right-0 top-0 h-full bg-gradient-to-b from-accentStart to-accentEnd text-white font-coco px-3 ">
+                  <div className="rounded-r-md flex items-center justify-center absolute right-0 top-0 h-full bg-gradient-to-b from-accentStart to-accentEnd text-white  px-3 ">
                     zł{formData.salary === "Stawka godzinowa" && "/h"}
                   </div>
                 </div>
