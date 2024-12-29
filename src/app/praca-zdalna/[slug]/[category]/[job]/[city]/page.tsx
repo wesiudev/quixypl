@@ -7,11 +7,10 @@ import Link from "next/link";
 import Image from "next/image";
 import Market from "@/components/marketplace/Market";
 import JobBoardList from "@/components/JobBoardList";
-
+export const revalidate = 60;
 export async function generateStaticParams() {
   const jobs = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    { next: { revalidate: 60 } }
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res) => res.json());
   return jobs
     .flatMap((service: any) =>
@@ -23,36 +22,29 @@ export async function generateStaticParams() {
 export default async function Page(props: { params: Promise<any> }) {
   const params = await props.params;
   const jobs = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    { next: { revalidate: 60 } }
+    `${process.env.NEXT_PUBLIC_URL}/api/jobs?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res) => res.json());
   const offers = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/offers?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`,
-    { next: { revalidate: 60 } }
+    `${process.env.NEXT_PUBLIC_URL}/api/offers?tubylytylkofigi=${process.env.API_SECRET_KEY}&category=${params.job}`
   ).then((res) => res.json());
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/talents/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
-    }&slug=${polishToEnglish(params.slug)}`,
-    { next: { revalidate: 60 } }
+    }&slug=${polishToEnglish(params.slug)}`
   ).then((res: any) => res.json());
   const companies = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/companies/slug?tubylytylkofigi=${
       process.env.API_SECRET_KEY
-    }&slug=${polishToEnglish(params.slug)}`,
-    { next: { revalidate: 60 } }
+    }&slug=${polishToEnglish(params.slug)}`
   ).then((res: any) => res.json());
   const content = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.job}`,
-    { next: { revalidate: 60 } }
+    `${process.env.NEXT_PUBLIC_URL}/api/content?tubylytylkofigi=${process.env.API_SECRET_KEY}&job=${params.job}`
   ).then((res: any) => res.json());
   const services = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    { next: { revalidate: 60 } }
+    `${process.env.NEXT_PUBLIC_URL}/api/services?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res: any) => res.json());
   const posts = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`,
-    { next: { revalidate: 60 } }
+    `${process.env.NEXT_PUBLIC_URL}/api/posts?tubylytylkofigi=${process.env.API_SECRET_KEY}`
   ).then((res: any) => res.json());
   const categoryTalents = talents.filter(
     (item: any) => polishToEnglish(item?.city) === params.city

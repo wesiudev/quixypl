@@ -15,12 +15,12 @@ export default function OpenableOpportunity({
       className={`bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out`}
     >
       <div className="flex justify-between">
-        <h2 className="text-xl lg:text-2xl font-extrabold text-black">
+        <h2 className=" sm:text-xl lg:text-2xl font-extrabold text-black">
           {opportunity.title}
         </h2>
         <Link
           href={`/praca-zdalna/${polishToEnglish(opportunity.title)}`}
-          className="h-max bg-gradient-to-r from-accentStart to-accentEnd px-4 py-2 rounded-xl text-white text-sm font-bold duration-300"
+          className="h-max bg-gradient-to-r from-accentStart to-accentEnd px-4 py-2 rounded-md text-white text-xs sm:text-sm duration-300"
         >
           <div className="w-max">Zobacz więcej</div>
         </Link>
@@ -32,7 +32,7 @@ export default function OpenableOpportunity({
             href={`/praca-zdalna/${polishToEnglish(
               opportunity.title
             )}/${polishToEnglish(subcategory.title)}`}
-            className="text-black hover:underline"
+            className="text-sm sm:text-base text-black hover:underline"
           >
             {subcategory.title}
           </Link>

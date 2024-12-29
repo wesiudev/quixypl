@@ -10,7 +10,8 @@ import JobBoardList from "@/components/JobBoardList";
 import dynamic from "next/dynamic";
 import LeadCard from "@/components/Dashboard/LeadCard";
 const Tags = dynamic(() => import("@/components/Tags"));
-
+export const revalidate = 60;
+export const dynamicParams = true;
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
   searchParams: Promise<any>;

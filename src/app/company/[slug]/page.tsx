@@ -2,9 +2,7 @@ import Image from "next/image";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { IProject } from "@/types";
-import ProjectCard from "@/components/Dashboard/ImageGenerator/dashboard/ProjectCard";
 import UserStickyTop from "@/components/UserStickyTop";
-import HireButton from "@/components/HireButton/HireButton";
 import { IoLocationOutline } from "react-icons/io5";
 import { polishToEnglish } from "../../../../utils/polishToEnglish";
 import Viewer from "@/components/AddJobOffer/Viewer";
@@ -12,7 +10,8 @@ import JobBoardList from "@/components/JobBoardList";
 import dynamic from "next/dynamic";
 import LeadCard from "@/components/Dashboard/LeadCard";
 const Tags = dynamic(() => import("@/components/Tags"));
-
+export const revalidate = 60;
+export const dynamicParams = true;
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
   searchParams: Promise<any>;
