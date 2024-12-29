@@ -74,6 +74,7 @@ export default function Register() {
           userData.password
         ).then((userCredential) => {
           addDocument("users", userCredential.user?.uid, {
+            leads: [],
             city: "",
             description: "",
             title: "",

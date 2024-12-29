@@ -7,9 +7,9 @@ import { toast } from "react-toastify";
 import Documents from "./Documents";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/slices/user";
+import { addApplication } from "@/lib/addApplication";
 
 export default function RecruitmentForm({
-  updateUserLeads,
   uid,
   companyName,
   setApplyOpen,
@@ -17,7 +17,6 @@ export default function RecruitmentForm({
   formState,
   setFormState,
 }: {
-  updateUserLeads: any;
   uid: string;
   companyName: string;
   setApplyOpen: any;
@@ -163,7 +162,7 @@ export default function RecruitmentForm({
               disabled={isSent}
               onClick={() => {
                 setIsSent(true);
-                updateUserLeads(formState, uid);
+                addApplication({ ...formState, uid, creationTime: Date.now() });
               }}
               className="disabled:cursor-not-allowed bg-gradient-to-r from-ctaStart to-primaryHoverEnd text-white text border-transparent-zinc-800 outline-none focus:outline-none duration-200 text-center py-2 rounded-md"
             >

@@ -37,7 +37,7 @@ export default function JobOfferDetails({
         </h3>
         <div className={`col-span-1`}>
           <div className="font-bold">Koszt</div> 💎
-          {jobOffer.price}
+          {jobOffer.price.toFixed(2)}
           <div className="font-bold">Status</div>
           <p
             className={`${

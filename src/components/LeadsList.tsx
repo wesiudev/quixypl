@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 import LeadApplication from "./LeadApplication";
 export default function LeadsList() {
   const { user } = useSelector((state: any) => state.user);
-  const [noteOpen, setNoteOpen] = useState<any>();
   const [filter, setFilter] = useState("new");
   moment.locale("pl");
   const { light } = useSelector((state: any) => state.light);
@@ -78,22 +77,9 @@ export default function LeadsList() {
           <div className="grid grid-cols-1 xl:grid-cols-3 2xl:grid-cols-4 font-sans gap-6 px-3 lg:px-6">
             {user?.leads?.map((lead: any, i: any) => (
               <>
-                {filter === "new" &&
-                  !lead.signed &&
-                  lead.status !== "trash" && (
-                    <LeadApplication light={light} key={i} lead={lead} />
-                  )}
-              </>
-            ))}
-            {user?.leads?.map((lead: any, i: any) => (
-              <>
-                {filter === "old" &&
-                  lead.isFinished &&
-                  lead.status !== "rejected" &&
-                  !lead.signed &&
-                  lead.status !== "trash" && (
-                    <LeadApplication light={light} key={i} lead={lead} />
-                  )}
+                {filter === "new" && (
+                  <LeadApplication light={light} key={i} lead={lead} />
+                )}
               </>
             ))}
           </div>

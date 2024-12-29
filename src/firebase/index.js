@@ -338,23 +338,20 @@ async function updateDocument(keys, values, collectionName, id) {
   const docRef = doc(db, collectionName, id);
   const docSnapshot = await getDoc(docRef);
 
-  if (docSnapshot.exists()) {
-    const existingData = docSnapshot.data();
-    const updatedData = { ...existingData };
-    keys.forEach((key, index) => {
-      updatedData[key] = values[index];
-    });
-    await updateDoc(docRef, updatedData);
-  } else {
-    const initialData = {};
-    keys.forEach((key, index) => {
-      initialData[key] = values[index];
-    });
-
-    await setDoc(docRef, initialData);
-  }
+  const existingData = docSnapshot.data();
+  const updatedData = { ...existingData };
+  keys.forEach((key, index) => {
+    updatedData[key] = values[index];
+  });
+  await updateDoc(docRef, updatedData);
 }
-
+async function updateUserLeads(uid, data) {
+  const userRef = doc(db, "users", uid);
+  const userSnapshot = await getDoc(userRef);
+  const userData = userSnapshot.data();
+  const leads = userData?.leads || [];
+  await updateDoc(userRef, { leads: [...leads, data] });
+}
 async function getBlogPosts() {
   const docRef = doc(db, "blog", "blog");
   const docSnap = await getDoc(docRef);
@@ -590,4 +587,5 @@ export {
   db,
   provider,
   storage,
+  updateUserLeads,
 };

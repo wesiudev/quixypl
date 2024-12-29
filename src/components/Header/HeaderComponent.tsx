@@ -12,6 +12,7 @@ export default function HeaderComponent({
   handleMouseLeave,
   width,
   setMenuShow,
+  setHovered,
 }: {
   showHeader: boolean;
   menuShow: boolean;
@@ -22,6 +23,7 @@ export default function HeaderComponent({
   handleMouseLeave: Function;
   width: number;
   setMenuShow: Function;
+  setHovered: Function;
 }) {
   return (
     <>
@@ -99,6 +101,7 @@ export default function HeaderComponent({
                 onClick={() => {
                   setProductsOpen(true);
                   setMenuShow(false);
+                  setHovered("");
                 }}
                 title="Firmy, Freelancerzy, Oferty Pracy Zdalnej, Zlecenia, Usługi Quixy"
                 className={`flex text-black items-center ml-3 sm:ml-12 w-max py-[10px] px-[10px] drop-shadow-sm duration-500 relative text-base cursor-pointer`}

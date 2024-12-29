@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { IoSend } from "react-icons/io5";
 import { v4 as uuidv4 } from "uuid";
-import { updateUserLeads } from "@/lib/updateUserLeads";
+import { addOrder } from "@/lib/addOrder";
 
 interface MessageInputProps {
   value: any;
@@ -62,29 +62,13 @@ const MessageInput: React.FC<MessageInputProps> = ({ value }) => {
       return;
     }
     const id = uuidv4();
-    await updateUserLeads(value?.uid, {
-      leads: value?.leads
-        ? [
-            ...value?.leads,
-            {
-              message,
-              phoneNumber,
-              creationTime: Date.now(),
-              email,
-              type: "order",
-              id,
-            },
-          ]
-        : [
-            {
-              message,
-              phoneNumber,
-              creationTime: Date.now(),
-              email,
-              type: "order",
-              id,
-            },
-          ],
+    await addOrder({
+      message,
+      phoneNumber,
+      creationTime: Date.now(),
+      email,
+      id,
+      uid: value.uid,
     });
     setSent(true);
   };

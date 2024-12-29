@@ -45,7 +45,6 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
 
   const hasNetto = job.preferences.some((p) => nettoPreferences.includes(p));
   const hasBrutto = job.preferences.some((p) => !nettoPreferences.includes(p));
-  function apply(uid: string) {}
   return (
     <div className="w-full border border-gray-300 rounded-md shadow-sm font-sans">
       {/* Collapsed Header */}
@@ -58,7 +57,7 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
             Opublikowana: {moment(job.creationTime).format("DD MMMM YYYY")}
           </div>
           <div className="flex flex-col">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-800">
+            <h2 className="text-lg lg:text-xl font-extrabold text-gray-800">
               {job.title}
             </h2>
             <span className="text-sm font-medium text-gray-800">
@@ -69,13 +68,15 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
         <div className="flex items-center mt-3">
           <div className="w-16 h-auto relative">
             {job.logo ? (
-              <Image
-                src={job.logo}
-                width={133}
-                height={133}
-                alt={`Logo firmy ${job.name}`}
-                className="w-[90%] h-auto group-hover:scale-110 duration-500"
-              />
+              <div className="relative overflow-hidden w-16 h-16">
+                <Image
+                  src={job.logo}
+                  width={133}
+                  height={133}
+                  alt={`Logo firmy ${job.name}`}
+                  className="absolute inset-0 object-cover w-full h-auto top-1/2 -translate-y-1/2 rounded-md"
+                />
+              </div>
             ) : (
               <div className="border-2 border-gray-300 rounded-md p-2 flex justify-center text-4xl text-gray-400/60">
                 <BsBuildings />
@@ -100,11 +101,12 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
           <div className="">
             {/* Specializations */}
             <div className="p-4">
-              <div className="w-full relative border border-gray-300 rounded-md">
-                <div className="rounded-tl-md rounded-br-xl w-max bg-gradient-to-b px-3 py-1.5 from-ctaStart to-ctaEnd text-white text-sm">
-                  SPECJALIZACJE
-                </div>
-                {job.specializations && (
+              {job.specializations.length > 0 && (
+                <div className="w-full relative border border-gray-300 rounded-md">
+                  <div className="rounded-tl-md rounded-br-xl w-max bg-gradient-to-b px-3 py-1.5 from-ctaStart to-ctaEnd text-white text-sm">
+                    SPECJALIZACJE
+                  </div>
+
                   <div className="flex flex-wrap p-[1rem]">
                     {job.specializations.map((spec: string, idx: number) => (
                       <div
@@ -118,8 +120,8 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
                       </div>
                     ))}
                   </div>
-                )}
-              </div>
+                </div>
+              )}
               {/* Salary Section */}
               {/* Salary Section */}
               <div className="mt-4 w-full relative border border-gray-300 rounded-md">
@@ -182,7 +184,7 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
             {/* Requirements and Responsibilities */}
             <div className="grid grid-cols-1 w-full gap-6 p-[1rem]">
               {/* Requirements */}
-              {job.requirements && (
+              {job.requirements.length > 0 && (
                 <div className="border border-gray-300 rounded-md">
                   <h3 className="flex justify-center items-center font-sans font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
                     <MdOutlineChecklist className="text-2xl mr-2" />
@@ -196,7 +198,7 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
               )}
 
               {/* Responsibilities */}
-              {job.responsibilities && (
+              {job.responsibilities.length > 0 && (
                 <div className="border border-gray-300 rounded-md">
                   <h3 className="flex justify-center items-center font-sans font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
                     <BsClipboardCheck className="text-2xl mr-2" />
@@ -210,8 +212,8 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
               )}
 
               {/* Technologies */}
-              <div>
-                {job.technologies && (
+              {job.technologies.length > 0 && (
+                <div>
                   <div className="border border-gray-300 rounded-md">
                     <h3 className="flex justify-center items-center font-sans font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
                       <AiOutlineCode className="text-3xl mr-2" />
@@ -228,11 +230,11 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
                       ))}
                     </div>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
               {/* Responsibilities */}
-              <div>
-                {job.niceToHave && (
+              {job.niceToHave.length > 0 && (
+                <div>
                   <div className="border border-gray-300 rounded-md">
                     <h3 className="flex justify-center items-center font-sans font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
                       <FaRegSmileBeam className="text-2xl mr-2" />
@@ -243,11 +245,11 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
                       className="px-4"
                     ></div>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
               {/* Responsibilities */}
-              <div>
-                {job.weOffer && (
+              {job.weOffer.length > 0 && (
+                <div>
                   <div className="border border-gray-300 rounded-md">
                     <h3 className="flex justify-center items-center font-sans font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
                       <GiGiftOfKnowledge className="text-2xl mr-2" />
@@ -258,8 +260,8 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
                       className="px-4"
                     ></div>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
           {/* Call-to-Action Button */}
@@ -268,20 +270,22 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
               <div className="p-4">
                 <button
                   onClick={() => setApplyOpen(true)}
-                  className="text-white px-6 py-2 rounded-md bg-gradient-to-r from-ctaStart to-ctaEnd hover:from-primaryStart hover:to-primaryEnd transition duration-300"
+                  className="text-white px-6 py-2 rounded-md bg-gradient-to-r from-ctaStart to-ctaEnd hover:from-ctaStart/80 hover:to-ctaEnd/80 transition duration-300"
                 >
                   Aplikuj
                 </button>
               </div>
             )}
             {!userData && (
-              <Link
-                href="/register"
-                target="_blank"
-                className="text-white px-6 py-2 rounded-md bg-gradient-to-r from-ctaStart to-ctaEnd hover:from-primaryStart hover:to-primaryEnd transition duration-300"
-              >
-                Stwórz konto i aplikuj
-              </Link>
+              <div className="p-4">
+                <Link
+                  href="/register"
+                  target="_blank"
+                  className="text-white px-6 py-2 rounded-md bg-gradient-to-r from-ctaStart to-ctaEnd hover:from-ctaStart/80 hover:to-ctaEnd/80 transition duration-300"
+                >
+                  Stwórz konto i aplikuj
+                </Link>
+              </div>
             )}
           </div>
         </div>
@@ -292,7 +296,6 @@ const JobOfferCard = ({ job }: { job: JobOffer }) => {
             <RecruitmentForm
               formState={formState}
               setFormState={setFormState}
-              updateUserLeads={apply}
               uid={job.uid}
               companyName={job.name}
               setApplyOpen={setApplyOpen}

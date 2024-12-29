@@ -2,9 +2,13 @@
 import { useEffect, useState } from "react";
 import useWindowDimensions from "../useWidth";
 import dynamic from "next/dynamic";
-const ProductsWide = dynamic(() => import("./ProductsWide"));
-const ProductsMobile = dynamic(() => import("./ProductsMobile"));
-const HeaderComponent = dynamic(() => import("./HeaderComponent"));
+const ProductsWide = dynamic(() => import("./ProductsWide"), { ssr: false });
+const ProductsMobile = dynamic(() => import("./ProductsMobile"), {
+  ssr: false,
+});
+const HeaderComponent = dynamic(() => import("./HeaderComponent"), {
+  ssr: false,
+});
 import { AiFillThunderbolt, AiOutlineLogin } from "react-icons/ai";
 import { MdOutlineDesignServices } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
@@ -74,6 +78,7 @@ export default function Header({ jobsList }: { jobsList: any[] }) {
         handleMouseLeave={handleMouseLeave}
         width={width}
         setMenuShow={setMenuShow}
+        setHovered={setHovered}
       />
     </div>
   );

@@ -99,7 +99,7 @@ export default function Posting({
               <div className="text-gray-500 text-xs font-light">
                 Opublikowana: {moment(job.creationTime).format("DD MMMM YYYY")}
               </div>
-              <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-800">
+              <h2 className="text-lg sm:text-xl font-extrabold text-gray-800">
                 {job.title}
               </h2>
             </div>
@@ -138,11 +138,11 @@ export default function Posting({
               <div className="">
                 {/* Specializations */}
                 <div>
-                  <div className="rounded-md w-full relative border border-gray-300">
-                    <div className="rounded-tl-md rounded-br-xl w-max bg-gradient-to-b px-3 py-1.5 from-ctaStart to-ctaEnd text-white text-sm">
-                      SPECJALIZACJE
-                    </div>
-                    {job.specializations && (
+                  {job.specializations.length > 0 && (
+                    <div className="rounded-md w-full relative border border-gray-300">
+                      <div className="rounded-tl-md rounded-br-xl w-max bg-gradient-to-b px-3 py-1.5 from-ctaStart to-ctaEnd text-white text-sm">
+                        SPECJALIZACJE
+                      </div>
                       <div className="flex flex-wrap p-[1rem]">
                         {job.specializations.map(
                           (spec: string, idx: number) => (
@@ -158,8 +158,8 @@ export default function Posting({
                           )
                         )}
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                   {/* Salary Section */}
                   <div className="mt-4 w-full relative border border-gray-300 rounded-md">
                     <div className="rounded-tl-md rounded-br-xl w-max bg-gradient-to-b px-3 py-1.5 from-ctaStart to-ctaEnd text-white text-sm">
@@ -262,7 +262,7 @@ export default function Posting({
                 {/* Requirements and Responsibilities */}
                 <div className="grid grid-cols-1 w-full gap-4 mt-6">
                   {/* Requirements */}
-                  {job.requirements && (
+                  {job.requirements.length > 0 && (
                     <div className="border border-gray-300 rounded-md">
                       <h3 className="flex justify-center items-center  font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
                         <MdOutlineChecklist className="text-2xl mr-2" />
@@ -276,7 +276,7 @@ export default function Posting({
                   )}
 
                   {/* Responsibilities */}
-                  {job.responsibilities && (
+                  {job.responsibilities.length > 0 && (
                     <div className="border border-gray-300 rounded-md">
                       <h3 className="flex justify-center items-center  font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
                         <BsClipboardCheck className="text-2xl mr-2" />
@@ -293,7 +293,7 @@ export default function Posting({
                 </div>
 
                 {/* Technologies */}
-                {job.technologies && (
+                {job.technologies.length > 0 && (
                   <div className="mt-4 border border-gray-300 rounded-md">
                     <h3 className="flex justify-center items-center  font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
                       <AiOutlineCode className="text-3xl mr-2" />
@@ -312,7 +312,7 @@ export default function Posting({
                   </div>
                 )}
                 {/* Responsibilities */}
-                {job.niceToHave && (
+                {job.niceToHave.length > 0 && (
                   <div className="border border-gray-300 rounded-md mt-4">
                     <h3 className="flex justify-center items-center  font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
                       <FaRegSmileBeam className="text-2xl mr-2" />
@@ -325,7 +325,7 @@ export default function Posting({
                   </div>
                 )}
                 {/* Responsibilities */}
-                {job.weOffer && (
+                {job.weOffer.length > 0 && (
                   <div className="border border-gray-300 rounded-md mt-4">
                     <h3 className="flex justify-center items-center  font-light rounded-t-md px-4 py-2 sm:text-xl md:text-2xl text-white bg-gradient-to-r from-ctaStart to-primaryHoverEnd">
                       <GiGiftOfKnowledge className="text-2xl mr-2" />

@@ -31,6 +31,7 @@ export default function GoogleAuthButton({
       const existingUser = await getDocument("users", user?.uid);
       if (!existingUser) {
         await createUser({
+          leads: [],
           uid: user?.uid,
           name: user?.displayName,
           email: user?.email,
