@@ -75,7 +75,7 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
               )}
 
               {!slugData?.photoURL && (
-                <div className="rounded-full flex bg-gradient-to-b from-primaryStart to-primaryEnd aspect-square min-w-12 sm:min-w-24 text-white justify-center">
+                <div className="rounded-full flex items-center bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd aspect-square min-w-12 sm:min-w-24 text-white justify-center">
                   <FaUser className="text-3xl lg:text-4xl" />
                 </div>
               )}
