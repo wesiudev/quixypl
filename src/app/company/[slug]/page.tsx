@@ -20,9 +20,7 @@ export default async function Page(props: {
 }) {
   const params = await props.params;
   const talent = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/talents/get?tubylytylkofigi=${
-      process.env.API_SECRET_KEY
-    }&pseudo=${polishToEnglish(params.slug)}`
+    `${process.env.NEXT_PUBLIC_URL}/api/companies/${params.slug}}`
   ).then((res: any) => res.json());
   const talents = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/getSimilarTalents?tubylytylkofigi=${process.env.API_SECRET_KEY}&id=${talent.uid}`
