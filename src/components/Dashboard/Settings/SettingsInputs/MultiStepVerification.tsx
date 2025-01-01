@@ -88,11 +88,7 @@ export default function MultiStepVerification({
         </h2>
         <div className="p-[1.5rem]">
           <p className="font-sans">
-            Po pomyślnej weryfikacji oraz opłaceniu wpisowego w wysokości{" "}
-            <b className="px-1.5 py-1 rounded-md bg-ctaStart text-white">
-              💎20
-            </b>{" "}
-            Twój profil wyświetli się w odpowiednich kategoriach i zacznie
+            Po pomyślnej weryfikacji Twój profil wyświetli się w odpowiednich kategoriach i zacznie
             docierać do potencjalnych klientów.
           </p>
           <div

@@ -39,7 +39,7 @@ export default function GoogleAuthButton({
           photoURL: user?.photoURL,
           totalSpent: 0,
           totalReceived: 0,
-          tokens: 3,
+          tokens: 20,
           isPremium: false,
           emailVerified: false,
           ideas: [],
