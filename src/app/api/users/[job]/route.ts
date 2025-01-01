@@ -7,10 +7,10 @@ export async function GET(params: any, req: any) {
   const filteredUsers = users
     ?.filter(
       (user) =>
-        user?.emailVerified &&
         user?.pseudo &&
-        user?.configured &&
         user?.name &&
+        user?.title &&
+        user?.configured &&
         user?.access &&
         user?.tags?.filter(
           (tag: any) =>

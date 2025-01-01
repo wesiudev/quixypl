@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 // MultiStepVerification Component
 export default function MultiStepVerification({
   name,
-  emailVerified,
+  title,
   seek,
   configured,
   pseudo,
@@ -20,7 +20,7 @@ export default function MultiStepVerification({
   setIsAnimating,
 }: {
   name: any;
-  emailVerified: any;
+  title: any;
   seek: any;
   configured: any;
   pseudo: any;
@@ -33,7 +33,7 @@ export default function MultiStepVerification({
   const calculateProgress = () => {
     let completion = 0;
     if (name) completion += 20;
-    if (emailVerified) completion += 20;
+    if (title) completion += 20;
     if (pseudo) completion += 20;
     if (seek === true || seek === false) completion += 20;
     if (configured) completion += 20;
@@ -42,7 +42,7 @@ export default function MultiStepVerification({
 
   useEffect(() => {
     setProgress(calculateProgress());
-  }, [name, emailVerified, seek, configured, pseudo]);
+  }, [name, title, seek, configured, pseudo]);
   const dispatch = useDispatch();
   function handleAccessClick() {
     if (user?.tokens >= 20) {
@@ -118,10 +118,10 @@ export default function MultiStepVerification({
             />
             <StepItem
               step={4}
-              title="E-mail"
-              isCompleted={emailVerified}
+              title="Tytuł profilu"
+              isCompleted={title}
               completedText="Pomyślnie ukończono"
-              incompleteText="Zweryfikuj E-mail"
+              incompleteText="Wpisz tytuł"
               light={light}
             />
             <StepItem

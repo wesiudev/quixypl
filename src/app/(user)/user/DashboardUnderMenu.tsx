@@ -17,7 +17,7 @@ export default function DashboardUnderMenu() {
             className={`flex flex-col-reverse lg:grid ${
               !user?.pseudo ||
               !user?.name ||
-              !user?.emailVerified ||
+              !user?.title ||
               !user?.configured ||
               !user?.access
                 ? "grid-cols-1"
@@ -31,7 +31,7 @@ export default function DashboardUnderMenu() {
                   seek={user?.seek}
                   pseudo={user?.pseudo}
                   name={user?.name}
-                  emailVerified={user?.emailVerified}
+                  title={user?.title}
                   configured={user?.configured}
                   user={user}
                   setIsAnimating={setIsAnimating}
