@@ -254,15 +254,17 @@ export async function generateMetadata(props: {
 }) {
   const params = await props.params;
   const slug = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/talents/get?tubylytylkofigi=${
-      process.env.API_SECRET_KEY
-    }&pseudo=${polishToEnglish(params.slug)}`
+    `${process.env.NEXT_PUBLIC_URL}/api/talents/${params.slug}`
   ).then((res: any) => res.json());
 
-  const title = !slug?.googleTitle
+  const title = !slug.access
+    ? `${slug.title} - ${slug.name} | ${slug.city}`
+    : !slug?.googleTitle
     ? `${slug?.title} - ${slug?.name} | ${slug?.city}`
     : slug?.googleTitle;
-  const description = !slug.googleDescription
+  const description = !slug.access
+    ? "Jesteś właścicelem tego konta? Skonfiguruj lub opłać wpisowe aby wyświetlać swój profil w Quixy."
+    : !slug.googleDescription
     ? `Profile z ofertami usług - ${slug?.title} - ${slug.name} | ${
         slug?.tags[0]?.title || ""
       } ${slug?.tags[1]?.title || ""} ${slug?.tags[2]?.title || ""} ${

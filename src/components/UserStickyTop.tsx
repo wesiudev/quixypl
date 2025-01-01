@@ -50,7 +50,7 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
     >
       <div className="absolute left-1/2 -translate-x-1/2 -top-8">
         {slugData?.hourRate && (
-          <div className="block w-max max-w-full  font-extrabold text-white bg-gradient-to-r from-accentStart to-accentEnd rounded-t-md px-3 py-1 text-center">
+          <div className="block w-max max-w-full  font-extrabold text-white bg-gradient-to-r from-primaryHoverStart to-primaryHoverEnd rounded-t-md px-3 py-1 text-center">
             {slugData?.hourRate} zł/h
           </div>
         )}
@@ -80,10 +80,10 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
                 </div>
               )}
               <div className="flex flex-col pl-3 sm:pl-4 lg:pl-6 text-white">
-                <h3 className="flex items-center font-bold text-sm sm:text-base lg:text-xl">
+                <h3 className="flex flex-wrap items-center font-bold text-sm sm:text-base lg:text-xl">
                   Zatrudnij
+                  {slugData?.name}!
                 </h3>
-                <p className="">{slugData?.name}!</p>
                 <div className="flex flex-col">
                   <p className="mb-1 text-sm sm:text-base text-gray-300">
                     {slugData?.title && slugData?.title}

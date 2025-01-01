@@ -296,7 +296,10 @@ export default function EssentialUserInfo({
           <div className="w-full mt-3">
             <div className="flex flex-col">
               <label htmlFor="hourRate" className="font-bold">
-                Stawka godzinowa
+                Stawka godzinowa{" "}
+                <span className="text-gray-600 text-sm font-normal">
+                  (opcjonalnie)
+                </span>
               </label>
               <div className="grid grid-cols-2">
                 <div className="relative w-full">
