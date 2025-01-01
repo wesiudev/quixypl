@@ -61,7 +61,7 @@ export default function ProductsMobile({
           </Link>
           <Link
             onClick={resetHeader}
-            href="/register"
+            href="/news"
             className="bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd text-white p-2 text-center text-sm rounded"
           >
             Newsy

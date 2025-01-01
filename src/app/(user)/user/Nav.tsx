@@ -7,6 +7,7 @@ import {
   FaBriefcase,
   FaChevronLeft,
   FaCoins,
+  FaGlobe,
   FaLightbulb,
   FaList,
   FaPowerOff,
@@ -31,6 +32,7 @@ export default function Nav({
   const router = useRouter();
   const navItems = [
     { title: "Przegląd", href: `/user`, icon: <FaHome /> },
+    { title: "Strona główna", href: `/`, icon: <FaGlobe /> },
     {
       title: "Zapytania",
       href: `/user/leads`,
