@@ -81,8 +81,7 @@ export default function UserStickyTop({ slugData }: { slugData: any }) {
               )}
               <div className="flex flex-col pl-3 sm:pl-4 lg:pl-6 text-white">
                 <h3 className="flex flex-wrap items-center font-bold text-sm sm:text-base lg:text-xl">
-                  Zatrudnij
-                  {slugData?.name}!
+                  Zatrudnij {slugData?.name}!
                 </h3>
                 <div className="flex flex-col">
                   <p className="mb-1 text-sm sm:text-base text-gray-300">
