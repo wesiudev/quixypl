@@ -130,7 +130,7 @@ export default function EssentialUserInfo({
             {user?.pseudo && (
               <div className="flex flex-col lg:pt-0">
                 <div className="text-white py-1 px-2  bg-gradient-to-b from-primaryHoverStart to-primaryHoverEnd rounded-md w-max mt-2 lg:mt-0">
-                  Unikalna nazwa
+                  Unikalny link
                 </div>{" "}
                 <span className=" my-2 text-sm sm:text-base">
                   {user?.pseudo}
@@ -213,7 +213,7 @@ export default function EssentialUserInfo({
           {!user?.pseudo && (
             <>
               <div className="flex flex-col mt-2">
-                <label className="font-bold">Unikalna nazwa</label>
+                <label className="font-bold">Unikalny link</label>
                 <div className="">
                   {!localPseudo &&
                     "Wartość ta pozwala na wyświetlanie profilu w zakładce pracy zdalnej."}
