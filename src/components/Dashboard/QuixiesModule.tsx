@@ -53,9 +53,10 @@ export default function QuixiesModule() {
                 <div className="relative w-full h-full pt-6 pb-16 lg:pt-0 lg:pb-12 flex justify-center items-center">
                   <Image
                     src={item.image}
-                    width={1024}
-                    height={1024}
+                    width={333}
+                    height={333}
                     alt={item.name}
+                    priority
                     className="w-full"
                   />
                   <p

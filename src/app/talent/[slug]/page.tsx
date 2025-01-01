@@ -69,17 +69,17 @@ export default async function Page(props: {
                       )}
                       {!talent?.photoURL && (
                         <div className="flex flex-col items-center">
-                          <div className="bg-gradient-to-r from-primary to-cta rounded-full aspect-square text-white flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 shadow-sm shadow-black">
-                            <FaUser className="text-3xl sm:text-5xl" />
+                          <div className="bg-gradient-to-r from-primaryStart to-primaryEnd rounded-full aspect-square text-white flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 shadow-sm shadow-black">
+                            <FaUser className="text-3xl sm:text-4xl" />
                           </div>
                         </div>
                       )}
                     </div>
                     <div className="w-full flex items-center justify-center flex-col text-center">
                       <div>
-                        <h2 className="lg:text-2xl mt-2">
+                        <h1 className="lg:text-2xl mt-2">
                           {talent?.name ? talent?.name : "Brak nazwy"}
-                        </h2>
+                        </h1>
 
                         {talent?.city && (
                           <div className="text-black flex items-center justify-center text-center">
@@ -133,7 +133,7 @@ export default async function Page(props: {
                         {!talent?.photoURL && (
                           <div className="flex flex-col items-center">
                             <div className="bg-gradient-to-b from-primaryStart to-primaryEnd rounded-full aspect-square text-white flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 shadow-sm shadow-black">
-                              <FaUser className="text-3xl sm:text-5xl" />
+                              <FaUser className="text-3xl sm:text-4xl" />
                             </div>
                           </div>
                         )}
@@ -141,9 +141,9 @@ export default async function Page(props: {
                       <div className="pl-3 lg:pl-6 w-full">
                         <div className="flex flex-col w-full">
                           <div className="text-black font-extrabold w-full flex justify-between">
-                            <h1 className="text-xl lg:text-2xl pr-2">
+                            <h2 className="text-xl lg:text-2xl pr-2">
                               {talent?.name ? talent?.name : "Nie podano"}
-                            </h1>
+                            </h2>
                           </div>
                           {talent?.title && (
                             <h3>
@@ -225,7 +225,7 @@ export default async function Page(props: {
               <div className="mt-6">
                 <div className={`h-max w-full`}>
                   <h2 className="text-2xl text-black font-extrabold">Usługi</h2>
-                  <div className="gap-3 mt-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mt-3">
                     {talent?.projects?.map((project: IProject, i: any) => (
                       <LeadCard key={i} service={project} slug />
                     ))}
@@ -235,7 +235,7 @@ export default async function Page(props: {
             )}
           </div>
         </div>
-        <div className="container mx-auto py-12 bg-white px-4 lg:px-12">
+        <div className="container mx-auto pb-12 mt-6 bg-white px-4 lg:px-12">
           <div className="bg-white relative overflow-hidden">
             <h2 className="text-black w-full text-xl lg:text-2xl font-extrabold">
               Zobacz podobne profile

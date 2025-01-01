@@ -69,8 +69,8 @@ export default async function Page(props: {
                       )}
                       {!talent?.photoURL && (
                         <div className="flex flex-col items-center">
-                          <div className="bg-gradient-to-r from-primary to-cta rounded-full aspect-square text-white flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 shadow-sm shadow-black">
-                            <FaUser className="text-3xl sm:text-5xl" />
+                          <div className="bg-gradient-to-r from-primaryStart to-primaryEnd rounded-full aspect-square text-white flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 shadow-sm shadow-black">
+                            <FaUser className="text-3xl sm:text-4xl" />
                           </div>
                         </div>
                       )}
@@ -133,7 +133,7 @@ export default async function Page(props: {
                         {!talent?.photoURL && (
                           <div className="flex flex-col items-center">
                             <div className="bg-gradient-to-b from-primaryStart to-primaryEnd rounded-full aspect-square text-white flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 shadow-sm shadow-black">
-                              <FaUser className="text-3xl sm:text-5xl" />
+                              <FaUser className="text-3xl sm:text-4xl" />
                             </div>
                           </div>
                         )}
