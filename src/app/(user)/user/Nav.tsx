@@ -31,13 +31,6 @@ export default function Nav({
   const [expandedItems, setExpandedItems] = useState([]);
   const router = useRouter();
   const navItems = [
-    { title: "Przegląd", href: `/user`, icon: <FaHome /> },
-    { title: "Strona główna", href: `/`, icon: <FaGlobe /> },
-    {
-      title: "Zapytania",
-      href: `/user/leads`,
-      icon: <AiFillThunderbolt />,
-    },
     {
       title: "Praca",
       href: `/praca-zdalna`,
@@ -71,6 +64,13 @@ export default function Nav({
           title: "Moje usługi",
           href: `/user/services`,
           icon: <FaList />,
+        },
+        { title: "Przegląd", href: `/user`, icon: <FaHome /> },
+        { title: "Strona główna", href: `/`, icon: <FaGlobe /> },
+        {
+          title: "Zapytania",
+          href: `/user/leads`,
+          icon: <AiFillThunderbolt />,
         },
       ],
     },
@@ -137,6 +137,30 @@ export default function Nav({
 
                 <div className="mt-4 font-sans">
                   <div className="flex flex-col flex-wrap justify-between w-full px-4 gap-2">
+                    <button
+                      onClick={() => {
+                        dispatch(
+                          set_modals({
+                            ...modals,
+                            quixies: false,
+                            config: !modals.config,
+                          })
+                        );
+                        setNavOpen(!isNavOpen);
+                      }}
+                      className={`${
+                        modals.config
+                          ? `border-primaryStart ${
+                              light ? "bg-gray-200" : "bg-[#2F313C]"
+                            }`
+                          : `border-transparent ${
+                              light ? "hover:bg-gray-200" : "hover:bg-[#2F313C]"
+                            }  `
+                      } border-l-2 flex items-center py-2 px-4 w-full rounded-md`}
+                    >
+                      <FaUser className="mr-2" />
+                      Portfolio
+                    </button>
                     {navItems.map((item, index) => (
                       <div
                         key={index}
@@ -144,34 +168,6 @@ export default function Nav({
                           item.expandable ? "relative" : ""
                         }`}
                       >
-                        {index === 1 && (
-                          <button
-                            onClick={() => {
-                              dispatch(
-                                set_modals({
-                                  ...modals,
-                                  quixies: false,
-                                  config: !modals.config,
-                                })
-                              );
-                              setNavOpen(!isNavOpen);
-                            }}
-                            className={`${
-                              modals.config
-                                ? `border-primaryStart ${
-                                    light ? "bg-gray-200" : "bg-[#2F313C]"
-                                  }`
-                                : `border-transparent ${
-                                    light
-                                      ? "hover:bg-gray-200"
-                                      : "hover:bg-[#2F313C]"
-                                  }  `
-                            } border-l-2 mb-2 flex items-center py-2 px-4 w-full rounded-md`}
-                          >
-                            <FaUser className="mr-2" />
-                            Portfolio
-                          </button>
-                        )}
                         {index === 1 && (
                           <button
                             onClick={() => {

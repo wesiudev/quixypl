@@ -18,13 +18,15 @@ export default async function Page() {
       <div className="">
         <div className="mx-auto px-4 lg:px-12 xl:container flex flex-col lg:items-center lg:grid lg:grid-cols-2 relative z-50 pt-12">
           <div className="group relative flex flex-col">
+            <div className="absolute w-12 h-12 rounded-full bg-green-400/30 -left-14 -top-16" />
+            <div className="absolute w-5 h-5 rounded-full bg-green-400/50 -left-24 -top-3" />
             <h1
               style={{ lineHeight: 1.3 }}
-              className="block text-center max-w-sm mx-auto lg:mx-0 lg:text-left lg:max-w-lg font-extrabold text-3xl lg:text-5xl text-zinc-800"
+              className="block text-center max-w-sm mx-auto lg:mx-0 lg:text-left lg:max-w-lg font-extrabold text-4xl lg:text-5xl text-zinc-800"
             >
-              Rozwijaj karierę i zdobywaj zlecenia z Quixy™
+              Morze możliwości
             </h1>
-            <p className="mx-auto lg:mx-0 text-center lg:text-left max-w-[100%] sm:max-w-sm lg:max-w-lg text-black mt-3">
+            <p className="text-base mx-auto lg:mx-0 text-center lg:text-left max-w-[100%] sm:max-w-sm lg:max-w-lg text-black mt-3">
               Twój partner w świecie freelancingu i pracy zdalnej! Pierwsza
               platforma w Polsce napędzana technologią{" "}
               <Link href="/about#ccrm" className="italic">
@@ -32,23 +34,23 @@ export default async function Page() {
               </Link>
               , która łączy freelancerów i firmy z klientami!
             </p>
-            <div className="flex items-center justify-center lg:justify-start gap-2 sm:gap-3 lg:gap-4 w-full mt-2">
+            <div className="flex items-center justify-center lg:justify-start gap-2 sm:gap-3 lg:gap-4 w-full mt-6">
               <Link
                 href="/marketplace"
                 title="Rekrutuj do pracy zdalnej na panelu Quixy"
-                className="font-gotham hover:underline text-black text-sm sm:text-base pr-4 py-2 text-center"
+                className="font-gotham hover:underline text-black pr-4 py-2 text-center"
               >
                 <h2 className="w-max mx-auto">Dodaj ofertę</h2>
               </Link>
               <Link
                 href="/praca-zdalna"
                 title="Szukaj pracy zdalnej na panelu Quixy"
-                className="rounded-md font-gotham bg-gradient-to-r from-ctaStart to-ctaEnd hover:bg-scale-105 duration-100 text-white text-sm sm:text-base px-4 py-2 text-center"
+                className="rounded-md font-gotham bg-gradient-to-r from-ctaStart to-ctaEnd hover:bg-scale-105 duration-100 text-white px-4 py-2 text-center"
               >
                 <h2 className="w-max mx-auto">Pracuj zdalnie</h2>
               </Link>
             </div>
-            <div className="mx-auto lg:mx-0">
+            <div className="mx-auto lg:mx-0 my-6">
               <Regions />
             </div>
           </div>

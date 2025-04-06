@@ -38,11 +38,10 @@ export default function AboutQuixyTalent() {
             <div className="mb-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="">
                 <h2 className="text-3xl 2xl:text-5xl font-lato font-bold flex items-center text-black">
-                  Utwórz profil z ofertą firmy, dodaj ofertę pracy
+                  Dodaj swoją firmę
                 </h2>
                 <p className="mt-6 2xl:mt-8 text-black">
-                  Skorzystaj z naszej bazy talentów, aby szybko znaleźć
-                  idealnych freelancerów do Twojego projektu.
+                  Utwórz profil firmy aby zaprezentować swoje usługi zdalne
                 </p>
 
                 <Link
@@ -111,12 +110,10 @@ export default function AboutQuixyTalent() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="">
                 <h2 className="text-3xl 2xl:text-5xl font-lato font-bold flex items-center text-black">
-                  Rozwijaj portfolio i zdobywaj klientów!
+                  Utwórz portfolio
                 </h2>
                 <p className="mt-6 2xl:mt-8 text-black">
-                  Niezależnie od branży, znajdź zlecenia, które pasują do Twoich
-                  umiejętności. Dołącz i twórz portfolio, które przyciągnie
-                  firmy i klientów!
+                  Znajdź pracę lub jednorazowe zlecenia od klientów
                 </p>
 
                 <Link

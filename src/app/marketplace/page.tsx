@@ -22,7 +22,7 @@ export default async function Page() {
                 style={{ lineHeight: 1.3 }}
                 className="lg:max-w-lg font-extrabold text-3xl lg:text-5xl text-zinc-800"
               >
-                Szukaj usług zdalnych lub dodaj nowe na rynek
+                Rynek przyszłości
               </h1>
               <p className="max-w-[100%] sm:max-w-sm lg:max-w-lg text-black mt-3">
                 Marketplace Quixy to jedyne takie miejsce, w którym spotkasz
